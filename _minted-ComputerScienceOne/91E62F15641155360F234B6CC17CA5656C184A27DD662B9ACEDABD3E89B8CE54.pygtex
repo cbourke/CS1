@@ -1,0 +1,6 @@
+\begin{Verbatim}[commandchars=\\\{\},codes={\catcode`\$=3\catcode`\^=7\catcode`\_=8}]
+\PYGdefault{k}{if}\PYGdefault{p}{(}\PYGdefault{n}{x} \PYGdefault{o}{\PYGdefaultZlt{}=} \PYGdefault{l+m+mi}{0} \PYGdefault{o}{||} \PYGdefault{n}{b} \PYGdefault{o}{\PYGdefaultZlt{}=} \PYGdefault{l+m+mi}{1}\PYGdefault{p}{)} \PYGdefault{p}{\PYGdefaultZob{}}
+  \PYGdefault{n}{printf}\PYGdefault{p}{(}\PYGdefault{l+s}{\PYGdefaultZdq{}Error: bad input!}\PYGdefault{l+s+se}{\PYGdefaultZbs{}n}\PYGdefault{l+s}{\PYGdefaultZdq{}}\PYGdefault{p}{);}
+  \PYGdefault{n}{exit}\PYGdefault{p}{(}\PYGdefault{l+m+mi}{1}\PYGdefault{p}{);}
+\PYGdefault{p}{\PYGdefaultZcb{}}
+\end{Verbatim}

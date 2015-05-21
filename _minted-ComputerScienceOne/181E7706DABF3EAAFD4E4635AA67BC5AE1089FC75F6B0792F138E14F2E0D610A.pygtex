@@ -1,0 +1,18 @@
+\begin{Verbatim}[commandchars=\\\{\},codes={\catcode`\$=3\catcode`\^=7\catcode`\_=8}]
+\PYGdefault{k+kn}{package} \PYGdefault{n+nn}{unl.cse}\PYGdefault{o}{;}
+
+\PYGdefault{k+kn}{import} \PYGdefault{n+nn}{java.util.Scanner}\PYGdefault{o}{;}
+
+\PYGdefault{c+cm}{/**}
+\PYGdefault{c+cm}{ * This program converts Fahrenheit temperatures to}
+\PYGdefault{c+cm}{ * Celsius}
+\PYGdefault{c+cm}{ */}
+\PYGdefault{k+kd}{public} \PYGdefault{k+kd}{class} \PYGdefault{n+nc}{TemperatureConverter} \PYGdefault{o}{\PYGdefaultZob{}}
+
+  \PYGdefault{k+kd}{public} \PYGdefault{k+kd}{static} \PYGdefault{k+kt}{void} \PYGdefault{n+nf}{main}\PYGdefault{o}{(}\PYGdefault{n}{String} \PYGdefault{n}{args}\PYGdefault{o}{[])} \PYGdefault{o}{\PYGdefaultZob{}}
+
+    \PYGdefault{c+c1}{//TODO: implement this}
+
+  \PYGdefault{o}{\PYGdefaultZcb{}}
+\PYGdefault{o}{\PYGdefaultZcb{}}
+\end{Verbatim}

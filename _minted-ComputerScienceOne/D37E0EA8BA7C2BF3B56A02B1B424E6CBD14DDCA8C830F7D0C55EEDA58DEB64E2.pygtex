@@ -1,0 +1,5 @@
+\begin{Verbatim}[commandchars=\\\{\},codes={\catcode`\$=3\catcode`\^=7\catcode`\_=8}]
+\PYGdefault{k+kt}{int} \PYGdefault{n}{numUnits}\PYGdefault{p}{;}
+\PYGdefault{k+kt}{double} \PYGdefault{n}{costPerUnit}\PYGdefault{p}{;}
+\PYGdefault{k+kt}{char} \PYGdefault{n}{firstInitial}\PYGdefault{p}{;}
+\end{Verbatim}

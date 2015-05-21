@@ -1,0 +1,5 @@
+\begin{Verbatim}[commandchars=\\\{\},codes={\catcode`\$=3\catcode`\^=7\catcode`\_=8}]
+\PYGdefault{n}{String} \PYGdefault{n}{s} \PYGdefault{o}{=} \PYGdefault{l+s}{\PYGdefaultZdq{}aardvark\PYGdefaultZdq{}}\PYGdefault{o}{;}
+\PYGdefault{n}{String} \PYGdefault{n}{t} \PYGdefault{o}{=} \PYGdefault{l+s}{\PYGdefaultZdq{}zebra\PYGdefaultZdq{}}\PYGdefault{o}{;}
+\PYGdefault{k+kt}{boolean} \PYGdefault{n}{b} \PYGdefault{o}{=} \PYGdefault{o}{(}\PYGdefault{n}{s} \PYGdefault{o}{==} \PYGdefault{n}{t}\PYGdefault{o}{);}
+\end{Verbatim}

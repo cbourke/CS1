@@ -1,0 +1,7 @@
+\begin{Verbatim}[commandchars=\\\{\},codes={\catcode`\$=3\catcode`\^=7\catcode`\_=8}]
+\PYGdefault{k}{if}\PYGdefault{p}{(}\PYGdefault{n}{numChildren} \PYGdefault{o}{\PYGdefaultZlt{}=} \PYGdefault{l+m+mi}{3}\PYGdefault{p}{)} \PYGdefault{p}{\PYGdefaultZob{}}
+  \PYGdefault{n}{credit} \PYGdefault{o}{=} \PYGdefault{n}{numChildren} \PYGdefault{o}{*} \PYGdefault{l+m+mi}{1000}\PYGdefault{p}{;}
+\PYGdefault{p}{\PYGdefaultZcb{}} \PYGdefault{k}{else} \PYGdefault{p}{\PYGdefaultZob{}}
+  \PYGdefault{n}{credit} \PYGdefault{o}{=} \PYGdefault{l+m+mi}{3000}\PYGdefault{p}{;}
+\PYGdefault{p}{\PYGdefaultZcb{}}
+\end{Verbatim}

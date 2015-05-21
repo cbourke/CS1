@@ -1,0 +1,6 @@
+\begin{Verbatim}[commandchars=\\\{\},codes={\catcode`\$=3\catcode`\^=7\catcode`\_=8}]
+Taylor Series: ln(3.1415) \PYGdefaultZti{}= 1.11976
+  Error: 0.02494
+Other Series:  ln(3.1415) \PYGdefaultZti{}= 1.14466
+  Error: 0.00004
+\end{Verbatim}

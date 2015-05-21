@@ -1,0 +1,6 @@
+\begin{Verbatim}[commandchars=\\\{\},codes={\catcode`\$=3\catcode`\^=7\catcode`\_=8}]
+\PYGdefault{n+nv}{\PYGdefaultZdl{}x} \PYGdefault{o}{=} \PYGdefault{l+m+mi}{15}\PYGdefault{p}{;}
+\PYGdefault{k}{if}\PYGdefault{p}{(}\PYGdefault{n+nv}{\PYGdefaultZdl{}x} \PYGdefault{o}{\PYGdefaultZlt{}} \PYGdefault{l+m+mi}{10}\PYGdefault{p}{)} \PYGdefault{p}{\PYGdefaultZob{}}
+\PYGdefault{p}{\PYGdefaultZcb{}}
+\PYGdefault{n+nb}{printf}\PYGdefault{p}{(}\PYGdefault{l+s+s2}{\PYGdefaultZdq{}x is less than 10}\PYGdefault{l+s+se}{\PYGdefaultZbs{}n}\PYGdefault{l+s+s2}{\PYGdefaultZdq{}}\PYGdefault{p}{);}
+\end{Verbatim}

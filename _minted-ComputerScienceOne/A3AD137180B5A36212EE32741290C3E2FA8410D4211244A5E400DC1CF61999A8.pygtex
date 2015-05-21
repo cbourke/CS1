@@ -1,0 +1,8 @@
+\begin{Verbatim}[commandchars=\\\{\},codes={\catcode`\$=3\catcode`\^=7\catcode`\_=8}]
+\PYGdefault{x}{\PYGdefaultZdl{}x = 32145.234;}
+\PYGdefault{x}{\PYGdefaultZdl{}k = 0;}
+\PYGdefault{x}{while(\PYGdefaultZdl{}x \PYGdefaultZgt{} 10) \PYGdefaultZob{}}
+\PYGdefault{x}{  \PYGdefaultZdl{}x = \PYGdefaultZdl{}x / 10; //or: \PYGdefaultZdl{}x /= 10;}
+\PYGdefault{x}{  \PYGdefaultZdl{}k++;}
+\PYGdefault{x}{\PYGdefaultZcb{}}
+\end{Verbatim}

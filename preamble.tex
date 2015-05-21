@@ -1,0 +1,198 @@
+%!TEX root = ComputerScienceOne.tex
+
+\usepackage{xcolor}
+\definecolor{darkred}{rgb}{0.75,0,0}
+\definecolor{darkblue}{rgb}{0,0,0.5}
+\definecolor{darkgreen}{rgb}{0,0.5,0}
+\definecolor{darkergreen}{rgb}{0,0.75,0}
+\definecolor{darkmagenta}{rgb}{0.55,0,0.55}
+\definecolor{left}{HTML}{041832}
+\definecolor{secondary}{HTML}{241024}
+
+\usepackage[colorlinks=true,
+		     urlcolor=darkblue,
+		     citecolor=darkergreen,
+		     linkcolor=darkblue,
+		     plainpages=false,
+		     pdfpagelabels]{hyperref}
+\hypersetup{
+  pdfpagemode=none,
+  pdftitle={Computer Science One},
+  pdfauthor={Christopher M. Bourke},
+  pdfsubject={Computer Science, Programming},
+  pdfkeywords={Computer Science, Programming, C, Java, PHP}
+}
+
+
+%\usepackage{fullpage}
+\usepackage{wrapfig}
+\usepackage{titling}
+%\newcommand{\subtitle}[1]{%
+%  \posttitle{%
+%    \par\end{center}
+%    \begin{center}\large#1\end{center}
+%    \vskip0.5em}%
+%}
+
+%as per online advice
+\usepackage{microtype}
+%\usepackage[T1]{fontenc}
+%\usepackage{lmodern}
+\usepackage[ascii]{inputenc}
+
+
+%http://en.wikibooks.org/wiki/LaTeX/Glossary
+%must create the glossaries by using command:
+%makeglossaries ComputerScienceOne
+\newcommand{\ignore}[1]{}
+\usepackage[toc,acronym]{glossaries}
+\makeglossaries
+\input{glossary}
+%\glsaddall
+
+%http://en.wikibooks.org/wiki/LaTeX/Indexing
+\usepackage{makeidx}
+\makeindex
+
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{.25cm}
+
+
+
+\usepackage{graphicx}
+\usepackage{framed}
+\usepackage{amssymb,amsmath,amsthm}
+
+\usepackage{subfigure}
+
+\theoremstyle{remark}
+\newtheorem{ExInternal}{Exercise}[section]
+
+\makeatletter
+\let\@exercises\@empty%
+\newcommand\exercise[2][]{%
+    \g@addto@macro\@exercises{%
+        \begin{ExInternal}[#1]%
+            #2%
+        \end{ExInternal}%
+    }%
+}
+
+\newcommand\exerciseshere{%
+    \subsection*{Exercises}
+    \@exercises%
+    \global\let\@exercises\@empty%
+}
+\makeatother
+
+\usepackage{tikz}
+\usetikzlibrary{backgrounds}
+\usetikzlibrary{decorations.pathreplacing}
+\usetikzlibrary{shapes,arrows}
+% Define block styles
+\tikzstyle{decision} = [diamond, draw, fill=yellow!20, 
+    text width=6em, text badly centered, node distance=3cm, inner sep=0pt]
+\tikzstyle{block} = [rectangle, draw, fill=blue!20, 
+    text width=5em, text centered, rounded corners, minimum height=4em]
+\tikzstyle{line} = [draw, -latex']
+\tikzstyle{cloud} = [draw, ellipse,fill=red!20, node distance=3cm,
+    minimum height=2em]
+
+%\usepackage{listings}
+%\lstset{basicstyle=\ttfamily\small\color{black},
+%        showspaces=false,
+%        showtabs=false,
+%        %tab=\rightarrowfill,
+%        tabsize=2,
+%        showstringspaces=false,
+%        stringstyle=\ttfamily\bfseries\color{blue},
+%        keywordstyle=\color{darkmagenta},
+%        commentstyle=\color{blue},
+%        % NUMBERING STYLES
+%        numbers=left,
+%        stepnumber=1,
+%        numbersep=5pt,
+%        %Handle framing
+%        frame=tlBR,      %frame = single, tbrl/TBRL
+%        %rulesepcolor=\color{green},
+%        frameround=tttt, %t = rounded, f = square, starts at top right, runs clockwise
+%        %Handle Margins
+%        breaklines=true,
+%        boxpos=r,
+%        breakatwhitespace=false,
+%        xleftmargin=0.5cm,
+%        xrightmargin=0.5cm} %
+%\lstset{language=Java}
+%\renewcommand{\lstlistingname}{Code Sample}
+%\renewcommand{\lstlistlistingname}{Code Samples}
+
+\definecolor{mintedBackground}{rgb}{0.95,0.95,0.95}
+\definecolor{mintedInlineBackground}{rgb}{.90,.90,1}
+
+%\usepackage{newfloat}
+\usepackage[newfloat=true,chapter]{minted}
+\setminted{mathescape,
+               linenos,
+               autogobble,
+               frame=none,
+               framesep=2mm,
+               framerule=0.4pt,
+               %label=foo,
+               xleftmargin=2em,
+               xrightmargin=0em,
+               startinline=true,  %PHP only, allow it to omit the PHP Tags *** with this option, variables using dollar sign in comments are treated as latex math
+               numbersep=10pt, %gap between line numbers and start of line
+               style=default, %syntax highlighting style, default is "default"
+               			    %gallery: http://help.farbox.com/pygments.html
+			    	    %list available: pygmentize -L styles
+               bgcolor=mintedBackground} %prevents breaking across pages
+               
+\setmintedinline{bgcolor={}}
+\setminted[text]{bgcolor={},linenos=false,autogobble,xleftmargin=1em}
+%\setminted[php]{bgcolor=mintedBackgroundPHP} %startinline=True}
+\SetupFloatingEnvironment{listing}{name=Code Sample}
+\SetupFloatingEnvironment{listing}{listname=List of Code Samples}
+
+\usepackage[boxed,slide,linesnumbered,algochapter]{algorithm2e}
+\SetKwComment{Comment}{//}{}
+\DontPrintSemicolon
+\SetKwSty{textsc} %
+\IncMargin{5em}
+%\SetAlFnt{\scriptsize} %
+\SetKwInOut{Input}{Input} %
+\SetKwInOut{Output}{Output} %
+%\setalcapskip{1em} % changed to
+\SetAlCapSkip{1em}
+\setlength{\algomargin}{2em} %
+%\Setvlineskip{0em} % changed to:
+\SetVlineSkip{0em}
+\SetKwRepeat{Do}{do}{while}
+
+\usepackage[yyyymmdd,hhmmss]{datetime}
+
+\theoremstyle{definition}
+\newtheorem{exer}{Exercise}
+\numberwithin{exer}{chapter}
+
+%\usepackage{xspace}
+\newcommand{\Neg}{\ensuremath{\neg}}
+\renewcommand{\And}{\ensuremath{\mathbin{\textsc{And}}}}
+%\renewcommand{\And}{
+%\ifmmode\, \textsc{And} \,
+%\else\textsc{And}\xspace\fi
+%}
+\newcommand{\Or}{\ensuremath{\mathbin{\textsc{Or}}}}
+\newcommand{\True}{\emph{true}\xspace}
+\newcommand{\False}{\emph{false}\xspace}
+\newcommand{\Null}{\textsc{Null}}
+
+\title{Computer Science I}
+\subtitle{Programming in C, Java, and Beyond}
+\author{Dr.\ Chris Bourke\\
+        \href{mailto:cbourke@cse.unl.edu}{cbourke@cse.unl.edu} \\
+        Department of Computer Science \& Engineering\\
+        University of Nebraska--Lincoln\\
+        Lincoln, NE 68588, USA
+}
+
+\date{\today\  \currenttime \\ Version 1.0.0}

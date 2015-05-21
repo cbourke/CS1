@@ -1,0 +1,6 @@
+\begin{Verbatim}[commandchars=\\\{\},codes={\catcode`\$=3\catcode`\^=7\catcode`\_=8}]
+\PYGdefault{n}{numUnits} \PYGdefault{o}{=} \PYGdefault{l+m+mi}{42}\PYGdefault{o}{;}
+\PYGdefault{n}{costPerUnit} \PYGdefault{o}{=} \PYGdefault{l+m+mf}{32.79}\PYGdefault{o}{;}
+\PYGdefault{n}{firstInitial} \PYGdefault{o}{=} \PYGdefault{l+s+sc}{\PYGdefaultZsq{}C\PYGdefaultZsq{}}\PYGdefault{o}{;}
+\PYGdefault{n}{isStudent} \PYGdefault{o}{=} \PYGdefault{k+kc}{true}\PYGdefault{o}{;}
+\end{Verbatim}

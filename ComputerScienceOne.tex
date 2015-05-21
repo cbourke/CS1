@@ -1,0 +1,161 @@
+\documentclass[12pt]{scrbook}
+
+\input{preamble}
+
+\begin{document}
+
+  \begin{tikzpicture}[remember picture,overlay,block/.style={
+  text width=0.95*\columnwidth, 
+  anchor=west,
+  minimum height=1cm
+  }, 
+font=\small
+]
+    \node [shading = axis,rectangle, left color=left!80!white, right color=left!20!white,shading angle=120, anchor=north, minimum width=\paperwidth, minimum height=\paperheight,opacity=.70] (box) at (current page.north){  ~ };
+
+    \node [shading = axis,rectangle, left color=secondary!80!white, right color=secondary!20!white,shading angle=45, anchor=north, minimum width=\paperwidth, minimum height=\paperheight,opacity=.60] (box) at (current page.north){  ~ };
+
+    \node[block,align=center] at (0, -8) {\maketitle};
+    
+    \input{coverPage/graph}
+
+  \end{tikzpicture}
+
+
+\frontmatter
+
+\chapter{Copyleft (Copyright)}
+
+\includegraphics[scale=0.10]{images/CC-BY-SA_icon-large.png} 
+
+The entirety of this book is free and is released under a \textbf{Creative Commons Attribution-ShareAlike 
+4.0 International License} (see \url{http://creativecommons.org/licenses/by-sa/4.0/} for details).
+
+\chapter{Draft Notice}
+
+This book is a draft that has been released for evaluation and comment.  The
+draft contains mostly complete chapters up through loops (Chapter \ref{chapter:loops}) 
+for three languages (C, Java, and PHP).  Subsequent chapters are included as
+placeholders and indicators for the intended scope of the final draft, but are intentionally
+left blank.  The author encourages people to send feedback including suggestions, 
+corrections, and reviews to inform and influence the final draft.  Thank you in advance
+to anyone helping out or sending constructive criticisms.
+
+\chapter{Preface}
+\input{preface}
+
+\chapter{Acknowledgements}
+\input{acknowledgements}
+
+\tableofcontents
+
+\listofalgorithms
+
+%\lstlistoflistings
+
+\listoflistings
+
+\listoffigures
+
+\mainmatter
+
+%CHAPTER: Introduction
+\chapter{Introduction}
+\input{chapter-Introduction}
+
+%CHAPTER: Basics
+\chapter{Basics}
+\input{chapter-Basics}
+\input{section-Basics-exercises}
+
+%CHAPTER: Conditionals
+\chapter{Conditionals}
+\label{chapter:conditionals}
+\index{conditionals}
+\input{chapter-Conditionals}
+\input{section-Conditionals-exercises}
+
+%CHAPTER: Loops
+\chapter{Loops}
+\label{chapter:loops}
+\index{loops}
+\input{chapter-Loops}
+\input{section-Loops-exercises}
+
+%CHAPTER: Functions
+\chapter{Functions}
+\index{functions}
+\input{chapter-Functions}
+\input{section-Functions-exercises}
+
+%THE REST:
+\input{toCome}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%% C Language
+
+\part{The C Programming Language}
+
+\chapter{Basics}
+\input{C-chapter-Basics}
+
+\chapter{Conditionals}
+\input{C-chapter-Conditionals}
+
+\chapter{Loops}
+\input{C-chapter-Loops}
+
+\chapter{Functions}
+\label{chapter:c:functions}
+\input{C-chapter-Functions}
+
+\part{The Java Programming Language}
+
+\chapter{Basics}
+\input{Java-chapter-Basics}
+
+\chapter{Conditionals}
+\input{Java-chapter-Conditionals}
+
+\chapter{Loops}
+\input{Java-chapter-Loops}
+
+
+\part{The PHP Programming Language}
+
+\chapter{Basics}
+\input{PHP-chapter-Basics}
+
+\chapter{Conditionals}
+\input{PHP-chapter-Conditionals}
+
+\chapter{Loops}
+\input{PHP-chapter-Loops}
+
+\backmatter
+
+\newpage
+%separate glossary/acronym:
+\printglossaries
+%do not print page numbers for unused entries, but include them in the glossaries:
+\forallglsentries{\thislabel}%
+{%
+  \ifglsused{\thislabel}{}{\glsadd[format=ignore]{\thislabel}}%
+}
+
+%\newpage
+\phantomsection
+\printindex
+\addcontentsline{toc}{chapter}{Index}
+
+%\newpage
+\phantomsection
+\nocite{*}
+\bibliographystyle{plain}
+%\bibliographystyle{elsarticle-harv}
+\bibliography{bibliography}
+\addcontentsline{toc}{chapter}{References}
+
+
+
+
+\end{document}

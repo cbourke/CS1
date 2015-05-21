@@ -1,0 +1,5 @@
+\begin{Verbatim}[commandchars=\\\{\},codes={\catcode`\$=3\catcode`\^=7\catcode`\_=8}]
+\PYGdefault{n+nv}{\PYGdefaultZdl{}s} \PYGdefault{o}{=} \PYGdefault{l+s+s2}{\PYGdefaultZdq{}Hello\PYGdefaultZdq{}}\PYGdefault{p}{;}
+\PYGdefault{n+nv}{\PYGdefaultZdl{}t} \PYGdefault{o}{=} \PYGdefault{l+s+s2}{\PYGdefaultZdq{}World!\PYGdefaultZdq{}}\PYGdefault{p}{;}
+\PYGdefault{n+nv}{\PYGdefaultZdl{}msg} \PYGdefault{o}{=} \PYGdefault{n+nv}{\PYGdefaultZdl{}s} \PYGdefault{o}{.} \PYGdefault{l+s+s2}{\PYGdefaultZdq{} \PYGdefaultZdq{}} \PYGdefault{o}{.} \PYGdefault{n+nv}{\PYGdefaultZdl{}t}\PYGdefault{p}{;} \PYGdefault{c+c1}{//msg contains \PYGdefaultZdq{}Hello World!\PYGdefaultZdq{}}
+\end{Verbatim}

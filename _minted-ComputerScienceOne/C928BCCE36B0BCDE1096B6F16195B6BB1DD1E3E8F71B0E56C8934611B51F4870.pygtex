@@ -1,0 +1,8 @@
+\begin{Verbatim}[commandchars=\\\{\},codes={\catcode`\$=3\catcode`\^=7\catcode`\_=8}]
+\PYGdefault{k+kt}{double} \PYGdefault{n}{x} \PYGdefault{o}{=} \PYGdefault{l+m+mf}{32145.234}\PYGdefault{o}{;}
+\PYGdefault{k+kt}{int} \PYGdefault{n}{k} \PYGdefault{o}{=} \PYGdefault{l+m+mi}{0}\PYGdefault{o}{;}
+\PYGdefault{k}{while}\PYGdefault{o}{(}\PYGdefault{n}{x} \PYGdefault{o}{\PYGdefaultZgt{}} \PYGdefault{l+m+mi}{10}\PYGdefault{o}{)} \PYGdefault{o}{\PYGdefaultZob{}}
+  \PYGdefault{n}{x} \PYGdefault{o}{=} \PYGdefault{n}{x} \PYGdefault{o}{/} \PYGdefault{l+m+mi}{10}\PYGdefault{o}{;} \PYGdefault{c+c1}{//or: x /= 10;}
+  \PYGdefault{n}{k}\PYGdefault{o}{++;}
+\PYGdefault{o}{\PYGdefaultZcb{}}
+\end{Verbatim}

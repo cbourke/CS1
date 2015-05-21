@@ -1,0 +1,3 @@
+\begin{Verbatim}[commandchars=\\\{\},codes={\catcode`\$=3\catcode`\^=7\catcode`\_=8}]
+\PYGdefault{n+nv}{\PYGdefaultZdl{}fahrenheit} \PYGdefault{o}{=} \PYGdefault{n+nb}{trim}\PYGdefault{p}{(}\PYGdefault{n+nb}{fgets}\PYGdefault{p}{(}\PYGdefault{n+nx}{STDIN}\PYGdefault{p}{));}
+\end{Verbatim}

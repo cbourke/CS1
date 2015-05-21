@@ -1,0 +1,9 @@
+\begin{Verbatim}[commandchars=\\\{\},codes={\catcode`\$=3\catcode`\^=7\catcode`\_=8}]
+Current Calculator
+==============
+Enter the first unit type (V, R, I): V
+Enter the voltage: 25.75
+Enter the second unit type (V, R, I): I
+Enter the current: 72
+The corresponding resistance is 0.358 Ohms
+\end{Verbatim}

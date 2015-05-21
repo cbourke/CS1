@@ -1,0 +1,6 @@
+\begin{Verbatim}[commandchars=\\\{\},codes={\catcode`\$=3\catcode`\^=7\catcode`\_=8}]
+\PYGdefault{k+kt}{int} \PYGdefault{n}{sum} \PYGdefault{o}{=} \PYGdefault{l+m+mi}{0}\PYGdefault{o}{;}
+\PYGdefault{k}{for}\PYGdefault{o}{(}\PYGdefault{k+kt}{int} \PYGdefault{n}{i}\PYGdefault{o}{=}\PYGdefault{l+m+mi}{1}\PYGdefault{o}{;} \PYGdefault{n}{i}\PYGdefault{o}{\PYGdefaultZlt{}=}\PYGdefault{l+m+mi}{10}\PYGdefault{o}{;} \PYGdefault{n}{i}\PYGdefault{o}{++)} \PYGdefault{o}{\PYGdefaultZob{}}
+  \PYGdefault{n}{sum} \PYGdefault{o}{+=} \PYGdefault{n}{i}\PYGdefault{o}{;}
+\PYGdefault{o}{\PYGdefaultZcb{}}
+\end{Verbatim}

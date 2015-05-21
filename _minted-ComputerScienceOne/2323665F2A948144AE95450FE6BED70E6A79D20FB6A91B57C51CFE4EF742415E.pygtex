@@ -1,0 +1,9 @@
+\begin{Verbatim}[commandchars=\\\{\},codes={\catcode`\$=3\catcode`\^=7\catcode`\_=8}]
+\PYGdefault{x}{\PYGdefaultZdl{}n = 10;}
+\PYGdefault{x}{\PYGdefaultZdl{}m = 20;}
+\PYGdefault{x}{for(\PYGdefaultZdl{}i=0; \PYGdefaultZdl{}i\PYGdefaultZlt{}\PYGdefaultZdl{}n; \PYGdefaultZdl{}i++) \PYGdefaultZob{}}
+\PYGdefault{x}{  for(\PYGdefaultZdl{}j=0; \PYGdefaultZdl{}j\PYGdefaultZlt{}\PYGdefaultZdl{}m; \PYGdefaultZdl{}j++) \PYGdefaultZob{}}
+\PYGdefault{x}{    printf(\PYGdefaultZdq{}(i, j) = (\PYGdefaultZpc{}d, \PYGdefaultZpc{}d)\PYGdefaultZbs{}n\PYGdefaultZdq{}, \PYGdefaultZdl{}i, \PYGdefaultZdl{}j);}
+\PYGdefault{x}{  \PYGdefaultZcb{}}
+\PYGdefault{x}{\PYGdefaultZcb{}}
+\end{Verbatim}

@@ -1,0 +1,6 @@
+\begin{Verbatim}[commandchars=\\\{\},codes={\catcode`\$=3\catcode`\^=7\catcode`\_=8}]
+\PYGdefault{x}{\PYGdefaultZdl{}i;}
+\PYGdefault{x}{for(\PYGdefaultZdl{}i=1; \PYGdefaultZdl{}i\PYGdefaultZlt{}=10; \PYGdefaultZdl{}i++) \PYGdefaultZob{}}
+\PYGdefault{x}{  //perform some action}
+\PYGdefault{x}{\PYGdefaultZcb{}}
+\end{Verbatim}

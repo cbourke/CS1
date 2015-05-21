@@ -1,0 +1,13 @@
+
+\begin{tikzpicture}[node distance = 4cm,auto,scale=1.0,transform shape]
+    % Place nodes
+    \node[draw=none] (start) {};
+    \node [decision, below of=start,node distance=2cm] (decide) {$\langle condition \rangle$};
+    \node [block, right of=decide] (a) {Code Block};
+    \node[block,below of=decide] (c) {Remaining Program};
+    % Draw edges
+    \path [line] (start) -- (decide);
+    \path [line] (decide) -- node {true}(a);
+    \path [line] (decide) -- node {false}(c);
+    \path [line] (a) |- (c);
+\end{tikzpicture}

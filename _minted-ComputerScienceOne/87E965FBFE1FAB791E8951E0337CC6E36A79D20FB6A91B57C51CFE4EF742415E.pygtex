@@ -1,0 +1,6 @@
+\begin{Verbatim}[commandchars=\\\{\},codes={\catcode`\$=3\catcode`\^=7\catcode`\_=8}]
+\PYGdefault{x}{\PYGdefaultZdl{}x = 15;}
+\PYGdefault{x}{if(\PYGdefaultZdl{}x \PYGdefaultZlt{} 10); \PYGdefaultZob{}}
+\PYGdefault{x}{  printf(\PYGdefaultZdq{}x is less than 10\PYGdefaultZbs{}n\PYGdefaultZdq{});}
+\PYGdefault{x}{\PYGdefaultZcb{}}
+\end{Verbatim}

@@ -1,0 +1,4 @@
+\begin{Verbatim}[commandchars=\\\{\},codes={\catcode`\$=3\catcode`\^=7\catcode`\_=8}]
+\PYGdefault{k+kd}{final} \PYGdefault{k+kt}{int} \PYGdefault{n}{secret} \PYGdefault{o}{=} \PYGdefault{l+m+mi}{42}\PYGdefault{o}{;}
+\PYGdefault{k+kd}{final} \PYGdefault{k+kt}{double} \PYGdefault{n}{salesTaxRate} \PYGdefault{o}{=} \PYGdefault{l+m+mf}{0.075}\PYGdefault{o}{;}
+\end{Verbatim}

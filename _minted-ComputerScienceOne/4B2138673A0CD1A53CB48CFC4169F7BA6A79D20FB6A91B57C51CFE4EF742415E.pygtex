@@ -1,0 +1,7 @@
+\begin{Verbatim}[commandchars=\\\{\},codes={\catcode`\$=3\catcode`\^=7\catcode`\_=8}]
+\PYGdefault{x}{if(\PYGdefaultZdl{}baseTax \PYGdefaultZhy{} \PYGdefaultZdl{}credit \PYGdefaultZgt{}= 0) \PYGdefaultZob{}}
+\PYGdefault{x}{  \PYGdefaultZdl{}totalTax = \PYGdefaultZdl{}baseTax \PYGdefaultZhy{} \PYGdefaultZdl{}credit;}
+\PYGdefault{x}{\PYGdefaultZcb{} else \PYGdefaultZob{}}
+\PYGdefault{x}{  \PYGdefaultZdl{}totalTax = 0;}
+\PYGdefault{x}{\PYGdefaultZcb{}}
+\end{Verbatim}

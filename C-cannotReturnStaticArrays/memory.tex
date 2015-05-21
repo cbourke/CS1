@@ -1,0 +1,165 @@
+
+\documentclass{article}
+\usepackage{subfigure}
+
+\usepackage{fullpage}
+\usepackage{listings}
+\lstset{basicstyle=\ttfamily\small\color{black},
+        showspaces=false,
+        showtabs=false,
+        %tab=\rightarrowfill,
+        tabsize=2,
+        showstringspaces=false,
+        stringstyle=\ttfamily\bfseries\color{blue},
+        keywordstyle=\color{magenta},
+        commentstyle=\color{blue},
+        % NUMBERING STYLES
+        numbers=left,
+        stepnumber=1,
+        numbersep=5pt,
+        %Handle framing
+        frame=tlBR,      %frame = single, tbrl/TBRL
+        %rulesepcolor=\color{green},
+        frameround=tttt, %t = rounded, f = square, starts at top right, runs clockwise
+        %Handle Margins
+        breaklines=true,
+        boxpos=r,
+        breakatwhitespace=false,
+        xleftmargin=0cm,
+        xrightmargin=0cm} %
+\lstset{language=Java}
+\renewcommand{\lstlistingname}{Code Sample}
+\renewcommand{\lstlistlistingname}{Code Samples}
+\usepackage{tikz}
+
+\begin{document}
+
+In C functions that return complex types or arrays must necessarily return pointers
+to memory that has been allocated on the program \emph{heap} rather than the
+program \emph{stack}.  The reason for this is that the program stack space is reused
+by subsequent function calls and the contents may even be changed when a
+function returns control back to the calling function (sometimes called \emph{unwinding}).  
+Thus, variables that are local in scope cannot be presumed to be available 
+upon returning from a function.  This is not an issue when returning primitive types as 
+the return value is placed in a special memory location available to the calling function
+which presumably takes the value from that location and copies it to a variable that is
+within the scope of a calling function.
+
+An illustrative example of this process can be found in Code Sample 
+\ref{code:returnStaticArray} and Figure \ref{fig:returningStaticArrays}.
+
+
+\begin{lstlisting}[caption=Example returning a static array,label=code:returnStaticArray]
+#include<stdlib.h>
+#include<stdio.h>
+
+int * foo(int n) {
+  int i;
+  int b[5];
+  for(i=0; i<5; i++) {
+    b[i] = n*i;
+  }
+  for(i=0; i<5; i++) {
+    printf("b[%d] = %d\n", i, b[i]);
+  }
+  return b;
+}
+
+int main(int argc, char **argv) {
+  int i, m = 7;
+  int *a = foo(m);
+  for(i=0; i<5; i++) {
+    printf("a[%d] = %d\n", i, a[i]);
+  }
+  return 0;
+}
+\end{lstlisting}
+
+\begin{figure}[h]
+\subfigure[Program stack at the end of the execution of \lstinline|foo| prior to its returning
+control back to \lstinline|main|.]{
+
+\begin{tabular}{rr|l|l|}
+
+\multicolumn{1}{c}{Stack Frame}  & \multicolumn{1}{c}{Variable} & \multicolumn{1}{c}{Address} & \multicolumn{1}{c}{Content} \\
+\multicolumn{1}{c}{~} & \multicolumn{1}{c}{~} & \multicolumn{1}{c}{$\vdots$} & \multicolumn{1}{c}{$\vdots$}\\
+\cline{3-4}
+~ & \lstinline|b[4]| & \lstinline|0x5c44cb76| & 25 \\
+\cline{3-4}
+~ & \lstinline|b[3]| & \lstinline|0x5c44cb72| & 20 \\
+\cline{3-4}
+~ & \lstinline|b[2]| & \lstinline|0x5c44cb68| & 15 \\
+\cline{3-4}
+~ & \lstinline|b[1]| & \lstinline|0x5c44cb64| & 10 \\
+\cline{3-4}
+~ & \lstinline|b[0]| & \lstinline|0x5c44cb60| & 5 \\
+\cline{3-4}
+~ & \lstinline|i| & \lstinline|0x5c44cb56| & 5 \\
+\cline{3-4}
+\lstinline|foo| & \lstinline|n| & \lstinline|0x5c44cb52| & 7 \\
+\cline{1-4}
+~ & \multicolumn{1}{c}{~} & \multicolumn{1}{c}{$\vdots$} & \multicolumn{1}{c}{$\vdots$} \\
+\cline{3-4}
+~ & \lstinline|a| & \lstinline|0x5c44cb34| & \lstinline|NULL| \\
+\cline{3-4}
+~ & \lstinline|m| & \lstinline|0x5c44cb30| & 7 \\
+\cline{3-4}
+\lstinline|main| & \lstinline|i| & \lstinline|0x5c44cb26| & \lstinline|0| \\
+\cline{1-4}
+~\\
+\end{tabular}
+}~~~~~~~~~~
+\subfigure[Upon returning, the stack frame is no longer valid; \lstinline|a| points to a stack memory address
+but the frame and its local variables are no longer valid.  Some have been overwritten with other values.
+Subsequent usage or access of the values in \lstinline|a| are undefined behavior.]{
+\begin{tabular}{rr|l|l|}
+
+\multicolumn{1}{c}{Stack Frame}  & \multicolumn{1}{c}{Variable} & \multicolumn{1}{c}{Address} & \multicolumn{1}{c}{Content} \\
+\multicolumn{1}{c}{~} & \multicolumn{1}{c}{~} & \multicolumn{1}{c}{$\vdots$} & \multicolumn{1}{c}{$\vdots$}\\
+\cline{3-4}
+~ & \lstinline|b[4]| & \lstinline|0x5c44cb76| & -626679356 \\
+\cline{3-4}
+~ & \lstinline|b[3]| & \lstinline|0x5c44cb72| & 20 \\
+\cline{3-4}
+~ & \lstinline|b[2]| & \lstinline|0x5c44cb68| & 15 \\
+\cline{3-4}
+~ & \lstinline|b[1]| & \lstinline|0x5c44cb64| & 32767 \\
+\cline{3-4}
+~ & \lstinline|b[0]| & \lstinline|0x5c44cb60| & 1564158624 \\
+\cline{3-4}
+~ & \lstinline|i| & \lstinline|0x5c44cb56| & 5 \\
+\cline{3-4}
+\lstinline|foo| & \lstinline|n| & \lstinline|0x5c44cb52| & 7 \\
+\cline{1-4}
+~ & \multicolumn{1}{c}{~} & \multicolumn{1}{c}{$\vdots$} & \multicolumn{1}{c}{$\vdots$} \\
+\cline{3-4}
+~ & \lstinline|a| & \lstinline|0x5c44cb34| & \lstinline|0x5c44cb60| \\
+\cline{3-4}
+~ & \lstinline|m| & \lstinline|0x5c44cb30| & 7 \\
+\cline{3-4}
+\lstinline|main| & \lstinline|i| & \lstinline|0x5c44cb26| & \lstinline|0| \\
+\cline{1-4}
+~\\
+\end{tabular}
+
+}
+\caption{Illustration of the pitfalls of returning a static array in C.  Static arrays are locally scoped and
+exist only within the function/block in which they are declared.  The program stack frame in which
+the variables are stored is invalid when the function returns control back to the calling function.  
+Depending on how the system/compiler/language handles this \emph{unwinding} process, values
+may be changed, unavailable, etc.}
+\label{fig:returningStaticArrays}
+\end{figure}
+%\begin{tikzpicture}[every node/.style={draw,text width=10em}]
+%
+%\matrix[draw=none,column sep=0em,row sep=0cm,minimum height=1.5em]
+%{
+%  ~ & \node[draw=none] {Variable}; & \node {Address}; & \node {Content}; \\
+%  ~ & \node[draw=none] {\lstinline|a[4]|}; & \node {\lstinline|0x5c44cb76|}; & \node {25}; \\
+%\node[draw=red,column sep=1em] (a) {main}; &  \node[draw=none] {\lstinline|a[3]|}; & \node {\lstinline|0x5c44cb72|}; & \node {20}; \\
+%};
+%
+%\end{tikzpicture}
+
+
+\end{document}

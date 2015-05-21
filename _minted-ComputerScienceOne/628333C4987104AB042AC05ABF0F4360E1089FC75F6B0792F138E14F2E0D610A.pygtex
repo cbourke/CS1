@@ -1,0 +1,7 @@
+\begin{Verbatim}[commandchars=\\\{\},codes={\catcode`\$=3\catcode`\^=7\catcode`\_=8}]
+\PYGdefault{k+kt}{int} \PYGdefault{n}{i}\PYGdefault{o}{;}
+\PYGdefault{k}{do} \PYGdefault{o}{\PYGdefaultZob{}}
+  \PYGdefault{c+c1}{//perform some action}
+  \PYGdefault{n}{i}\PYGdefault{o}{++;}
+\PYGdefault{o}{\PYGdefaultZcb{}} \PYGdefault{k}{while}\PYGdefault{o}{(}\PYGdefault{n}{i} \PYGdefault{o}{\PYGdefaultZlt{}=} \PYGdefault{l+m+mi}{10}\PYGdefault{o}{);}
+\end{Verbatim}

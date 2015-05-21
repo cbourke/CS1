@@ -1,0 +1,1568 @@
+%!TEX root = ComputerScienceOne.tex
+
+%%Chapter: Basics
+
+\section{Control Flow}
+
+The flow of control (or simply control flow) is how a program processes its instructions.
+Typically, programs operate in a linear or \emph{sequential} flow of control.  Executable
+statements or instructions in a program are performed one after another.  In source code, 
+the order that instructions are written defines their order.  Just like English, a program
+is ``read'' top to bottom.  Each statement may modify the \emph{state} of a program.  
+The state of a program is the value of all its variables and other information/data stored 
+in memory at a given moment during its execution.  Further, an executable statement
+may instead invoke (or call or execute) another \emph{procedure} (also called 
+subroutine, function, method, etc.) which is another unit of code that has been 
+encapsulated into one unit so that it can be reused.
+
+This type of control flow is usually associated with a procedural programming paradigm
+(which is closely related to imperative or structured programming paradigms).  
+Though this text will mostly focus on languages that are procedural (or that have
+strong procedural aspects), it is important to understand that there are other 
+programming language paradigms.  Functional programming languages such as
+Scheme and Haskell achieve computation through the evaluation of mathematical 
+functions with as little or no (``pure'' functional) state at all.  Declarative languages
+such as those used in database languages like SQL or in spreadsheets like Excel
+specify computation by expressing the logic of computation rather than explicitly 
+specifying control flow.  For a more formal introduction to programming language 
+paradigms, a good resource is \emph{Seven Languages in Seven Weeks: A Pragmatic Guide to Learning Programming Languages}
+by Tate \cite{Tate:2010:SLS:1951955}.
+
+\subsection{Flow Charts}
+
+Sometimes processes are described using diagrams called \glspl{flowchart}.
+A flow chart is a visual representation of an \gls{algorithm} or process consisting
+of boxes or ``nodes'' connected by directed edges.  Boxes can represent an individual 
+step or a decision to be made.  The edges establish an \emph{order} of operations
+in the diagram.  
+
+Some boxes represent \emph{decisions} to be made which may have one or
+more alternate routes (more than one directed edge going out of the box)
+depending on the the result of the decision.  Decision boxes are usually 
+depicted with a diamond shaped box.
+
+Other boxes represent a process, operation, or action to be performed.  Boxes
+representing a process are usually rectangles.  We will further distinguish two
+types of processes using two different colorings: we'll use green to represent
+boxes that are steps directly related to the algorithm being depicted.  We'll
+use blue for actions that are necessary to the control flow of the algorithm such
+as assigning a value to a variable or incrementing a value as part of a loop.
+Figure \ref{figure:flowchartNodes} depicts the three types of boxes we'll use.  
+Figure \ref{figure:flowchartATM} depicts a simple ATM (Automated Teller Machine) process 
+as an example.
+
+\begin{figure}
+\centering
+\subfigure[Decision Node]{
+\input{figures/figureDecisionNode}
+}\subfigure[Control Node]{
+\input{figures/figureControlNode}
+}\subfigure[Action Node]{
+\input{figures/figureActionNode}
+}
+\caption[Types of Flowchart Nodes]{Types of Flowchart Nodes.  Control and 
+action nodes are distinguished by color.  Control nodes are automated steps
+while action nodes are steps performed as part of the algorithm being depicted.}
+\label{figure:flowchartNodes}
+\end{figure}
+
+\begin{figure}
+\centering
+\input{figures/figureATMFlowChart}
+\caption{Example of a flow chart for a simple ATM process}
+\label{figure:flowchartATM}
+\end{figure}
+
+\section{Variables}
+\index{variable}
+
+In mathematics, variables are used as placeholders for values that aren't
+necessarily known.  For example, in the equation, 
+  $$x = 3y + 5$$ 
+the variables $x$ and $y$ represent numbers that can take on a number 
+of different values.
+
+Similarly, in a computer program, we also use \glspl{variable} to store 
+values.  A variable is essentially a memory location in which a \emph{value} 
+can be stored.  Typically, a variable is referred to by a \emph{name} 
+or \gls{identifier} (like $x, y, z$ in mathematics).  In mathematics variables
+are usually used to hold numerical values.  However, in programming, 
+variables can usually hold different \emph{types} of values such as numbers,
+strings (a collection of characters), Booleans (\True or \False values), or
+more complex types such as objects.
+
+\subsection{Naming Rules \& Conventions}
+
+Most programming languages have very specific rules as to what you can
+use as variable identifiers (names).  For example, most programming languages
+do not allow you to use whitespace characters (space, tab, etc.) in a variable's
+identifier.  Allowing spaces would make variable names ambiguous: where does the
+variable's name end and the rest of the program continue?  How could you tell
+the difference between ``average score'' and two separate variables named 
+``average'' and ``score''?  Many programming languages also have 
+\gls{reserved word}--words or terms that are used by the programming 
+language itself and have special meaning.  Variable names cannot be the same as any reserved word as the
+language wouldn't be able to distinguish between them.
+
+For similar reasons, many programming languages do not allow you to start
+a variable name with a number as it would make it more difficult to decipher
+a program.  Yet other languages require that variables begin
+with a specific character (PHP for example \emph{requires} that all variables begin
+with a dollar sign, \mintinline{text}{$}).
+
+In general, most programming languages allow you to use upper \mintinline{text}{[A-Z]}
+and lowercase \mintinline{text}{[a-z]} letters as well as numbers, \mintinline{text}{[0-9]}
+and certain special characters such as underscores \mintinline{text}{_} or dollar signs, 
+\mintinline{text}{$}.  Moreover, most programming languages (like English) are 
+\gls{case sensitive} \index{case sensitive} meaning that a variable name using lower case letters is not
+the same variable as one that uses upper case letters.  For example, the variables
+\mintinline{c}{x} and \mintinline{c}{X} are \emph{different}; the variables \mintinline{c}{average},
+\mintinline{c}{Average} and \mintinline{c}{AVERAGE} are all different as well.
+A few languages are \emph{case-insensitive} meaning that they do not recognize
+differences in lower and upper case letters when used in variable identifiers.  
+Even in these languages, however, using a mixture of lower and upper case letters
+to refer to the same variable is discouraged: it is difficult to read, inconsistent, and
+just plain ugly.
+
+Beyond the naming rules that languages may enforce, most languages have established
+\glspl{naming convention}; a set of guidelines and best-practices for choosing
+identifier names for variables (as well as functions, methods, and class names).  
+Conventions may be widely adopted on a per-language basis or may be established
+within a certain library, framework or by an organization.  Naming conventions are
+intended to give source code consistency which ultimately improves readability and 
+makes it easier to understand.  Following a consistent convention can also greatly
+reduce the chance for errors and mistakes.  Good naming conventions also has an
+aesthetic appeal; code should be beautiful.  
+
+There are several general conventions when it comes to variables.  An early 
+convention, but still in common use is \emph{underscore casing} in which 
+variable names consisting of more than one word have words separated by
+underscore characters with all other characters being lower case.  For example:
+\begin{center}
+\mintinline{c}{average_score}, \mintinline{c}{number_of_students}, \mintinline{c}{miles_per_hour}
+\end{center}
+A variation on this convention is to use all uppercase letters such as \mintinline{c}{MILES_PER_HOUR}.
+A more modern convention is to use \emph{lower camel casing} (or just \emph{camel casing}) in
+which variable names with multiple words are written as one long word with the
+first letter in each new word capitalized but with the first word's first letter lower case.
+For example:
+\begin{center}
+\mintinline{c}{averageScore}, \mintinline{c}{numberOfStudents}, \mintinline{c}{milesPerHour}
+\end{center}
+The convention refers to the capitalized letters resembling the humps of a camel.
+One advantage that camel casing has over underscore casing is that you're not always
+straining to type the underscore character.  Yet another similar convention is upper camel
+casing, also known as \emph{PascalCase}\footnote{Rarely this is referred to as DromedaryCase; 
+a Dromedary is an Arabian camel.} which is like camel casing, but the first letter
+in the first word is also capitalized:
+\begin{center}
+\mintinline{c}{AverageScore}, \mintinline{c}{NumberOfStudents}, \mintinline{c}{MilesPerHour}
+\end{center}
+Each of these conventions is used in various languages in different contexts which
+we'll explore more fully in subsequent sections (usually
+underscore lowercasing and camel casing are used to denote variables and
+functions, PascalCase is used to denote user defined types such as classes or 
+structures, and underscore uppercasing is used to denote static and constant variables).  
+However, for our purposes, we'll use camel casing for variables in our pseudocode.
+
+There are exceptions and special cases to each of these conventions such
+as when a variable name involves an acronym or a hyphenated word, etc.  In such
+cases sensible extensions or compromises are employed.  For example, 
+\mintinline{c}{xmlString} or \mintinline{c}{priorityXMLParser} (involving the acronym 
+\gls{xmlLabel}) may be used which keep all letters in the acronym consistent (all lower
+or all uppercase).
+
+In addition to these conventions, there are several best-practice principles when deciding
+on identifiers.
+\begin{itemize}
+  \item Be descriptive, but not verbose -- Use variable names that describe what the
+  	variable represents.  The examples above, \mintinline{c}{averageScore}, 
+	\mintinline{c}{numberOfStudents}, \mintinline{c}{milesPerHour} clearly indicate
+	what the variable is intended to represent.  Using good, descriptive names makes
+	your code self-documenting (a reader can make sense of it without having to 
+	read extensive supplemental documentation).
+
+	Avoid meaningless variable names such as \mintinline{c}{value}, \mintinline{c}{aVariable}, 
+	or some cryptic combination of \mintinline{c}{v10} (its the 10th variable I've used!).  
+	Ambiguous variables such as \mintinline{c}{name} should also be avoided unless the
+	context makes its clear what you are referring to (as when used inside of a Person
+	object).
+	
+	Single character variables are commonly used, but used in a context in which their
+	meaning is clearly understood.  For example, variable names such as \mintinline{c}{x},
+	\mintinline{c}{y} are okay if they are used to refer to points in the Euclidean plane.  
+	Single character variables such as \mintinline{c}{i}, \mintinline{c}{j} are often used
+	as index variables when iterating over arrays.  In this case, terseness is valued over
+	descriptiveness as the context is very well-understood. 
+	
+	As a general rule, the more a variable is used, the shorter it should be.  For example,
+	the variable \mintinline{c}{numStudents} may be preferred over the full variable 
+	\mintinline{c}{numberOfStudents}.
+	
+  \item Avoid abbreviations (or at least use them sparingly) -- You're not being charged 
+  	by the character in your code; you can afford to write out full words.  Abbreviations
+	can help to write shorter variable names, but not all abbreviations are the same. 
+	The word ``abbreviation'' itself could be abbreviated as ``abbr.'', ``abbrv.'' or ``abbrev.''
+	for example.  Abbreviations are not always universally understood by all users, may be
+	ambiguous, or non-standard.  Moreover, modern \glspl{ideLabel} provide automatic code 
+	completion, relieving you of the need to type longer variable names.  If the abbreviation 
+	is well-known or understood from context, then it may make sense to use it.
+  \item Avoid acronyms (or at least use them sparingly) -- Using acronyms in variable
+  	names come with many of the same problems as abbreviations.  However, if it 
+	makes sense in the context of your code and has little chance of being misunderstood
+	or mistaken, then go for it.  For example, in the context of a financial application, 
+	APR (Annual Percentage Rate) would be a well-understood acronym in which case
+	the variable \mintinline{c}{apr} may be preferred over the longer \mintinline{c}{annualPercentageRate}.
+  \item Avoid pluralizations, use singular forms -- English is not a very consistent language when it comes to 
+  	rules like pluralizations.  For most cases you simply add ``s''; for others you add ``es'' or change the ``y'' to
+	``i'' and add ``es''.  Some words are the same form for singular and plural such as ``glasses''.\footnote{These
+	are called \emph{plurale tantum} (nouns with no singular form) and \emph{singular tantum} (nouns with
+	no plural form) for you grammarians.  Words like ``sheep'' are \emph{unchanging irregular plurals}; words
+	whose singular and plural forms are the same.}  Other words completely different forms forms 
+	(``focus'' becomes ``foci'').  Still yet there are instances in which \emph{multiple} words are acceptable:
+	the plural of ``person'' can be ``persons'' \emph{or} ``people''.  Avoiding plural forms keeps things simple
+	and consistent: you don't need to be a grammarian in order easily read code.  One potential 
+	exception to this is when using a collection such as an array to hold more than one element or
+	the variable represents a quantity that is pluralized (as with \mintinline{c}{numberOfStudents} above).
+\end{itemize}
+
+Though the guidelines above provide a good framework from which to write good variable
+names, reasonable people can and do disagree
+on best practice because at some point as you go from generalities to specifics, conventions
+become more of a matter of personal preference and subjective aesthetics.  Sometimes an
+organization may establish its own coding standards that must be followed which of course 
+trumps any of the guidelines above.
+
+In the end, a good balance must be struck between readability and consistency.  Rules and
+conventions should be followed, until they get in the way of good code that is.
+
+\subsection{Types}
+
+A variable's \gls{type} (or \emph{data type}) is the characterization of the data that it 
+represents.  As mentioned before, a computer only ``speaks'' in 0s and 1s (binary).  
+A variable is merely a memory location in which a series of 0s and 1s is stored.  That
+binary string could represent a number (either an integer or a floating point number), 
+a single alphanumeric character or series of characters (string), a boolean type or
+some other, more complex user-defined type.  
+
+The type of a variable is important because it affects 
+how the raw binary data stored at a memory location is interpreted.  Moreover, some
+types take a different amount of memory.  For example, an integer type could take
+32 \glspl{bit} while a floating point type could take 64 \glspl{bit}.
+
+Programming languages may support different types and may do so in different ways.
+In the next few sections we'll describe some common types that are supported
+by many languages.
+
+\subsubsection{Numeric Types}
+
+At their most basic, computers are number crunching machines.  Thus, the
+most basic type of variable that can be used in a computer program is a
+\emph{numeric type}.  There are several numeric types that are supported
+by various programming languages.  The most simple is an \emph{integer}
+type which can represent whole numbers 0, 1, 2, etc. and their negations, 
+$-1, -2, \ldots$.  \emph{Floating point} numeric types represent decimal numbers
+such as $0.5, 3.14, 4.0$, etc.  However, floating point numbers cannot 
+represent \emph{every} real number possible since they use a finite
+number of \glspl{bit} to represent the number.  We will examine this in
+detail below.  For now, let's understand how a computer represents both
+integers and floating point numbers in memory.
+
+As humans, we ``think'' in base-10 (decimal) because we have 10 fingers
+and 10 toes.\footnote{At least, the most fortunate among us.}  When we write 
+a number with multiple digits in base-10 we do so using places (ones place, 
+tens place, hundreds place, etc.).  Mathematically, a number in base-10 
+can be broken down into powers of ten; for example:
+  $$3,201 = 3 \times 10^{3} + 2 \times 10^{2} + 0 \times 10^{1} + 1 \times 10^{0}$$
+In general, any number in base-10 can be written as the summation of powers of 10
+multiplied by numbers 0--9, 
+  $$c_k \times 10^{k} + c_{k-1} \times 10^{k-1} + \cdots c_1 \cdot 10^{1} + c_0$$
+
+\begin{wraptable}[22]{R}{0.40\textwidth}
+%\begin{table}
+\centering
+\begin{tabular}{r|r}
+Base-10 & Binary\\
+\hline\hline
+0 & \mintinline{text}{0b0} \\
+1 & \mintinline{text}{0b1} \\
+2 & \mintinline{text}{0b10} \\
+3 & \mintinline{text}{0b11} \\
+4 & \mintinline{text}{0b100} \\
+5 & \mintinline{text}{0b101} \\
+6 & \mintinline{text}{0b110} \\
+7 & \mintinline{text}{0b111} \\
+8 & \mintinline{text}{0b1000} \\
+9 & \mintinline{text}{0b1001} \\
+10 & \mintinline{text}{0b1010} \\
+11 & \mintinline{text}{0b1011} \\
+12 & \mintinline{text}{0b1100} \\
+13 & \mintinline{text}{0b1101} \\
+14 & \mintinline{text}{0b1110} \\
+15 & \mintinline{text}{0b1111} \\
+16 & \mintinline{text}{0b10000} \\
+\end{tabular}
+\caption{Counting in Binary}
+\label{table:countingInBinary}
+%\end{table}
+\end{wraptable}
+
+In binary, numbers are represented in the same way, but in base-2 in which we only
+have 0 and 1 as symbols.  To illustrate, let's consider counting from 0: in base-10, we
+would count $0, 1, 2, \ldots, 9$ at which point we ``carry-over'' a 1 to the tens spot
+and start over at 0 in the ones spot, giving us $10, 11, 12, \ldots, 19$ and repeat the
+carry-over to 20.  
+
+With only two symbols, the carry-over occurs much more frequently, 
+we count $0, 1$ and then carry over and have $10$.  It is important to understand, this
+is not ``ten'': we are counting in base-2, so $10$ is actually equivalent to 2 in base-10.
+Continuing, we have $11$ and again carry over, but we carry it over twice giving us
+100 (just like we'd carry over twice when going from 99 to 100 in base-10).
+A full count from 0 to 16 in binary can be found in Table \ref{table:countingInBinary}.
+In many programming languages, a prefix of \texttt{0b} is used to denote a number
+represented in binary.  We use this convention in the table.  
+
+As a fuller example, consider again the number 3,201.  This can be 
+represented in binary as follows.
+\begin{align*}
+  \texttt{0b110010000001} = \, & 1 \times 2^{11} + 1 \times 2^{10} + 0 \times 2^{9} + 0 \times 2^{8} + \\
+   & 1 \times 2^{7~} + 0 \times 2^{6~} + 0 \times 2^{5} + 0 \times 2^{4} + \\
+   & 0 \times 2^{3~} + 0 \times 2^{2~} + 0 \times 2^{1} + 1 \times 2^{0} \\
+   = \, & 2^{11} + 2^{10} + 2^{7} + 2^{0} \\
+   = \, & 2,048 + 1,024 + 128 + 1 \\
+   = \, & 3,201
+\end{align*}
+
+Representing negative numbers is a bit more complicated and is usually done
+using a scheme called \gls{two's complement}.  We omit the details for now, but
+essentially the first bit in the representation serves as a \emph{sign bit}: zero indicates 
+positive, while 1 indicates negative.  Negative values are represented as a complement
+with respect to $2^n$ (a complement is where 0s and 1s are ``flipped'' to 1s and 0s).
+
+When represented using Two's Complement, binary numbers with $n$ bits can represent
+numbers $x$ in the range
+  $$-2^{n-1} \leq x \leq 2^{n-1}-1$$
+Note that the upper bound follows from the fact that 
+  $$\texttt{0b}\underbrace{ \vphantom{\frac{A}{B}} \texttt{11}\ldots \texttt{11}}_{n \textrm{ bits}} = \sum_{i=0}^{n-1} 2^i = 2^{n} -1$$
+Which captures the idea that we start at zero.  The lower bound represents the idea
+that we have $2^{n-1}$ possible values ($n-1$ since we need one bit for the sign bit) 
+and we don't need to start at zero, we can start at $-1$.  Table \ref{table:rangesForIntegerTypes}
+contains ranges for common integer types using various number of bits.
+
+\begin{table}[h]
+\centering
+\begin{tabular}{r|r|r}
+$n$ (number of bits) & minimum & maximum \\
+\hline\hline
+8 & -128 & 127 \\
+16 & -32,768 & 32,767 \\
+32 & -2,147,483,648 & 2,147,483,647 \\
+64 & -9,223,372,036,854,775,808 & 9,223,372,036,854,775,807 \\
+128 & $\approx -3.4028 \times 10^{38}$ & $\approx 3.4028 \times 10^{38}$ \\
+\end{tabular}
+\caption{Ranges for various signed integer types}
+\label{table:rangesForIntegerTypes}
+\end{table}
+
+Some programming languages allow you to define variables that are \emph{unsigned} in which 
+the sign bit is not used to indicate positive/negative.  With the extra bit we can represent numbers
+twice as big; using $n$ bits we can represent numbers $x$ in the range
+  $$0 \leq x \leq 2^n -1$$
+
+Floating point numbers in binary are represented in a manner similar
+to scientific notation.  Recall that in scientific notation, a number is \emph{normalized}
+by multiplying it by some power of 10 so that it its most significant digit is between 1
+and 9.  The resulting normalized number is called the \emph{significand} while the
+power of ten that the number was scaled by is called the \emph{exponent} (and
+since we are base-10, 10 is the \emph{base}).  In general, a number in scientific
+notation is represented as:
+$$\text{significand} \times \text{base}^\text{exponent}$$
+For example, 
+$$14326.123 = \underbrace{ \vphantom{\frac{A}{B}} 1.4326123}_\text{significand} \times \underbrace{ \vphantom{\frac{A}{B}} 10}_\text{base}\!\!\!\!\!\!^{\overbrace{4}^\text{exponent}}$$
+Equivalently, sometimes the notations $1.4326123e+4$, $1.4326123e4$ or 
+$1.4326123E4$ are used.  As before, we can see that a fractional number in base-10
+can be seen as a summation of powers of 10:
+\begin{align*}
+  1.4326123 = \, & 1 \times 10^{1\,\,\,\,\,} + 4 \times 10^{-1} + 3 \times 10^{-2} + 2 \times 10^{-3} + \\
+  	& 6 \times 10^{-4} + 1 \times 10^{-5} + 2 \times 10^{-6} + 3 \times 10^{-7} 
+\end{align*}
+In binary, floating point numbers are represented in a similar way, but the
+base is $2$, consequently a fractional number in binary is a summation of
+powers of 2.  For example, 
+\begin{align*}
+    110.011 = & 1 \times 2^2 + 1 \times 2^1 + 0 \times 2^0 + 0 \times 2^{-1} + 1 \times 2^{-2} + 1 \times 2^{-3} \\
+            = & 1 \times 4 + 1 \times 2 + 0 \times 1 + 0 \times \frac{1}{2} + 1 \times \frac{1}{4} + 1 \times \frac{1}{8} \\
+            = & 4 + 2 + 0 + 0 + \frac{1}{4} + \frac{1}{8} \\
+            = & 6.375
+\end{align*}
+In binary, the significand is often referred to as a \gls{mantissa}.  We also 
+normalize a binary floating point number so that the mantissa is between $\frac{1}{2}$ and 1.  
+This is where the term \emph{floating point} comes from: the decimal point (more generally
+called a \emph{radix point}) ``floats'' left and right to ensure that the number is always 
+normalized.  The example above would normalized to 
+  $$0.110011 \times 2^{3}$$
+Here, $0.110011$ is the mantissa and $3$ is the exponent (which in binary would 
+be \texttt{0b11}).
+
+Most modern programming languages implement floating point numbers according to the
+\gls{ieeeLabel} 754 Standard \cite{P754:2008:ISF} (also called the \gls{iecLabel} 60559 \cite{IEC:1989:IBF}).
+When represented in binary, the total number of bits must be used to represent the sign, mantissa
+and exponent.  The standard defines several precisions that each use a fixed number of bits with
+a resulting number of significant digits (base-10) of precision.  Table \ref{table:ieee754Summary}
+contains a summary of a few of the most commonly implemented precisions.
+
+\begin{table}
+\centering
+\begin{tabular}{l|r|r|r|p{3cm}|p{3cm}}
+Name & Bits & Exponent Bits & Mantissa Bits & Significant Digits of Precision & Approximate Range\\
+\hline\hline
+Half & 16 & 5 & 10 & $\approx 3.3$ & $10^{3} \sim 10^{4.5}$\\
+Single & 32 & 8 &  23 & $\approx 7.2$ & $10^{-38} \sim 10^{38}$\\
+Double & 64 & 11 & 52 & $\approx 15.9$ & $10^{-308} \sim 10^{308}$ \\
+Quadruple & 128 & 15 & 112 & $\approx 34.0$ & $10^{-4931} \sim 10^{4931}$ \\
+\end{tabular}
+\caption[Summary of Floating-point Precisions in the IEEE 754 Standard]{Summary of Floating-point Precisions in the IEEE 754 Standard.  Half and
+quadruple are not widely adopted.}
+\label{table:ieee754Summary}
+\end{table}
+
+Just as with integers, the finite precision of floating-point numbers results in 
+several limitations.  First, irrational numbers such as $\pi = 3.14159\ldots$ 
+can only be approximated out to a certain number of digits.  For example, 
+with single precision $\pi \approx 3.1415927$ which is accurate only to the 
+6th decimal place and with double precision, $\pi \approx 3.1415926535897931$
+approximate to only 15 decimal places.\footnote{The first 80 digits of $\pi$ are\\ 
+$3.14159265358979323846264338327950288419716939937510582097494459230781640628620899$\\ 
+though only only 39 digits of $\pi$ are required to accurately calculate the volume of the known universe to within one atom.}
+In fact, \emph{regardless} of how many bits we allow in our representation, 
+an irrational number like $\pi$ (that never repeats and never terminates) will
+only ever be an approximation.  Real numbers like $\pi$ require an infinite
+precision, but computers are only finite machines.  
+
+Even numbers that have a finite representation (rational numbers) such as 
+$\frac{1}{3} = 0.\overline{333}$ are not represented exactly when using floating-point numbers.
+In double precision binary, 
+  $$\frac{1}{3} = \texttt{0b1.0101010101010101010101010101010101010101010101010101} \times 2^{-2}$$
+which when represented in scientific notation in decimal is
+  $$3.3333333333333330 \times 10^{-1}$$
+That is, there are only 16 digits of precision, after which the remaining (infinite) sequence of $3$s 
+get cut off.
+
+Programming languages usually only support the common single and double precisions
+defined by the \gls{ieeeLabel} 754 standard as those are commonly supported by hardware.
+However, there are languages that support arbitrary precision (also called multiprecision) 
+numbers and yet other languages that have many libraries to support ``big number'' arithmetic.
+Arbitrary precision is still not infinite: instead, as more digits are needed, more memory is
+allocated.  If you want to compute 10 more digits of $\pi$, you can but at a cost.  To support
+the additional digits, more memory is allocated.  Also, operations are performed in software
+using many operations which can be much slower than performing fixed-precision arithmetic
+directly in hardware.  Still, there are many applications where such accuracy or large numbers
+are absolutely essential.  
+
+\subsubsection{Characters \& Strings}
+\index{strings}
+
+Another type of data is textual data which can either be single characters or a sequence of
+characters which are called \glspl{string}.  Strings are sometimes used for human readable
+data such as messages or output, but may model general data.  For example, DNA is
+usually encoded using strings consisting of C, G, A, T (corresponding to the nucleases
+cytosine, guanine, adenine, and thymine).  Numerical characters and punctuation can
+also be used in strings in which case they do not represent numbers, but instead may
+represent textual versions of numerical data.  
+
+Different programming languages implement characters and strings in different ways 
+(or may even treat them the same).  Some languages implement strings by defining
+\emph{arrays} of characters.  Other languages may treat strings as dynamic data types.
+However, all languages use some form of \emph{character encoding} to represent
+strings.  Recall that computers only speak in binary: 0s and 1s.  To represent a character
+like the capital letter ``A'', the binary sequence \texttt{0b1000001} is used.  In fact, the
+most common alphanumeric characters are encoded according to the \gls{asciiLabel}
+text standard.  The basic ASCII text standard assigns characters to the decimal values
+0--127 using 7 bits to \emph{encode} each character as a number.  Table \ref{table:asciiTable}
+contains a complete listing of standard ASCII character set.  
+
+\begin{table}
+\centering
+\input{figures/tableASCII}
+\caption[ASCII Character Table]{ASCII Character Table.  The first and second
+column indicate the binary and decimal representation respectively.  The third column
+visualizes the resulting character when possible.  Characters 0--31 and 127 are
+control characters that are not printable or print whitespace.  The encoding is
+designed to impose a lexicographic ordering: A--Z are in order, uppercase letters
+precede lowercase letters, numbers precede letters and are also in order.}
+\label{table:asciiTable}
+\end{table}
+
+The ASCII table was designed to enforce a lexicographic ordering: letters are in alphabetic
+order, uppercase precede lowercase versions, and number precede both.  This
+design allows for an easy and natural comparison among strings, ``alpha''
+would come before ``beta'' because they differ in the first letter.  The characters
+have numerical values 97 and 98 respectively; since $97 < 98$, the order follows.
+Likewise, ``Alpha'' would come before ``alpha'' (since $65 < 97$), and ``alpha''
+would come before ``alphanumeric'': the sixth character is empty in the first string
+(usually treated as the null character with value 0) while it is ``n'' in the second (value of 110).
+This is the ordering that we would expect in a dictionary.
+
+There are several other nice design features built into the ASCII table.  For example, 
+to convert from upper to lower case versions, you only need to ``flip'' the second bit
+(0 for uppercase, 1 for lowercase).  There are also several characters that need to be
+\emph{escaped} to be defined.  For example, though your keyboard has a tab and an
+enter key, if you wanted to code those characters, you would need to specify them
+in some way other than those keys (since typing those keys will affect what you are
+typing rather than specifying a character).  The standard way to escape characters
+is to use a backslash along with another, single character.  The three most common
+are the (horizontal) tab, \verb|\t|, the endline character, \verb|\n|, and the null
+terminating character, \verb|\0|.  The tab and endline character are used to 
+specify their whitespace characters respectively.  The null character is used
+in some languages to denote the \emph{end} of a string and is not printable.
+
+ASCII is quite old, originally developed in the early sixties.  President Johnson first
+mandated that all computers purchased by the federal government support ASCII in 1968.
+However, it is quite limited with only 128 possible characters.  Since then, additional 
+extensions have been developed.  The Extended ASCII character set adds support
+for 128 additional characters (numbered 128 through 255) by adding 1 more bit (8
+total).  Included in the extension are support for common international characters with
+diacritics such as \texttt{\"{u}}, \texttt{\~{n}} and \texttt{\pounds} (which are characters
+129, 164, and 156 respectively).
+
+Even 256 possible characters are not enough to represent the wide array of international
+characters when you consider languages like Chinese, Japanese, and Korean (CJK for short).
+Unicode was developed to solve this problem by establishing a standard encoding
+that supports 1,112,064 possible characters, though only a fraction of these are actually
+currently assigned.\footnote{As of 2012, 110,182 are assigned to characters, 137,468 are 
+reserved for private use (they are valid characters, but not defined so that organizations can
+use them for their own purposes), with 2,048 surrogates and 66 non-character control 
+codes.  864,348 are left unassigned meaning that we are well-prepared for encoding
+alien languages when they finally get here.}  Unicode is \gls{backward compatible}, so
+it works with plain ASCII characters.  In fact, the most common encoding for Unicode, UTF-8 
+uses a \emph{variable} number of bytes to encode characters.  1-byte encodings correspond
+to plain ASCII, there are also 2, 3, and 4-byte encodings.
+
+In most programming languages, strings \glspl{literal} are defined by using either single or
+double quotes to \emph{delimit} where the string begins and ends.  For example, one may
+be able to define the string \mintinline{c}{"Hello World"}: the double quotes are \emph{not}
+part of the string, but instead specify where the string begins and ends.  Some languages
+allow you to use \emph{either} single or double quotes.  PHP for example would allow you
+to also define the same string as \mintinline{php}{'Hello World'}.  Yet other languages, such 
+as C distinguish the usage of single and double quotes: single quotes are for single characters
+such as \mintinline{c}{'A'} or \mintinline{c}{'\n'} while double quotes are used for full 
+strings such as \mintinline{c}{"Hello World"}.
+
+In any case, if you want a single or double quote to appear in your string you need to
+escape it similar to how the tab and endline characters are escaped.  For example, in C 
+\mintinline{c}{'\''} would refer to the single quote character and 
+\mintinline{c}{"Dwayne \"The Rock\" Johnson"} would allow you to use double quotes
+within a string.  In our pseudocode we'll use the stylized double quotes, ``Hello World'' 
+in any strings that we define.  We will examine string types more fully in Chapter \ref{chapter:strings}.
+
+\subsubsection{Boolean Types}
+
+A \gls{Boolean} is another type of variable that is used to hold a truth value, 
+either \True or \False, of a logical statement.  Some programming languages 
+explicitly support a built-in Boolean type while others implicitly support them.
+For languages that have explicit types, typical the keywords \mintinline{java}{true}
+and \mintinline{java}{false} are used, but logical expressions can also be evaluated
+and assigned to Boolean variables.  
+
+Some languages do not have an explicit Boolean type and instead support
+Booleans implicitly, sometimes by using numeric types.  For example, in C, 
+\False is associated with zero while \emph{any} non-zero value is associated
+with \True.  In either case, Boolean values are used to make
+decisions and control the flow of operations in a program (see 
+Chapter \ref{chapter:conditionals}).
+
+\subsubsection{Object \& Reference Types}
+
+Not everything is a number or string.  Often, we wish to model real-world entities
+such as people, locations, accounts, or even interactions such as exchanges or
+transactions.  Most programming languages allow you to create 
+\emph{user-defined types} by using objects or structures.  Objects and structures
+allow you to group multiple pieces of data together into one logical
+entity; this is known as \gls{encapsulation}.  For example, a Student object
+may consist of a first-name, last-name, GPA, year, major, etc.  Grouping
+these separate pieces of data together allows us to define a more complex
+type.  We explore these concepts in more depth in Chapter \ref{chapter:objects}.
+
+In contrast to the built-in numeric, character/string, and Boolean types (also called
+\gls{primitive} data types) user-defined types do not necessarily take a fixed
+amount of memory to represent.  Since they are user-defined, it is up to the
+programmer to specify how they get created and how they are represented in
+memory.  A variable that refers to an object or structure is usually \glspl{reference}
+or \glspl{pointer}: a reference to where the object is stored in memory on a 
+computer.  
+
+Many programming languages use the keyword \mintinline{java}{null} (or sometimes
+\mintinline{c}{NULL} or a some variation) to indicate an invalid reference.  
+The \mintinline{java}{null} keyword is often used to refer to uninitialized or
+``missing'' data.
+
+Another common user-defined type is an \emph{enumerated} type which allows
+a user to define a \emph{list} of keywords associated with integers.  For example,
+the cardinal directions, ``north'', ``south'', ``east'', and ``west'' could be associated
+with the integers 0, 1, 2, 3 respectively.   Defining an enumerated type then allows
+you to use these keywords in your program directly without having to rely on
+mysterious numerical values, making a program more readable and less prone to
+error.
+
+\subsection{Declaring Variables: Dynamic vs. Static Typing}
+
+In some languages, variables must be declared before they can be referred to
+or used.  When you declare a variable, you not only give it an identifier, but also
+define its type.  For example, you can declare a variable named $numberOfStudents$
+and define it to be an integer.  For the life of that variable, it will \emph{always}
+be an integer type.  You can only give that variable integer values.  Attempts to
+assign, say, a string type to an integer variable may either result in a syntax error
+or a runtime error when the program is executed or lead to unexpected or 
+undefined behavior.  A language that requires you to declare a variable and its
+type is a \glslink{static typing}{statically typed} language.  
+
+The declaration of a variable is typically achieved by writing a statement that
+includes the variable's type (using a built-in keyword of the language) along with the
+variable name.  For example, in C-style languages, a line like
+
+\mintinline{c}{  int x;} 
+
+would create an integer variable associated with the identifier \mintinline{c}{x}. 
+
+In other languages, typically \emph{interpreted} languages, you do \emph{not}
+have to declare a variable before using it.  Such languages are generally
+referred to as \glslink{dynamic typing}{dynamically typed} languages.  Instead
+of declaring a variable to have a particular type, the type of a variable is 
+determined by the type of value that is assigned to it.  If you assign an
+integer to a variable it becomes an integer.  If you assign a string to it, 
+it becomes a string type.  Moreover, a variable's type can \emph{change}
+during the execution of a program.  If you reassign a value to a variable, it
+dynamically changes its type to match the type of the value assigned.
+
+In PHP for example, a line like
+
+\mintinline{php}{  $x = 10;} 
+
+would create an integer variable associated with the identifier \mintinline{php}{$x}. 
+In this example, we did not declare that \mintinline{php}{$x} was an integer.  Instead, 
+it was inferred by the value that we assigned to it (10).
+
+At first glance it may seem that dynamically typed languages are better.  Certainly
+they are more flexible (and allow you to write less so-called ``boilerplate'' code), 
+but that flexibility comes at a cost.  Dynamically
+typed variables are generally less efficient.  Moreover, dynamic typing
+opens the door to a lot of potential type mismatching errors.  For example, 
+you may have a variable that is assumed to \emph{always} be an integer.
+In a dynamically typed language, no such assumption is valid as any 
+reassignment can change the variable's type.  It is impossible to enforce
+this rule by the language itself and may require a lot of extra code to check
+a variable's type and deal with ``type safety'' issues.  The advantages and
+disadvantages of each continue to be debated.
+
+\subsection{Scoping}
+
+The \gls{scope} \index{variable!scope} of a variable is the section of code in
+which a variable is valid or ``known.''  In a statically typed language, a 
+variable must be declared before it can be used.  The code block in which
+the variable is declared is therefore its scope.  Outside of this code block, 
+the variable is invalid.  Attempts to reference or use a variable that is out-of-scope
+typically result in a syntax error.  An example using the C programming language is 
+depicted in Code Sample \ref{code:cScoping}.
+
+\begin{listing}
+\begin{minted}{c}
+{
+  int a;
+  {
+    //this is a new code block inside the outer block
+    int b;
+    //at this point in the code, both a and b are in-scope
+  }
+  //at this point, only a is in-scope, b is out-of-scope
+}
+\end{minted}
+\caption{Example of variable scoping in C}
+\label{code:cScoping}
+\end{listing}
+
+Scoping in a dynamically typed language is similar, but since you don't 
+declare a variable, the scope is usually defined by the block of code where
+you first use or reference the variable.  Moreover, in some languages using 
+a variable may cause that variable to become \emph{globally} scoped.  
+
+A \glslink{global scope}{globally scoped} variable is valid throughout the
+entirety of a program.  A global variable can be accessed and referenced
+on every line of code.  Sometimes this is a good thing: for example, we could
+define a variable to represent $\pi$ and then use it anywhere in our program.
+We would then be assured that every computation involving $\pi$ would be
+using the same definition of $\pi$ (rather than one line of coding using the 
+estimate 3.14 while another uses 3.14159).
+
+On the same token, however, global variables make the state and 
+execution of a program less predictable: if any piece of code can access a
+global variable, then potentially any piece of code could \emph{change} that
+variable.  Imagine some questionable code changing the value of our global
+$\pi$ variable to 3.  For this reason, using global variables are generally 
+considered bad practice.\footnote{Coders often say ``globals are evil'' and 
+indeed have often demonstrated that they have low moral standards.  Global
+variables that is.  Coders are above reproach.}  Even if no code performs
+such an egregious operation, the fact that anything \emph{can} change the
+value means that when testing, you must test for the potential that anything
+\emph{will} change the value, greatly increasing the complexity of software
+testing.
+
+To capture the advantages of a global variable while avoiding the disadvantages, 
+it is common to only allow global \emph{constants}; variables whose values 
+cannot be changed once set.
+
+Another argument against globally scoped variables is that once the identifier
+has been used, it cannot be reused or redefined for other purposes (a floating-point
+variable with the identifier \mintinline{c}{pi} means we cannot use the identifier
+\mintinline{c}{pi} for any other purpose) as it would lead to conflicts.  
+Defining many globally scoped variables (or functions, or other elements) starts
+to \emph{pollute the namespace} by reserving more and more identifiers.
+Problems arise when one attempts to use multiple libraries that have both
+used the same identifiers for different variables or functions.  Resolving the
+conflict can be difficult or impossible if you have no control over the offending
+libraries.  
+ 
+\subsection{Binary Representations}
+
+\section{Operators}
+\index{operator}
+
+Now that we have variables, we need a way to work with variables.  That is, 
+given two variables we may wish to add them together.  Or we may wish
+to take two strings and combine them to form a new string.  In programming
+languages this is accomplished through \glspl{operator} which operate on
+one or more \glspl{operand}.  An operator takes the values of its operands 
+and combines them or changes them in some way to produce a new value.
+If an operator is applied to variable(s), then the values used in the operation
+are the values stored in the variable at the time that the operator is evaluated.
+
+Many common operators are \emph{binary} in that they operate on two operands
+such as common arithmetic operations like addition and multiplication.  Some
+operators are \emph{unary} in that they only operate on one variable.  The
+first operator that we look at is a unary operator and allows us to assign values 
+to variables.
+
+\subsection{Assignment Operators}
+
+The \gls{assignment operator} is a unary operator that allows you to take a
+value and \emph{assign} it to a variable.  The assignment operator usually takes
+the following form: the value is placed on the right-hand-side of the operator
+while the variable to which we are assigning the value is placed on the left-hand-side
+of the operator.  For our pseudocode, we'll use a generic ``left-arrow'' notation:
+  $$a \leftarrow 10$$
+which should be read as ``place the value 10 into the variable $a$.''  Many C-style 
+programming languages commonly use the single equals sign for the assignment 
+operator.  The example above might be written as
+
+\mintinline{c}{a = 10;}
+
+It is important to realize that when this notation is used, it is not a declaration like 
+it would be in algebra: $a = b$ for example is an algebraic assertion that the variables 
+$a$ and $b$ are equal.  An assignment operator is different: it means place the value
+on the right-hand-side into the variable on the left-hand-side.  For that reason, writing
+something like 
+
+\mintinline{c}{10 = a;}
+
+is invalid syntax.  The left-hand-side \emph{must} be a variable.
+
+The right-hand-side, however, may be a \gls{literal}, another variable, or 
+even a more complex \gls{expression}.  In the example before, 
+  $$a \leftarrow 10$$
+the value 10 was acting as a numerical literal: a way of expressing a (human-readable) 
+value that the computer can then interpret as a binary value.  In code, we
+can conveniently write numbers in base-10; when compiled or interpreted, 
+the numerical literals are converted into binary data that the computer
+understands and placed in a memory location corresponding to the variable.
+This entire process is automatic and transparent to the user.
+Literals can also be strings or other values.  For example:
+  $$message \leftarrow \text{``hello world''}$$
+We can also ``copy'' values from one variable to another.  Assuming that we've assigned
+the value 10 to the variable $a$, we can then copy it to another variable $b$: 
+  $$b \leftarrow a$$
+This does not mean that $a$ and $b$ are the same variable.  The value that is stored
+in the variable $a$ at the time that this statement is executed is \emph{copied} into 
+the variable $b$.  There are now \emph{two} different variables with the same value.
+If we reassign the value in $a$, the value in $b$ is unaffected.  This is illustrated in
+Algorithm \ref{algo:assignmentOperator}
+
+\begin{algorithm}[H]
+\caption{Assignment Operator Demonstration}
+\label{algo:assignmentOperator}
+$a \leftarrow 10$ \;
+$b \leftarrow a$ \;
+\Comment{$a$ and $b$ both store the value 10 at this point}
+$a \leftarrow 20$ \;
+\Comment{now $a$ has the value 20, but $b$ still has the value 10}
+$b \leftarrow 25$ \;
+\Comment{$a$ still stores a value of 20, $b$ now has a value of 25}
+\end{algorithm}
+
+The right-hand-side can also be a more complex expression, for example
+the result of summing two numbers together.
+
+\subsection{Numerical Operators}
+
+Numerical operators allow you to create complex expressions involving either
+numerical literals and/or numerical variables.  For most numerical operators, 
+it doesn't matter if the operands are integers or floating-point numbers.  Integers
+can be added to floating-point numbers without much additional code for example.
+
+The most basic numerical operator is the unary negation operator.  It allows you to
+negate a numerical literal or variable.  For example, 
+  $$a \leftarrow -10$$
+or
+  $$a \leftarrow -b$$
+The usage of a negation is so common that it is often not perceived to be an
+operator but it is.
+
+\subsubsection{Addition \& Subtraction}
+
+You can also add (sum) two numbers using the $+$ (plus) operator and
+subtract using the $-$ (minus) operator in a straightforward way.  Note that
+most languages can distinguish the minus operator and the negation operator
+by how you use it just like a mathematical expression.  If applied to one operand, it
+is interpreted as a negation operator.  If applied to two operands, it represents
+subtraction.  Some examples can be found in Algorithm \ref{algo:additionSubtractionOperators}.
+
+\begin{algorithm}[H]
+\caption{Addition and Subtraction Demonstration}
+\label{algo:additionSubtractionOperators}
+$a \leftarrow 10$ \;
+$b \leftarrow 20$ \;
+$c \leftarrow a + b$ \;
+$d \leftarrow a - b$ \;
+\Comment{$c$ has the value 30 while $d$ has the value $-10$}
+$c \leftarrow a + 10$ \;
+$d \leftarrow -d$ \;
+\Comment{$c$ now has the value 20 and $d$ now has the value 10}
+\end{algorithm}
+
+\subsubsection{Multiplication \& Division}
+
+You can also multiply and divide literals and variables.  In mathematical 
+expressions multiplication is represented as $a \times b$ or $a \cdot b$ or 
+simply just $ab$ and division is represented as $a \div b$ or $a / b$ or 
+$\frac{a}{b}$.  In our pseudocode, we'll generally use $a\cdot b$ and 
+$\frac{a}{b}$, but in programming languages it is difficult to write these 
+some of these symbols. Usually programming languages use \mintinline{c}{*}
+for multiplication and \mintinline{c}{/} for division.  Similar examples are
+provided in Algorithm \ref{algo:multiplicationDivisionOperators}.
+
+\begin{algorithm}[H]
+\caption{Multiplication and Division Demonstration}
+\label{algo:multiplicationDivisionOperators}
+$a \leftarrow 10$ \;
+$b \leftarrow 20$ \;
+$c \leftarrow a \cdot b$ \;
+$d \leftarrow \frac{a}{b}$ \;
+\Comment{$c$ has the value 200 while $d$ has the value $0.5$}
+\end{algorithm}
+
+{\color{red} \textbf{Careful!}} Some languages specify that the result of an arithmetic
+operation on variables of a certain type \emph{must} match.  That is, an 
+integer plus an integer results in an integer.  A floating-point number divided
+by a floating-point number results a floating-point number.  When we mix types, 
+say an integer and a floating-point number, the result is generally a floating-point
+number.  For the most part this is straightforward.  The one tricky case is
+when we have an integer divided by another integer, $3 / 2$ for example.  
+
+Since both operands are integers, the result must be an integer.  Normally,
+$3 / 2 = 1.5$, but since the result must be an integer, the fractional part
+gets \glslink{truncation}{truncated} (cut-off) and only the integral part is kept for the final
+result.  This can lead to weird results such as $1 / 3 = 0$ and $99 / 100 = 0$.
+The result is \emph{not} rounded down or up; instead the fractional part
+is completely thrown out.  Care must be taken when dividing integer variables
+in a statically typed language.  \glslink{type casting}{Type casting} can be
+used to force variables to change their type for the purposes of certain
+operations so that the full answer is preserved.  For example, in C we can
+write
+
+\begin{minted}{c}
+int a = 10;
+int b = 20;
+double c;
+int d;
+c = (double) a / (double) b;
+d = a / b;
+//the value in c is correctly 0.5 but the value in d is 0
+\end{minted}
+
+\subsubsection{Integer Division}
+
+Recall that in arithmetic, when you divide integers $a / b$, $b$ might not
+go into $a$ evenly in which case you get a remainder.  For example, $13 / 5 = 2$
+with a remainder $r = 3$.  More generally we have that
+  $$a = qb + r$$
+Where $a$ is the \emph{dividend}, $b$ is the \emph{divisor}, $q$ is
+the \emph{quotient} (the result) and $r$ is the \emph{remainder}.  We can
+also perform \emph{integer division} in most programming languages.  
+In particular, the integer division operator is the operator that gives us the
+\emph{remainder} of the integer division operation in $a / b$.  In mathematics
+this is the \emph{modulo} operator and is denoted
+  $$a \bmod{b}$$
+For example, 
+  $$13 \bmod{5} = 3$$
+It is possible that the remainder is zero, for example,
+  $$10 \bmod{5} = 0$$
+Many programming languages support this operation using the percent sign.  In
+C for example, 
+
+\mintinline{c}{c = a % b;}
+
+\subsection{String Concatenation}
+
+Strings can also be combined to form new strings.  In fact, strings can
+also be combined with non-string variables to form new strings.  You would
+typically do this in order to convert a numerical value to a string
+representation so that it can be output to the user or to a file for
+longterm storage.  The operation of combining strings is referred to 
+as \gls{string concatenation}.  Some languages support this through the same
+plus operator that is used with addition.  For example, 
+  $$message \leftarrow \textrm{``hello ''} + \textrm{``world!''}$$
+which combines the two strings to form one string containing the characters
+``hello world!'', storing the value into the $message$ variable.
+For our pseudocode we'll adopt the plus operator for string concatenation.
+
+The string concatenation operator can also sometimes be combined with 
+non-string types; numerical types for example.  This allows you to easily
+convert numbers to a human-readable, base-10 format so that they can
+be printed to the output.  For example suppose that the variable $b$ 
+contains the value $20$, then 
+  $$message \leftarrow \textrm{``the answer is''} + b$$
+might result in the string ``the answer is 20'' being stored in the variable $message$.
+
+Other languages use different symbols to distinguish concatenation
+and addition.  Still yet other languages do not directly support an operator
+for string concatenation which must instead be done using a function.
+
+\subsection{Order of Precedence}
+\label{subsection:NumericalOperators_OrderOfPrecedence}
+\index{order of precedence}
+
+In mathematics, when you write an expression such as:
+  $$a + b \cdot c$$
+you interpret it as ``multiply $b$ and $c$ and then add $a$.''  This is because 
+multiplication has a higher \gls{order of precedence} than addition.  The order
+of precedence (sometimes referred to as \emph{order of operations}) is a set
+of rules which define the order in which operations should be evaluated.  In this
+case, multiplication is performed before addition.  If, instead, we had written 
+  $$(a + b) \cdot c$$
+we would have a different interpretation: ``add $a$ and $b$ and then multiply 
+the result by $c$.''  That is, the inclusion of parentheses \emph{changes} the order
+in which we evaluate the operations.  Adding parentheses can have no effect
+(if we wrote $a + (bc)$ for example), or it can cause operations with a lower
+order of precedence to be evaluated first as in the example above.
+
+Numerical operators are no different when used in most programming languages.
+The same order of precedence is used and parentheses can be used to change
+the order of evaluation.
+
+\subsection{Common Numerical Errors}
+\label{subsection:commonNumericalErrors}
+
+When dealing with numeric types its important to know and understand 
+their limitations.  In mathematics, the following operations might be
+considered ``invalid''
+\begin{itemize}
+  \item Division by zero: $\frac{a}{b}$ where $b = 0$.  This is an 
+  undefined operation in mathematics and also in programming languages.
+  Depending on the language, any number of things may happen.  It may 
+  be a fatal error or \emph{exception}; the program may continue executing
+  but give ``garbage'' results from then on; the result may be a special value
+  such as null, ``NaN'' (not-a-number) or ``INF'' (a special representation of
+  infinity).  It is best to avoid such an operation entirely using conditionals statements and
+  \gls{defensive programming} (see Chapter \ref{chapter:conditionals})
+
+  \item Other potentially invalid operations involve common mathematical functions.
+  For example, $\sqrt{-1}$ would be a complex result, $i$ which some languages 
+  do support.  However, many do not.  Similarly, the natural logarithm of zero and
+  negative values is undefined.  In either case you could expect a result like ``NaN''
+  or ``INF''.
+  
+  \item Still other operations seem like they should be valid, but because of how
+  numbers are represented in binary, the results are invalid.  Recall that for a 
+  32-bit signed, two's complement number, the maximum representable value 
+  is 2,147,483,647.  Suppose this maximum value is stored in a variable, $b$.
+  Now suppose we attempt to add one more, 
+  	$$c \leftarrow b + 1$$
+  Mathematically we'd expect the result to be 2,147,483,648, but that is more than
+  the maximum representable integer.  What happens is something called arithmetic
+  \gls{overflow}.  The actual number stored in binary in memory for 2,147,483,647 is
+    $$\texttt{0b0}\underbrace{\texttt{11}\ldots\texttt{11}}_{\text{31 1s}}$$
+  When we add 1 to this, it is carried over all the way to the 32nd bit, giving the 
+  result 
+    $$\texttt{0b1}\underbrace{\texttt{00}\ldots\texttt{00}}_{\text{31 0s}}$$
+  in binary.  However, the 32nd bit is the sign bit, so this is a negative number.
+  In particular, if this is a two's complement integer, it has the decimal value
+  $-2,147,483,648$ which is obviously wrong.  Another example would be if we have a
+  ``large number, say 2 billion and attempt to double it (multiply by 2).  We would
+  expect 4 billion as a result, but again overflow occurs and the result (using 32-bit
+  signed two's complement integers) is $-294,967,296$.
+  do support  functions.  
+
+  \item A similar phenomenon can happen with floating point numbers.  If an operation
+  (say multiplying two ``small'' numbers together) results in a number that is smaller
+  than the smallest floating-point number that can be represented, the result is said
+  to have resulted in \gls{underflow}.  The result can essentially be zero, or an error 
+  can be raised to indicate that underflow has occurred.  The consequences of 
+  underflow can be very complex.
+  
+  \item Floating-point operations can also result in a loss of precision even if no overflow
+  or underflow occurs.  For example, when adding a very large number $a$ and a very small 
+  number $b$, the result might be no different from the value of $a$.  This is because 
+  (for example) double precision floating-point numbers only have about 16 significant 
+  digits of precision with the least significant digits being cutoff in order to preserve the 
+  magnitude.
+  
+  As another example, suppose we compute $\sqrt{2} = 1.41421356\ldots$.  If we
+  squared the result, mathematically we would expect to get 2.  However, since we
+  only have a certain number of digits of precision, squaring the result in a 
+  computer may result in a value slightly different from 2 (either 1.9999998 or 2.0000001).
+
+\end{itemize}
+
+\subsection{Other Operators}
+
+Many programming languages support other ``convenience'' operators that 
+allow you to perform common operations using less code.  These operators
+are generally \gls{syntactic sugar} the don't add any functionality (the same
+operation could be achieved using other operators), but they add simpler or
+more terse syntax for doing so.
+
+\subsubsection{Increment Operators}
+\label{subsubsection:incrementOperators}
+ 
+Adding or subtracting one to a variable is a very common operation.  So common, 
+that most programming languages define increment operators such as \mintinline{c}{i++} 
+and \mintinline{c}{i--} which add one and subtract one from the variables applied.  
+The same effect could be achieved by writing 
+   $$i\leftarrow (i+1) \quad \text{ and } i \leftarrow (i-1)$$
+but the increment operators provide a shorthand way of expressing the operation.
+
+The operators \mintinline{c}{i++} and \mintinline{c}{i--} are \emph{postfix} 
+operators: the operator is written \emph{after} (post) the operand.  Some languages
+define similar \emph{prefix} increment operators, \mintinline{c}{++i} and \mintinline{c}{--i}.
+The effect is similar: each adds or subtracts one from the variable \mintinline{c}{i}.
+However, the difference is when the operator is used in a larger expression.  A
+postfix operator \emph{retains} the original value for the expression, a prefix
+operator takes on the new, incremented value in the expression.  
+
+To illustrate, suppose the variable \mintinline{c}{i} has the value 10.
+In the following line of code, \mintinline{c}{i} is incremented and used
+in an expression that adds 5 and stores the result in a variable \mintinline{c}{x}:
+
+\mintinline{c}{x = 5 + (i++);}
+
+The value of \mintinline{c}{x} after this code is 15 while the value of \mintinline{c}{i}
+is now 11.  This is because the postfix operator increments \mintinline{c}{i}, but 
+\mintinline{c}{i++} retains the value 10 in the expression.  In contrast, with the
+line
+
+\mintinline{c}{x = 5 + (++i);}
+
+the variable \mintinline{c}{i} again now has the value 11, but the value of \mintinline{c}{x}
+is 16 since \mintinline{c}{++i} takes on the new, incremented value of 11.  
+
+Appropriately using each can lead to some very concise code, but it is important
+to remember the difference.
+
+\subsubsection{Compound Assignment Operators}
+
+If we want to increment or decrement a variable by an amount other than 1
+we can do so using \emph{compound assignment} operators that combine
+an arithmetic operator and an assignment operator into one.  For example, 
+\mintinline{c}{a += 10} would add 10 to the variable \mintinline{c}{a}.  The
+same could be achieved by coding \mintinline{c}{a = a + 10}, but the former
+is a bit shorter as we don't have to repeat the variable.  
+
+You can do the same with subtraction, multiplication, and division.  More examples
+using the C programming language can be found in Code Snippet 
+\ref{code:compoundAssignmentOperatorsInC}.  It is important to
+note that these operators are \emph{not}, strictly speaking, equivalent.  That is
+\mintinline{c}{a += 10} is not equivalent to \mintinline{c}{a = a + 10}.  They have
+the same effect, but the first involves only \emph{one} operator while the second
+involves \emph{two} operators.
+
+\begin{listing}
+\begin{minted}{c}
+int a = 10;
+a += 5; //adds 5 to a
+a -= 3; //subtracts 3 from a
+a *= 2; //multiplies a by 2
+a /= 4; //divides a by 4
+
+//you can also use compound assignment operators with variables:
+int b = 5;
+a += b; //adds the value stored in b to a
+a -= b; //subtracts the value stored in b from a
+a *= b; //multiplies a by b
+a /= b; //divides a by b
+\end{minted}
+\caption{Compound Assignment Operators in C}
+\label{code:compoundAssignmentOperatorsInC}
+\end{listing}
+
+\section{Basic Input/Output}
+
+Not all variables can be coded using literals.  Sometimes a program
+needs to read in values as \gls{input} from a user who can give
+different values on different runs of a program.  Likewise, a computer
+program often needs to produce \gls{output} to the user to be
+of any use.  
+
+The most basic types of programs are \gls{interactive} programs that
+interact with a human user.  Generally, the program may \gls{prompt} the
+user to enter some input value(s) or make some choices.  It may then
+compute some values and respond to the user with some output.
+
+In the following sections we'll overview the various types of input
+and output or I/O for short that are available.
+
+\subsection{Standard Input \& Output}
+
+The standard input (stdin for short), standard output (stdout) and standard error
+(stderr) are three standard communication \emph{streams} that are defined by
+most computer systems.
+
+Though perhaps an over simplification, the keyboard usually serves as a 
+standard input device while the monitor (or the system \emph{console} or 
+shell program) serves as a 
+standard output device.  The standard error is usually displayed in the same
+display but may be displayed differently on some systems (it is typeset in red
+in some consoles that support color to indicate that the output is communicating
+an error).
+
+As a program is executing, it may prompt a user to enter input.  A program
+may wait (called blocking) until a user has typed whatever input they want to provide.
+The user typically hits the enter key to indicate their input is done and the 
+program resumes, reading the input provided via the standard input.  The
+program may also produce output which is displayed to the user.
+
+The standard input and output are generally universal: almost any language, 
+and operating system will support them and they are the most basic types
+of input/output.  However, the type of input and output is somewhat limited (usually limited
+to text-based I/O) and doesn't provide much in the way of input \gls{validation}.
+As an example, suppose that a program prompts a user to enter a number.  
+Since the input device (keyboard) is does not really restrict the user, a more
+obstinate user may enter a non-numeric value, say ``hello''.  The program
+may crash or provide garbage output with such input.  
+
+\subsection{Graphical User Interfaces}
+
+A much more user-oriented way of reading input and displaying output is to use
+a \gls{guiLabel}.  GUIs can be implemented as traditional ``thick-client'' applications
+(programs that are installed locally on your machine) or as ``thin-client'' applications
+such as a web application.  They typically support general ``widgets'' such as input
+boxes, buttons, sliders, etc. that allow a user to interact with the program in a 
+more visual way.  They also allow the programmer to do better input validation.  
+Widgets could be design so that \emph{only} good input is allowed by creating
+\emph{modal} restrictions: the user is only allowed to select one of several ``radio''
+buttons for example.  GUIs also support visual feedback cues to the user: popups,
+color coding, and other elements can be used to give feedback on errors and
+indicate invalid selections.  
+
+Graphical user interfaces can also make use of more modern input devices: mice, touch 
+screens with gestures, even gaming devices such as the Kinect allow users to use
+a full body motion as an input mechanism.  We discuss GUIs in more detail in 
+Chapter \ref{chapter:gui}.  To begin, we'll focus more on plain textual input and output.
+
+\subsection{Output Using \mintinline{c}{printf}-style Formatting}
+\label{subsection:printfStyleFormatting}
+
+Recall that many languages allow you to concatenate a string and a non-string type
+in order to produce a string that can then, say, be output to the standard output.
+Concatenation doesn't provide much in the way of customizability when it comes
+to \emph{formatting} output.  We may want to format a floating-point number so
+that it only prints to two decimal places (as with US currency).  We may want
+to align a column of data so that number places match up.  Or we may want
+to \emph{justify} text either left or right.
+
+Such data formatting can be achieved through the use of a \mintinline{c}{printf}-style
+formatting function.  The ideas date back to the mid-60s, but the modern \mintinline{c}{printf}
+comes from the C programming language.  Numerous programming languages support
+this style of formatted output (\mintinline{c}{printf} stands for \textbf{print} \textbf{f}ormatted).
+Most support either printing the resulting formatted output to the standard output as well as
+to strings and other output mechanisms (files, streams, etc.).  Table \ref{table:printfSupport}
+contains a small sampling of \mintinline{c}{printf}-style supported in several languages.
+We'll illustrate this usage using the C programming language for our examples, but the 
+concepts are generally universal across most languages.
+
+\begin{table}
+\centering
+\begin{tabular}{l|l|l}
+Language & Standard Output & String Output \\
+\hline\hline
+C & \mintinline{c}{printf} &  \mintinline{c}{sprintf} \\
+Java & \mintinline{java}{System.out.printf} & \mintinline{java}{String.format} \\
+PHP & \mintinline{php}{printf} & \mintinline{php}{sprintf} \\
+\end{tabular}
+\caption[\mintinline{c}{printf}-style Methods in Several Languages]{\mintinline{c}{printf}-style Methods in Several Languages.  
+Languages support formatting directly to the Standard Output as well as to strings that can be further used or manipulated.
+Most languages also support \mintinline{c}{printf}-style formatting to other output mechanisms (streams, files, etc.).}
+\label{table:printfSupport}
+\end{table}
+
+The function works by providing it a number of \emph{arguments}.  The first argument is
+always a string that specifies the formatting of the result using several 
+\emph{placeholders} (flags that begin with a percent sign) which will be replaced 
+with values stored in variables but in
+a formatted manner.  Subsequent arguments to the function are the list of variables
+to be printed; each argument is delimited by a comma.  Figure \ref{figure:printfElements} 
+gives an example of of a \mintinline{c}{printf}
+statement with two placeholders.  The placeholders are ultimately replaced with 
+the values stored in the provided variables $a, b$.  If $a, b$ held the values $10$ and
+$2.718281$, the code would end up printing
+
+\mintinline{text}{The value of a = 10, the value of b is 2.718281}
+
+\begin{figure}
+\centering
+\input{figures/printfMarkup}
+\caption{Elements of a \mintinline{c}{printf} statement in C}
+\label{figure:printfElements}
+\end{figure}
+
+Though there are dozens of placeholders that are supported, we will focus only on
+a few:
+
+\begin{itemize}
+  \item \mintinline{c}{%d} formats an integer variable or literal
+  \item \mintinline{c}{%f} formats a floating-point variable or literal
+  \item \mintinline{c}{%c} formats a single character variable or literal
+  \item \mintinline{c}{%s} formats a string variable or literal
+\end{itemize}
+
+Misuse of placeholders may result in garbage output.  For example, using an 
+integer placeholder, \mintinline{c}{%d}, but providing a string argument; since
+strings cannot be (directly) converted to integers, the output will not be correct.
+
+In addition to these placeholders, you can also add \emph{modifiers}.  A number
+$n$ between the percent sign and character (\mintinline[escapeinside=||]{c}{%|$n$|d}, 
+\mintinline[escapeinside=||]{c}{%|$n$|f}, \mintinline[escapeinside=||]{c}{%|$n$|s}))
+specifies that the result should be formatted with a \emph{minimum} of $n$ columns.
+If the output takes less than $n$ columns, \mintinline{c}{printf} will pad out
+the result with spaces so that there are $n$ columns.  If the output takes
+$n$ or more columns, then the modifier will have no effect (it specifies a 
+\emph{minimum} not a maximum.  
+
+Floating-point numbers have a second modifier that allows you to specify the
+number of digits of precision to be formatted.  In particular, you can use 
+the placeholder \mintinline[escapeinside=||]{c}{%|$n.m$|f} in which $n$
+has the same meaning, but $m$ specifies the number of decimals 
+to be displayed.  By default, 6 decimals of precision are displayed. 
+If $m$ is greater than the precision of the number, zeros are usually
+used for subsequent digits; if $m$ is smaller than the precision of the
+number, rounding \emph{may} occur.  Note that the $n$ modifier
+\emph{includes} the decimal point as a column.  Both modifiers 
+are optional. 
+
+Finally, each of these modifiers can be made negative (example: 
+\mintinline{c}{%-20d}) to \emph{left-justify} the result.  By default, 
+justification is to the right.  Several examples are illustrated in Code 
+Sample \ref{code:printfInCExamples1} with the results in Code 
+Sample \ref{code:printfInCExamples1Result}.
+
+\begin{listing}
+\begin{minted}{c}
+int a = 4567;
+double b = 3.14159265359;
+
+printf("a=%d\n", a);
+printf("a=%2d\n", a);
+printf("a=%4d\n", a);
+printf("a=%8d\n", a);
+
+//by default, prints 6 decimals of precision
+printf("b=%f\n", b);  
+//the .m modifier is optional:
+printf("b=%10f\n", b);
+//the n modifier is also optional:
+printf("b=%.2f\n", b);
+//note that this rounds!
+printf("b=%10.3f\n", b);  
+//zeros are added so that 15 decimals are displayed
+printf("b=%20.15f\n", b);  
+\end{minted}
+\caption{\mintinline{c}{printf} examples in C}
+\label{code:printfInCExamples1}
+\end{listing}
+
+\begin{listing}
+\begin{minted}[showspaces]{text}
+a=4567
+a=4567
+a=4567
+a=    4567
+b=3.141593
+b=  3.141593
+b=3.14
+b=     3.142
+b=   3.141592653590000
+\end{minted}
+\caption{Result of Computation in Code Sample \ref{code:printfInCExamples1}.  Spaces are highlighted for clarity.}
+\label{code:printfInCExamples1Result}
+\end{listing}
+
+\subsection{Command Line Input}
+\label{subsection:commandLineInput}
+
+Not all programs are interactive.  In fact, the vast majority of software is developed
+to interact with other software and does not expect that a user is sitting at the console
+constantly providing it with input.  Most languages and operating systems support 
+non-interactive input from the \gls{cliLabel}.  This is input that is provided at the command
+line when the program is executed.  Input provided from the command line are usually referred
+to as \emph{command line arguments}.  For example, if we invoke a program named 
+\texttt{myProgram} from the command line prompt using something like the following:
+
+\mintinline{text}{~>./myProgram a 10 3.14}
+
+Then we would have provided 4 command line arguments.  The first argument is usually
+the program's name, all subsequent arguments are separated by whitespace.  Command
+line arguments are provided to the program as strings and it is the program's responsibility
+to convert them if needed and to validate them to ensure that the correct expected number
+and type of arguments are were provided.
+
+Within a program, command line arguments are usually referred to as an argument vector
+(sometimes in a variable named \mintinline{c}{argv}) and argument count (sometimes
+in a variable named \mintinline{c}{argc}).  We explore how each language supports this
+in subsequent sections.
+
+\section{Debugging}
+
+Making mistakes in programming is inevitable.  Even the most expert of software 
+developers make mistakes.\footnote{A severe security bug in the popular unix 
+bash shell utility went undiscovered for 25 years before it was finally 
+fixed in September 2014, missed by thousands of experts and some of the
+best coders in the world.}  An error in computer programs are usually 
+referred to as \glspl{bug}.  The term was popularized by Grace Hopper in 
+1947 while working on a Mark II Computer at a US Navy research lab.  
+Literally, a moth stuck in the computer was impeding its operation, removing it 
+or ``debugging'' the computer fixed it.  In this section will will identify general
+types of errors and outline ways to address them.
+
+\subsection{Types of Errors}
+
+When programming there are several types of errors that can occur, some 
+can be easily detected (or even easily fixed) by compilers and other modern 
+code analysis tools such as \glspl{ideLabel}.
+
+\subsubsection{Syntax Errors}
+
+Syntax errors are errors in the usage of a programming language itself.  A syntax
+error can be a failure to adhere to the rules of the language such as misspelling 
+a keyword or forgetting proper ``punctuation'' (such as missing an ending semicolon).
+When you have a syntax error, you're essentially not ``speaking the same language'':
+You wouldn't be very comprehensible if you started injecting non-sense words 
+or words from different language when speaking to someone in English.  Similarly,
+a computer can't understand what you're trying to say (or what directions you're 
+trying to give it) if you're not speaking the same language.
+
+Typically syntax errors prevent you from even compiling a program, though syntax
+errors can be a problem at runtime with interpreted languages.  When it encounters
+a syntax error, a compiler will fail to complete the compilation process and will
+generally quit.  Ideally, the compiler will give reasons for why it was unable to 
+compile and will hopefully identify the line number where the syntax error was
+encountered with a hint on what was wrong.  Unfortunately, many times a compiler's
+error message isn't too helpful or may indicate a problem on one line where
+the root cause of the problem is earlier in the program.  One cannot expect
+too much from a compiler after all.  If a compiler were able to correctly
+interpret and fix our errors for us, we'd have ``natural language'' programming
+where we could order the computer to execute our commands in plain English.  
+If we had this science fiction-level of computer interaction we wouldn't need 
+programming languages at all.
+
+Fixing syntax errors involves reading and interpreting the compiler error messages, 
+reexamining the program and fixing any and all issues to conform to the syntax
+of the programming language.  Fixing one syntax
+error may enable the compiler to find additional syntax errors that it had not
+before.  Only once all syntax errors have been resolved can a program actually
+compile.  For interpreted languages, the program may be able to run up to
+where it encounters a syntax error and then exits with a fatal error.  It may take
+several runs to resolve such errors as well.
+
+\subsubsection{Runtime Errors}
+
+Once a program is free of syntax errors it can compile and be run.  However, that
+doesn't mean that the program is completely free of bugs, just that it is free of
+the types of bugs (syntax errors) that the compiler is able to detect.  A compiler
+is not able to predict every action or possible event that could occur when a 
+program is actually run.  A runtime error is an error that occurs while a program
+is being executed.  For example, a program could attempt to access a file that
+does not exist, or attempt to connect to a database, but the computer has lost
+its network connection, or a user could enter bad data that results in an invalid
+arithmetic operation, etc.
+
+A compiler cannot be expected to detect such errors because by definition, the 
+conditions under which runtime errors occur occur \emph{at runtime}, not at 
+compile time.  One run of a program could execute successfully, while another
+subsequent run could fail because the system conditions have changed.  That
+doesn't mean that we should mitigate the consequences of runtime errors.
+
+As a programmer it is important to think about the potential problems and
+runtime errors that could occur and make contingency plans accordingly.
+We can make reasonable assumptions that certain kinds of errors may 
+occur in the execution of our program and add code to \emph{handle} 
+those errors if the occur.  This is known as \emph{error handling} (which
+we discuss in detail in Chapter \ref{chapter:errorHandling}).  For
+example, we could add code that checks if a user enters bad input and
+then re-prompt them to enter good data.  If a file is missing, we could add
+code to create it as needed.  By checking for these errors and preventing
+illegal, potentially fatal operations, we practice \gls{defensive programming}.
+
+\subsubsection{Logic Errors}
+
+Other errors may be a result of bad code or bad design.  Computer do 
+exactly as they are told to do.  Logic errors can occur if we tell the
+computer to do something that we didn't intend for them to do.  For example, 
+if we tell the computer to execute command $A$ under condition $X$, but
+we meant to have the computer execute command $B$ under condition $Y$, 
+we have caused a logical error.  The computer will perform the first set of 
+instructions, not the second as we intended.  The program may be free of
+syntax errors and may execute without any problems, but we certainly don't
+get the \emph{results} that we expected.  
+
+Logic errors are generally only detected and addressed by rigorous 
+\emph{software testing}.  When developing software, we can also
+design a collection of \emph{test cases}: a set of inputs along with
+correct outputs that we would expect the program of code to produce.
+We can then test the program with these inputs to see if they produce
+the same output as in the test cases.  If they don't, then we've uncovered
+a logical error that needs to be addressed.
+
+Rigorous testing can be just as complex (or even \emph{more} complex) 
+than writing the program itself.  Testing along cannot guarantee that a
+program is free of bugs (in general, the number of possible inputs is
+\emph{infinite}; it is \emph{impossible} to test all possibilities).  However, 
+the more test cases that we design and pass the higher the confidence 
+we have that the program is correct.
+
+Testing can also be very tedious.  Modern software engineering techniques
+can help streamline the process.  Many testing frameworks have been
+developed and built that attempt to automate the testing process.  Test 
+cases can be randomly generated, test suites can be repeatedly 
+run and verified throughout the development process.  Frameworks
+can perform \emph{regression testing} to see if fixing one bug 
+caused another, etc.
+
+\subsection{Strategies}
+
+A common beginner's way of debugging a program is to insert 
+temporary print statements throughout their program to see what
+values variables have at certain points in an attempt to isolate where
+an error is occurring.  This is an okay strategy for extremely simple
+programs, but its the ``poor man's'' way of debugging.  As soon as
+you start writing more complex programs you quickly realize that this
+strategy is slow, inefficient, and can actually hide the real problems 
+(the standard output is not guaranteed to work as expected if an error
+has occurred, so print statements may actually mislead you into thinking
+the problem occurs at one point in the program when it actually
+occurs in a different part).
+
+Instead, it is much better to use a proper \emph{debugging tool} in 
+order to isolate the problem.  A debugger is another program, that
+allows you to ``simulate'' an execution of your program.  You can set
+\emph{break points} in your program on certain lines and the debugger
+will execute your program up to those points.  It then pauses and 
+allows you to look at the program's state: you can examine the
+contents of memory, look at the values stored in certain variables, etc.
+Debuggers will also allow you to resume the execution of your program
+to the next break point or allow you to ``step'' through your program
+line by line.  This allows you to examine the execution of a program
+at human speed in order to diagnose the exact point in execution where
+the problem occurs.  \glspl{ideLabel} allow you to do this visually with
+a graphical user interface and easy visualization of variables.  However,
+there are command line debuggers such as GDB (\gls{gnuLabel} Debugger)
+that you interact with using text commands.
+
+In general, debugging strategies attempt to isolate a problem 
+to as small of a code segment as possible.  For this reason, it
+is good practice to design code into as small of segments as possible
+using good procedural abstraction and use of functions and methods
+(see Chapter \ref{chapter:functions}) and creating test cases and suites
+for these small pieces of code.  
+
+It can also help to diagnose a problem by looking at the nature of
+the failure.  If some test cases pass and others fail you can get a hint
+as to what's wrong by examining the key differences between the test
+cases.  If one value passes and another fails, you can trace that value
+as it propagates through the execution of your program to see how
+it affects other value.  
+
+In the end, good debugging skills, just like good coding skills, come from
+experience.  A seasoned expert may be able to look at an error message 
+and immediately diagnose the problem.  Or, a bug can escape the detection
+of hundreds of the best developers and software tools and end up costing 
+millions of dollars and thousands of man-hours because of a simple failure to convert 
+from English units to metric (in 1999, the Mars Climate Orbiter broke up in the 
+atmosphere of Mars because one subsystem was computing force using
+pound-seconds while everything else was computing in newton-seconds 
+leading to a miscalculation of orbital entry \cite{mars1999}).
+
+\section{Examples}
+
+Let's apply these concepts by developing several prompt-and-compute style
+programs.  That is, the programs will prompt the user for input, perform some
+calculations, and then output a result.  
+
+To write these programs, we'll use pseudocode, an informal, abstract description
+of a program/algorithm.  Pseudocode does not use any language-specific syntax.
+Instead, it describes processes at a high-level, making use of plain English
+and mathematical notation.  This allows us to focus on the actual process/program
+rather than worrying about the particular syntax of a specific language.  Good
+pseudocode should be easily translated into any programming language.
+
+%TODO: Pseudocode introduction (move from previous section?)
+
+\subsection{Temperature Conversion}
+
+Temperature can be measured in several different scales.  The most common 
+for everyday use is Celsius and Fahrenheit.  Let's write a program to convert
+from Fahrenheit to Celsius using the following formula:
+  $$C = \frac{5}{9} \cdot (F-32)$$
+The basic outline of the program will be three simple steps:
+\begin{enumerate}
+  \item Read in a Fahrenheit value from the user
+  \item Compute a Celsius value using the formula above
+  \item Output the result to the user
+\end{enumerate}
+This is actually pretty good pseudocode already, but let's be a little
+more specific using some of the operators and notation we've established
+above.  The full program can be found in Algorithm \ref{algo:temperatureConversion}.
+
+\begin{algorithm}
+prompt the user to enter a temperature in Fahrenheit \;
+$F \leftarrow $ read input from user \;
+$C \leftarrow \frac{5}{9} \cdot (F-32)$ \;
+Output $C$ to the user \;
+\caption{Temperature Conversion Program}
+\label{algo:temperatureConversion}
+\end{algorithm}
+
+\subsection{Quadratic Roots}
+
+A common math exercise is to find the \emph{roots} of a quadratic equation
+with coefficients, $a, b, c$,   
+  $$ax^2 + bx + c = 0$$
+using the quadratic formula, 
+  $$\frac{-b \pm \sqrt{b^2 - 4ac}}{2a}$$
+Following the same basic outline, we'll read in the coefficients from the user, 
+compute each of the roots, and output the results to the user.  Here, however,
+we may two computations, one for each of the roots which we label $r_1, r_2$.
+The full procedure is presented in Algorithm \ref{algo:quadraticRoots}.
+
+\begin{algorithm}
+prompt the user to enter $a$ \;
+$a \leftarrow$ read input from user \; 
+prompt the user to enter $b$ \;
+$b \leftarrow$ read input from user \; 
+prompt the user to enter $c$ \;
+$c \leftarrow$ read input from user \; 
+$r_1 \leftarrow \frac{-b + \sqrt{b^2 - 4ac}}{2a}$ \;
+$r_2 \leftarrow \frac{-b - \sqrt{b^2 - 4ac}}{2a}$ \;
+Output ``the roots of $ax^2 + bx + c$ are $r_1, r_2$'' \;
+\caption{Quadratic Roots Program}
+\label{algo:quadraticRoots}
+\end{algorithm}
+
+%TODO: \subsection{Another Example}
+

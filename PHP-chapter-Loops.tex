@@ -1,0 +1,325 @@
+%!TEX root = ComputerScienceOne.tex
+
+%%Chapter: Loops in PHP
+
+PHP supports while loops, for loops, and do-while loops using the keywords
+\mintinline{php}{while}, \mintinline{php}{for}, and \mintinline{php}{do} (along with 
+another \mintinline{php}{while}).  Continuation conditions for loops are 
+enclosed in parentheses, \mintinline{php}{(...)} and the blocks of code
+associated with the loop are enclosed in curly brackets.  
+
+\section{While Loops}
+
+Code Sample \ref{code:php:whileLoop} contains an example of a basic
+while loop in PHP.  Just as with conditional statements, our code styling
+places the opening curly bracket on the same line as the \mintinline{php}{while}
+keyword and continuation condition.  The inner block of code is also
+indented and all lines in the block are indented to the same level.
+
+\begin{listing}
+\begin{minted}{php}
+$i = 1; //Initialization
+while($i <= 10) {  //continuation condition
+  //perform some action
+  $i++; //iteration
+}
+\end{minted}
+  \caption{While Loop in PHP}
+  \label{code:php:whileLoop}
+\end{listing}
+
+In addition, the continuation condition does \emph{not} contain 
+a semicolon since it is not an executable statement.  Just as with
+an if-statement, if we \emph{had} placed a semicolon it would 
+have led to unintended results.  Consider the following:
+
+\begin{minted}{php}
+while($i <= 10); {
+  //perform some action
+  $i++; //iteration
+}
+\end{minted}
+
+A similar problem occurs: the \mintinline{php}{while} keyword and
+continuation condition bind to the next executable statement or
+code block.  As a consequence of the semicolon, the executable
+statement that gets bound to the while loop is \emph{empty}.  What
+happens is even worse: the program will enter an infinite loop.  To
+see this, the code is essentially equivalent to the following:
+
+\begin{minted}{php}
+while($i <= 10) {
+}
+{
+  //perform some action
+  $i++; //iteration
+}
+\end{minted}
+
+In the while loop, we never increment the counter variable \mintinline{php}{$i}, 
+the loop does nothing, and so the computation will continue on
+forever!  Some compilers will warn you about this, others will not.  It
+is valid PHP and will run, but obviously won't work as intended.
+Avoid this problem by using proper syntax.
+
+Another common use case for a while loop is a flag-controlled loop in which
+we use a Boolean flag rather than an expression to determine if a loop
+should continue or not.  Since PHP has built-in Boolean types, we can 
+use a variable along with the keywords \mintinline{php}{true} and \mintinline{php}{false}
+appropriately.  An example
+can be found in Code Sample \ref{code:php:flagControlledWhileLoop}.
+
+\begin{listing}
+\begin{minted}{php}
+$i = 1;
+$flag = true;
+while($flag) {
+  //perform some action
+  $i++; //iteration  
+  if($i>10) {
+    $flag = false;
+  }
+}
+\end{minted}
+  \caption{Flag-controlled While Loop in PHP}
+  \label{code:php:flagControlledWhileLoop}
+\end{listing}
+
+\section{For Loops}
+
+For loops in PHP use the familiar syntax of placing the initialization, continuation
+condition, and iteration on the same line as the keyword \mintinline{php}{for}.
+An example can be found in Code Sample \ref{code:php:forLoop}.
+
+\begin{listing}[H]
+\begin{minted}{php}
+$i;
+for($i=1; $i<=10; $i++) {
+  //perform some action
+}
+\end{minted}
+  \caption{For Loop in PHP}
+  \label{code:php:forLoop}
+\end{listing}
+
+Again, note the syntax: semicolons are placed at the end of the initialization and
+continuation condition, but \emph{not} the iteration statement.  Just as with while
+loops, the opening curly bracket is placed on the same line as the \mintinline{php}{for}
+keyword.  Code within the loop body is indented, all at the same indentation level.
+
+\section{Do-While Loops}
+
+PHP also supports do-while loops.  Recall that the difference between a
+while loop and a do-while loop is when the continuation condition is checked.
+For a while loop it is \emph{prior} to the beginning of the loop body and in
+a do-while loop it is at the \emph{end} of the loop.  This means that a do-while 
+always executes \emph{at least once}.  An example can be found in Code
+Sample \ref{code:php:doWhileLoop}.
+
+\begin{listing}
+\begin{minted}{php}
+$i;
+do {
+  //perform some action
+  $i++;
+} while($i <= 10);
+\end{minted}
+  \caption{Do-While Loop in PHP}
+  \label{code:php:doWhileLoop}
+\end{listing}
+
+Note the syntax and style: the opening curly bracket is again on the same
+line as the keyword \mintinline{php}{do}.  The \mintinline{php}{while} keyword and
+continuation condition are on the same line as the closing curly bracket.
+In a slight departure from consistent syntax, a semicolon \emph{does} appear
+at the end of the continuation condition even though it is not an
+executable statement.
+
+\section{Foreach Loops}
+
+Finally, PHP does support foreach loops using the keyword \mintinline{php}{foreach}.
+Some of this will be a preview of Section \ref{chapter:php:arrays} where we discuss 
+arrays in PHP\footnote{Actually, PHP supports \emph{associative} arrays, which are
+not the same thing as traditional arrays.}, but in short you can iterate over the 
+elements of an array as follows.
+
+\begin{minted}{php}
+$arr = array(1.41, 2.71, 3.14);
+foreach($arr as $x) {
+  //$x now holds the "current" element in $arr
+}
+\end{minted}
+
+In the \mintinline{php}{foreach} syntax we specify the array we want to iterate
+over, \mintinline{php}{$arr} and use the keyword \mintinline{php}{as}.  The
+last element in the statement is the variable name that we want to use within
+the loop.  This should be read as ``\mintinline{php}{foreach} element \mintinline{php}{$x}
+in the array \mintinline{php}{$arr}...''.  Inside the loop, the variable \mintinline{php}{$x}
+will be automatically updated on each iteration to the next element in \mintinline{php}{$arr}.
+
+\section{Examples}
+
+\subsection{Normalizing a Number}
+
+Let's revisit the example from Section \ref{subsection:whileLoopExample} in which 
+we \emph{normalize} a number by continually dividing it by 10 until it is less 
+than 10.  The code in Code Sample \ref{code:php:normalizeWhileLoop} specifically
+refers to the value $32145.234$ but would work equally well with any value of 
+\mintinline{php}{$x}.
+
+\begin{listing}[H]
+\begin{minted}{php}
+$x = 32145.234;
+$k = 0;
+while($x > 10) {
+  $x = $x / 10;
+  $k++;
+}
+\end{minted}
+  \caption{Normalizing a Number with a While Loop in PHP}
+  \label{code:php:normalizeWhileLoop}
+\end{listing}
+
+\subsection{Summation}
+
+Let's revisit the example from Section \ref{subsection:summationExample} in which
+we computed the sum of integers $1 + 2 + \cdots + 10$.  The code is presented in
+Code Sample \ref{code:php:summationForLoop}
+
+\begin{listing}[H]
+\begin{minted}{php}
+$sum = 0;
+for($i=1; $i<=10; $i++) {
+  $sum += $i;
+}
+\end{minted}
+  \caption{Summation of Numbers using a For Loop in PHP}
+  \label{code:php:summationForLoop}
+\end{listing}
+
+Of course we could easily have generalized the code somewhat.  Instead of computing
+a sum up to a particular number, we could have written it to sum up to another
+variable \mintinline{php}{$n}, in which case the for loop would instead look like the
+following.
+
+\begin{minted}{php}
+for($i=1; $i<=n; $i++) {
+  $sum += $i;
+}
+\end{minted}
+
+\subsection{Nested Loops}
+
+Recall that you can write loops within loops.  The inner loop will execute fully 
+\emph{for each} iteration of the outer loop.  An example of two nested of
+loops in PHP can be found in Code Sample \ref{code:php:nestedForLoops}.
+
+\begin{listing}[H]
+\begin{minted}{php}
+$n = 10;
+$m = 20;
+for($i=0; $i<$n; $i++) {
+  for($j=0; $j<$m; $j++) {
+    printf("(i, j) = (%d, %d)\n", $i, $j);
+  }
+}
+\end{minted}
+  \caption{Nested For Loops in PHP}
+  \label{code:php:nestedForLoops}
+\end{listing}
+
+The inner loop execute for $j = 0, 1, 2, \ldots, 19 < m = 20$ for a total
+of 20 times.  However, it executes 20 times \emph{for each} iteration of
+the outer loop.  Since the outer loop execute for $i = 0, 1, 2, \ldots, 9 < n = 10$, 
+the total number of times the \mintinline{php}{printf} statement execute is
+$10 \times 20 = 200$.  In this example, the sequence $(0, 0), (0, 1), (0, 2), \ldots, (0,19), (1, 0), \ldots, (9, 19)$
+will be printed.
+
+\subsection{Paying the Piper}
+
+Let's adapt the solution for the loan amortization schedule we developed in 
+Section \ref{subsection:loanAmortization}.  First, we'll read the principle, 
+terms, and interest as command line inputs.
+
+Adapting the formula for the monthly payment and using the standard
+math library's \mintinline{php}{pow} function, we get
+
+\begin{minted}{php}
+  $monthlyPayment = ($monthlyInterestRate * $principle) / 
+  	(1 - pow( (1 + $monthlyInterestRate), -$n));
+\end{minted}
+
+However, recall that we may have problems due to accuracy.  The monthly
+payment could come out to be a fraction of a cent, say \$43.871.  For 
+accuracy, we need to ensure that all of the figures for currency are rounded
+to the nearest cent.  The standard math library does have a \mintinline{php}{round}
+function, but it only rounds to the nearest whole number, not the nearest
+100th.
+
+However, we can \emph{adapt} the ``off-the-shelf'' solution to fit our needs.  
+If we take the number, multiply it by 100, we get (say) 4387.1 which we can
+now round to the nearest whole number, giving us 4387.  We can then 
+divide by 100 to get a number that has been rounded to the nearest 100th!
+In PHP, we could simply do the following.
+
+\mintinline{php}{$monthlyPayment = round($monthlyPayment * 100) / 100;}
+
+We can use the same trick to round the monthly interest payment and any
+other number expected to be whole cents.  To output our numbers, we use
+\mintinline{php}{printf} and take care to align our columns to make make it look 
+nice.  To finish our adaptation, we handle the final month separately to account
+for an over/under payment due to rounding.  The full solution can be found
+in Code Sample \ref{code:php:loanAmortization}.
+
+\begin{listing}
+\begin{minted}[fontsize=\footnotesize]{php}
+<?php
+  if($argc != 4) {
+    printf("Usage: %s principle apr terms\n", $argv[0]);
+    exit(1);
+  }
+
+  $principle = floatval($argv[1]);
+  $apr = floatval($argv[2]);
+  $n = intval($argv[3]);
+
+  $balance = $principle;
+  $monthlyInterestRate = $apr / 12;
+
+  //monthly payment
+  $monthlyPayment = ($monthlyInterestRate * $principle) /
+         (1 - pow( (1 + $monthlyInterestRate), -$n));
+  //round to the nearest cent
+  $monthlyPayment = round($monthlyPayment * 100) / 100;
+
+  printf("Principle: $%.2f\n", $principle);
+  printf("APR: %.4f%%\n", $apr * 100.0);
+  printf("Months: %d\n", $n);
+  printf("Monthly Payment: $%.2f\n", $monthlyPayment);
+
+  //for the first n-1 payments in a loop:
+  for($i=1; $i<$n; $i++) {
+    //  compute the monthly interest, rounded:
+    $monthlyInterest =
+      round( ($balance * $monthlyInterestRate) * 100) / 100;
+    //  compute the monthly principle payment
+    $monthlyPrinciplePayment = $monthlyPayment - $monthlyInterest;
+    //  update the balance
+    $balance = $balance - $monthlyPrinciplePayment;
+    //  print i, monthly interest, monthly principle, new balance
+    printf("%d\t$%10.2f  $%10.2f  $%10.2f\n", $i, $monthlyInterest,
+                         $monthlyPrinciplePayment, $balance);
+  }
+
+  //handle the last month and last payment separately
+  $lastInterest = round( ($balance * $monthlyInterestRate) * 100) / 100;
+  $lastPayment = $balance + $lastInterest;
+
+  printf("Last payment = $%.2f\n", $lastPayment);
+?>
+\end{minted}
+\caption{Loan Amortization Program in PHP}
+\label{code:php:loanAmortization}
+\end{listing}
+
+

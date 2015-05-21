@@ -1,0 +1,33 @@
+\begin{tikzpicture}[node distance=3cm,auto,scale=1.0,transform shape]
+    % Place nodes
+    
+%    \tikzstyle{decision} = [diamond, draw, fill=blue!20, 
+%    text width=4.5em, text badly centered, node distance=3cm, inner sep=0pt]
+%\tikzstyle{block} = [rectangle, draw, fill=blue!20, 
+%    text width=5em, text centered, rounded corners, minimum height=4em]
+%\tikzstyle{line} = [draw, -latex']
+
+    \node [block,text width=8em] (a) {Initialization: $i \leftarrow 1$};
+    \node [block,text width=8em, fill=green!20, below of=a] (b) {loop body};
+    \node [block,text width=8em, below of=b] (c) {Iteration: $i \leftarrow (i + 1)$};
+    \node [decision,node distance=3.5cm,text width=6em,text centered, below of=c] (decide) {Continuation: $i \leq 10$?};
+    \node[block,node distance=3.5cm,text width=8em,below of=decide] (d) {remaining program};
+    
+    %position dummy nodes
+    %\node[right of=b] (null1) {};
+    %\node[right of=decide] (null2) {};
+    
+    % Draw edges
+    \path [line] (a) -- (b);
+    \path [line] (b) -- (c);
+    \path [line] (c) -- (decide);
+    \path [line] (decide) -- node {false} (d);
+    \path [line] (decide)   --++  (3,0) node [below] {true} |- (b);
+%    \path [line] (decide) |- (null1) -- (null2) -| (b);
+    %\path [line] (decide) |- node{true} (b);
+
+%    \path [line] (decide) -- node {true}(a);
+  %  \path [line] (decide) -- node {false}(b);
+    %\path [line] (a) |- (c);
+    %\path [line] (b) -- (c);
+\end{tikzpicture}

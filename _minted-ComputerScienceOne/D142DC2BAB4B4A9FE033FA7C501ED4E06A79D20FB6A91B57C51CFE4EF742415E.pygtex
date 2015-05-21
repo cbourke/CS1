@@ -1,0 +1,24 @@
+\begin{Verbatim}[commandchars=\\\{\},codes={\catcode`\$=3\catcode`\^=7\catcode`\_=8}]
+\PYGdefault{c+cp}{\PYGdefaultZlt{}?php}
+
+\PYGdefault{l+s+sd}{/**}
+\PYGdefault{l+s+sd}{ * This program computes the roots to a quadratic equation}
+\PYGdefault{l+s+sd}{ * using the quadratic formula.}
+\PYGdefault{l+s+sd}{ */}
+
+\PYGdefault{n+nb}{printf}\PYGdefault{p}{(}\PYGdefault{l+s+s2}{\PYGdefaultZdq{}Please enter a: \PYGdefaultZdq{}}\PYGdefault{p}{);}
+\PYGdefault{n+nv}{\PYGdefaultZdl{}a} \PYGdefault{o}{=} \PYGdefault{n+nb}{floatval}\PYGdefault{p}{(}\PYGdefault{n+nb}{trim}\PYGdefault{p}{(}\PYGdefault{n+nb}{fgets}\PYGdefault{p}{(}\PYGdefault{n+nx}{STDIN}\PYGdefault{p}{)));}
+\PYGdefault{n+nb}{printf}\PYGdefault{p}{(}\PYGdefault{l+s+s2}{\PYGdefaultZdq{}Please enter b: \PYGdefaultZdq{}}\PYGdefault{p}{);}
+\PYGdefault{n+nv}{\PYGdefaultZdl{}b} \PYGdefault{o}{=} \PYGdefault{n+nb}{floatval}\PYGdefault{p}{(}\PYGdefault{n+nb}{trim}\PYGdefault{p}{(}\PYGdefault{n+nb}{fgets}\PYGdefault{p}{(}\PYGdefault{n+nx}{STDIN}\PYGdefault{p}{)));}
+\PYGdefault{n+nb}{printf}\PYGdefault{p}{(}\PYGdefault{l+s+s2}{\PYGdefaultZdq{}Please enter c: \PYGdefaultZdq{}}\PYGdefault{p}{);}
+\PYGdefault{n+nv}{\PYGdefaultZdl{}c} \PYGdefault{o}{=} \PYGdefault{n+nb}{floatval}\PYGdefault{p}{(}\PYGdefault{n+nb}{trim}\PYGdefault{p}{(}\PYGdefault{n+nb}{fgets}\PYGdefault{p}{(}\PYGdefault{n+nx}{STDIN}\PYGdefault{p}{)));}
+
+\PYGdefault{n+nv}{\PYGdefaultZdl{}root1} \PYGdefault{o}{=} \PYGdefault{p}{(}\PYGdefault{o}{\PYGdefaultZhy{}}\PYGdefault{n+nv}{\PYGdefaultZdl{}b} \PYGdefault{o}{+} \PYGdefault{n+nb}{sqrt}\PYGdefault{p}{(}\PYGdefault{n+nv}{\PYGdefaultZdl{}b}\PYGdefault{o}{*}\PYGdefault{n+nv}{\PYGdefaultZdl{}b} \PYGdefault{o}{\PYGdefaultZhy{}} \PYGdefault{l+m+mi}{4}\PYGdefault{o}{*}\PYGdefault{n+nv}{\PYGdefaultZdl{}a}\PYGdefault{o}{*}\PYGdefault{n+nv}{\PYGdefaultZdl{}c}\PYGdefault{p}{)} \PYGdefault{p}{)} \PYGdefault{o}{/} \PYGdefault{p}{(}\PYGdefault{l+m+mi}{2}\PYGdefault{o}{*}\PYGdefault{n+nv}{\PYGdefaultZdl{}a}\PYGdefault{p}{);}
+\PYGdefault{n+nv}{\PYGdefaultZdl{}root2} \PYGdefault{o}{=} \PYGdefault{p}{(}\PYGdefault{o}{\PYGdefaultZhy{}}\PYGdefault{n+nv}{\PYGdefaultZdl{}b} \PYGdefault{o}{\PYGdefaultZhy{}} \PYGdefault{n+nb}{sqrt}\PYGdefault{p}{(}\PYGdefault{n+nv}{\PYGdefaultZdl{}b}\PYGdefault{o}{*}\PYGdefault{n+nv}{\PYGdefaultZdl{}b} \PYGdefault{o}{\PYGdefaultZhy{}} \PYGdefault{l+m+mi}{4}\PYGdefault{o}{*}\PYGdefault{n+nv}{\PYGdefaultZdl{}a}\PYGdefault{o}{*}\PYGdefault{n+nv}{\PYGdefaultZdl{}c}\PYGdefault{p}{)} \PYGdefault{p}{)} \PYGdefault{o}{/} \PYGdefault{p}{(}\PYGdefault{l+m+mi}{2}\PYGdefault{o}{*}\PYGdefault{n+nv}{\PYGdefaultZdl{}a}\PYGdefault{p}{);}
+
+\PYGdefault{n+nb}{printf}\PYGdefault{p}{(}\PYGdefault{l+s+s2}{\PYGdefaultZdq{}The roots of \PYGdefaultZpc{}fx\PYGdefaultZca{}2 + \PYGdefaultZpc{}fx + \PYGdefaultZpc{}f are: }\PYGdefault{l+s+se}{\PYGdefaultZbs{}n}\PYGdefault{l+s+s2}{\PYGdefaultZdq{}}\PYGdefault{p}{,} \PYGdefault{n+nv}{\PYGdefaultZdl{}a}\PYGdefault{p}{,} \PYGdefault{n+nv}{\PYGdefaultZdl{}b}\PYGdefault{p}{,} \PYGdefault{n+nv}{\PYGdefaultZdl{}c}\PYGdefault{p}{);}
+\PYGdefault{n+nb}{printf}\PYGdefault{p}{(}\PYGdefault{l+s+s2}{\PYGdefaultZdq{}  root1 = \PYGdefaultZpc{}f}\PYGdefault{l+s+se}{\PYGdefaultZbs{}n}\PYGdefault{l+s+s2}{\PYGdefaultZdq{}}\PYGdefault{p}{,} \PYGdefault{n+nv}{\PYGdefaultZdl{}root1}\PYGdefault{p}{);}
+\PYGdefault{n+nb}{printf}\PYGdefault{p}{(}\PYGdefault{l+s+s2}{\PYGdefaultZdq{}  root2 = \PYGdefaultZpc{}f}\PYGdefault{l+s+se}{\PYGdefaultZbs{}n}\PYGdefault{l+s+s2}{\PYGdefaultZdq{}}\PYGdefault{p}{,} \PYGdefault{n+nv}{\PYGdefaultZdl{}root2}\PYGdefault{p}{);}
+
+\PYGdefault{c+cp}{?\PYGdefaultZgt{}}
+\end{Verbatim}

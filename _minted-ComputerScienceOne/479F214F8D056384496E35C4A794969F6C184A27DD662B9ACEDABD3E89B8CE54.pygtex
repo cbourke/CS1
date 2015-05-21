@@ -1,0 +1,20 @@
+\begin{Verbatim}[commandchars=\\\{\},codes={\catcode`\$=3\catcode`\^=7\catcode`\_=8}]
+\PYGdefault{k+kt}{int} \PYGdefault{n}{a} \PYGdefault{o}{=} \PYGdefault{l+m+mi}{4567}\PYGdefault{p}{;}
+\PYGdefault{k+kt}{double} \PYGdefault{n}{b} \PYGdefault{o}{=} \PYGdefault{l+m+mf}{3.14159265359}\PYGdefault{p}{;}
+
+\PYGdefault{n}{printf}\PYGdefault{p}{(}\PYGdefault{l+s}{\PYGdefaultZdq{}a=\PYGdefaultZpc{}d}\PYGdefault{l+s+se}{\PYGdefaultZbs{}n}\PYGdefault{l+s}{\PYGdefaultZdq{}}\PYGdefault{p}{,} \PYGdefault{n}{a}\PYGdefault{p}{);}
+\PYGdefault{n}{printf}\PYGdefault{p}{(}\PYGdefault{l+s}{\PYGdefaultZdq{}a=\PYGdefaultZpc{}2d}\PYGdefault{l+s+se}{\PYGdefaultZbs{}n}\PYGdefault{l+s}{\PYGdefaultZdq{}}\PYGdefault{p}{,} \PYGdefault{n}{a}\PYGdefault{p}{);}
+\PYGdefault{n}{printf}\PYGdefault{p}{(}\PYGdefault{l+s}{\PYGdefaultZdq{}a=\PYGdefaultZpc{}4d}\PYGdefault{l+s+se}{\PYGdefaultZbs{}n}\PYGdefault{l+s}{\PYGdefaultZdq{}}\PYGdefault{p}{,} \PYGdefault{n}{a}\PYGdefault{p}{);}
+\PYGdefault{n}{printf}\PYGdefault{p}{(}\PYGdefault{l+s}{\PYGdefaultZdq{}a=\PYGdefaultZpc{}8d}\PYGdefault{l+s+se}{\PYGdefaultZbs{}n}\PYGdefault{l+s}{\PYGdefaultZdq{}}\PYGdefault{p}{,} \PYGdefault{n}{a}\PYGdefault{p}{);}
+
+\PYGdefault{c+c1}{//by default, prints 6 decimals of precision}
+\PYGdefault{n}{printf}\PYGdefault{p}{(}\PYGdefault{l+s}{\PYGdefaultZdq{}b=\PYGdefaultZpc{}f}\PYGdefault{l+s+se}{\PYGdefaultZbs{}n}\PYGdefault{l+s}{\PYGdefaultZdq{}}\PYGdefault{p}{,} \PYGdefault{n}{b}\PYGdefault{p}{);}
+\PYGdefault{c+c1}{//the .m modifier is optional:}
+\PYGdefault{n}{printf}\PYGdefault{p}{(}\PYGdefault{l+s}{\PYGdefaultZdq{}b=\PYGdefaultZpc{}10f}\PYGdefault{l+s+se}{\PYGdefaultZbs{}n}\PYGdefault{l+s}{\PYGdefaultZdq{}}\PYGdefault{p}{,} \PYGdefault{n}{b}\PYGdefault{p}{);}
+\PYGdefault{c+c1}{//the n modifier is also optional:}
+\PYGdefault{n}{printf}\PYGdefault{p}{(}\PYGdefault{l+s}{\PYGdefaultZdq{}b=\PYGdefaultZpc{}.2f}\PYGdefault{l+s+se}{\PYGdefaultZbs{}n}\PYGdefault{l+s}{\PYGdefaultZdq{}}\PYGdefault{p}{,} \PYGdefault{n}{b}\PYGdefault{p}{);}
+\PYGdefault{c+c1}{//note that this rounds!}
+\PYGdefault{n}{printf}\PYGdefault{p}{(}\PYGdefault{l+s}{\PYGdefaultZdq{}b=\PYGdefaultZpc{}10.3f}\PYGdefault{l+s+se}{\PYGdefaultZbs{}n}\PYGdefault{l+s}{\PYGdefaultZdq{}}\PYGdefault{p}{,} \PYGdefault{n}{b}\PYGdefault{p}{);}
+\PYGdefault{c+c1}{//zeros are added so that 15 decimals are displayed}
+\PYGdefault{n}{printf}\PYGdefault{p}{(}\PYGdefault{l+s}{\PYGdefaultZdq{}b=\PYGdefaultZpc{}20.15f}\PYGdefault{l+s+se}{\PYGdefaultZbs{}n}\PYGdefault{l+s}{\PYGdefaultZdq{}}\PYGdefault{p}{,} \PYGdefault{n}{b}\PYGdefault{p}{);}
+\end{Verbatim}

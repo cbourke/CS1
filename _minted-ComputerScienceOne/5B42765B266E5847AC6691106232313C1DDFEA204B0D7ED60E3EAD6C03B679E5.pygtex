@@ -1,0 +1,18 @@
+\begin{Verbatim}[commandchars=\\\{\},codes={\catcode`\$=3\catcode`\^=7\catcode`\_=8}]
+\PYGdefault{n+nv}{\PYGdefaultZdl{}a} \PYGdefault{o}{=} \PYGdefault{l+s+s2}{\PYGdefaultZdq{}10\PYGdefaultZdq{}}\PYGdefault{p}{;}
+\PYGdefault{n+nv}{\PYGdefaultZdl{}b} \PYGdefault{o}{=} \PYGdefault{l+m+mi}{5} \PYGdefault{o}{+} \PYGdefault{n+nv}{\PYGdefaultZdl{}a}\PYGdefault{p}{;}
+\PYGdefault{k}{print} \PYGdefault{n+nv}{\PYGdefaultZdl{}b}\PYGdefault{p}{;} \PYGdefault{c+c1}{//b = 15}
+
+\PYGdefault{n+nv}{\PYGdefaultZdl{}a} \PYGdefault{o}{=} \PYGdefault{l+s+s2}{\PYGdefaultZdq{}3.14\PYGdefaultZdq{}}\PYGdefault{p}{;}
+\PYGdefault{n+nv}{\PYGdefaultZdl{}b} \PYGdefault{o}{=} \PYGdefault{l+m+mi}{5} \PYGdefault{o}{+} \PYGdefault{n+nv}{\PYGdefaultZdl{}a}\PYGdefault{p}{;}
+\PYGdefault{k}{print} \PYGdefault{l+s+s2}{\PYGdefaultZdq{}b = }\PYGdefault{l+s+si}{\PYGdefaultZdl{}b}\PYGdefault{l+s+s2}{\PYGdefaultZdq{}}\PYGdefault{p}{;} \PYGdefault{c+c1}{//b = 8.14}
+
+\PYGdefault{n+nv}{\PYGdefaultZdl{}a} \PYGdefault{o}{=} \PYGdefault{l+s+s2}{\PYGdefaultZdq{}ten\PYGdefaultZdq{}}\PYGdefault{p}{;}
+\PYGdefault{n+nv}{\PYGdefaultZdl{}b} \PYGdefault{o}{=} \PYGdefault{l+m+mi}{5} \PYGdefault{o}{+} \PYGdefault{n+nv}{\PYGdefaultZdl{}a}\PYGdefault{p}{;}
+\PYGdefault{k}{print} \PYGdefault{l+s+s2}{\PYGdefaultZdq{}b = }\PYGdefault{l+s+si}{\PYGdefaultZdl{}b}\PYGdefault{l+s+s2}{\PYGdefaultZdq{}}\PYGdefault{p}{;} \PYGdefault{c+c1}{//b = 5}
+
+\PYGdefault{c+c1}{//partial conversions also occur:}
+\PYGdefault{n+nv}{\PYGdefaultZdl{}a} \PYGdefault{o}{=} \PYGdefault{l+s+s2}{\PYGdefaultZdq{}10ten\PYGdefaultZdq{}}\PYGdefault{p}{;}
+\PYGdefault{n+nv}{\PYGdefaultZdl{}b} \PYGdefault{o}{=} \PYGdefault{l+m+mi}{5} \PYGdefault{o}{+} \PYGdefault{n+nv}{\PYGdefaultZdl{}a}\PYGdefault{p}{;}
+\PYGdefault{k}{print} \PYGdefault{l+s+s2}{\PYGdefaultZdq{}b = }\PYGdefault{l+s+si}{\PYGdefaultZdl{}b}\PYGdefault{l+s+s2}{\PYGdefaultZdq{}}\PYGdefault{p}{;} \PYGdefault{c+c1}{//b = 15}
+\end{Verbatim}

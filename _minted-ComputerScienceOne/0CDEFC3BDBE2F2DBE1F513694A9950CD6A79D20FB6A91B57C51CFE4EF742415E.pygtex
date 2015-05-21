@@ -1,0 +1,11 @@
+\begin{Verbatim}[commandchars=\\\{\},codes={\catcode`\$=3\catcode`\^=7\catcode`\_=8}]
+\PYGdefault{x}{//this is a single line comment}
+\PYGdefault{x}{int x;  //this is also a single line comment, but after some code}
+
+\PYGdefault{x}{/*}
+\PYGdefault{x}{  This is a comment that can}
+\PYGdefault{x}{  span multiple lines to format the comment}
+\PYGdefault{x}{  message more clearly}
+\PYGdefault{x}{*/}
+\PYGdefault{x}{double y;}
+\end{Verbatim}

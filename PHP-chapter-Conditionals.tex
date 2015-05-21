@@ -1,0 +1,527 @@
+%!TEX root = ComputerScienceOne.tex
+
+%%Chapter: PHP Conditionals
+
+PHP supports the basic if, if-else, and if-else-if conditional structures as well as switch
+statements.  Logical statements are built using the standard logical operators for
+numeric comparisons as well as logical operators such as negations, \And, and 
+\Or.
+
+\section{Logical Operators}
+
+PHP has a built-in Boolean type and supports the keywords \mintinline{php}{true}
+and \mintinline{php}{false}.  However, \emph{any} variable can be treated as a 
+Boolean if used in a logical expression.  Depending on the variable, it could
+evaluate to \True or \False!  For example, an empty string, \mintinline{php}{""},
+\mintinline{php}{null}, or a numeric value of zero, \mintinline{php}{0} are all
+considered \False.  A non-empty string, a non-zero numeric value, or a
+non-empty array all evaluate to \True.  It is best to avoid these issues by 
+writing clean code that uses clear, explicit statements.
+
+Because PHP is dynamically typed, comparison operators work differently 
+depending on how they are used.  First, let's consider the four basic 
+inequality operators, \mintinline{php}{<},  \mintinline{php}{<=},  \mintinline{php}{>},  
+and \mintinline{php}{>=}.  When used to compare numeric types
+to numeric types, these operators work as expected and the value of 
+the numbers are compared and the result is either \True or \False.  Examples:
+
+\begin{minted}{php}
+$a = 10;
+$b = 20;
+$c = 20;
+
+$r = ($a < $b);  //true
+$r = ($a <= $b); //false
+$r = ($b <= $c); //true
+$r = ($a > $b);  //false
+$r = ($a >= $b); //false
+$r = ($b >= $c); //true
+\end{minted}
+
+When these operators are used to compare strings to strings, the strings
+are compared lexicographically according to the standard ASCII text table.
+Some examples follow, but it is better to use a function (in particular 
+\mintinline{php}{strcmp} which we discuss later) to do string comparisons.
+
+\begin{minted}{php}
+$s = "aardvark";
+$t = "zebra";
+
+$r = ($s < $t);  //true
+$r = ($s <= $t); //true
+$r = ($s >= $t); //false
+$r = ($s > $t);   //false
+\end{minted}
+
+However, when these operators are used to compare strings to numeric types, 
+the strings are converted to numbers using the same type juggling that happens
+when strings are mixed with arithmetic operators.  In the following example, 
+\mintinline{php}{$b} gets converted to a numeric type when compared to 
+\mintinline{php}{$a} which give the results indicated in the comments.  
+
+\begin{minted}{php}
+$a = 10;
+$b = "10";
+
+$r = ($a <= $b);  //true
+$r = ($a < $b);   //false
+$r = ($a >= $b);  //true
+$r = ($a > $b);   //false
+\end{minted}
+
+With the equality operators, \mintinline{php}{==} and \mintinline{php}{!=}, something
+similar happens.  When the types of the two operands match, the expected 
+comparison is made: when numbers are compared to numbers their values are
+compared; when strings are compared to strings, their content is
+compared (case sensitively).  However, when the types are different, again, 
+type juggling happens and strings are converted to numbers for the purpose
+of comparison.  Thus, a comparison like \mintinline{php}{(10 == "10")} ends
+up being \True!  The operators are \mintinline{php}{==} and \mintinline{php}{!=}
+are referred to as \emph{loose} comparison operators because of this.
+
+What if we want to ensure that we're comparing apples to apples?  To rectify
+this, PHP offers another set of comparison operators, \emph{strict} comparison
+operators, \mintinline{php}{===} and \mintinline{php}{!==} (the same, but with
+an extra equals sign, \mintinline{php}{=}).  These operators will make a 
+comparison \emph{without} type juggling either operand first.  Now a 
+similar comparison, \mintinline{php}{(10 === "10")} ends up evaluating
+to \False.  The operator \mintinline{php}{===} will only evaluate to \True
+if the both the operands' type \emph{and} value are the same.
+
+\begin{minted}{php}
+$a = 10;
+$b = "10";
+
+$r = ($a == $b);  //true
+$r = ($a != $b);  //false
+$r = ($a === $b); //false
+$r = ($a !== $b); //true
+\end{minted}
+
+The three basic logical operators, not \mintinline{php}{!}, $\And$ \mintinline{php}{&&},
+and $\Or$ \mintinline{php}{||} are also supported.  The operands applied to these
+operators will be converted to Boolean values according to the rules described in
+Table \ref{table:truthyPHPValues}.
+
+\subsection{Order of Precedence}
+
+At this point it is worth summarizing the order of precedence of all the 
+operators that we've seen so far including assignment, arithmetic, 
+comparison, and logical.  Since all of these operators could be used
+in one statement, for example, 
+
+\mintinline{php}{($b*$b < 4*$a*$c || $a === 0 || $argc != 4)}
+
+it is important to understand the order in which each one gets evaluated.
+Table \ref{table:php:operatorPrecedence} summarizes the order of precedence
+for the operators seen so far.  This is not an exhaustive list of PHP operators.
+
+\begin{table}
+\centering
+\begin{tabular}{l|l|l|p{7cm}}
+~ & Operator(s) & Associativity & Notes \\
+\hline\hline
+Highest & \mintinline{php}{++}, \mintinline{php}{--} & left-to-right & increment operators\\
+~ & \mintinline{php}{-},  \mintinline{php}{!} & right-to-left & unary negation operator, logical not\\
+~ & \mintinline{php}{*},  \mintinline{php}{/}, \mintinline{php}{%} & left-to-right & ~\\
+~ & \mintinline{php}{+},  \mintinline{php}{-} & left-to-right & addition, subtraction\\
+~ & \mintinline{php}{<},  \mintinline{php}{<=}, \mintinline{php}{>}, \mintinline{php}{>=} & left-to-right & comparison \\
+~ & \mintinline{php}{==},  \mintinline{php}{!=}, \mintinline{php}{===},  \mintinline{php}{!==} & left-to-right & equality, inequality \\
+~ & \mintinline{php}{&&} & left-to-right & logical \And \\
+~ & \mintinline{php}{||}  & left-to-right & logical \Or \\
+Lowest & \mintinline{php}{=}, \mintinline{php}{+=}, \mintinline{php}{-=}, \mintinline{php}{*=}, \mintinline{php}{/=}  & right-to-left & assignment and compound assignment operators \\
+\end{tabular}
+\caption[Operator Order of Precedence in PHP]{Operator Order of Precedence in PHP.
+Operators on the same level have equivalent order and are performed in the associative
+order specified.}
+\label{table:php:operatorPrecedence}
+\end{table}
+
+\section{If, If-Else, If-Else-If Statements}
+
+Conditional statements in PHP utilize the key words \mintinline{php}{if}, \mintinline{php}{else}, and
+\mintinline{php}{else if}.  Conditions are placed inside parentheses immediately after the 
+\mintinline{php}{if} and \mintinline{php}{else if} keywords.  Examples of all three can be 
+found in Code Sample \ref{code:php:conditionalExamples}.
+
+\begin{listing}
+\begin{minted}{php}
+//example of an if statement:
+if($x < 10) {
+  printf("x is less than 10\n");
+}
+
+//example of an if-else statement:
+if($x < 10) {
+  printf("x is less than 10\n");
+} else {
+  printf("x is 10 or more \n");
+}
+
+//example of an if-else-if statement:
+if($x < 10) {
+  printf("x is less than 10\n");
+} else if($x === 10) {
+  printf("x is equal to ten\n");
+} else {
+  printf("x is greater than 10\n");
+}
+\end{minted}
+\caption{Examples of Conditional Statements in PHP}
+\label{code:php:conditionalExamples}
+\end{listing}
+
+Some observations about the syntax: the statement, \mintinline{php}{if($x < 10)}
+does not have a semicolon at the end.  This is because it is a conditional statement
+that determines the flow of control and \emph{not} an executable statement.  
+Therefore, no semicolon is used.  Suppose we made a mistake and \emph{did}
+include a semicolon:
+
+\begin{minted}{php}
+$x = 15;
+if($x < 10); {
+  printf("x is less than 10\n");
+}
+\end{minted}
+
+This PHP code will run without error or warning.  However, it will end up 
+printing \mintinline{php}{x is less than 10}, even
+though $x = 15$!  Recall that a conditional statement \emph{binds} to the 
+executable statement or code block \emph{immediately} following it.  In this
+case, we've provided an \emph{empty} executable statement ended by the
+semicolon.  The code is essentially equivalent to 
+
+\begin{minted}{php}
+$x = 15;
+if($x < 10) {
+}
+printf("x is less than 10\n");
+\end{minted}
+
+Which is obviously not what we wanted.  The semicolon ended up binding 
+to the empty executable statement, and the code block containing the
+print statement immediately followed, but was \emph{not} bound to the
+conditional statement which is why the print statement executed regardless
+of the value of $x$.
+
+Another convention that we've used in our code is where we have placed the
+curly brackets.  First, if a conditional statement is bound to only one statement, 
+the curly brackets are not necessary.  However, it is best practice to include them
+even if they are not necessary and we'll follow this convention.  Second, the
+opening curly bracket is on the same line as the conditional statement while
+the closing curly bracket is indented to the same level as the start of the
+conditional statement.  Moreover, the code inside the code block is indented.
+If there were more statements in the block, they would have all been at the
+same indentation level.
+
+%\section{Switch statements}
+%
+%TODO: should we actually do this?
+%
+%C also supports switch statements, but only for integer types.  The usual
+%syntax applies as do the fall-through rules.  Switch statements also work 
+%on \mintinline{php}{char} types since in C, they can be treated as integers
+%according to the ASCII text table.
+%
+%\begin{listing}[H]
+%\begin{minted}{php}
+%int x;
+%...
+%switch(x) {
+%  case 0: 
+%    printf("x is zero\n");
+%    break;
+%  case 1:
+%  case 2:
+%    printf("x is one or 2\n");
+%    break;
+%  case 3:
+%    printf("x is 3\n");
+%    break;
+%  case 10:
+%    printf("x is 10\n");
+%    break;
+%  default:
+%    printf("x is not 0, 1, 2, 3, nor 10\n");
+%    break;
+%}
+%\end{minted}
+%\caption{Switch Statement in C}
+%\label{code:php:switchStatement}
+%\end{listing}
+%
+%TODO: more here?
+
+\section{Examples}
+
+\subsection{Computing a Logarithm}
+
+The logarithm of $x$ is the exponent that some \emph{base} must 
+be raised to get $x$.  The most common logarithm is the natural logarithm, 
+$\ln{(x)}$ which is base $e = 2.71828\ldots$.  But logarithms can be in any base 
+$b > 1$\footnote{Bases can also be $0< b < 1$, but we'll restrict our attention to
+increasing functions only.}  What if we wanted to compute $\log_2{(x)}$?  
+Or $\log_{\pi}{(x)}$?  Let's write a program that will prompt the user for a
+number $x$ and a base $b$ and computes $\log_b{(x)}$.
+
+Arbitrary bases can be computed using the change of base formula: 
+  $$\log_b(x) = \frac{\log_a{(x)}}{\log_a{(b)}}$$
+If we can compute \emph{some} base $a$, then we can compute any base 
+$b$.  Fortunately we have such a solution.  Recall that the standard library 
+provides a function to compute the natural logarithm, \mintinline{php}{log()}).
+This is one of the fundamentals of problems solving: if a solution already 
+exists, use it.  In this case, a solution exists for a different, but similar problem
+(computing the natural logarithm), but we can \emph{adapt} the solution 
+using the change of base formula.  In particular, if we have variables 
+\mintinline{php}{b} (base) and \mintinline{php}{x}, we can compute $\log_b{(x)}$ using
+
+  \mintinline{php}{log(x) / log(b)}
+  
+But wait: we have a problem similar to the examples in the previous section.  
+The user could enter invalid values such as $b = -10$ or $x = -2.54$ 
+(logarithms are undefined for non-positive values in any base).  We want
+to ensure that $b > 1$ and $x > 0$.  With conditionals, we can now do this.  
+Once we have read in the input from the user we can make a check for
+good input using an \mintinline{php}{if} statement.
+
+\begin{minted}{php}
+if($x <= 0 || $b <= 1) {
+  printf("Error: bad input!\n");
+  exit(1);
+}
+\end{minted}
+
+This code has something new: \mintinline{php}{exit(1)}.  The \mintinline{php}{exit}
+function immediately terminates the script regardless of the rest of the
+code that may remain.  The argument passed to \mintinline{php}{exit} is an 
+integer that represents an \emph{error code}.  The convention is that 
+zero indicates ``no error'' while non-zero values indicate some error.  This
+is a simple way of performing \emph{error handling}: if the user provides
+bad input, we inform them and quit the program, forcing them to run it
+again and provide good input.  By prematurely terminating the program
+we avoid any illegal operation that would give a bad result.
+
+Alternatively, we could have split the conditions into two statements and given
+a more descriptive error message.  We use this design in the full program 
+which can be found in Code Sample \ref{code:php:logarithmProgram}.  The 
+program also takes the input as command line arguments.  Now that we have
+conditionals, we can actually check that the correct number of arguments
+was provided by the user and quit in the event that they don't provide
+the correct number.
+
+\begin{listing}[h]
+\begin{minted}{php}
+<?php
+
+/**
+ * This program computes the logarithm base b (b > 1)
+ * of a given number x > 0
+ */
+
+if($argc != 3) {
+  printf("Usage: %s b x \n", $argv[0]);
+  exit(1);
+}
+
+$b = floatval($argv[1]);
+$x = floatval($argv[2]);
+
+if($x <= 0) {
+  printf("Error: x must be greater than zero\n");
+  exit(1);
+}
+if($b <= 1) {
+  printf("Error: base must be greater than one\n");
+  exit(1);
+}
+
+$result = log($x) / log($b);
+printf("log_(%f)(%f) = %f\n", $b, $x, $result);
+
+?>
+\end{minted}
+\caption{Logarithm Calculator Program in C}
+\label{code:php:logarithmProgram}
+\end{listing}
+
+\subsection{Life \& Taxes}
+
+Let's adapt the conditional statements we developed in Section \ref{subsubsection:lifeAndTaxes}
+into a full PHP script.  The first thing we need to do is establish the variables we'll need and
+read them in from the user.  At the same time we can check for bad input (negative values)
+for both the inputs.
+
+\begin{minted}{php}
+//prompt for income from the user
+printf("Please enter your Adjusted Gross Income: ");
+
+$income = floatval(trim(fgets(STDIN)));
+
+//prompt for children
+printf("How many children do you have? ");
+$numChildren = intval(trim(fgets(STDIN)));
+
+if($income < 0 || $numChildren < 0) {
+  printf("Invalid inputs");
+  exit(1);
+}
+\end{minted}
+
+Next, we can code a series of if-else-if statements for the income range.  By
+placing the ranges in increasing order, we only need to check the upper bounds
+just as in the original example.
+
+\begin{minted}{php}
+if($income <= 18150) {
+  $baseTax = $income * .10;
+} else if($income <= 73800) {
+  $baseTax = 1815 + ($income  -18150) * .15;
+} else if($income <= 148850) {
+...
+} else {
+  $baseTax = 127962.50 + ($income - 457600) * .396;
+}
+\end{minted}
+
+Next we compute the child tax credit, taking care that it does
+not exceed \$3,000.  A conditional based on the number of children
+should suffice as at this point in the program we already know it is
+zero or greater.
+
+\begin{minted}{php}
+if($numChildren <= 3) {
+  $credit = $numChildren * 1000;
+} else {
+  $credit = 3000;
+}
+\end{minted}
+
+Finally, we need to ensure that the credit does not exceed the total tax
+liability (the credit is non-refundable, so if the credit is greater, the tax
+should only be zero, not negative).  
+
+\begin{minted}{php}
+if($baseTax - $credit >= 0) {
+  $totalTax = $baseTax - $credit;
+} else {
+  $totalTax = 0;
+}
+\end{minted}
+
+The full program is presented in Code Sample \ref{code:php:taxProgram}.
+
+\begin{listing}[h]
+\begin{minted}[fontsize=\footnotesize]{php}
+<?php
+//prompt for income from the user
+printf("Please enter your Adjusted Gross Income: ");
+
+$income = floatval(trim(fgets(STDIN)));
+
+//prompt for children
+printf("How many children do you have? ");
+$numChildren = intval(trim(fgets(STDIN)));
+
+if($income < 0 || $numChildren < 0) {
+  printf("Invalid inputs");
+  exit(1);
+}
+
+if($income <= 18150) {
+  $baseTax = $income * .10;
+} else if($income <= 73800) {
+  $baseTax = 1815 + ($income  -18150) * .15;
+} else if($income <= 148850) {
+  $baseTax = 10162.50 + ($income - 73800) * .25;
+} else if($income <= 225850) {
+  $baseTax = 28925.00 + ($income - 148850) * .28;
+} else if($income <= 405100) {
+  $baseTax = 50765.00 + ($income - 225850) * .33;
+} else if($income <= 457600) {
+  $baseTax = 109587.50 + ($income - 405100) * .35;
+} else {
+  $baseTax = 127962.50 + ($income - 457600) * .396;
+}
+
+if($numChildren <= 3) {
+  $credit = $numChildren * 1000;
+} else {
+  $credit = 3000;
+}
+
+if($baseTax - $credit >= 0) {
+  $totalTax = $baseTax - $credit;
+} else {
+  $totalTax = 0;
+}
+
+printf("AGI:           $%10.2f\n", $income);
+printf("Tax:           $%10.2f\n", $baseTax);
+printf("Credit:        $%10.2f\n", $credit);
+printf("Tax Liability: $%10.2f\n", $totalTax);
+
+?>
+\end{minted}
+\caption{Tax Program in PHP}
+\label{code:php:taxProgram}
+\end{listing}
+
+\subsection{Quadratic Roots Revisited}
+
+Let's return to the quadratic roots program we previously designed that uses
+the quadratic equation to compute the roots of a quadratic polynomial by reading
+coefficients $a, b, c$ in from the user.  One of the problems we had previously 
+identified is if the user enters ``bad'' input: if $a = 0$, we would end up dividing
+by zero; if $b^2-4ac < 0$ then we would have complex roots.  With conditionals, 
+we can now check for these issues and exit with an error message.  
+
+Another potential case we might want to handle differently is when there is only
+one distinct root ($b^2 - 4ac = 0$).  In that case, the quadratic formula simplifies 
+to $\frac{-b}{2a}$ and we can print a different, more specific message to the user.
+The full program can be found in Code Sample \ref{code:php:quadraticRootsProgramWithErrorChecking}.
+
+
+\begin{listing}[h]
+\begin{minted}{php}
+<?php
+
+/**
+ * This program computes the roots to a quadratic equation
+ * using the quadratic formula.
+ */
+
+if($argc != 4) {
+  printf("Usage: %s a b c\n", $argv[0]);
+  exit(1);
+}
+
+$a = floatval($argv[1]);
+$b = floatval($argv[2]);
+$c = floatval($argv[3]);
+
+if($a === 0) {
+  printf("Error: a cannot be zero\n");
+  exit(1);
+} else if($b*$b < 4*$a*$c) {
+  printf("Error: cannot handle complex roots\n");
+  exit(1);
+} else if($b*$b === 4*$a*$c) {
+  $root1 = -$b / (2*$a);
+  printf("Only one distinct root: %f\n", $root1);
+} else {
+  $root1 = (-$b + sqrt($b*$b - 4*$a*$c) ) / (2*$a);
+  $root2 = (-$b - sqrt($b*$b - 4*$a*$c) ) / (2*$a);
+
+  printf("The roots of %fx^2 + %fx + %f are: \n", $a, $b, $c);
+  printf("  root1 = %f\n", $root1);
+  printf("  root2 = %f\n", $root2);
+}
+
+?>
+\end{minted}
+\caption{Quadratic Roots Program in PHP With Error Checking}
+\label{code:php:quadraticRootsProgramWithErrorChecking}
+\end{listing}
+
+
+

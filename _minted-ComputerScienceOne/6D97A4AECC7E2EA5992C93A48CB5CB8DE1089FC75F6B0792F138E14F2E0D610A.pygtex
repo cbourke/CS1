@@ -1,0 +1,7 @@
+\begin{Verbatim}[commandchars=\\\{\},codes={\catcode`\$=3\catcode`\^=7\catcode`\_=8}]
+\PYGdefault{n}{List}\PYGdefault{o}{\PYGdefaultZlt{}}\PYGdefault{n}{Integer}\PYGdefault{o}{\PYGdefaultZgt{}} \PYGdefault{n}{list} \PYGdefault{o}{=} \PYGdefault{n}{Arrays}\PYGdefault{o}{.}\PYGdefault{n+na}{asList}\PYGdefault{o}{(}\PYGdefault{l+m+mi}{10}\PYGdefault{o}{,} \PYGdefault{l+m+mi}{20}\PYGdefault{o}{,} \PYGdefault{l+m+mi}{8}\PYGdefault{o}{,} \PYGdefault{l+m+mi}{42}\PYGdefault{o}{);}
+\PYGdefault{k+kt}{int} \PYGdefault{n}{sum} \PYGdefault{o}{=} \PYGdefault{l+m+mi}{0}\PYGdefault{o}{;}
+\PYGdefault{k}{for}\PYGdefault{o}{(}\PYGdefault{n}{Integer} \PYGdefault{n}{a} \PYGdefault{o}{:} \PYGdefault{n}{list}\PYGdefault{o}{)} \PYGdefault{o}{\PYGdefaultZob{}}
+  \PYGdefault{n}{sum} \PYGdefault{o}{+=} \PYGdefault{n}{a}\PYGdefault{o}{;}
+\PYGdefault{o}{\PYGdefaultZcb{}}
+\end{Verbatim}

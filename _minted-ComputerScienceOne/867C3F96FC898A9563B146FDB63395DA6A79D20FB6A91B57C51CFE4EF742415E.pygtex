@@ -1,0 +1,4 @@
+\begin{Verbatim}[commandchars=\\\{\},codes={\catcode`\$=3\catcode`\^=7\catcode`\_=8}]
+\PYGdefault{x}{\PYGdefaultZdl{}monthlyPayment = (\PYGdefaultZdl{}monthlyInterestRate * \PYGdefaultZdl{}principle) /}
+\PYGdefault{x}{	(1 \PYGdefaultZhy{} pow( (1 + \PYGdefaultZdl{}monthlyInterestRate), \PYGdefaultZhy{}\PYGdefaultZdl{}n));}
+\end{Verbatim}

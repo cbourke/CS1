@@ -1,0 +1,8 @@
+\begin{Verbatim}[commandchars=\\\{\},codes={\catcode`\$=3\catcode`\^=7\catcode`\_=8}]
+Sine Approximation
+===================
+Enter x: 1.15
+Sine approximation: 0.912754
+Sine value:         0.912764
+Difference:         0.000010
+\end{Verbatim}

@@ -1,0 +1,9 @@
+\begin{Verbatim}[commandchars=\\\{\},codes={\catcode`\$=3\catcode`\^=7\catcode`\_=8}]
+Day Converter
+=============
+Enter number of days: 1000
+That is
+  2 years
+  38 weeks
+  4 days
+\end{Verbatim}

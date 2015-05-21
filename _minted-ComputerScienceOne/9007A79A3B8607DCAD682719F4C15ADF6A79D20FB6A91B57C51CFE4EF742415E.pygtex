@@ -1,0 +1,5 @@
+\begin{Verbatim}[commandchars=\\\{\},codes={\catcode`\$=3\catcode`\^=7\catcode`\_=8}]
+\PYGdefault{x}{int numUnits = 42;}
+\PYGdefault{x}{double costPerUnit = 32.79;}
+\PYGdefault{x}{char firstInitial = \PYGdefaultZsq{}C\PYGdefaultZsq{};}
+\end{Verbatim}

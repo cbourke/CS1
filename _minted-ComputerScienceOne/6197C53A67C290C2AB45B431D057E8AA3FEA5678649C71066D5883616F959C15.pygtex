@@ -1,0 +1,9 @@
+\begin{Verbatim}[commandchars=\\\{\},codes={\catcode`\$=3\catcode`\^=7\catcode`\_=8}]
+Derivative Approximation
+===================
+Enter x: 2
+Enter delta\PYGdefaultZhy{}x: 0.1
+(x\PYGdefaultZca{}2)\PYGdefaultZsq{}  \PYGdefaultZti{}= 4.100000
+sin\PYGdefaultZsq{}(x) \PYGdefaultZti{}= \PYGdefaultZhy{}0.460881
+ln\PYGdefaultZsq{}x(x) \PYGdefaultZti{}= 0.487902
+\end{Verbatim}

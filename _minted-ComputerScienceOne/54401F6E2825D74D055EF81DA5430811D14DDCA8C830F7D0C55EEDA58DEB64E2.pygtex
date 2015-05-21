@@ -1,0 +1,10 @@
+\begin{Verbatim}[commandchars=\\\{\},codes={\catcode`\$=3\catcode`\^=7\catcode`\_=8}]
+\PYGdefault{k+kt}{int} \PYGdefault{n}{i}\PYGdefault{p}{,} \PYGdefault{n}{j}\PYGdefault{p}{;}
+\PYGdefault{k+kt}{int} \PYGdefault{n}{n} \PYGdefault{o}{=} \PYGdefault{l+m+mi}{10}\PYGdefault{p}{;}
+\PYGdefault{k+kt}{int} \PYGdefault{n}{m} \PYGdefault{o}{=} \PYGdefault{l+m+mi}{20}\PYGdefault{p}{;}
+\PYGdefault{k}{for}\PYGdefault{p}{(}\PYGdefault{n}{i}\PYGdefault{o}{=}\PYGdefault{l+m+mi}{0}\PYGdefault{p}{;} \PYGdefault{n}{i}\PYGdefault{o}{\PYGdefaultZlt{}}\PYGdefault{n}{n}\PYGdefault{p}{;} \PYGdefault{n}{i}\PYGdefault{o}{++}\PYGdefault{p}{)} \PYGdefault{p}{\PYGdefaultZob{}}
+  \PYGdefault{k}{for}\PYGdefault{p}{(}\PYGdefault{n}{j}\PYGdefault{o}{=}\PYGdefault{l+m+mi}{0}\PYGdefault{p}{;} \PYGdefault{n}{j}\PYGdefault{o}{\PYGdefaultZlt{}}\PYGdefault{n}{m}\PYGdefault{p}{;} \PYGdefault{n}{j}\PYGdefault{o}{++}\PYGdefault{p}{)} \PYGdefault{p}{\PYGdefaultZob{}}
+    \PYGdefault{n}{printf}\PYGdefault{p}{(}\PYGdefault{l+s}{\PYGdefaultZdq{}(i, j) = (\PYGdefaultZpc{}d, \PYGdefaultZpc{}d)}\PYGdefault{l+s+se}{\PYGdefaultZbs{}n}\PYGdefault{l+s}{\PYGdefaultZdq{}}\PYGdefault{p}{,} \PYGdefault{n}{i}\PYGdefault{p}{,} \PYGdefault{n}{j}\PYGdefault{p}{);}
+  \PYGdefault{p}{\PYGdefaultZcb{}}
+\PYGdefault{p}{\PYGdefaultZcb{}}
+\end{Verbatim}

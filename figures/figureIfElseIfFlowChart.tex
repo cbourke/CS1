@@ -1,0 +1,68 @@
+%\documentclass{article}
+%\usepackage{fullpage}
+%\usepackage{tikz}
+%\usetikzlibrary{arrows.meta}
+%\usetikzlibrary{backgrounds}
+%\usetikzlibrary{shapes,arrows}
+%
+%\tikzstyle{decision} = [diamond, draw, fill=yellow!20, 
+%    text width=6em, text badly centered, node distance=3cm, inner sep=0pt]
+%\tikzstyle{block} = [rectangle, draw, fill=blue!20, 
+%    text width=5em, text centered, rounded corners, minimum height=4em]
+%\tikzstyle{line} = [draw, -latex']
+%\tikzstyle{cloud} = [draw, ellipse,fill=red!20, node distance=3cm,
+%    minimum height=2em]
+%
+%
+%\begin{document}
+%
+%~
+
+\begin{tikzpicture}[node distance=5cm,auto,scale=0.65,transform shape,every node/.style={text width=8em,minimum width=8em,minimum height=8em}]
+    % Place nodes
+    \node[draw=none] (start) {};
+    \node [decision,below of=start,node distance=4cm] (condition1) {$\langle condition\,1 \rangle$};
+    \node [decision,below of=condition1,node distance=4cm] (condition2) {$\langle condition\,2 \rangle$};
+    \node [decision, below of=condition2,node distance=4cm] (condition3) {$\langle condition\,3 \rangle$};
+    \node [decision,draw=none,fill=none, below of=condition3,node distance=4cm] (vdot1) {$\vdots$};
+    \node [decision, below of=vdot1,node distance=4cm] (conditionX) {$\langle condition\,n \rangle$};
+
+    \node [block, right of=condition1] (blockA) {Code Block $A$};
+    \node [block, right of=condition2] (blockB) {Code Block $B$};
+    \node [block, right of=condition3] (blockC) {Code Block $C$};
+    \node [block,draw=none,fill=none, below of=blockC,node distance=4cm] (vdot2) {$\vdots$};
+    \node [block, right of=conditionX] (blockN) {Code Block $N$};
+    \node [block, below of=conditionX] (blockM) {Code Block $M$};
+
+    \node[block,below of=blockM] (remaining) {Remaining Program};
+    
+    \node [left of=condition1,node distance=3.5cm,minimum width=10em] (code1) {if$\left(\langle condition\,1 \rangle\right)$};
+    \node [left of=condition2,node distance=3.5cm,text width=10em] (code2) {else if$\left(\langle condition\,2 \rangle\right)$};
+    \node [left of=condition3,node distance=3.5cm,text width=10em] (code3) {else if$\left(\langle condition\,3 \rangle\right)$};
+    \node [left of=conditionX,node distance=3.5cm,text width=10em] (code4) {else if$\left(\langle condition\,n \rangle\right)$};
+    \node [left of=blockM,node distance=3.5cm,text width=1em] (code5) {else};
+
+
+    % Draw edges
+    \path [line] (start) -- (condition1);
+    \path [line] (condition1) -- node[pos=.95,yshift=-1cm] {true}(blockA);
+    \path [line] (condition2) -- node[pos=.95,yshift=-1cm] {true}(blockB);
+    \path [line] (condition3) -- node[pos=.95,yshift=-1cm] {true}(blockC);
+    \path [line] (conditionX) -- node[pos=.95,yshift=-1cm] {true}(blockN);
+    
+    \path [line] (condition1) -- node[pos=.5] {false}(condition2);
+    \path [line] (condition2) -- node[pos=.5] {false}(condition3);
+    \path [line] (condition3) -- node[pos=.5] {false}(vdot1);
+    \path [line] (vdot1) -- node[pos=.5] {false}(conditionX);
+    \path [line] (conditionX) -- node[pos=.5] {false}(blockM);
+    \path [line] (blockM) -- node[pos=.5] {~}(remaining);
+
+    \path [line] (blockA)   --++  (3,0) node [above] {~} |- (remaining);
+    \path [line] (blockB)   --++  (3,0) node [above] {~} |- (remaining);
+    \path [line] (blockC)   --++  (3,0) node [above] {~} |- (remaining);
+    \path [line] (blockN)   --++  (3,0) node [above] {~} |- (remaining);
+
+%    \path [line] (b) -- (c);
+\end{tikzpicture}
+
+%\end{document}

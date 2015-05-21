@@ -1,0 +1,12 @@
+\begin{Verbatim}[commandchars=\\\{\},codes={\catcode`\$=3\catcode`\^=7\catcode`\_=8}]
+\PYGdefault{c+cp}{\PYGdefaultZlt{}?php}
+
+\PYGdefault{l+s+sd}{/**}
+\PYGdefault{l+s+sd}{ * This program converts Fahrenheit temperatures to}
+\PYGdefault{l+s+sd}{ * Celsius}
+\PYGdefault{l+s+sd}{ */}
+
+\PYGdefault{c+c1}{//TODO: implement this}
+
+\PYGdefault{c+cp}{?\PYGdefaultZgt{}}
+\end{Verbatim}

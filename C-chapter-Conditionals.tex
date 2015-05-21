@@ -1,0 +1,572 @@
+%!TEX root = ComputerScienceOne.tex
+
+%%Chapter: C Conditionals
+
+C supports the basic if, if-else, and if-else-if conditional structures as well as switch
+statements.  Logical statements are built using the standard logical operators for
+numeric comparisons as well as logical operators such as negations, \And, and 
+\Or.  However, there are a few idiosyncrasies that need to be understood.
+
+\section{Logical Operators}
+
+C has no built-in Boolean type, nor does it have any keywords 
+associated with \True and \False.  Instead, C uses numeric types as implicit 
+Boolean types with the convention that zero is associated with \False and 
+\emph{any} non-zero value is associated with \True.  So the values $1$, $2.5$, 
+and even negatives, $-1$, $-123.2421$, etc. are all interpreted as \True when
+used in logical statements.  
+
+The standard numeric comparison operators are also supported.  Consider the 
+following code snippet:
+
+\begin{minted}{c}
+int a = 10;
+int b = 20;
+int c = 10;
+int d = 0;
+\end{minted}
+
+The six standard comparison operators are presented in Table \ref{table:c:comparisonOperators}
+using these variables as examples.  The comparison operators are the same when
+used with \mintinline{c}{double} types as well and \mintinline{c}{int} types and 
+\mintinline{c}{double} types can be compared with each other without type casting.
+
+\begin{table}
+\centering
+\begin{tabular}{l|l|l|l}
+Name & Operator Syntax & Examples  & Value \\
+\hline\hline
+Equals & \mintinline{c}{==} & 
+	\mintinline{c}{a == 10} & \True \\
+~ & ~ & \mintinline{c}{b == 10} & \False \\
+~ & ~ & \mintinline{c}{a == b} & \False \\
+~ & ~ & \mintinline{c}{a == c} & \True \\
+\hline	
+Not Equals & \mintinline{c}{!=} & 
+	\mintinline{c}{a != 10} & \False \\
+~ & ~ & \mintinline{c}{b != 10} & \True \\
+~ & ~ & \mintinline{c}{a != b} & \True \\
+~ & ~ & \mintinline{c}{a != c} & \False \\
+\hline	
+Strictly Less Than & \mintinline{c}{<} & 
+	\mintinline{c}{a < 15} & \True \\
+~ & ~ & \mintinline{c}{a < 5} & \False \\
+~ & ~ & \mintinline{c}{a < b} & \True \\
+~ & ~ & \mintinline{c}{a < c} & \False \\
+\hline
+Less Than Or Equal To & \mintinline{c}{<=} & 
+	\mintinline{c}{a <= 15} & \True \\
+~ & ~ & \mintinline{c}{a <= 5} & \False \\
+~ & ~ & \mintinline{c}{a <= b} & \True \\
+~ & ~ & \mintinline{c}{a <= c} & \True \\
+\hline
+Strictly Greater Than & \mintinline{c}{>} & 
+	\mintinline{c}{a > 15} & \False \\
+~ & ~ & \mintinline{c}{a > 5} & \True \\
+~ & ~ & \mintinline{c}{a > b} & \False \\
+~ & ~ & \mintinline{c}{a > c} & \False \\
+\hline
+Greater Than Or Equal To & \mintinline{c}{>=} & 
+	\mintinline{c}{a >= 15} & \False \\
+~ & ~ & \mintinline{c}{a >= 5} & \True \\
+~ & ~ & \mintinline{c}{a >= b} & \False \\
+~ & ~ & \mintinline{c}{a >= c} & \True \\
+\hline	
+\end{tabular}
+\caption{Comparison Operators in C}
+\label{table:c:comparisonOperators}
+\end{table}
+
+The three basic logical operators are also supported as described in 
+Table \ref{table:c:logicOperators} using the same code snippet variable
+values as examples.
+
+\begin{table}
+\centering
+\begin{tabular}{l|l|l|l}
+Operator & Operator Syntax & Examples & Values \\
+\hline\hline
+Negation & \mintinline{c}{!} & 
+	\mintinline{c}{!a} & \False \\
+~ & ~ & \mintinline{c}{!d} & \True \\
+\hline
+\And & \mintinline{c}{&&} & 
+	\mintinline{c}{a && b} & \True \\
+~ & ~ & \mintinline{c}{a && d} & \False \\
+\hline
+\Or & \mintinline{c}{||} & 
+	\mintinline{c}{a || b} & \False \\
+~ & ~ & \mintinline{c}{a || d} & \True \\
+\end{tabular}
+\caption{Logical Operators in C}
+\label{table:c:logicOperators}
+\end{table}
+
+\subsection{Order of Precedence}
+
+At this point it is worth summarizing the order of precedence of all the 
+operators that we've seen so far including assignment, arithmetic, 
+comparison, and logical.  Since all of these operators could be used
+in one statement, for example, 
+
+\mintinline{c}{(b*b < 4*a*c || a == 0 || argc != 4)}
+
+it is important to understand the order in which each one gets evaluated.
+Table \ref{table:c:operatorPrecedence} summarizes the order of precedence
+for the operators seen so far.  This is not an exhaustive list of C operators.
+
+\begin{table}
+\centering
+\begin{tabular}{l|l|l|p{7cm}}
+~ & Operator(s) & Associativity & Notes \\
+\hline\hline
+Highest & \mintinline{c}{++}, \mintinline{c}{--} & left-to-right & increment operators\\
+~ & \mintinline{c}{-},  \mintinline{c}{!} & right-to-left & unary negation operator, logical not\\
+~ & \mintinline{c}{*},  \mintinline{c}{/}, \mintinline{c}{%} & left-to-right & ~\\
+~ & \mintinline{c}{+},  \mintinline{c}{-} & left-to-right & addition, subtraction\\
+~ & \mintinline{c}{<},  \mintinline{c}{<=}, \mintinline{c}{>}, \mintinline{c}{>=} & left-to-right & comparison \\
+~ & \mintinline{c}{==},  \mintinline{c}{!=} & left-to-right & equality, inequality \\
+~ & \mintinline{c}{&&} & left-to-right & logical \And \\
+~ & \mintinline{c}{||}  & left-to-right & logical \Or \\
+Lowest & \mintinline{c}{=}, \mintinline{c}{+=}, \mintinline{c}{-=}, \mintinline{c}{*=}, \mintinline{c}{/=}  & right-to-left & assignment and compound assignment operators \\
+\end{tabular}
+\caption[Operator Order of Precedence in C]{Operator Order of Precedence in C.
+Operators on the same level have equivalent order and are performed in the associative
+order specified.}
+\label{table:c:operatorPrecedence}
+\end{table}
+
+\subsection{Comparing Strings and Characters}
+
+The comparison operators in Table \ref{table:c:comparisonOperators} can also be used
+for \emph{single characters} because of the nature of the ASCII text table (see Table \ref{table:asciiTable}).
+Each alphanumeric character, including the various symbols and whitespace characters, 
+is associated with an integer 0--127.  We can therefore write statements like \mintinline{c}{('A' < 'a')}, 
+which is \True since uppercase letters are ordered before lowercase letters in the ASCII
+table (\mintinline{c}{('A'} is 65 and \mintinline{c}{('a'} is 97 and so $65 < 97$ is \True).
+Several more examples can be found in Table \ref{table:c:asciiComparisonExamples}.
+
+\begin{table}[h]
+\centering
+\begin{tabular}{c|l}
+Comparison Example & Result \\
+\hline\hline
+\mintinline{c}{('A' < 'a')} & \True \\ 
+\mintinline{c}{('A' == 'a')} & \False \\ 
+\mintinline{c}{('A' < 'Z')} & \True \\ 
+\mintinline{c}{('0' < '9')} & \True \\ 
+\mintinline{c}{('\n' < 'A')} & \True \\ 
+\mintinline{c}{(' ' < '\n')} & \False \\ 
+\end{tabular}
+\caption{Character comparisons in C}
+\label{table:c:asciiComparisonExamples}
+\end{table}
+
+Numeric comparison operators \emph{cannot} be used to compare strings in C.  For example,
+if we could write \mintinline{c}{("aardvark" < "zebra")} which would be valid C, and it would 
+even have a result.  However, that result wouldn't necessarily be \True or \False.  The reason
+for this is that strings in C are actually represented as arrays, which in turn are represented
+as \emph{memory locations}.  We'll explore these issues in greater depth later on, but for
+now understand that you can write this code, it will compile, and it will even run.  However,
+the results will not be as expected.
+
+\section{If, If-Else, If-Else-If Statements}
+
+Conditional statements in C utilize the key words \mintinline{c}{if}, \mintinline{c}{else}, and
+\mintinline{c}{else if}.  Conditions are placed inside parentheses immediately after the 
+\mintinline{c}{if} and \mintinline{c}{else if} keywords.  Examples of all three can be 
+found in Code Sample \ref{code:c:conditionalExamples}.
+
+\begin{listing}
+\begin{minted}{c}
+//example of an if statement:
+if(x < 10) {
+  printf("x is less than 10\n");
+}
+
+//example of an if-else statement:
+if(x < 10) {
+  printf("x is less than 10\n");
+} else {
+  printf("x is 10 or more \n");
+}
+
+//example of an if-else-if statement:
+if(x < 10) {
+  printf("x is less than 10\n");
+} else if(x == 10) {
+  printf("x is equal to ten\n");
+} else {
+  printf("x is greater than 10\n");
+}
+\end{minted}
+\caption{Examples of Conditional Statements in C}
+\label{code:c:conditionalExamples}
+\end{listing}
+
+Some observations about the syntax: the statement, \mintinline{c}{if(x < 10)}
+does not have a semicolon at the end.  This is because it is a conditional statement
+that determines the flow of control and \emph{not} an executable statement.  
+Therefore, no semicolon is used.  Suppose we made a mistake and \emph{did}
+include a semicolon:
+
+\begin{minted}{c}
+int x = 15;
+if(x < 10); {
+  printf("x is less than 10\n");
+}
+\end{minted}
+
+Some compilers may give a warning, but this is valid C; it will compile and it 
+will run.  However, it will end up printing \mintinline{c}{x is less than 10}, even
+though $x = 15$!  Recall that a conditional statement \emph{binds} to the 
+executable statement or code block \emph{immediately} following it.  In this
+case, we've provided an \emph{empty} executable statement ended by the
+semicolon.  The code is essentially equivalent to 
+
+\begin{minted}{c}
+int x = 15;
+if(x < 10) {
+}
+printf("x is less than 10\n");
+\end{minted}
+
+Which is obviously not what we wanted.  The semicolon ended up binding 
+to the empty executable statement, and the code block containing the
+print statement immediately followed, but was \emph{not} bound to the
+conditional statement which is why the print statement executed regardless
+of the value of $x$.
+
+Another convention that we've used in our code is where we have placed the
+curly brackets.  First, if a conditional statement is bound to only one statement, 
+the curly brackets are not necessary.  However, it is best practice to include them
+even if they are not necessary and we'll follow this convention.  Second, the
+opening curly bracket is on the same line as the conditional statement while
+the closing curly bracket is indented to the same level as the start of the
+conditional statement.  Moreover, the code inside the code block is indented.
+If there were more statements in the block, they would have all been at the
+same indentation level.
+
+%\section{Switch statements}
+%
+%TODO: should we actually do this?
+%
+%C also supports switch statements, but only for integer types.  The usual
+%syntax applies as do the fall-through rules.  Switch statements also work 
+%on \mintinline{c}{char} types since in C, they can be treated as integers
+%according to the ASCII text table.
+%
+%\begin{listing}[H]
+%\begin{minted}{c}
+%int x;
+%...
+%switch(x) {
+%  case 0: 
+%    printf("x is zero\n");
+%    break;
+%  case 1:
+%  case 2:
+%    printf("x is one or 2\n");
+%    break;
+%  case 3:
+%    printf("x is 3\n");
+%    break;
+%  case 10:
+%    printf("x is 10\n");
+%    break;
+%  default:
+%    printf("x is not 0, 1, 2, 3, nor 10\n");
+%    break;
+%}
+%\end{minted}
+%\caption{Switch Statement in C}
+%\label{code:c:switchStatement}
+%\end{listing}
+%
+%TODO: more here?
+
+\section{Examples}
+
+\subsection{Computing a Logarithm}
+
+The logarithm of $x$ is the exponent that some \emph{base} must 
+be raised to get $x$.  The most common logarithm is the natural logarithm, 
+$\ln{(x)}$ which is base $e = 2.71828\ldots$.  But logarithms can be in any base 
+$b > 1$\footnote{Bases can also be $0< b < 1$, but we'll restrict our attention to
+increasing functions only.}  What if we wanted to compute $\log_2{(x)}$?  
+Or $\log_{\pi}{(x)}$?  Let's write a program that will prompt the user for a
+number $x$ and a base $b$ and computes $\log_b{(x)}$.
+
+Arbitrary bases can be computed using the change of base formula: 
+  $$\log_b(x) = \frac{\log_a{(x)}}{\log_a{(b)}}$$
+If we can compute \emph{some} base $a$, then we can compute any base 
+$b$.  Fortunately we have such a solution.  Recall that the standard library 
+provides a function to compute the natural logarithm, \mintinline{c}{log()}).
+This is one of the fundamentals of problems solving: if a solution already 
+exists, use it.  In this case, a solution exists for a different, but similar problem
+(computing the natural logarithm), but we can \emph{adapt} the solution 
+using the change of base formula.  In particular, if we have variables 
+\mintinline{c}{b} (base) and \mintinline{c}{x}, we can compute $\log_b{(x)}$ using
+
+  \mintinline{c}{log(x) / log(b)}
+  
+But wait: we have a problem similar to the examples in the previous section.  
+The user could enter invalid values such as $b = -10$ or $x = -2.54$ 
+(logarithms are undefined for non-positive values in any base).  We want
+to ensure that $b > 1$ and $x > 0$.  With conditionals, we can now do this.  
+Once we have read in the input from the user we can make a check for
+good input using an \mintinline{c}{if} statement.
+
+\begin{minted}{c}
+if(x <= 0 || b <= 1) {
+  printf("Error: bad input!\n");
+  exit(1);
+}
+\end{minted}
+
+This code has something new: \mintinline{c}{exit(1)}.  The \mintinline{c}{exit}
+function immediately terminates the program regardless of the rest of the
+code that may remain.  The argument passed to \mintinline{c}{exit} is an 
+integer that represents an \emph{error code}.  The convention is that 
+zero indicates ``no error'' while non-zero values indicate some error.  This
+is a simple way of performing \emph{error handling}: if the user provides
+bad input, we inform them and quit the program, forcing them to run it
+again and provide good input.  By prematurely terminating the program
+we avoid any illegal operation that would give a bad result.
+
+Alternatively, we could have split the conditions into two statements and given
+a more descriptive error message.  We use this design in the full program 
+which can be found in Code Sample \ref{code:c:logarithmProgram}.  The 
+program also takes the input as command line arguments.  Now that we have
+conditionals, we can actually check that the correct number of arguments
+was provided by the user and quit in the event that they don't provide
+the correct number.
+
+\begin{listing}[h]
+\begin{minted}{c}
+#include<stdlib.h>
+#include<stdio.h>
+#include<math.h>
+
+/**
+ * This program computes the logarithm base b (b > 1) 
+ * of a given number x > 0
+ */
+int main(int argc, char **argv) {
+
+  double b, x, result;
+  if(argc != 3) {
+    printf("Usage: %s b x \n", argv[0]);
+    exit(1);
+  }  
+  
+  b = atof(argv[1]);
+  x = atof(argv[2]);
+
+  if(x <= 0) {
+    printf("Error: x must be greater than zero\n");
+    exit(1);
+  }
+  if(b <= 1) {
+    printf("Error: base must be greater than one\n");
+    exit(1);
+  }
+
+  result = log(x) / log(b);
+  printf("log_(%f)(%f) = %f\n", b, x, result);
+  return 0;
+}
+\end{minted}
+\caption{Logarithm Calculator Program in C}
+\label{code:c:logarithmProgram}
+\end{listing}
+
+\subsection{Life \& Taxes}
+
+Let's adapt the conditional statements we developed in Section \ref{subsubsection:lifeAndTaxes}
+into a full C program.  The first thing we need to do is establish the variables we'll need and
+read them in from the user.  At the same time we can check for bad input (negative values)
+for both the inputs.
+
+\begin{minted}{c}
+double income, tax, numChildren, credit;
+
+printf("Please enter your Adjusted Gross Income: ");
+scanf("%lf", &income);
+
+printf("How many children do you have?");
+scanf("%d", &numChildren);
+
+if(income < 0 || numChildren < 0) {
+  printf("Invalid inputs");   
+  exit(1);
+}
+\end{minted}
+
+Next, we can code a series of if-else-if statements for the income range.  By
+placing the ranges in increasing order, we only need to check the upper bounds
+just as in the original example.
+
+\begin{minted}{c}
+  if(income <= 18150) {
+    baseTax = income * .10;
+  } else if(income <= 73800) {
+    baseTax = 1815 + (income - 18150) * .15;
+  } else if(income <= 148850) {
+  ...  
+  } else {
+    baseTax = 127962.50 + (income - 457600) * .396;
+  }
+\end{minted}
+
+Next we compute the child tax credit, taking care that it does
+not exceed \$3,000.  A conditional based on the number of children
+should suffice as at this point in the program we already know it is
+zero or greater.
+
+\begin{minted}{c}
+  if(numChildren <= 3) {
+    credit = numChildren * 1000;
+  } else {
+    credit = 3000;
+  }
+\end{minted}
+
+Finally, we need to ensure that the credit does not exceed the total tax
+liability (the credit is non-refundable, so if the credit is greater, the tax
+should only be zero, not negative).  
+
+\begin{minted}{c}
+  if(baseTax - credit >= 0) {
+    totalTax = baseTax - credit;
+  } else {
+    totalTax = 0;
+  }
+\end{minted}
+
+The full program is presented in Code Sample \ref{code:c:taxProgram}.
+
+\begin{listing}[h]
+\begin{minted}[fontsize=\footnotesize]{c}
+#include<stdlib.h>
+#include<stdio.h>
+
+int main(int argc, char **argv) {
+
+  double income, baseTax, credit, totalTax;
+  int numChildren;
+
+  //prompt for income from the user
+  printf("Please enter your Adjusted Gross Income: ");
+  scanf("%lf", &income);
+
+  //prompt for children
+  printf("How many children do you have?");
+  scanf("%d", &numChildren);
+
+  if(income < 0 || numChildren < 0) {
+    printf("Invalid inputs");
+    exit(1);
+  }
+
+  if(income <= 18150) {
+    baseTax = income * .10;
+  } else if(income <= 73800) {
+    baseTax = 1815 + (income  -18150) * .15;
+  } else if(income <= 148850) {
+    baseTax = 10162.50 + (income - 73800) * .25;
+  } else if(income <= 225850) {
+    baseTax = 28925.00 + (income - 148850) * .28;
+  } else if(income <= 405100) {
+    baseTax = 50765.00 + (income - 225850) * .33;
+  } else if(income <= 457600) {
+    baseTax = 109587.50 + (income - 405100) * .35;
+  } else {
+    baseTax = 127962.50 + (income - 457600) * .396;
+  }
+
+  if(numChildren <= 3) {
+    credit = numChildren * 1000;
+  } else {
+    credit = 3000;
+  }
+
+  if(baseTax - credit >= 0) {
+    totalTax = baseTax - credit;
+  } else {
+    totalTax = 0;
+  }
+
+  printf("AGI:           $%10.2f\n", income);
+  printf("Tax:           $%10.2f\n", baseTax);
+  printf("Credit:        $%10.2f\n", credit);
+  printf("Tax Liability: $%10.2f\n", totalTax);
+
+  return 0;
+}
+\end{minted}
+\caption{Tax Program in C}
+\label{code:c:taxProgram}
+\end{listing}
+
+\subsection{Quadratic Roots Revisited}
+
+Let's return to the quadratic roots program we previously designed that uses
+the quadratic equation to compute the roots of a quadratic polynomial by reading
+coefficients $a, b, c$ in from the user.  One of the problems we had previously 
+identified is if the user enters ``bad'' input: if $a = 0$, we would end up dividing
+by zero; if $b^2-4ac < 0$ then we would have complex roots.  With conditionals, 
+we can now check for these issues and exit with an error message.  
+
+Another potential case we might want to handle differently is when there is only
+one distinct root ($b^2 - 4ac = 0$).  In that case, the quadratic formula simplifies 
+to $\frac{-b}{2a}$ and we can print a different, more specific message to the user.
+The full program can be found in Code Sample \ref{code:c:quadraticRootsProgramWithErrorChecking}.
+
+
+\begin{listing}[h]
+\begin{minted}{c}
+#include<stdlib.h>
+#include<stdio.h>
+#include<math.h>
+
+/**
+ * This program computes the roots to a quadratic equation
+ * using the quadratic formula.
+ */
+int main(int argc, char **argv) {
+
+  double a, b, c, root1, root2;
+
+  if(argc !=4) {
+    printf("Usage: %s a b c\n", argv[0]);
+    exit(1);
+  }
+
+  a = atof(argv[1]);
+  b = atof(argv[2]);
+  c = atof(argv[3]);
+  
+  if(a == 0) {
+    printf("Error: a cannot be zero\n");
+    exit(1);
+  } else if(b*b < 4*a*c) {
+    printf("Error: cannot handle complex roots\n");
+    exit(1);
+  } else if(b*b == 4*a*c) {
+    root1 = -b / (2*a);
+    printf("Only one distinct root: %f\n", root1);
+  } else {
+    root1 = (-b + sqrt(b*b - 4*a*c) ) / (2*a);
+    root2 = (-b - sqrt(b*b - 4*a*c) ) / (2*a);
+  
+    printf("The roots of %fx^2 + %fx + %f are: \n", a, b, c);
+    printf("  root1 = %f\n", root1);
+    printf("  root2 = %f\n", root2);
+  }
+    return 0;
+}
+\end{minted}
+\caption{Quadratic Roots Program in C With Error Checking}
+\label{code:c:quadraticRootsProgramWithErrorChecking}
+\end{listing}

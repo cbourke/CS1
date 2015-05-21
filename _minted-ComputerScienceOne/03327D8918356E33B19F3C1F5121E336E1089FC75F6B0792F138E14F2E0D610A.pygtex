@@ -1,0 +1,4 @@
+\begin{Verbatim}[commandchars=\\\{\},codes={\catcode`\$=3\catcode`\^=7\catcode`\_=8}]
+\PYGdefault{k+kt}{double} \PYGdefault{n}{monthlyPayment} \PYGdefault{o}{=} \PYGdefault{o}{(}\PYGdefault{n}{monthlyInterestRate} \PYGdefault{o}{*} \PYGdefault{n}{principle}\PYGdefault{o}{)} \PYGdefault{o}{/}
+  \PYGdefault{o}{(}\PYGdefault{l+m+mi}{1} \PYGdefault{o}{\PYGdefaultZhy{}} \PYGdefault{n}{pow}\PYGdefault{o}{(} \PYGdefault{o}{(}\PYGdefault{l+m+mi}{1} \PYGdefault{o}{+} \PYGdefault{n}{monthlyInterestRate}\PYGdefault{o}{),} \PYGdefault{o}{\PYGdefaultZhy{}}\PYGdefault{n}{n}\PYGdefault{o}{));}
+\end{Verbatim}

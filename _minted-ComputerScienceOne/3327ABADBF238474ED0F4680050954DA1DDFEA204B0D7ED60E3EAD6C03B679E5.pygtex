@@ -1,0 +1,5 @@
+\begin{Verbatim}[commandchars=\\\{\},codes={\catcode`\$=3\catcode`\^=7\catcode`\_=8}]
+\PYGdefault{n+nx}{int} \PYGdefault{n+nx}{a}\PYGdefault{p}{;}
+\PYGdefault{n+nb}{printf}\PYGdefault{p}{(}\PYGdefault{l+s+s2}{\PYGdefaultZdq{}Please enter a number: \PYGdefaultZdq{}}\PYGdefault{p}{);}
+\PYGdefault{n+nx}{scanf}\PYGdefault{p}{(}\PYGdefault{l+s+s2}{\PYGdefaultZdq{}\PYGdefaultZpc{}d\PYGdefaultZdq{}}\PYGdefault{p}{,} \PYGdefault{o}{\PYGdefaultZam{}}\PYGdefault{n+nx}{a}\PYGdefault{p}{);}
+\end{Verbatim}

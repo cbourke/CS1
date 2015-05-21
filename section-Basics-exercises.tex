@@ -1,0 +1,291 @@
+%!TEX root = ComputerScienceOne.tex
+
+%Basic I/O - exercises
+
+\section{Exercises}
+
+%\begin{exer}
+%Write a program to convert a temperature in degrees Fahrenheit 
+%($f$) to degrees Celsius ($c$), using the equation
+%  $$c = \frac{5}{9}\Big(f - 32\Big)$$
+%\end{exer}
+
+\begin{exer}
+Write a program that calculates mileage deduction for income tax using the
+standard rate of \$0.575 per mile.  Your program will read in a beginning
+and ending odometer reading and calculate the difference and total 
+deduction.  Take care that your output is in whole cents.  An example run
+of the program may look like the following.
+
+\begin{minted}{text}
+INCOME TAX MILEAGE CALCULATOR
+Enter beginning odometer reading--> 13505.2
+Enter ending odometer reading--> 13810.6
+You traveled 305.4 miles.  At $.575 per mile,
+your reimbursement is $175.61
+\end{minted}
+\end{exer}
+
+\begin{exer}
+Write a program to compute the total ``cost'' $C$ of a loan.  That is, the total amount of interest paid over
+the life of a loan.  To compute this value, use the following formula.
+$$C = \frac{p\cdot i \cdot \left(1 + i\right)^{12n}}{(1+i)^{12n} - 1} * 12n - p$$
+where
+\begin{itemize}
+  \item $p$ is the starting principle amount
+  \item $i = \frac{r}{12}$ where $r$ is the APR on the interval $[0, 1]$
+  \item $n$ is the number of years the loan is to be paid back
+\end{itemize}
+\end{exer}
+
+\begin{exer}
+Write a program to compute the annualized appreciation of an asset (say a house).  The program
+should read in a purchase price $p$, a sale price $s$ and compute their difference $d = s - p$ 
+(it should support a loss or gain).  Then, it should compute an appreciation rate: $r = \frac{d}{p}$ along
+with an (average) \emph{annualized appreciation rate} (that is, what was the appreciation rate in each
+year that the asset was held that compounded ):
+$$(1 + r)^{\frac{1}{y}}-1$$
+Where $y$ is the number of years (possibly fractional) the asset was held (and $r$ is on the 
+scale $[0, 1]$).
+\end{exer}
+
+\begin{exer}
+The annual percentage yield (APY) is a much more accurate measure of the true cost of a 
+loan or savings account that compounds interest on a monthly or daily basis.  For a large enough 
+number of compounding periods, it can be calculated as:
+ $$APY = e^{i} - 1$$
+where $i$ is the nominal interest rate ($6\% = 0.06$).  Write a program that prompts the user 
+for the nominal interest rate and outputs the APY.
+\end{exer}
+
+\begin{exer}
+Write a program that calculates the speed of sound ($v$, feet-per-second) in the 
+air of a given temperature $T$ (in Fahrenheit). Use the formula,
+ $$v = 1086 \sqrt{\frac{5T + 297}{247}}$$
+Be sure your program does not lose the fractional part of the quotient
+in the formula shown and format the output to three decimal places.
+\end{exer}
+
+\begin{exer}
+\label{exercise:radiansToDegree}
+Write a program to convert from radians to degrees using the formula
+  $$deg = \frac{180\cdot rad}{\pi}$$
+However, radians are on the scale $[0, 2\pi)$.  After reading input
+from the user be sure to do some error checking and give an error
+message if their input is invalid.
+\end{exer}
+
+\begin{exer}
+Write a program to compute the Euclidean Distance between two points, 
+$(x_1, y_2)$ and $(x_2, y_2)$ using the formulate:
+$$\sqrt{(x_1-x_2)^2+(y_1-y_2)^2}$$
+\end{exer}
+
+\begin{exer}
+Write a program that will compute the value of $\sin(x)$ using the first 4 terms of 
+the Taylor series:
+  $$\sin(x) \approx x - \frac{x^3}{3!} + \frac{x^5}{5!} - \frac{x^7}{7!}$$
+In addition, your program will compute the \emph{absolute} difference between this 
+calculation and a standard implementation of the sine function supported in
+your language.  Your program should prompt the user for an
+input value $x$ and display the appropriate output.  Your output should looks \emph{something}
+like the following.
+
+\begin{minted}{text}
+Sine Approximation
+===================
+Enter x: 1.15
+Sine approximation: 0.912754
+Sine value:         0.912764
+Difference:         0.000010
+\end{minted}
+\end{exer}
+
+\begin{exer}
+Write a program to compute the roots of a quadratic equation:
+  $$ax^2 + bx + c = 0$$
+using the well-known quadratic formula:
+  $$\frac{-b \pm \sqrt{b^2 - 4ac}}{2a}$$
+Your program will prompt the user for the values, $a, b, c$ and output each real root.
+However, for ``invalid'' input ($a = 0$ or values that would result in complex roots), the
+program will instead output a message that informs the user why that the inputs are invalid
+(with a specific reason).
+\end{exer}
+
+\begin{exer}
+One of Ohm's laws can be used to calculate the amount of \emph{power} 
+in Watts (the rate of energy conversion; 1 joule per second) in terms of Amps (a measure of current, 1 amp = $6.241 \times 10^{18}$ 
+electrons per second) and Ohms (a measure of electrical resistance).  Specifically:
+  $$W = A^2 \cdot O$$
+Develop a simple program to read in two of the terms from the user and output the third.
+\end{exer}
+
+\begin{exer}
+Ohm's Law models the current through a conductor as follows:
+ $$I = \frac{V}{R}$$
+where $V$ is the voltage (in volts), $R$ is the resistance (in Ohms) and $I$ is the
+current (in amps).  Write a program that, given two of these values computes the
+third using Ohm's Law.
+
+The program should work as follows: it prompts the user for units of the first value: the user
+should be prompted to enter \texttt{V}, \texttt{R}, or \texttt{I} and should then be
+prompted for the value.  It should then prompt for the second unit (same options) and then
+the value.  The program will then output the third value depending on the input.  An example
+run of the program:
+
+\begin{minted}{text}
+Current Calculator
+==============
+Enter the first unit type (V, R, I): V
+Enter the voltage: 25.75
+Enter the second unit type (V, R, I): I
+Enter the current: 72
+The corresponding resistance is 0.358 Ohms
+\end{minted}
+\end{exer}
+
+\begin{exer}
+Consider the following linear system of equations in two unknowns:
+$$\begin{array}{rcl}
+  ax + by & = & c \\
+  dx + ey & = & f 
+\end{array}$$
+Write a program that prompts the user for the coefficients in such a system (prompt for $a, b, c, d, e, f$).  Then 
+output a solution to the system (the values for $x, y$).  Take care to handle situations in which
+the system is \emph{inconsistent}.
+\end{exer}
+
+\begin{exer}
+The surface area of a sphere of radius $r$ is
+  $$4\pi r^2$$
+and the volume of a sphere with radius $r$ is 
+  $$\frac{4}{3}\pi r^3$$
+Write a program that prompts the user for a radius $r$ and outputs the surface area and volume of 
+the corresponding sphere.  If the radius entered is invalid, print an error message and exit.  Your
+output should look something like the following.
+
+\begin{minted}{text}
+Sphere Statistics
+=================
+Enter radius r: 2.5
+area: 78.539816
+volume: 65.449847
+\end{minted}
+\end{exer}
+
+\begin{exer}
+Write a program that prompts for the latitude and longitude of two locations (an origin and a 
+destination) on the globe.  These numbers are in the range $[-180, 180]$ (negative values 
+correspond to the western and southern hemispheres).  Your program should then compute 
+the air distance between the two points using the Spherical Law of Cosines.  In particular, 
+the distance $d$ is
+ $$d = \arccos{(\sin(\varphi_1) \sin(\varphi_2) + \cos(\varphi_1) \cos(\varphi_2) \cos(\Delta) )} \cdot R$$
+\begin{itemize}
+  \item $\varphi_1$ is the latitude of location $A$, $\varphi_2$ is the latitude of location $B$
+  \item $\Delta$ is the difference between location $B$'s longitude and location $A$'s longitude
+  \item $R$ is the (average) radius of the earth, 6,371 kilometers
+\end{itemize}
+Note: the formula above assumes that latitude and longitude are measured in radians $r$, $-\pi \leq r \leq \pi$.  
+See Exercise \ref{exercise:radiansToDegree} for how to convert between them.  Your program output should 
+look something like the following.  
+
+\begin{minted}{text}
+City Distance
+========================
+Enter latitude of origin: 41.9483
+Enter longitude of origin: -87.6556
+Enter latitude of destination: 40.8206
+Enter longitude of destination: -96.7056
+Air distance is 764.990931
+\end{minted}
+
+\end{exer}
+
+\begin{exer}
+Write a program that prompts the user to enter in a number of days.  Your program should
+then compute the number of years, weeks, and days that number represents.  For this 
+exercise, ignore leap years (thus all years are 365 days). Your output should look something 
+like the following.
+
+\begin{minted}{text}
+Day Converter
+=============
+Enter number of days: 1000
+That is 
+  2 years
+  38 weeks
+  4 days
+\end{minted}
+\end{exer}
+
+\begin{exer}
+The derivative of a function $f(x)$ can be estimated using the difference function:
+  $$f'(x) \approx \frac{f(x+\Delta x) - f(x)}{\Delta x}$$
+That is, this gives us an estimate of the slope of the tangent line at the point $x$.  
+Write a program that prompts the user for an $x$ value and a $\Delta x$ value and 
+outputs the value of the difference function for all three of the following functions:
+  $$\begin{array}{rcl}
+  	f(x) & = & x^2 \\
+	f(x) & = & \sin(x) \\
+	f(x) & = & \ln(x)
+    \end{array}$$
+Your output should looks something like the following.
+
+\begin{minted}{text}
+Derivative Approximation
+===================
+Enter x: 2
+Enter delta-x: 0.1
+(x^2)'  ~= 4.100000
+sin'(x) ~= -0.460881
+ln'x(x) ~= 0.487902
+\end{minted}
+
+In addition, your program should check for invalid inputs: $\Delta x$ cannot be zero, and $\ln(x)$ is undefined
+for $x \leq 0$.  If given invalid inputs, appropriate error message(s) should be output instead.
+\end{exer}
+
+\begin{exer}
+Write a program that prompts the user to enter two points in the plane, $(x_1, y_1)$ 
+and $(x_2, y_2)$ which define a line segment $\ell$.  Your program should then compute 
+and output an equation for the perpendicular line intersecting the \emph{midpoint} of $\ell$.  
+You should take care that invalid inputs (horizontal or vertical lines) are handled appropriately.
+An example run of your program would look something like the following.
+
+\begin{minted}{text}
+Perpendicular Line
+====================
+Enter x1: 2.5
+Enter y1: 10
+Enter x2: 3.5
+Enter y2: 11
+Original Line: 
+  y = 1.0000 x + 7.5000
+Perpendicular Line: 
+  y = -1.0000 x + 13.5000
+\end{minted}
+\end{exer}
+
+\begin{exer}
+Write a program that computes the total for a bill.  The program should prompt the user for a 
+sub-total.  It should then prompt whether or not the customer is entitled to an employee discount (of 15\%) by 
+having them enter 1 for yes, 2 for no.  It should then compute the new sub-total and apply a 7.35\% sales tax, and
+print the receipt details along with the grand total.  Take care that you properly round each operation.
+
+An example run of the program should look something like the following.
+
+\begin{minted}{text}
+Please enter a sub-total: 100
+Apply employee discount (1=yes, 2=no)? 1
+
+Receipt
+========================
+Sub-Total   $  100.00
+Discount    $   15.00
+Taxes       $    6.25
+Total       $   91.25
+\end{minted}
+\end{exer}
+
+
+

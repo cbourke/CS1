@@ -1,0 +1,11 @@
+\begin{Verbatim}[commandchars=\\\{\},codes={\catcode`\$=3\catcode`\^=7\catcode`\_=8}]
+a=4567
+a=4567
+a=4567
+a=    4567
+b=3.141593
+b=  3.141593
+b=3.14
+b=     3.142
+b=   3.141592653590000
+\end{Verbatim}

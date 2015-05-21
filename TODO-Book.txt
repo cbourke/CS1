@@ -1,0 +1,10 @@
+
+
+155 Book
+ -transfer word notes
+ -gather exercises
+ -Exercise ideas: http://www.dreamincode.net/forums/topic/78802-martyr2s-mega-project-ideas-list/
+  Leenkiat:
+   http://cse.unl.edu/~lksoh/Classes/CSCE155N_Spring13/homeworks.html
+   http://cse.unl.edu/~lksoh/Classes/CSCE155N_Fall12/homeworks.html
+

@@ -1,0 +1,16 @@
+\begin{tikzpicture}[node distance = 4cm,auto,scale=1.0,transform shape]
+    % Place nodes
+    %\node[draw=none] (start) {};
+    %\node [decision, below of=start,node distance=2cm] (decide) {Decision Node};
+    \draw[white] (0,2)  -- (0,-2);
+    \draw[white] (2,0)  -- (-2,0);
+    \node [block] (a) {Control to Perform};
+    %\node [block, below of=decide] (b) {Code Block $B$};
+    %\node[block,below of=b] (c) {Remaining Program};
+    % Draw edges
+    %\path [line] (start) -- (decide);
+    %\path [line] (decide) -- node {true}(a);
+    %\path [line] (decide) -- node {false}(b);
+    %\path [line] (a) |- (c);
+    %\path [line] (b) -- (c);
+\end{tikzpicture}

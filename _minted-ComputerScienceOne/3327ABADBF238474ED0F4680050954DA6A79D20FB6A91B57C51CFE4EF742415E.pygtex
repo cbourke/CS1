@@ -1,0 +1,5 @@
+\begin{Verbatim}[commandchars=\\\{\},codes={\catcode`\$=3\catcode`\^=7\catcode`\_=8}]
+\PYGdefault{x}{int a;}
+\PYGdefault{x}{printf(\PYGdefaultZdq{}Please enter a number: \PYGdefaultZdq{});}
+\PYGdefault{x}{scanf(\PYGdefaultZdq{}\PYGdefaultZpc{}d\PYGdefaultZdq{}, \PYGdefaultZam{}a);}
+\end{Verbatim}

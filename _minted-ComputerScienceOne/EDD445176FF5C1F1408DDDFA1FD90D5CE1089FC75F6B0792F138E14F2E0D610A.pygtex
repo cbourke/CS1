@@ -1,0 +1,22 @@
+\begin{Verbatim}[commandchars=\\\{\},codes={\catcode`\$=3\catcode`\^=7\catcode`\_=8}]
+\PYGdefault{c+c1}{//example of an if statement:}
+\PYGdefault{k}{if}\PYGdefault{o}{(}\PYGdefault{n}{x} \PYGdefault{o}{\PYGdefaultZlt{}} \PYGdefault{l+m+mi}{10}\PYGdefault{o}{)} \PYGdefault{o}{\PYGdefaultZob{}}
+  \PYGdefault{n}{System}\PYGdefault{o}{.}\PYGdefault{n+na}{out}\PYGdefault{o}{.}\PYGdefault{n+na}{println}\PYGdefault{o}{(}\PYGdefault{l+s}{\PYGdefaultZdq{}x is less than 10\PYGdefaultZdq{}}\PYGdefault{o}{);}
+\PYGdefault{o}{\PYGdefaultZcb{}}
+
+\PYGdefault{c+c1}{//example of an if\PYGdefaultZhy{}else statement:}
+\PYGdefault{k}{if}\PYGdefault{o}{(}\PYGdefault{n}{x} \PYGdefault{o}{\PYGdefaultZlt{}} \PYGdefault{l+m+mi}{10}\PYGdefault{o}{)} \PYGdefault{o}{\PYGdefaultZob{}}
+  \PYGdefault{n}{System}\PYGdefault{o}{.}\PYGdefault{n+na}{out}\PYGdefault{o}{.}\PYGdefault{n+na}{println}\PYGdefault{o}{(}\PYGdefault{l+s}{\PYGdefaultZdq{}x is less than 10\PYGdefaultZdq{}}\PYGdefault{o}{);}
+\PYGdefault{o}{\PYGdefaultZcb{}} \PYGdefault{k}{else} \PYGdefault{o}{\PYGdefaultZob{}}
+  \PYGdefault{n}{System}\PYGdefault{o}{.}\PYGdefault{n+na}{out}\PYGdefault{o}{.}\PYGdefault{n+na}{println}\PYGdefault{o}{(}\PYGdefault{l+s}{\PYGdefaultZdq{}x is 10 or more\PYGdefaultZdq{}}\PYGdefault{o}{);}
+\PYGdefault{o}{\PYGdefaultZcb{}}
+
+\PYGdefault{c+c1}{//example of an if\PYGdefaultZhy{}else\PYGdefaultZhy{}if statement:}
+\PYGdefault{k}{if}\PYGdefault{o}{(}\PYGdefault{n}{x} \PYGdefault{o}{\PYGdefaultZlt{}} \PYGdefault{l+m+mi}{10}\PYGdefault{o}{)} \PYGdefault{o}{\PYGdefaultZob{}}
+  \PYGdefault{n}{System}\PYGdefault{o}{.}\PYGdefault{n+na}{out}\PYGdefault{o}{.}\PYGdefault{n+na}{println}\PYGdefault{o}{(}\PYGdefault{l+s}{\PYGdefaultZdq{}x is less than 10\PYGdefaultZdq{}}\PYGdefault{o}{);}
+\PYGdefault{o}{\PYGdefaultZcb{}} \PYGdefault{k}{else} \PYGdefault{k}{if}\PYGdefault{o}{(}\PYGdefault{n}{x} \PYGdefault{o}{==} \PYGdefault{l+m+mi}{10}\PYGdefault{o}{)} \PYGdefault{o}{\PYGdefaultZob{}}
+  \PYGdefault{n}{System}\PYGdefault{o}{.}\PYGdefault{n+na}{out}\PYGdefault{o}{.}\PYGdefault{n+na}{println}\PYGdefault{o}{(}\PYGdefault{l+s}{\PYGdefaultZdq{}x is equal to ten\PYGdefaultZdq{}}\PYGdefault{o}{);}
+\PYGdefault{o}{\PYGdefaultZcb{}} \PYGdefault{k}{else} \PYGdefault{o}{\PYGdefaultZob{}}
+  \PYGdefault{n}{System}\PYGdefault{o}{.}\PYGdefault{n+na}{out}\PYGdefault{o}{.}\PYGdefault{n+na}{println}\PYGdefault{o}{(}\PYGdefault{l+s}{\PYGdefaultZdq{}x is greater than 10\PYGdefaultZdq{}}\PYGdefault{o}{);}
+\PYGdefault{o}{\PYGdefaultZcb{}}
+\end{Verbatim}

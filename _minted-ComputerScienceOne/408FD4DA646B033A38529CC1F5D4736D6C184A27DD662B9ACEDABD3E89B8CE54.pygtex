@@ -1,0 +1,14 @@
+\begin{Verbatim}[commandchars=\\\{\},codes={\catcode`\$=3\catcode`\^=7\catcode`\_=8}]
+\PYGdefault{k+kt}{int} \PYGdefault{n}{a} \PYGdefault{o}{=} \PYGdefault{l+m+mi}{10}\PYGdefault{p}{;}
+\PYGdefault{n}{a} \PYGdefault{o}{+=} \PYGdefault{l+m+mi}{5}\PYGdefault{p}{;} \PYGdefault{c+c1}{//adds 5 to a}
+\PYGdefault{n}{a} \PYGdefault{o}{\PYGdefaultZhy{}=} \PYGdefault{l+m+mi}{3}\PYGdefault{p}{;} \PYGdefault{c+c1}{//subtracts 3 from a}
+\PYGdefault{n}{a} \PYGdefault{o}{*=} \PYGdefault{l+m+mi}{2}\PYGdefault{p}{;} \PYGdefault{c+c1}{//multiplies a by 2}
+\PYGdefault{n}{a} \PYGdefault{o}{/=} \PYGdefault{l+m+mi}{4}\PYGdefault{p}{;} \PYGdefault{c+c1}{//divides a by 4}
+
+\PYGdefault{c+c1}{//you can also use compound assignment operators with variables:}
+\PYGdefault{k+kt}{int} \PYGdefault{n}{b} \PYGdefault{o}{=} \PYGdefault{l+m+mi}{5}\PYGdefault{p}{;}
+\PYGdefault{n}{a} \PYGdefault{o}{+=} \PYGdefault{n}{b}\PYGdefault{p}{;} \PYGdefault{c+c1}{//adds the value stored in b to a}
+\PYGdefault{n}{a} \PYGdefault{o}{\PYGdefaultZhy{}=} \PYGdefault{n}{b}\PYGdefault{p}{;} \PYGdefault{c+c1}{//subtracts the value stored in b from a}
+\PYGdefault{n}{a} \PYGdefault{o}{*=} \PYGdefault{n}{b}\PYGdefault{p}{;} \PYGdefault{c+c1}{//multiplies a by b}
+\PYGdefault{n}{a} \PYGdefault{o}{/=} \PYGdefault{n}{b}\PYGdefault{p}{;} \PYGdefault{c+c1}{//divides a by b}
+\end{Verbatim}

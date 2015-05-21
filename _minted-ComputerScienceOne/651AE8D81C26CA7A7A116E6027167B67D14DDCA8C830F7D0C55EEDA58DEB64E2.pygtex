@@ -1,0 +1,32 @@
+\begin{Verbatim}[commandchars=\\\{\},codes={\catcode`\$=3\catcode`\^=7\catcode`\_=8}]
+\PYGdefault{k+kt}{int} \PYGdefault{n}{i}\PYGdefault{p}{;}
+\PYGdefault{k}{for}\PYGdefault{p}{(}\PYGdefault{n}{i}\PYGdefault{o}{=}\PYGdefault{l+m+mi}{1}\PYGdefault{p}{;} \PYGdefault{n}{i}\PYGdefault{o}{\PYGdefaultZlt{}=}\PYGdefault{l+m+mi}{10}\PYGdefault{p}{;} \PYGdefault{n}{i}\PYGdefault{o}{++}\PYGdefault{p}{)} \PYGdefault{p}{\PYGdefaultZob{}}
+  \PYGdefault{c+c1}{//perform some action}
+\PYGdefault{p}{\PYGdefaultZcb{}}
+  \PYGdefault{err}{\PYGdefaultZbs{}}\PYGdefault{n}{caption}\PYGdefault{p}{\PYGdefaultZob{}}\PYGdefault{n}{For} \PYGdefault{n}{Loop} \PYGdefault{n}{in} \PYGdefault{n}{C}\PYGdefault{p}{\PYGdefaultZcb{}}
+  \PYGdefault{err}{\PYGdefaultZbs{}}\PYGdefault{n}{label}\PYGdefault{p}{\PYGdefaultZob{}}\PYGdefault{n+nl}{code}\PYGdefault{p}{:}\PYGdefault{n+nl}{c}\PYGdefault{p}{:}\PYGdefault{n}{forLoop}\PYGdefault{p}{\PYGdefaultZcb{}}
+\PYGdefault{err}{\PYGdefaultZbs{}}\PYGdefault{n}{end}\PYGdefault{p}{\PYGdefaultZob{}}\PYGdefault{n}{listing}\PYGdefault{p}{\PYGdefaultZcb{}}
+
+\PYGdefault{err}{\PYGdefaultZbs{}}\PYGdefault{n}{begin}\PYGdefault{p}{\PYGdefaultZob{}}\PYGdefault{n}{listing}\PYGdefault{p}{\PYGdefaultZcb{}[}\PYGdefault{n}{H}\PYGdefault{p}{]}
+\PYGdefault{err}{\PYGdefaultZbs{}}\PYGdefault{n}{begin}\PYGdefault{p}{\PYGdefaultZob{}}\PYGdefault{n}{minted}\PYGdefault{p}{\PYGdefaultZcb{}\PYGdefaultZob{}}\PYGdefault{n}{c}\PYGdefault{p}{\PYGdefaultZcb{}}
+\PYGdefault{k+kt}{int} \PYGdefault{n}{i}\PYGdefault{p}{;}
+\PYGdefault{k+kt}{int} \PYGdefault{n}{sum} \PYGdefault{o}{=} \PYGdefault{l+m+mi}{0}\PYGdefault{p}{;}
+\PYGdefault{k}{for}\PYGdefault{p}{(}\PYGdefault{n}{i}\PYGdefault{o}{=}\PYGdefault{l+m+mi}{1}\PYGdefault{p}{;} \PYGdefault{n}{i}\PYGdefault{o}{\PYGdefaultZlt{}=}\PYGdefault{l+m+mi}{10}\PYGdefault{p}{;} \PYGdefault{n}{i}\PYGdefault{o}{++}\PYGdefault{p}{)} \PYGdefault{p}{\PYGdefaultZob{}}
+  \PYGdefault{n}{sum} \PYGdefault{o}{+=} \PYGdefault{n}{i}\PYGdefault{p}{;}
+\PYGdefault{p}{\PYGdefaultZcb{}}
+  \PYGdefault{err}{\PYGdefaultZbs{}}\PYGdefault{n}{caption}\PYGdefault{p}{\PYGdefaultZob{}}\PYGdefault{n}{Summation} \PYGdefault{n}{of} \PYGdefault{n}{Numbers} \PYGdefault{n}{using} \PYGdefault{n}{a} \PYGdefault{n}{For} \PYGdefault{n}{Loop} \PYGdefault{n}{in} \PYGdefault{n}{C}\PYGdefault{p}{\PYGdefaultZcb{}}
+  \PYGdefault{err}{\PYGdefaultZbs{}}\PYGdefault{n}{label}\PYGdefault{p}{\PYGdefaultZob{}}\PYGdefault{n+nl}{code}\PYGdefault{p}{:}\PYGdefault{n+nl}{c}\PYGdefault{p}{:}\PYGdefault{n}{summationForLoop}\PYGdefault{p}{\PYGdefaultZcb{}}
+\PYGdefault{err}{\PYGdefaultZbs{}}\PYGdefault{n}{end}\PYGdefault{p}{\PYGdefaultZob{}}\PYGdefault{n}{listing}\PYGdefault{p}{\PYGdefaultZcb{}}
+
+
+\PYGdefault{n}{Special} \PYGdefault{n+nl}{note}\PYGdefault{p}{:} \PYGdefault{n}{ANSI} \PYGdefault{n}{C} \PYGdefault{n}{does} \PYGdefault{n}{not} \PYGdefault{n}{allow} \PYGdefault{n}{declaration} \PYGdefault{n}{inside} \PYGdefault{n}{a} \PYGdefault{k}{for}\PYGdefault{o}{\PYGdefaultZhy{}}\PYGdefault{n}{loop} \PYGdefault{p}{(}\PYGdefault{n}{many} \PYGdefault{n}{compilers} \PYGdefault{n}{will} \PYGdefault{n}{be} \PYGdefault{n}{forgiving} \PYGdefault{n}{about}
+\PYGdefault{n}{this} \PYGdefault{n}{or} \PYGdefault{n}{allow} \PYGdefault{n}{extensions}\PYGdefault{p}{,} \PYGdefault{n}{or} \PYGdefault{n}{you} \PYGdefault{n}{can} \PYGdefault{n}{use} \PYGdefault{n}{C99} \PYGdefault{n}{or} \PYGdefault{n}{after}\PYGdefault{p}{)}
+
+\PYGdefault{err}{\PYGdefaultZbs{}}\PYGdefault{n}{section}\PYGdefault{p}{\PYGdefaultZob{}}\PYGdefault{n}{Do}\PYGdefault{o}{\PYGdefaultZhy{}}\PYGdefault{n}{While} \PYGdefault{n}{Loops}\PYGdefault{p}{\PYGdefaultZcb{}}
+
+\PYGdefault{err}{\PYGdefaultZbs{}}\PYGdefault{n}{section}\PYGdefault{p}{\PYGdefaultZob{}}\PYGdefault{n}{Other} \PYGdefault{n}{Issues}\PYGdefault{p}{\PYGdefaultZcb{}}
+
+\PYGdefault{o}{\PYGdefaultZhy{}}\PYGdefault{n}{no} \PYGdefault{n}{foreach} \PYGdefault{n}{loop}
+\PYGdefault{o}{\PYGdefaultZhy{}}\PYGdefault{n}{recall} \PYGdefault{n}{that} \PYGdefault{l+m+mi}{0} \PYGdefault{n}{is} \PYGdefault{n+nb}{false}\PYGdefault{p}{,} \PYGdefault{n}{anything} \PYGdefault{k}{else} \PYGdefault{n}{is} \PYGdefault{n+nb}{true}
+\PYGdefault{o}{\PYGdefaultZhy{}}\PYGdefault{n}{flag} \PYGdefault{n}{controlled} \PYGdefault{n}{loop}
+\end{Verbatim}

@@ -1,0 +1,147 @@
+\glossarysection[\glossarytoctitle]{\glossarytitle}\glossarypreamble
+\begin{theglossary}\glossaryheader
+\glsgroupheading{A}\relax \glsresetentrylist %
+\glossaryentryfield{algorithm}{\glsnamefont{algorithm}}{a process or method that consists of a specified step-by-step set of operations}{\relax }{\glossaryentrynumbers{\relax 
+		\setentrycounter[]{page}\glsnumberformat{15}}}%
+\glossaryentryfield{assignment operator}{\glsnamefont{assignment operator}}{an operator that allows a user to assign a value to a variable}{\relax }{\glossaryentrynumbers{\relax 
+		\setentrycounter[]{page}\glsnumberformat{31}}}\glsgroupskip
+\glsgroupheading{B}\relax \glsresetentrylist %
+\glossaryentryfield{backward compatible}{\glsnamefont{backward compatible}}{a program, code, library, or standard that is compatible with previous versions so that current and older versions of it can coexist and successfully operate without breaking anything}{\relax }{\glossaryentrynumbers{\relax 
+		\setentrycounter[]{page}\glsnumberformat{25}}}%
+\glossaryentryfield{bit}{\glsnamefont{bit}}{the basic unit of information in a digital computer. A bit can be either 1 or 0 (alternatively, \True /\False , on/off, high voltage/low voltage, etc.). Originally a portmanteau (mash up) of \textbf {b}inary dig\textbf {it}}{\relax }{\glossaryentrynumbers{\relax 
+		\setentrycounter[]{page}\glsnumberformat{4}\delimN 
+		\setentrycounter[]{page}\glsnumberformat{20}}}%
+\glossaryentryfield{Boolean}{\glsnamefont{Boolean}}{a data type that represents the truth value of a logical statement. Booleans typically have only two values: \True or \False }{\relax }{\glossaryentrynumbers{\relax 
+		\setentrycounter[]{page}\glsnumberformat{27}}}%
+\glossaryentryfield{bug}{\glsnamefont{bug}}{A flaw or mistake in a computer program that results in incorrect behavior that may have unintended such as errors or failure. The term predates modern computer systems but was popularized by Grace Hopper who, when working with the Mark II computer in 1946 traced a system failure to a moth stuck in a relay}{\relax }{\glossaryentrynumbers{\relax 
+		\setentrycounter[]{page}\glsnumberformat{42}\delimN 
+		\setentrycounter[]{page}\glsnumberformat{67}}}%
+\glossaryentryfield{byte}{\glsnamefont{byte}}{a unit of information in a digital computer consisting of 8 bits}{\relax }{\glossaryentrynumbers{\relax 
+		\setentrycounter[]{page}\glsnumberformat{4}}}\glsgroupskip
+\glsgroupheading{C}\relax \glsresetentrylist %
+\glossaryentryfield{case sensitive}{\glsnamefont{case sensitive}}{a language is case sensitive if it recognizes differences between lower and upper case characters in identifier names. A language is case insensitive if it does not}{\relax }{\glossaryentrynumbers{\relax 
+		\setentrycounter[]{page}\glsnumberformat{17}}}%
+\glossaryentryfield{constant}{\glsnamefont{constant}}{a variable whose value cannot be changed once set}{\relax }{\glossaryentrynumbers{\relax 
+		\setentrycounter[]{page}\ignore{246}}}%
+\glossaryentryfield{contradiction}{\glsnamefont{contradiction}}{a logical statement that is always \False regardless of the truth values of the statement's variables}{\relax }{\glossaryentrynumbers{\relax 
+		\setentrycounter[]{page}\glsnumberformat{60}}}%
+\glossaryentryfield{control flow}{\glsnamefont{control flow}}{the order in which individual statements in a program are executed or evaluated}{\relax }{\glossaryentrynumbers{\relax 
+		\setentrycounter[]{page}\glsnumberformat{63}}}\glsgroupskip
+\glsgroupheading{D}\relax \glsresetentrylist %
+\glossaryentryfield{dead code}{\glsnamefont{dead code}}{a code segment that has no effect on a program either because it is unused or unreachable (the conditions involving the code will never be satisfied)}{\relax }{\glossaryentrynumbers{\relax 
+		\setentrycounter[]{page}\glsnumberformat{60}}}%
+\glossaryentryfield{defensive programming}{\glsnamefont{defensive programming}}{an approach to programming in which error conditions are checked and handled, preventing undefined or erroneous operations from happening in a program}{\relax }{\glossaryentrynumbers{\relax 
+		\setentrycounter[]{page}\glsnumberformat{36}\delimN 
+		\setentrycounter[]{page}\glsnumberformat{44}\delimN 
+		\setentrycounter[]{page}\glsnumberformat{70}}}%
+\glossaryentryfield{dynamic typing}{\glsnamefont{dynamic typing}}{a variable whose type can change during runtime based on the value it is assigned}{\relax }{\glossaryentrynumbers{\relax 
+		\setentrycounter[]{page}\glsnumberformat{28}\delimN 
+		\setentrycounter[]{page}\ignore{246}}}\glsgroupskip
+\glsgroupheading{E}\relax \glsresetentrylist %
+\glossaryentryfield{encapsulation}{\glsnamefont{encapsulation}}{the grouping and protection of data together into one logical entity along with the functionality (functions or methods) that act on that data}{\relax }{\glossaryentrynumbers{\relax 
+		\setentrycounter[]{page}\glsnumberformat{27}}}%
+\glossaryentryfield{expression}{\glsnamefont{expression}}{a combination of values, constants, literals, variables, operators and possibly function calls such that when evaluated, produce a resulting value}{\relax }{\glossaryentrynumbers{\relax 
+		\setentrycounter[]{page}\glsnumberformat{31}}}\glsgroupskip
+\glsgroupheading{F}\relax \glsresetentrylist %
+\glossaryentryfield{flowchart}{\glsnamefont{flowcharts}}{a diagram that represents an algorithm or process, showing steps as boxes connected by arrows which establish an order or flow}{\relax }{\glossaryentrynumbers{\relax 
+		\setentrycounter[]{page}\glsnumberformat{15}}}\glsgroupskip
+\glsgroupheading{G}\relax \glsresetentrylist %
+\glossaryentryfield{garbage collection}{\glsnamefont{garbage collection}}{automated memory management in which a garbage collector attempts to reclaim memory (garbage) that is no longer being used by a program so that it can be reallocated for other purposes}{\relax }{\glossaryentrynumbers{\relax 
+		\setentrycounter[]{page}\glsnumberformat{167}}}%
+\glossaryentryfield{global scope}{\glsnamefont{global scope}}{a variable, function, or other element in a program has global scope if it is visible or has effect throughout the entire program}{\relax }{\glossaryentrynumbers{\relax 
+		\setentrycounter[]{page}\glsnumberformat{29}\delimN 
+		\setentrycounter[]{page}\ignore{246}}}\glsgroupskip
+\glsgroupheading{I}\relax \glsresetentrylist %
+\glossaryentryfield{identifier}{\glsnamefont{identifier}}{a symbol, token, or label that is used to refer to a variable. Essentially, a variable's name}{\relax }{\glossaryentrynumbers{\relax 
+		\setentrycounter[]{page}\glsnumberformat{16}}}%
+\glossaryentryfield{immutable}{\glsnamefont{immutable}}{an object whose internal state cannot be changed once created, alternatively, one whose internal state cannot be \emph {observably} changed once created}{\relax }{\glossaryentrynumbers{\relax 
+		\setentrycounter[]{page}\glsnumberformat{173}}}%
+\glossaryentryfield{input}{\glsnamefont{input}}{data or information that is provided to a computer program for processing}{\relax }{\glossaryentrynumbers{\relax 
+		\setentrycounter[]{page}\glsnumberformat{38}}}%
+\glossaryentryfield{interactive}{\glsnamefont{interactive}}{a program that is designed to interface with humans by prompting them for input and displaying output directly to them}{\relax }{\glossaryentrynumbers{\relax 
+		\setentrycounter[]{page}\glsnumberformat{38}}}%
+\glossaryentryfield{prompt}{\glsnamefont{interactive}}{an informal, abstract, high-level description of a process or algorithm}{\relax }{\glossaryentrynumbers{\relax 
+		\setentrycounter[]{page}\glsnumberformat{38}}}\glsgroupskip
+\glsgroupheading{K}\relax \glsresetentrylist %
+\glossaryentryfield{keyword}{\glsnamefont{keyword}}{a word in a programming language with a special meaning in a particular context. In contrast to a reserved word, a keyword \emph {may} be used for an identifier (variable or function name) but it is strongly discouraged to do so as the keyword already has an intended meaning}{\relax }{\glossaryentrynumbers{\relax 
+		\setentrycounter[]{page}\ignore{246}}}%
+\glossaryentryfield{kilobyte}{\glsnamefont{kilobyte}}{a unit of information in a digital computer consisting of 1024 bytes (equivalently, $2^{10}$ bytes), KB for short}{\relax }{\glossaryentrynumbers{\relax 
+		\setentrycounter[]{page}\ignore{246}}}\glsgroupskip
+\glsgroupheading{L}\relax \glsresetentrylist %
+\glossaryentryfield{literal}{\glsnamefont{literal}}{in a programming language, a literal is notation for specifying a value such as a number of string that can be directly assigned to a variable}{\relax }{\glossaryentrynumbers{\relax 
+		\setentrycounter[]{page}\glsnumberformat{27}\delimN 
+		\setentrycounter[]{page}\glsnumberformat{31}}}\glsgroupskip
+\glsgroupheading{M}\relax \glsresetentrylist %
+\glossaryentryfield{mantissa}{\glsnamefont{mantissa}}{the part of a floating-point number consisting of its significant digits (called a significand in scientific notation)}{\relax }{\glossaryentrynumbers{\relax 
+		\setentrycounter[]{page}\glsnumberformat{23}}}\glsgroupskip
+\glsgroupheading{N}\relax \glsresetentrylist %
+\glossaryentryfield{naming convention}{\glsnamefont{naming convention}}{a set of guidelines for choosing identifier names for variables, functions, etc. in a programming language. Conventions may be generally accepted by all developers of a particular language or they may be established for use in a particular library, framework, or organization}{\relax }{\glossaryentrynumbers{\relax 
+		\setentrycounter[]{page}\glsnumberformat{17}}}\glsgroupskip
+\glsgroupheading{O}\relax \glsresetentrylist %
+\glossaryentryfield{operand}{\glsnamefont{operand}}{the arguments that an operator applies to}{\relax }{\glossaryentrynumbers{\relax 
+		\setentrycounter[]{page}\glsnumberformat{30}}}%
+\glossaryentryfield{operator}{\glsnamefont{operator}}{a symbol used to denote some transformation that combines or changes the operands it is applied to to produce a new value}{\relax }{\glossaryentrynumbers{\relax 
+		\setentrycounter[]{page}\glsnumberformat{30}}}%
+\glossaryentryfield{order of precedence}{\glsnamefont{order of precedence}}{the order in which operators are evaluated, multiplication is performed before addition for example}{\relax }{\glossaryentrynumbers{\relax 
+		\setentrycounter[]{page}\glsnumberformat{35}}}%
+\glossaryentryfield{output}{\glsnamefont{output}}{data or information that is produced as the result of the execution of a program}{\relax }{\glossaryentrynumbers{\relax 
+		\setentrycounter[]{page}\glsnumberformat{38}}}%
+\glossaryentryfield{overflow}{\glsnamefont{overflow}}{when an arithmetic operation results in a number that is larger than the specified type can represent overflow occurs resulting in an invalid result}{\relax }{\glossaryentrynumbers{\relax 
+		\setentrycounter[]{page}\glsnumberformat{36}}}\glsgroupskip
+\glsgroupheading{P}\relax \glsresetentrylist %
+\glossaryentryfield{pointer}{\glsnamefont{pointer}}{a reference to a particular memory location in a computer}{\relax }{\glossaryentrynumbers{\relax 
+		\setentrycounter[]{page}\glsnumberformat{28}}}%
+\glossaryentryfield{primitive}{\glsnamefont{primitive}}{a basic data type that is defined and provided by a programming language. Typically numeric and character types are primitive types in a language for example. Generally, the user doesn't need to define the operations involving primitive types as they are defined by the language. Primitive data types are used as the basic building blocks in a program and used to \emph {compose} more complex user-defined types}{\relax }{\glossaryentrynumbers{\relax 
+		\setentrycounter[]{page}\glsnumberformat{27}\delimN 
+		\setentrycounter[]{page}\glsnumberformat{173}}}%
+\glossaryentryfield{pseudocode}{\glsnamefont{pseudocode}}{the act of a program asking a user to enter input and subsequently waiting for the user to enter data}{\relax }{\glossaryentrynumbers{\relax 
+		\setentrycounter[]{page}\glsnumberformat{12}}}\glsgroupskip
+\glsgroupheading{R}\relax \glsresetentrylist %
+\glossaryentryfield{radix}{\glsnamefont{radix}}{the base of a number system. Binary, octal, decimal, hexadecimal would be base 2, 8, 10, and 16 respectively}{\relax }{\glossaryentrynumbers{\relax 
+		\setentrycounter[]{page}\ignore{246}}}%
+\glossaryentryfield{reference}{\glsnamefont{reference}}{a reference in a computer program is a variable that refers to an object or function in memory}{\relax }{\glossaryentrynumbers{\relax 
+		\setentrycounter[]{page}\glsnumberformat{28}}}%
+\glossaryentryfield{reserved word}{\glsnamefont{reserved word}}{a word or identifier in a language that has a special meaning to the syntax of the language and therefore cannot be used as an identifier in variables, functions, etc.}{\relax }{\glossaryentrynumbers{\relax 
+		\setentrycounter[]{page}\glsnumberformat{17}}}\glsgroupskip
+\glsgroupheading{S}\relax \glsresetentrylist %
+\glossaryentryfield{scope}{\glsnamefont{scope}}{the \emph {scope} of a variable, method, or other entity in a program is the part of the program in which the name or reference of the entity is bound. That is, the part of the program that ``knows'' about the variable in which the variable can be accessed, changed, or used}{\relax }{\glossaryentrynumbers{\relax 
+		\setentrycounter[]{page}\glsnumberformat{29}\delimN 
+		\setentrycounter[]{page}\glsnumberformat{131}\delimN 
+		\setentrycounter[]{page}\glsnumberformat{169}}}%
+\glossaryentryfield{short circuiting}{\glsnamefont{short circuiting}}{the process by which the second operand in a logical statement is not evaluated if the value of the expression is determined by the first operand}{\relax }{\glossaryentrynumbers{\relax 
+		\setentrycounter[]{page}\glsnumberformat{62}}}%
+\glossaryentryfield{static typing}{\glsnamefont{static typing}}{a variable whose type is specified when it is created (declared) and does not change while the variable remains in scope}{\relax }{\glossaryentrynumbers{\relax 
+		\setentrycounter[]{page}\glsnumberformat{28}\delimN 
+		\setentrycounter[]{page}\ignore{246}}}%
+\glossaryentryfield{string}{\glsnamefont{string}}{a data type that consists of a sequence of characters which are encoded under some encoding standard such as ASCII or Unicode}{\relax }{\glossaryentrynumbers{\relax 
+		\setentrycounter[]{page}\glsnumberformat{24}}}%
+\glossaryentryfield{string concatenation}{\glsnamefont{string concatenation}}{an operation by which a string and another data type are combined to form a new string}{\relax }{\glossaryentrynumbers{\relax 
+		\setentrycounter[]{page}\glsnumberformat{34}}}%
+\glossaryentryfield{syntactic sugar}{\glsnamefont{syntactic sugar}}{syntax in a language or program that is not absolutely necessary (that is, the same thing can be achieved using other syntax), but may be shorter, more convenient, or easier to read/write. In general, such syntax makes the language ``sweeter'' for the humans reading and writing it}{\relax }{\glossaryentrynumbers{\relax 
+		\setentrycounter[]{page}\glsnumberformat{37}\delimN 
+		\setentrycounter[]{page}\glsnumberformat{69}\delimN 
+		\setentrycounter[]{page}\glsnumberformat{85}}}\glsgroupskip
+\glsgroupheading{T}\relax \glsresetentrylist %
+\glossaryentryfield{tautology}{\glsnamefont{tautology}}{a logical statement that is always \True regardless of the truth values of the statement's variables}{\relax }{\glossaryentrynumbers{\relax 
+		\setentrycounter[]{page}\glsnumberformat{59}}}%
+\glossaryentryfield{truncation}{\glsnamefont{truncation}}{removing the fractional part of a floating-point number to make it an integer. Truncation is \emph {not} a rounding operation}{\relax }{\glossaryentrynumbers{\relax 
+		\setentrycounter[]{page}\glsnumberformat{33}\delimN 
+		\setentrycounter[]{page}\glsnumberformat{137}\delimN 
+		\setentrycounter[]{page}\glsnumberformat{176}}}%
+\glossaryentryfield{two's complement}{\glsnamefont{two's complement}}{A way of representing signed (positive and negative) integers using the first bit as a sign bit (0 for positive, 1 for negative) and where negative numbers are represented as the complement with respect to $2^n$ (the result of subtracting the number from $2^n$) }{\relax }{\glossaryentrynumbers{\relax 
+		\setentrycounter[]{page}\glsnumberformat{21}}}%
+\glossaryentryfield{type}{\glsnamefont{type}}{a variable's type is the classification of the data it represents which could be numeric, string, boolean, or a user defined type}{\relax }{\glossaryentrynumbers{\relax 
+		\setentrycounter[]{page}\glsnumberformat{20}}}%
+\glossaryentryfield{type casting}{\glsnamefont{type casting}}{converting or variable's type into another type, for example, converting an integer into a more general floating-point number, or converting a floating-point number into an integer, truncating and losing the fractional part}{\relax }{\glossaryentrynumbers{\relax 
+		\setentrycounter[]{page}\glsnumberformat{33}\delimN 
+		\setentrycounter[]{page}\glsnumberformat{137}\delimN 
+		\setentrycounter[]{page}\glsnumberformat{176}}}\glsgroupskip
+\glsgroupheading{U}\relax \glsresetentrylist %
+\glossaryentryfield{underflow}{\glsnamefont{underflow}}{when an arithmetic operation involving floating-point numbers results in a number that is smaller than the smallest representable number underflow occurs resulting in an invalid result}{\relax }{\glossaryentrynumbers{\relax 
+		\setentrycounter[]{page}\glsnumberformat{36}}}\glsgroupskip
+\glsgroupheading{V}\relax \glsresetentrylist %
+\glossaryentryfield{validation}{\glsnamefont{validation}}{the process of verifying that data is correct or conforms to certain expectations including formatting, type, range of values, represents a valid value, etc.}{\relax }{\glossaryentrynumbers{\relax 
+		\setentrycounter[]{page}\glsnumberformat{39}}}%
+\glossaryentryfield{variable}{\glsnamefont{variable}}{a memory location which stores a value that may be set using an assignment operator. Typically a variable is referred to using a name or \emph {identifier}}{\relax }{\glossaryentrynumbers{\relax 
+		\setentrycounter[]{page}\glsnumberformat{16}}}%
+\end{theglossary}\glossarypostamble

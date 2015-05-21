@@ -1,0 +1,23 @@
+\begin{Verbatim}[commandchars=\\\{\},codes={\catcode`\$=3\catcode`\^=7\catcode`\_=8}]
+\PYGdefault{o}{\PYGdefaultZlt{}?}\PYGdefault{n+nx}{php}
+
+\PYGdefault{l+s+sd}{/**}
+\PYGdefault{l+s+sd}{ * This program converts Fahrenheit temperatures to}
+\PYGdefault{l+s+sd}{ * Celsius}
+\PYGdefault{l+s+sd}{ */}
+
+\PYGdefault{c+c1}{//1. Prompt the user for input in Fahrenheit}
+\PYGdefault{n+nb}{printf}\PYGdefault{p}{(}\PYGdefault{l+s+s2}{\PYGdefaultZdq{}Please enter degrees in Fahrenheit: \PYGdefaultZdq{}}\PYGdefault{p}{);}
+
+\PYGdefault{c+c1}{//2. Read the Fahrenheit value from the standard input}
+\PYGdefault{n+nv}{\PYGdefaultZdl{}fahrenheit} \PYGdefault{o}{=} \PYGdefault{n+nb}{trim}\PYGdefault{p}{(}\PYGdefault{n+nb}{fgets}\PYGdefault{p}{(}\PYGdefault{n+nx}{STDIN}\PYGdefault{p}{));}
+\PYGdefault{n+nv}{\PYGdefaultZdl{}fahrenheit} \PYGdefault{o}{=} \PYGdefault{n+nb}{floatval}\PYGdefault{p}{(}\PYGdefault{n+nv}{\PYGdefaultZdl{}fahrenheit}\PYGdefault{p}{);}
+
+\PYGdefault{c+c1}{//3. Compute the degrees Celsius}
+\PYGdefault{n+nv}{\PYGdefaultZdl{}celsius} \PYGdefault{o}{=} \PYGdefault{p}{(}\PYGdefault{n+nv}{\PYGdefaultZdl{}fahrenheit} \PYGdefault{o}{\PYGdefaultZhy{}} \PYGdefault{l+m+mi}{32}\PYGdefault{p}{)} \PYGdefault{o}{*} \PYGdefault{p}{(}\PYGdefault{l+m+mi}{5}\PYGdefault{o}{/}\PYGdefault{l+m+mi}{9}\PYGdefault{p}{);}
+
+\PYGdefault{c+c1}{//4. Print the result to the user}
+\PYGdefault{n+nb}{printf}\PYGdefault{p}{(}\PYGdefault{l+s+s2}{\PYGdefaultZdq{}\PYGdefaultZpc{}f Fahrenheit is \PYGdefaultZpc{}f Celsius}\PYGdefault{l+s+se}{\PYGdefaultZbs{}n}\PYGdefault{l+s+s2}{\PYGdefaultZdq{}}\PYGdefault{p}{,} \PYGdefault{n+nv}{\PYGdefaultZdl{}fahrenheit}\PYGdefault{p}{,} \PYGdefault{n+nv}{\PYGdefaultZdl{}celsius}\PYGdefault{p}{);}
+
+\PYGdefault{c+cp}{?\PYGdefaultZgt{}}
+\end{Verbatim}

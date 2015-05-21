@@ -1,0 +1,6 @@
+\begin{Verbatim}[commandchars=\\\{\},codes={\catcode`\$=3\catcode`\^=7\catcode`\_=8}]
+\PYGdefault{x}{if(\PYGdefaultZdl{}x \PYGdefaultZlt{}= 0 || \PYGdefaultZdl{}b \PYGdefaultZlt{}= 1) \PYGdefaultZob{}}
+\PYGdefault{x}{  printf(\PYGdefaultZdq{}Error: bad input!\PYGdefaultZbs{}n\PYGdefaultZdq{});}
+\PYGdefault{x}{  exit(1);}
+\PYGdefault{x}{\PYGdefaultZcb{}}
+\end{Verbatim}

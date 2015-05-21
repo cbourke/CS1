@@ -1,0 +1,9 @@
+\begin{Verbatim}[commandchars=\\\{\},codes={\catcode`\$=3\catcode`\^=7\catcode`\_=8}]
+\PYGdefault{k+kt}{int} \PYGdefault{n}{a} \PYGdefault{o}{=} \PYGdefault{l+m+mi}{10}\PYGdefault{p}{;}
+\PYGdefault{k+kt}{int} \PYGdefault{n}{b} \PYGdefault{o}{=} \PYGdefault{l+m+mi}{20}\PYGdefault{p}{;}
+\PYGdefault{k+kt}{double} \PYGdefault{n}{c}\PYGdefault{p}{;}
+\PYGdefault{k+kt}{int} \PYGdefault{n}{d}\PYGdefault{p}{;}
+\PYGdefault{n}{c} \PYGdefault{o}{=} \PYGdefault{p}{(}\PYGdefault{k+kt}{double}\PYGdefault{p}{)} \PYGdefault{n}{a} \PYGdefault{o}{/} \PYGdefault{p}{(}\PYGdefault{k+kt}{double}\PYGdefault{p}{)} \PYGdefault{n}{b}\PYGdefault{p}{;}
+\PYGdefault{n}{d} \PYGdefault{o}{=} \PYGdefault{n}{a} \PYGdefault{o}{/} \PYGdefault{n}{b}\PYGdefault{p}{;}
+\PYGdefault{c+c1}{//the value in c is correctly 0.5 but the value in d is 0}
+\end{Verbatim}

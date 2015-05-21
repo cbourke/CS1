@@ -1,0 +1,3 @@
+\begin{Verbatim}[commandchars=\\\{\},codes={\catcode`\$=3\catcode`\^=7\catcode`\_=8}]
+\PYGdefault{n+nb}{printf}\PYGdefault{p}{(}\PYGdefault{l+s+s2}{\PYGdefaultZdq{}\PYGdefaultZpc{}f Fahrenheit is \PYGdefaultZpc{}f Celsius}\PYGdefault{l+s+se}{\PYGdefaultZbs{}n}\PYGdefault{l+s+s2}{\PYGdefaultZdq{}}\PYGdefault{p}{,} \PYGdefault{n+nv}{\PYGdefaultZdl{}fahrenheit}\PYGdefault{p}{,} \PYGdefault{n+nv}{\PYGdefaultZdl{}celsius}\PYGdefault{p}{);}
+\end{Verbatim}

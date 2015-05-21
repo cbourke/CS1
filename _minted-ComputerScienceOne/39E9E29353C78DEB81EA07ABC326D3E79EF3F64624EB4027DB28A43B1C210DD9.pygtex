@@ -1,0 +1,8 @@
+\begin{Verbatim}[commandchars=\\\{\},codes={\catcode`\$=3\catcode`\^=7\catcode`\_=8}]
+\PYGdefault{n+nb}{printf}\PYGdefault{p}{(}\PYGdefault{l+s+s2}{\PYGdefaultZdq{}Please enter a: \PYGdefaultZdq{}}\PYGdefault{p}{);}
+\PYGdefault{n+nv}{\PYGdefaultZdl{}a} \PYGdefault{o}{=} \PYGdefault{n+nb}{floatval}\PYGdefault{p}{(}\PYGdefault{n+nb}{trim}\PYGdefault{p}{(}\PYGdefault{n+nb}{fgets}\PYGdefault{p}{(}\PYGdefault{n+nx}{STDIN}\PYGdefault{p}{)));}
+\PYGdefault{n+nb}{printf}\PYGdefault{p}{(}\PYGdefault{l+s+s2}{\PYGdefaultZdq{}Please enter b: \PYGdefaultZdq{}}\PYGdefault{p}{);}
+\PYGdefault{n+nv}{\PYGdefaultZdl{}b} \PYGdefault{o}{=} \PYGdefault{n+nb}{floatval}\PYGdefault{p}{(}\PYGdefault{n+nb}{trim}\PYGdefault{p}{(}\PYGdefault{n+nb}{fgets}\PYGdefault{p}{(}\PYGdefault{n+nx}{STDIN}\PYGdefault{p}{)));}
+\PYGdefault{n+nb}{printf}\PYGdefault{p}{(}\PYGdefault{l+s+s2}{\PYGdefaultZdq{}Please enter c: \PYGdefaultZdq{}}\PYGdefault{p}{);}
+\PYGdefault{n+nv}{\PYGdefaultZdl{}c} \PYGdefault{o}{=} \PYGdefault{n+nb}{floatval}\PYGdefault{p}{(}\PYGdefault{n+nb}{trim}\PYGdefault{p}{(}\PYGdefault{n+nb}{fgets}\PYGdefault{p}{(}\PYGdefault{n+nx}{STDIN}\PYGdefault{p}{)));}
+\end{Verbatim}

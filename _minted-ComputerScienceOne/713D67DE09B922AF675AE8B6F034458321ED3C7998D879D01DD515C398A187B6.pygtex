@@ -1,0 +1,12 @@
+\begin{Verbatim}[commandchars=\\\{\},codes={\catcode`\$=3\catcode`\^=7\catcode`\_=8}]
+\PYGdefault{n+nv}{\PYGdefaultZdl{}a} \PYGdefault{o}{=} \PYGdefault{l+m+mi}{10}\PYGdefault{p}{;}
+\PYGdefault{n+nv}{\PYGdefaultZdl{}b} \PYGdefault{o}{=} \PYGdefault{l+m+mf}{3.14}\PYGdefault{p}{;}
+
+\PYGdefault{k}{print} \PYGdefault{n+nv}{\PYGdefaultZdl{}a}\PYGdefault{p}{;}
+\PYGdefault{k}{print} \PYGdefault{l+s+s2}{\PYGdefaultZdq{}The value of a is }\PYGdefault{l+s+si}{\PYGdefaultZdl{}a\PYGdefaultZbs{}n}\PYGdefault{l+s+s2}{\PYGdefaultZdq{}}\PYGdefault{p}{;} \PYGdefault{c+c1}{//variables can be embedded in strings}
+
+\PYGdefault{k}{echo} \PYGdefault{n+nv}{\PYGdefaultZdl{}a}\PYGdefault{p}{;}
+\PYGdefault{k}{echo} \PYGdefault{l+s+s2}{\PYGdefaultZdq{}The value of a is }\PYGdefault{l+s+si}{\PYGdefaultZdl{}a\PYGdefaultZbs{}n}\PYGdefault{l+s+s2}{\PYGdefaultZdq{}}\PYGdefault{p}{;}
+
+\PYGdefault{n+nb}{printf}\PYGdefault{p}{(}\PYGdefault{l+s+s2}{\PYGdefaultZdq{}The value of a is \PYGdefaultZpc{}d, and b is \PYGdefaultZpc{}f}\PYGdefault{l+s+se}{\PYGdefaultZbs{}n}\PYGdefault{l+s+s2}{\PYGdefaultZdq{}}\PYGdefault{p}{,} \PYGdefault{n+nv}{\PYGdefaultZdl{}a}\PYGdefault{p}{,} \PYGdefault{n+nv}{\PYGdefaultZdl{}b}\PYGdefault{p}{);}
+\end{Verbatim}

@@ -1,0 +1,7 @@
+\relax 
+\newlabel{code:returnStaticArray}{{1}{1}}
+\@writefile{lol}{\contentsline {lstlisting}{\numberline {1}Example returning a static array}{1}}
+\@writefile{lof}{\contentsline {figure}{\numberline {1}{\ignorespaces Illustration of the pitfalls of returning a static array in C. Static arrays are locally scoped and exist only within the function/block in which they are declared. The program stack frame in which the variables are stored is invalid when the function returns control back to the calling function. Depending on how the system/compiler/language handles this \emph  {unwinding} process, values may be changed, unavailable, etc.}}{2}}
+\@writefile{lof}{\contentsline {subfigure}{\numberline{(a)}{\ignorespaces {Program stack at the end of the execution of \lstinline|foo| prior to its returning control back to \lstinline|main|.}}}{2}}
+\@writefile{lof}{\contentsline {subfigure}{\numberline{(b)}{\ignorespaces {Upon returning, the stack frame is no longer valid; \lstinline|a| points to a stack memory address but the frame and its local variables are no longer valid. Some have been overwritten with other values. Subsequent usage or access of the values in \lstinline|a| are undefined behavior.}}}{2}}
+\newlabel{fig:returningStaticArrays}{{1}{2}}

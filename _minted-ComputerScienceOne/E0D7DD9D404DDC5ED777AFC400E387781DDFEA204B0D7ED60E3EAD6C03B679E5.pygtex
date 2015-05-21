@@ -1,0 +1,6 @@
+\begin{Verbatim}[commandchars=\\\{\},codes={\catcode`\$=3\catcode`\^=7\catcode`\_=8}]
+\PYGdefault{n+nv}{\PYGdefaultZdl{}arr} \PYGdefault{o}{=} \PYGdefault{k}{array}\PYGdefault{p}{(}\PYGdefault{l+m+mf}{1.41}\PYGdefault{p}{,} \PYGdefault{l+m+mf}{2.71}\PYGdefault{p}{,} \PYGdefault{l+m+mf}{3.14}\PYGdefault{p}{);}
+\PYGdefault{k}{foreach}\PYGdefault{p}{(}\PYGdefault{n+nv}{\PYGdefaultZdl{}arr} \PYGdefault{k}{as} \PYGdefault{n+nv}{\PYGdefaultZdl{}x}\PYGdefault{p}{)} \PYGdefault{p}{\PYGdefaultZob{}}
+  \PYGdefault{c+c1}{//$x now holds the "current" element in $arr}
+\PYGdefault{p}{\PYGdefaultZcb{}}
+\end{Verbatim}

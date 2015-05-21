@@ -1,0 +1,3 @@
+\begin{Verbatim}[commandchars=\\\{\},codes={\catcode`\$=3\catcode`\^=7\catcode`\_=8}]
+\PYGdefault{n}{printf}\PYGdefault{p}{(}\PYGdefault{l+s}{\PYGdefaultZdq{}The value of a is \PYGdefaultZpc{}d, b = \PYGdefaultZpc{}f and c contains \PYGdefaultZpc{}c}\PYGdefault{l+s+se}{\PYGdefaultZbs{}n}\PYGdefault{l+s}{ \PYGdefaultZdq{}}\PYGdefault{p}{,} \PYGdefault{n}{a}\PYGdefault{p}{,} \PYGdefault{n}{b}\PYGdefault{p}{,} \PYGdefault{n}{c}\PYGdefault{p}{);}
+\end{Verbatim}

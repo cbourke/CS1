@@ -1,0 +1,58 @@
+\documentclass[12pt]{scrbook}
+\usepackage{fullpage}
+\usepackage{hyperref}
+\usepackage{tikz}
+\usetikzlibrary{calc}
+
+%\usetikzlibrary{decorations.pathmorphing} % LATEX and plain TEX when using Tik Z
+
+\definecolor{left}{HTML}{041832}
+\definecolor{secondary}{HTML}{241024}
+
+\title{Computer Science I}
+\subtitle{Programming in C, Java, and Beyond}
+\author{Dr.\ Chris Bourke\\
+        \href{mailto:cbourke@cse.unl.edu}{cbourke@cse.unl.edu} \\
+        Department of Computer Science \& Engineering\\
+        University of Nebraska---Lincoln\\
+        Lincoln, NE 68588, USA
+}
+
+\date{DATE}
+
+\begin{document}
+
+  \begin{tikzpicture}[remember picture,overlay,block/.style={
+  text width=0.95*\columnwidth, 
+  anchor=west,
+  minimum height=1cm
+  }, 
+font=\small
+]
+    \node [shading = axis,rectangle, left color=left!80!white, right color=left!20!white,shading angle=120, anchor=north, minimum width=\paperwidth, minimum height=\paperheight,opacity=.70] (box) at (current page.north){  ~ };
+
+    \node [shading = axis,rectangle, left color=secondary!80!white, right color=secondary!20!white,shading angle=45, anchor=north, minimum width=\paperwidth, minimum height=\paperheight,opacity=.60] (box) at (current page.north){  ~ };
+
+    \node[block,align=center] at (0, -8) {\maketitle};
+
+
+  %\node[draw,fill,circle] at (current page.south east) {$\alpha$};
+  %\node[draw,circle,opacity=1,fill=green] at (7.75, -15) {$\alpha$};
+
+\input{graph}
+
+\input{randomPoints}
+
+  \end{tikzpicture}
+  
+  \newpage
+  ~\\
+
+~\\
+
+foo bar
+
+\end{document}
+
+
+\end{document}

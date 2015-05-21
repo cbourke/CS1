@@ -1,0 +1,14 @@
+\begin{Verbatim}[commandchars=\\\{\},codes={\catcode`\$=3\catcode`\^=7\catcode`\_=8}]
+Principal: \PYGdefaultZdl{}1000.00
+Annual Interest Rate: 9.00 \PYGdefaultZpc{}
+Term: 6 months
+Monthly Payment: \PYGdefaultZdl{}171.07
+Payment     Interest       Principal        Balance
+1           \PYGdefaultZdl{}   7.50        \PYGdefaultZdl{} 163.57       \PYGdefaultZdl{} 836.43
+2           \PYGdefaultZdl{}   6.27        \PYGdefaultZdl{} 164.80       \PYGdefaultZdl{} 671.63
+3           \PYGdefaultZdl{}   5.04        \PYGdefaultZdl{} 166.03       \PYGdefaultZdl{} 505.60
+4           \PYGdefaultZdl{}   3.79        \PYGdefaultZdl{} 167.28       \PYGdefaultZdl{} 338.32
+5           \PYGdefaultZdl{}   2.54        \PYGdefaultZdl{} 168.53       \PYGdefaultZdl{} 169.79
+6           \PYGdefaultZdl{}   1.27        \PYGdefaultZdl{} 169.79       \PYGdefaultZdl{}   0.00
+Final Payment: \PYGdefaultZdl{}171.06
+\end{Verbatim}

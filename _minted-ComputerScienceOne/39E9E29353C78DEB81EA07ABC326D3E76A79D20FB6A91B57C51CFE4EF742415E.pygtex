@@ -1,0 +1,8 @@
+\begin{Verbatim}[commandchars=\\\{\},codes={\catcode`\$=3\catcode`\^=7\catcode`\_=8}]
+\PYGdefault{x}{printf(\PYGdefaultZdq{}Please enter a: \PYGdefaultZdq{});}
+\PYGdefault{x}{\PYGdefaultZdl{}a = floatval(trim(fgets(STDIN)));}
+\PYGdefault{x}{printf(\PYGdefaultZdq{}Please enter b: \PYGdefaultZdq{});}
+\PYGdefault{x}{\PYGdefaultZdl{}b = floatval(trim(fgets(STDIN)));}
+\PYGdefault{x}{printf(\PYGdefaultZdq{}Please enter c: \PYGdefaultZdq{});}
+\PYGdefault{x}{\PYGdefaultZdl{}c = floatval(trim(fgets(STDIN)));}
+\end{Verbatim}

@@ -1,0 +1,22 @@
+\begin{Verbatim}[commandchars=\\\{\},codes={\catcode`\$=3\catcode`\^=7\catcode`\_=8}]
+\PYGdefault{x}{//example of an if statement:}
+\PYGdefault{x}{if(\PYGdefaultZdl{}x \PYGdefaultZlt{} 10) \PYGdefaultZob{}}
+\PYGdefault{x}{  printf(\PYGdefaultZdq{}x is less than 10\PYGdefaultZbs{}n\PYGdefaultZdq{});}
+\PYGdefault{x}{\PYGdefaultZcb{}}
+
+\PYGdefault{x}{//example of an if\PYGdefaultZhy{}else statement:}
+\PYGdefault{x}{if(\PYGdefaultZdl{}x \PYGdefaultZlt{} 10) \PYGdefaultZob{}}
+\PYGdefault{x}{  printf(\PYGdefaultZdq{}x is less than 10\PYGdefaultZbs{}n\PYGdefaultZdq{});}
+\PYGdefault{x}{\PYGdefaultZcb{} else \PYGdefaultZob{}}
+\PYGdefault{x}{  printf(\PYGdefaultZdq{}x is 10 or more \PYGdefaultZbs{}n\PYGdefaultZdq{});}
+\PYGdefault{x}{\PYGdefaultZcb{}}
+
+\PYGdefault{x}{//example of an if\PYGdefaultZhy{}else\PYGdefaultZhy{}if statement:}
+\PYGdefault{x}{if(\PYGdefaultZdl{}x \PYGdefaultZlt{} 10) \PYGdefaultZob{}}
+\PYGdefault{x}{  printf(\PYGdefaultZdq{}x is less than 10\PYGdefaultZbs{}n\PYGdefaultZdq{});}
+\PYGdefault{x}{\PYGdefaultZcb{} else if(\PYGdefaultZdl{}x === 10) \PYGdefaultZob{}}
+\PYGdefault{x}{  printf(\PYGdefaultZdq{}x is equal to ten\PYGdefaultZbs{}n\PYGdefaultZdq{});}
+\PYGdefault{x}{\PYGdefaultZcb{} else \PYGdefaultZob{}}
+\PYGdefault{x}{  printf(\PYGdefaultZdq{}x is greater than 10\PYGdefaultZbs{}n\PYGdefaultZdq{});}
+\PYGdefault{x}{\PYGdefaultZcb{}}
+\end{Verbatim}

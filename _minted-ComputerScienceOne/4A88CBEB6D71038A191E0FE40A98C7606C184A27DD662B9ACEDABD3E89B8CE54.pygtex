@@ -1,0 +1,7 @@
+\begin{Verbatim}[commandchars=\\\{\},codes={\catcode`\$=3\catcode`\^=7\catcode`\_=8}]
+\PYGdefault{k+kt}{int} \PYGdefault{n}{x}\PYGdefault{p}{;}
+
+\PYGdefault{n}{x} \PYGdefault{o}{=} \PYGdefault{l+m+mi}{10} \PYGdefault{o}{\PYGdefaultZpc{}} \PYGdefault{l+m+mi}{5}\PYGdefault{p}{;} \PYGdefault{c+c1}{//x is 0}
+\PYGdefault{n}{x} \PYGdefault{o}{=} \PYGdefault{l+m+mi}{10} \PYGdefault{o}{\PYGdefaultZpc{}} \PYGdefault{l+m+mi}{3}\PYGdefault{p}{;} \PYGdefault{c+c1}{//x is 1}
+\PYGdefault{n}{x} \PYGdefault{o}{=} \PYGdefault{l+m+mi}{29} \PYGdefault{o}{\PYGdefaultZpc{}} \PYGdefault{l+m+mi}{5}\PYGdefault{p}{;} \PYGdefault{c+c1}{//x is 4}
+\end{Verbatim}

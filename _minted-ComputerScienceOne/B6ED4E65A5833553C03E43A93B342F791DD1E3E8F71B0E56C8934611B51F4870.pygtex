@@ -1,0 +1,19 @@
+\begin{Verbatim}[commandchars=\\\{\},codes={\catcode`\$=3\catcode`\^=7\catcode`\_=8}]
+\PYGdefault{k+kt}{int} \PYGdefault{n}{a} \PYGdefault{o}{=} \PYGdefault{l+m+mi}{10}\PYGdefault{o}{,} \PYGdefault{n}{c}\PYGdefault{o}{;}
+\PYGdefault{n}{Integer} \PYGdefault{n}{b} \PYGdefault{o}{=} \PYGdefault{l+m+mi}{20}\PYGdefault{o}{;}
+
+\PYGdefault{c+c1}{//int and Integer can be mixed:}
+\PYGdefault{n}{c} \PYGdefault{o}{=} \PYGdefault{n}{a} \PYGdefault{o}{+} \PYGdefault{n}{b}\PYGdefault{o}{;}
+
+\PYGdefault{k+kt}{double} \PYGdefault{n}{x} \PYGdefault{o}{=} \PYGdefault{l+m+mf}{3.14}\PYGdefault{o}{,} \PYGdefault{n}{z}\PYGdefault{o}{;}
+\PYGdefault{n}{Double} \PYGdefault{n}{y} \PYGdefault{o}{=} \PYGdefault{l+m+mf}{2.71}\PYGdefault{o}{;}
+\PYGdefault{c+c1}{//double and Double can be mixed:}
+\PYGdefault{n}{z} \PYGdefault{o}{=} \PYGdefault{n}{x} \PYGdefault{o}{+} \PYGdefault{n}{y}\PYGdefault{o}{;}
+
+\PYGdefault{c+c1}{//all types can be mixed:}
+\PYGdefault{k+kt}{double} \PYGdefault{n}{u} \PYGdefault{o}{=} \PYGdefault{n}{a} \PYGdefault{o}{+} \PYGdefault{n}{x} \PYGdefault{o}{+} \PYGdefault{n}{b} \PYGdefault{o}{+} \PYGdefault{n}{y}\PYGdefault{o}{;}
+
+\PYGdefault{c+c1}{//Be careful:}
+\PYGdefault{n}{Integer} \PYGdefault{n}{d} \PYGdefault{o}{=} \PYGdefault{k+kc}{null}\PYGdefault{o}{;}
+\PYGdefault{n}{c} \PYGdefault{o}{=} \PYGdefault{n}{a} \PYGdefault{o}{+} \PYGdefault{n}{d}\PYGdefault{o}{;} \PYGdefault{c+c1}{//NullPointerException}
+\end{Verbatim}

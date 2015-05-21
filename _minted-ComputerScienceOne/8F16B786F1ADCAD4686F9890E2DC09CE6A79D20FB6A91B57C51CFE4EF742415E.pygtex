@@ -1,0 +1,9 @@
+\begin{Verbatim}[commandchars=\\\{\},codes={\catcode`\$=3\catcode`\^=7\catcode`\_=8}]
+\PYGdefault{x}{\PYGdefaultZdl{}s = \PYGdefaultZdq{}aardvark\PYGdefaultZdq{};}
+\PYGdefault{x}{\PYGdefaultZdl{}t = \PYGdefaultZdq{}zebra\PYGdefaultZdq{};}
+
+\PYGdefault{x}{\PYGdefaultZdl{}r = (\PYGdefaultZdl{}s \PYGdefaultZlt{} \PYGdefaultZdl{}t);  //true}
+\PYGdefault{x}{\PYGdefaultZdl{}r = (\PYGdefaultZdl{}s \PYGdefaultZlt{}= \PYGdefaultZdl{}t); //true}
+\PYGdefault{x}{\PYGdefaultZdl{}r = (\PYGdefaultZdl{}s \PYGdefaultZgt{}= \PYGdefaultZdl{}t); //false}
+\PYGdefault{x}{\PYGdefaultZdl{}r = (\PYGdefaultZdl{}s \PYGdefaultZgt{} \PYGdefaultZdl{}t);   //false}
+\end{Verbatim}

@@ -1,0 +1,6 @@
+\begin{Verbatim}[commandchars=\\\{\},codes={\catcode`\$=3\catcode`\^=7\catcode`\_=8}]
+\PYGdefault{k+kt}{int} \PYGdefault{n}{a} \PYGdefault{o}{=} \PYGdefault{l+m+mi}{10}\PYGdefault{p}{,} \PYGdefault{n}{b} \PYGdefault{o}{=} \PYGdefault{l+m+mi}{20}\PYGdefault{p}{;}
+\PYGdefault{k+kt}{double} \PYGdefault{n}{x}\PYGdefault{p}{;}
+
+\PYGdefault{n}{x} \PYGdefault{o}{=} \PYGdefault{p}{(}\PYGdefault{k+kt}{double}\PYGdefault{p}{)} \PYGdefault{n}{a} \PYGdefault{o}{/} \PYGdefault{n}{b}\PYGdefault{p}{;}
+\end{Verbatim}

@@ -1,0 +1,21 @@
+\begin{Verbatim}[commandchars=\\\{\},codes={\catcode`\$=3\catcode`\^=7\catcode`\_=8}]
+\PYGdefault{x}{int a = 10, b = 20, c = 30, d;}
+\PYGdefault{x}{d = a + 5;}
+\PYGdefault{x}{d = a + b;}
+\PYGdefault{x}{d = a \PYGdefaultZhy{} b;}
+\PYGdefault{x}{d = a + b * c;}
+\PYGdefault{x}{d = a * b;}
+\PYGdefault{x}{d = a / b; //integer division and truncation!  See below}
+
+\PYGdefault{x}{double x = 1.5, y = 3.4, z = 10.5, w;}
+\PYGdefault{x}{w = x + 5.0;}
+\PYGdefault{x}{w = x + y;}
+\PYGdefault{x}{w = x \PYGdefaultZhy{} y;}
+\PYGdefault{x}{w = x + y * z;}
+\PYGdefault{x}{w = x * y;}
+\PYGdefault{x}{w = x / y;}
+
+\PYGdefault{x}{//you can do arithmetic with both types:}
+\PYGdefault{x}{w = a + x;}
+\PYGdefault{x}{d = b + y; //truncation also occurs here!}
+\end{Verbatim}

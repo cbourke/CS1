@@ -1,0 +1,6 @@
+\begin{Verbatim}[commandchars=\\\{\},codes={\catcode`\$=3\catcode`\^=7\catcode`\_=8}]
+\PYGdefault{x}{\PYGdefaultZdl{}sum = 0;}
+\PYGdefault{x}{for(\PYGdefaultZdl{}i=1; \PYGdefaultZdl{}i\PYGdefaultZlt{}=10; \PYGdefaultZdl{}i++) \PYGdefaultZob{}}
+\PYGdefault{x}{  \PYGdefaultZdl{}sum += \PYGdefaultZdl{}i;}
+\PYGdefault{x}{\PYGdefaultZcb{}}
+\end{Verbatim}

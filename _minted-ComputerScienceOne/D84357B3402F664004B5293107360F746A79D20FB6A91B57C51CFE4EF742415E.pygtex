@@ -1,0 +1,5 @@
+\begin{Verbatim}[commandchars=\\\{\},codes={\catcode`\$=3\catcode`\^=7\catcode`\_=8}]
+\PYGdefault{x}{double x;}
+\PYGdefault{x}{printf(\PYGdefaultZdq{}Please enter a fractional number: \PYGdefaultZdq{});}
+\PYGdefault{x}{scanf(\PYGdefaultZdq{}\PYGdefaultZpc{}lf\PYGdefaultZdq{}, \PYGdefaultZam{}x);}
+\end{Verbatim}

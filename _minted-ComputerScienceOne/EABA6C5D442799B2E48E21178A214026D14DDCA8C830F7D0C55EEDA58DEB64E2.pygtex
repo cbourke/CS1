@@ -1,0 +1,11 @@
+\begin{Verbatim}[commandchars=\\\{\},codes={\catcode`\$=3\catcode`\^=7\catcode`\_=8}]
+\PYGdefault{k}{if}\PYGdefault{p}{(}\PYGdefault{n}{income} \PYGdefault{o}{\PYGdefaultZlt{}=} \PYGdefault{l+m+mi}{18150}\PYGdefault{p}{)} \PYGdefault{p}{\PYGdefaultZob{}}
+  \PYGdefault{n}{baseTax} \PYGdefault{o}{=} \PYGdefault{n}{income} \PYGdefault{o}{*} \PYGdefault{l+m+mf}{.10}\PYGdefault{p}{;}
+\PYGdefault{p}{\PYGdefaultZcb{}} \PYGdefault{k}{else} \PYGdefault{k}{if}\PYGdefault{p}{(}\PYGdefault{n}{income} \PYGdefault{o}{\PYGdefaultZlt{}=} \PYGdefault{l+m+mi}{73800}\PYGdefault{p}{)} \PYGdefault{p}{\PYGdefaultZob{}}
+  \PYGdefault{n}{baseTax} \PYGdefault{o}{=} \PYGdefault{l+m+mi}{1815} \PYGdefault{o}{+} \PYGdefault{p}{(}\PYGdefault{n}{income} \PYGdefault{o}{\PYGdefaultZhy{}} \PYGdefault{l+m+mi}{18150}\PYGdefault{p}{)} \PYGdefault{o}{*} \PYGdefault{l+m+mf}{.15}\PYGdefault{p}{;}
+\PYGdefault{p}{\PYGdefaultZcb{}} \PYGdefault{k}{else} \PYGdefault{k}{if}\PYGdefault{p}{(}\PYGdefault{n}{income} \PYGdefault{o}{\PYGdefaultZlt{}=} \PYGdefault{l+m+mi}{148850}\PYGdefault{p}{)} \PYGdefault{p}{\PYGdefaultZob{}}
+\PYGdefault{p}{...}
+\PYGdefault{p}{\PYGdefaultZcb{}} \PYGdefault{k}{else} \PYGdefault{p}{\PYGdefaultZob{}}
+  \PYGdefault{n}{baseTax} \PYGdefault{o}{=} \PYGdefault{l+m+mf}{127962.50} \PYGdefault{o}{+} \PYGdefault{p}{(}\PYGdefault{n}{income} \PYGdefault{o}{\PYGdefaultZhy{}} \PYGdefault{l+m+mi}{457600}\PYGdefault{p}{)} \PYGdefault{o}{*} \PYGdefault{l+m+mf}{.396}\PYGdefault{p}{;}
+\PYGdefault{p}{\PYGdefaultZcb{}}
+\end{Verbatim}

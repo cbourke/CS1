@@ -1,0 +1,3 @@
+\begin{Verbatim}[commandchars=\\\{\},codes={\catcode`\$=3\catcode`\^=7\catcode`\_=8}]
+\PYGdefault{esc}{\tikz \coordinate(a1);}\PYGdefault{n}{printf}\PYGdefault{p}{(}\PYGdefault{esc}{\tikz \coordinate(b1);}\PYGdefault{l+s}{\PYGdefaultZdq{}The value of a = \PYGdefaultZpc{}@}\PYGdefault{l+s+se}{\PYGdefaultZbs{}t}\PYGdefault{l+s}{ikz \PYGdefaultZbs{}coordinate(p1);@d, the value of b is \PYGdefaultZpc{}@}\PYGdefault{l+s+se}{\PYGdefaultZbs{}t}\PYGdefault{l+s}{ikz \PYGdefaultZbs{}coordinate(p2);@f; and the character is \PYGdefaultZpc{}@}\PYGdefault{l+s+se}{\PYGdefaultZbs{}t}\PYGdefault{l+s}{ikz \PYGdefaultZbs{}coordinate(p3);@c}\PYGdefault{l+s+se}{\PYGdefaultZbs{}n}\PYGdefault{l+s}{\PYGdefaultZdq{}}\PYGdefault{esc}{\tikz \coordinate(c1);}\PYGdefault{p}{);}
+\end{Verbatim}

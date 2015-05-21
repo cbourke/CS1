@@ -1,0 +1,6 @@
+\begin{Verbatim}[commandchars=\\\{\},codes={\catcode`\$=3\catcode`\^=7\catcode`\_=8}]
+\PYGdefault{c+c1}{//prompt the user to enter input}
+\PYGdefault{n+nb}{printf}\PYGdefault{p}{(}\PYGdefault{l+s+s2}{\PYGdefaultZdq{}Please enter a number: \PYGdefaultZdq{}}\PYGdefault{p}{);}
+\PYGdefault{n+nv}{\PYGdefaultZdl{}a} \PYGdefault{o}{=} \PYGdefault{n+nb}{fgets}\PYGdefault{p}{(}\PYGdefault{n+nx}{STDIN}\PYGdefault{p}{);}
+\PYGdefault{n+nv}{\PYGdefaultZdl{}a} \PYGdefault{o}{=} \PYGdefault{n+nb}{trim}\PYGdefault{p}{(}\PYGdefault{n+nv}{\PYGdefaultZdl{}a}\PYGdefault{p}{);}
+\end{Verbatim}

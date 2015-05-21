@@ -1,0 +1,12 @@
+\begin{Verbatim}[commandchars=\\\{\},codes={\catcode`\$=3\catcode`\^=7\catcode`\_=8}]
+Perpendicular Line
+====================
+Enter x1: 2.5
+Enter y1: 10
+Enter x2: 3.5
+Enter y2: 11
+Original Line:
+  y = 1.0000 x + 7.5000
+Perpendicular Line:
+  y = \PYGdefaultZhy{}1.0000 x + 13.5000
+\end{Verbatim}

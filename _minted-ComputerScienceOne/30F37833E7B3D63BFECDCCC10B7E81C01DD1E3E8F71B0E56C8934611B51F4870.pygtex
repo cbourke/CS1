@@ -1,0 +1,41 @@
+\begin{Verbatim}[commandchars=\\\{\},codes={\catcode`\$=3\catcode`\^=7\catcode`\_=8}]
+\PYGdefault{c+cm}{/**}
+\PYGdefault{c+cm}{ * This program computes the roots to a quadratic equation}
+\PYGdefault{c+cm}{ * using the quadratic formula.}
+\PYGdefault{c+cm}{ */}
+\PYGdefault{k+kd}{public} \PYGdefault{k+kd}{class} \PYGdefault{n+nc}{Roots} \PYGdefault{o}{\PYGdefaultZob{}}
+
+  \PYGdefault{k+kd}{public} \PYGdefault{k+kd}{static} \PYGdefault{k+kt}{void} \PYGdefault{n+nf}{main}\PYGdefault{o}{(}\PYGdefault{n}{String} \PYGdefault{n}{args}\PYGdefault{o}{[])} \PYGdefault{o}{\PYGdefaultZob{}}
+    \PYGdefault{k+kt}{double} \PYGdefault{n}{a}\PYGdefault{o}{,} \PYGdefault{n}{b}\PYGdefault{o}{,} \PYGdefault{n}{c}\PYGdefault{o}{,} \PYGdefault{n}{root1}\PYGdefault{o}{,} \PYGdefault{n}{root2}\PYGdefault{o}{;}
+
+    \PYGdefault{k}{if}\PYGdefault{o}{(}\PYGdefault{n}{args}\PYGdefault{o}{.}\PYGdefault{n+na}{length} \PYGdefault{o}{!=} \PYGdefault{l+m+mi}{3}\PYGdefault{o}{)} \PYGdefault{o}{\PYGdefaultZob{}}
+      \PYGdefault{n}{System}\PYGdefault{o}{.}\PYGdefault{n+na}{err}\PYGdefault{o}{.}\PYGdefault{n+na}{println}\PYGdefault{o}{(}\PYGdefault{l+s}{\PYGdefaultZdq{}Usage: a b c\PYGdefaultZbs{}n\PYGdefaultZdq{}}\PYGdefault{o}{);}
+      \PYGdefault{n}{System}\PYGdefault{o}{.}\PYGdefault{n+na}{exit}\PYGdefault{o}{(}\PYGdefault{l+m+mi}{1}\PYGdefault{o}{);}
+    \PYGdefault{o}{\PYGdefaultZcb{}}
+
+    \PYGdefault{n}{a} \PYGdefault{o}{=} \PYGdefault{n}{Double}\PYGdefault{o}{.}\PYGdefault{n+na}{parseDouble}\PYGdefault{o}{(}\PYGdefault{n}{args}\PYGdefault{o}{[}\PYGdefault{l+m+mi}{0}\PYGdefault{o}{]);}
+    \PYGdefault{n}{b} \PYGdefault{o}{=} \PYGdefault{n}{Double}\PYGdefault{o}{.}\PYGdefault{n+na}{parseDouble}\PYGdefault{o}{(}\PYGdefault{n}{args}\PYGdefault{o}{[}\PYGdefault{l+m+mi}{1}\PYGdefault{o}{]);}
+    \PYGdefault{n}{c} \PYGdefault{o}{=} \PYGdefault{n}{Double}\PYGdefault{o}{.}\PYGdefault{n+na}{parseDouble}\PYGdefault{o}{(}\PYGdefault{n}{args}\PYGdefault{o}{[}\PYGdefault{l+m+mi}{2}\PYGdefault{o}{]);}
+
+    \PYGdefault{k}{if}\PYGdefault{o}{(}\PYGdefault{n}{a} \PYGdefault{o}{==} \PYGdefault{l+m+mi}{0}\PYGdefault{o}{)} \PYGdefault{o}{\PYGdefaultZob{}}
+      \PYGdefault{n}{System}\PYGdefault{o}{.}\PYGdefault{n+na}{err}\PYGdefault{o}{.}\PYGdefault{n+na}{println}\PYGdefault{o}{(}\PYGdefault{l+s}{\PYGdefaultZdq{}Error: a cannot be zero\PYGdefaultZdq{}}\PYGdefault{o}{);}
+      \PYGdefault{n}{System}\PYGdefault{o}{.}\PYGdefault{n+na}{exit}\PYGdefault{o}{(}\PYGdefault{l+m+mi}{1}\PYGdefault{o}{);}
+    \PYGdefault{o}{\PYGdefaultZcb{}} \PYGdefault{k}{else} \PYGdefault{k}{if}\PYGdefault{o}{(}\PYGdefault{n}{b}\PYGdefault{o}{*}\PYGdefault{n}{b} \PYGdefault{o}{\PYGdefaultZlt{}} \PYGdefault{l+m+mi}{4}\PYGdefault{o}{*}\PYGdefault{n}{a}\PYGdefault{o}{*}\PYGdefault{n}{c}\PYGdefault{o}{)} \PYGdefault{o}{\PYGdefaultZob{}}
+      \PYGdefault{n}{System}\PYGdefault{o}{.}\PYGdefault{n+na}{err}\PYGdefault{o}{.}\PYGdefault{n+na}{println}\PYGdefault{o}{(}\PYGdefault{l+s}{\PYGdefaultZdq{}Error: cannot handle complex roots\PYGdefaultZbs{}n\PYGdefaultZdq{}}\PYGdefault{o}{);}
+      \PYGdefault{n}{System}\PYGdefault{o}{.}\PYGdefault{n+na}{exit}\PYGdefault{o}{(}\PYGdefault{l+m+mi}{1}\PYGdefault{o}{);}
+    \PYGdefault{o}{\PYGdefaultZcb{}} \PYGdefault{k}{else} \PYGdefault{k}{if}\PYGdefault{o}{(}\PYGdefault{n}{b}\PYGdefault{o}{*}\PYGdefault{n}{b} \PYGdefault{o}{==} \PYGdefault{l+m+mi}{4}\PYGdefault{o}{*}\PYGdefault{n}{a}\PYGdefault{o}{*}\PYGdefault{n}{c}\PYGdefault{o}{)} \PYGdefault{o}{\PYGdefaultZob{}}
+      \PYGdefault{n}{root1} \PYGdefault{o}{=} \PYGdefault{o}{\PYGdefaultZhy{}}\PYGdefault{n}{b} \PYGdefault{o}{/} \PYGdefault{o}{(}\PYGdefault{l+m+mi}{2}\PYGdefault{o}{*}\PYGdefault{n}{a}\PYGdefault{o}{);}
+      \PYGdefault{n}{System}\PYGdefault{o}{.}\PYGdefault{n+na}{out}\PYGdefault{o}{.}\PYGdefault{n+na}{printf}\PYGdefault{o}{(}\PYGdefault{l+s}{\PYGdefaultZdq{}Only one distinct root: \PYGdefaultZpc{}f\PYGdefaultZbs{}n\PYGdefaultZdq{}}\PYGdefault{o}{,} \PYGdefault{n}{root1}\PYGdefault{o}{);}
+    \PYGdefault{o}{\PYGdefaultZcb{}} \PYGdefault{k}{else} \PYGdefault{o}{\PYGdefaultZob{}}
+      \PYGdefault{n}{root1} \PYGdefault{o}{=} \PYGdefault{o}{(\PYGdefaultZhy{}}\PYGdefault{n}{b} \PYGdefault{o}{+} \PYGdefault{n}{Math}\PYGdefault{o}{.}\PYGdefault{n+na}{sqrt}\PYGdefault{o}{(}\PYGdefault{n}{b}\PYGdefault{o}{*}\PYGdefault{n}{b} \PYGdefault{o}{\PYGdefaultZhy{}} \PYGdefault{l+m+mi}{4}\PYGdefault{o}{*}\PYGdefault{n}{a}\PYGdefault{o}{*}\PYGdefault{n}{c}\PYGdefault{o}{)} \PYGdefault{o}{)} \PYGdefault{o}{/} \PYGdefault{o}{(}\PYGdefault{l+m+mi}{2}\PYGdefault{o}{*}\PYGdefault{n}{a}\PYGdefault{o}{);}
+      \PYGdefault{n}{root2} \PYGdefault{o}{=} \PYGdefault{o}{(\PYGdefaultZhy{}}\PYGdefault{n}{b} \PYGdefault{o}{\PYGdefaultZhy{}} \PYGdefault{n}{Math}\PYGdefault{o}{.}\PYGdefault{n+na}{sqrt}\PYGdefault{o}{(}\PYGdefault{n}{b}\PYGdefault{o}{*}\PYGdefault{n}{b} \PYGdefault{o}{\PYGdefaultZhy{}} \PYGdefault{l+m+mi}{4}\PYGdefault{o}{*}\PYGdefault{n}{a}\PYGdefault{o}{*}\PYGdefault{n}{c}\PYGdefault{o}{)} \PYGdefault{o}{)} \PYGdefault{o}{/} \PYGdefault{o}{(}\PYGdefault{l+m+mi}{2}\PYGdefault{o}{*}\PYGdefault{n}{a}\PYGdefault{o}{);}
+
+      \PYGdefault{n}{System}\PYGdefault{o}{.}\PYGdefault{n+na}{out}\PYGdefault{o}{.}\PYGdefault{n+na}{printf}\PYGdefault{o}{(}\PYGdefault{l+s}{\PYGdefaultZdq{}The roots of \PYGdefaultZpc{}fx\PYGdefaultZca{}2 + \PYGdefaultZpc{}fx + \PYGdefaultZpc{}f are: \PYGdefaultZbs{}n\PYGdefaultZdq{}}\PYGdefault{o}{,}
+      	\PYGdefault{n}{a}\PYGdefault{o}{,} \PYGdefault{n}{b}\PYGdefault{o}{,} \PYGdefault{n}{c}\PYGdefault{o}{);}
+      \PYGdefault{n}{System}\PYGdefault{o}{.}\PYGdefault{n+na}{out}\PYGdefault{o}{.}\PYGdefault{n+na}{printf}\PYGdefault{o}{(}\PYGdefault{l+s}{\PYGdefaultZdq{}  root1 = \PYGdefaultZpc{}f\PYGdefaultZbs{}n\PYGdefaultZdq{}}\PYGdefault{o}{,} \PYGdefault{n}{root1}\PYGdefault{o}{);}
+      \PYGdefault{n}{System}\PYGdefault{o}{.}\PYGdefault{n+na}{out}\PYGdefault{o}{.}\PYGdefault{n+na}{printf}\PYGdefault{o}{(}\PYGdefault{l+s}{\PYGdefaultZdq{}  root2 = \PYGdefaultZpc{}f\PYGdefaultZbs{}n\PYGdefaultZdq{}}\PYGdefault{o}{,} \PYGdefault{n}{root2}\PYGdefault{o}{);}
+    \PYGdefault{o}{\PYGdefaultZcb{}}
+  \PYGdefault{o}{\PYGdefaultZcb{}}
+
+\PYGdefault{o}{\PYGdefaultZcb{}}
+\end{Verbatim}

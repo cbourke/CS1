@@ -1,0 +1,21 @@
+\begin{Verbatim}[commandchars=\\\{\},codes={\catcode`\$=3\catcode`\^=7\catcode`\_=8}]
+\PYGdefault{k+kt}{int} \PYGdefault{n}{a} \PYGdefault{o}{=} \PYGdefault{l+m+mi}{10}\PYGdefault{p}{,} \PYGdefault{n}{b} \PYGdefault{o}{=} \PYGdefault{l+m+mi}{20}\PYGdefault{p}{,} \PYGdefault{n}{c} \PYGdefault{o}{=} \PYGdefault{l+m+mi}{30}\PYGdefault{p}{,} \PYGdefault{n}{d}\PYGdefault{p}{;}
+\PYGdefault{n}{d} \PYGdefault{o}{=} \PYGdefault{n}{a} \PYGdefault{o}{+} \PYGdefault{l+m+mi}{5}\PYGdefault{p}{;}
+\PYGdefault{n}{d} \PYGdefault{o}{=} \PYGdefault{n}{a} \PYGdefault{o}{+} \PYGdefault{n}{b}\PYGdefault{p}{;}
+\PYGdefault{n}{d} \PYGdefault{o}{=} \PYGdefault{n}{a} \PYGdefault{o}{\PYGdefaultZhy{}} \PYGdefault{n}{b}\PYGdefault{p}{;}
+\PYGdefault{n}{d} \PYGdefault{o}{=} \PYGdefault{n}{a} \PYGdefault{o}{+} \PYGdefault{n}{b} \PYGdefault{o}{*} \PYGdefault{n}{c}\PYGdefault{p}{;}
+\PYGdefault{n}{d} \PYGdefault{o}{=} \PYGdefault{n}{a} \PYGdefault{o}{*} \PYGdefault{n}{b}\PYGdefault{p}{;}
+\PYGdefault{n}{d} \PYGdefault{o}{=} \PYGdefault{n}{a} \PYGdefault{o}{/} \PYGdefault{n}{b}\PYGdefault{p}{;} \PYGdefault{c+c1}{//integer division and truncation!  See below}
+
+\PYGdefault{k+kt}{double} \PYGdefault{n}{x} \PYGdefault{o}{=} \PYGdefault{l+m+mf}{1.5}\PYGdefault{p}{,} \PYGdefault{n}{y} \PYGdefault{o}{=} \PYGdefault{l+m+mf}{3.4}\PYGdefault{p}{,} \PYGdefault{n}{z} \PYGdefault{o}{=} \PYGdefault{l+m+mf}{10.5}\PYGdefault{p}{,} \PYGdefault{n}{w}\PYGdefault{p}{;}
+\PYGdefault{n}{w} \PYGdefault{o}{=} \PYGdefault{n}{x} \PYGdefault{o}{+} \PYGdefault{l+m+mf}{5.0}\PYGdefault{p}{;}
+\PYGdefault{n}{w} \PYGdefault{o}{=} \PYGdefault{n}{x} \PYGdefault{o}{+} \PYGdefault{n}{y}\PYGdefault{p}{;}
+\PYGdefault{n}{w} \PYGdefault{o}{=} \PYGdefault{n}{x} \PYGdefault{o}{\PYGdefaultZhy{}} \PYGdefault{n}{y}\PYGdefault{p}{;}
+\PYGdefault{n}{w} \PYGdefault{o}{=} \PYGdefault{n}{x} \PYGdefault{o}{+} \PYGdefault{n}{y} \PYGdefault{o}{*} \PYGdefault{n}{z}\PYGdefault{p}{;}
+\PYGdefault{n}{w} \PYGdefault{o}{=} \PYGdefault{n}{x} \PYGdefault{o}{*} \PYGdefault{n}{y}\PYGdefault{p}{;}
+\PYGdefault{n}{w} \PYGdefault{o}{=} \PYGdefault{n}{x} \PYGdefault{o}{/} \PYGdefault{n}{y}\PYGdefault{p}{;}
+
+\PYGdefault{c+c1}{//you can do arithmetic with both types:}
+\PYGdefault{n}{w} \PYGdefault{o}{=} \PYGdefault{n}{a} \PYGdefault{o}{+} \PYGdefault{n}{x}\PYGdefault{p}{;}
+\PYGdefault{n}{d} \PYGdefault{o}{=} \PYGdefault{n}{b} \PYGdefault{o}{+} \PYGdefault{n}{y}\PYGdefault{p}{;} \PYGdefault{c+c1}{//truncation also occurs here!}
+\end{Verbatim}

@@ -1,0 +1,14 @@
+\begin{Verbatim}[commandchars=\\\{\},codes={\catcode`\$=3\catcode`\^=7\catcode`\_=8}]
+\PYGdefault{k+kt}{double} \PYGdefault{n}{income}\PYGdefault{p}{,} \PYGdefault{n}{tax}\PYGdefault{p}{,} \PYGdefault{n}{numChildren}\PYGdefault{p}{,} \PYGdefault{n}{credit}\PYGdefault{p}{;}
+
+\PYGdefault{n}{printf}\PYGdefault{p}{(}\PYGdefault{l+s}{\PYGdefaultZdq{}Please enter your Adjusted Gross Income: \PYGdefaultZdq{}}\PYGdefault{p}{);}
+\PYGdefault{n}{scanf}\PYGdefault{p}{(}\PYGdefault{l+s}{\PYGdefaultZdq{}\PYGdefaultZpc{}lf\PYGdefaultZdq{}}\PYGdefault{p}{,} \PYGdefault{o}{\PYGdefaultZam{}}\PYGdefault{n}{income}\PYGdefault{p}{);}
+
+\PYGdefault{n}{printf}\PYGdefault{p}{(}\PYGdefault{l+s}{\PYGdefaultZdq{}How many children do you have?\PYGdefaultZdq{}}\PYGdefault{p}{);}
+\PYGdefault{n}{scanf}\PYGdefault{p}{(}\PYGdefault{l+s}{\PYGdefaultZdq{}\PYGdefaultZpc{}d\PYGdefaultZdq{}}\PYGdefault{p}{,} \PYGdefault{o}{\PYGdefaultZam{}}\PYGdefault{n}{numChildren}\PYGdefault{p}{);}
+
+\PYGdefault{k}{if}\PYGdefault{p}{(}\PYGdefault{n}{income} \PYGdefault{o}{\PYGdefaultZlt{}} \PYGdefault{l+m+mi}{0} \PYGdefault{o}{||} \PYGdefault{n}{numChildren} \PYGdefault{o}{\PYGdefaultZlt{}} \PYGdefault{l+m+mi}{0}\PYGdefault{p}{)} \PYGdefault{p}{\PYGdefaultZob{}}
+  \PYGdefault{n}{printf}\PYGdefault{p}{(}\PYGdefault{l+s}{\PYGdefaultZdq{}Invalid inputs\PYGdefaultZdq{}}\PYGdefault{p}{);}
+  \PYGdefault{n}{exit}\PYGdefault{p}{(}\PYGdefault{l+m+mi}{1}\PYGdefault{p}{);}
+\PYGdefault{p}{\PYGdefaultZcb{}}
+\end{Verbatim}
