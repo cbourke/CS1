@@ -1,0 +1,19 @@
+\begin{Verbatim}[commandchars=\\\{\},codes={\catcode`\$=3\catcode`\^=7\catcode`\_=8}]
+\PYGdefault{n+nv}{\PYGdefaultZdl{}a} \PYGdefault{o}{=} \PYGdefault{l+m+mi}{10}\PYGdefault{p}{,} \PYGdefault{n+nv}{\PYGdefaultZdl{}b} \PYGdefault{o}{=} \PYGdefault{l+m+mi}{20}\PYGdefault{p}{,} \PYGdefault{n+nv}{\PYGdefaultZdl{}c} \PYGdefault{o}{=} \PYGdefault{l+m+mi}{30}\PYGdefault{p}{;}
+\PYGdefault{n+nv}{\PYGdefaultZdl{}d} \PYGdefault{o}{=} \PYGdefault{n+nv}{\PYGdefaultZdl{}a} \PYGdefault{o}{+} \PYGdefault{l+m+mi}{5}\PYGdefault{p}{;}
+\PYGdefault{n+nv}{\PYGdefaultZdl{}d} \PYGdefault{o}{=} \PYGdefault{n+nv}{\PYGdefaultZdl{}a} \PYGdefault{o}{+} \PYGdefault{n+nv}{\PYGdefaultZdl{}b}\PYGdefault{p}{;}
+\PYGdefault{n+nv}{\PYGdefaultZdl{}d} \PYGdefault{o}{=} \PYGdefault{n+nv}{\PYGdefaultZdl{}a} \PYGdefault{o}{\PYGdefaultZhy{}} \PYGdefault{n+nv}{\PYGdefaultZdl{}b}\PYGdefault{p}{;}
+\PYGdefault{n+nv}{\PYGdefaultZdl{}d} \PYGdefault{o}{=} \PYGdefault{n+nv}{\PYGdefaultZdl{}a} \PYGdefault{o}{+} \PYGdefault{n+nv}{\PYGdefaultZdl{}b} \PYGdefault{o}{*} \PYGdefault{n+nv}{\PYGdefaultZdl{}c}\PYGdefault{p}{;}
+\PYGdefault{n+nv}{\PYGdefaultZdl{}d} \PYGdefault{o}{=} \PYGdefault{n+nv}{\PYGdefaultZdl{}a} \PYGdefault{o}{*} \PYGdefault{n+nv}{\PYGdefaultZdl{}b}\PYGdefault{p}{;} \PYGdefault{c+c1}{//d becomes a floating\PYGdefaultZhy{}point number with a value .5}
+
+\PYGdefault{n+nv}{\PYGdefaultZdl{}x} \PYGdefault{o}{=} \PYGdefault{l+m+mf}{1.5}\PYGdefault{p}{,} \PYGdefault{n+nv}{\PYGdefaultZdl{}y} \PYGdefault{o}{=} \PYGdefault{l+m+mf}{3.4}\PYGdefault{p}{,} \PYGdefault{n+nv}{\PYGdefaultZdl{}z} \PYGdefault{o}{=} \PYGdefault{l+m+mf}{10.5}\PYGdefault{p}{;}
+\PYGdefault{n+nv}{\PYGdefaultZdl{}w} \PYGdefault{o}{=} \PYGdefault{n+nv}{\PYGdefaultZdl{}x} \PYGdefault{o}{+} \PYGdefault{l+m+mf}{5.0}\PYGdefault{p}{;}
+\PYGdefault{n+nv}{\PYGdefaultZdl{}w} \PYGdefault{o}{=} \PYGdefault{n+nv}{\PYGdefaultZdl{}x} \PYGdefault{o}{+} \PYGdefault{n+nv}{\PYGdefaultZdl{}y}\PYGdefault{p}{;}
+\PYGdefault{n+nv}{\PYGdefaultZdl{}w} \PYGdefault{o}{=} \PYGdefault{n+nv}{\PYGdefaultZdl{}x} \PYGdefault{o}{\PYGdefaultZhy{}} \PYGdefault{n+nv}{\PYGdefaultZdl{}y}\PYGdefault{p}{;}
+\PYGdefault{n+nv}{\PYGdefaultZdl{}w} \PYGdefault{o}{=} \PYGdefault{n+nv}{\PYGdefaultZdl{}x} \PYGdefault{o}{+} \PYGdefault{n+nv}{\PYGdefaultZdl{}y} \PYGdefault{o}{*} \PYGdefault{n+nv}{\PYGdefaultZdl{}z}\PYGdefault{p}{;}
+\PYGdefault{n+nv}{\PYGdefaultZdl{}w} \PYGdefault{o}{=} \PYGdefault{n+nv}{\PYGdefaultZdl{}x} \PYGdefault{o}{*} \PYGdefault{n+nv}{\PYGdefaultZdl{}y}\PYGdefault{p}{;}
+\PYGdefault{n+nv}{\PYGdefaultZdl{}w} \PYGdefault{o}{=} \PYGdefault{n+nv}{\PYGdefaultZdl{}x} \PYGdefault{o}{/} \PYGdefault{n+nv}{\PYGdefaultZdl{}y}\PYGdefault{p}{;}
+
+\PYGdefault{c+c1}{//mixing integers and floating\PYGdefaultZhy{}point numbers is no problem}
+\PYGdefault{n+nv}{\PYGdefaultZdl{}w} \PYGdefault{o}{=} \PYGdefault{n+nv}{\PYGdefaultZdl{}a} \PYGdefault{o}{+} \PYGdefault{n+nv}{\PYGdefaultZdl{}x}\PYGdefault{p}{;}
+\end{Verbatim}

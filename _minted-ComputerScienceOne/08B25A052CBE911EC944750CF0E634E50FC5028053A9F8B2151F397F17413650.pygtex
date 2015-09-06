@@ -1,0 +1,28 @@
+\begin{Verbatim}[commandchars=\\\{\},codes={\catcode`\$=3\catcode`\^=7\catcode`\_=8}]
+\PYGdefault{k+kn}{package} \PYGdefault{n+nn}{unl.cse}\PYGdefault{o}{;}
+
+\PYGdefault{k+kn}{import} \PYGdefault{n+nn}{java.util.Scanner}\PYGdefault{o}{;}
+
+\PYGdefault{k+kd}{public} \PYGdefault{k+kd}{class} \PYGdefault{n+nc}{TemperatureConverter} \PYGdefault{o}{\PYGdefaultZob{}}
+
+  \PYGdefault{k+kd}{public} \PYGdefault{k+kd}{static} \PYGdefault{k+kt}{void} \PYGdefault{n+nf}{main}\PYGdefault{o}{(}\PYGdefault{n}{String} \PYGdefault{n}{args}\PYGdefault{o}{[])} \PYGdefault{o}{\PYGdefaultZob{}}
+
+    \PYGdefault{k+kt}{double} \PYGdefault{n}{fahrenheit}\PYGdefault{o}{,} \PYGdefault{n}{celsius}\PYGdefault{o}{;}
+    \PYGdefault{n}{Scanner} \PYGdefault{n}{s} \PYGdefault{o}{=} \PYGdefault{k}{new} \PYGdefault{n}{Scanner}\PYGdefault{o}{(}\PYGdefault{n}{System}\PYGdefault{o}{.}\PYGdefault{n+na}{in}\PYGdefault{o}{);}
+
+    \PYGdefault{c+c1}{//1. Prompt the user for input in Fahrenheit}
+    \PYGdefault{n}{System}\PYGdefault{o}{.}\PYGdefault{n+na}{out}\PYGdefault{o}{.}\PYGdefault{n+na}{println}\PYGdefault{o}{(}\PYGdefault{l+s}{\PYGdefaultZdq{}Please enter degrees in Fahrenheit: \PYGdefaultZdq{}}\PYGdefault{o}{);}
+
+    \PYGdefault{c+c1}{//2. Read the Fahrenheit value from the standard input}
+    \PYGdefault{n}{fahrenheit} \PYGdefault{o}{=} \PYGdefault{n}{s}\PYGdefault{o}{.}\PYGdefault{n+na}{nextDouble}\PYGdefault{o}{();}
+
+    \PYGdefault{c+c1}{//3. Compute the degrees Celsius}
+    \PYGdefault{n}{celsius} \PYGdefault{o}{=} \PYGdefault{o}{(}\PYGdefault{n}{fahrenheit} \PYGdefault{o}{\PYGdefaultZhy{}} \PYGdefault{l+m+mi}{32}\PYGdefault{o}{)} \PYGdefault{o}{*} \PYGdefault{l+m+mf}{5.0} \PYGdefault{o}{/} \PYGdefault{l+m+mi}{9}\PYGdefault{o}{;}
+
+    \PYGdefault{c+c1}{//4. Print the result to the user}
+    \PYGdefault{n}{System}\PYGdefault{o}{.}\PYGdefault{n+na}{out}\PYGdefault{o}{.}\PYGdefault{n+na}{printf}\PYGdefault{o}{(}\PYGdefault{l+s}{\PYGdefaultZdq{}\PYGdefaultZpc{}f Fahrenheit is \PYGdefaultZpc{}f Celsius\PYGdefaultZbs{}n\PYGdefaultZdq{}}\PYGdefault{o}{,}
+    	\PYGdefault{n}{fahrenheit}\PYGdefault{o}{,} \PYGdefault{n}{celsius}\PYGdefault{o}{);}
+
+  \PYGdefault{o}{\PYGdefaultZcb{}}
+\PYGdefault{o}{\PYGdefaultZcb{}}
+\end{Verbatim}

@@ -1,0 +1,56 @@
+%\documentclass[12pt]{article}
+%\usepackage{tikz}
+%\usepackage{minted}
+%\usetikzlibrary{decorations.pathreplacing}
+%\usetikzlibrary{fadings}
+%\usepackage{fullpage}
+%\begin{document}
+%\begin{figure}
+%\centering
+
+\begin{tikzpicture}[auto,scale=0.80,transform shape,every node/.style={text centered, text width=5.5cm}]
+
+\node [above left] (bottom) at (0,0) {Bottom of the stack (high memory)};
+\node [below left] (top) at (0,15.5) {Top of the stack (low memory)};
+
+\draw (6,18.5) -- (6, 15.5);
+\draw[path fading=north] (0,15.5) -- (0, 18.5);
+\node [above] (unused) at (3, 16) {Unused stack space};
+
+\draw[fill=blue!10!white] (0, 0) rectangle (6,2);
+\node [above] (pc) at (3,0) {Program Code};
+
+\draw[fill=yellow!10!white] (0, 2) rectangle (6,3.5);
+\node [above] (globals) at (3,2) {Global Variables \\ Static Content};
+
+\draw[fill=green!30!white] (0, 3.5) rectangle (6,7.5);
+\node [above] (main) at (3,3.5) {arguments \mintinline{c}{argc, argv}};
+\draw[dashed] (0, 5) -- (6, 5);
+\node [above] (mainvar) at (3,5) {return address, value (\mintinline{c}{0})};
+\draw[dashed] (0, 6) -- (6, 6);
+\node [above] (mainvar2) at (3,6) {local variables \mintinline{c}{n, m, ave}};
+\draw [decorate,decoration={brace,amplitude=10pt,mirror},xshift=4pt,yshift=0pt] (6, 3.5) -- (6, 6.5+1) node [align=left,black,midway,xshift=6.25cm]  {\texttt{main()} stack frame};
+
+
+\draw[fill=green!20!white] (0, 3.5+4) rectangle (6,7.5+4);
+\node [above] (main) at (3,3.5+4) {arguments \mintinline{c}{a, b}};
+\draw[dashed] (0, 5+4) -- (6, 5+4);
+\node [above] (mainvar) at (3,5+4) {return address, value (\mintinline{c}{12.5})};
+\draw[dashed] (0, 6+4) -- (6, 6+4);
+\node [above] (mainvar2) at (3,6+4) {local variables \mintinline{c}{y}};
+\draw [decorate,decoration={brace,amplitude=10pt,mirror},xshift=4pt,yshift=0pt] (6, 3.5+4) -- (6, 7.5+4) node [align=left,black,midway,xshift=6.25cm]  {\texttt{average()} stack frame};
+
+
+\draw[fill=green!10!white] (0, 3.5+8) rectangle (6,7.5+8);
+\node [above] (main) at (3,3.5+8) {arguments \mintinline{c}{a, b}};
+\draw[dashed] (0, 5+8) -- (6, 5+8);
+\node [above] (mainvar) at (3,5+8) {return address, value (\mintinline{c}{26.0})};
+\draw[dashed] (0, 6+8) -- (6, 6+8);
+\node [above] (mainvar2) at (3,6+8) {local variables \mintinline{c}{x}};
+\draw [decorate,decoration={brace,amplitude=10pt,mirror},xshift=4pt,yshift=0pt] (6, 3.6+8) -- (6, 7.6+8) node [align=left,black,midway,xshift=6.25cm]  {\texttt{sum()} stack frame};
+
+
+\end{tikzpicture}
+
+
+%\end{document}

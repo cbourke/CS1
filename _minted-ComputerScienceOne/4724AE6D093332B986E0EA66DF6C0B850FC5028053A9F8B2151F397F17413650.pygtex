@@ -1,0 +1,3 @@
+\begin{Verbatim}[commandchars=\\\{\},codes={\catcode`\$=3\catcode`\^=7\catcode`\_=8}]
+\PYGdefault{n}{Scanner} \PYGdefault{n}{s} \PYGdefault{o}{=} \PYGdefault{k}{new} \PYGdefault{n}{Scanner}\PYGdefault{o}{(}\PYGdefault{n}{System}\PYGdefault{o}{.}\PYGdefault{n+na}{in}\PYGdefault{o}{);}
+\end{Verbatim}

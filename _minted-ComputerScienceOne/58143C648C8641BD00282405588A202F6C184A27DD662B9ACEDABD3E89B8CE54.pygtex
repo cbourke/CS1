@@ -1,0 +1,9 @@
+\begin{Verbatim}[commandchars=\\\{\},codes={\catcode`\$=3\catcode`\^=7\catcode`\_=8}]
+\PYGdefault{c+c1}{//regular variable declarations}
+\PYGdefault{k+kt}{int} \PYGdefault{n}{a}\PYGdefault{p}{;}
+\PYGdefault{k+kt}{double} \PYGdefault{n}{b}\PYGdefault{p}{;}
+
+\PYGdefault{c+c1}{//pointer variable declarations}
+\PYGdefault{k+kt}{int} \PYGdefault{o}{*}\PYGdefault{n}{ptrA}\PYGdefault{p}{;}
+\PYGdefault{k+kt}{double} \PYGdefault{o}{*}\PYGdefault{n}{ptrB}\PYGdefault{p}{;}
+\end{Verbatim}

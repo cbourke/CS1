@@ -1,4 +1,29 @@
 
+Revise Introduction:
+ Include a section on programming language paradigms, Procedural, Functional, Object Oriented, etc.
+
+Analogies:
+ Periods end sentences -> semicolons end executable lines
+ Paragraphs are separated by lines -> blocks are demarcated with curly brackets
+ Shakespearian plays are annotated: lines needing more explanation have
+  footnotes; but not all lines need explaining -> comments should be used
+  to document important or unclear things; code itself should be self-documenting
+
+Add a quote:
+ Because of the low-level nature of C, you can really get yourself
+ in trouble and the language will let you.  In contrast, some language
+ C is the kind of language that if you tell it you want to shoot
+ yourself in the foot, it will ask you ``what caliber’’?   
+ In contrast, some more ``managed'' languages will ask you, are you
+ really sure you want to do that?
+
+Under comments section add a reference to ``doc style’’ comments
+and description
+
+Exercises:
+ -incorporate Fall 2015 155H/RAIK exercises into book
+
+
 
 155 Book
  -transfer word notes
@@ -8,3 +33,25 @@
    http://cse.unl.edu/~lksoh/Classes/CSCE155N_Spring13/homeworks.html
    http://cse.unl.edu/~lksoh/Classes/CSCE155N_Fall12/homeworks.html
 
+
+Ryan:
+I'm just getting to look at this now.
+
+-I like Figure 2.1 (I present loops and conditionals using similar diagramming), but it's probably better to differentiate control nodes and action nodes in a way that would be unambiguous if someone printed the text in black and white. Could you change the shape or texture of one of them to clarify which is which?
+-It doesn't look like you define that you are using // to start comments until 15.2.3, but you start using them in 2.2.4
+
+
+C: malloc:
+
+issues like this can invoke holy wars
+
+to cast or not to cast?
+
+not necessary in pure C
+
+will do it:
+clarity and intent is more important than brevity
+more importantly: its necessary in C++, doing so allows you to use either compiler
+
+more:
+http://stackoverflow.com/questions/605845/do-i-cast-the-result-of-malloc

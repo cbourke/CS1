@@ -10,7 +10,6 @@ int main(int argc, char **argv) {
   }
 
   double x = atof(argv[1]);
-
   double result = sqrt(x);
 
   if(x < 0) {

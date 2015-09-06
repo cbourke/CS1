@@ -1,0 +1,19 @@
+\begin{Verbatim}[commandchars=\\\{\},codes={\catcode`\$=3\catcode`\^=7\catcode`\_=8}]
+\PYGdefault{k+kt}{double} \PYGdefault{n+nf}{sum}\PYGdefault{p}{(}\PYGdefault{k+kt}{double} \PYGdefault{n}{a}\PYGdefault{p}{,} \PYGdefault{k+kt}{double} \PYGdefault{n}{b}\PYGdefault{p}{)} \PYGdefault{p}{\PYGdefaultZob{}}
+  \PYGdefault{k+kt}{double} \PYGdefault{n}{x} \PYGdefault{o}{=} \PYGdefault{n}{a} \PYGdefault{o}{+} \PYGdefault{n}{b}\PYGdefault{p}{;}
+  \PYGdefault{k}{return} \PYGdefault{n}{x}\PYGdefault{p}{;}
+\PYGdefault{p}{\PYGdefaultZcb{}}
+
+\PYGdefault{k+kt}{double} \PYGdefault{n+nf}{average}\PYGdefault{p}{(}\PYGdefault{k+kt}{double} \PYGdefault{n}{a}\PYGdefault{p}{,} \PYGdefault{k+kt}{double} \PYGdefault{n}{b}\PYGdefault{p}{)} \PYGdefault{p}{\PYGdefaultZob{}}
+  \PYGdefault{k+kt}{double} \PYGdefault{n}{y} \PYGdefault{o}{=} \PYGdefault{n}{sum}\PYGdefault{p}{(}\PYGdefault{n}{a}\PYGdefault{p}{,} \PYGdefault{n}{b}\PYGdefault{p}{)} \PYGdefault{o}{/} \PYGdefault{l+m+mf}{2.0}\PYGdefault{p}{;}
+  \PYGdefault{k}{return} \PYGdefault{n}{y}\PYGdefault{p}{;}
+\PYGdefault{p}{\PYGdefaultZcb{}}
+
+\PYGdefault{k+kt}{int} \PYGdefault{n+nf}{main}\PYGdefault{p}{(}\PYGdefault{k+kt}{int} \PYGdefault{n}{argc}\PYGdefault{p}{,} \PYGdefault{k+kt}{char} \PYGdefault{o}{**}\PYGdefault{n}{argv}\PYGdefault{p}{)} \PYGdefault{p}{\PYGdefaultZob{}}
+  \PYGdefault{k+kt}{double} \PYGdefault{n}{n} \PYGdefault{o}{=} \PYGdefault{l+m+mf}{10.0}\PYGdefault{p}{;}
+  \PYGdefault{k+kt}{double} \PYGdefault{n}{m} \PYGdefault{o}{=} \PYGdefault{l+m+mf}{16.0}\PYGdefault{p}{;}
+  \PYGdefault{k+kt}{double} \PYGdefault{n}{ave} \PYGdefault{o}{=} \PYGdefault{n}{average}\PYGdefault{p}{(}\PYGdefault{n}{n}\PYGdefault{p}{,} \PYGdefault{n}{m}\PYGdefault{p}{);}
+  \PYGdefault{n}{printf}\PYGdefault{p}{(}\PYGdefault{l+s}{\PYGdefaultZdq{}average = \PYGdefaultZpc{}f}\PYGdefault{l+s+se}{\PYGdefaultZbs{}n}\PYGdefault{l+s}{\PYGdefaultZdq{}}\PYGdefault{p}{,} \PYGdefault{n}{ave}\PYGdefault{p}{);}
+  \PYGdefault{k}{return} \PYGdefault{l+m+mi}{0}\PYGdefault{p}{;}
+\PYGdefault{p}{\PYGdefaultZcb{}}
+\end{Verbatim}

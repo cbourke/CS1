@@ -7,7 +7,7 @@
 \glossaryentry{JVM?\glossaryentryfield{jvmLabel}{\glsnamefont{JVM}}{Java Virtual Machine}{\relax }|setentrycounter[]{page}\glsnumberformat}{7}
 \glossaryentry{JVM?\glossaryentryfield{jvmLabel}{\glsnamefont{JVM}}{Java Virtual Machine}{\relax }|setentrycounter[]{page}\glsnumberformat}{9}
 \glossaryentry{JIT?\glossaryentryfield{jitLabel}{\glsnamefont{JIT}}{Just In Time}{\relax }|setentrycounter[]{page}\glsnumberformat}{9}
-\glossaryentry{API?\glossaryentryfield{apiLabel}{\glsnamefont{API}}{Application Programmer Interface}{\relax }|setentrycounter[]{page}\glsnumberformat}{14}
+\glossaryentry{API?\glossaryentryfield{apiLabel}{\glsnamefont{API}}{Application Programmer Interface}{\relax }|setentrycounter[]{page}\glsnumberformat}{13}
 \glossaryentry{XML?\glossaryentryfield{xmlLabel}{\glsnamefont{XML}}{Extensible Markup Language}{\relax }|setentrycounter[]{page}\glsnumberformat}{18}
 \glossaryentry{IDE?\glossaryentryfield{ideLabel}{\glsnamefont{IDE}}{Integrated Development Environment}{\relax }|setentrycounter[]{page}\glsnumberformat}{19}
 \glossaryentry{IEEE?\glossaryentryfield{ieeeLabel}{\glsnamefont{IEEE}}{Institute of Electrical and Electronics Engineers}{\relax }|setentrycounter[]{page}\glsnumberformat}{23}
@@ -21,36 +21,42 @@
 \glossaryentry{GNU?\glossaryentryfield{gnuLabel}{\glsnamefont{GNU}}{GNU's Not Unix"!}{\relax }|setentrycounter[]{page}\glsnumberformat}{46}
 \glossaryentry{ASCII?\glossaryentryfield{asciiLabel}{\glsnamefont{ASCII}}{American Standard Code for Information Interchange}{\relax }|setentrycounter[]{page}\glsnumberformat}{56}
 \glossaryentry{CPU?\glossaryentryfield{cpuLabel}{\glsnamefont{CPU}}{Central Processing Unit}{\relax }|setentrycounter[]{page}\glsnumberformat}{64}
-\glossaryentry{ANSI?\glossaryentryfield{ansiLabel}{\glsnamefont{ANSI}}{American National Standards Institute}{\relax }|setentrycounter[]{page}\glsnumberformat}{133}
-\glossaryentry{ISO?\glossaryentryfield{isoLabel}{\glsnamefont{ISO}}{International Organization for Standardization}{\relax }|setentrycounter[]{page}\glsnumberformat}{133}
-\glossaryentry{IEC?\glossaryentryfield{iecLabel}{\glsnamefont{IEC}}{International Electrotechnical Commission}{\relax }|setentrycounter[]{page}\glsnumberformat}{133}
-\glossaryentry{IDE?\glossaryentryfield{ideLabel}{\glsnamefont{IDE}}{Integrated Development Environment}{\relax }|setentrycounter[]{page}\glsnumberformat}{137}
-\glossaryentry{POSIX?\glossaryentryfield{posixLabel}{\glsnamefont{POSIX}}{Portable Operating System Interface}{\relax }|setentrycounter[]{page}\glsnumberformat}{138}
-\glossaryentry{ASCII?\glossaryentryfield{asciiLabel}{\glsnamefont{ASCII}}{American Standard Code for Information Interchange}{\relax }|setentrycounter[]{page}\glsnumberformat}{138}
-\glossaryentry{IEEE?\glossaryentryfield{ieeeLabel}{\glsnamefont{IEEE}}{Institute of Electrical and Electronics Engineers}{\relax }|setentrycounter[]{page}\glsnumberformat}{139}
-\glossaryentry{WWW?\glossaryentryfield{wwwLabel}{\glsnamefont{WWW}}{World Wide Web}{\relax }|setentrycounter[]{page}\glsnumberformat}{173}
-\glossaryentry{JDK?\glossaryentryfield{jdkLabel}{\glsnamefont{JDK}}{Java Development Kit}{\relax }|setentrycounter[]{page}\glsnumberformat}{173}
-\glossaryentry{JVM?\glossaryentryfield{jvmLabel}{\glsnamefont{JVM}}{Java Virtual Machine}{\relax }|setentrycounter[]{page}\glsnumberformat}{173}
-\glossaryentry{JVM?\glossaryentryfield{jvmLabel}{\glsnamefont{JVM}}{Java Virtual Machine}{\relax }|setentrycounter[]{page}\glsnumberformat}{173}
-\glossaryentry{JVM?\glossaryentryfield{jvmLabel}{\glsnamefont{JVM}}{Java Virtual Machine}{\relax }|setentrycounter[]{page}\glsnumberformat}{173}
-\glossaryentry{JVM?\glossaryentryfield{jvmLabel}{\glsnamefont{JVM}}{Java Virtual Machine}{\relax }|setentrycounter[]{page}\glsnumberformat}{174}
-\glossaryentry{OOP?\glossaryentryfield{oopLabel}{\glsnamefont{OOP}}{Object-Oriented Programming}{\relax }|setentrycounter[]{page}\glsnumberformat}{174}
-\glossaryentry{JDK?\glossaryentryfield{jdkLabel}{\glsnamefont{JDK}}{Java Development Kit}{\relax }|setentrycounter[]{page}\glsnumberformat}{174}
-\glossaryentry{IDE?\glossaryentryfield{ideLabel}{\glsnamefont{IDE}}{Integrated Development Environment}{\relax }|setentrycounter[]{page}\glsnumberformat}{174}
-\glossaryentry{ASCII?\glossaryentryfield{asciiLabel}{\glsnamefont{ASCII}}{American Standard Code for Information Interchange}{\relax }|setentrycounter[]{page}\glsnumberformat}{175}
-\glossaryentry{OOP?\glossaryentryfield{oopLabel}{\glsnamefont{OOP}}{Object-Oriented Programming}{\relax }|setentrycounter[]{page}\glsnumberformat}{176}
-\glossaryentry{IDE?\glossaryentryfield{ideLabel}{\glsnamefont{IDE}}{Integrated Development Environment}{\relax }|setentrycounter[]{page}\glsnumberformat}{178}
-\glossaryentry{ASCII?\glossaryentryfield{asciiLabel}{\glsnamefont{ASCII}}{American Standard Code for Information Interchange}{\relax }|setentrycounter[]{page}\glsnumberformat}{180}
-\glossaryentry{HTML?\glossaryentryfield{htmlLabel}{\glsnamefont{HTML}}{HyperText Markup Language}{\relax }|setentrycounter[]{page}\glsnumberformat}{213}
-\glossaryentry{CMS?\glossaryentryfield{cmsLabel}{\glsnamefont{CMS}}{Content Management System}{\relax }|setentrycounter[]{page}\glsnumberformat}{213}
-\glossaryentry{OOP?\glossaryentryfield{oopLabel}{\glsnamefont{OOP}}{Object-Oriented Programming}{\relax }|setentrycounter[]{page}\glsnumberformat}{215}
-\glossaryentry{IDE?\glossaryentryfield{ideLabel}{\glsnamefont{IDE}}{Integrated Development Environment}{\relax }|setentrycounter[]{page}\glsnumberformat}{217}
-\glossaryentry{IEEE?\glossaryentryfield{ieeeLabel}{\glsnamefont{IEEE}}{Institute of Electrical and Electronics Engineers}{\relax }|setentrycounter[]{page}\glsnumberformat}{218}
-\glossaryentry{CLI?\glossaryentryfield{cliLabel}{\glsnamefont{CLI}}{Command Line Interface}{\relax }|setentrycounter[]{page}\glsnumberformat}{223}
-\glossaryentry{ACM?\glossaryentryfield{acmLabel}{\glsnamefont{ACM}}{Association for Computing Machinery}{\relax }|setentrycounter[]{page}\ignore}{252}
-\glossaryentry{KB?\glossaryentryfield{kbLabel}{\glsnamefont{KB}}{Kilobyte}{\relax }|setentrycounter[]{page}\ignore}{252}
-\glossaryentry{NIST?\glossaryentryfield{nistLabel}{\glsnamefont{NIST}}{National Institute of Standards and Technology}{\relax }|setentrycounter[]{page}\ignore}{252}
-\glossaryentry{ROM?\glossaryentryfield{romLabel}{\glsnamefont{ROM}}{Read-Only Memory}{\relax }|setentrycounter[]{page}\ignore}{252}
-\glossaryentry{STEM?\glossaryentryfield{stemLabel}{\glsnamefont{STEM}}{Science, Technology, Engineering, and Math}{\relax }|setentrycounter[]{page}\ignore}{252}
-\glossaryentry{UTF-8?\glossaryentryfield{utfLabel}{\glsnamefont{UTF-8}}{Universal (Character Set) Transformation Format--8-bit}{\relax }|setentrycounter[]{page}\ignore}{252}
-\glossaryentry{W3C?\glossaryentryfield{w3cLabel}{\glsnamefont{W3C}}{World Wide Web Consortium}{\relax }|setentrycounter[]{page}\ignore}{252}
+\glossaryentry{LIFO?\glossaryentryfield{lifoLabel}{\glsnamefont{LIFO}}{Last-In First-Out}{\relax }|setentrycounter[]{page}\glsnumberformat}{115}
+\glossaryentry{GUI?\glossaryentryfield{guiLabel}{\glsnamefont{GUI}}{Graphical User Interface}{\relax }|setentrycounter[]{page}\glsnumberformat}{122}
+\glossaryentry{ANSI?\glossaryentryfield{ansiLabel}{\glsnamefont{ANSI}}{American National Standards Institute}{\relax }|setentrycounter[]{page}\glsnumberformat}{145}
+\glossaryentry{ISO?\glossaryentryfield{isoLabel}{\glsnamefont{ISO}}{International Organization for Standardization}{\relax }|setentrycounter[]{page}\glsnumberformat}{145}
+\glossaryentry{IEC?\glossaryentryfield{iecLabel}{\glsnamefont{IEC}}{International Electrotechnical Commission}{\relax }|setentrycounter[]{page}\glsnumberformat}{145}
+\glossaryentry{IDE?\glossaryentryfield{ideLabel}{\glsnamefont{IDE}}{Integrated Development Environment}{\relax }|setentrycounter[]{page}\glsnumberformat}{149}
+\glossaryentry{POSIX?\glossaryentryfield{posixLabel}{\glsnamefont{POSIX}}{Portable Operating System Interface}{\relax }|setentrycounter[]{page}\glsnumberformat}{150}
+\glossaryentry{ASCII?\glossaryentryfield{asciiLabel}{\glsnamefont{ASCII}}{American Standard Code for Information Interchange}{\relax }|setentrycounter[]{page}\glsnumberformat}{150}
+\glossaryentry{IEEE?\glossaryentryfield{ieeeLabel}{\glsnamefont{IEEE}}{Institute of Electrical and Electronics Engineers}{\relax }|setentrycounter[]{page}\glsnumberformat}{151}
+\glossaryentry{DRY?\glossaryentryfield{dryLabel}{\glsnamefont{DRY}}{Don't Repeat Yourself}{\relax }|setentrycounter[]{page}\glsnumberformat}{181}
+\glossaryentry{SSL?\glossaryentryfield{sslLabel}{\glsnamefont{SSL}}{Secure Sockets Layer}{\relax }|setentrycounter[]{page}\glsnumberformat}{185}
+\glossaryentry{WWW?\glossaryentryfield{wwwLabel}{\glsnamefont{WWW}}{World Wide Web}{\relax }|setentrycounter[]{page}\glsnumberformat}{193}
+\glossaryentry{JDK?\glossaryentryfield{jdkLabel}{\glsnamefont{JDK}}{Java Development Kit}{\relax }|setentrycounter[]{page}\glsnumberformat}{193}
+\glossaryentry{JVM?\glossaryentryfield{jvmLabel}{\glsnamefont{JVM}}{Java Virtual Machine}{\relax }|setentrycounter[]{page}\glsnumberformat}{193}
+\glossaryentry{JVM?\glossaryentryfield{jvmLabel}{\glsnamefont{JVM}}{Java Virtual Machine}{\relax }|setentrycounter[]{page}\glsnumberformat}{193}
+\glossaryentry{JVM?\glossaryentryfield{jvmLabel}{\glsnamefont{JVM}}{Java Virtual Machine}{\relax }|setentrycounter[]{page}\glsnumberformat}{193}
+\glossaryentry{JVM?\glossaryentryfield{jvmLabel}{\glsnamefont{JVM}}{Java Virtual Machine}{\relax }|setentrycounter[]{page}\glsnumberformat}{194}
+\glossaryentry{OOP?\glossaryentryfield{oopLabel}{\glsnamefont{OOP}}{Object-Oriented Programming}{\relax }|setentrycounter[]{page}\glsnumberformat}{194}
+\glossaryentry{JDK?\glossaryentryfield{jdkLabel}{\glsnamefont{JDK}}{Java Development Kit}{\relax }|setentrycounter[]{page}\glsnumberformat}{194}
+\glossaryentry{IDE?\glossaryentryfield{ideLabel}{\glsnamefont{IDE}}{Integrated Development Environment}{\relax }|setentrycounter[]{page}\glsnumberformat}{194}
+\glossaryentry{ASCII?\glossaryentryfield{asciiLabel}{\glsnamefont{ASCII}}{American Standard Code for Information Interchange}{\relax }|setentrycounter[]{page}\glsnumberformat}{195}
+\glossaryentry{OOP?\glossaryentryfield{oopLabel}{\glsnamefont{OOP}}{Object-Oriented Programming}{\relax }|setentrycounter[]{page}\glsnumberformat}{196}
+\glossaryentry{IDE?\glossaryentryfield{ideLabel}{\glsnamefont{IDE}}{Integrated Development Environment}{\relax }|setentrycounter[]{page}\glsnumberformat}{198}
+\glossaryentry{ASCII?\glossaryentryfield{asciiLabel}{\glsnamefont{ASCII}}{American Standard Code for Information Interchange}{\relax }|setentrycounter[]{page}\glsnumberformat}{200}
+\glossaryentry{HTML?\glossaryentryfield{htmlLabel}{\glsnamefont{HTML}}{HyperText Markup Language}{\relax }|setentrycounter[]{page}\glsnumberformat}{233}
+\glossaryentry{CMS?\glossaryentryfield{cmsLabel}{\glsnamefont{CMS}}{Content Management System}{\relax }|setentrycounter[]{page}\glsnumberformat}{233}
+\glossaryentry{OOP?\glossaryentryfield{oopLabel}{\glsnamefont{OOP}}{Object-Oriented Programming}{\relax }|setentrycounter[]{page}\glsnumberformat}{235}
+\glossaryentry{IDE?\glossaryentryfield{ideLabel}{\glsnamefont{IDE}}{Integrated Development Environment}{\relax }|setentrycounter[]{page}\glsnumberformat}{237}
+\glossaryentry{IEEE?\glossaryentryfield{ieeeLabel}{\glsnamefont{IEEE}}{Institute of Electrical and Electronics Engineers}{\relax }|setentrycounter[]{page}\glsnumberformat}{238}
+\glossaryentry{CLI?\glossaryentryfield{cliLabel}{\glsnamefont{CLI}}{Command Line Interface}{\relax }|setentrycounter[]{page}\glsnumberformat}{243}
+\glossaryentry{ACM?\glossaryentryfield{acmLabel}{\glsnamefont{ACM}}{Association for Computing Machinery}{\relax }|setentrycounter[]{page}\ignore}{274}
+\glossaryentry{FIFO?\glossaryentryfield{fifoLabel}{\glsnamefont{FIFO}}{First-In First-Out}{\relax }|setentrycounter[]{page}\ignore}{274}
+\glossaryentry{KB?\glossaryentryfield{kbLabel}{\glsnamefont{KB}}{Kilobyte}{\relax }|setentrycounter[]{page}\ignore}{274}
+\glossaryentry{NIST?\glossaryentryfield{nistLabel}{\glsnamefont{NIST}}{National Institute of Standards and Technology}{\relax }|setentrycounter[]{page}\ignore}{274}
+\glossaryentry{ROM?\glossaryentryfield{romLabel}{\glsnamefont{ROM}}{Read-Only Memory}{\relax }|setentrycounter[]{page}\ignore}{274}
+\glossaryentry{STEAM?\glossaryentryfield{steamLabel}{\glsnamefont{STEAM}}{Science, Technology, Engineering, Art, and Math}{\relax }|setentrycounter[]{page}\ignore}{274}
+\glossaryentry{STEM?\glossaryentryfield{stemLabel}{\glsnamefont{STEM}}{Science, Technology, Engineering, and Math}{\relax }|setentrycounter[]{page}\ignore}{274}
+\glossaryentry{UTF-8?\glossaryentryfield{utfLabel}{\glsnamefont{UTF-8}}{Universal (Character Set) Transformation Format--8-bit}{\relax }|setentrycounter[]{page}\ignore}{274}
+\glossaryentry{W3C?\glossaryentryfield{w3cLabel}{\glsnamefont{W3C}}{World Wide Web Consortium}{\relax }|setentrycounter[]{page}\ignore}{274}

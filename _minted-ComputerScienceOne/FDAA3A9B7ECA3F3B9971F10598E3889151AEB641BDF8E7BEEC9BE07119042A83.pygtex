@@ -1,0 +1,3 @@
+\begin{Verbatim}[commandchars=\\\{\},codes={\catcode`\$=3\catcode`\^=7\catcode`\_=8}]
+\PYGdefault{n+nv}{\PYGdefaultZdl{}monthlyPayment} \PYGdefault{o}{=} \PYGdefault{n+nb}{round}\PYGdefault{p}{(}\PYGdefault{n+nv}{\PYGdefaultZdl{}monthlyPayment} \PYGdefault{o}{*} \PYGdefault{l+m+mi}{100}\PYGdefault{p}{)} \PYGdefault{o}{/} \PYGdefault{l+m+mi}{100}\PYGdefault{p}{;}
+\end{Verbatim}

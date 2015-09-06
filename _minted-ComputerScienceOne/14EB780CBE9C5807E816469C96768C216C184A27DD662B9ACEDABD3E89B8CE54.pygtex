@@ -1,0 +1,12 @@
+\begin{Verbatim}[commandchars=\\\{\},codes={\catcode`\$=3\catcode`\^=7\catcode`\_=8}]
+\PYGdefault{k+kt}{int} \PYGdefault{n}{a} \PYGdefault{o}{=} \PYGdefault{l+m+mi}{10}\PYGdefault{p}{,} \PYGdefault{n}{b} \PYGdefault{o}{=} \PYGdefault{l+m+mi}{20}\PYGdefault{p}{;}
+\PYGdefault{k+kt}{int} \PYGdefault{n}{c} \PYGdefault{o}{=} \PYGdefault{n}{sum}\PYGdefault{p}{(}\PYGdefault{n}{a}\PYGdefault{p}{,} \PYGdefault{n}{b}\PYGdefault{p}{);} \PYGdefault{c+c1}{//c contains the value 30}
+
+\PYGdefault{c+c1}{//invoke a function with literal values:}
+\PYGdefault{k+kt}{double} \PYGdefault{n}{dist} \PYGdefault{o}{=} \PYGdefault{n}{getDistance}\PYGdefault{p}{(}\PYGdefault{l+m+mf}{0.0}\PYGdefault{p}{,} \PYGdefault{l+m+mf}{0.0}\PYGdefault{p}{,} \PYGdefault{l+m+mf}{10.0}\PYGdefault{p}{,} \PYGdefault{l+m+mf}{20.0}\PYGdefault{p}{);}
+
+\PYGdefault{c+c1}{//invoke a function with a combination:}
+\PYGdefault{k+kt}{double} \PYGdefault{n}{p} \PYGdefault{o}{=} \PYGdefault{l+m+mf}{1500.0}\PYGdefault{p}{;}
+\PYGdefault{k+kt}{double} \PYGdefault{n}{r} \PYGdefault{o}{=} \PYGdefault{l+m+mf}{0.05}\PYGdefault{p}{;}
+\PYGdefault{k+kt}{double} \PYGdefault{n}{monthlyPayment} \PYGdefault{o}{=} \PYGdefault{n}{getMonthlyPayment}\PYGdefault{p}{(}\PYGdefault{n}{p}\PYGdefault{p}{,} \PYGdefault{n}{r}\PYGdefault{p}{,} \PYGdefault{l+m+mi}{60}\PYGdefault{p}{);}
+\end{Verbatim}

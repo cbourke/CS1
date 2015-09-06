@@ -1,0 +1,25 @@
+\begin{Verbatim}[commandchars=\\\{\},codes={\catcode`\$=3\catcode`\^=7\catcode`\_=8}]
+\PYGdefault{c+cp}{\PYGdefaultZsh{}include\PYGdefaultZlt{}stdlib.h\PYGdefaultZgt{}}
+\PYGdefault{c+cp}{\PYGdefaultZsh{}include\PYGdefaultZlt{}stdio.h\PYGdefaultZgt{}}
+\PYGdefault{c+cp}{\PYGdefaultZsh{}include\PYGdefaultZlt{}math.h\PYGdefaultZgt{}}
+
+\PYGdefault{k+kt}{int} \PYGdefault{n+nf}{main}\PYGdefault{p}{(}\PYGdefault{k+kt}{int} \PYGdefault{n}{argc}\PYGdefault{p}{,} \PYGdefault{k+kt}{char} \PYGdefault{o}{**}\PYGdefault{n}{argv}\PYGdefault{p}{)} \PYGdefault{p}{\PYGdefaultZob{}}
+
+  \PYGdefault{k}{if}\PYGdefault{p}{(}\PYGdefault{n}{argc} \PYGdefault{o}{!=} \PYGdefault{l+m+mi}{2}\PYGdefault{p}{)} \PYGdefault{p}{\PYGdefaultZob{}}
+    \PYGdefault{n}{fprintf}\PYGdefault{p}{(}\PYGdefault{n}{stderr}\PYGdefault{p}{,} \PYGdefault{l+s}{\PYGdefaultZdq{}Usage: \PYGdefaultZpc{}s x}\PYGdefault{l+s+se}{\PYGdefaultZbs{}n}\PYGdefault{l+s}{\PYGdefaultZdq{}}\PYGdefault{p}{,} \PYGdefault{n}{argv}\PYGdefault{p}{[}\PYGdefault{l+m+mi}{0}\PYGdefault{p}{]);}
+    \PYGdefault{n}{exit}\PYGdefault{p}{(}\PYGdefault{l+m+mi}{1}\PYGdefault{p}{);}
+  \PYGdefault{p}{\PYGdefaultZcb{}}
+
+  \PYGdefault{k+kt}{double} \PYGdefault{n}{x} \PYGdefault{o}{=} \PYGdefault{n}{atof}\PYGdefault{p}{(}\PYGdefault{n}{argv}\PYGdefault{p}{[}\PYGdefault{l+m+mi}{1}\PYGdefault{p}{]);}
+  \PYGdefault{k+kt}{double} \PYGdefault{n}{result} \PYGdefault{o}{=} \PYGdefault{n}{sqrt}\PYGdefault{p}{(}\PYGdefault{n}{x}\PYGdefault{p}{);}
+
+  \PYGdefault{k}{if}\PYGdefault{p}{(}\PYGdefault{n}{x} \PYGdefault{o}{\PYGdefaultZlt{}} \PYGdefault{l+m+mi}{0}\PYGdefault{p}{)} \PYGdefault{p}{\PYGdefaultZob{}}
+    \PYGdefault{n}{fprintf}\PYGdefault{p}{(}\PYGdefault{n}{stderr}\PYGdefault{p}{,} \PYGdefault{l+s}{\PYGdefaultZdq{}Cannot handle complex roots}\PYGdefault{l+s+se}{\PYGdefaultZbs{}n}\PYGdefault{l+s}{\PYGdefaultZdq{}}\PYGdefault{p}{);}
+    \PYGdefault{n}{exit}\PYGdefault{p}{(}\PYGdefault{l+m+mi}{2}\PYGdefault{p}{);}
+  \PYGdefault{p}{\PYGdefaultZcb{}}
+
+  \PYGdefault{n}{printf}\PYGdefault{p}{(}\PYGdefault{l+s}{\PYGdefaultZdq{}square root of \PYGdefaultZpc{}f = \PYGdefaultZpc{}f}\PYGdefault{l+s+se}{\PYGdefaultZbs{}n}\PYGdefault{l+s}{\PYGdefaultZdq{}}\PYGdefault{p}{,} \PYGdefault{n}{x}\PYGdefault{p}{,} \PYGdefault{n}{result}\PYGdefault{p}{);}
+
+  \PYGdefault{k}{return} \PYGdefault{l+m+mi}{0}\PYGdefault{p}{;}
+\PYGdefault{p}{\PYGdefaultZcb{}}
+\end{Verbatim}

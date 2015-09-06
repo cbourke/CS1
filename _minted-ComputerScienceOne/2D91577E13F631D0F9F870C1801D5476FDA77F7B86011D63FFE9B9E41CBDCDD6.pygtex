@@ -1,0 +1,5 @@
+\begin{Verbatim}[commandchars=\\\{\},codes={\catcode`\$=3\catcode`\^=7\catcode`\_=8}]
+\PYGdefault{n+nv}{\PYGdefaultZdl{}a} \PYGdefault{o}{=} \PYGdefault{n+nb}{intval}\PYGdefault{p}{(}\PYGdefault{l+s+s2}{\PYGdefaultZdq{}10\PYGdefaultZdq{}}\PYGdefault{p}{);}
+\PYGdefault{n+nv}{\PYGdefaultZdl{}b} \PYGdefault{o}{=} \PYGdefault{n+nb}{floatval}\PYGdefault{p}{(}\PYGdefault{l+s+s2}{\PYGdefaultZdq{}3.14\PYGdefaultZdq{}}\PYGdefault{p}{);}
+\PYGdefault{n+nv}{\PYGdefaultZdl{}c} \PYGdefault{o}{=} \PYGdefault{n+nb}{intval}\PYGdefault{p}{(}\PYGdefault{l+s+s2}{\PYGdefaultZdq{}ten\PYGdefaultZdq{}}\PYGdefault{p}{);} \PYGdefault{c+c1}{//c has the value zero}
+\end{Verbatim}

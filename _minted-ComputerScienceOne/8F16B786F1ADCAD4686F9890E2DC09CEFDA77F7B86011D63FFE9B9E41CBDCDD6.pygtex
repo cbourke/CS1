@@ -1,0 +1,9 @@
+\begin{Verbatim}[commandchars=\\\{\},codes={\catcode`\$=3\catcode`\^=7\catcode`\_=8}]
+\PYGdefault{n+nv}{\PYGdefaultZdl{}s} \PYGdefault{o}{=} \PYGdefault{l+s+s2}{\PYGdefaultZdq{}aardvark\PYGdefaultZdq{}}\PYGdefault{p}{;}
+\PYGdefault{n+nv}{\PYGdefaultZdl{}t} \PYGdefault{o}{=} \PYGdefault{l+s+s2}{\PYGdefaultZdq{}zebra\PYGdefaultZdq{}}\PYGdefault{p}{;}
+
+\PYGdefault{n+nv}{\PYGdefaultZdl{}r} \PYGdefault{o}{=} \PYGdefault{p}{(}\PYGdefault{n+nv}{\PYGdefaultZdl{}s} \PYGdefault{o}{\PYGdefaultZlt{}} \PYGdefault{n+nv}{\PYGdefaultZdl{}t}\PYGdefault{p}{);}  \PYGdefault{c+c1}{//true}
+\PYGdefault{n+nv}{\PYGdefaultZdl{}r} \PYGdefault{o}{=} \PYGdefault{p}{(}\PYGdefault{n+nv}{\PYGdefaultZdl{}s} \PYGdefault{o}{\PYGdefaultZlt{}=} \PYGdefault{n+nv}{\PYGdefaultZdl{}t}\PYGdefault{p}{);} \PYGdefault{c+c1}{//true}
+\PYGdefault{n+nv}{\PYGdefaultZdl{}r} \PYGdefault{o}{=} \PYGdefault{p}{(}\PYGdefault{n+nv}{\PYGdefaultZdl{}s} \PYGdefault{o}{\PYGdefaultZgt{}=} \PYGdefault{n+nv}{\PYGdefaultZdl{}t}\PYGdefault{p}{);} \PYGdefault{c+c1}{//false}
+\PYGdefault{n+nv}{\PYGdefaultZdl{}r} \PYGdefault{o}{=} \PYGdefault{p}{(}\PYGdefault{n+nv}{\PYGdefaultZdl{}s} \PYGdefault{o}{\PYGdefaultZgt{}} \PYGdefault{n+nv}{\PYGdefaultZdl{}t}\PYGdefault{p}{);}   \PYGdefault{c+c1}{//false}
+\end{Verbatim}

@@ -1,0 +1,3 @@
+\begin{Verbatim}[commandchars=\\\{\},codes={\catcode`\$=3\catcode`\^=7\catcode`\_=8}]
+\PYGdefault{n}{fahrenheit} \PYGdefault{o}{=} \PYGdefault{n}{s}\PYGdefault{o}{.}\PYGdefault{n+na}{nextDouble}\PYGdefault{o}{();}
+\end{Verbatim}

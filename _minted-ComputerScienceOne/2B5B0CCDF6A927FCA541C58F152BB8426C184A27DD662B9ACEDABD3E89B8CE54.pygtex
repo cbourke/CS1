@@ -1,0 +1,14 @@
+\begin{Verbatim}[commandchars=\\\{\},codes={\catcode`\$=3\catcode`\^=7\catcode`\_=8}]
+\PYGdefault{k+kt}{void} \PYGdefault{n+nf}{sum}\PYGdefault{p}{(}\PYGdefault{k+kt}{int} \PYGdefault{n}{a}\PYGdefault{p}{,} \PYGdefault{k+kt}{int} \PYGdefault{n}{b}\PYGdefault{p}{,} \PYGdefault{k+kt}{int} \PYGdefault{o}{*}\PYGdefault{n}{c}\PYGdefault{p}{)} \PYGdefault{p}{\PYGdefaultZob{}}
+  \PYGdefault{k+kt}{int} \PYGdefault{n}{x} \PYGdefault{o}{=} \PYGdefault{n}{a} \PYGdefault{o}{+} \PYGdefault{n}{b}\PYGdefault{p}{;}
+  \PYGdefault{o}{*}\PYGdefault{n}{c} \PYGdefault{o}{=} \PYGdefault{n}{x}\PYGdefault{p}{;}
+  \PYGdefault{k}{return}\PYGdefault{p}{;}
+\PYGdefault{p}{\PYGdefaultZcb{}}
+
+\PYGdefault{k+kt}{void} \PYGdefault{n+nf}{swap}\PYGdefault{p}{(}\PYGdefault{k+kt}{int} \PYGdefault{o}{*}\PYGdefault{n}{a}\PYGdefault{p}{,} \PYGdefault{k+kt}{int} \PYGdefault{o}{*}\PYGdefault{n}{b}\PYGdefault{p}{)} \PYGdefault{p}{\PYGdefaultZob{}}
+  \PYGdefault{k+kt}{int} \PYGdefault{n}{temp} \PYGdefault{o}{=} \PYGdefault{o}{*}\PYGdefault{n}{a}\PYGdefault{p}{;}
+  \PYGdefault{o}{*}\PYGdefault{n}{a} \PYGdefault{o}{=} \PYGdefault{o}{*}\PYGdefault{n}{b}\PYGdefault{p}{;}
+  \PYGdefault{o}{*}\PYGdefault{n}{b} \PYGdefault{o}{=} \PYGdefault{n}{temp}\PYGdefault{p}{;}
+  \PYGdefault{k}{return}\PYGdefault{p}{;}
+\PYGdefault{p}{\PYGdefaultZcb{}}
+\end{Verbatim}

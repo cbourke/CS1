@@ -1,0 +1,3 @@
+\begin{Verbatim}[commandchars=\\\{\},codes={\catcode`\$=3\catcode`\^=7\catcode`\_=8}]
+\PYGdefault{n}{d} \PYGdefault{o}{=} \PYGdefault{o}{(}\PYGdefault{k+kt}{int}\PYGdefault{o}{)} \PYGdefault{o}{(}\PYGdefault{n}{b} \PYGdefault{o}{+} \PYGdefault{n}{y}\PYGdefault{o}{);}
+\end{Verbatim}

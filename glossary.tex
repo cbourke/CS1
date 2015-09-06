@@ -6,6 +6,13 @@
   description={a process or method that consists of a specified step-by-step set of operations}
 }
 
+\newglossaryentry{anonymous function}
+{
+  name=anonymous function,
+  description={a function that has no identifier or name, typically created so that it can be passed as an argument to another function as a callback},
+  plural=anonymous functions
+}
+
 \newglossaryentry{assignment operator}
 {
   name=assignment operator,
@@ -45,6 +52,24 @@
 {
   name=byte,
   description={a unit of information in a digital computer consisting of 8 bits}
+}
+
+\newglossaryentry{callback}
+{
+  name=callback,
+  description={a function or executable unit of code that is passed as an argument to another function with the intention that the function that it is passed to will execute or ``call back'' the passed function at some point}
+}
+
+\newglossaryentry{call by reference}
+{
+  name=call by reference,
+  description={when a variable's memory address is passed as a parameter to a function, enabling the function to manipulate the contents of the memory address and change the original variable's value}
+}
+
+\newglossaryentry{call by value}
+{
+  name=call by value,
+  description={when a \emph{copy} of a variable's value is passed as a parameter to a function; the function has no reference to the original variable and thus changes to the copy inside the function have no effect on the original variable}
 }
 
 \newglossaryentry{case sensitive}
@@ -112,6 +137,19 @@
   order or flow}
 }
 
+\newglossaryentry{function}
+{
+  name=function,
+  description={a sequence of program instructions that perform a specific task, packaged as a unit, also
+  known as a \emph{subroutine}}
+}
+
+\newglossaryentry{function overloading}
+{
+  name=function overloading,
+  description={the ability to define multiple functions with the same name but with with a different number of or different types of parameters}
+}
+
 \newglossaryentry{garbage collection}
 {
   name=garbage collection,
@@ -124,6 +162,12 @@
   name=global scope,
   description={a variable, function, or other element in a program has global scope if it is visible or has effect throughout
   	the entire program}
+}
+
+\newglossaryentry{hoisting}
+{
+  name=hoisting,
+  description={usually used in interpreted languages, hoisting involves processing code to find variable or function declarations and processing them before actually executing the code or script}
 }
 
 \newglossaryentry{identifier}
@@ -223,10 +267,19 @@
 \newglossaryentry{primitive}
 {
   name=primitive,
-  description={a basic data type that is defined and provided by a programming language.  Typically numeric and character types are
-  primitive types in a language for example.  Generally, the user doesn't need to define the operations involving primitive types as they
-  are defined by the language.  Primitive data types are used as the basic building blocks in a program and used to \emph{compose} more
-  complex user-defined types}
+  description={a basic data type that is defined and provided by a programming language.  Typically numeric and character types are primitive types in a language for example.  Generally, the user doesn't need to define the operations involving primitive types as they are defined by the language.  Primitive data types are used as the basic building blocks in a program and used to \emph{compose} more complex user-defined types}
+}
+
+\newglossaryentry{procedural abstraction}
+{
+  name=procedural abstraction,
+  description={TODO}
+}
+
+\newglossaryentry{program stack}
+{
+  name=program stack,
+  description={also referred to as a \emph{call stack}, it is an area of memory where stack frames are stored for each function call containing memory for arguments, local variables and return values/addresses}
 }
 
 \newglossaryentry{prompt}
@@ -239,6 +292,12 @@
 {
   name=pseudocode,
   description={the act of a program asking a user to enter input and subsequently waiting for the user to enter data}
+}
+
+\newglossaryentry{queue}
+{
+  name=queue,
+  description={a data structure that store elements in a FIFO (First-In First-Out) manner; elements can be added to the end of a queue by an \emph{enqueue} operation and removed from the start of a queue by a \emph{dequeue} operation}
 }
 
 \newglossaryentry{radix}
@@ -269,11 +328,35 @@
 	can be accessed, changed, or used}
 }
 
+\newglossaryentry{segmentation fault}
+{
+  name=segmentation fault,
+  description={a fault or error that arises when a program attempts to access a segment of memory that it is not allowed access to, usually resulting in the program being terminated by the operating system}
+}
+
 \newglossaryentry{short circuiting}
 {
   name=short circuiting,
   description={the process by which the second operand in a logical statement is not evaluated if the
   	value of the expression is determined by the first operand}
+}
+
+\newglossaryentry{signature}
+{
+  name=scope,
+  description={a function signature is how a function is uniquely identified.  A signature includes the name (identifier) of the function, its parameter list (and maybe types) and the return type}
+}
+
+\newglossaryentry{stack}
+{
+  name=stack,
+  description={a data structure that stores elements in a LIFO (last-in first-out) manner; elements can be added to a stack via a \emph{push} operation which places the element on the ``top'' of the stack; elements can be removed from the top of the stack via a \emph{pop} operation}
+}
+
+\newglossaryentry{static dispatch}
+{
+  name=static dispatch,
+  description={when function overloading is supported in a language, this is the mechanism by which the compiler determines \emph{which} function should be called based on the number and type of arguments passed to the function when it is called}
 }
 
 \newglossaryentry{static typing}
@@ -282,7 +365,6 @@
   description={a variable whose type is specified when it is created (declared) and does not change while the
   	variable remains in scope}
 }
-
 
 \newglossaryentry{string}
 {
@@ -309,6 +391,12 @@
 {
   name=tautology,
   description={a logical statement that is always \True regardless of the truth values of the statement's variables}
+}
+
+\newglossaryentry{top-down design}
+{
+  name=top-down design,
+  description={an approach to problem solving where a problem is broken down into smaller parts}
 }
 
 \newglossaryentry{truncation}
@@ -376,6 +464,10 @@
 
 \newacronym{cpuLabel}{CPU}{Central Processing Unit}
 
+\newacronym{dryLabel}{DRY}{Don't Repeat Yourself}
+
+\newacronym{fifoLabel}{FIFO}{First-In First-Out}
+
 \newacronym{htmlLabel}{HTML}{HyperText Markup Language}
 
 \newacronym{ideLabel}{IDE}{Integrated Development Environment}
@@ -398,6 +490,8 @@
 
 \newacronym{kbLabel}{KB}{Kilobyte}
 
+\newacronym{lifoLabel}{LIFO}{Last-In First-Out}
+
 \newacronym{nistLabel}{NIST}{National Institute of Standards and Technology}
 
 \newacronym{oopLabel}{OOP}{Object-Oriented Programming}
@@ -407,6 +501,10 @@
 \newacronym{ramLabel}{RAM}{Random Access Memory}
 
 \newacronym{romLabel}{ROM}{Read-Only Memory}
+
+\newacronym{sslLabel}{SSL}{Secure Sockets Layer}
+
+\newacronym{steamLabel}{STEAM}{Science, Technology, Engineering, Art, and Math}
 
 \newacronym{stemLabel}{STEM}{Science, Technology, Engineering, and Math}
 

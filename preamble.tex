@@ -40,7 +40,6 @@
 %\usepackage{lmodern}
 \usepackage[ascii]{inputenc}
 
-
 %http://en.wikibooks.org/wiki/LaTeX/Glossary
 %must create the glossaries by using command:
 %makeglossaries ComputerScienceOne
@@ -88,6 +87,8 @@
 \usepackage{tikz}
 \usetikzlibrary{backgrounds}
 \usetikzlibrary{decorations.pathreplacing}
+\usetikzlibrary{patterns}
+\usetikzlibrary{fadings}
 \usetikzlibrary{shapes,arrows}
 % Define block styles
 \tikzstyle{decision} = [diamond, draw, fill=yellow!20, 
@@ -154,6 +155,7 @@
 \SetupFloatingEnvironment{listing}{listname=List of Code Samples}
 
 \usepackage[boxed,slide,linesnumbered,algochapter]{algorithm2e}
+\SetKwProg{Fn}{Function}{}{end}
 \SetKwComment{Comment}{//}{}
 \DontPrintSemicolon
 \SetKwSty{textsc} %

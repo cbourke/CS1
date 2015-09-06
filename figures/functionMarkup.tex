@@ -1,0 +1,47 @@
+%\documentclass[12pt]{article}
+%\usepackage{tikz}
+%\usetikzlibrary{backgrounds}
+%\usetikzlibrary{decorations.pathreplacing}
+%
+%%\usepackage{newfloat}
+%\usepackage{minted}
+%\setminted{mathescape,
+%               linenos,
+%               autogobble,
+%               frame=none,
+%               framesep=2mm,
+%               framerule=0.4pt,
+%               %label=foo,
+%               xleftmargin=2em,
+%               xrightmargin=0em,
+%               numbersep=10pt, %gap between line numbers and start of line
+%               style=default}
+%\usepackage{fullpage}
+%\begin{document}
+
+\begin{tikzpicture}[framed]
+
+  \node (main) {
+{
+\mintinline[]{c}{double getDistance(double x1, double y1, double x2, double y2);}
+}
+  
+  };
+
+%  \node (formatstring) at (-5,2) {Format String};
+
+%  \node (placeholders) at (1,-1.5) {Placeholders};
+ % \draw[->] (placeholders.north) -- ([xshift=-.70cm,yshift=0.15cm]main.south);
+  %\draw[->] (placeholders.north) -- ([xshift=3.7cm,yshift=0.2cm]main.south);
+  
+  \draw [decorate,decoration={brace,amplitude=10pt},xshift=-4pt,yshift=0pt] ([xshift=-2.65cm]main.north) -- ([xshift=6.25cm]main.north) node [black,midway,yshift=0.65cm] {Parameters};
+
+  \draw [decorate,decoration={brace,mirror,amplitude=5pt},xshift=-4pt,yshift=0pt] ([xshift=-6.75cm]main.south) -- ([xshift=-5.5cm]main.south) node [below,align=center,text width=2cm,black,midway,yshift=-0.25cm] {Return Type};
+
+  \draw [decorate,decoration={brace,mirror,amplitude=5pt},xshift=-4pt,yshift=0pt] ([xshift=-5.25cm]main.south) -- ([xshift=-3.0cm]main.south) node [below,align=center,text width=2cm,black,midway,yshift=-0.25cm] {Identifier (name)};
+
+%\draw[black,fill=black] (placeholders.north) circle (.5pt);
+
+\end{tikzpicture}
+
+%\end{document}

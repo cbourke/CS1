@@ -3,7 +3,7 @@
 \addvspace {10\p@ }
 \addvspace {10\p@ }
 \addvspace {10\p@ }
-\contentsline {algocf}{\numberline {1.1}{\ignorespaces An example of pseudocode: finding a minimum value}}{14}{algocf.1.1}
+\contentsline {algocf}{\numberline {1.1}{\ignorespaces An example of pseudocode: finding a minimum value}}{13}{algocf.1.1}
 \addvspace {10\p@ }
 \contentsline {algocf}{\numberline {2.1}{\ignorespaces Assignment Operator Demonstration}}{32}{algocf.2.1}
 \contentsline {algocf}{\numberline {2.2}{\ignorespaces Addition and Subtraction Demonstration}}{33}{algocf.2.2}
@@ -39,6 +39,8 @@
 \contentsline {algocf}{\numberline {4.15}{\ignorespaces Counting the number of primes.}}{96}{algocf.4.15}
 \contentsline {algocf}{\numberline {4.16}{\ignorespaces Computing a loan amortization schedule}}{98}{algocf.4.16}
 \addvspace {10\p@ }
+\contentsline {algocf}{\numberline {5.1}{\ignorespaces A function in pseudocode}}{113}{algocf.5.1}
+\contentsline {algocf}{\numberline {5.2}{\ignorespaces Using a function}}{114}{algocf.5.2}
 \addvspace {10\p@ }
 \addvspace {10\p@ }
 \addvspace {10\p@ }

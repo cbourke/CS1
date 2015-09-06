@@ -73,5 +73,4 @@ L_.str1:                                ## @.str1
 L_.str2:                                ## @.str2
 	.asciz	"square root of %f = %f\n"
 
-
 .subsections_via_symbols

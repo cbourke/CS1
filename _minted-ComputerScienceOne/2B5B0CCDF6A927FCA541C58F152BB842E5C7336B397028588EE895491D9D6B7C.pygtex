@@ -1,0 +1,14 @@
+\begin{Verbatim}[commandchars=\\\{\},codes={\catcode`\$=3\catcode`\^=7\catcode`\_=8}]
+void sum(int a, int b, int *c) \PYGdefaultZob{}
+  int x = a + b;
+  *c = x;
+  return;
+\PYGdefaultZcb{}
+
+void swap(int *a, int *b) \PYGdefaultZob{}
+  int temp = *a;
+  *a = *b;
+  *b = temp;
+  return;
+\PYGdefaultZcb{}
+\end{Verbatim}

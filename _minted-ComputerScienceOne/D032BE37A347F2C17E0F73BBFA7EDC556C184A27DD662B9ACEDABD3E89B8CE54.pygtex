@@ -1,0 +1,3 @@
+\begin{Verbatim}[commandchars=\\\{\},codes={\catcode`\$=3\catcode`\^=7\catcode`\_=8}]
+\PYGdefault{k+kt}{double} \PYGdefault{n}{x} \PYGdefault{o}{=} \PYGdefault{n}{ptrToSqrt}\PYGdefault{p}{(}\PYGdefault{l+m+mf}{2.0}\PYGdefault{p}{);}
+\end{Verbatim}

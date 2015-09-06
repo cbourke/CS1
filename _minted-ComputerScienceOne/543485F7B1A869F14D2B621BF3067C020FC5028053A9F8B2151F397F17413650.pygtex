@@ -1,0 +1,9 @@
+\begin{Verbatim}[commandchars=\\\{\},codes={\catcode`\$=3\catcode`\^=7\catcode`\_=8}]
+\PYGdefault{k+kt}{int} \PYGdefault{n}{a} \PYGdefault{o}{=} \PYGdefault{l+m+mi}{10}\PYGdefault{o}{;}
+\PYGdefault{n}{Integer} \PYGdefault{n}{b} \PYGdefault{o}{=} \PYGdefault{l+m+mi}{20}\PYGdefault{o}{;}
+\PYGdefault{n}{Double} \PYGdefault{n}{x} \PYGdefault{o}{=} \PYGdefault{l+m+mf}{3.14}\PYGdefault{o}{;}
+\PYGdefault{k+kt}{boolean} \PYGdefault{n}{r}\PYGdefault{o}{;}
+\PYGdefault{n}{r} \PYGdefault{o}{=} \PYGdefault{o}{(}\PYGdefault{n}{a} \PYGdefault{o}{\PYGdefaultZlt{}} \PYGdefault{n}{b}\PYGdefault{o}{);}
+\PYGdefault{n}{r} \PYGdefault{o}{=} \PYGdefault{o}{(}\PYGdefault{n}{a} \PYGdefault{o}{\PYGdefaultZgt{}=} \PYGdefault{n}{b}\PYGdefault{o}{);}
+\PYGdefault{n}{r} \PYGdefault{o}{=} \PYGdefault{o}{(}\PYGdefault{n}{x} \PYGdefault{o}{==} \PYGdefault{l+m+mf}{2.71}\PYGdefault{o}{);}
+\end{Verbatim}
