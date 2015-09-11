@@ -1,47 +1,35 @@
+%\documentclass[12pt]{scrbook}
+%
+%\usepackage{tikz}
+%\usetikzlibrary{backgrounds}
+%\usetikzlibrary{decorations.pathreplacing}
+%\usetikzlibrary{patterns}
+%\usetikzlibrary{fadings}
+%\usetikzlibrary{shapes,arrows}
+%
+%% Define block styles
+%\tikzstyle{decision} = [diamond, draw, fill=yellow!20, 
+%    text width=6em, text badly centered, node distance=5cm, inner sep=0pt]
+%\tikzstyle{block} = [rectangle, draw, fill=blue!20, 
+%    text width=5em, text centered, node distance=5cm, minimum height=4em]
+%\tikzstyle{action} = [rectangle, draw, fill=green!20, 
+%    text width=5em, text centered, rounded corners, node distance=5cm, minimum height=4em]
+%\tikzstyle{line} = [draw, -latex']
+%    
+%    \begin{document}
 
-
-%\begin{tikzpicture}[node distance = 2cm, auto]
-%    % Place nodes
-%    \node [block] (init) {initialize model};
-%    \node [cloud, left of=init] (expert) {expert};
-%    \node [cloud, right of=init] (system) {system};
-%    \node [block, below of=init] (identify) {identify candidate models};
-%    \node [block, below of=identify] (evaluate) {evaluate candidate models};
-%    \node [block, left of=evaluate, node distance=3cm] (update) {update model};
-%    \node [decision, below of=evaluate] (decide) {is best candidate better?};
-%    \node [block, below of=decide, node distance=3cm] (stop) {stop};
-%    % Draw edges
-%    \path [line] (init) -- (identify);
-%    \path [line] (identify) -- (evaluate);
-%    \path [line] (evaluate) -- (decide);
-%    \path [line] (decide) -| node [near start] {yes} (update);
-%    \path [line] (update) |- (identify);
-%    \path [line] (decide) -- node {no}(stop);
-%    \path [line,dashed] (expert) -- (init);
-%    \path [line,dashed] (system) -- (init);
-%    \path [line,dashed] (system) |- (evaluate);
-%\end{tikzpicture}
-\begin{tikzpicture}[node distance = 5cm, auto,scale=.65,transform shape]
-
-% Define block styles
-\tikzstyle{decision} = [diamond, draw, fill=yellow!20,
-    text width=4.5em, text badly centered, node distance=5cm, inner sep=0pt]
-\tikzstyle{block} = [rectangle, draw, fill=green!20,
-    text width=5em, text centered, rounded corners, minimum height=4em, node distance=5cm]
-\tikzstyle{line} = [draw, -latex']; %
-\tikzstyle{cloud} = [rectangle,rounded corners,draw,fill=blue!20, node
-distance=5cm, minimum height=2em, text width=5em];
+\begin{tikzpicture}[auto,scale=.65,transform shape]
 
         % Place nodes
-    \node [block] (init) {Input PIN};
+    \node [action] (init) {Input PIN};
     \node [decision, right of=init] (verify) {Is PIN correct?};
-    \node [block, below of=verify] (close) {Eject Card};
-    \node [cloud, right of=verify] (amount) {Get amount of withdraw};
-    \node [block, above of=amount] (userInput) {User Input};
+    \node [action, below of=verify] (close) {Eject Card};
+    \node [block, right of=verify] (amount) {Get amount of withdraw};
+    \node [action, above of=amount] (userInput) {User Input};
 
     \node [decision, right of=amount] (funds) {Sufficient Funds?};
 
-    \node [cloud, right of=funds] (money) {Dispense \texttt{amount}};
+    \node [block, right of=funds] (money) {Dispense \texttt{amount}};
 
 %    \node [block, below of=init] (identify) {identify candidate models};
 %    \node [block, below of=identify] (evaluate) {evaluate candidate models};
@@ -69,3 +57,5 @@ distance=5cm, minimum height=2em, text width=5em];
 %    \path [line,dashed] (system) -- (init);
 %    \path [line,dashed] (system) |- (evaluate);
 \end{tikzpicture}
+
+%\end{document}

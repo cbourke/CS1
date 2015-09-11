@@ -1,15 +1,202 @@
 %!TEX root = ComputerScienceOne.tex
 
-%Functions I/O - exercises
+%Functions  - exercises
 
 \section{Exercises}
 
 \begin{exer}
-Implement the quadratic formula computation program but place the code to compute each 
-root value into its own function.  Optionally: add support for error checking (either return an error code(enumerated type)
-or throw an exception).
-
-Test your program using the following inputs: $(2, 5, 1)$, $(5, 1, 5)$, $(0, 1, 2)$.
+Recall that the \emph{greatest common divisor} (gcd) of two integers, 
+$a$ and $b$ is the largest positive integer that divides both $a$ and
+$b$.  Adapt the solution from Exercise \ref{exercise:loops:gcd} into
+a function.  If the language you use supports it, return the gcd via
+a pass by reference variable.
 \end{exer}
+
+\begin{exer}
+Write a function that \emph{scales} an input $x$ to to its scientific
+notation scale so that $1 \leq x < 10$.  If you language supports 
+pass by reference, the amount that $x$ is shifted should be stored 
+in a pass-by-reference parameter.  For example, a call to this function 
+with $x = 314.15$ should return $3.1415$ and the amount it is scaled
+by is $n=-2$.
+\end{exer}
+
+\begin{exer}
+Write a function that returns the most significant digit of a floating
+point number.  The function should only return an integer in the range 
+$1--9$ (it should return zero only if $x = 0$).
+\end{exer}
+
+\begin{exer}
+Write a function to convert radians to degrees using the formula,
+  $$deg = \frac{180\cdot rad}{\pi}$$
+Write another function to covert degrees to radians.
+\end{exer}
+
+\begin{exer}
+Write functions to compute the diameter, circumference and
+area of a circle given its radius.  If your language supports 
+pass by reference, compute all three of these with one function.
+\end{exer}
+
+\begin{exer}
+The \emph{arithmetic-geometric} mean of two numbers $x, y$, denoted 
+$M(x, y)$ (or $\mathrm{agm}(x, y)$) can be computed iteratively as 
+follows.  Initially, $a_1 = \frac{1}{2}(x + y)$ and $g_1 = \sqrt{xy}$ (i.e. the 
+normal arithmetic and geometric means).  Then, compute
+  $$\begin{array}{rcl}
+    a_{n+1} & = & \frac{1}{2}(a_n+g_n) \\
+    g_{n+1} & = & \sqrt{a_n g_n}
+    \end{array}$$
+The two sequences will converge to the same number which is the arithmetic-geometric 
+mean of $x, y$.  Obviously we cannot compute an infinite sequence, so we compute until
+$|a_n - g_n| < \epsilon$ for some small number $\epsilon$.
+\end{exer}
+
+\begin{exer}
+Write a function to compute the annual percentage yield (APY) given
+an annual percentage rate (APR) using the formula 
+  $$APY = e^{APR} - 1$$
+\end{exer}
+
+\begin{exer}
+Write a function that will compute the air distance between two locations given their
+latitudes and longitudes.  Use the formula as in Exercise \ref{exercise:basics:airDistance}.
+\end{exer}
+
+\begin{exer}
+Write a function to convert a color represented in the RGB (red-green-blue) 
+color model (used in digital monitors) to a CMYK (cyan-magenta-yellow-key) 
+used in printing.  RGB values are integers in the range $[0, 255]$ while CMYK 
+are fractional numbers in the range $[0, 1]$.  To convert to CMYK, you first need 
+to scale each integer value to the range $[0, 1]$ by simply computing
+  $$r' = \frac{r}{255}, \quad g' = \frac{g}{255}, \quad b' = \frac{b}{255}$$
+and then using the following formulas:
+\begin{align*}
+K & = 1-\max\{r', g', b'\} \\
+C & = (1-r'-k) / (1-k) \\
+M & = (1-g'-k) / (1-k) \\
+Y & = (1-b'-k) / (1-k) \\
+\end{align*}
+\end{exer}
+
+\begin{exer}
+Write a function to convert from CMYK to RGB using the following formulas.
+\begin{align*}
+r & = 255 \cdot (1 - C) \cdot (1-K) \\
+g & = 255 \cdot (1 - M) \cdot (1-K) \\
+b & = 255 \cdot (1 - Y) \cdot (1-K) \\
+\end{align*}
+\end{exer}
+
+\begin{exer}
+Write some functions to convert an RGB color to a gray scale, ``removing'' the color 
+values.  An RGB color value is grayscale if all three components have the same 
+value.  To transform a color value to grayscale, there there are several possible 
+techniques.  The average method simply sets all three values to the average:
+  $$\frac{r + g + b}{3}$$
+The lightness method averages the most prominent and least prominent colors:
+  $$\frac{\max\{r, g, b\} + \min\{r, g, b\}}{2}$$
+The luminosity technique uses a weighted average to account for a human perceptual
+preference toward green:
+  $$0.21 r + 0.72 g + 0.07 b$$
+\end{exer}
+
+\begin{exer}
+Adapt the methods to compute a square root in Exercise 
+\ref{exercise:loops:squareRoots} into functions.
+\end{exer}
+
+\begin{exer}
+Adapt the methods to compute the natural logarithm in Exercise 
+\ref{exercise:loops:naturalLog} into functions.
+\end{exer}
+
+\begin{exer}
+Weight (mass in the presence of gravity) can be measured in 
+several scales: kilogram force (kgf), pounds (lbs), ounces (oz), or 
+Newtons (N).  To convert between these scales, you can use the following facts:
+
+\begin{itemize}
+  \item 1 kgf is equal to 2.20462 pounds
+  \item There are 16 ounces in a pound
+  \item 1 kgf is equal to 9.80665 Newtons
+\end{itemize}
+
+Write a collection of functions to convert between these scales.
+\end{exer}
+
+\begin{exer}
+Length can be measured by several different units.  We will concern 
+ourselves with the following scales: kilometer, mile, nautical mile, and 
+furlong.  A measure in each one of these scales can be converted to 
+another using the following facts.
+\begin{itemize}
+  \item One mile is equivalent to 1.609347219 kilometers
+  \item One nautical mile is equivalent to 1.15078 miles
+  \item A furlong is $\frac{1}{8}$-th of a mile
+\end{itemize}
+Write a collection of functions to convert between these scales.
+\end{exer}
+
+\begin{exer}
+Temperature can be measured in several scales: Celsius, Kelvin, 
+Fahrenheit, and Newton.  To convert between these scales, you 
+can use the following conversion table.
+
+\begin{table}[h]
+\centering
+\begin{tabular}{|c||c|c|c|c|}
+\hline
+  From/To      & Celsius & Kelvin & Fahrenheit & Newton \\
+\hline
+\hline
+  Celsius        & -- & $c + 273.15$ & $c \frac{9}{5} + 32$ & $c \frac{33}{100}$ \\
+\hline
+  Kelvin          & $k - 273.15$  & -- & $\frac{9}{5}k - 459.67$ & $.33k - 90.1395$ \\
+\hline
+  Fahrenheit  & $(f - 32) \frac{5}{9}$ & $\frac{5}{9}f + 255.372$ & -- & $\frac{11}{60}f - \frac{88}{15}$\\
+\hline
+  Newton      & $n \frac{100}{33}$ & $\frac{100}{33}n + 273.15$ & $\frac{60}{11}n + 32$ & -- \\
+\hline
+\end{tabular}
+\caption{Conversion Chart}
+\end{table}
+Write a collection of functions to convert between these scales.
+\end{exer}
+
+\begin{exer}
+Energy can be measured in several different scales: calories ($c$), 
+joules ($J$), ergs ($erg$) and foot-pound force (ft-lbf) among others.  
+To convert between these scales, you can use the following facts:
+
+\begin{itemize}
+  \item 1 erg equals $1.0 \times 10^{-7} J$
+  \item 1 ft-lbs equals $1.3558$ joules
+  \item 1 calorie is equal to $4.184$ joules
+\end{itemize}
+Write a collection of functions to convert between these scales.
+\end{exer}
+
+\begin{exer}
+Pressure is a measure of force applied to the surface of an object 
+per unit area.  There are several units that can be used to measure 
+pressure:
+\begin{itemize}
+  \item Pascal (Pa) which is one Newton per square meter
+  \item Pound-force Per Square Inch (psi) 
+  \item Atmosphere (atm) or standard atmospheric pressure
+  \item The torr, an absolute scale for pressure
+\end{itemize}
+
+To convert between these units, you can use the following formulas.
+\begin{itemize}
+  \item 1 psi is equal to 6,894.75729 Pascals, 1 psi is equal to $0.06804596$ atmospheres
+  \item 1 atmosphere is equal to 101,325 Pascals
+  \item 1 torr is equal to $\frac{1}{760}$ atmosphere and $\frac{101,325}{760}$ Pascals
+\end{itemize}
+Write a collection of functions to convert between these scales.
+\end{exer}
+
 
 

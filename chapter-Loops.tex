@@ -376,6 +376,7 @@ is in operation, we don't want this process to stop.  This can be viewed as an
 infinite loop as it doesn't have any termination condition.
 
 \subsubsection{The Zune Bug}
+\label{subsubsection:zuneBug}
 
 Though proper testing and debugging should reduce the likelihood of such bugs,
 there are several notable instances in which an infinite loop impacted real 
@@ -404,7 +405,7 @@ code.
 \end{listing}
 
 2008 was a leap year, so the check on line 2 evaluated to \emph{true}.
-However, though December 31st, 2008 was the 266th day of the year (\mintinline{c}{days = 366})
+However, though December 31st, 2008 was the 366th day of the year (\mintinline{c}{days = 366})
 the third line evaluated to \emph{false} and the loop was repeated without any of
 the program state being updated.  The problem was ``fixed'' 24 hours later when 
 it was the 367th day and line 3 worked.  The problem was that line 3 \emph{should} have been

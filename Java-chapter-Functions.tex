@@ -1,0 +1,363 @@
+%!TEX root = ComputerScienceOne.tex
+
+%%Chapter: Methods in Java
+
+As an object-oriented programming language, functions in
+Java are usually referred to as \emph{methods} and are 
+essential to writing programs.  The distinction is that a 
+function is usually a standalone element while methods
+are functions that are members of a class.  In Java, since
+everything is a class or belongs to a class, standalone
+functions cannot be defined.
+
+In Java you can define your own methods, but they
+need to be placed within a class.  Usually methods that
+act on data in the class (or instances of the class, see
+Chapter \ref{chapter:javaClasses}) or have common
+functionality are placed into one class.  For example, all
+the basic math methods are all part of the 
+\mintinline{java}{java.lang.Math} class.  It is not uncommon
+to place similar methods together into one ``utility'' class.
+
+Java supports method overloading, so within the same 
+class you can define multiple methods with the same name
+as long as they differ in either the number of type of 
+parameters.  For example, in the \mintinline{java}{java.lang.Math}
+class, there are 3 versions of the absolute value method,
+\mintinline{java}{abs()}, one that takes/returns an 
+\mintinline{java}{int}, one that takes/returns a \mintinline{java}{double}
+and one for \mintinline{java}{float} types.  Naming conflicts
+can easily be solved by ensuring that you place your 
+methods in a class/package that is unique to your application.
+
+In Java, the 8 primitive types (\mintinline{java}{int}, \mintinline{java}{double},
+\mintinline{java}{char}, \mintinline{java}{boolean}, etc.) are 
+passed by value.  All object types, however, such as the 
+wrapper classes \mintinline{java}{Integer}, \mintinline{java}{Double}
+as well as \mintinline{java}{String}, etc. are passed by 
+reference.  That is, the memory address in the \gls{jvmLabel}
+is passed to the method.  This is done for efficiency, for 
+objects that are ``large'' it would be inefficient to copy the
+entire object into the call stack in order to pass it to a
+method.  
+
+However, though object types are passed by reference, the
+method cannot necessarily change them.  Recall that the wrapper
+classes \mintinline{java}{Integer}, \mintinline{java}{Double} and
+the \mintinline{java}{String} class are all \gls{immutable}, meaning
+that once created they cannot be modified.  Thus, even though
+they are passed by reference, the method that receives them
+cannot change them.
+
+There are many \emph{mutable} objects in Java.  The 
+\mintinline{java}{StringBuilder} class for example is a mutable
+object.  If you pass a \mintinline{java}{StringBuilder} instance
+to a method, that method is free to invoke mutator methods 
+(any methods that \emph{change} the object's state).  Since
+it is the \emph{same} object as in the calling method, the
+calling method can ``see'' those changes.
+
+As of Java 5, you can write and use vararg methods.  The
+\mintinline{java}{System.out.printf()} method is a prime
+example of this.  However, we will not discuss in detail how
+to do this.  Instead, refer to standard Java documentation.
+Finally, parameters are not optional in Java.  This is because
+Java supports method overloading.  You can write multiple
+versions of the same method that each take a different
+number of arguments.  You can even design them so that
+the more specific versions (with fewer arguments) invoke
+the more general versions (with more arguments), passing
+in sensible ``defaults.'' when doing so.
+
+\section{Defining Methods}
+
+Defining methods is fairly straightforward.  First you create 
+class to place them in.  Then you provide the method signature
+along with the body of the method.  In addition, there are 
+several \emph{modifiers} that you can place in the method 
+signature to specify its \emph{visibility} and whether or not
+the method ``belongs'' to the class or to instances of the 
+class.  This is a concept we'll explore in Chapter \ref{chatper:javaClasses}.
+For now, we'll only focus on what is needed to get started.
+
+Typically, the documentation for methods is included with 
+the method definition using ``Javadoc'' style comments.
+Consider the following examples.
+
+\begin{minted}{java}
+/**
+ * Computes the sum of the two arguments.
+ * @param a
+ * @param b
+ * @return the sum, <code>a + b</code>
+ */
+public static int sum(int a, int b) {
+  return (a + b);
+}
+
+/**
+ * Computes the Euclidean distance between the 2-D points, 
+ * (x1,y1) and (x2,y2).
+ * @param x1
+ * @param y1
+ * @param x2
+ * @param y2
+ * @return
+ */
+public static double getDistance(double x1, double y1, 
+                        double x2, double y2) {
+  double xDiff = (x1-x2);
+  double yDiff = (y1-y2);
+  return Math.sqrt( xDiff * xDiff + yDiff * yDiff);
+}
+
+/**
+ * Computes a monthly payment for a loan with the given
+ * principle at the given APR (annual percentage rate) which
+ * is to be repaid over the given number of terms.
+ * @param principle - the amount borrowed
+ * @param apr - the annual percentage rate
+ * @param terms - number of terms (usually months)
+ * @return
+ */
+public static double getMonthlyPayment(double principle, 
+                           double apr, int terms) {
+  double rate = (apr / 12.0);
+  double payment = (principle * rate) / (1-Math.pow(1+rate, -terms));
+  return payment;
+}
+\end{minted}
+
+In each of the examples above, the first modifier keyword we
+used was \mintinline{java}{public}.  This makes the method visible
+to all other parts of the code base.  Any other piece of code can
+invoke the method and take advantage of the functionality it
+provides.  Alternatively, we could have used the keywords 
+\mintinline{java}{private}, to make it only visible to other methods
+in the same class, \mintinline{java}{protected} or ``package
+protected'' by omitting the modifier altogether.  We'll discuss
+these in detail later on.  We'll mostly want our methods to
+be available, so we'll make most of them \mintinline{java}{public}.
+
+The second modifier is \mintinline{java}{static} which makes it
+so that the method belongs to the class itself rather than instances
+of the class.  We'll discuss objects and instances in detail later
+on.  For now, we'll simply make all of our methods \mintinline{java}{static}.
+
+After the modifiers, we provide the method signature including 
+the return type, its identifier (name), and its parameter list.
+Method names must follow the same naming rules as variables: 
+they must begin with an alphabetic character and may contain 
+alphanumeric characters as well as underscores.  However, 
+using modern coding conventions  we usually name methods 
+using lower camel casing.
+
+Immediately after the signature we provide a method body which
+contains the code that will be run upon invocation of the method.
+The method body is enclosed using opening/closing curly brackets.
+
+\subsection{Void Methods}
+
+The keyword \mintinline{java}{void} can be used in Java to indicate
+a method does \emph{not} return a value, in which case it is
+called a ``void method.''  Though it is not necessary, it is still
+good practice to include a \mintinline{java}{return} statement.
+
+\begin{minted}{java}
+public static void printCopyright()
+  System.out.println("(c) Bourke 2015");
+}
+\end{minted}
+
+In the example above, we've also illustrated how to define a 
+method that has no inputs.  
+
+\subsection{Using Methods}
+
+Once a method has been defined in a class, you can make
+use of the method as follows.  First, you may need to import
+the class itself depending on where it is.  For example, suppose
+that the examples we've presented so far are contained in a 
+class named \mintinline{java}{Utils} (short for ``utilities'') which 
+is in a package named \mintinline{java}{unl.cse}.  Then in the 
+class in which we want to call some of these functions we would
+import it using 
+
+\mintinline{java}{import unl.cse.Utils;}
+
+prior to the class declaration.  Once the class has been imported, 
+we can invoke a method in the class by first referencing the class
+and using the \emph{dot operator} to access one of its methods.
+For example, 
+
+\begin{minted}{java}
+int a = 10, b = 20;
+int c = Utils.sum(a, b); //c contains the value 30
+
+//invoke a method with literal values:
+double dist = Utils.getDistance(0.0, 0.0, 10.0, 20.0);
+
+//invoke a method with a combination:
+double p = 1500.0;
+double r = 0.05;
+double monthlyPayment = Utils.getMonthlyPayment(p, r, 60);
+\end{minted}
+
+The \mintinline{java}{Utils.methodName()} syntax is used because
+the methods are \mintinline{java}{static}--they belong to the class
+and so must be invoked \emph{through} the class using the
+class's name.  We've previously seen this syntax when using
+\mintinline{java}{System.} or \mintinline{java}{Math.} with the
+standard \gls{jdkLabel} library functions.
+
+\subsection{Passing By Reference}
+
+Java does not allow you the ability to specify if a variable
+is passed by reference or by value.  Instead, all primitive types
+are passed by value while all object types are passed by 
+reference.  Moreover, most of the built-in types such as 
+\mintinline{java}{Integer} and \mintinline{java}{String} are
+immutable, even though they are passed by reference, any
+method that receives them cannot change them.  Only
+if the passed object is \emph{mutable} can the method
+make changes to it (by invoking its methods).  
+
+As an example, consider the following piece of code.  The
+\mintinline{java}{StringBuilder} class is a mutable string
+object.  You can \emph{change} the string contents stored
+in a \mintinline{java}{StringBuilder} by calling one of its
+many methods such as \mintinline{java}{append()}, which
+will add whatever string you give it to the end.
+
+In the main method, we create two objects, a 
+\mintinline{java}{String} and a \mintinline{java}{StringBuilder}
+and pass it to a method that makes changes to both by
+appending \mintinline{java}{" world!"} to them.  Understand
+what happens here though.  The first line in \mintinline{java}{change()}
+actually creates a \emph{new} string and then changes
+what the parameter variable \mintinline{java}{s} references.
+The reference to the original string, \mintinline{java}{"Hello"} is lost and
+replaced with the new string.  In contrast, the \mintinline{java}{StringBuilder}
+instance is actually changed via its \mintinline{java}{append()}
+method but is \emph{still the same} object.
+
+\begin{minted}{java}
+public class Mutability {
+  
+  public static void change(String s, StringBuilder sb) {    
+    s = s + " world!";
+    sb.append(" world!");
+    
+    System.out.println("change: s  = " + s);
+    System.out.println("change: sb = " + sb);
+  }
+
+  public static void main(String args[]) {
+    String a = "Hello";
+    StringBuilder b = new StringBuilder("Hello");
+
+    System.out.println("main: s = " + a);
+    System.out.println("main: b = " + b);
+    
+    change(a, b);
+
+    System.out.println("main after: s = " + a);
+    System.out.println("main after: b = " + b);
+
+  }
+}
+\end{minted}
+
+To see this, observe the following output.  When we
+return to the main method, the original string \mintinline{java}{s}
+is unchanged (since it was immutable).  However, the
+\mintinline{java}{StringBuilder} has been changed by
+the method.
+
+TODO: figure?
+
+\begin{minted}{text}
+main: s = Hello
+main: b = Hello
+change: s  = Hello world!
+change: sb = Hello world!
+main after: s = Hello
+main after: b = Hello world!
+\end{minted}
+
+\section{Examples}
+
+\subsection{Generalized Rounding}
+
+Recall that the standard math library provides a 
+\mintinline{java}{Math.round()} method that rounds a number to 
+the nearest whole number.  Often, we've had need to round to 
+cents as well.  We now have the ability to write a method to do 
+this for us.  Before we do, however, let's think more generally.  
+What if we wanted to round to the nearest tenth?  Or
+what if we wanted to round to the nearest 10s or 100s place?  Let's
+write a general purpose rounding method that allows us to specify
+\emph{which} decimal place to round to.  
+
+The most natural input values would be to specify the place using
+an integer exponent.  That is, if we wanted to round to the nearest
+tenth, then we would pass it $-1$ as $0.1 = 10^{-1}$, $-2$ if we wanted
+to round to the nearest 100th, etc.  On the positive end passing in 0
+would correspond to the usual round function, 1 to the nearest 10s spot, 
+and so on.  
+
+Moreover, we could demonstrate good code reuse (as well as procedural
+abstraction) by \emph{scaling} the input value and reusing the functionality
+already provided in the math library's \mintinline{java}{Math.round()} 
+method.  We could further define a \mintinline{java}{roundToCents()} 
+method that used our generalized round method.  Finally, we could place
+all of these methods into \mintinline{java}{RoundUtils} Java class for
+good organization.
+
+\begin{minted}{java}
+package unl.cse;
+
+/**
+ * A collection of rounding utilities
+ *
+ */
+public class RoundUtils {
+  
+  /**
+   * Rounds to the nearest digit specified by the place
+   * argument.  In particular to the (10^place)-th digit
+   *
+   * @param x the number to be rounded
+   * @param place the place to be rounded to
+   * @return
+   */
+  public static double roundToPlace(double x, int place) {
+    double scale = Math.pow(10, -place);
+    double rounded = Math.round(x * scale) / scale;
+    return rounded;
+  }
+
+  /**
+   * Rounds to the nearest cent (100th place)
+   * 
+   * @param x
+   * @return
+   */
+  public static double roundToCents(double x) {
+    return RoundUtils.roundToPlace(x, -2);
+  }
+
+}
+\end{minted}
+
+Observe that this class does not contain a \mintinline{java}{main()}
+method.  That means that this class is \emph{not} executable 
+itself.  It only provides functionality to other classes in the code
+base.  
+
+
+
+
+
+
+

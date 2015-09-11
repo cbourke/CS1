@@ -92,12 +92,12 @@
 \usetikzlibrary{shapes,arrows}
 % Define block styles
 \tikzstyle{decision} = [diamond, draw, fill=yellow!20, 
-    text width=6em, text badly centered, node distance=3cm, inner sep=0pt]
+    text width=6em, text badly centered, node distance=5cm, inner sep=0pt]
 \tikzstyle{block} = [rectangle, draw, fill=blue!20, 
-    text width=5em, text centered, rounded corners, minimum height=4em]
+    text width=5em, text centered, node distance=5cm, minimum height=4em]
+\tikzstyle{action} = [rectangle, draw, fill=green!20, 
+    text width=5em, text centered, rounded corners, node distance=5cm, minimum height=4em]
 \tikzstyle{line} = [draw, -latex']
-\tikzstyle{cloud} = [draw, ellipse,fill=red!20, node distance=3cm,
-    minimum height=2em]
 
 %\usepackage{listings}
 %\lstset{basicstyle=\ttfamily\small\color{black},
@@ -149,7 +149,7 @@
                bgcolor=mintedBackground} %prevents breaking across pages
                
 \setmintedinline{bgcolor={}}
-\setminted[text]{bgcolor={},linenos=false,autogobble,xleftmargin=1em}
+\setminted[text]{bgcolor={mintedBackground},linenos=false,autogobble,xleftmargin=1em}
 %\setminted[php]{bgcolor=mintedBackgroundPHP} %startinline=True}
 \SetupFloatingEnvironment{listing}{name=Code Sample}
 \SetupFloatingEnvironment{listing}{listname=List of Code Samples}
@@ -197,4 +197,4 @@
         Lincoln, NE 68588, USA
 }
 
-\date{\today\  \currenttime \\ Version 1.0.0}
+\date{\today\  \currenttime \\ Version 1.1.0}

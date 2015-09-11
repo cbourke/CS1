@@ -1,0 +1,341 @@
+%!TEX root = ComputerScienceOne.tex
+
+%%Chapter: Functions in PHP
+
+Functions are essential in PHP programming.  As we've 
+already seen, PHP provides a large library of standard 
+functions to perform basic input/output, math, and many 
+other functions.  PHP also provides the ability to define 
+and use your own functions.
+
+PHP does not support function overloading, so when you
+define a function and give it a name, that name cannot be
+in conflict with any other function name in the standard library
+or any other code that you might use.  Therefore, careful 
+though should go into the design of your functions.  
+
+PHP supports both call by value and call by reference.
+As of PHP 5.6, vararg functions are also supported (though
+earlier versions supported some vararg-like functions 
+such as \mintinline{php}{printf()}).  However, we will not
+go into detail here.  Finally, another feature of PHP is that
+function parameters are all optional.  You may invoke
+a function with a subset of the parameters; depending on
+your PHP setup, it may be issue a warning that a parameter
+was omitted.  However, PHP allows you to define default 
+values for optional parameters.
+
+ \section{Defining \& Using Functions}
+
+In general, you can define functions anywhere in your PHP script
+or codebase.  They can even appear \emph{after} code that
+invokes them because PHP essentially \emph{hoists} the function
+definitions by doing two passes of the script.  However, it is good
+style to include function definitions at the top of your script or
+in a separate PHP file for organization.
+
+\subsection{Declaring Functions}
+
+In PHP, to declare a function you use the keyword 
+\mintinline{php}{function}.  Because PHP is dynamically typed, 
+a function can return \emph{any} type.  Therefore, you do
+not declare the return type (just as you do not declare a variable's
+type).  After the \mintinline{php}{function} keyword you do
+provide an identifier and parameters as the function signature.
+Immediately following, you provide the function body enclosed
+with opening/closing curly brackets.  
+
+Typically, the documentation for functions is included with its
+declaration.  Consider the following examples.  In these examples 
+we use a commenting style known as ``doc comments.'' This 
+style was originally developed for Java but has since been 
+adopted by many other languages.
+
+\begin{minted}{php}
+/**
+ * Computes the sum of the two arguments.
+ */
+function sum($a, $b) {
+  return ($a + $b);
+}
+
+/**
+ * Computes the Euclidean distance between the 2-D points, 
+ * (x1,y1) and (x2,y2).
+ */
+function getDistance($x1, $y1, $x2, $y2) {
+  $xDiff = ($x1-$x2);
+  $yDiff = ($y1-$y2);
+  return sqrt( $xDiff * $xDiff + $yDiff * $yDiff);
+}
+
+/**
+ * Computes a monthly payment for a loan with the given
+ * principle at the given APR (annual percentage rate) which
+ * is to be repaid over the given number of terms (usually
+ * months).
+ */
+function getMonthlyPayment($principle, $apr, $terms) {
+  $rate = ($apr / 12.0);
+  $payment = ($principle * $rate) / (1-pow(1+$rate, -$terms));
+  return $payment;
+}
+\end{minted}
+
+Function identifiers (names) follow similar naming rules as 
+variables, however they do not begin with a dollar sign.  
+Function names must begin with an alphabetic character 
+and may contain alphanumeric characters as well as 
+underscores.  However, using modern coding conventions 
+we usually name functions using lower camel casing.  Another
+quirk of PHP is that function names are \emph{case insensitive}.
+Though we declared a function, \mintinline{php}{getDistance()}
+above, it could be invoked with either \mintinline{php}{getdistance()}, 
+\mintinline{php}{GETDISTANCE} or any other combination of
+capital/lower case letters.  However, good code will use consistent
+naming and your function calls \emph{should} match their
+declaration.
+
+The keyword \mintinline{php}{return} is used to specify the value
+that is returned to the calling function.  Whatever value you end
+up returning is the return type of the function.  Since you do not
+specify variable or return types, functions are usually referred
+to as returning a ``mixed'' type.  You could design a function that,
+given one set of inputs, returns a number while another set of
+inputs ends up returning a string.  
+
+You can use the syntax \mintinline{php}{return;} to return no
+value (you do not use the keyword \mintinline{text}{void}).  
+In practice, however, the function ends up returning 
+\mintinline{php}{null} when doing this.  
+
+\subsection{Organizing Functions}
+
+There are many coding standards that guide how PHP code
+should be organized.  We'll only discuss a simple mechanism 
+here.  One way to organize functions is to collect functions
+with similar functionality into separate PHP source files.  
+
+Suppose the functions above are in a PHP source file named 
+\mintinline{text}{utils.php}.  We could include them in another
+source file (our ``main'' source file) using an \mintinline{php}{include_once}
+function invocation.  An example:
+
+\begin{minted}{php}
+<?php
+
+include_once("utils.php");
+
+//we can now use the functions in utils.php:
+$p = getMonthlyPayment(1000, 0.05, 12);
+\end{minted}
+
+The \mintinline{php}{include_once} function essentially loads and
+evaluates the given PHP source file at the point in the code in which
+it is invoked.  The ``once'' in the function refers to the fact that if
+the source file was already included in the script/code before, it will
+not be included a second time.  This allows you to include the same
+source file in multiple source files without a conflict.
+
+\subsection{Calling Functions}
+
+The syntax for calling a function is to simply provide the function 
+name followed by parentheses containing values or variables 
+to pass to the function.  Some examples:
+
+\begin{minted}{php}
+$a = 10, $b = 20;
+$c = sum($a, $b); //c contains the value 30
+
+//invoke a function with literal values:
+$dist = getDistance(0.0, 0.0, 10.0, 20.0);
+
+//invoke a function with a combination:
+$p = 1500.0;
+$r = 0.05;
+$monthlyPayment = getMonthlyPayment($p, $r, 60);
+\end{minted}
+
+\subsection{Passing By Reference}
+
+By default, all types (including numbers, strings, etc.) are passed
+by value.  To be able to pass arguments by reference, we need to 
+use slightly different syntax when defining our functions.
+
+To specify that a parameter is to be passed by reference, we place
+an ampersand, \mintinline{php}{&} in front of it in the function signature.
+\footnote{Those familiar with pointers in C will note that this is the
+exact \emph{opposite} of the C operator.}
+No other syntax is necessary and when you call the function, PHP
+automatically takes care of the referencing/dereferencing for you.
+Consider the following examples.
+
+\begin{minted}{php}
+<?php
+
+function swap($a, $b) {
+  $t = $a;
+  $a = $b;
+  $b = $t;
+}
+
+function swapByRef(&$a, &$b) {
+  $t = $a;
+  $a = $b;
+  $b = $t;
+}
+
+$x = 10;
+$y = 20;
+
+printf("x = %d, y = %d\n", $x, $y);
+swap($x, $y);
+printf("x = %d, y = %d\n", $x, $y);
+swapByRef($x, $y);
+printf("x = %d, y = %d\n", $x, $y);
+
+?>
+\end{minted}
+
+The first function, \mintinline{php}{swap()} passes both variables
+by value.  Swapping the values only affects the \emph{copies} of
+the parameters.  The original variables \mintinline{php}{$x} and
+\mintinline{php}{$y} will be unaffected.  In the second function, 
+\mintinline{php}{swap2()}, both variables are passed by reference
+as there are ampersands in front of them.  Swapping them inside
+the function, swaps the original variables.  The output to this 
+code is as follows.
+
+\begin{minted}{text}
+x = 10, y = 20
+x = 10, y = 20
+x = 20, y = 10
+\end{minted}
+
+Observe that when we invoked the function, 
+\mintinline{php}{swapByRef($x, $y);} we used the same syntax
+as the pass by value version.  The only syntax needed to 
+pass by reference is in the function signature itself.
+
+\subsection{Function Pointers}
+
+Functions are just pieces of code that reside somewhere in 
+memory just as variables do.  Since we can pass variables by
+reference, it also makes sense that we would do the same with
+functions.  
+
+In PHP, functions are first-class citizens\footnote{Some would use
+a much more restrictive definition of first-class and would \emph{not}
+consider them first-class citizens in this sense} meaning that you
+can assign a function to a variable just as you would a numeric value.
+For example, you can do the following.
+
+\begin{minted}{php}
+$func = swapByRef;
+
+$func($x, $y);
+\end{minted}
+
+In the example above, we assigned the function \mintinline{php}{swapByRef()}
+to the variable \mintinline{php}{$func$} by using its identifier.  The
+variable essentially holds a reference to the \mintinline{php}{swapByRef()} 
+function.  Since it refers to a function, we can also invoke the function
+using the variable as in the last line.  This allows you to treat functions
+as callbacks to other functions.  We will revisit this concept in Chapter
+\ref{chapter:php:searchingSorting}.
+
+\section{Examples}
+
+\subsection{Generalized Rounding}
+
+Recall that the standard math library provides a \mintinline{php}{round()}
+function that rounds a number to the nearest whole number.  
+Often, we've had need to round to cents as well.  We now have 
+the ability to write a function to do this for us.  Before we do, 
+however, let's think more generally.  What if we wanted to round 
+to the nearest tenth?  Or what if we wanted to round to the nearest 
+10s or 100s place?  Let's write a general purpose rounding function 
+that allows us to specify \emph{which} decimal place to round.  
+
+The most natural input values would be to specify the place using
+an integer exponent.  That is, if we wanted to round to the nearest
+tenth, then we would pass it $-1$ as $0.1 = 10^{-1}$, $-2$ if we wanted
+to round to the nearest 100th, etc.  On the positive end passing in 0
+would correspond to the usual round function, 1 to the nearest 10s 
+spot, and so on.  
+
+Moreover, we could demonstrate good code reuse (as well 
+as procedural abstraction) by \emph{scaling} the input value 
+and reusing the functionality already provided in the math 
+library's \mintinline{php}{round()} function.  We could further 
+define a \mintinline{php}{roundToCents()} function that used 
+our generalized round function.  Consider the following.
+
+\begin{minted}{php}
+<?php
+
+/**
+ * Rounds to the nearest digit specified by the place
+ * argument.  In particular to the (10^place)-th digit
+ */
+function roundToPlace($x, $place) {
+  $scale = pow(10, -$place);
+  $rounded = round(x * $scale) / $scale;
+  return $rounded;
+}
+
+/**
+ * Rounds to the nearest cent
+ */
+function roundToCents($x) {
+  return roundToPlace($x, -2);
+}
+
+?>
+\end{minted}
+
+We could place these functions into a file named \mintinline{text}{round.php}
+and include them in another PHP source file.
+
+\subsection{Quadratic Roots}
+
+Another advantage of passing variables by reference is that we
+can ``return'' multiple values with one function call.  Functions
+are limited in that they can only return at most one value.  But
+if we pass multiple parameters by reference, the function can
+manipulate the contents of them, thereby communicating (though
+not strictly returning) multiple values.  
+
+Consider again the problem of computing the roots of a quadratic
+equation, 
+  $$ax^2 + bx + c = 0$$
+using the quadratic formula,
+ $$\frac{-b \pm \sqrt{b^2 - 4ac}}{2a}$$
+Since there are two roots, we may have to write two functions, 
+one for the ``plus'' root and one for the ``minus'' root both of 
+which take the coefficients, $a, b, c$ as arguments.  However,
+if we wrote a single function that took the coefficients as parameters
+by value as well as two other parameters by reference, we could
+place \emph{both} root values, one in each of the by-reference
+variables.
+
+\begin{minted}{php}
+function quadraticRoots($a, $b, $c, &$root1, &$root2) {
+  $discriminant = sqrt($b*$b - 4*$a*$c);
+  $root1 = (-$b + $discriminant) / (2*$a);
+  $root2 = (-$b - $discriminant) / (2*$a);
+  return;
+}
+\end{minted}
+
+By using pass by reference variables, we avoid multiple functions.
+Recall that there could be several ``bad'' inputs to this function.  The 
+roots could be complex values, the coefficient $a$ could be zero, 
+etc.  In the next chapter, we examine how we can \emph{handle}
+these errors.
+
+
+
+
+
+

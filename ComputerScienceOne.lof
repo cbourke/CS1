@@ -12,40 +12,55 @@
 \contentsline {figure}{\numberline {\relax 2.2}{\ignorespaces Example of a flow chart for a simple ATM process}}{17}{figure.2.2}
 \contentsline {figure}{\numberline {\relax 2.3}{\ignorespaces Elements of a \mintinline {c}{printf} statement in C}}{41}{figure.2.3}
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {\relax 3.1}{\ignorespaces Control flow diagrams for sequential control flow and an if-statement.}}{66}{figure.3.1}
-\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {Sequential Flow Chart}}}{66}{figure.3.1}
-\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {If-Statement Flow Chart}}}{66}{figure.3.1}
-\contentsline {figure}{\numberline {\relax 3.2}{\ignorespaces An if-else Flow Chart}}{68}{figure.3.2}
-\contentsline {figure}{\numberline {\relax 3.3}{\ignorespaces Control Flow for an If-Else-If Statement}}{70}{figure.3.3}
-\contentsline {figure}{\numberline {\relax 3.4}{\ignorespaces Quadrants of the Cartesian Plane}}{77}{figure.3.4}
-\contentsline {figure}{\numberline {\relax 3.5}{\ignorespaces Three types of triangles}}{80}{figure.3.5}
-\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {Equilateral Triangle}}}{80}{figure.3.5}
-\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {Isosceles Triangle}}}{80}{figure.3.5}
-\contentsline {subfigure}{\numberline {(c)}{\ignorespaces {Scalene Triangle}}}{80}{figure.3.5}
-\contentsline {figure}{\numberline {\relax 3.6}{\ignorespaces Intersection of Two Rectangles}}{81}{figure.3.6}
+\contentsline {figure}{\numberline {\relax 3.1}{\ignorespaces Control flow diagrams for sequential control flow and an if-statement.}}{68}{figure.3.1}
+\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {Sequential Flow Chart}}}{68}{figure.3.1}
+\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {If-Statement Flow Chart}}}{68}{figure.3.1}
+\contentsline {figure}{\numberline {\relax 3.2}{\ignorespaces An if-else Flow Chart}}{70}{figure.3.2}
+\contentsline {figure}{\numberline {\relax 3.3}{\ignorespaces Control Flow for an If-Else-If Statement}}{72}{figure.3.3}
+\contentsline {figure}{\numberline {\relax 3.4}{\ignorespaces Quadrants of the Cartesian Plane}}{79}{figure.3.4}
+\contentsline {figure}{\numberline {\relax 3.5}{\ignorespaces Three types of triangles}}{82}{figure.3.5}
+\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {Equilateral Triangle}}}{82}{figure.3.5}
+\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {Isosceles Triangle}}}{82}{figure.3.5}
+\contentsline {subfigure}{\numberline {(c)}{\ignorespaces {Scalene Triangle}}}{82}{figure.3.5}
+\contentsline {figure}{\numberline {\relax 3.6}{\ignorespaces Intersection of Two Rectangles}}{83}{figure.3.6}
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {\relax 4.1}{\ignorespaces A Typical Loop Flow Chart}}{84}{figure.4.1}
-\contentsline {figure}{\numberline {\relax 4.2}{\ignorespaces A Do-While Loop Flow Chart. The continuation condition is checked \emph {after} the loop body.}}{88}{figure.4.2}
-\contentsline {figure}{\numberline {\relax 4.3}{\ignorespaces Plot of $f(x) = \frac {\qopname \relax o{sin}{x}}{x}$}}{103}{figure.4.3}
-\contentsline {figure}{\numberline {\relax 4.4}{\ignorespaces A rectangle for the interval $[-5, 5]$.}}{104}{figure.4.4}
-\contentsline {figure}{\numberline {\relax 4.5}{\ignorespaces Follow the bouncing ball}}{105}{figure.4.5}
-\contentsline {figure}{\numberline {\relax 4.6}{\ignorespaces Sampling points in a circle}}{106}{figure.4.6}
-\contentsline {figure}{\numberline {\relax 4.7}{\ignorespaces Regular polygons}}{107}{figure.4.7}
+\contentsline {figure}{\numberline {\relax 4.1}{\ignorespaces A Typical Loop Flow Chart}}{86}{figure.4.1}
+\contentsline {figure}{\numberline {\relax 4.2}{\ignorespaces A Do-While Loop Flow Chart. The continuation condition is checked \emph {after} the loop body.}}{91}{figure.4.2}
+\contentsline {figure}{\numberline {\relax 4.3}{\ignorespaces Plot of $f(x) = \frac {\qopname \relax o{sin}{x}}{x}$}}{105}{figure.4.3}
+\contentsline {figure}{\numberline {\relax 4.4}{\ignorespaces A rectangle for the interval $[-5, 5]$.}}{106}{figure.4.4}
+\contentsline {figure}{\numberline {\relax 4.5}{\ignorespaces Follow the bouncing ball}}{107}{figure.4.5}
+\contentsline {figure}{\numberline {\relax 4.6}{\ignorespaces Sampling points in a circle}}{108}{figure.4.6}
+\contentsline {figure}{\numberline {\relax 4.7}{\ignorespaces Regular polygons}}{109}{figure.4.7}
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {\relax 5.1}{\ignorespaces A function declaration (prototype) in the C programming language with the return type, identifier, and parameter list labeled.}}{113}{figure.5.1}
-\contentsline {figure}{\numberline {\relax 5.2}{\ignorespaces Program Stack}}{117}{figure.5.2}
-\contentsline {figure}{\numberline {\relax 5.3}{\ignorespaces Demonstration of Pass By Value}}{119}{figure.5.3}
-\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {Upon invocation of the \mintinline {c}{sum} function, a new stack frame is created which holds the parameters and local variable. The parameter variables \mintinline {c}{a} and \mintinline {c}{b} are \emph {distinct} from the original argument variables \mintinline {c}{n} and \mintinline {c}{m}.}}}{119}{figure.5.3}
-\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {The change to the variable \mintinline {c}{a} in the \mintinline {c}{sum()} function changes the parameter variable, but the original variable \mintinline {c}{n} is unaffected.}}}{119}{figure.5.3}
-\contentsline {subfigure}{\numberline {(c)}{\ignorespaces {When the \mintinline {c}{sum()} function finishes execution, its stack frame is removed and the variables \mintinline {c}{a}, \mintinline {c}{b}, and \mintinline {c}{x} are no longer valid. The return value 20 is stored in another return value location.}}}{119}{figure.5.3}
-\contentsline {subfigure}{\numberline {(d)}{\ignorespaces {The returned value is stored in the variable \mintinline {c}{k} and the variable \mintinline {c}{n} retains its original value.}}}{119}{figure.5.3}
-\contentsline {figure}{\numberline {\relax 5.4}{\ignorespaces Demonstration of Pass By Reference}}{121}{figure.5.4}
-\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {Upon invocation of the \mintinline {c}{sum} function, a new stack frame is created which holds the parameters and local variable. The parameter variable \mintinline {c}{a} holds the memory location of the original variable \mintinline {c}{n}.}}}{121}{figure.5.4}
-\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {The change to the variable \mintinline {c}{a} in the \mintinline {c}{sum()} function actually changes what the variable \mintinline {c}{a} \emph {references}. That is, the original variable \mintinline {c}{n}.}}}{121}{figure.5.4}
-\contentsline {subfigure}{\numberline {(c)}{\ignorespaces {When the \mintinline {c}{sum()} function finishes execution, its stack frame is removed and the variables \mintinline {c}{a}, \mintinline {c}{b}, and \mintinline {c}{x} are no longer valid. The return value 20 is stored in another return value location.}}}{121}{figure.5.4}
-\contentsline {subfigure}{\numberline {(d)}{\ignorespaces {The returned value is stored in the variable \mintinline {c}{k} and the value in the variable \mintinline {c}{n} has now changed.}}}{121}{figure.5.4}
+\contentsline {figure}{\numberline {\relax 5.1}{\ignorespaces A function declaration (prototype) in the C programming language with the return type, identifier, and parameter list labeled.}}{121}{figure.5.1}
+\contentsline {figure}{\numberline {\relax 5.2}{\ignorespaces Program Stack}}{125}{figure.5.2}
+\contentsline {figure}{\numberline {\relax 5.3}{\ignorespaces Demonstration of Pass By Value}}{127}{figure.5.3}
+\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {Upon invocation of the \mintinline {c}{sum} function, a new stack frame is created which holds the parameters and local variable. The parameter variables \mintinline {c}{a} and \mintinline {c}{b} are \emph {distinct} from the original argument variables \mintinline {c}{n} and \mintinline {c}{m}.}}}{127}{figure.5.3}
+\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {The change to the variable \mintinline {c}{a} in the \mintinline {c}{sum()} function changes the parameter variable, but the original variable \mintinline {c}{n} is unaffected.}}}{127}{figure.5.3}
+\contentsline {subfigure}{\numberline {(c)}{\ignorespaces {When the \mintinline {c}{sum()} function finishes execution, its stack frame is removed and the variables \mintinline {c}{a}, \mintinline {c}{b}, and \mintinline {c}{x} are no longer valid. The return value 20 is stored in another return value location.}}}{127}{figure.5.3}
+\contentsline {subfigure}{\numberline {(d)}{\ignorespaces {The returned value is stored in the variable \mintinline {c}{k} and the variable \mintinline {c}{n} retains its original value.}}}{127}{figure.5.3}
+\contentsline {figure}{\numberline {\relax 5.4}{\ignorespaces Demonstration of Pass By Reference}}{129}{figure.5.4}
+\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {Upon invocation of the \mintinline {c}{sum} function, a new stack frame is created which holds the parameters and local variable. The parameter variable \mintinline {c}{a} holds the memory location of the original variable \mintinline {c}{n}.}}}{129}{figure.5.4}
+\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {The change to the variable \mintinline {c}{a} in the \mintinline {c}{sum()} function actually changes what the variable \mintinline {c}{a} \emph {references}. That is, the original variable \mintinline {c}{n}.}}}{129}{figure.5.4}
+\contentsline {subfigure}{\numberline {(c)}{\ignorespaces {When the \mintinline {c}{sum()} function finishes execution, its stack frame is removed and the variables \mintinline {c}{a}, \mintinline {c}{b}, and \mintinline {c}{x} are no longer valid. The return value 20 is stored in another return value location.}}}{129}{figure.5.4}
+\contentsline {subfigure}{\numberline {(d)}{\ignorespaces {The returned value is stored in the variable \mintinline {c}{k} and the value in the variable \mintinline {c}{n} has now changed.}}}{129}{figure.5.4}
 \addvspace {10\p@ }
 \addvspace {10\p@ }
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {\relax 18.1}{\ignorespaces Pointer Operations}}{198}{figure.18.1}
+\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {After the first two lines memory has been dedicated for the variable \mintinline {c}{a} and the pointer variable \mintinline {c}{ptrA} and their values have been initialized.}}}{198}{figure.18.1}
+\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {Making \mintinline {c}{ptrA} point to the variable \mintinline {c}{a}'s memory location. The value stored in the variable \mintinline {c}{ptrA} is a memory address.}}}{198}{figure.18.1}
+\contentsline {subfigure}{\numberline {(c)}{\ignorespaces {Dereferencing \mintinline {c}{ptrA} and assigning a value changes the value stored at what it \emph {points} to.}}}{198}{figure.18.1}
 \addvspace {10\p@ }
 \addvspace {10\p@ }
 \addvspace {10\p@ }

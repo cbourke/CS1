@@ -87,128 +87,158 @@
 \BOOKMARK [2][-]{subsection.5.3.4}{Optional Parameters \046 Default Values}{section.5.3}% 87
 \BOOKMARK [1][-]{section.5.4}{Exercises}{chapter.5}% 88
 \BOOKMARK [0][-]{chapter.6}{Error Handling}{}% 89
-\BOOKMARK [0][-]{chapter.7}{Arrays, Collections \046 Dynamic Memory}{}% 90
-\BOOKMARK [0][-]{chapter.8}{Strings}{}% 91
-\BOOKMARK [0][-]{chapter.9}{File Input/Output}{}% 92
-\BOOKMARK [0][-]{chapter.10}{Encapsulation: Objects \046 Structures}{}% 93
-\BOOKMARK [0][-]{chapter.11}{Recursion}{}% 94
-\BOOKMARK [0][-]{chapter.12}{Searching \046 Sorting}{}% 95
-\BOOKMARK [0][-]{chapter.13}{Graphical User Interfaces \046 Event Driven Programming}{}% 96
-\BOOKMARK [0][-]{chapter.14}{Introduction to Databases \046 Database Connectivity}{}% 97
-\BOOKMARK [-1][-]{part.1}{The C Programming Language}{}% 98
-\BOOKMARK [0][-]{chapter.15}{Basics}{part.1}% 99
-\BOOKMARK [1][-]{section.15.1}{Getting Started: Hello World}{chapter.15}% 100
-\BOOKMARK [1][-]{section.15.2}{Basic Elements}{chapter.15}% 101
-\BOOKMARK [2][-]{subsection.15.2.1}{Basic Syntax Rules}{section.15.2}% 102
-\BOOKMARK [2][-]{subsection.15.2.2}{Preprocessor Directives}{section.15.2}% 103
-\BOOKMARK [2][-]{subsection.15.2.3}{Comments}{section.15.2}% 104
-\BOOKMARK [2][-]{subsection.15.2.4}{The cmain Function}{section.15.2}% 105
-\BOOKMARK [1][-]{section.15.3}{Variables}{chapter.15}% 106
-\BOOKMARK [2][-]{subsection.15.3.1}{Declaration \046 Assignment}{section.15.3}% 107
-\BOOKMARK [1][-]{section.15.4}{Operators}{chapter.15}% 108
-\BOOKMARK [1][-]{section.15.5}{Basic I/O}{chapter.15}% 109
-\BOOKMARK [1][-]{section.15.6}{Examples}{chapter.15}% 110
-\BOOKMARK [2][-]{subsection.15.6.1}{Converting Units}{section.15.6}% 111
-\BOOKMARK [2][-]{subsection.15.6.2}{Computing Quadratic Roots}{section.15.6}% 112
-\BOOKMARK [0][-]{chapter.16}{Conditionals}{part.1}% 113
-\BOOKMARK [1][-]{section.16.1}{Logical Operators}{chapter.16}% 114
-\BOOKMARK [2][-]{subsection.16.1.1}{Order of Precedence}{section.16.1}% 115
-\BOOKMARK [2][-]{subsection.16.1.2}{Comparing Strings and Characters}{section.16.1}% 116
-\BOOKMARK [1][-]{section.16.2}{If, If-Else, If-Else-If Statements}{chapter.16}% 117
-\BOOKMARK [1][-]{section.16.3}{Examples}{chapter.16}% 118
-\BOOKMARK [2][-]{subsection.16.3.1}{Computing a Logarithm}{section.16.3}% 119
-\BOOKMARK [2][-]{subsection.16.3.2}{Life \046 Taxes}{section.16.3}% 120
-\BOOKMARK [2][-]{subsection.16.3.3}{Quadratic Roots Revisited}{section.16.3}% 121
-\BOOKMARK [0][-]{chapter.17}{Loops}{part.1}% 122
-\BOOKMARK [1][-]{section.17.1}{While Loops}{chapter.17}% 123
-\BOOKMARK [1][-]{section.17.2}{For Loops}{chapter.17}% 124
-\BOOKMARK [1][-]{section.17.3}{Do-While Loops}{chapter.17}% 125
-\BOOKMARK [1][-]{section.17.4}{Other Issues}{chapter.17}% 126
-\BOOKMARK [1][-]{section.17.5}{Examples}{chapter.17}% 127
-\BOOKMARK [2][-]{subsection.17.5.1}{Normalizing a Number}{section.17.5}% 128
-\BOOKMARK [2][-]{subsection.17.5.2}{Summation}{section.17.5}% 129
-\BOOKMARK [2][-]{subsection.17.5.3}{Nested Loops}{section.17.5}% 130
-\BOOKMARK [2][-]{subsection.17.5.4}{Paying the Piper}{section.17.5}% 131
-\BOOKMARK [0][-]{chapter.18}{Functions}{part.1}% 132
-\BOOKMARK [1][-]{section.18.1}{Defining \046 Using Functions}{chapter.18}% 133
-\BOOKMARK [2][-]{subsection.18.1.1}{Declaration: Prototypes}{section.18.1}% 134
-\BOOKMARK [2][-]{subsection.18.1.2}{Void Functions}{section.18.1}% 135
-\BOOKMARK [2][-]{subsection.18.1.3}{Organizing Functions}{section.18.1}% 136
-\BOOKMARK [2][-]{subsection.18.1.4}{Calling Functions}{section.18.1}% 137
-\BOOKMARK [1][-]{section.18.2}{Pointers}{chapter.18}% 138
-\BOOKMARK [2][-]{subsection.18.2.1}{Passing By Reference}{section.18.2}% 139
-\BOOKMARK [2][-]{subsection.18.2.2}{Function Pointers}{section.18.2}% 140
-\BOOKMARK [-1][-]{part.2}{The Java Programming Language}{}% 141
-\BOOKMARK [0][-]{chapter.19}{Basics}{part.2}% 142
-\BOOKMARK [1][-]{section.19.1}{Getting Started: Hello World}{chapter.19}% 143
-\BOOKMARK [1][-]{section.19.2}{Basic Elements}{chapter.19}% 144
-\BOOKMARK [2][-]{subsection.19.2.1}{Basic Syntax Rules}{section.19.2}% 145
-\BOOKMARK [2][-]{subsection.19.2.2}{Program Structure}{section.19.2}% 146
-\BOOKMARK [2][-]{subsection.19.2.3}{The javamain Method}{section.19.2}% 147
-\BOOKMARK [2][-]{subsection.19.2.4}{Comments}{section.19.2}% 148
-\BOOKMARK [1][-]{section.19.3}{Variables}{chapter.19}% 149
-\BOOKMARK [2][-]{subsection.19.3.1}{Declaration \046 Assignment}{section.19.3}% 150
-\BOOKMARK [1][-]{section.19.4}{Operators}{chapter.19}% 151
-\BOOKMARK [1][-]{section.19.5}{Basic I/O}{chapter.19}% 152
-\BOOKMARK [1][-]{section.19.6}{Examples}{chapter.19}% 153
-\BOOKMARK [2][-]{subsection.19.6.1}{Converting Units}{section.19.6}% 154
-\BOOKMARK [2][-]{subsection.19.6.2}{Computing Quadratic Roots}{section.19.6}% 155
-\BOOKMARK [0][-]{chapter.20}{Conditionals}{part.2}% 156
-\BOOKMARK [1][-]{section.20.1}{Logical Operators}{chapter.20}% 157
-\BOOKMARK [2][-]{subsection.20.1.1}{Order of Precedence}{section.20.1}% 158
-\BOOKMARK [2][-]{subsection.20.1.2}{Comparing Strings and Characters}{section.20.1}% 159
-\BOOKMARK [1][-]{section.20.2}{If, If-Else, If-Else-If Statements}{chapter.20}% 160
-\BOOKMARK [1][-]{section.20.3}{Examples}{chapter.20}% 161
-\BOOKMARK [2][-]{subsection.20.3.1}{Computing a Logarithm}{section.20.3}% 162
-\BOOKMARK [2][-]{subsection.20.3.2}{Life \046 Taxes}{section.20.3}% 163
-\BOOKMARK [2][-]{subsection.20.3.3}{Quadratic Roots Revisited}{section.20.3}% 164
-\BOOKMARK [0][-]{chapter.21}{Loops}{part.2}% 165
-\BOOKMARK [1][-]{section.21.1}{While Loops}{chapter.21}% 166
-\BOOKMARK [1][-]{section.21.2}{For Loops}{chapter.21}% 167
-\BOOKMARK [1][-]{section.21.3}{Do-While Loops}{chapter.21}% 168
-\BOOKMARK [1][-]{section.21.4}{Enhanced For Loops}{chapter.21}% 169
-\BOOKMARK [1][-]{section.21.5}{Examples}{chapter.21}% 170
-\BOOKMARK [2][-]{subsection.21.5.1}{Normalizing a Number}{section.21.5}% 171
-\BOOKMARK [2][-]{subsection.21.5.2}{Summation}{section.21.5}% 172
-\BOOKMARK [2][-]{subsection.21.5.3}{Nested Loops}{section.21.5}% 173
-\BOOKMARK [2][-]{subsection.21.5.4}{Paying the Piper}{section.21.5}% 174
-\BOOKMARK [-1][-]{part.3}{The PHP Programming Language}{}% 175
-\BOOKMARK [0][-]{chapter.22}{Basics}{part.3}% 176
-\BOOKMARK [1][-]{section.22.1}{Getting Started: Hello World}{chapter.22}% 177
-\BOOKMARK [1][-]{section.22.2}{Basic Elements}{chapter.22}% 178
-\BOOKMARK [2][-]{subsection.22.2.1}{Basic Syntax Rules}{section.22.2}% 179
-\BOOKMARK [2][-]{subsection.22.2.2}{PHP Tags}{section.22.2}% 180
-\BOOKMARK [2][-]{subsection.22.2.3}{Libraries}{section.22.2}% 181
-\BOOKMARK [2][-]{subsection.22.2.4}{Comments}{section.22.2}% 182
-\BOOKMARK [2][-]{subsection.22.2.5}{Entry Point \046 Command Line Arguments}{section.22.2}% 183
-\BOOKMARK [1][-]{section.22.3}{Variables}{chapter.22}% 184
-\BOOKMARK [2][-]{subsection.22.3.1}{Using Variables}{section.22.3}% 185
-\BOOKMARK [1][-]{section.22.4}{Operators}{chapter.22}% 186
-\BOOKMARK [2][-]{subsection.22.4.1}{Type Juggling}{section.22.4}% 187
-\BOOKMARK [2][-]{subsection.22.4.2}{String Concatenation}{section.22.4}% 188
-\BOOKMARK [1][-]{section.22.5}{Basic I/O}{chapter.22}% 189
-\BOOKMARK [1][-]{section.22.6}{Examples}{chapter.22}% 190
-\BOOKMARK [2][-]{subsection.22.6.1}{Converting Units}{section.22.6}% 191
-\BOOKMARK [2][-]{subsection.22.6.2}{Computing Quadratic Roots}{section.22.6}% 192
-\BOOKMARK [0][-]{chapter.23}{Conditionals}{part.3}% 193
-\BOOKMARK [1][-]{section.23.1}{Logical Operators}{chapter.23}% 194
-\BOOKMARK [2][-]{subsection.23.1.1}{Order of Precedence}{section.23.1}% 195
-\BOOKMARK [1][-]{section.23.2}{If, If-Else, If-Else-If Statements}{chapter.23}% 196
-\BOOKMARK [1][-]{section.23.3}{Examples}{chapter.23}% 197
-\BOOKMARK [2][-]{subsection.23.3.1}{Computing a Logarithm}{section.23.3}% 198
-\BOOKMARK [2][-]{subsection.23.3.2}{Life \046 Taxes}{section.23.3}% 199
-\BOOKMARK [2][-]{subsection.23.3.3}{Quadratic Roots Revisited}{section.23.3}% 200
-\BOOKMARK [0][-]{chapter.24}{Loops}{part.3}% 201
-\BOOKMARK [1][-]{section.24.1}{While Loops}{chapter.24}% 202
-\BOOKMARK [1][-]{section.24.2}{For Loops}{chapter.24}% 203
-\BOOKMARK [1][-]{section.24.3}{Do-While Loops}{chapter.24}% 204
-\BOOKMARK [1][-]{section.24.4}{Foreach Loops}{chapter.24}% 205
-\BOOKMARK [1][-]{section.24.5}{Examples}{chapter.24}% 206
-\BOOKMARK [2][-]{subsection.24.5.1}{Normalizing a Number}{section.24.5}% 207
-\BOOKMARK [2][-]{subsection.24.5.2}{Summation}{section.24.5}% 208
-\BOOKMARK [2][-]{subsection.24.5.3}{Nested Loops}{section.24.5}% 209
-\BOOKMARK [2][-]{subsection.24.5.4}{Paying the Piper}{section.24.5}% 210
-\BOOKMARK [0][-]{section*.33}{Glossary}{part.3}% 211
-\BOOKMARK [0][-]{section*.35}{Acronyms}{part.3}% 212
-\BOOKMARK [0][-]{section*.37}{Index}{part.3}% 213
-\BOOKMARK [0][-]{chapter*.39}{References}{part.3}% 214
+\BOOKMARK [1][-]{section.6.1}{Exercises}{chapter.6}% 90
+\BOOKMARK [0][-]{chapter.7}{Arrays, Collections \046 Dynamic Memory}{}% 91
+\BOOKMARK [0][-]{chapter.8}{Strings}{}% 92
+\BOOKMARK [0][-]{chapter.9}{File Input/Output}{}% 93
+\BOOKMARK [0][-]{chapter.10}{Encapsulation: Objects \046 Structures}{}% 94
+\BOOKMARK [0][-]{chapter.11}{Recursion}{}% 95
+\BOOKMARK [0][-]{chapter.12}{Searching \046 Sorting}{}% 96
+\BOOKMARK [0][-]{chapter.13}{Graphical User Interfaces \046 Event Driven Programming}{}% 97
+\BOOKMARK [0][-]{chapter.14}{Introduction to Databases \046 Database Connectivity}{}% 98
+\BOOKMARK [-1][-]{part.1}{The C Programming Language}{}% 99
+\BOOKMARK [0][-]{chapter.15}{Basics}{part.1}% 100
+\BOOKMARK [1][-]{section.15.1}{Getting Started: Hello World}{chapter.15}% 101
+\BOOKMARK [1][-]{section.15.2}{Basic Elements}{chapter.15}% 102
+\BOOKMARK [2][-]{subsection.15.2.1}{Basic Syntax Rules}{section.15.2}% 103
+\BOOKMARK [2][-]{subsection.15.2.2}{Preprocessor Directives}{section.15.2}% 104
+\BOOKMARK [2][-]{subsection.15.2.3}{Comments}{section.15.2}% 105
+\BOOKMARK [2][-]{subsection.15.2.4}{The cmain Function}{section.15.2}% 106
+\BOOKMARK [1][-]{section.15.3}{Variables}{chapter.15}% 107
+\BOOKMARK [2][-]{subsection.15.3.1}{Declaration \046 Assignment}{section.15.3}% 108
+\BOOKMARK [1][-]{section.15.4}{Operators}{chapter.15}% 109
+\BOOKMARK [1][-]{section.15.5}{Basic I/O}{chapter.15}% 110
+\BOOKMARK [1][-]{section.15.6}{Examples}{chapter.15}% 111
+\BOOKMARK [2][-]{subsection.15.6.1}{Converting Units}{section.15.6}% 112
+\BOOKMARK [2][-]{subsection.15.6.2}{Computing Quadratic Roots}{section.15.6}% 113
+\BOOKMARK [0][-]{chapter.16}{Conditionals}{part.1}% 114
+\BOOKMARK [1][-]{section.16.1}{Logical Operators}{chapter.16}% 115
+\BOOKMARK [2][-]{subsection.16.1.1}{Order of Precedence}{section.16.1}% 116
+\BOOKMARK [2][-]{subsection.16.1.2}{Comparing Strings and Characters}{section.16.1}% 117
+\BOOKMARK [1][-]{section.16.2}{If, If-Else, If-Else-If Statements}{chapter.16}% 118
+\BOOKMARK [1][-]{section.16.3}{Examples}{chapter.16}% 119
+\BOOKMARK [2][-]{subsection.16.3.1}{Computing a Logarithm}{section.16.3}% 120
+\BOOKMARK [2][-]{subsection.16.3.2}{Life \046 Taxes}{section.16.3}% 121
+\BOOKMARK [2][-]{subsection.16.3.3}{Quadratic Roots Revisited}{section.16.3}% 122
+\BOOKMARK [0][-]{chapter.17}{Loops}{part.1}% 123
+\BOOKMARK [1][-]{section.17.1}{While Loops}{chapter.17}% 124
+\BOOKMARK [1][-]{section.17.2}{For Loops}{chapter.17}% 125
+\BOOKMARK [1][-]{section.17.3}{Do-While Loops}{chapter.17}% 126
+\BOOKMARK [1][-]{section.17.4}{Other Issues}{chapter.17}% 127
+\BOOKMARK [1][-]{section.17.5}{Examples}{chapter.17}% 128
+\BOOKMARK [2][-]{subsection.17.5.1}{Normalizing a Number}{section.17.5}% 129
+\BOOKMARK [2][-]{subsection.17.5.2}{Summation}{section.17.5}% 130
+\BOOKMARK [2][-]{subsection.17.5.3}{Nested Loops}{section.17.5}% 131
+\BOOKMARK [2][-]{subsection.17.5.4}{Paying the Piper}{section.17.5}% 132
+\BOOKMARK [0][-]{chapter.18}{Functions}{part.1}% 133
+\BOOKMARK [1][-]{section.18.1}{Defining \046 Using Functions}{chapter.18}% 134
+\BOOKMARK [2][-]{subsection.18.1.1}{Declaration: Prototypes}{section.18.1}% 135
+\BOOKMARK [2][-]{subsection.18.1.2}{Void Functions}{section.18.1}% 136
+\BOOKMARK [2][-]{subsection.18.1.3}{Organizing Functions}{section.18.1}% 137
+\BOOKMARK [2][-]{subsection.18.1.4}{Calling Functions}{section.18.1}% 138
+\BOOKMARK [1][-]{section.18.2}{Pointers}{chapter.18}% 139
+\BOOKMARK [2][-]{subsection.18.2.1}{Passing By Reference}{section.18.2}% 140
+\BOOKMARK [2][-]{subsection.18.2.2}{Function Pointers}{section.18.2}% 141
+\BOOKMARK [1][-]{section.18.3}{Examples}{chapter.18}% 142
+\BOOKMARK [2][-]{subsection.18.3.1}{Generalized Rounding}{section.18.3}% 143
+\BOOKMARK [2][-]{subsection.18.3.2}{Quadratic Roots}{section.18.3}% 144
+\BOOKMARK [0][-]{chapter.19}{Error Handling}{part.1}% 145
+\BOOKMARK [0][-]{chapter.20}{Arrays}{part.1}% 146
+\BOOKMARK [0][-]{chapter.21}{Strings}{part.1}% 147
+\BOOKMARK [-1][-]{part.2}{The Java Programming Language}{}% 148
+\BOOKMARK [0][-]{chapter.22}{Basics}{part.2}% 149
+\BOOKMARK [1][-]{section.22.1}{Getting Started: Hello World}{chapter.22}% 150
+\BOOKMARK [1][-]{section.22.2}{Basic Elements}{chapter.22}% 151
+\BOOKMARK [2][-]{subsection.22.2.1}{Basic Syntax Rules}{section.22.2}% 152
+\BOOKMARK [2][-]{subsection.22.2.2}{Program Structure}{section.22.2}% 153
+\BOOKMARK [2][-]{subsection.22.2.3}{The javamain Method}{section.22.2}% 154
+\BOOKMARK [2][-]{subsection.22.2.4}{Comments}{section.22.2}% 155
+\BOOKMARK [1][-]{section.22.3}{Variables}{chapter.22}% 156
+\BOOKMARK [2][-]{subsection.22.3.1}{Declaration \046 Assignment}{section.22.3}% 157
+\BOOKMARK [1][-]{section.22.4}{Operators}{chapter.22}% 158
+\BOOKMARK [1][-]{section.22.5}{Basic I/O}{chapter.22}% 159
+\BOOKMARK [1][-]{section.22.6}{Examples}{chapter.22}% 160
+\BOOKMARK [2][-]{subsection.22.6.1}{Converting Units}{section.22.6}% 161
+\BOOKMARK [2][-]{subsection.22.6.2}{Computing Quadratic Roots}{section.22.6}% 162
+\BOOKMARK [0][-]{chapter.23}{Conditionals}{part.2}% 163
+\BOOKMARK [1][-]{section.23.1}{Logical Operators}{chapter.23}% 164
+\BOOKMARK [2][-]{subsection.23.1.1}{Order of Precedence}{section.23.1}% 165
+\BOOKMARK [2][-]{subsection.23.1.2}{Comparing Strings and Characters}{section.23.1}% 166
+\BOOKMARK [1][-]{section.23.2}{If, If-Else, If-Else-If Statements}{chapter.23}% 167
+\BOOKMARK [1][-]{section.23.3}{Examples}{chapter.23}% 168
+\BOOKMARK [2][-]{subsection.23.3.1}{Computing a Logarithm}{section.23.3}% 169
+\BOOKMARK [2][-]{subsection.23.3.2}{Life \046 Taxes}{section.23.3}% 170
+\BOOKMARK [2][-]{subsection.23.3.3}{Quadratic Roots Revisited}{section.23.3}% 171
+\BOOKMARK [0][-]{chapter.24}{Loops}{part.2}% 172
+\BOOKMARK [1][-]{section.24.1}{While Loops}{chapter.24}% 173
+\BOOKMARK [1][-]{section.24.2}{For Loops}{chapter.24}% 174
+\BOOKMARK [1][-]{section.24.3}{Do-While Loops}{chapter.24}% 175
+\BOOKMARK [1][-]{section.24.4}{Enhanced For Loops}{chapter.24}% 176
+\BOOKMARK [1][-]{section.24.5}{Examples}{chapter.24}% 177
+\BOOKMARK [2][-]{subsection.24.5.1}{Normalizing a Number}{section.24.5}% 178
+\BOOKMARK [2][-]{subsection.24.5.2}{Summation}{section.24.5}% 179
+\BOOKMARK [2][-]{subsection.24.5.3}{Nested Loops}{section.24.5}% 180
+\BOOKMARK [2][-]{subsection.24.5.4}{Paying the Piper}{section.24.5}% 181
+\BOOKMARK [0][-]{chapter.25}{Methods}{part.2}% 182
+\BOOKMARK [1][-]{section.25.1}{Defining Methods}{chapter.25}% 183
+\BOOKMARK [2][-]{subsection.25.1.1}{Void Methods}{section.25.1}% 184
+\BOOKMARK [2][-]{subsection.25.1.2}{Using Methods}{section.25.1}% 185
+\BOOKMARK [2][-]{subsection.25.1.3}{Passing By Reference}{section.25.1}% 186
+\BOOKMARK [1][-]{section.25.2}{Examples}{chapter.25}% 187
+\BOOKMARK [2][-]{subsection.25.2.1}{Generalized Rounding}{section.25.2}% 188
+\BOOKMARK [0][-]{chapter.26}{Error Handling \046 Exceptions}{part.2}% 189
+\BOOKMARK [0][-]{chapter.27}{Arrays}{part.2}% 190
+\BOOKMARK [0][-]{chapter.28}{Strings}{part.2}% 191
+\BOOKMARK [-1][-]{part.3}{The PHP Programming Language}{}% 192
+\BOOKMARK [0][-]{chapter.29}{Basics}{part.3}% 193
+\BOOKMARK [1][-]{section.29.1}{Getting Started: Hello World}{chapter.29}% 194
+\BOOKMARK [1][-]{section.29.2}{Basic Elements}{chapter.29}% 195
+\BOOKMARK [2][-]{subsection.29.2.1}{Basic Syntax Rules}{section.29.2}% 196
+\BOOKMARK [2][-]{subsection.29.2.2}{PHP Tags}{section.29.2}% 197
+\BOOKMARK [2][-]{subsection.29.2.3}{Libraries}{section.29.2}% 198
+\BOOKMARK [2][-]{subsection.29.2.4}{Comments}{section.29.2}% 199
+\BOOKMARK [2][-]{subsection.29.2.5}{Entry Point \046 Command Line Arguments}{section.29.2}% 200
+\BOOKMARK [1][-]{section.29.3}{Variables}{chapter.29}% 201
+\BOOKMARK [2][-]{subsection.29.3.1}{Using Variables}{section.29.3}% 202
+\BOOKMARK [1][-]{section.29.4}{Operators}{chapter.29}% 203
+\BOOKMARK [2][-]{subsection.29.4.1}{Type Juggling}{section.29.4}% 204
+\BOOKMARK [2][-]{subsection.29.4.2}{String Concatenation}{section.29.4}% 205
+\BOOKMARK [1][-]{section.29.5}{Basic I/O}{chapter.29}% 206
+\BOOKMARK [1][-]{section.29.6}{Examples}{chapter.29}% 207
+\BOOKMARK [2][-]{subsection.29.6.1}{Converting Units}{section.29.6}% 208
+\BOOKMARK [2][-]{subsection.29.6.2}{Computing Quadratic Roots}{section.29.6}% 209
+\BOOKMARK [0][-]{chapter.30}{Conditionals}{part.3}% 210
+\BOOKMARK [1][-]{section.30.1}{Logical Operators}{chapter.30}% 211
+\BOOKMARK [2][-]{subsection.30.1.1}{Order of Precedence}{section.30.1}% 212
+\BOOKMARK [1][-]{section.30.2}{If, If-Else, If-Else-If Statements}{chapter.30}% 213
+\BOOKMARK [1][-]{section.30.3}{Examples}{chapter.30}% 214
+\BOOKMARK [2][-]{subsection.30.3.1}{Computing a Logarithm}{section.30.3}% 215
+\BOOKMARK [2][-]{subsection.30.3.2}{Life \046 Taxes}{section.30.3}% 216
+\BOOKMARK [2][-]{subsection.30.3.3}{Quadratic Roots Revisited}{section.30.3}% 217
+\BOOKMARK [0][-]{chapter.31}{Loops}{part.3}% 218
+\BOOKMARK [1][-]{section.31.1}{While Loops}{chapter.31}% 219
+\BOOKMARK [1][-]{section.31.2}{For Loops}{chapter.31}% 220
+\BOOKMARK [1][-]{section.31.3}{Do-While Loops}{chapter.31}% 221
+\BOOKMARK [1][-]{section.31.4}{Foreach Loops}{chapter.31}% 222
+\BOOKMARK [1][-]{section.31.5}{Examples}{chapter.31}% 223
+\BOOKMARK [2][-]{subsection.31.5.1}{Normalizing a Number}{section.31.5}% 224
+\BOOKMARK [2][-]{subsection.31.5.2}{Summation}{section.31.5}% 225
+\BOOKMARK [2][-]{subsection.31.5.3}{Nested Loops}{section.31.5}% 226
+\BOOKMARK [2][-]{subsection.31.5.4}{Paying the Piper}{section.31.5}% 227
+\BOOKMARK [0][-]{chapter.32}{Functions}{part.3}% 228
+\BOOKMARK [1][-]{section.32.1}{Defining \046 Using Functions}{chapter.32}% 229
+\BOOKMARK [2][-]{subsection.32.1.1}{Declaring Functions}{section.32.1}% 230
+\BOOKMARK [2][-]{subsection.32.1.2}{Organizing Functions}{section.32.1}% 231
+\BOOKMARK [2][-]{subsection.32.1.3}{Calling Functions}{section.32.1}% 232
+\BOOKMARK [2][-]{subsection.32.1.4}{Passing By Reference}{section.32.1}% 233
+\BOOKMARK [2][-]{subsection.32.1.5}{Function Pointers}{section.32.1}% 234
+\BOOKMARK [1][-]{section.32.2}{Examples}{chapter.32}% 235
+\BOOKMARK [2][-]{subsection.32.2.1}{Generalized Rounding}{section.32.2}% 236
+\BOOKMARK [2][-]{subsection.32.2.2}{Quadratic Roots}{section.32.2}% 237
+\BOOKMARK [0][-]{chapter.33}{Error Handling \046 Exceptions}{part.3}% 238
+\BOOKMARK [0][-]{chapter.34}{Arrays}{part.3}% 239
+\BOOKMARK [0][-]{chapter.35}{Strings}{part.3}% 240
+\BOOKMARK [0][-]{section*.33}{Glossary}{part.3}% 241
+\BOOKMARK [0][-]{section*.35}{Acronyms}{part.3}% 242
+\BOOKMARK [0][-]{section*.37}{Index}{part.3}% 243
+\BOOKMARK [0][-]{chapter*.39}{References}{part.3}% 244

@@ -174,6 +174,7 @@ volume: 65.449847
 \end{exer}
 
 \begin{exer}
+\label{exercise:basics:airDistance}
 Write a program that prompts for the latitude and longitude of two locations (an origin and a 
 destination) on the globe.  These numbers are in the range $[-180, 180]$ (negative values 
 correspond to the western and southern hemispheres).  Your program should then compute 
@@ -286,6 +287,154 @@ Taxes       $    6.25
 Total       $   91.25
 \end{minted}
 \end{exer}
+
+
+\begin{exer}
+The ROI (Return On Investment) is computed by the following formula:
+  $$\textrm{ROI} = \frac{\textrm{Gain from Investment} - \textrm{Cost of Investment}}{\textrm{Cost of Investment}}$$
+Write a program that prompts the user to enter the cost and gain 
+(how much it was sold for) from an investment and computes and
+outputs the ROI.  For example, if the user enters \$100,000 and
+\$120,000 respectively, the output look similar to the following.
+
+\begin{minted}{text}
+Cost of Investment: $100000.00
+Gain of Investment: $120000.00
+Return on Investment: 20.00%
+\end{minted}
+\end{exer}
+
+\begin{exer}
+Write a program to compute the real cost of driving.  Gas
+mileage (in the US) is usually measured in miles per gallon
+but the real cost should be measured in how much it costs 
+to drive a mile, that is, dollars per mile.  Write a program to 
+assist a user in figuring out the real cost of driving.  Prompt 
+the user for the following inputs.
+\begin{itemize}
+  \item Beginning odometer reading
+  \item Ending odometer reading
+  \item Number of gallons it took to fill the tank
+  \item Cost of gas in dollars per gallon
+\end{itemize}
+For example, if the user enters 50,125, 50,430, 10 (gallons), 
+and \$3.25 (per gallon), then your output should be something 
+like the following.
+
+\begin{minted}{text}
+Miles driven: 305
+Miles per gallon: 30.50
+Cost per mile: $0.11 
+\end{minted}
+\end{exer}
+
+\begin{exer}
+A \emph{bearing} can be measured in degrees on the scale 
+of $[0, 360)$ with $0^\circ$ being due north, $90^\circ$ due 
+east, etc.  The (initial) directional bearing from location $A$ 
+to location $B$ can be computed using the following formula.
+$$\theta = \mathrm{atan2}\big(\sin(\Delta) \cdot \cos(\varphi_2), \, \cos(\varphi_1)\cdot\sin(\varphi_2) - \sin(\varphi_1)\cdot \cos(\varphi_2) \cos(\Delta)\big)$$
+Where
+\begin{itemize}
+  \item $\varphi_1$ is the latitude of location $A$
+  \item $\varphi_2$ is the latitude of location $B$
+  \item $\Delta$ is the difference between location $B$'s longitude 
+  	and location $A$'s longitude
+  \item $\textrm{atan2}$ is the two-argument arctangent function
+\end{itemize}
+Note: the formula above assumes that latitude and longitude 
+are measured in radians $r$, $-\pi < r < \pi$.  To convert from 
+degrees $d$ ($-180 < d < 180$) to radians $r$, you can use the 
+simple formula:
+  $$r = \frac{d}{180} \pi$$
+Write a program to prompt a user for a latitude/longitude of two 
+locations (an origin and a destination) and computes the directional
+bearing (in degrees) from the origin to the destination.  For example, if
+the user enters: $40.8206, -96.7056$ ($40.8206^\circ$ N, $96.7056^\circ$ W)
+and $41.9483, -87.6556$ ($41.9483^\circ$ N, $87.6556^\circ$ W), your
+program should output something like the following.
+
+\begin{minted}{text}
+From (40.8206, -96.7056) to (41.9483, -87.6556): 
+bearing 77.594671 degrees
+\end{minted}
+\end{exer}
+
+
+\begin{exer}
+General relativity tells us that time is relative to your velocity.  
+As you approach the speed of light ($c = 299,792$ km/s), 
+time slows down relative to objects traveling at a slower velocity.  
+This \emph{time dilation} is quantified by the Lorentz equation
+  $$t' = \frac{t}{\sqrt{1-\frac{v^2}{c^2}}}$$
+Where $t$ is the time duration on the traveling space ship and 
+$t'$ is the time duration on the (say) Earth.  
+  
+For example, if we were traveling at 50\% the speed of light 
+relative to Earth, one hour in our space ship ($t=1$) would 
+correspond to 
+  $$t' = \frac{1}{\sqrt{1-(.5)^2}} = 1.1547$$
+hours on Earth (about 1 hour, 9.28 minutes).
+
+Write a program that prompts the user for a velocity which represents the
+\emph{percentage} $p$ of the speed of light (that is, $p = \frac{v}{c}$) and
+a time duration $t$ in hours and outputs the relative time duration on Earth.
+
+For example, if the user enters $0.5$ and $1$ respectively as in our example, it
+should output something \emph{like} the following:
+
+\begin{minted}{text}
+Traveling at 1 hour(s) in your space ship at
+50.00% the speed of light, your friends on
+Earth would experience:
+1 hour(s)
+9.28 minute(s)
+\end{minted}
+
+Your output should be able to handle years, weeks, days, hours, and minutes.  So
+if the user inputs something like $0.9999$ and $168$, your output should
+look something like:
+
+\begin{minted}{text}
+Traveling at 168.00 hour(s) in your space ship at
+99.99% the speed of light, your friends on 
+Earth would experience: 
+1 year(s)
+18 week(s)
+3 day(s)
+17 hour(s)
+41.46 minute(s)
+\end{minted}
+\end{exer}
+
+\begin{exer}
+Radioactive isotopes decay into other isotopes at a rate that is
+measured by a half-life, $H$.  For example, Strontium-90 has a half-life
+of 28.79 years.  If you started with 10 kilograms of Strontium-90, 28.79
+years later you would have only 5 kilograms (with the remaining 5 kilograms
+being Yttrium-90 and Zirconium-90, Strontium-90's decay products).
+
+Given a mass $m$ of an isotope with half-life $H$ we can determine
+how much of the isotope remains after $y$ years using the formula,
+  $$r = m \cdot \left(\frac{1}{2}\right)^{(y/H)}$$
+For example, if we have $m = 10$ kilograms of Strontium-90 with $H = 28.79$, 
+after $y = 2$ years we would have 
+  $$r = 10 \cdot \left(\frac{1}{2}\right)^{(2/28.79)} = 9.5298$$
+kilograms of Strontium-90 left.
+
+Write a program that prompts the user for an amount $m$ (mass, in kilograms) 
+of an isotope and its half-life $H$ as well as a number of years $y$ and 
+outputs the amount of the isotope remaining after $y$ years.  For the
+example above your output should look something like the following.
+
+\begin{minted}{text}
+Starting with 10.00kg of an isotope with half-life
+28.79 years, after 2.00 years you would have
+9.5298 kilograms left.
+\end{minted}
+\end{exer}
+
+
 
 
 

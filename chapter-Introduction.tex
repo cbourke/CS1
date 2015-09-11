@@ -452,8 +452,8 @@ of contents.
 Code should be well-documented.  The code itself should be
 clear enough that it tells the user \emph{what} the code does
 and \emph{how} it does it.  This is called ``self-documenting''
-code.  In addition, good code should contain good, sufficient
-\emph{comments}.  A comment in a program is intended for
+code.  In addition, well-written code should contain sufficient and
+clear \emph{comments}.  A comment in a program is intended for
 a human user to read.  A comment is ultimately ignored and
 has no effect on the actual program.  Good comments tell the
 user \emph{why} the code was written or why it was written
@@ -462,7 +462,47 @@ what a block of code, function, or program does.  If the
 particular method or algorithm is of interest, it should also be
 documented.  
 
-Comments not be trivial: they should not explain something
+There are typically two ways to write comments.  Single line
+comments usually begin with two forward slashes, \mintinline{text}{//}.
+Everything after the slashes until the next line is ignored 
+by the program.  Multiline comments begin with a \mintinline{text}{/*}
+and end with a \mintinline{text}{*/}; everything between them 
+is ignored even if it spans multiple lines.  This syntax is shared
+among many languages including C, Java, PHP and others.
+Some examples:
+
+\begin{minted}{c}
+double x = sqrt(y); //this is a single line comment
+
+/*
+  This is a multiline comment
+  each line is ignored, but allows
+  for better formatting
+*/
+
+/**
+ * This is a doc-style comment, usually placed in
+ * front of major portions of code such as a function
+ * to provide documentation
+ * It begins with a forward-slash-star-star
+ */
+\end{minted}
+
+The last example above is a doc-style comment.  It originated
+with Java, but has since been adopted by many other programming
+languages.  Syntactically it is a normal multiline comment, but
+begins with a \mintinline{text}{/**}.  Asterisks are aligned together
+on each line.  Certain commenting systems allow you to place
+other marked up data inside these comments such as labeling
+parameters (\mintinline{text}{@param x}) or use HTML code
+to provide links.  These doc-style comments are used to provide
+documentation for major parts of the code especially functions
+and data structures.  Though not part of the language, other
+documentation tools can be used to gather the information in
+doc-style comments to produce documentation documents (such
+as web pages).
+
+Comments should not be trivial: they should not explain something
 that should be readily apparent to an experienced user or
 programmer.  For example, if a piece of code adds two
 numbers together and stores the result, there should not

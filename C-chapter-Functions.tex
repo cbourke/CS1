@@ -315,9 +315,11 @@ Consider the following example.
 \begin{minted}{c}
 //declare a normal integer variable
 int a = 10;
-
-//declare a pointer and make it point to a
+//declare a pointer and initialize it to NULL
 int *ptrA = &a;
+
+//point ptrA to a's memory location
+ptrA = &a;
 
 //change the value of the variable a using its pointer
 *ptrA = 20;
@@ -326,9 +328,10 @@ int *ptrA = &a;
 printf("a = %d\n", a); //prints "a = 20"
 \end{minted}
 
-TODO: repeat memory figure here
+How each of these lines of code operate in memory is depicted
+in Figure \ref{figure:cPointers}.  
 
-%TODO: void pointer here or in arrays?
+\input{figures/figureCPointers}
 
 \subsection{Passing By Reference}
 
@@ -390,8 +393,17 @@ swap(&x, &y);
 // x contains 20 and y contains 10
 \end{minted}
 
+This should look familiar.  We saw this same syntax when
+we used \mintinline{c}{scanf()} to read input from the standard
+input.  We needed to place an ampersand in front of each
+variable in order to pass the variable by reference so that
+\mintinline{c}{scanf()} could place the results into the respective
+memory locations.  If the variables had been passed by 
+value, then \mintinline{c}{scanf()} would not have been able
+to manipulate their values.
+
 You can also specify functions to \emph{return} pointers
-which we discuss in detail in Chapter \ref{chapter:cArrays}.
+which we discuss in detail in Chapter \ref{chapter:c:arrays}.
 
 \subsection{Function Pointers}
 
@@ -448,10 +460,118 @@ x = ptr(-10.5); //x contains 10.5
 You generally want to create and use function pointers when
 passing and returning functions as arguments to other
 functions as callbacks.  We discuss this in further detail
-in Chapter \ref{chapter:?}.
+in Chapter \ref{chapter:c:searchingSorting}.
 
+\section{Examples}
 
+\subsection{Generalized Rounding}
 
+Recall that the standard math library provides a \mintinline{c}{round()}
+function that rounds a number to the nearest whole number.  Often, we've
+had need to round to cents as well.  We now have the ability to write
+a function to do this for us.  Before we do, however, let's think more
+generally.  What if we wanted to round to the nearest tenth?  Or
+what if we wanted to round to the nearest 10s or 100s place?  Let's
+write a general purpose rounding function that allows us to specify
+\emph{which} decimal place to round.  
+
+The most natural input values would be to specify the place using
+an integer exponent.  That is, if we wanted to round to the nearest
+tenth, then we would pass it $-1$ as $0.1 = 10^{-1}$, $-2$ if we wanted
+to round to the nearest 100th, etc.  On the positive end passing in 0
+would correspond to the usual round function, 1 to the nearest 10s spot, 
+and so on.  
+
+Moreover, we could demonstrate good code reuse (as well as procedural
+abstraction) by \emph{scaling} the input value and reusing the functionality
+already provided in the math library's \mintinline{c}{round()} function.  We
+could further define a \mintinline{c}{roundToCents()} function that used 
+our generalized round function.
+
+Let's also think about organization.  We could place the prototypes into
+a \mintinline{text}{round.h} header file and the corresponding definitions
+in a \mintinline{text}{round.c} source file.  The contents of these two
+files are presented here:
+
+\begin{minted}{c}
+/**
+ * Rounds to the nearest digit specified by the place
+ * argument.  In particular to the (10^place)-th digit
+ */
+double roundToPlace(double x, int place);
+
+/**
+ * Rounds to the nearest cent
+ */
+double roundToCents(double x);
+\end{minted}
+
+\begin{minted}{c}
+#include<math.h>
+#include "round.h"
+
+double roundToPlace(double x, int place) {
+  double scale = pow(10, -place);
+  double rounded = round(x * scale) / scale;
+  return rounded;
+}
+
+double roundToCents(double x) {
+  return roundToPlace(x, -2);
+}
+\end{minted}
+
+Observe that neither of these files contains a \mintinline{c}{main()}
+function.  By themselves they would not be able to be compiled
+into an executable program.  We've essentially built a small 
+\emph{library} of rounding functions.  We could compile them though
+into a binary \emph{object} file using gcc (something like 
+\mintinline{text}{gcc -c round.c}).  We could then link into the object
+file when compiling an executable program that uses these functions.
+
+\subsection{Quadratic Roots}
+
+Another advantage of passing variables by reference is that we
+can ``return'' multiple values with one function call.  Functions
+are limited in that they can only return at most one value.  But
+if we pass multiple parameters by reference, the function can
+manipulate the contents of them, thereby communicating (though
+not strictly returning) multiple values.  
+
+Consider again the problem of computing the roots of a quadratic
+equation, 
+  $$ax^2 + bx + c = 0$$
+using the quadratic formula,
+ $$\frac{-b \pm \sqrt{b^2 - 4ac}}{2a}$$
+Since there are two roots, we may have to write two functions, 
+one for the ``plus'' root and one for the ``minus'' root both of 
+which take the coefficients, $a, b, c$ as arguments.  However,
+if we wrote a single function that took the coefficients as parameters
+by value as well as two other parameters by reference, we could
+place \emph{both} root values, one in each of the by-reference
+variables.
+
+\begin{minted}{c}
+void quadraticRoots(double a, double b, double c, 
+                    double *root1, double *root2) {
+  double discriminant = sqrt(b*b - 4*a*c);
+  *root1 = (-b + discriminant) / (2*a);
+  *root2 = (-b - discriminant) / (2*a);
+  return;
+}
+\end{minted}
+
+By using pass by reference variables, we avoid multiple functions.
+We also note that the return value in this case is unused since
+we are ``returning'' the root values in the two pass-by-reference
+variables.  This frees up the return value to be used to communicate
+\emph{errors} to the calling function.  Recall that there could
+be several ``bad'' inputs to this function.  The roots could be complex
+values, the coefficient $a$ could be zero, etc.  And now that we
+are dealing with pointers, the pointers could be invalid (point to
+\mintinline{c}{NULL}).  In the next chapter, we examine how we
+can use the return value to communicate different errors to the
+calling function, letting it \emph{handle} those errors.
 
 
 

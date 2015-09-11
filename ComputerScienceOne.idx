@@ -5,38 +5,38 @@
 \indexentry{variable!scope|hyperpage}{29}
 \indexentry{operator|hyperpage}{30}
 \indexentry{order of precedence|hyperpage}{35}
-\indexentry{conditionals|hyperpage}{55}
-\indexentry{logical operators|hyperpage}{55}
-\indexentry{operator!logical|hyperpage}{55}
-\indexentry{logical operators!negation|hyperpage}{58}
-\indexentry{logical operators!and|hyperpage}{59}
-\indexentry{conjunction|hyperindexformat{\see {logical operators--and}}}{59}
-\indexentry{logical operators!or|hyperpage}{60}
-\indexentry{disjunction|hyperindexformat{\see {logical operators--or}}}{60}
-\indexentry{order of precedence!logic|hyperpage}{63}
-\indexentry{short circuiting|hyperpage}{64}
-\indexentry{if statement|hyperpage}{65}
-\indexentry{conditionals!if statement|hyperpage}{65}
-\indexentry{if-else statement|hyperpage}{67}
-\indexentry{conditionals!if-else statement|hyperpage}{67}
-\indexentry{if-else-if statement|hyperpage}{68}
-\indexentry{conditionals!if-else-if statement|hyperpage}{68}
-\indexentry{loops|hyperpage}{83}
-\indexentry{infinite loop|hyperpage}{84}
-\indexentry{while loop|hyperpage}{84}
-\indexentry{loops!while loop|hyperpage}{84}
-\indexentry{for loop|hyperpage}{86}
-\indexentry{loops!for loop|hyperpage}{86}
-\indexentry{do-while loop|hyperpage}{87}
-\indexentry{loops!do-while loop|hyperpage}{87}
-\indexentry{foreach loop|hyperpage}{89}
-\indexentry{loops!foreach loop|hyperpage}{89}
-\indexentry{infinite loop|hyperpage}{90}
-\indexentry{loops!infinite loop|hyperpage}{90}
-\indexentry{functions|hyperpage}{111}
-\indexentry{error handling|hyperpage}{125}
-\indexentry{arrays|hyperpage}{127}
-\indexentry{strings|hyperpage}{129}
-\indexentry{file I/O|hyperpage}{131}
-\indexentry{objects|hyperpage}{133}
-\indexentry{type juggling|hyperpage}{240}
+\indexentry{conditionals|hyperpage}{57}
+\indexentry{logical operators|hyperpage}{57}
+\indexentry{operator!logical|hyperpage}{57}
+\indexentry{logical operators!negation|hyperpage}{60}
+\indexentry{logical operators!and|hyperpage}{61}
+\indexentry{conjunction|hyperindexformat{\see {logical operators--and}}}{61}
+\indexentry{logical operators!or|hyperpage}{62}
+\indexentry{disjunction|hyperindexformat{\see {logical operators--or}}}{62}
+\indexentry{order of precedence!logic|hyperpage}{65}
+\indexentry{short circuiting|hyperpage}{66}
+\indexentry{if statement|hyperpage}{67}
+\indexentry{conditionals!if statement|hyperpage}{67}
+\indexentry{if-else statement|hyperpage}{69}
+\indexentry{conditionals!if-else statement|hyperpage}{69}
+\indexentry{if-else-if statement|hyperpage}{70}
+\indexentry{conditionals!if-else-if statement|hyperpage}{70}
+\indexentry{loops|hyperpage}{85}
+\indexentry{infinite loop|hyperpage}{86}
+\indexentry{while loop|hyperpage}{86}
+\indexentry{loops!while loop|hyperpage}{86}
+\indexentry{for loop|hyperpage}{88}
+\indexentry{loops!for loop|hyperpage}{88}
+\indexentry{do-while loop|hyperpage}{89}
+\indexentry{loops!do-while loop|hyperpage}{89}
+\indexentry{foreach loop|hyperpage}{90}
+\indexentry{loops!foreach loop|hyperpage}{90}
+\indexentry{infinite loop|hyperpage}{93}
+\indexentry{loops!infinite loop|hyperpage}{93}
+\indexentry{functions|hyperpage}{119}
+\indexentry{error handling|hyperpage}{135}
+\indexentry{arrays|hyperpage}{137}
+\indexentry{strings|hyperpage}{139}
+\indexentry{file I/O|hyperpage}{141}
+\indexentry{objects|hyperpage}{143}
+\indexentry{type juggling|hyperpage}{272}

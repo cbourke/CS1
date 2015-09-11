@@ -1,6 +1,8 @@
 
+
+
 Revise Introduction:
- Include a section on programming language paradigms, Procedural, Functional, Object Oriented, etc.
+ Include a section on programming language paradigms, Procedural, Functional, Object Oriented, etc. (this may already be there)
 
 Analogies:
  Periods end sentences -> semicolons end executable lines
@@ -17,13 +19,6 @@ Add a quote:
  In contrast, some more ``managed'' languages will ask you, are you
  really sure you want to do that?
 
-Under comments section add a reference to ``doc style’’ comments
-and description
-
-Exercises:
- -incorporate Fall 2015 155H/RAIK exercises into book
-
-
 
 155 Book
  -transfer word notes
@@ -34,11 +29,7 @@ Exercises:
    http://cse.unl.edu/~lksoh/Classes/CSCE155N_Fall12/homeworks.html
 
 
-Ryan:
-I'm just getting to look at this now.
 
--I like Figure 2.1 (I present loops and conditionals using similar diagramming), but it's probably better to differentiate control nodes and action nodes in a way that would be unambiguous if someone printed the text in black and white. Could you change the shape or texture of one of them to clarify which is which?
--It doesn't look like you define that you are using // to start comments until 15.2.3, but you start using them in 2.2.4
 
 
 C: malloc:

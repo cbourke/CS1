@@ -197,6 +197,7 @@ Deviation:   15.13
 \end{exer}
 
 \begin{exer}
+\label{exercise:loops:gcd}
 The ancient Greek mathematician Euclid developed a method for finding
 the greatest common divisor of two positive integers, $a$ and $b$. His method is
 as follows:
@@ -512,6 +513,7 @@ Other Series:  ln(3.1415) ~= 1.14466
 \end{exer}
 
 \begin{exer}
+\label{exercise:loops:squareRoots}
 There are many different numerical methods to compute the square root of a number.  In
 this exercise, you will implement several of these methods.
 
@@ -535,12 +537,33 @@ this exercise, you will implement several of these methods.
 	We can easily overcome this by \emph{scaling} $x$ by some power of 4 so that
 	the scaled value of $x$ satisfies $\frac{1}{2} \leq x < 2$.  After applying the method we
 	can then scale back up by the appropriate value of $2$ (since $\sqrt{4} = 2$).  
+	Algorithm \ref{algo:scalingX} describes how to scale $x$.
 \end{enumerate}
 
-Write a program to compute the square root of an input number using these methods and compare your results.
+Write a program to compute the square root of an input number using 
+these methods and compare your results.
+
+\begin{algorithm}[H]
+\caption{Scaling a value $x$ so that it satisfies $\frac{1}{2} \leq x < 2$.  After
+execution, $power$ indicates what power of 2 the value $x$ was scaled by.}
+\label{algo:scalingX}
+$power \leftarrow 0$ \;
+\While{$x < \frac{1}{2}$}{
+  \Comment{Scale up}
+  $x \leftarrow (x \cdot 4)$ \;
+  $power \leftarrow (power - 1)$ \;
+}
+\While{$x \geq 2$}{
+  \Comment{Scale down}
+  $x \leftarrow \frac{x}{4}$ \;
+  $power \leftarrow (power + 1)$ \;  
+}
+\end{algorithm}
+
 \end{exer}
 
 \begin{exer}
+\label{exercise:loops:naturalLog}
 There are many different numerical methods to compute the natural logarithm of a number, $\ln{x}$.  
 In this exercise, you will implement several of these methods.
 
@@ -578,4 +601,218 @@ Thus, we can apply the methods above to Newton's method to $z$ and add $k$ to th
 result to get $\ln(x)$.  A similar trick can be used to ensure that the Taylor Series method is
 convergent.
 \end{exer}
+
+
+\begin{exer}
+Consider the following variation on the classical ``FizzBuzz'' challenge.
+Write a program that will print out numbers 1 through $n$ where $n$ is provided
+as a command line argument.  However, if the number is a perfect square 
+(that is, the square of some integer; for example $1 = 1^2, 4 = 2^2, 9 = 3^2$, etc.) 
+print ``Go Huskers'' instead.  If the number is a prime
+($2, 3, 5, 7$, etc.) print ``Go Cubs'' instead.
+\end{exer}
+
+\begin{exer}
+Write a program that takes an integer $n$ and a subsequent list
+of integers as command line arguments and determines which number(s) 
+between $1$ and $n$ are missing from the list.  For example, if the following
+numbers are given to the program:
+  \mintinline{text}{10 5 2 3 9 2 8 8}
+your output should look something like:
+
+\begin{minted}{text}
+Missing numbers 1 thru 10:
+1, 4, 6, 7, 10
+\end{minted}
+\end{exer}
+
+\begin{exer}
+Write a program that takes a list of pairs of numbers representing 
+latitudes/longitudes (on the scale $[-180, 180]$ (negative values correspond to the
+southern and western hemispheres).  Then, starting with the first
+pair, calculate the intermediate air distances between each location as well as a 
+final total distance.
+
+To compute air distance from location $A$ to a location $B$, use the Spherical Law of Cosines:
+ $$d = \arccos{(\sin(\varphi_1) \sin(\varphi_2) + \cos(\varphi_1) \cos(\varphi_2) \cos(\Delta) )} \cdot R$$
+where
+\begin{itemize}
+  \item $\varphi_1$ is the latitude of location $A$, $\varphi_2$ is the latitude of location $B$
+  \item $\Delta$ is the difference between location $B$'s longitude and location $A$'s longitude
+  \item $R$ is the (average) radius of the earth, 6,371 kilometers
+\end{itemize}
+Note: the formula above assumes that latitude and longitude are measured in radians $r$, $-\pi \leq r \leq \pi$.  
+To convert from degrees $deg$ ($-180 \leq deg \leq 180$) to radians $r$, you can use the simple formula:
+  $$r = \frac{deg}{180} \pi$$
+
+For example, if the command line arguments were 
+
+\mintinline{text}{40.8206 -96.756 41.8806 -87.6742 41.9483 -87.6556 28.0222 -81.7329}
+
+your output should look something like:
+
+\begin{minted}{text}
+(40.8206, -96.7560) to (41.8806, -87.6742): 766.8053km
+(41.8806, -87.6742) to (41.9483, -87.6556): 7.6836km
+(41.9483, -87.6556) to (28.0222, -81.7329): 1638.7151km
+Total Distance: 2413.2040
+\end{minted}
+\end{exer}
+
+\begin{exer}
+A DNA sequence is made up of a sequence of four nucleotide bases, 
+A, C, G, T (adenine, cytosine, guanine, thymine).  One particularly interesting 
+statistic of a DNA sequence is finding a \emph{CG island}: a subsequence that 
+contains the highest frequency of guanine and cytosine.
+
+For simplicity, we will be interested in subsequences of a particular length, $n$ 
+that will be provided as part of the input.  
+
+Write a program that takes, as command line arguments, an integer $n$ and
+a DNA sequence.  The program should then find all subsequences of the
+given DNA string of length $n$ with the maximal frequency of C and G in it.
+For example, if the DNA sequence is 
+
+\begin{minted}{text}
+ACAAGATGCCATTGTCCCCCGGCCTCCTGCTGCTGCTGCTCTCCGGGGCCACGGC
+\end{minted}
+
+and the ``window'' size that we're interested in is $n = 5$ then you would scan the 
+sequence and find every subsequence with the maximum number of C or G bases.  
+Your output should include \emph{all} CG Islands (by indices) in the sequence 
+similar to the following.
+
+\begin{minted}{text}
+n = 5
+highest frequency: 5 / 5 = 100.00%
+CG Islands:
+15 thru 20: CCCCC
+16 thru 21: CCCCG
+17 thru 22: CCCGG
+18 thru 23: CCGGC
+19 thru 24: CGGCC
+42 thru 47: CCGGG
+43 thru 48: CGGGG
+44 thru 49: GGGGC
+45 thru 50: GGGCC
+\end{minted}
+\end{exer}
+
+\begin{exer}
+Write a program that will assist people in saving for retirement
+using a tax-deferred 401k program.  
+
+Your program will read the following inputs as command line arguments.
+\begin{itemize}
+  \item An initial starting balance
+  \item A monthly contribution amount (we'll assume its the same over the life of the savings plan)
+  \item An (average) annual rate of return (on the scale $[0, 1]$)
+  \item An (average) annual rate of inflation (on the scale $[0, 1]$)
+  \item A number of years until retirement
+\end{itemize}
+Your program will then compute a monthly savings table detailing
+the (inflation-adjusted) interest earned each month, contribution, and
+new balance.  The inflation-adjusted rate of return can be computed 
+with the following formula.
+  $$\frac{1 + \textrm{rate of return}}{1+\textrm{inflation rate}} - 1$$
+To get the monthly rate, simply divide by 12.  Each month, interest 
+is applied to the balance at this rate (prior to the monthly deposit) and
+the monthly contribution is added.  Thus, the earnings compound 
+month to month.
+
+Be sure that your program handles bad inputs as well as it can.  It
+should also round to the nearest cent for every figure.  Finally, 
+as of 2014, annual 401k contributions cannot exceed \$17,500.  
+If the user's proposed savings schedule violates this limit, display 
+an error message instead of the savings table.
+
+For inputs \mintinline{text}{10000 500 0.09 0.012 10} your output
+should look something like the following:
+
+\begin{minted}{text}
+Month    Interest     Balance 
+    1 $     64.23 $  10564.23
+    2 $     67.85 $  11132.08
+    3 $     71.50 $  11703.58
+    4 $     75.17 $  12278.75
+    5 $     78.87 $  12857.62
+    6 $     82.58 $  13440.20
+    7 $     86.33 $  14026.53
+    8 $     90.09 $  14616.62
+    9 $     93.88 $  15210.50
+...    
+  116 $    678.19 $ 106767.24
+  117 $    685.76 $ 107953.00
+  118 $    693.37 $ 109146.37
+  119 $    701.04 $ 110347.41
+  120 $    708.75 $ 111556.16
+Total Interest Earned: $  41556.16
+Total Nest Egg: $ 111556.16
+\end{minted}
+\end{exer}
+
+\begin{exer}
+An \emph{affine cipher} is an encryption scheme that encrypts
+messages using the following function:
+  $$e_k(x) = (a x + b) \bmod{n}$$
+Where $n$ is some integer and $0\leq a, b, x \leq n-1$.  That is, we fix
+$n$, which will be used to encode an alphabet as in Table \ref{table:characterMapping}.
+
+\begin{table}[h]
+\centering
+\begin{tabular}{c|c}
+$x$ & character \\
+\hline\hline
+0 & (space) \\
+1 & A \\
+2 & B \\
+3 & C \\
+\vdots & \vdots \\
+25 & Y \\
+26 & Z \\
+27 & .\\
+28 & !\\
+\end{tabular}
+\caption{Character Mapping for $n = 29$}
+\label{table:characterMapping}
+\end{table}
+
+Then we choose integers $a, b$ to define the encryption function.  Suppose
+$a = 10, b = 13$, then 
+  $$e_k(x) = (10x + 13) \bmod{29}$$
+So to encrypt ``HELLO!'' we would encode it as $8, 5, 12, 12, 15, 27$, then encrypt
+them, 
+  $$e_k(8) = (10 \cdot 8 + 13) \bmod{29} = 6$$
+  $$e_k(5) = (10 \cdot 5 + 13) \bmod{29} = 5$$
+  $$e_k(12) = (10 \cdot 12 + 13) \bmod{29} = 17$$
+  $$e_k(12) = (10 \cdot 12 + 13) \bmod{29} = 17$$
+  $$e_k(15) = (10 \cdot 15 + 13) \bmod{29} = 18$$
+  $$e_k(28) = (10 \cdot 28 + 13) \bmod{29} = 3$$
+Which, when mapped back to characters using our encoding is ``FEQQRC.''
+
+To decrypt a message we need to invert the decryption function, that is, 
+  $$d_k(y) = \left( a^{-1} \cdot (y-b) \right) \bmod{n}$$
+where $a^{-1}$ is the inverse of $a$ modulo $n$.  The inverse of an integer
+$a$ is the value such that 
+  $$(a \cdot a^{-1}) \bmod{n} = 1$$
+so for $a = 10, n = 29$, the inverse, $10^{-1} \bmod{29} = 3$ since $3 \cdot 10 \bmod{29} = 1$.
+Given $a$ and $n$, how can we find an inverse, $a^{-1}$?  Obviously it cannot be
+zero, nor can it be 1 (1 is its own inverse).  There is a simple algorithm (the Extended Euclidean
+Algorithm) that can solve this problem, but $n = 29$ is small enough that a brute-force
+strategy of testing all possibilities will suffice.
+
+Write a program that takes $a, b$ and an encrypted message as command 
+line arguments and decrypts the message.  Your program should print the
+decrypted message and other cipher information to the standard output.  For
+example:
+
+\begin{minted}{text}
+a    = 10
+b    = 13
+a^-1 = 3
+Encrypted Message: FEQQRC
+Decrypted Message: HELLO!
+\end{minted}
+\end{exer}
+
 
