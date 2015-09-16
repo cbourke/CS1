@@ -1,4 +1,0 @@
-\begin{Verbatim}[commandchars=\\\{\},codes={\catcode`\$=3\catcode`\^=7\catcode`\_=8}]
-\PYGdefault{n+nx}{int} \PYGdefault{n+nx}{numOrders}\PYGdefault{p}{,} \PYGdefault{n+nx}{numUnits} \PYGdefault{o}{=} \PYGdefault{l+m+mi}{42}\PYGdefault{p}{,} \PYGdefault{n+nx}{numCustomers} \PYGdefault{o}{=} \PYGdefault{l+m+mi}{10}\PYGdefault{p}{,} \PYGdefault{n+nx}{numItems}\PYGdefault{p}{;}
-\PYGdefault{n+nx}{double} \PYGdefault{n+nx}{costPerUnit} \PYGdefault{o}{=} \PYGdefault{l+m+mf}{32.79}\PYGdefault{p}{,} \PYGdefault{n+nx}{salesTaxRate}\PYGdefault{p}{;}
-\end{Verbatim}

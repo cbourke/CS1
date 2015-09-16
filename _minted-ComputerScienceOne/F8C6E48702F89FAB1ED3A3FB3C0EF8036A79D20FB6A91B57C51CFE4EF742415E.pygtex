@@ -1,6 +1,0 @@
-\begin{Verbatim}[commandchars=\\\{\},codes={\catcode`\$=3\catcode`\^=7\catcode`\_=8}]
-\PYGdefault{x}{double x = 1.5;}
-\PYGdefault{x}{double y, z;}
-\PYGdefault{x}{y = sqrt(x); //y now has the value \PYGdefaultZdl{}\PYGdefaultZbs{}sqrt\PYGdefaultZob{}x\PYGdefaultZcb{} = \PYGdefaultZbs{}sqrt\PYGdefaultZob{}1.5\PYGdefaultZcb{}\PYGdefaultZdl{}}
-\PYGdefault{x}{z = sin(x); //z now has the value \PYGdefaultZdl{}\PYGdefaultZbs{}sin\PYGdefaultZob{}(x)\PYGdefaultZcb{} = \PYGdefaultZbs{}sin\PYGdefaultZob{}(1.5)\PYGdefaultZcb{}\PYGdefaultZdl{}}
-\end{Verbatim}

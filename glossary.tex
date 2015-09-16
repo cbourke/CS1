@@ -13,6 +13,12 @@
   plural=anonymous functions
 }
 
+\newglossaryentry{anti-pattern}
+{
+  name=anti-pattern,
+  description={a common software pattern that is used as a solution to recurring problems that is usually ineffective in solving the problem or introduces risks and other problems; a technical term for common ``bad-habits'' that can be found in software}
+}
+
 \newglossaryentry{assignment operator}
 {
   name=assignment operator,
@@ -79,6 +85,12 @@
   	identifier names.  A language is case insensitive if it does not}
 }
 
+\newglossaryentry{code smell}
+{
+  name=code smell,
+  description={a symptom or common pattern in source code that is usually indicative of a deeper problem or design flaw; smells are usually not bugs and may not cause problems in and of themselves, but instead indicate a pattern of carelessness or low quality of software design or implementation}
+}
+
 \newglossaryentry{contradiction}
 {
   name=contradiction,
@@ -97,11 +109,29 @@
   description={the order in which individual statements in a program are executed or evaluated}
 }
 
+\newglossaryentry{cruft}
+{
+  name=cruft,
+  description={anything that is left over, redundant or getting in the way; in the context of code cruft is code that is no longer needed, legacy or simply poorly written source code}
+}
+
 \newglossaryentry{dead code}
 {
   name=dead code,
   description={a code segment that has no effect on a program either because it is unused or unreachable (the 
 	conditions involving the code will never be satisfied)}
+}
+
+\newglossaryentry{debug}
+{
+  name=debug,
+  description={the process of analyzing a program to find a fault or error with the code that leads to bad or unexpected results}
+}
+
+\newglossaryentry{debugger}
+{
+  name=debugger,
+  description={a software tool that facilitates debugging; usually a debugger simulates the execution of a program allowing a developer to view the contents of a program as it executes and to ``walk'' through the execution step by step}
 }
 
 \newglossaryentry{defensive programming}
@@ -122,6 +152,18 @@
   name=encapsulation,
   description={the grouping and protection of data together into one logical entity along with the functionality (functions or methods)
   	that act on that data}
+}
+
+\newglossaryentry{enumerated type}
+{
+  name=enumerated type,
+  description={a data type (usually user defined) that consists of a list of named values}
+}
+
+\newglossaryentry{exception}
+{
+  name=exception,
+  description={an event or occurrence of an erroneous or ``exceptional'' condition that interrupts the normal flow of control in a program, handing control over to exception handler(s)}
 }
 
 \newglossaryentry{expression}
@@ -209,11 +251,23 @@
   description={a unit of information in a digital computer consisting of 1024 bytes (equivalently, $2^{10}$ bytes), KB for short}
 }
 
+\newglossaryentry{lint}
+{
+  name=lint,
+  description={(or linter) a static code analysis tool that analyzes code for suspicious or error-prone code that is likely to cause problems}
+}
+
 \newglossaryentry{literal}
 {
   name=literal,
   description={in a programming language, a literal is notation for specifying a value such as a number of string that can be 
   	directly assigned to a variable}
+}
+
+\newglossaryentry{magic number}
+{
+  name=magic number,
+  description={a value used in a program with unexplained, undocumented, or ambiguous meaning, usually making the code less understandable}
 }
 
 \newglossaryentry{mantissa}
@@ -306,6 +360,12 @@
   description={the base of a number system.  Binary, octal, decimal, hexadecimal would be base 2, 8, 10, and 16 respectively}
 }
 
+\newglossaryentry{refactor}
+{
+  name=refactor,
+  description={the process of modifying, updating or restructuring code without changing its external behavior; refactoring may be done to make code more efficient, more readable, more reliable, or simply to bring it into compliance with style or coding conventions}
+}
+
 \newglossaryentry{reference}
 {
   name=reference,
@@ -347,10 +407,22 @@
   description={a function signature is how a function is uniquely identified.  A signature includes the name (identifier) of the function, its parameter list (and maybe types) and the return type}
 }
 
+\newglossaryentry{spaghetti code}
+{
+  name=spaghetti code,
+  description={a negative term used for code that is overly complex, disorganized or unstructured code}
+}
+
 \newglossaryentry{stack}
 {
   name=stack,
   description={a data structure that stores elements in a LIFO (last-in first-out) manner; elements can be added to a stack via a \emph{push} operation which places the element on the ``top'' of the stack; elements can be removed from the top of the stack via a \emph{pop} operation}
+}
+
+\newglossaryentry{static analysis}
+{
+  name=static analysis,
+  description={the analysis of software that is performed on source (or object) code without actually running or compiling a program usually by using an automated tool that can detect actual or potential problems with the source code (other than syntactic problems that could easily be found by a compiler)}
 }
 
 \newglossaryentry{static dispatch}
@@ -464,23 +536,49 @@
 
 \newacronym{cpuLabel}{CPU}{Central Processing Unit}
 
+\newacronym{cssLabel}{CSS}{Cascading Style Sheets}
+
 \newacronym{dryLabel}{DRY}{Don't Repeat Yourself}
 
+\newacronym{ebLabel}{EB}{Exabyte}
+
+\newacronym{ecmaLabel}{ECMA}{European Computer Manufacturers Association}
+
 \newacronym{fifoLabel}{FIFO}{First-In First-Out}
+
+\newacronym{fossLabel}{FOSS}{Free and Open Source Software}
+
+\newacronym{gbLabel}{GB}{Gigabyte}
+
+\newacronym{gccLabel}{GCC}{GNU Compiler Collection}
+
+\newacronym{gdbLabel}{GDB}{GNU Debugger}
+
+\newacronym{gimpLabel}{GIMP}{GNU Image Manipulation Program}
+
+\newacronym{gisLabel}{GIS}{Geographic Information System}
+
+\newacronym{gnuLabel}{GNU}{GNU's Not Unix!}
+
+\newacronym{guiLabel}{GUI}{Graphical User Interface}
 
 \newacronym{htmlLabel}{HTML}{HyperText Markup Language}
 
 \newacronym{ideLabel}{IDE}{Integrated Development Environment}
 
+\newacronym{jdbcLabel}{JDBC}{Java Database Connectivity}
+
 \newacronym{jdkLabel}{JDK}{Java Development Kit}
+
+\newacronym{jeeLabel}{JEE}{Java Enterprise Edition}
 
 \newacronym{jitLabel}{JIT}{Just In Time}
 
+\newacronym{jpegLabel}{JPEG}{Joint Photographic Experts Group}
+
+\newacronym{jreLabel}{JRE}{Java Runtime Environment}
+
 \newacronym{jvmLabel}{JVM}{Java Virtual Machine}
-
-\newacronym{gnuLabel}{GNU}{GNU's Not Unix!}
-
-\newacronym{guiLabel}{GUI}{Graphical User Interface}
 
 \newacronym{iecLabel}{IEC}{International Electrotechnical Commission}
 
@@ -492,21 +590,37 @@
 
 \newacronym{lifoLabel}{LIFO}{Last-In First-Out}
 
+\newacronym{mbLabel}{MB}{Megabyte}
+
 \newacronym{nistLabel}{NIST}{National Institute of Standards and Technology}
 
 \newacronym{oopLabel}{OOP}{Object-Oriented Programming}
+
+\newacronym{odbcLabel}{ODBC}{Open Database Connectivity}
+
+\newacronym{oemLabel}{OEM}{Original Equipment Manufacturer}
+
+\newacronym{pbLabel}{PB}{Petabyte}
+
+\newacronym{pojoLabel}{POJO}{Plain Old Java Object}
 
 \newacronym{posixLabel}{POSIX}{Portable Operating System Interface}
 
 \newacronym{ramLabel}{RAM}{Random Access Memory}
 
+\newacronym{replLabel}{REPL}{Read-Eval-Print Loop}
+
 \newacronym{romLabel}{ROM}{Read-Only Memory}
+
+\newacronym{sqlLabel}{SQL}{Structured Query Language}
 
 \newacronym{sslLabel}{SSL}{Secure Sockets Layer}
 
 \newacronym{steamLabel}{STEAM}{Science, Technology, Engineering, Art, and Math}
 
 \newacronym{stemLabel}{STEM}{Science, Technology, Engineering, and Math}
+
+\newacronym{tbLabel}{TB}{Terabyte}
 
 \newacronym{utfLabel}{UTF-8}{Universal (Character Set) Transformation Format--8-bit}
 

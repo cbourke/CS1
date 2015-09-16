@@ -1,8 +1,0 @@
-\begin{Verbatim}[commandchars=\\\{\},codes={\catcode`\$=3\catcode`\^=7\catcode`\_=8}]
-\PYGdefault{x}{//prints the first command line argument:}
-\PYGdefault{x}{printf(\PYGdefaultZdq{}\PYGdefaultZpc{}s\PYGdefaultZbs{}n\PYGdefaultZdq{}, argv[0]);}
-\PYGdefault{x}{//converts the \PYGdefaultZdq{}second\PYGdefaultZdq{} command line argument to an integer}
-\PYGdefault{x}{int x = atoi(argv[1]);}
-\PYGdefault{x}{//converts the \PYGdefaultZdq{}third\PYGdefaultZdq{} command line argument to a double:}
-\PYGdefault{x}{double y = atof(argv[2]);}
-\end{Verbatim}

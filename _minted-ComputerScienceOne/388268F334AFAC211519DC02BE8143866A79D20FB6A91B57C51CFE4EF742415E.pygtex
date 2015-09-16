@@ -1,7 +1,0 @@
-\begin{Verbatim}[commandchars=\\\{\},codes={\catcode`\$=3\catcode`\^=7\catcode`\_=8}]
-\PYGdefault{x}{if(\PYGdefaultZdl{}numChildren \PYGdefaultZlt{}= 3) \PYGdefaultZob{}}
-\PYGdefault{x}{  \PYGdefaultZdl{}credit = \PYGdefaultZdl{}numChildren * 1000;}
-\PYGdefault{x}{\PYGdefaultZcb{} else \PYGdefaultZob{}}
-\PYGdefault{x}{  \PYGdefaultZdl{}credit = 3000;}
-\PYGdefault{x}{\PYGdefaultZcb{}}
-\end{Verbatim}

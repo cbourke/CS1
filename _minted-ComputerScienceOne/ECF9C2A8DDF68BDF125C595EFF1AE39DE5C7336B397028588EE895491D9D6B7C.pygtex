@@ -1,7 +1,0 @@
-\begin{Verbatim}[commandchars=\\\{\},codes={\catcode`\$=3\catcode`\^=7\catcode`\_=8}]
-INCOME TAX MILEAGE CALCULATOR
-Enter beginning odometer reading\PYGdefaultZhy{}\PYGdefaultZhy{}\PYGdefaultZgt{} 13505.2
-Enter ending odometer reading\PYGdefaultZhy{}\PYGdefaultZhy{}\PYGdefaultZgt{} 13810.6
-You traveled 305.4 miles.  At \PYGdefaultZdl{}.575 per mile,
-your reimbursement is \PYGdefaultZdl{}175.61
-\end{Verbatim}

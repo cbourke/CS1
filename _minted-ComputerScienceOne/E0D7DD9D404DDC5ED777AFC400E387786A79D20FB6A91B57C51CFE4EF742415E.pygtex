@@ -1,6 +1,0 @@
-\begin{Verbatim}[commandchars=\\\{\},codes={\catcode`\$=3\catcode`\^=7\catcode`\_=8}]
-\PYGdefault{x}{\PYGdefaultZdl{}arr = array(1.41, 2.71, 3.14);}
-\PYGdefault{x}{foreach(\PYGdefaultZdl{}arr as \PYGdefaultZdl{}x) \PYGdefaultZob{}}
-\PYGdefault{x}{  //\PYGdefaultZdl{}x now holds the \PYGdefaultZdq{}current\PYGdefaultZdq{} element in \PYGdefaultZdl{}arr}
-\PYGdefault{x}{\PYGdefaultZcb{}}
-\end{Verbatim}

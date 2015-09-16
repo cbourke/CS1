@@ -1,8 +1,0 @@
-\begin{Verbatim}[commandchars=\\\{\},codes={\catcode`\$=3\catcode`\^=7\catcode`\_=8}]
-\PYGdefault{x}{while(\PYGdefaultZdl{}i \PYGdefaultZlt{}= 10) \PYGdefaultZob{}}
-\PYGdefault{x}{\PYGdefaultZcb{}}
-\PYGdefault{x}{\PYGdefaultZob{}}
-\PYGdefault{x}{  //perform some action}
-\PYGdefault{x}{  \PYGdefaultZdl{}i++; //iteration}
-\PYGdefault{x}{\PYGdefaultZcb{}}
-\end{Verbatim}

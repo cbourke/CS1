@@ -1,3 +1,0 @@
-\begin{Verbatim}[commandchars=\\\{\},codes={\catcode`\$=3\catcode`\^=7\catcode`\_=8}]
-\PYGdefault{n+nv}{\PYGdefaultZdl{}area} \PYGdefault{o}{=} \PYGdefault{n+nv}{\PYGdefaultZdl{}r} \PYGdefault{o}{*} \PYGdefault{n+nv}{\PYGdefaultZdl{}r} \PYGdefault{o}{*} \PYGdefault{n+nx}{PI}\PYGdefault{p}{;}
-\end{Verbatim}

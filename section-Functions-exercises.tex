@@ -5,7 +5,8 @@
 \section{Exercises}
 
 \begin{exer}
-Recall that the \emph{greatest common divisor} (gcd) of two integers, 
+\label{exercise:functions:gcd}
+Recall that the \emph{greatest common divisor} (gcd) of two positive integers, 
 $a$ and $b$ is the largest positive integer that divides both $a$ and
 $b$.  Adapt the solution from Exercise \ref{exercise:loops:gcd} into
 a function.  If the language you use supports it, return the gcd via
@@ -28,12 +29,18 @@ $1--9$ (it should return zero only if $x = 0$).
 \end{exer}
 
 \begin{exer}
+Write a function that, given an integer $x$, sums the values of
+its digits.  That is, for $x = 29423$ the sum $2 + 9 + 4 + 2 + 3 = 20$.
+\end{exer}
+
+\begin{exer}
 Write a function to convert radians to degrees using the formula,
   $$deg = \frac{180\cdot rad}{\pi}$$
 Write another function to covert degrees to radians.
 \end{exer}
 
 \begin{exer}
+\label{exercise:functions:circleStats}
 Write functions to compute the diameter, circumference and
 area of a circle given its radius.  If your language supports 
 pass by reference, compute all three of these with one function.
@@ -54,17 +61,20 @@ $|a_n - g_n| < \epsilon$ for some small number $\epsilon$.
 \end{exer}
 
 \begin{exer}
+\label{exercise:functions:apr}
 Write a function to compute the annual percentage yield (APY) given
 an annual percentage rate (APR) using the formula 
   $$APY = e^{APR} - 1$$
 \end{exer}
 
 \begin{exer}
+\label{exercise:functions:airDistance}
 Write a function that will compute the air distance between two locations given their
 latitudes and longitudes.  Use the formula as in Exercise \ref{exercise:basics:airDistance}.
 \end{exer}
 
 \begin{exer}
+\label{exercise:functions:rgbToCMYK}
 Write a function to convert a color represented in the RGB (red-green-blue) 
 color model (used in digital monitors) to a CMYK (cyan-magenta-yellow-key) 
 used in printing.  RGB values are integers in the range $[0, 255]$ while CMYK 
@@ -81,6 +91,7 @@ Y & = (1-b'-k) / (1-k) \\
 \end{exer}
 
 \begin{exer}
+\label{exercise:functions:cmykToRGB}
 Write a function to convert from CMYK to RGB using the following formulas.
 \begin{align*}
 r & = 255 \cdot (1 - C) \cdot (1-K) \\
@@ -103,16 +114,19 @@ preference toward green:
 \end{exer}
 
 \begin{exer}
+\label{exercise:functions:squareRoots}
 Adapt the methods to compute a square root in Exercise 
 \ref{exercise:loops:squareRoots} into functions.
 \end{exer}
 
 \begin{exer}
+\label{exercise:functions:naturalLog}
 Adapt the methods to compute the natural logarithm in Exercise 
 \ref{exercise:loops:naturalLog} into functions.
 \end{exer}
 
 \begin{exer}
+\label{exercise:functions:weight}
 Weight (mass in the presence of gravity) can be measured in 
 several scales: kilogram force (kgf), pounds (lbs), ounces (oz), or 
 Newtons (N).  To convert between these scales, you can use the following facts:
@@ -127,6 +141,7 @@ Write a collection of functions to convert between these scales.
 \end{exer}
 
 \begin{exer}
+\label{exercise:functions:length}
 Length can be measured by several different units.  We will concern 
 ourselves with the following scales: kilometer, mile, nautical mile, and 
 furlong.  A measure in each one of these scales can be converted to 
@@ -140,6 +155,7 @@ Write a collection of functions to convert between these scales.
 \end{exer}
 
 \begin{exer}
+\label{exercise:functions:temperature}
 Temperature can be measured in several scales: Celsius, Kelvin, 
 Fahrenheit, and Newton.  To convert between these scales, you 
 can use the following conversion table.
@@ -166,6 +182,7 @@ Write a collection of functions to convert between these scales.
 \end{exer}
 
 \begin{exer}
+\label{exercise:functions:energy}
 Energy can be measured in several different scales: calories ($c$), 
 joules ($J$), ergs ($erg$) and foot-pound force (ft-lbf) among others.  
 To convert between these scales, you can use the following facts:
@@ -179,6 +196,7 @@ Write a collection of functions to convert between these scales.
 \end{exer}
 
 \begin{exer}
+\label{exercise:functions:pressure}
 Pressure is a measure of force applied to the surface of an object 
 per unit area.  There are several units that can be used to measure 
 pressure:

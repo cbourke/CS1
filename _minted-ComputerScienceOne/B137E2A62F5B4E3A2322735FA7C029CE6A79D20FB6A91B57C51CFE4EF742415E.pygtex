@@ -1,5 +1,0 @@
-\begin{Verbatim}[commandchars=\\\{\},codes={\catcode`\$=3\catcode`\^=7\catcode`\_=8}]
-\PYGdefault{x}{\PYGdefaultZdl{}a = floatval(\PYGdefaultZdl{}argv[1]);}
-\PYGdefault{x}{\PYGdefaultZdl{}b = floatval(\PYGdefaultZdl{}argv[2]);}
-\PYGdefault{x}{\PYGdefaultZdl{}c = floatval(\PYGdefaultZdl{}argv[3]);}
-\end{Verbatim}

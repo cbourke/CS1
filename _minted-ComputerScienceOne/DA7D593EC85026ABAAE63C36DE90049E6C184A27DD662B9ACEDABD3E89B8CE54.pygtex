@@ -1,3 +1,0 @@
-\begin{Verbatim}[commandchars=\\\{\},codes={\catcode`\$=3\catcode`\^=7\catcode`\_=8}]
-\PYGdefault{n}{min} \PYGdefault{o}{=} \PYGdefault{p}{(} \PYGdefault{p}{(}\PYGdefault{n}{a} \PYGdefault{o}{\PYGdefaultZlt{}} \PYGdefault{n}{b}\PYGdefault{p}{)} \PYGdefault{o}{?} \PYGdefault{n+nl}{a} \PYGdefault{p}{:} \PYGdefault{n}{b} \PYGdefault{p}{);}
-\end{Verbatim}

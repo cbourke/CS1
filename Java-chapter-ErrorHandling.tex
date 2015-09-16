@@ -2,4 +2,409 @@
 
 %%Chapter: Error Handling in Java
 
-TODO
+Java supports error handling through the use of exceptions.
+Java has many different predefined types of exceptions that
+you can freely use in your own code.  It also allows you to
+define your own exception types by creating new classes
+that \emph{inherit} from the predefined classes.  Java uses
+the standard \mintinline{java}{try-catch-finally} control structure
+to handle exceptions and allows you to \mintinline{java}{throw}
+your own exceptions.
+
+\section{Exceptions}
+
+Java defines a base class named \mintinline{java}{Throwable}
+that an object type that can be thrown using the keyword
+\mintinline{java}{throw}.  There are two majors subtypes of
+\mintinline{java}{Throwable}: \mintinline{java}{Error} and 
+\mintinline{java}{Exception}.  The \mintinline{java}{Error} class
+is used primarily for \emph{fatal} errors such as the \gls{jvmLabel}
+running out of memory or some other extreme case that your
+code cannot reasonably be expected to recover from.  
+
+There are dozens of types of exceptions that are subclasses
+of the standard Java \mintinline{java}{Exception} class defined by
+the \gls{jdkLabel} including \mintinline{java}{IOException} 
+(and its subclasses such as \mintinline{java}{FileNotFoundException})
+or \mintinline{java}{SQLException} (when working with \gls{sqlLabel}
+databases).
+
+An important subclass of \mintinline{java}{Exception} is 
+\mintinline{java}{RuntimeException} which represent \emph{unchecked}
+exceptions that do \emph{not} need to be explicitly caught
+(see Section \ref{section:java:checkedExceptions} below for 
+further details).  We'll mostly focus on this type of exception.
+
+\subsection{Catching Exceptions}
+
+To catch an exception in Java you can use the standard
+\mintinline{java}{try-catch} control block (and optionally
+use the \mintinline{java}{finally} block to clean up any
+resources).  Let's take, for example, the simple task of
+reading input from a user using \mintinline{java}{Scanner}
+and manually parsing its value into an integer.  If the
+user enters a non-numeric value, parsing will fail
+and result in a \mintinline{java}{NumberFormatException}
+that we can then catch and handle. For example, 
+
+\begin{minted}{java}
+Scanner s = new Scanner(System.in);
+int n = 0;
+		
+try {
+  String input = s.next();
+  n = Integer.parseInt(input);
+} catch (NumberFormatException nfe) {
+  System.err.println("You entered invalid data!");
+  System.exit(1);
+}
+\end{minted}
+
+In this example, we've simply displayed an error message to
+the standard error output and exited the program.  That is, 
+we've made the design decision that this error should be fatal.
+We could have chosen to handle this error differently in the
+\mintinline{java}{catch} block.
+
+The code above could have resulted in other exceptions.  For
+example if the \mintinline{java}{Scanner} failed to read the
+next token from the standard input, it would have thrown a
+\mintinline{java}{NoSuchElementException}.  We can add
+as many \mintinline{java}{catch} blocks as we want to handle
+each exception differently.
+
+\begin{minted}{java}
+Scanner s = new Scanner(System.in);
+int n = 0;
+		
+try {
+  String input = s.next();
+  n = Integer.parseInt(input);
+} catch (NumberFormatException nfe) {
+  System.err.println("You entered invalid data!");
+  System.exit(1);
+} catch (NoSuchElementException nsee) {
+  System.err.println("Input reading failed, using default...");
+  n = 20; //a default value
+} catch(Exception e) {
+  System.err.println("A general exception occurred");
+  e.printStackTrace();
+  System.exit(1);
+}
+\end{minted}
+
+Each \mintinline{java}{catch} block catches a different 
+type of exception.  Thus, the name of the variable
+that holds each exception must be different in the chain
+of \mintinline{java}{catch} blocks; \mintinline{java}{nfe}, 
+\mintinline{java}{nsee}, \mintinline{java}{e}.
+
+Note that the last \mintinline{java}{catch} block was written
+to catch a generic \mintinline{java}{Exception}.  This last
+block will essentially catch any other type of exception.  
+Much like an \mintinline{java}{if-else-if} statement, the
+first type of exception that is caught is the block that will
+be executed and they are all mutually exclusive.  Thus, a
+``catch all' block like this should always be the last 
+\mintinline{java}{catch} block.  The most specific types
+of exceptions should be caught first and the most general
+types should be caught last.
+
+\subsection{Throwing Exceptions}
+
+We can also manually \mintinline{java}{throw} an exception
+if we need to.  For example, we can \mintinline{java}{throw}
+a generic \mintinline{java}{RuntimeException} using the following.
+
+\begin{minted}{java}
+throw new RuntimeException("Something went wrong");
+\end{minted}
+
+By using a generic \mintinline{java}{RuntimeException}, we
+can only attach a message to the exception (which can be
+printed by code that catches the exception).  If we want
+more fine-grained control over the type of exceptions, we
+need to define our own exceptions.
+
+\subsection{Creating Custom Exceptions}
+
+To create your own exceptions, you need to create a new
+class to represent the exception and make it \emph{extends} 
+\mintinline{java}{RuntimeException} by using the keyword
+\mintinline{java}{extends}.  This makes your exception a 
+subclass or \emph{subtype} of the \mintinline{java}{RuntimeException}.
+This is a concept known as \emph{inheritance} in \gls{oopLabel}.
+
+Consider the example in the previous chapter of computing
+the roots of a quadratic polynomial.  One possible error 
+situation is when the roots are complex numbers.  We could
+define a new Java class as follows.
+
+\begin{minted}{java}
+public class ComplexRootException extends RuntimeException {
+
+  /**
+   * Constructor that takes an error message
+   */
+  public ComplexRootException(String errorMessage) {
+    super(errorMessage);
+  }
+}
+\end{minted}
+
+Now in our code we can catch and even throw this new type
+of exception.
+
+\begin{minted}{java}
+//throw this exception:
+if( b*b - 4*a*c < 0) {
+  throw new ComplexRootException("Cannot Handle complex roots");
+}
+\end{minted}
+
+\begin{minted}{java}
+try {
+  r1 = getComplexRoot01(a, b, c);
+} catch(ComplexRootException cre) {
+  //handle the exception here...
+}
+\end{minted}
+
+\subsection{Checked Exceptions}
+\label{section:java:checkedExceptions}
+
+A \emph{checked} exception in Java is an exception that \emph{must}
+be explicitly caught and handled.  For example, the generic 
+\mintinline{java}{Exception} class is a checked exception (others 
+include \mintinline{java}{IOException}, \mintinline{java}{SQLException}, 
+etc.).  If a checked exception is thrown within a block of code such 
+as a method then it must either be caught and handled within that
+block of code or the (say) method must be specified to explicitly 
+throw the exception.  For example, the method
+
+\begin{minted}{java}
+public static void processFile() {
+  Scanner s = new Scanner(new File("data.csv"));
+}
+\end{minted}
+
+would not actually compile because \mintinline{java}{Scanner}
+throws a checked \mintinline{java}{FileNotFoundException}.  Either
+we would have to explicitly \mintinline{java}{catch} the exception:
+
+\begin{minted}{java}
+public static void processFile() {
+  Scanner s = null;
+  try {
+    s = new Scanner(new File("data.csv"));
+  } catch (FileNotFoundException e) {
+    //handle the exception here
+  }
+}
+\end{minted}
+
+or we would need to specify that the method \mintinline{java}{processFile()}
+explicitly \mintinline{java}{throws} the exception:
+
+\begin{minted}{java}
+public static void processFile() throws FileNotFoundException {
+  Scanner s = new Scanner(new File("data.csv"));
+}
+\end{minted}
+
+Doing this, however, would force any code that called the 
+\mintinline{java}{processFile()} method to surround it in a 
+\mintinline{java}{try-catch} block and explicitly handle it (or
+once again, throw it back to the calling method).  
+
+The point of a checked exception is to force code to deal with
+potential issues that can be reasonably anticipated (such as
+the unavailability of a file).  However, from another point of 
+view checked exceptions represent the exact opposite goal
+of error handling.  Namely, that a function or code block can
+and should \emph{inform} the calling function that an error
+has occurred, but \emph{not} explicitly make a decision on
+how to handle the error.  A checked exception doesn't make
+the full decision for the calling function, but it does eliminate 
+\emph{ignoring} the error as an option from the calling function.
+
+Java also supports \emph{unchecked} exceptions which do
+\emph{not} need to be explicitly caught.  For example, 
+\mintinline{java}{NumberFormatException} or \mintinline{java}{NullPointerException}
+are unchecked exceptions.  If an unchecked 
+exception is thrown and not caught, it bubbles up through the
+call stack until some piece of code does catch it.  If no code
+catches it, it results in a fatal error and terminates the execution
+of the \gls{jvmLabel}.
+
+The \mintinline{java}{RuntimeException} class and any of its
+subclasses are unchecked exceptions.  In our  \mintinline{java}{ComplexRootException}
+example above, because we extended  \mintinline{java}{RuntimeException}
+we made it an unchecked exception, allowing the calling
+function to decide not only \emph{how} to handle it, but also
+whether or not to handle it \emph{at all}.  If we had instead 
+decided to extend \mintinline{java}{Exception} we would
+have made our exception a checked exception.
+
+There is considerable debate as to whether or not checked 
+exceptions are a good thing (and as to whether or not unchecked
+exceptions are a good thing).  Many feel (the author included) that 
+checked exceptions were a mistake and their usage should be
+avoided.  The rationale behind checked exceptions is summed up
+in the following quote from the Java documentation \cite{javaCheckedExceptions}.
+
+\begin{quote}
+Here's the bottom line guideline: If a client can reasonably be expected 
+to recover from an exception, make it a checked exception. If a client 
+cannot do anything to recover from the exception, make it an unchecked 
+exception
+\end{quote}
+
+The problem is that the \gls{jdkLabel}'s own design violates this principle.
+For example, \mintinline{java}{FileNotFound} is a checked exception; the
+reasoning being that a program could \emph{reprompt} the user for a different
+file.  The problem is the assumption that the program we are writing is 
+always interactive.  In fact most software is \emph{not} interactive and 
+is instead designed to interact with other software.  Reprompting is \emph{not}
+an option in the vast majority of cases.  
+
+As another example, consider Java's SQL library which allows you to 
+programmatically connect to an \gls{sqlLabel} database.  Nearly every
+method in the \gls{apiLabel} explicitly throws a checked \mintinline{java}{SQLException}.
+It stretches the imagination to understand how our code or even a
+user would be able to recover (programmatically at least) from 
+a lost internet connection or a bad password, etc.  
+
+In general and in the opinion of this author, you should use
+unchecked exceptions.
+
+\section{Enumerated Types}
+
+TODO: move this to a miscellaneous section?
+
+Java allows you to define a special class called an 
+\gls{enumerated type} which allow you to define a fixed
+list of possible values.  For example, the days of the
+week or months of the year are possible values used in a date.
+However, they are more-or-less fixed (no one will be adding a new
+day of the week or month any time soon).  An enumerated 
+class allows us to define these values using human-readable 
+keywords.
+
+To create an enumerated type class we use the keywords 
+\mintinline{java}{enum} (short for enumeration).  Since an
+enumerated type is a class, it must follow the same rules.
+It must be in a \mintinline{text}{.java} source file of the same
+name.  Inside the class we provide a comma-delimited 
+list of keywords to define our enumeration.  
+Consider the following example.
+
+\begin{minted}{java}
+public enum Day {
+  SUNDAY,
+  MONDAY,
+  TUESDAY,
+  WEDNESDAY,
+  THURSDAY,
+  FRIDAY,
+  SATURDAY;
+}
+\end{minted}
+
+In the example, since the name of the enumeration is 
+\mintinline{java}{Day} this declaration must be in a source file
+named \mintinline{text}{Day.java}.  We can now declare 
+variables of this type.  The possible \emph{values} it can 
+take are restricted to \mintinline{c}{SUNDAY}, 
+\mintinline{c}{MONDAY}, etc. and we can use these keywords 
+in our program.  However these values belong to the
+class \mintinline{java}{Day} and must be accessed statically.
+For example,
+
+\begin{minted}{java}
+Day today = Day.MONDAY;
+
+if(today == Day.SUNDAY || today == Day.SATURDAY) {
+  System.out.println("Its the weekend!");
+}
+\end{minted}
+
+Note the naming conventions: the name of the enumerated type
+follows the same upper camel casing that all classes use while 
+the enumerated values follow an upper case underscore convention.  
+Though our example does not contain a value with multiple words, 
+if it had, we would have used an underscore to separate them.  
+
+Using an enumerated type has two advantages.  First, it enforces
+that only a particular set of predefined values can be used.  You
+would not be able to assign a value to a \mintinline{java}{Day} 
+variable that was not already defined by the \mintinline{java}{Day}
+enumeration.
+
+Second, without an enumerated type we'd be forced
+to use a collection of \glspl{magic number} to indicate values.  
+Even for something as simple as the days of the week we'd be
+constantly trying to remember: which day is Wednesday again?
+I forget, do our weeks start with Monday or Sunday?  Etc.  By
+using an enumerated type these questions are mostly moot as
+we can use the more human-readable keywords and eliminate
+the guess work.
+
+\subsection{More Tricks}
+
+Every \mintinline{java}{enum} type has some additional built-in
+methods that you can use.  For example, there is a \mintinline{java}{values()}
+method that can be called on the \mintinline{java}{enum} that
+returns an array of the \mintinline{java}{enum}'s values.  You
+can use an enhanced for loop to iterate over them, for example, 
+
+\begin{minted}{java}
+for(Day d : Day.values() {
+  System.out.println(d.name());
+}
+\end{minted}
+
+In the example above, we used another feature: each 
+\mintinline{java}{enum} value has a \mintinline{java}{name()} 
+method that returns the value as a \mintinline{java}{String}.
+This example would end up printing the following.
+
+\begin{minted}{text}
+SUNDAY
+MONDAY
+TUESDAY
+WEDNESDAY
+THURSDAY
+FRIDAY
+SATURDAY
+\end{minted}
+
+Of course, we may want more human-oriented representations.  
+To do this we could override the class's \mintinline{java}{toString()}
+method to return a better string representation.  For example:
+
+\begin{minted}{java}
+public String toString() {
+  if(this == SUNDAY) {
+    return "Sunday";
+  } else if(this == MONDAY) {
+    return "Monday";
+  }
+  ...
+  } else {
+    return "Saturday";
+  }
+}
+\end{minted}
+
+Because \mintinline{java}{enum} types are full classes in Java, 
+many more tricks can be used that leverage the power of classes
+including using additional state and constructors.  We will cover
+these topics later.
+
+
+
+
+
+
+

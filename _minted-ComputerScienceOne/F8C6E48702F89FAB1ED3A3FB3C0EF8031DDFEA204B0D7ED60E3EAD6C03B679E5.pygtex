@@ -1,6 +1,0 @@
-\begin{Verbatim}[commandchars=\\\{\},codes={\catcode`\$=3\catcode`\^=7\catcode`\_=8}]
-\PYGdefault{n+nx}{double} \PYGdefault{n+nx}{x} \PYGdefault{o}{=} \PYGdefault{l+m+mf}{1.5}\PYGdefault{p}{;}
-\PYGdefault{n+nx}{double} \PYGdefault{n+nx}{y}\PYGdefault{p}{,} \PYGdefault{n+nx}{z}\PYGdefault{p}{;}
-\PYGdefault{n+nx}{y} \PYGdefault{o}{=} \PYGdefault{n+nb}{sqrt}\PYGdefault{p}{(}\PYGdefault{n+nx}{x}\PYGdefault{p}{);} \PYGdefault{c+c1}{//y now has the value $\sqrt{x} = \sqrt{1.5}$}
-\PYGdefault{n+nx}{z} \PYGdefault{o}{=} \PYGdefault{n+nb}{sin}\PYGdefault{p}{(}\PYGdefault{n+nx}{x}\PYGdefault{p}{);} \PYGdefault{c+c1}{//z now has the value $\sin{(x)} = \sin{(1.5)}$}
-\end{Verbatim}

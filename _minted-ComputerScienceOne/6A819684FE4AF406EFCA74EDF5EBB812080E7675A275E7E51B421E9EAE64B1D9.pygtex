@@ -1,8 +1,0 @@
-\begin{Verbatim}[commandchars=\\\{\},codes={\catcode`\$=3\catcode`\^=7\catcode`\_=8}]
-\PYGdefault{n}{count} \PYGdefault{o}{=} \PYGdefault{l+m+mi}{1}\PYGdefault{p}{;}
-\PYGdefault{k}{while}\PYGdefault{p}{(}\PYGdefault{n}{count} \PYGdefault{o}{\PYGdefaultZlt{}=} \PYGdefault{l+m+mi}{10}\PYGdefault{p}{);} \PYGdefault{c+c1}{//WRONG}
-\PYGdefault{p}{\PYGdefaultZob{}}
-    \PYGdefault{n}{printf}\PYGdefault{p}{(}\PYGdefault{l+s}{\PYGdefaultZdq{}Count = \PYGdefaultZpc{}d}\PYGdefault{l+s+se}{\PYGdefaultZbs{}n}\PYGdefault{l+s}{\PYGdefaultZdq{}}\PYGdefault{p}{,}\PYGdefault{n}{count}\PYGdefault{p}{);}
-    \PYGdefault{n}{count} \PYGdefault{o}{=} \PYGdefault{n}{count} \PYGdefault{o}{+} \PYGdefault{l+m+mi}{1}\PYGdefault{p}{;}
-\PYGdefault{p}{\PYGdefaultZcb{}}
-\end{Verbatim}

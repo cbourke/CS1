@@ -1,8 +1,0 @@
-\begin{Verbatim}[commandchars=\\\{\},codes={\catcode`\$=3\catcode`\^=7\catcode`\_=8}]
-\PYGdefault{c+c1}{//prints the first command line argument:}
-\PYGdefault{n}{printf}\PYGdefault{p}{(}\PYGdefault{l+s}{\PYGdefaultZdq{}\PYGdefaultZpc{}s}\PYGdefault{l+s+se}{\PYGdefaultZbs{}n}\PYGdefault{l+s}{\PYGdefaultZdq{}}\PYGdefault{p}{,} \PYGdefault{n}{argv}\PYGdefault{p}{[}\PYGdefault{l+m+mi}{0}\PYGdefault{p}{]);}
-\PYGdefault{c+c1}{//converts the \PYGdefaultZdq{}second\PYGdefaultZdq{} command line argument to an integer}
-\PYGdefault{k+kt}{int} \PYGdefault{n}{x} \PYGdefault{o}{=} \PYGdefault{n}{atoi}\PYGdefault{p}{(}\PYGdefault{n}{argv}\PYGdefault{p}{[}\PYGdefault{l+m+mi}{1}\PYGdefault{p}{]);}
-\PYGdefault{c+c1}{//converts the \PYGdefaultZdq{}third\PYGdefaultZdq{} command line argument to a double:}
-\PYGdefault{k+kt}{double} \PYGdefault{n}{y} \PYGdefault{o}{=} \PYGdefault{n}{atof}\PYGdefault{p}{(}\PYGdefault{n}{argv}\PYGdefault{p}{[}\PYGdefault{l+m+mi}{2}\PYGdefault{p}{]);}
-\end{Verbatim}

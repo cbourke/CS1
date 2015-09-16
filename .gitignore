@@ -25,6 +25,7 @@
 
 # minted subdirectory
 _minted-ComputerScienceOne
+figures/_minted*
 
 #
 .DS_Store

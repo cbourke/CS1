@@ -1,3 +1,0 @@
-\begin{Verbatim}[commandchars=\\\{\},codes={\catcode`\$=3\catcode`\^=7\catcode`\_=8}]
-\PYGdefault{p}{(}\PYGdefault{n}{b}\PYGdefault{o}{*}\PYGdefault{n}{b} \PYGdefault{o}{\PYGdefaultZlt{}} \PYGdefault{l+m+mi}{4}\PYGdefault{o}{*}\PYGdefault{n}{a}\PYGdefault{o}{*}\PYGdefault{n}{c} \PYGdefault{o}{||} \PYGdefault{n}{a} \PYGdefault{o}{==} \PYGdefault{l+m+mi}{0} \PYGdefault{o}{||} \PYGdefault{n}{argc} \PYGdefault{o}{!=} \PYGdefault{l+m+mi}{4}\PYGdefault{p}{)}
-\end{Verbatim}

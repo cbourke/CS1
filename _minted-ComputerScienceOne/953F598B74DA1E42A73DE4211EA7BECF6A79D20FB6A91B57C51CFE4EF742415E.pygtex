@@ -1,4 +1,0 @@
-\begin{Verbatim}[commandchars=\\\{\},codes={\catcode`\$=3\catcode`\^=7\catcode`\_=8}]
-\PYGdefault{x}{\PYGdefaultZdl{}root1 = (\PYGdefaultZhy{}\PYGdefaultZdl{}b + sqrt(\PYGdefaultZdl{}b*\PYGdefaultZdl{}b \PYGdefaultZhy{} 4*\PYGdefaultZdl{}a*\PYGdefaultZdl{}c) ) / (2*\PYGdefaultZdl{}a);}
-\PYGdefault{x}{\PYGdefaultZdl{}root2 = (\PYGdefaultZhy{}\PYGdefaultZdl{}b \PYGdefaultZhy{} sqrt(\PYGdefaultZdl{}b*\PYGdefaultZdl{}b \PYGdefaultZhy{} 4*\PYGdefaultZdl{}a*\PYGdefaultZdl{}c) ) / (2*\PYGdefaultZdl{}a);}
-\end{Verbatim}

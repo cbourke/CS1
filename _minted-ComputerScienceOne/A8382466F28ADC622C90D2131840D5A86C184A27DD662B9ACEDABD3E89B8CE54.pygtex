@@ -1,9 +1,0 @@
-\begin{Verbatim}[commandchars=\\\{\},codes={\catcode`\$=3\catcode`\^=7\catcode`\_=8}]
-\PYGdefault{c+c1}{//prototype:}
-\PYGdefault{k+kt}{void} \PYGdefault{n+nf}{printCopyright}\PYGdefault{p}{();}
-
-\PYGdefault{c+c1}{//definition:}
-\PYGdefault{k+kt}{void} \PYGdefault{n+nf}{printCopyright}\PYGdefault{p}{()} \PYGdefault{p}{\PYGdefaultZob{}}
-  \PYGdefault{n}{printf}\PYGdefault{p}{(}\PYGdefault{l+s}{\PYGdefaultZdq{}(c) Bourke 2015}\PYGdefault{l+s+se}{\PYGdefaultZbs{}n}\PYGdefault{l+s}{\PYGdefaultZdq{}}\PYGdefault{p}{);}
-\PYGdefault{p}{\PYGdefaultZcb{}}
-\end{Verbatim}

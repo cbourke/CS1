@@ -1,8 +1,0 @@
-\begin{Verbatim}[commandchars=\\\{\},codes={\catcode`\$=3\catcode`\^=7\catcode`\_=8}]
-Regular 5\PYGdefaultZhy{}sided polygon with radius 6.0:
-(6.0000, 0.0000)
-(1.8541, 5.7063)
-(\PYGdefaultZhy{}4.8541, 3.5267)
-(\PYGdefaultZhy{}4.8541, \PYGdefaultZhy{}3.5267)
-(1.8541, \PYGdefaultZhy{}5.7063)
-\end{Verbatim}

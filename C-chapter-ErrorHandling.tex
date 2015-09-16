@@ -2,4 +2,288 @@
 
 %%Chapter: Error Handling in C
 
-TODO
+The C language does not support exceptions or exception handling.
+Instead, the usual method of error handling is done through 
+defensive programming.  As a user, it is your responsibility to
+write code that checks for invalid or unsafe operations before
+executing them and handle the error appropriately.
+
+One way that we've already seen to handle errors in C is to use
+the \mintinline{c}{exit()} function in the standard library.  This function
+immediately terminates the execution of our program and ``returns''
+an integer valued ``exit code.''  This exit code can be used to
+communicate errors between different processes.  The process that
+executed the program can use it to determine if the program exited
+with or without an error.  By convention, 0 indicates an error while
+a non-zero value indicates an error.  Using the \mintinline{c}{exit()} 
+function should only be done when an error should be considered
+\emph{fatal} or severe enough that the program should immediately
+terminate.
+
+\section{Language Supported Error Codes}
+
+In the standard libraries, some functions are designed to indicate a
+n error by returning a special ``flag'' value such as $-1$ or 
+\mintinline{c}{NULL}.  In general, though, the standard library functions
+communicate an error code represented as an integer value.
+As previously mentioned, C uses the convention that 0 
+indicates ``no error'' while a non-zero value indicates an error.
+
+Error codes are communicated through a special global variable called
+\mintinline{c}{errno} which is defined in the \mintinline{c}{errno.h} 
+standard header file.  This header file also defines several macros 
+that are identified with various error codes.  The C standard actually
+only requires the following three error codes to be supported.  
+
+\begin{itemize}
+  \item \mintinline{c}{EDOM} indicates an error in the \emph{domain} 
+  	of a function; that is, an error with respect to the function's input value(s).
+	For example, calling the math library's \mintinline{c}{sqrt(-1)} on a negative
+	value results in an \mintinline{c}{EDOM} error as C does not support
+	complex numbers.
+  \item \mintinline{c}{ERANGE} indicates an error in the \emph{range}
+  	of a function; that is, an error with respect to the function's output value(s).
+	For example, calling the math library's \mintinline{c}{log(0)} with a zero
+	value results in an \mintinline{c}{ERANGE} error as C does not 
+	support $-\infty$ as an actual number.
+  \item \mintinline{c}{EILSEQ} indicates an illegal byte sequences in 
+  	characters on systems that use UTF-8.
+\end{itemize}
+
+All three of these are defined in the \mintinline{c}{errno.h} header file.
+Depending on the system, additional error codes may also be defined
+and supported (see POSIX Error Codes below).  
+
+When an error occurs, a function will set the global variable 
+\mintinline{c}{errno} to one of these error code values.  Upon returning 
+from a function, you can check for these error codes.  Since these 
+error codes are represented as integers, you simply use the numerical 
+comparison operator, \mintinline{c}{==}.  You can check for no error
+by making a comparison to zero.
+
+In addition, the standard string library, \mintinline{c}{string.h} provides a function,
+\mintinline{c}{char * strerror(errno)} that can be used to map the value in
+\mintinline{c}{errno} to a human-readable error message.  We discuss
+strings in detail later on, but we can see how to use this function in the
+following demonstration (see below).  The output of this program is as follows.
+
+\begin{minted}{text}
+result: 1.4142, error: 0
+result: -nan, error: 33
+it was an EDOM error
+Error Message: Numerical argument out of domain
+result: -inf, error: 34
+it was an ERANGE error
+Error Message: Numerical result out of range
+\end{minted}
+
+For this particular system, the \mintinline{c}{EDOM} and 
+\mintinline{c}{ERANGE} error codes were associated with the
+integer values 33 and 34 respectively.  These numbers are 
+not necessarily the same on all systems so comparisons must 
+be made against the macro names for portability.
+
+\inputminted{c}{code/errorDemo.c}
+
+\subsection{POSIX Error Codes}
+
+\gls{posixLabel} is an \gls{ieeeLabel} set of standards for maintaining compatibility between
+various operating systems.  It defines several rules and expectations
+that operating systems must adhere to in order to be POSIX 
+\emph{compliant}.  Such standards allow developers to develop 
+code that should be interoperable among a collection of different
+operating systems, reducing the need for rewrites and reimplementations
+for different systems.
+
+In particular, \gls{posixLabel} compliant systems define many other error 
+codes (see \cite{posixErrno}) that can be used beyond the three
+mentioned above.  For example, the \mintinline{c}{ENOENT} error
+code corresponds to ``No such file or directory'' and \mintinline{c}{EACCES}
+corresponds to a ``Permission denied'' error.
+
+\section{Error Handling By Design}
+
+In our own code we \emph{could} communicate errors to calling
+functions by setting \mintinline{c}{errno}, however, we may run 
+into compatibility issues with the standard error codes or POSIX 
+error codes.  Instead, it may be more appropriate to do error 
+handling by utilizing the return value of a function to communicate
+an error code.  
+
+That is, to do error handling we could design our functions to always
+return an \mintinline{c}{int} value to indicate an error: 0 for no error
+and some non-zero value to indicate various different types of errors.
+Of course, as a consequence any value that needs to be ``returned''
+to the calling function would need to be done so via a pass by reference
+variable.  
+
+As an example, let's revisit the quadratic roots example in Section
+\ref{subsection:c:quadraticRoots}.  By returning the two output values
+via pass by reference variables, we freed up the return value.  We
+can now modify our function to return an integer indicating an
+error code instead.
+
+Previously we had identified several different types of errors: division
+by zero (if $a = 0$), complex roots (if $b^2 - 4ac < 0$) and a 
+\mintinline{c}{NULL} pointer error if the variables passed by reference
+were \mintinline{c}{NULL}.  We can now modify our function to 
+check for these errors and return an appropriate error code.
+We return zero in the event that no error was encountered.
+
+\begin{minted}{c}
+int quadraticRoots(double a, double b, double c, 
+                   double *root1, double *root2) {
+  if(a == 0) {
+    return 1;
+  } else if( b*b - 4*a*c < 0 ) {
+    return 2;
+  } else if(root1 == NULL || root2 == NULL) {
+    return 3;
+  }
+  double discriminant = sqrt(b*b - 4*a*c);
+  *root1 = (-b + discriminant) / (2*a);
+  *root2 = (-b - discriminant) / (2*a);
+  return 0;
+}
+\end{minted}
+
+Now when a function invokes our \mintinline{c}{quadraticRoots()}
+it can check to see what kind of error code it returned and
+handle the error in whatever way it wants.  
+
+There is still an issue, however.  The usage of the integers 1, 2, 3
+to indicate the various errors was arbitrary.  These are essentially
+\glspl{magic number} that the calling function would have to deal
+with by making comparisons with various integers.  The numbers
+themselves are meaningless and someone using them would 
+need to constantly refer to documentation to understand which
+integer corresponded to which error condition.
+
+It would be much better if we could follow the strategy of the
+\mintinline{c}{errno} and define human-readable identifiers 
+for each error code.  We could accomplish this by defining
+macros, but another solution is to use an \emph{enumerated
+type}.
+
+\section{Enumerated Types}
+
+C allows you to define \glspl{enumerated type} which allow you to
+define a fixed list of possible values.  For example, the days of the
+week or months of the year are possible values used in a date.
+However, they are more-or-less fixed (no one will be adding a new
+day of the week or month any time soon).  An enumerated type
+allows us to define these values using human-readable keywords
+(much like the \mintinline{c}{#define} macro).  
+
+To declare an enumerated type we use the keywords 
+\mintinline{c}{typedef enum} (short for type definition
+and enumeration).  We then provide a comma delimited
+list of keywords inside a code block.  At the end of the
+code block we provide the type's identifier.  That is, the
+name of the type itself.  For example, the names of 
+integer and floating-point types in C are \mintinline{c}{int} and 
+\mintinline{c}{double} respectively.  This identifier gives
+our type a name that we can later use to declare variables
+of that type.  Consider the following example.
+
+\begin{minted}{c}
+typedef enum {
+  SUNDAY,
+  MONDAY,
+  TUESDAY,
+  WEDNESDAY,
+  THURSDAY,
+  FRIDAY,
+  SATURDAY
+} DayOfWeek;
+\end{minted}
+
+In this example we've defined an enumeration of the days 
+of the week.  The name of the type itself is \mintinline{c}{DayOfWeek}
+and we can now declare variables of this type.  The possible 
+\emph{values} it can take are \mintinline{c}{SUNDAY}, 
+\mintinline{c}{MONDAY}, etc. and we can use these keywords 
+in our program.  For example, 
+
+\begin{minted}{c}
+DayOfWeek today = MONDAY;
+
+if(today == SUNDAY || today == SATURDAY) {
+  printf("Its the weekend!\n");
+}
+\end{minted}
+
+Note the modern naming conventions: the type identifier uses 
+upper camel casing while the enumerated values follow an 
+upper case underscore convention.  Though our example does
+not contain a value with multiple words, if it had, we would have
+used an underscore to separate them.  Furthermore, enumerated
+type declarations are usually placed in separate header files
+along with function prototype declarations.  
+
+Care must be taken when using enumerated types, however.  
+Internally, C simply associates integers with the values.  Thus, 
+in our example, \mintinline{c}{SUNDAY} is actually \mintinline{c}{0}, 
+\mintinline{c}{MONDAY} is \mintinline{c}{1}, and 
+\mintinline{c}{SATURDAY} is \mintinline{c}{6}.  When we do
+assignments or equality comparisons, we're actually just
+comparing integers.  
+
+Consequently, a \mintinline{c}{DayOfWeek} variable \emph{may}
+be assigned values that do not correspond to our enumeration. 
+For example, 
+
+\mintinline{c}{DayOfWeek today = 1000;}
+
+is valid code and will not (in general) result in any compiler errors
+or warnings, even though it is assigning an invalid value to the 
+variable.  Care must be taken to only assign valid values to an
+enumerated type variable.  Proper error checking should also
+be done.
+
+Despite this limitation, using enumerated types in C provides an
+obvious advantage.  Without an enumerated type we'd be forced
+to use a collection of \glspl{magic number} to indicate values.  
+Even for something as simple as the days of the week we'd be
+constantly trying to remember: which day is Wednesday again?
+I forget, do our week start with Monday or Sunday?  Etc.  By
+using an enumerated type these questions are mostly moot as
+we can use the more human-readable keywords and eliminate
+the guess work.
+
+\section{Using Enumerated Types for Error Codes}
+
+Let's apply enumerated types to our \mintinline{c}{quadraticRoots()}
+function example from before.  First, we define our enumerated
+type which includes all types of errors including a \mintinline{c}{NO_ERROR}
+type.  Note that we start with \mintinline{c}{NO_ERROR} as its value
+will be zero following our convention.
+
+\begin{minted}{c}
+typedef enum {
+  NO_ERROR,
+  DIV_BY_ZERO_ERROR,
+  COMPLEX_ROOT_ERROR,
+  NULL_POINTER_ERROR
+} ErrorCode;
+\end{minted}
+
+Now in the \mintinline{c}{quadraticRoots()} function, we can
+return the appropriate error code.
+
+\begin{minted}{c}
+ErrorCode quadraticRoots(double a, double b, double c, 
+                   double *root1, double *root2) {
+  if(a == 0) {
+    return DIV_BY_ZERO_ERROR;
+  } else if( b*b - 4*a*c < 0 ) {
+    return COMPLEX_ROOT_ERROR;
+  } else if(root1 == NULL || root2 == NULL) {
+    return NULL_POINTER_ERROR;
+  }
+  double discriminant = sqrt(b*b - 4*a*c);
+  *root1 = (-b + discriminant) / (2*a);
+  *root2 = (-b - discriminant) / (2*a);
+  return NO_ERROR;
+}
+\end{minted}

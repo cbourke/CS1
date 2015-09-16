@@ -1,4 +1,0 @@
-\begin{Verbatim}[commandchars=\\\{\},codes={\catcode`\$=3\catcode`\^=7\catcode`\_=8}]
-\PYGdefault{x}{\PYGdefaultZsh{}include\PYGdefaultZlt{}stdlib.h\PYGdefaultZgt{}}
-\PYGdefault{x}{\PYGdefaultZsh{}include\PYGdefaultZlt{}stdio.h\PYGdefaultZgt{}}
-\end{Verbatim}

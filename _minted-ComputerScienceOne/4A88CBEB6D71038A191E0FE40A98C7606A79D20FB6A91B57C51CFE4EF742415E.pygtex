@@ -1,7 +1,0 @@
-\begin{Verbatim}[commandchars=\\\{\},codes={\catcode`\$=3\catcode`\^=7\catcode`\_=8}]
-\PYGdefault{x}{int x;}
-
-\PYGdefault{x}{x = 10 \PYGdefaultZpc{} 5; //x is 0}
-\PYGdefault{x}{x = 10 \PYGdefaultZpc{} 3; //x is 1}
-\PYGdefault{x}{x = 29 \PYGdefaultZpc{} 5; //x is 4}
-\end{Verbatim}

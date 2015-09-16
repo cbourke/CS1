@@ -1,5 +1,0 @@
-\begin{Verbatim}[commandchars=\\\{\},codes={\catcode`\$=3\catcode`\^=7\catcode`\_=8}]
-\PYGdefault{n+nb}{define}\PYGdefault{p}{(}\PYGdefault{l+s+s2}{\PYGdefaultZdq{}PI\PYGdefaultZdq{}}\PYGdefault{p}{,} \PYGdefault{l+m+mf}{3.14159}\PYGdefault{p}{);}
-\PYGdefault{n+nb}{define}\PYGdefault{p}{(}\PYGdefault{l+s+s2}{\PYGdefaultZdq{}INSTITUTION\PYGdefaultZdq{}}\PYGdefault{p}{,} \PYGdefault{l+s+s2}{\PYGdefaultZdq{}University of Nebraska\PYGdefaultZhy{}Lincoln\PYGdefaultZdq{}}\PYGdefault{p}{);}
-\PYGdefault{n+nb}{define}\PYGdefault{p}{(}\PYGdefault{l+s+s2}{\PYGdefaultZdq{}COST\PYGdefaultZus{}PER\PYGdefaultZus{}UNIT\PYGdefaultZdq{}}\PYGdefault{p}{,} \PYGdefault{l+m+mf}{2.50}\PYGdefault{p}{);}
-\end{Verbatim}
