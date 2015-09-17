@@ -1,11 +1,11 @@
 
-\begin{tikzpicture}[node distance = 2.5cm,minimum height=1cm,auto,scale=1.0,transform shape]
+\begin{tikzpicture}[minimum height=1cm,auto,scale=1.0,transform shape]
     % Place nodes
     \node[draw=none] (start) {};
-    \node [block, below of=start,text width=6em,minimum height=3em] (a) {Statement 1};
-    \node [block, below of=a,text width=6em,minimum height=3em] (b) {Statement 2};
-    \node [block, below of=b,text width=6em,minimum height=3em] (c) {Statement 3};
-    \node[draw=none, below of=c] (end) {};
+    \node [block, node distance=3cm,below of=start,text width=6em,minimum height=3em] (a) {Statement 1};
+    \node [block, node distance=3cm,below of=a,text width=6em,minimum height=3em] (b) {Statement 2};
+    \node [block, node distance=3cm,below of=b,text width=6em,minimum height=3em] (c) {Statement 3};
+    \node[draw=none, below of=c,node distance=2cm] (end) {};
     % Draw edges
     \path [line] (start) -- (a);
     \path [line] (a) -- (b);

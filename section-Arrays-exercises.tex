@@ -1,0 +1,414 @@
+%!TEX root = ComputerScienceOne.tex
+
+%Strings - exercises
+
+\section{Exercises}
+
+\begin{exer}
+Write a function to return the \emph{index} of the maximum 
+element in an array of numbers.
+\end{exer}
+
+\begin{exer}
+Write a function to return the \emph{index} of the minimum 
+element in an array of numbers.
+\end{exer}
+
+\begin{exer}
+Write a function to compute the mean (average) of an array of numbers.
+\end{exer}
+
+\begin{exer}
+Write a function to compute the standard deviation of an array of numbers, 
+  $$\sigma = \sqrt{\frac{1}{N} \sum_{i=1}^N (x_i - \mu)^2}$$
+where $\mu$ is the mean of the array of numbers.
+\end{exer}
+
+\begin{exer}
+Write a function that takes two arrays of numbers that are \emph{sorted}
+and \emph{merges} them into one array (retuning a new array as a 
+result).  
+\end{exer}
+
+\begin{exer}
+Write a function that takes an integer $n$ and produces a new
+array of size $n$ filled with 1s.
+\end{exer}
+
+\begin{exer}
+Write a function that takes an array of numbers are computes 
+returns the \emph{median} element.  The median is defined as 
+follows:
+ \begin{itemize}
+   \item If $n$ is odd, the median is the $\frac{n+1}{2}$-th
+       largest element
+   \item If $n$ is even, the median is the average of the
+       $\frac{n}{2}$ and the $(\frac{n}{2} + 1)$-th largest
+       elements
+ \end{itemize}
+\end{exer}
+
+\begin{exer}
+The dot product of two arrays (or vectors) of the same 
+dimension is defined as the sum of the product of each of 
+their entries.  That is, 
+  $$\sum_{i=1}^n a_i \times b_i$$
+Write a function to compute the dot product of two arrays 
+(you may assume that they are of the same dimension)
+\end{exer}
+
+\begin{exer}
+The \emph{norm} of an $n$-dimensional vector, 
+$\vec{x} = (x_1, x_2, \ldots, x_n)$ captures the notion of 
+``distance'' in a higher dimensional space and is defined as
+  $$\|\vec{x}\| = \sqrt{x_1^2 + \cdots + x_n^2}$$
+Write a function that takes an array of numbers that 
+represents an $n$-dimensional vector and computes
+its norm.
+\end{exer}
+
+\begin{exer}
+Write a function that takes two arrays $A, B$ and creates
+and returns a new array that is the \emph{concatenation}
+of the two.  That is, the new array will contain all elements
+$a$ followed by all elements in $b$.
+\end{exer}
+
+\begin{exer}
+Write a function that takes an array of numbers $A$ 
+and an element $x$ and returns true/false if $A$ contains
+$x$
+\end{exer}
+
+\begin{exer}
+Write a function that takes an array of numbers $A$, an 
+element $x$ and two indices $i, j$ and returns true/false 
+if $A$ contains $x$ somewhere between index $i$ and
+$j$.
+\end{exer}
+
+\begin{exer}
+Write a function that takes an array of numbers $A$ 
+and an element $x$ and returns the \emph{multiplicity} of
+$x$; that is the number of times $x$ appears in $A$.
+\end{exer}
+
+\begin{exer}
+Write a function to compute a \emph{sliding window} 
+mean.  That is, it computes the average of the first $m$ 
+numbers in the array.  The next value is the average of 
+the values index from 1 to $m$, then $2$ to $m+1$, etc.
+The last window is the average of the last $m$ elements.  
+Obviously, $m \leq n$ (for $m = n$, this is the usual mean). 
+Since there is more than one value, your function will return 
+a (new) array of means of size $n-m+1$.  
+\end{exer}
+
+\begin{exer}
+Write a function to compute the \emph{mode} of an array of 
+numbers.  The mode is the most \emph{common} value that 
+appears in the array.  For example, if the array contained the 
+elements $2, 9, 3, 4, 2, 1, 8, 9, 2$, the mode would be
+2 as it appears more than any other element.  The mode may 
+not be unique; multiple elements could appear the same, 
+maximal number of times.  Your function should simply return 
+\emph{a} mode.
+\end{exer}
+
+\begin{exer}
+Write a function to find \emph{all} modes of an array.  That 
+is, it should find all modes in an array and return a new array 
+containing all the mode values.
+\end{exer}
+
+\begin{exer}
+Write a function to filter out certain elements from an array.  
+Specifically, the function will create a new array containing 
+only elements that are greater than or equal to a certain 
+threshold $\delta$.  
+\end{exer}
+
+\begin{exer}
+Write a function that takes an array of numbers and 
+creates a new ``deep'' copy of the array.  In addition, the
+function should take a new ``size'' parameter which will
+be the size of the copy.  If the new size is less than
+the original, then the new array will be a \emph{truncated} 
+copy.  If the new size is greater then the copy will be 
+\emph{padded} with zero values at the end.
+\end{exer}
+
+\begin{exer}
+Write a function that takes an array $A$ and two indices
+$i, j$ and returns a new array that is a subarray of 
+$A$ consisting of elements $i$ through $j$.
+\end{exer}
+
+\begin{exer}
+Write a function that takes two arrays $A, B$ and creates
+and returns a new array that represents the \emph{unique
+intersection} of $A$ and $B$.  That is, an array that contains
+elements that are in both $A$ \emph{and} $B$.  However, 
+elements should not be included more than once.
+\end{exer}
+
+\begin{exer}
+Write a function that takes two arrays $A, B$ and creates
+and returns a new array that represents the \emph{unique
+union} of $A$ and $B$.  That is, an array that contains
+elements that are \emph{either} in $A$ \emph{or} $B$
+(or both).  However, elements should not be included more than once.
+\end{exer}
+
+\begin{exer}
+Write a function that takes an array of numbers and returns the
+sum of its elements.
+\end{exer}
+
+\begin{exer}
+Write a function that takes an array of numbers and two indices
+$i, j$ and computes the sum of its elements between $i$ and
+$j$ inclusive.  
+\end{exer}
+
+\begin{exer}
+Write a function that takes \emph{two} arrays of numbers and
+determines if they are \emph{equal}: that is, each index contains 
+the same element.
+\end{exer}
+
+\begin{exer}
+Write a function that takes \emph{two} arrays of numbers and
+determines if they both contain the same elements (though 
+are not necessarily equal) regardless of their multiplicity.  That is, 
+the function should return true even if the arrays' elements 
+appear a different number of times or in a different order.
+For example $[2, 2, 3]$ would be equal to an array containing 
+$[3, 2, 3, 3, 3, 2, 2, 2]$.
+\end{exer}
+
+\begin{exer}
+A \emph{suffix array} is a lexicographically sorted array of 
+all suffixes of a string.  Suffix arrays have many applications 
+in text indexing, data compression algorithms and in 
+bioinformatics.  Write a program that takes a string 
+and produces its suffix array.  
+
+For example, the suffixes of \mintinline{text}{science} are
+\mintinline{text}{science}, \mintinline{text}{cience}, \mintinline{text}{ience}, \mintinline{text}{ence}, \mintinline{text}{nce}, \mintinline{text}{ce}, and \mintinline{text}{e}. The suffix array (sorted) would look something 
+like the following.
+
+\begin{minted}{text}
+ce
+cience
+e
+ence
+ience
+nce 
+science
+\end{minted}
+\end{exer}
+
+\begin{exer} 
+An array of size $n$ represents a \emph{permutation} if it 
+contains all integers $0, 1, 2, \ldots, (n-1)$ exactly once.  
+Write a function to determine if an array is a permutation or 
+not.
+\end{exer}
+
+\begin{exer}
+The $k$-th order statistic of an array is the $k$-th largest 
+element.  For our purposes, $k$ starts at 0, thus the minimum 
+element is the $0$-th order statistic and the largest element is 
+the $n-1$-th order statistic.
+
+Another way to view it is: suppose we were to \emph{sort} the 
+array, then the $k$-th order statistic would be the element at index 
+$k$ in the sorted array.  Write a function to find the $k$-th order statistic.
+\end{exer}
+
+
+%%%% MATRICES %%%%%
+
+\begin{exer}
+Write a function that takes two $n \times n$ square matrices 
+$A, B$ and returns a new $n \times n$ matrix $C$ which is 
+the product, $A \times B$.  The product of two matrices of 
+dimension $n \times n$ is defined as follows:
+$$c_{ij} = \sum_{k=1}^n a_{ik} b_{kj}$$
+Where $1 \leq i,j \leq n$ and $c_{ij}$ is the $(i,j)$-th entry of the
+matrix $C$.  
+\end{exer}
+
+\begin{exer}
+We can multiply a matrix by a single scalar value $x$ by simply
+multiplying each entry in the matrix by $x$.  Write a function that
+takes a matrix of numbers and an element $x$ and performs
+scalar multiplication.
+\end{exer}
+
+\begin{exer}
+Write a function that takes two matrices and determines if 
+they are equal (all of their elements are the same).
+\end{exer}
+
+\begin{exer}
+Write a function that takes a matrix and an index $i$ and 
+returns a new \emph{array} that contains the elements in the
+$i$-th row of the matrix.
+\end{exer}
+
+\begin{exer}
+Write a function that takes a matrix and an index $j$ and 
+returns a new \emph{array} that contains the elements in the
+$j$-th column of the matrix.
+\end{exer}
+
+\begin{exer}
+Iterated Matrix Multiplication is where you take a square 
+matrix, $A$ and multiply it by itself $k$ times, 
+  $$A^k = \underbrace{A \times A \times \cdots \times A}_{k \, \mathrm{ times}}$$
+Write a function to compute the $k$-th power of a matrix $A$.  
+\end{exer}
+
+\begin{exer}
+The \emph{transpose} of a square matrix is an operation
+that ``flips'' the matrix along the diagonal from the upper left
+to the lower right.  In particular the values $m_{i,j}$ and $m_{j, i}$
+are swapped.  Write a function to transpose a given matrix
+\end{exer}
+
+\begin{exer}
+Write a function that takes a matrix, a row index $i$, and a number
+$x$ and adds $x$ to each value in the $i$-th row.
+\end{exer}
+
+\begin{exer}
+Write a function that takes a matrix, a row index $i$, and a number
+$x$ and multiples each value in the $i$-th row with $x$.
+\end{exer}
+
+\begin{exer}
+Write a function that takes a matrix, and two row indices $i, j$
+and \emph{swaps} each value in row $i$ with the value in row $j$
+\end{exer}
+
+\begin{exer}
+A special matrix that is often used is the \emph{identity} matrix.  
+The identity matrix is an $n \times n$ matrix with 1s on its diagonal 
+and zeros everywhere else.  Write a function that, given $n$, 
+creates a new $n\times n$ identity matrix.
+\end{exer}
+
+\begin{exer}
+Write a function to convert a matrix of integers to 
+floating point numbers.
+\end{exer}
+
+\begin{exer}
+Write a function to determine if a given matrix is a 
+\emph{permutation matrix}.  A permutation matrix is a 
+matrix that represents a permutation of the rows of an 
+identity matrix.  That is, $A$ is a permutation matrix if 
+every row and every column has exactly one 1 and the 
+rest are zeros.
+\end{exer}
+
+\begin{exer}
+Write a function to determine if a given square matrix 
+is \emph{symmetric}.  A matrix is symmetric if $m_{i,j} = m_{j,i}$ 
+for all $i, j$. 
+\end{exer}
+
+\begin{exer}
+Write a function to compute the \emph{trace} of a matrix.  
+The trace of a matrix is the sum of its elements along its 
+diagonal.
+\end{exer}
+
+\begin{exer}
+Write a function that returns a ``resized'' copy of a matrix.  
+The function takes a matrix of size $n \times m$ (not necessarily 
+square) and creates a copy that is $p \times q$ ($p, q$ are part
+of the input to the function).  If $p < n$ and/or $q < m$, the 
+values are ``cut off''.  If $p > n$ and/or $q > m$, the matrix is 
+padded (to the right and to the bottom) with zeros.  
+\end{exer}
+
+\begin{exer}
+A \emph{submatrix} is a matrix formed by selecting certain rows 
+and columns from a larger matrix.  Write a function that constructs 
+a submatrix from a larger matrix.  To do so, the function will take
+a matrix as well as two row indices $i, j$ and two column indices
+$k, \ell$ and it will return a new matrix which consists of entries
+from the $i$-th row through the $j$-th row and $k$-th column 
+through the $\ell$-th column.
+
+For example, if $A$ is
+$$\mathbf{A}=\begin{bmatrix}
+    8 & 2 & 4 & 1 \\
+   10 & 4 & 2 & 3 \\
+   12 & 42 & 1 & 0 \\
+  \end{bmatrix}.$$
+then a call to this function with $i=1, j=2, k=2, \ell=3)$ should
+result in
+$$\mathbf{A}=\begin{bmatrix}
+   2 & 3 \\
+   1 & 0 \\
+  \end{bmatrix}.$$
+\end{exer}
+
+\begin{exer}
+The \emph{Kronecker} product (\url{http://en.wikipedia.org/wiki/Kronecker_product}) is a matrix operation on two matrices
+that produces a larger block matrix.  Specifically, if $A$ is an 
+$m \times n$ matrix and $B$ is a $p \times q$ matrix, then the
+Kronecker product $A \otimes B$ is the $mp \times nq$ block matrix:
+
+$$\mathbf{A}\otimes\mathbf{B} = \begin{bmatrix} a_{11} \mathbf{B} & \cdots & a_{1n}\mathbf{B} \\ \vdots & \ddots & \vdots \\ a_{m1} \mathbf{B} & \cdots & a_{mn} \mathbf{B} \end{bmatrix}$$
+
+more explicitly:
+
+$${\mathbf{A}\otimes\mathbf{B}} = \begin{bmatrix}
+   a_{11} b_{11} & a_{11} b_{12} & \cdots & a_{11} b_{1q} &
+                   \cdots & \cdots & a_{1n} b_{11} & a_{1n} b_{12} & \cdots & a_{1n} b_{1q} \\
+   a_{11} b_{21} & a_{11} b_{22} & \cdots & a_{11} b_{2q} &
+                   \cdots & \cdots & a_{1n} b_{21} & a_{1n} b_{22} & \cdots & a_{1n} b_{2q} \\
+   \vdots & \vdots & \ddots & \vdots & & & \vdots & \vdots & \ddots & \vdots \\
+   a_{11} b_{p1} & a_{11} b_{p2} & \cdots & a_{11} b_{pq} &
+                   \cdots & \cdots & a_{1n} b_{p1} & a_{1n} b_{p2} & \cdots & a_{1n} b_{pq} \\
+   \vdots & \vdots & & \vdots & \ddots & & \vdots & \vdots & & \vdots \\
+   \vdots & \vdots & & \vdots & & \ddots & \vdots & \vdots & & \vdots \\
+   a_{m1} b_{11} & a_{m1} b_{12} & \cdots & a_{m1} b_{1q} &
+                   \cdots & \cdots & a_{mn} b_{11} & a_{mn} b_{12} & \cdots & a_{mn} b_{1q} \\
+   a_{m1} b_{21} & a_{m1} b_{22} & \cdots & a_{m1} b_{2q} &
+                   \cdots & \cdots & a_{mn} b_{21} & a_{mn} b_{22} & \cdots & a_{mn} b_{2q} \\
+   \vdots & \vdots & \ddots & \vdots & & & \vdots & \vdots & \ddots & \vdots \\
+   a_{m1} b_{p1} & a_{m1} b_{p2} & \cdots & a_{m1} b_{pq} &
+                   \cdots & \cdots & a_{mn} b_{p1} & a_{mn} b_{p2} & \cdots & a_{mn} b_{pq}
+\end{bmatrix}. $$
+Write a function that computes the Kronecker product.
+\end{exer}
+
+\begin{exer}
+The Hadamard product is an entry-wise product of two matrices 
+of equal size.  Let $\mathbf{A}, \mathbf{B}$ be two $n \times m$ 
+matrices, then the Hadamard product is defined as follows.
+$$\mathbf{A} \circ \mathbf{B} = \begin{pmatrix} a_{11} & a_{12} & \cdots & a_{1m} \\
+ a_{21} & a_{22} & \cdots & a_{2m} \\
+\vdots & \vdots & \ddots & \vdots \\
+ a_{n1} & a_{n2} & \cdots & a_{nm} \\
+\end{pmatrix}\circ\begin{pmatrix}
+ b_{11} & b_{12} & \cdots & b_{1m} \\
+ b_{21} & b_{22} & \cdots & b_{2m} \\
+\vdots & \vdots & \ddots & \vdots \\
+ b_{n1} & b_{n2} & \cdots & b_{nm} \\
+\end{pmatrix} =\begin{pmatrix}
+ a_{11}b_{11} & a_{12}b_{12} & \cdots & a_{1m}b_{1m} \\
+ a_{21}b_{21} & a_{22}b_{22} & \cdots & a_{2m}b_{2m} \\
+\vdots & \vdots & \ddots & \vdots \\
+ a_{n1}b_{n1} & a_{n2}b_{n2} & \cdots & a_{nm}b_{nm} \\
+\end{pmatrix}$$
+Write a function to compute the Hadamard product of two 
+$n \times m$ matrices.
+\end{exer}
+

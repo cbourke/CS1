@@ -369,5 +369,55 @@ message should be presented.  You are allowed/encouraged to
 compute any other stats for the user that you feel would be useful.
 \end{exer}
 
+\begin{exer}
+Write a program to  help a floor tile company determine how many
+tiles they need to send to a work site to tile a floor in a room.  For 
+simplicity, assume that all rooms are perfectly rectangular with no 
+obstructions; we will also omit any additional measurements related 
+to grouting.  
+
+Further, we will assume that all tile is laid in a grid pattern centered 
+at the center of the room.  That is, four tiles will meet at their corners 
+at the center of the room with tiles laid out to the edge of the room.  
+Thus, it may be the case that the final row and/or column at the edge 
+may need to be cut.  Also note that if the cut is short enough, the 
+remaining tile can be used on the other end of the room (same goes 
+for the corners).
+
+The program will take the following input:
+\begin{itemize}
+  \item $w$ - the width of the room
+  \item $l$ - the length of the room
+  \item $t$ - width/length of the tile (all tiles are perfectly square)
+\end{itemize}
+
+If we can use whole tiles to perfectly fit the room, then we do so.  
+For example, on the input $(10, 10, 1)$, we could perfectly tile a 
+$10 \times 10$ room with 100 $1 \times 1$ tiles.  If the tiles don't 
+perfectly fit, then we have to consider the possibility of waste 
+and/or reuse.  Consider the examples in Figure \ref{figure:floorTiling}.
+
+\input{figures/figureFloorTiling}
+
+The first example is from the input $(9.8, 100, 1)$.  In this case, 
+we lay the tiles from the center of the room (8 full tile lengths) but 
+are left with $0.9$ on either side.  If we cut a tile to fit the left
+side, we are left with only $.1$ tile which is too short for the right 
+side.  Therefore, we are forced to waste the $0.1$ length and cut 
+a full tile for the right side.  In all, 100 tiles are required.
+
+The second example is from the input $(8.8, 100, 1)$.  In this case, 
+we again lay tiles from the center of the room (8 full tile lengths) and 
+are left with $0.4$ lengths on either side.  Here, we \emph{can}
+reuse the cut tile: cut a tile on one side $0.4$ with $0.6$ remaining, 
+and cut $0.4$ on the other side of the tile (with the center $0.2$ 
+length of the tile being waste).  Thus, both sides can be tiled with 
+a single tile, meaning only 90 full tiles are needed to tile this room.
+
+You may further assume that tiles used on 
+the length-side end of the room \emph{cannot} be used to tile the 
+width-side of the room (and vice versa).  Your program will compute 
+and output the number of tiles required.
+\end{exer}
 
 

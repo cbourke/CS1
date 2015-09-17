@@ -18,4 +18,162 @@ Write a program to take a phrase (International Business Machines) and ``acronym
 a string that is an upper-cased string of the first letter of each word in the phrase (IBM).
 \end{exer}
 
+\begin{exer}
+Write a function that takes a string containing a word and returns a \emph{pluralized} version
+according to the following rules.
+\begin{enumerate}
+  \item If the noun ends in ``y,'' remove the ``y'' and add ``ies''
+  \item If the noun ends in ``s,'' ``ch,'' or ``sh,'' add ``es''
+  \item In all other cases, just add ``s''
+\end{enumerate}
+\end{exer}
 
+\begin{exer}
+Write a function that takes a string and determines if it is a \emph{palindrome}
+or not.  A \emph{palindrome} is a word that is spelled exactly the same when 
+the letters are reversed.  
+\end{exer}
+
+\begin{exer}
+Write a function to compute the \emph{longest common prefix}
+of two strings.  For example, the longest common prefix of ``global''
+and ``glossary'' is ``glo''.  If two strings have no common prefix, 
+then the longest common prefix is the empty string. 
+\end{exer}
+
+\begin{exer}
+Write a function to remove any whitespace from a given string.  
+For example, if the string passed to the function contains
+\mintinline{c}{"Hello World How    are you?  "} then it should
+result in the string \mintinline{c}{"HelloWorldHowareyou?"}
+\end{exer}
+
+\begin{exer}
+Write a function that takes a string and flips the case of each
+alphabetic character in it.  For example, if the input string is 
+\mintinline{c}{"GNU Image Processing Tool-Kit"} then it should
+output \mintinline{c}{"gnu iMAGE pROCESSING tOOL-kIT"}
+\end{exer}
+
+\begin{exer}
+Write a function to validate a variable name according to the rules
+that it must begin with an alphabetic character, a--z or A--Z but
+may contain any alphanumeric character a--z, A--Z, 0--9, or underscores
+\mintinline{c}{_}.  Your function should take a string with a possible
+variable name and return true or false depending on whether or
+not it is valid.
+\end{exer}
+
+\begin{exer}
+Write a function to convert a string that represents a variable name
+using \mintinline{c}{under_score_casing} to \mintinline{c}{lowerCamelCasing}.
+That is, it should remove all underscores, and replace the first
+letter of each word with an uppercase (except the first word).
+\end{exer}
+
+\begin{exer}
+Write a function that takes a string and another character $c$
+and counts the number of times that $c$ appears in the string.
+\end{exer}
+
+\begin{exer}
+Write a function that takes a string and another character $c$ and
+removes all instances of $c$ from the string.  For example, a call 
+to this function on the string \mintinline{c}{"Hello World"} with $c$
+being equal to \mintinline{c}{'o'} would result in the string \mintinline{c}{"Hell Wrld"}.
+\end{exer}
+
+\begin{exer}
+Write a function that takes a string and two characters, $c$ and $d$
+and replaces all instances of $c$ with $d$.  
+\end{exer}
+
+\begin{exer}
+Write a function to determine if a given string $s$ contains a substring
+$t$.  The function should return true if $t$ appears anywhere inside $s$
+and false otherwise.
+\end{exer}
+
+\begin{exer}
+Write a function that takes a string $s$ and returns a new string that
+contains the first character of each word in $s$ capitalized.  You may 
+assume that words are separated by a single space.  For example, if we 
+call this function with the string \mintinline{c}{"International Business Machines"} 
+it should return \mintinline{c}{"IBM"}.  If we call it with the string
+\mintinline{c}{"Flint Lockwood Diatonic Super Mutating Dynamic Food Replicator"} 
+it should return \mintinline{c}{"FLDSMDFR"}
+\end{exer}
+
+\begin{exer}
+Write a function that \emph{trims} leading and trailing white space from
+a string.  Inner whitespace should not be modified.
+\end{exer}
+
+\begin{exer}
+Write a function that splits a string containing a unix path/file
+into its three components: the directory path, the file base 
+name and the file extension.  For example, if the input string 
+is \mintinline{text}{/usr/home/message.txt} then the three 
+components would be \mintinline{text}{/usr/home/}, 
+\mintinline{text}{message} and \mintinline{text}{txt} respectively.
+For the purposes of this function, you may assume that the path
+ends with the \emph{last} forward slash (or is empty if none) and that
+the extension is always after the \emph{last} period.  That is, you should
+be able to handle inputs such as \mintinline{text}{../foo/bar/baz.old.txt}.
+\end{exer}
+
+\begin{exer}
+Write a function that (re)formats a string representing a 
+telephone number.  Phone numbers can be written using 
+a variety of formats, for example \mintinline{text}{1-402-555-1234}
+or \mintinline{text}{+4025551234} or \mintinline{text}{402 555-1234}, 
+etc.  Assume that you will only deal with 10 digit US phone numbers.  
+Create a new string that uses the ``standard'' format of 
+\mintinline{text}{(402) 555-1234}.  
+\end{exer}
+
+\begin{exer}
+Write a function that takes a string and splits it up to an 
+\emph{array} of strings.  The split will be length-based: the 
+function will also take an integer $n$ and will split the given
+string up into strings of length $n$.  It is possible that the 
+last string will not be of length $n$.
+
+For example, if we pass \mintinline{c}{"Hello World, how are you?"} 
+with $n = 3$ then it should return an array of size 9 containing the 
+strings \mintinline{c}{"Hel"}, \mintinline{c}{"lo "}, \mintinline{c}{"Wor"}, \mintinline{c}{"ld,"}, \mintinline{c}{" ho"}, \mintinline{c}{"w a"}, \mintinline{c}{"re "}, \mintinline{c}{"you"}, \mintinline{c}{"?"}
+\end{exer}
+
+\begin{exer}
+\label{exercise:strings:htmlScrubber}
+\gls{htmlLabel} (Hypertext Markup Language) is the primary 
+document description language for the \gls{wwwLabel}.  Certain 
+characters are not rendered in browsers as they are special 
+characters used in \gls{htmlLabel}; in particular tags which 
+begin and end with the \mintinline{text}{<} and \mintinline{text}{>}.
+
+To display such characters correctly they need to be \emph{escaped} 
+(similar to how you need to escape tabs \mintinline{text}{\t} 
+and endline \mintinline{text}{\n} characters).  Properly escaping 
+these characters is not only important for proper rendering, 
+but there are also security issues involved (Cross-Site Scripting Attacks).  
+
+Write a function that takes a string and \emph{escapes} the
+HTML characters in Table \ref{table:escapedHTMLCharacters}.
+
+\begin{table}[h]
+\centering
+\begin{tabular}{|l|l|}
+\hline
+Replace the following & with this \\
+\hline
+\mintinline{text}{&} & \mintinline{html}{&amp;}  \\
+\mintinline{text}{<} & \mintinline{html}{&lt;}  \\
+\mintinline{text}{>} & \mintinline{html}{&gt;}  \\
+\mintinline{text}{"} & \mintinline{html}{&quot;}  \\
+\hline
+\end{tabular}
+\caption{Replacement HTML Characters}
+\label{table:escapedHTMLCharacters}
+\end{table}
+\end{exer}
