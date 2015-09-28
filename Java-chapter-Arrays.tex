@@ -18,18 +18,25 @@ a regular variable, but you use square brackets to designate
 the variable as an array.  Arrays for any type of variable can
 be created including primitives and objects.
 
-\begin{minted}{c}
+\begin{minted}{java}
 int arr[] = null;
 double values[] = null;
 String names[] = null;
 \end{minted}
 
-This example only declares 3 references that can refer to an array, 
+This example\footnote{You may see code examples that use the
+alternative notation \mintinline{java}{int[] arr = null;}.  Both are
+acceptable.  Some would argue that this way is more correct because
+it keeps the brackets with the type, avoiding the type-variable name-type
+separation in our example.  Those preferring the \mintinline{java}{int arr[] = null;}
+notation would argue that it is ``more natural'' because that is how we
+ultimately index the array.  Six of One, Half-Dozen of the Other.} 
+only declares 3 references that can refer to an array, 
 it doesn't actually create them as the references are all 
 \mintinline{java}{null}.  To create arrays of a particular size, we
 need to initialize them using the keyword \mintinline{java}{new}.  
 
-\begin{minted}{c}
+\begin{minted}{java}
 arr = new int[10];
 values = new double[20];
 names = new String[5];
@@ -68,7 +75,7 @@ providing an index.  Once indexed, an array element can be
 treated as a normal variable and can be used with other operators
 such as the assignment operator or comparison operators.
 
-\begin{minted}{c}
+\begin{minted}{java}
 arr[0] = 42;
 if(arr[4] < 0) {
   System.out.println("negative!");
@@ -158,6 +165,64 @@ arr = null;
 //we can also reallocate new memory: 
 arr = new arr[20];
 \end{minted}
+
+\section{Using Arrays with Methods}
+
+We can pass and return arrays to and from methods in Java
+To do so we use the same syntax as when we define them
+by specifying a type and using square brackets.  As an example, 
+the following method takes an array of integers and computes 
+its sum.
+
+\begin{minted}{java}
+/**
+ * This method computes the sum of elements in the
+ * given array which contains n elements
+ */
+public static int computeSum(int arr[]) {
+  int sum = 0;
+  for(int i=0; i<size; i++) {
+    sum += arr[i];
+  }
+  return sum;
+}
+\end{minted}
+
+In Java, arrays are always passed by reference.  Though we
+did not make any changes to the contents of the passed array
+in the particular example, in general we could have.  Any
+such changes would be realized in the calling method.  Unfortunately, 
+there is no mechanism by which we can prevent changes to
+arrays when passed to methods.\footnote{The use of the keyword
+\mintinline{java}{final} only prevents us from changing the
+array reference, not modifying the contents.}
+
+We can also create an array in a method and return it as a value.  
+For example, the following method creates a \gls{deep copy} of
+the given integer array.  That is, a completely new array that
+is a distinct copy of the old array.  In contrast, a \gls{shallow copy}
+would be if we simply made one reference point to another reference.
+
+\begin{minted}{java}
+/**
+ * This method creates a new copy of the given array
+ * and returns it.
+ */
+public static int [] makeCopy(int a[]) {
+  int copy[] = new int[a.length];
+  for(int i=0; i<n; i++) {
+    copy[i] = a[i];
+  }
+  return copy;
+}
+\end{minted}
+
+The method returns an integer array.  In fact, this method seems
+so useful, that it is already provided as part of the Java \gls{sdkLabel}.
+The class \mintinline{java}{Arrays} contains dozens of utility
+methods that process arrays.  In particular there is a \mintinline{java}{copyOf()}
+method that allows you to create deep copies of arrays and
+even allows you to expand or shrink their size.
 
 \section{Multidimensional Arrays}
 

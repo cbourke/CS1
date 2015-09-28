@@ -1,0 +1,180 @@
+%\documentclass[12pt]{scrbook}
+%
+%\usepackage{tikz}
+%\usepackage{minted}
+%%\usetikzlibrary{decorations.pathreplacing,arrows}
+%\usetikzlibrary{arrows,decorations.pathmorphing,backgrounds,positioning,fit,petri}
+%
+%\usepackage{fullpage}
+%\usepackage{subfigure}
+%\begin{document}
+%
+%
+%Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
+
+\begin{figure}
+\centering
+
+\subfigure[A shallow copy.  $B$ refers to $A$ which refers to the array.  Thus, $B$ implicitly
+refers to the same array.]{
+\begin{tikzpicture}
+% size of each node
+\def\sz{12mm}
+% node style definition
+\tikzstyle{block} = [
+	draw, fill=black!10, rectangle,
+	minimum height=\sz, minimum width=\sz ];
+\tikzstyle{plain} = [draw=none,fill=none];
+% array element definition
+\def\arr{2, 3, 5, 7, 11, 13, 17, 19, 23, 29 };
+%\def\x{0}; % x pos of arr
+%\def\y{0}; % y pos of arr
+%\newcounter{ind};
+\setcounter{ind}{0};
+\node[plain] (a) at (-2, 0) { $A$ };
+\node[plain] (b) at (-2, -2) { $B$ };
+\node[block] (c) at (0,0) { ~ };
+
+\draw[->] (a) -- (c);
+\draw[->] (b) -- (a);
+\draw[->,dashed,shorten >=.1cm] (b.north) to [bend left] (c.west);
+
+\foreach \item in \arr
+{
+	\node[block] at (\theind*\sz,0) { \item };
+	\node[plain] at (\theind*\sz,1.0) { \theind };
+	\addtocounter{ind}{1};
+}
+\end{tikzpicture}
+}%end (a)
+
+\subfigure[When an element in a shallow copy is changed, \mintinline{c}{A[i] = -1;}, it is changed from the perspective of both $A$ and $B$.]{
+\begin{tikzpicture}
+% size of each node
+\def\sz{12mm}
+% node style definition
+\tikzstyle{block} = [
+	draw, fill=black!10, rectangle,
+	minimum height=\sz, minimum width=\sz ];
+\tikzstyle{plain} = [draw=none,fill=none];
+% array element definition
+\def\arr{2, 3, 5, 7, 11, 13, \color{red}{-1}, 19, 23, 29 };
+%\def\x{0}; % x pos of arr
+%\def\y{0}; % y pos of arr
+%\newcounter{ind};
+\setcounter{ind}{0};
+\node[plain] (a) at (-2, 0) { $A$ };
+\node[plain] (b) at (-2, -2) { $B$ };
+\node[block] (c) at (0,0) { ~ };
+
+\draw[->] (a) -- (c);
+\draw[->] (b) -- (a);
+\draw[->,dashed,shorten >=.1cm] (b.north) to [bend left] (c.west);
+
+\foreach \item in \arr
+{
+	\node[block] at (\theind*\sz,0) { \item };
+	\node[plain] at (\theind*\sz,1.0) { \theind };
+	\addtocounter{ind}{1};
+}
+\end{tikzpicture}
+}%end (b)
+
+
+\subfigure[A deep copy.  $B$ refers to its own copy of the array distinct from $A$.  Both
+are stored in separate memory locations.]{
+\begin{tikzpicture}
+% size of each node
+\def\sz{12mm}
+% node style definition
+\tikzstyle{block} = [
+	draw, fill=black!10, rectangle,
+	minimum height=\sz, minimum width=\sz ];
+\tikzstyle{plain} = [draw=none,fill=none];
+% array element definition
+\def\arr{2, 3, 5, 7, 11, 13, 17, 19, 23, 29 };
+%\def\x{0}; % x pos of arr
+%\def\y{0}; % y pos of arr
+%\newcounter{ind};
+\setcounter{ind}{0};
+\node[plain] (a) at (-2, 0) { $A$ };
+\node[plain] (b) at (-2, -2.5) { $B$ };
+\node[block] (c) at (0,0) { ~ };
+\node[block] (d) at (0,-2.5) { ~ };
+
+\draw[->] (a) -- (c);
+\draw[->] (b) -- (d);
+%\draw[->,dashed,shorten >=.1cm] (b.north) to [bend left] (c.west);
+
+\foreach \item in \arr
+{
+	\node[block] at (\theind*\sz,0) { \item };
+	\node[plain] at (\theind*\sz,1.0) { \theind };
+	\addtocounter{ind}{1};
+}
+
+\setcounter{ind}{0};
+\foreach \item in \arr
+{
+	\node[block] at (\theind*\sz,-2.5) { \item };
+	\node[plain] at (\theind*\sz,-1.5) { \theind };
+	\addtocounter{ind}{1};
+}
+
+\end{tikzpicture}
+}
+
+\subfigure[When an element in a deep copy is changed, \mintinline{c}{A[i] = -1;}, it is changed
+only in the array $A$.  The element in $B$ is unaffected.]{
+\begin{tikzpicture}
+% size of each node
+\def\sz{12mm}
+% node style definition
+\tikzstyle{block} = [
+	draw, fill=black!10, rectangle,
+	minimum height=\sz, minimum width=\sz ];
+\tikzstyle{plain} = [draw=none,fill=none];
+% array element definition
+\def\arr{2, 3, 5, 7, 11, 13, \color{red}{-1}, 19, 23, 29 };
+\def\arrB{2, 3, 5, 7, 11, 13, 17, 19, 23, 29 };
+%\def\x{0}; % x pos of arr
+%\def\y{0}; % y pos of arr
+%\newcounter{ind};
+\setcounter{ind}{0};
+\node[plain] (a) at (-2, 0) { $A$ };
+\node[plain] (b) at (-2, -2.5) { $B$ };
+\node[block] (c) at (0,0) { ~ };
+\node[block] (d) at (0,-2.5) { ~ };
+
+\draw[->] (a) -- (c);
+\draw[->] (b) -- (d);
+%\draw[->,dashed,shorten >=.1cm] (b.north) to [bend left] (c.west);
+
+\foreach \item in \arr
+{
+	\node[block] at (\theind*\sz,0) { \item };
+	\node[plain] at (\theind*\sz,1.0) { \theind };
+	\addtocounter{ind}{1};
+}
+
+\setcounter{ind}{0};
+\foreach \item in \arrB
+{
+	\node[block] at (\theind*\sz,-2.5) { \item };
+	\node[plain] at (\theind*\sz,-1.5) { \theind };
+	\addtocounter{ind}{1};
+}
+
+\end{tikzpicture}
+}
+
+
+\caption[Shallow vs.\ Deep Copies]{Shallow copies are when two references 
+refer to the same data in memory (a) and (b).  Changes to one affect the other.  
+Deep copies (c) and (d) are distinct data in memory, changes to one do
+not affect the other.}
+\label{figure:arrayShallowVsDeep}
+\end{figure}
+
+%\end{document}
+

@@ -59,7 +59,10 @@ The index is used in conjunction with (usually) square brackets and
 the array's identifier.  For example, if the array's identifier is 
 \mintinline{c}{arr} and the index is an integer value stored in the 
 variable \mintinline{c}{i}, we would refer to the $i$-th element using
-the syntax \mintinline{c}{arr[i]}.
+the syntax \mintinline{c}{arr[i]}.  An example is presented in Figure
+\ref{figure:arrayExample}.
+
+\input{figures/figureArray}
 
 For most programming languages, indices start at zero.  This is 
 known as zero-indexing.\footnote{Though, some languages do 
@@ -433,6 +436,25 @@ languages has been shrinking.
 
 In any case, all program memory is reclaimed by 
 the operating system when the program terminates.
+
+\subsection{Shallow vs. Deep Copies}
+
+In most languages, an array variable is actually a \emph{reference}
+to the array in memory.  We could create an array referred to 
+by a variable $A$ and then create another reference variable
+$B$ and set it ``equal'' to $A$.  However, this is simply a 
+\gls{shallow copy}.  Both the reference variables refer to the
+same data in memory.  Consequently, if we change the
+value of an element in one, the change is realized in both.
+
+Often, we want a completely different copy, referred to as a
+\gls{deep copy}.  With a deep copy, $A$ and $B$ would 
+refer to different memory blocks.  Changes to one would not
+affect the other.  This distinction is illustrated in Figure
+\ref{figure:arrayShallowVsDeep}.
+
+\input{figures/figureArrayShallowVsDeep}
+
 
 \section{Multidimensional Arrays}
 
