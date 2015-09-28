@@ -2,4 +2,522 @@
 
 %%Chapter: Arrays in PHP
 
-TODO
+PHP allows you to use arrays, but PHP arrays are actually
+\emph{associative arrays}.  Though you can treat them
+as regular arrays and use contiguous integer indices, they
+are more flexible.  You can also use strings as indices for
+example.  In addition, since PHP is dynamically typed, PHP 
+arrays allow mixed types.  An array has no fixed type and 
+you can place different mixed types into the same array.
+Moreover, PHP arrays are dynamic, so there is no memory
+management or allocation/deallocation of memory space.
+Arrays will grow and shrink automatically as you add and 
+remove elements.
+
+\section{Creating Arrays}
+
+Since PHP is dynamically typed, you do not need to 
+declare an array or specify a particular type
+of variable that it holds.  However, there are several
+ways that you can initialize an array.
+
+To create an empty array, you can call the \mintinline{java}{array()}
+function.  Optionally, you can provide an initial list of elements
+to insert into the array by providing the list of elements as 
+arguments to the function.
+
+\begin{minted}{php}
+//create an empty array:
+$arr = array();
+
+//create an array with elements 10, 20, 30:
+$arr = array(10, 20, 30);
+
+//create an array with mixed types:
+$arr = array(10, 3.14, "Hello");
+\end{minted}
+
+\section{Indexing}
+
+By default, when inserting elements, 0-indexing is used.
+In the three examples above, each element would be
+located at indices 0, 1, and 2 respectively.  The usual
+square bracket syntax can be used to access and 
+assign elements.
+
+\begin{minted}{php}
+//create an array with elements 10, 20, 30:
+$arr = array(10, 20, 30);
+
+//get the first element:
+$x = $arr[0]; //x has value 10
+
+//change the 3rd element to 5:
+$arr[2] = 5;
+
+//print the 2nd element:
+printf("$arr[1] = %d\n", $arr[1]);
+\end{minted}
+
+Attempting to access an element at an invalid index does
+not actually result in an error or an exception (though a
+\emph{warning} may be issued depending on how PHP is
+setup).  Instead, if you attempt to access an invalid element, 
+it will be treated as a \mintinline{php}{null} value.  
+
+\begin{minted}{php}
+$arr = array(10, 20, 30);
+$x = $arr[10]; //x is null
+\end{minted}
+
+However, an array could have \mintinline{php}{null} values
+in it as elements.  How do we distinguish whether or not an
+accessed value was \emph{actually} \mintinline{php}{null} or if
+it is not part of the array?  PHP provides a function, 
+\mintinline{php}{array_key_exists()} to distinguish between 
+these two cases.  It returns \mintinline{php}{true} 
+or \mintinline{php}{false} depending on whether or not a 
+particular index has been set or not.
+
+\begin{minted}{php}
+$arr = array(10, null, 30);
+if(array_key_exists(1, $arr)) {
+  print "index 1 contains an element\n";
+}
+if(!array_key_exists(10, $arr)) {
+  print "index 10 does not contain an element\n";
+}
+
+if($arr[1] === $arr[10]) {
+  print "but they are both null\n";
+}
+\end{minted}
+
+\subsection{Strings as Indices}
+
+Since arrays in PHP are associative arrays, keys are not
+limited to integers.  You can also use strings as keys to
+index elements.  
+
+\begin{minted}{php}
+$arr = array();
+$arr[0] = 5;
+$arr['foo'] = 10;
+$arr['hello'] = 'world';
+
+print "value = " . $arr["hello"];
+\end{minted}
+
+Note that strings that contain integer values will be 
+type-juggled into their numeric values.  For example, 
+\mintinline{php}{$arr["10"] = 3;} will be equivalent to
+\mintinline{php}{$arr[10] = 3;}.  However, strings containing
+floating-point values will not be coerced but will remain
+as strings, \mintinline{php}{$arr["3.15"] = 7;} for example.
+
+\subsection{Non-Contiguous Indices}
+
+Another consequence of PHP arrays being associative
+arrays is that indices need not be contiguous.  For example,
+
+\begin{minted}{php}
+$arr = array();
+$arr[0] = 10;
+$arr[5] = 20;
+\end{minted}
+
+The values at indices 1 through 4 are undefined and the
+array contains some ``holes'' in its indices.  
+
+\subsection{Key-Value Initialization}
+
+Since associative arrays in PHP can be indexed by
+either integers or strings and need not be ordered or
+contiguous, we can use a special key-value initialization
+syntax to define not only the values, but the keys that
+map to those values when we initialize an array.  The
+``double arrow'', \mintinline{php}{=>} is used to denote
+the mapping.
+
+\begin{minted}{php}
+$arr = array(
+  "foo" => 5,
+  4 => "bar",
+  0 => 3.14,
+  "baz" => "ten"
+);
+\end{minted}
+
+\section{Useful Functions}
+
+There are dozens of useful functions that PHP defines that can
+be used with arrays.  We'll only highlight a few of the more
+useful ones. 
+
+First, the \mintinline{php}{count()} function can be used to
+compute how many elements are stored in the array.
+
+\begin{minted}{php}
+$arr = array(10, 20, 30);
+$n = count($arr); //n is 3
+\end{minted}
+
+For convenience and debugging, a special function, 
+\mintinline{php}{print_r()} allows you to print the
+contents of an array in a human-readable format 
+that resembles the key-value initialization syntax
+above.  For example, 
+
+\begin{minted}{php}
+$arr = array(
+  "foo" => 5,
+  4 => "bar",
+  0 => 3.14,
+  "baz" => "ten"
+);
+print_r($arr);  
+\end{minted}
+
+would end up printing
+
+\begin{minted}[fontsize=\scriptsize]{text}
+Array
+(
+    [foo] => 5
+    [4] => bar
+    [0] => 3.14
+    [baz] => ten
+)
+\end{minted}
+
+Two other functions, \mintinline{php}{array_keys()} and 
+\mintinline{php}{array_values()} return new zero-indexed
+arrays containing the keys and the values of an array 
+respectively.  Reusing the example above, 
+
+\begin{minted}{php}
+$keys = array_keys($arr);
+$vals = array_values($arr);
+print_r($keys);
+print_r($vals);
+\end{minted}
+
+would print
+
+\begin{minted}[fontsize=\scriptsize]{text}
+Array
+(
+    [0] => foo
+    [1] => 4
+    [2] => 0
+    [3] => baz
+)
+Array
+(
+    [0] => 5
+    [1] => bar
+    [2] => 3.14
+    [3] => ten
+)
+\end{minted}
+
+%SPLICE
+%Another useful function is the \mintinline{php}{splice()}
+%function that allows you to remove or replace arbitrary
+%elements or ranges of elements in an array.
+
+Finally, you can use the equality operators, 
+\mintinline{php}{==} and \mintinline{php}{===}
+to compare arrays.  The first is the loose equality
+operator and evaluates to true if the two compared
+arrays have the same key-value pairs while the
+second is the strict equality operator and is true
+only if the arrays have the same key/value pairs in
+the same order and are of the same type.
+
+\section{Iteration}
+
+If we have an array in PHP that we \emph{know} is
+0-indexed and all elements are contiguous, we can 
+use a normal for-loop to iterate over its elements
+by incrementing an index variable.
+
+\begin{minted}{php}
+for($i=0; $i<count($arr); $i++) {
+  print $arr[$i] . "\n";
+}
+\end{minted}
+
+This fails, however, when we have an associative array
+that has a mix of integer and string keys or ``holes'' in
+the indexing of integer keys.  For this reason, it is more
+reliable to use \mintinline{php}{foreach} loops.  There
+are several ways that we can use a \mintinline{php}{foreach}
+loop.  The most general usage is to use the double arrow
+notation to iterate over each key-value pair.
+
+\begin{minted}{php}
+//for each key value pair:
+foreach($arr as $key => $val) {
+  print "$key maps to $val \n";
+}
+\end{minted}
+
+This syntax gives you access to both the key and the
+value for each element in the array \mintinline{php}{$arr}.
+The keyword \mintinline{php}{as} is used to denote
+the variable names \mintinline{php}{$key} and 
+\mintinline{php}{$val} that will be changed on each
+iteration of the loop.  You need not use the identifiers
+\mintinline{php}{$key} and \mintinline{php}{$val}; you 
+can use any legal variable names for the key/value 
+variables.
+
+If you do not need the keys when iterating, you can
+use the following shorthand syntax.
+
+\begin{minted}{php}
+//for each value:
+foreach($arr as $val) {
+  print "$val \n";
+}
+\end{minted}
+
+\section{Adding Elements}
+
+You can easily add elements to an array by simply
+providing an index and using the assignment operator
+as in the previous examples.  There are also several
+functions that PHP defines that can insert elements to
+the beginning (\mintinline{php}{array_unshift()}), end
+(\mintinline{php}{array_push()}) or at an arbitrary position
+(\mintinline{php}{array_splice()}).
+
+Another, simpler way of adding elements is to use the
+following syntax:
+
+\begin{minted}{php}
+$arr = array(10, 20, 30);
+$arr[] = 5;
+$arr[] = 15;
+$arr[] = 25;
+print_r($arr);
+\end{minted}
+
+By using the assignment operator but not specifying
+the index, the element will be added to the next available
+integer index.  Since there were already 3 elements in the
+array, each subsequent element is inserted at index 3, 4, and
+finally 5.  In general, the element will be inserted at the
+maximum index value already used plus one.  The
+example above results in the following.
+
+\begin{minted}[fontsize=\scriptsize]{text}
+Array
+(
+    [0] => 10
+    [1] => 20
+    [2] => 30
+    [3] => 5
+    [4] => 15
+    [5] => 25
+)
+\end{minted}
+
+\section{Removing Elements}
+
+You can remove elements from an array using the 
+\mintinline{php}{unset()} function.  This function only
+removes the element from the array, it does not
+shift other elements down to fill in the unused
+index. 
+
+\begin{minted}{php}
+$arr = array(10, 20, 30);
+unset($arr[1]);
+print_r($arr);
+\end{minted}
+
+This example would result in the following.
+
+\begin{minted}{text}
+Array
+(
+    [0] => 10
+    [2] => 30
+)
+\end{minted}
+
+Further, you can use \mintinline{php}{unset()}
+to destroy all elements in the array:
+
+\mintinline{php}{unset($arr);} 
+
+destroys the entire array.  It does not merely 
+empty the array, but it unsets the variable \mintinline{php}{$arr}
+itself.  
+
+\section{Using Arrays in Functions}
+
+By default, all arguments to a function in PHP are
+passed by value; this includes arrays.  Thus, if you 
+make any changes to an array passed to a function, 
+the changes are not realized in the calling function.
+You can explicitly specify that the array parameter
+is passed by reference so that any changes to the
+array are realized in the calling function.
+
+To illustrate, consider the following example.
+
+\begin{minted}{php}
+function setFirst($a) {
+  $a[0] = 5;
+}
+
+$arr = array(10, 20, 30);
+print_r($arr);
+setFirst($arr);
+print_r($arr);
+\end{minted}
+
+This example results in the following.
+
+\begin{minted}[fontsize=\scriptsize]{text}
+Array
+(
+    [0] => 10
+    [1] => 20
+    [2] => 30
+)
+Array
+(
+    [0] => 10
+    [1] => 20
+    [2] => 30
+)
+\end{minted}
+
+That is, the change to the first element does not affect the
+original array.  However, if we specify that the array is passed
+by reference, then the change is realized.  For example, 
+
+\begin{minted}{php}
+function setFirst(&$a) {
+  $a[0] = 5;
+}
+
+$arr = array(10, 20, 30);
+print_r($arr);
+setFirst($arr);
+print_r($arr);
+\end{minted}
+
+This now results in the original array being changed:
+
+\begin{minted}[fontsize=\scriptsize]{text}
+Array
+(
+    [0] => 10
+    [1] => 20
+    [2] => 30
+)
+Array
+(
+    [0] => 5
+    [1] => 20
+    [2] => 30
+)
+\end{minted}
+
+\section{Multidimensional Arrays}
+
+PHP supports multidimensional arrays in the sense that
+elements in an array can be of any type, including other 
+arrays.
+
+We can use all the same syntax and operations for single
+dimensional arrays.  For example, we can use the double
+arrow syntax and assign arrays as values to create a 2-dimensional
+array.
+
+\begin{minted}{php}
+$mat = array(
+  0 => array(10, 20, 30),
+  1 => array(40, 50, 60),
+  2 => array(70, 80, 90)
+);
+print_r($mat);
+\end{minted}
+
+Which results in the following:
+
+\begin{minted}[fontsize=\scriptsize]{text}
+Array
+(
+    [0] => Array
+        (
+            [0] => 10
+            [1] => 20
+            [2] => 30
+        )
+
+    [1] => Array
+        (
+            [0] => 40
+            [1] => 50
+            [2] => 60
+        )
+
+    [2] => Array
+        (
+            [0] => 70
+            [1] => 80
+            [2] => 90
+        )
+
+)
+\end{minted}
+
+Alternatively, you can use two indices to get and set values 
+from a 2-dimensional array.
+
+\begin{minted}{php}
+for($i=0; $i<3; $i++) {
+  for($j=0; $j<4; $j++) {
+    $mat[$i][$j] = ($i+$j)*3;
+  }
+}
+\end{minted}
+
+which results in:
+
+\begin{minted}[fontsize=\scriptsize]{text}
+Array
+(
+    [0] => Array
+        (
+            [0] => 0
+            [1] => 3
+            [2] => 6
+            [3] => 9
+        )
+
+    [1] => Array
+        (
+            [0] => 3
+            [1] => 6
+            [2] => 9
+            [3] => 12
+        )
+
+    [2] => Array
+        (
+            [0] => 6
+            [1] => 9
+            [2] => 12
+            [3] => 15
+        )
+
+)
+\end{minted}
+

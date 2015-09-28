@@ -2,4 +2,338 @@
 
 %%Chapter: Arrays in C
 
-TODO
+C allows you to declare and use arrays.  Since C is statically
+typed, arrays must also be typed when they are declared and
+may only hold that particular type of element.  C supports the
+use of both static arrays and dynamic arrays through standard
+library calls.
+
+\section{Basic Usage}
+
+To declare a static array, you use syntax similar to declaring
+a regular variable, but you use square brackets to designate
+the variable as an array.  Within the square brackets you
+indicate the size (number of elements) in the array.  For
+example, 
+
+\begin{minted}{c}
+int arr[5];
+double values[10];
+\end{minted}
+
+The two declarations above create arrays of size 5 and 10 
+respectively.  The array types are also defined using the usual
+keywords.  In this case, \mintinline{c}{arr} can only hold
+\mintinline{c}{int} values and \mintinline{c}{values} can only
+hold \mintinline{c}{double} values.  Arrays follow the same
+naming rules and conventions as regular variables.  Many 
+times, identifiers are made plural as an array naturally holds
+more than one value.  
+
+C99 introduced Variable Length Arrays (VLAs, which are also 
+supported in GNU C89) which allow you to declare a static
+array whose size is determined by a variable.  For example, 
+
+\begin{minted}{c}
+int n = 5;
+int arr[n];
+\end{minted}
+
+or within a function, 
+
+\begin{minted}{c}
+void foo(int n) {
+  int arr[n];
+  ...
+}
+\end{minted}
+
+In either case, care must be taken as static arrays are allocated
+on the stack.  The stack is generally small and allocating even a
+moderately large array on the stack may lead to a stack overflow.
+In addition, VLAs are not supported in any C++ standard and
+should be avoided if portable code is desired.
+
+Another way to declare an array is to use the compound declaration
+and assignment syntax whereby you can initialize an array to hold
+a certain list of values.  
+
+\begin{minted}{c}
+int a[] = { 2, 3, 5, 7, 11 };
+\end{minted}
+
+Using this syntax we do not need to specify the size of the array 
+as the compiler is smart enough to count the number of elements
+we've provided.  The elements themselves are denoted inside curly
+brackets and delimited with commas.
+
+\subsubsection{Indexing}
+
+Once an array has been created, its elements can be accessed
+by indexing.  C uses the standard 0-indexing scheme so the
+first element is at index 0, the second at index 1, etc.  Indexing
+an element involves using the square bracket notation and
+providing an index.  Once indexed, an array element can be
+treated as a normal variable and can be used with other operators
+such as the assignment operator or comparison operators.
+
+\begin{minted}{c}
+arr[0] = 42;
+if(arr[4] < 0) {
+  printf("negative!\n");
+}
+printf("arr[1] = %d\n", arr[1]);
+\end{minted}
+
+Recall that an index is actually an offset.  The compiler and
+system know exactly how many bytes each \mintinline{c}{int}
+element takes and so an index \mintinline{c}{i} calculates
+exactly how many bytes from the first element the $i$-th
+element is located at.  Consequently it is possible to index
+elements that are beyond the range of the array.  For example, 
+\mintinline{c}{arr[-1]} or \mintinline{c}{arr[5]} would attempt
+to access an element immediately \emph{before} the first element
+and immediately \emph{after} the last element.  Obviously, 
+these elements are not part of the array.  
+
+If these out-of-bound elements represent a memory space
+that does not belong to our program, then it is likely that
+a \gls{segmentation fault} will occur and terminator our program
+as we've attempted to access or modify memory that does
+not belong to us.  However, it is also likely that the memory 
+space surrounding our array belongs to our program.  Still,
+accessing those blocks of memory may not give us meaningful
+values and modifying them could corrupt other variable values
+or generally lead to \emph{undefined behavior}.  It is our
+responsibility as programmers to write code that does not
+go beyond the bounds of an array.
+
+This begs the question, how can we keep track of the size
+of the array so that we do not access elements after the last
+element?  With C the responsibility again falls to us, we must
+always have secondary variables that store the number of
+elements in an array.  If we pass an array to a function (see
+below), we must also pass a ``size'' parameter so that the
+function knows how big the array is.
+
+\subsubsection{Iteration}
+
+C provides no foreach loop to iterate over an array.  Instead,
+the most natural way to iterate over the elements is a normal
+for-loop that increments an index variable.
+
+\begin{minted}{c}
+int i, n = 10;
+int arr[n];
+for(i=0; i<n; i++) {
+  arr[i] = 5 * i;
+}
+\end{minted}
+
+The for loop above initializes the variable \mintinline{c}{i} to zero,
+corresponding to the first element in the array.  The continuation
+condition is specifies that the loop continues while \mintinline{c}{i}
+is strictly less than the size of the array.  This iteration for-loop
+is idiomatic when dealing with arrays.
+
+\section{Dynamic Memory}
+
+Recall that static arrays have many shortcomings (see Section 
+\ref{section:arraysInDepth}).  In general they should be avoided
+since stack space is limited and they cannot be returned from 
+functions.  Fortunately, C provides several standard library 
+functions that facilitate the creation and management of 
+dynamically allocated arrays.
+
+The primary function to allocate memory is the \mintinline{c}{malloc()}
+function: 
+
+\mintinline{c}{void * malloc(size_t size);}
+
+which takes a single parameter, the number of bytes that you 
+wish to allocate.  The type, \mintinline{c}{size_t} is an alias for
+an unsigned integer type, so you can think of it as an integer.
+Thus, \mintinline{c}{malloc(200)} would allocate 200 bytes and
+return a pointer to the memory space.  In some instances, the
+allocation may fail.  For example, if the program or system has
+run out of available memory or you simply request too much.
+In the event of a failure, \mintinline{c}{malloc()} returns a 
+\mintinline{c}{NULL} pointer.  The returned value can thus
+be checked to see if the allocation was successful.
+
+We don't have to manually calculate how many bytes we need
+for an array of a particular size.  There is a macro available, 
+\mintinline{c}{sizeof()} that can be used to determine the number
+of bytes any type takes on a system.  For example, 
+\mintinline{c}{sizeof(int)} gives the number of bytes an \mintinline{c}{int}
+takes while \mintinline{c}{sizeof(double)} gives the number of
+bytes for a \mintinline{c}{double}, etc.  Thus, if we want to
+allocate an array of 100 integers, we could call \mintinline{c}{malloc()}
+as 
+
+\mintinline{c}{malloc(100 * sizeof(double));}
+
+Using \mintinline{c}{sizeof()} is actually preferable as some systems
+may use a different number of bytes for various types.
+
+Finally, note the return type of \mintinline{c}{malloc()}: its a 
+\emph{void pointer}.  The \mintinline{c}{malloc()} function 
+simply allocates chunks of memory.  It doesn't care that you
+intend to use the memory to store integers or floating-point
+numbers.  Thus, \mintinline{c}{malloc()} returns a ``generic''
+pointer, simply an address in memory.  Once we have that
+pointer we can treat it as an integer pointer, \mintinline{c}{int *}
+or a floating-point pointer, \mintinline{c}{double *} depending
+on what we want to store.  
+
+One way of doing this is to explicitly \emph{cast} the void
+pointer as the pointer that we want.  Some examples:
+
+\begin{minted}{c}
+int *arr = NULL;
+double *values = NULL;
+
+arr = (int *) malloc(sizeof(int) * 10);
+values = (double *) malloc(sizeof(double) * 100);
+\end{minted}
+
+The pointer cast is just like when we casted \mintinline{c}{int}
+types as \mintinline{c}{double} types so that we could perform
+division without truncation.  In this case, we convert the
+returned generic void pointer into a \mintinline{c}{int} pointer
+and \mintinline{c}{double} pointer respectively.  \footnote{Performing
+an explicit pointer cast is actually not necessary in C as
+the type system will do an implicit cast for us.  Whether
+explicit or implicit types casts are ``better'' can evoke
+debates akin to nerd holy wars.  Though there are advantages
+and disadvantages to both \cite{stackOverflowCasts}, we perform explicit 
+pointer casts in this book as clarity and intent is
+more important than brevity.  Even more important is
+that explicit pointer casts are \emph{necessary} in 
+C++ so doing so in our C code makes our code
+more portable.}
+
+Once created, a dynamic array can be used just like a static
+array.  You use the array's identifier as well as an index to
+access or modify each element.  The same rules and pitfalls
+apply, so care must be taken to not access elements outside
+the bounds of the array.  Finally, when using \mintinline{c}{malloc()}
+it is important to understand that the memory that is allocated
+is uninitialized.  Just as with variables you cannot make any
+assumptions as to the contents of the memory space that is
+allocated.  It may contain garbage values, it may contain the
+original contents that occupied the memory last time it was used, 
+etc.  A full example:
+
+\begin{minted}{c}
+int n = 100;
+int *arr = NULL;
+arr = (int *) malloc(sizeof(int) * n);
+if(arr == NULL) {
+  fprintf(stderr, "unable to allocate memory!\n");
+  exit(1);
+}
+for(i=0; i<n; i++) {
+  arr[i] = (i+1) * 10;
+  printf("a[%d] = %d\n", i, arr[i]);
+}
+\end{minted}
+
+There are other functions that can be used to allocate memory
+in C.  For example, \mintinline{c}{calloc()} is similar to 
+\mintinline{c}{malloc()} but initializes the contents
+to zero (null bytes).  \mintinline{c}{realloc()} can be used to resize
+an existing memory space (though it may fail if it cannot be 
+expanded).  
+
+\subsubsection{Deallocation}
+
+Once dynamically allocated memory is no longer needed, we 
+should release it so that it can be reused by the program or the
+operating system.  The \mintinline{c}{free()} function in the
+standard library does this for us.  All we need to do is provide
+the pointer to \mintinline{c}{free()} and it deallocates the
+memory block.
+
+\begin{minted}{c}
+free(arr);
+\end{minted}
+
+Once freed, accessing old memory pointed to by the \mintinline{c}{arr}
+pointer is undefined behavior and may lead to unexpected or fatal
+results.  
+
+\section{Multidimensional Arrays}
+
+C supports multidimensional arrays both static and dynamically
+allocated; though we'll only focus on dynamically allocated 2-dimensional
+arrays.  Conceptually, a 2-dimensional array of, say, integers can
+be modeled as an array of pointers that point to an array of integers.
+That is, a pointer to pointers, for example, \mintinline{c}{int **}.  
+The initial pointer points to an array of integer points, \mintinline{c}{int *}
+and each integer pointer points to an array of \mintinline{c}{int} variables.
+
+To understand this better, let's look at the details of allocation.  Consider
+the following code.
+
+\begin{minted}{c}
+int i;
+int **myMatrix = NULL; 
+myMatrix = (int **)malloc(n * sizeof(int*)); 
+for(i=0; i<n; i++) {
+  myMatrix[i] = (int *)malloc(n * sizeof(int)); 
+}
+\end{minted}
+
+Line 3 invokes \mintinline{c}{malloc()} to create an array of $n$ integer
+pointers, that is \mintinline{c}{int *} types.  We then go into a loop to
+iterate over each of these pointers and invoke \mintinline{c}{malloc()} 
+again to setup each array.  This process is visualized in Figure 
+\ref{figure:mallocIllustration2D}.  Note the syntax: when we invoke \mintinline{c}{malloc()} to 
+create an array of pointers, we use \mintinline{c}{sizeof(int*)} to
+determine how many bytes each integer \emph{pointer} takes.  We
+also do an explicit type cast of \mintinline{c}{(int **)} to match our
+pointer-to-pointer(s) variable \mintinline{c}{myMatrix}.  
+
+\input{figures/figureMalloc}
+
+Once the allocation has completed, we can treat \mintinline{c}{myMatrix}
+as a normal 2-dimensional array and index each element with two
+index variables.
+
+\begin{minted}{c}
+int i, j;
+for(i=0; i<n; i++) {
+  for(j =0; j<n; j++) {
+    myMatrix[i][j] = 0;
+  }
+}
+\end{minted}
+
+To deallocate and free multidimensional arrays, we need to work backwards.
+If we immediately freed the pointer-to-pointers, \mintinline{c}{free(myMatrix);}, 
+we would lose all references to the individual array ``rows'' and would not
+be able to free them, resulting in a \gls{memory leak}.  We need to free up 
+each row first, \emph{then} we can free the pointer-to-pointers.
+
+\begin{minted}{c}
+for(i=0; i<n; i++) {
+  free(myMatrix[i]);
+}
+free(myMatrix);
+\end{minted}
+
+\section{Dynamic Data Structures}
+
+The C standard library does not provide a variety of advanced, dynamic
+data structures such as linked lists or sets.  As of C89 and POSIX.1 the
+C standard library does provide hash tables and binary search trees, but
+does not require implementations of other dynamic data structures.
+instead, you must either implement your own or utilize a third-party 
+library such as glibc, the \gls{gnuLabel} C library 
+(\url{http://www.gnu.org/software/libc/}).
+
+
+
+
+

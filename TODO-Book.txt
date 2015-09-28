@@ -29,26 +29,6 @@ Add a quote:
 
 
 
-C: malloc:
-
-issues like this can invoke holy wars
-
-to cast or not to cast?
-
-not necessary in pure C
-
-will do it:
-clarity and intent is more important than brevity
-more importantly: its necessary in C++, doing so allows you to use either compiler
-
-more:
-http://stackoverflow.com/questions/605845/do-i-cast-the-result-of-malloc
-
-C: arrays
-Variable Length Array (VLA) introduced in C99 (and supported in GNU C89), but 
-must take care with the stack to ensure it is not too big; moreover it is not
-supported by any C++ standard and should be avoided
-
 
 
 %MOVE THIS TO STRUCTS/CLASSES?

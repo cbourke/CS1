@@ -2,4 +2,347 @@
 
 %%Chapter: Arrays in Java
 
-TODO
+Java allows you to declare and use arrays.  Since Java is statically
+typed, arrays must also be typed when they are declared and
+may only hold that particular type of element.  Since Java has
+automated garbage collection, memory management is greatly
+simplified.  Finally, in Java, only locally scoped primitives and 
+references are allocated on the program call stack.  As such,
+there are no static arrays; all arrays are allocated in the heap
+space.
+
+\section{Basic Usage}
+
+To declare an array reference, you use syntax similar to declaring
+a regular variable, but you use square brackets to designate
+the variable as an array.  Arrays for any type of variable can
+be created including primitives and objects.
+
+\begin{minted}{c}
+int arr[] = null;
+double values[] = null;
+String names[] = null;
+\end{minted}
+
+This example only declares 3 references that can refer to an array, 
+it doesn't actually create them as the references are all 
+\mintinline{java}{null}.  To create arrays of a particular size, we
+need to initialize them using the keyword \mintinline{java}{new}.  
+
+\begin{minted}{c}
+arr = new int[10];
+values = new double[20];
+names = new String[5];
+\end{minted}
+
+Each of these initializations creates a new array (allocated on the 
+heap) of the specified size (10, 20, and 5 respectively).  These 
+arrays can only hold values of the specified type (\mintinline{java}{int},
+\mintinline{java}{double}, and \mintinline{java}{String} respectively).
+
+As with regular variables, the default value for each element in
+these new arrays will be zero for the numeric types and \mintinline{java}{null}
+for object types.  Alternatively, you could use a compound declaration/assignment
+syntax to initialize specific values:
+
+\begin{minted}{java}
+int arr[] = { 2, 3, 5, 7, 11 };
+\end{minted}
+
+Using this syntax we do not need to specify the size of the array 
+as the compiler is smart enough to count the number of elements
+we've provided.  The elements themselves are denoted inside curly
+brackets and delimited with commas.  
+
+For both types of syntax, the actual array is always allocated on the heap
+while the reference variables, \mintinline{java}{arr} \mintinline{java}{values}, 
+and \mintinline{java}{names} are stored in the program call stack.
+
+\subsubsection{Indexing}
+
+Once an array has been created, its elements can be accessed
+by indexing.  Java uses the standard 0-indexing scheme so the
+first element is at index 0, the second at index 1, etc.  Indexing
+an element involves using the square bracket notation and
+providing an index.  Once indexed, an array element can be
+treated as a normal variable and can be used with other operators
+such as the assignment operator or comparison operators.
+
+\begin{minted}{c}
+arr[0] = 42;
+if(arr[4] < 0) {
+  System.out.println("negative!");
+}
+System.out.println("arr[1] = "+ arr[1]);
+\end{minted}
+
+Recall that an index is actually an offset.  The compiler and
+system know exactly how many bytes each 
+element takes and so an index \mintinline{java}{i} calculates
+exactly how many bytes from the first element the $i$-th
+element is located at.  Consequently it is possible to index
+elements that are beyond the range of the array.  For example, 
+\mintinline{java}{arr[-1]} or \mintinline{java}{arr[5]} would attempt
+to access an element immediately \emph{before} the first element
+and immediately \emph{after} the last element.  Obviously, 
+these elements are not part of the array.  
+
+If you attempt to access an element outside the bounds of
+an array, the \gls{jvmLabel} will raise an \mintinline{java}{IndexOutOfBoundsException}
+which is a \mintinline{java}{RuntimeException} that you can
+catch and handle if you choose.  To prevent such an exception
+you can write code that does not exceed the bounds of the
+array.  Java arrays have a special \emph{length} property that
+gives you the size of the array.  You can access the property
+using the dot operator, so \mintinline{java}{arr.length} would
+give the value 5.  
+
+\subsubsection{Iteration}
+
+Using the length property you can design a for-loop that
+increments an index variable to iterate over the elements in
+an array.
+
+\begin{minted}{java}
+int arr[] = new int[5];
+for(i=0; i<arr.length; i++) {
+  arr[i] = 5 * i;
+}
+\end{minted}
+
+The for loop above initializes the variable \mintinline{java}{i} to zero,
+corresponding to the first element in the array.  The continuation
+condition is specifies that the loop continues while \mintinline{java}{i}
+is strictly less than the size of the array denoted using the
+\mintinline{java}{arr.length} property.  This iteration for-loop
+is idiomatic when dealing with arrays.
+
+In addition, Java (as of version 5) supports foreach loops that 
+allow you to iterate over the elements of an array without using
+an index variable.  Java refers to these loops as ``enhanced
+for-loops'', but they are essentially foreach loops.  For example:
+
+\begin{minted}{java}
+for(int a : arr) {
+  System.out.println(a);
+}
+\end{minted}
+
+The syntax still uses the keyword \mintinline{java}{for}, but instead
+of an index variable, it specifies the type, the loop-scoped variable
+identifier followed by a colon and the array that you want to iterate
+over.  Each iteration of the loop updates the variable \mintinline{java}{a}
+to the next value in the array.  
+
+\section{Dynamic Memory}
+
+The use of the keyword \mintinline{java}{new} dynamically allocates 
+memory space (on the heap) for the array.  Because Java has
+automated garbage collection, if the reference to the array goes
+out of scope, it is automatically cleaned up by the \gls{jvmLabel}.
+This process is automated and essentially transparent to us.
+There is no reliable way to force garbage collection and in general, 
+we shouldn't.  There are sophisticated algorithms and heuristics
+at work that determine the ``optimal'' time to perform garbage
+collection.
+
+\begin{minted}{java}
+int arr[];
+//create a new array of size 10:
+arr = new arr[10];
+//lose the reference by explicitly setting it to null:
+arr = null;
+//all references to the old memory are now lost and it is 
+//eligible for garbage collection
+
+//we can also reallocate new memory: 
+arr = new arr[20];
+\end{minted}
+
+\section{Multidimensional Arrays}
+
+Java supports multidimensional arrays, though we'll only focus 
+on 2-dimensional arrays.  To declare and allocate 2-dimensional
+arrays, we simply use two square brackets with two specified
+dimensions.
+
+\begin{minted}{java}
+int matrix[][] = new int[10][20];
+\end{minted}
+
+This creates a 2-dimensional array of integers with 10 rows and
+20 columns.  Once created, we can index individual elements by
+specifying the row and column.
+
+\begin{minted}{java}
+for(int i=0; i<matrix.length; i++) {
+  for(int j =0; j<matrix[i].length; j++) {
+    matrix[i][j] = 10;
+  }
+}
+\end{minted}
+
+\section{Dynamic Data Structures}
+
+The Java \gls{sdkLabel} provides a rich assortment of dynamic
+data structures as alternatives to arrays including lists, sets and
+maps.  The classes that support and implement these data 
+structures are defined in the Collections Library under the 
+\mintinline{java}{java.util} package.  We will cover how to use
+some of these data structures, but we will not go into the
+details of how they are implemented nor the \gls{oopLabel}
+concepts that underly them.
+
+The Java \mintinline{java}{List} is an \emph{interface} that
+defines a dynamic list data structure.  This data structure
+provides a dynamic collection that can grow and shrink 
+automatically as you add and remove elements from it.  It
+is an interface, so it doesn't actually provide an implementation, 
+just a specification for the publicly available methods that
+you can use on it.  To common implementations are the 
+\mintinline{java}{ArrayList}, which uses an array to hold 
+elements, and \mintinline{java}{LinkedList} which stores
+elements in linked nodes.
+
+To create an instance of either of these lists, you use the
+\mintinline{java}{new} keyword and the following syntax.
+
+\begin{minted}{java}
+List<Integer> a = new ArrayList<Integer>();
+List<String> b = new LinkedList<String>();
+\end{minted}
+
+The first line creates a new instance of an \mintinline{java}{ArrayList}
+that is \emph{parameterized} to hold \mintinline{java}{Integer} 
+types.  The second creates a new instance of a \mintinline{java}{LinkedList}
+that has been parameterized to only hold \mintinline{java}{String}
+types.  Because of this parameterization, it would be a 
+compiler error to attempt to add anything other than \mintinline{java}{Integer}s
+to the first list or anything other than \mintinline{java}{String}s to the
+second.
+
+Once these lists have been created, you can add and remove
+elements as follows.
+
+\begin{minted}{java}
+a.add(42);
+a.add(81);
+a.add(17);
+
+b.add("Hello");
+b.add("World");
+b.add("Computers!");
+\end{minted}
+
+The order that you add elements is preserved, so in the first list, the
+first element would be 42, the second 81, and the last 17.  You can
+remove elements by specifying an index of the element to remove.
+Like arrays, lists are 0-indexed.
+
+\begin{minted}{java}
+a.remove(0);
+
+b.remove(2);
+b.remove(0);
+\end{minted}
+
+As you remove elements, the indices are ``shifted'' down, so that after
+removing the first element in the list \mintinline{java}{a}, 81 becomes
+the new first element.  Removing the last then the first element in the
+list \mintinline{java}{b} leaves it with only one element, \mintinline{java}{"World"}
+as the first element (at index 0).
+
+You can also retrieve elements from a list using 0-indexing and
+the \mintinline{java}{get()} method. 
+
+\begin{minted}{java}
+List<Double> values = new ArrayList<Double>();
+values.add(3.14);
+values.add(2.71);
+values.add(42.0);
+
+double x = values.get(1); //get the second value, 2.71
+double y = values.get(2); //get the third value, 42.0
+\end{minted}
+
+Any attempt to access an element that does not exist will
+result in an \mintinline{java}{IndexOutOfBoundsException} just as 
+with arrays.  To stay within bounds you can use the \mintinline{java}{size()}
+method to determine how many elements are in the collection.
+In this example, \mintinline{java}{values.size()} would return an 
+integer value of 3.
+
+Finally, most collections implement the \mintinline{java}{Iterable}
+interface which allows you iterate over the elements using an 
+enhanced for-loop just as with arrays.
+
+\begin{minted}{java}
+for(Double x : values) {
+  System.out.println(x);
+}
+\end{minted}
+
+There are dozens of other methods that allow you to insert, remove, and
+retrieve elements from a Java \mintinline{java}{List}; refer to the documentation
+for details.
+
+Another type of collection supported by the Collections library is a 
+\mintinline{java}{Set}.  A set differs from a list in that elements are not
+stored in any particular order; there is no concept of the first element
+or last element.  Moreover, a set does not allow duplicate elements.\footnote{Duplicates
+are determined by how the \mintinline{java}{equals()} and possibly the
+\mintinline{java}{hashCode()} methods are implemented in your particular
+objects.}  A commonly used implementation of the \mintinline{java}{Set}
+interface is the \mintinline{java}{HashSet}.  
+
+\begin{minted}{java}
+Set<String> names = new HashSet<String>();
+
+names.add("Robin");
+names.add("Little John");
+names.add("Marian");
+
+//this has no effect since Robin is already part of the set:
+names.add("Robin");
+\end{minted}
+
+Since the elements in a \mintinline{java}{Set} are unordered, 
+we cannot use an index-based \mintinline{java}{get()} method
+as we did with a set.  Fortunately, we can still use an enhanced
+for-loop to iterate over the elements.
+
+\begin{minted}{java}
+for(String name : names) {
+  System.out.println(name);
+}
+\end{minted}
+
+When this code executes we cannot expect any particular order of
+the three names.  Any permutation of the three may be printed.  If
+we executed the loop more than once we may even observe a different
+enumeration of the names!
+
+Finally, Java also supports a \mintinline{java}{Map} data structure
+which allows you to store key-value pairs.  The keys and values
+can be any object type and are specified by two parameters when
+you create the map.  A common implementation is the \mintinline{java}{HashMap}.
+
+\begin{minted}{java}
+//define a map that maps integers (keys) to strings (values):
+Map<Integer, String> numbers = new HashMap<Integer, String>();
+
+//add key-value pairs:
+numbers.add(10, "ten");
+numbers.add(20, "twenty");
+
+//retrieve values given a key:
+String name = numbers.get(20); //name equals "twenty"
+
+//invalid mappings result in null:
+name = numbers.get(30); //name is null
+\end{minted}
+
+The Collections library is much more extensive than what we've 
+presented here.  It includes stacks, queues, hash tables, balanced 
+binary search trees, and many other dynamic data structure 
+implementations.

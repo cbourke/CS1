@@ -1,0 +1,292 @@
+%\documentclass[12pt]{scrbook}
+%
+%\usepackage{tikz}
+%\usepackage{minted}
+%\usetikzlibrary{decorations.pathreplacing,arrows}
+%
+%\usepackage{fullpage}
+%\usepackage{subfigure}
+%\begin{document}
+%
+%
+%Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
+
+\begin{figure}
+\centering
+
+\subfigure[Initialization of the pointer-to-pointers.  The first invocation of \mintinline{c}{malloc()} sets up
+an array of integer pointers, \mintinline{c}{int *} that are uninitialized (where they point to is undefined).]{
+\begin{tikzpicture}[scale=0.65,transform shape]
+
+% Define block styles
+\tikzstyle{box} = [rectangle,
+                   draw,
+                   fill=white,
+                   text width=3.1cm,
+                   text centered,
+                   inner sep=5pt,
+                   node distance=.75cm]
+
+\tikzstyle{line} = [draw, -latex']; %
+
+\draw[white] (-1, 0) rectangle (19, -1);
+    \node [box] (init) at (0,0) {\mintinline{c}{**myMatrix}};
+
+    \node [box, below of=init,node distance=2cm] (p0) {\mintinline{c}{*myMatrix[0]}};
+    \node[node distance = 3cm,right of=p0] (d0) {?};
+    \draw[line] (p0) -- (d0);
+    \node [box, below of=p0] (p1) {\mintinline{c}{*myMatrix[1]}};
+    \node[node distance = 3cm,right of=p1] (d1) {?};
+    \draw[line] (p1) -- (d1);
+    \node [box, below of=p1] (p2) {\mintinline{c}{*myMatrix[2]}};
+    \node[node distance = 3cm,right of=p2] (d2) {?};
+    \draw[line] (p2) -- (d2);
+    \node [below of=p2,node distance=1cm] (pd) {$\vdots$};
+    \node [box, below of=pd,node distance=1cm] (pn) {\mintinline{c}{*myMatrix[n-1]}};
+    \node[node distance = 3cm,right of=pn] (dn) {?};
+    \draw[line] (pn) -- (dn);
+    \path [line] (init) -- (p0);
+
+%\onslide<3->{
+%    \node [box, right of=p0,node distance=5cm] (m00) {\mintinline{c}{myMatrix[0][0]}};
+%    \node [box, right of=m00,node distance=3.4cm] (m01) {\mintinline{c}{myMatrix[0][1]}};
+%    \node [box, right of=m01,node distance=3.4cm] (m02) {\mintinline{c}{myMatrix[0][2]}};
+%    \node [right of=m02,node distance=3cm] (m0d) {$\cdots$};
+%    \node [box, text width=3.2cm, right of=m0d,node distance=3cm] (m0n) {\mintinline{c}{myMatrix[0][n-1]}};
+%    \path [line] (p0) -- (m00);
+%}
+%\onslide<4->{
+%    \node [box, right of=p1,node distance=5cm] (m10) {\mintinline{c}{myMatrix[1][0]}};
+%    \node [box, right of=m10,node distance=3.4cm] (m11) {\mintinline{c}{myMatrix[1][1]}};
+%    \node [box, right of=m11,node distance=3.4cm] (m12) {\mintinline{c}{myMatrix[1][2]}};
+%    \node [right of=m12,node distance=3cm] (m1d) {$\cdots$};
+%    \node [box, text width=3.2cm, right of=m1d,node distance=3cm] (m1n) {\mintinline{c}{myMatrix[1][n-1]}};
+%    \path [line] (p1) -- (m10);
+%}
+%\onslide<5->{
+%    \node [box, right of=p2,node distance=5cm]    (m20) {\mintinline{c}{myMatrix[2][0]}};
+%    \node [box, right of=m20,node distance=3.4cm] (m21) {\mintinline{c}{myMatrix[2][1]}};
+%    \node [box, right of=m21,node distance=3.4cm] (m22) {\mintinline{c}{myMatrix[2][2]}};
+%    \node [right of=m22,node distance=3cm]        (m2d) {$\cdots$};
+%    \node [box, text width=3.2cm, right of=m2d,node distance=3cm]   (m2n) {\mintinline{c}{myMatrix[2][n-1]}};
+%    \path [line] (p2) -- (m20);
+%}
+%\onslide<6->{
+%    \node [box, right of=pn,node distance=5cm]    (mn0) {\mintinline{c}{myMatrix[n-1][0]}};
+%    \node [box, right of=mn0,node distance=3.4cm] (mn1) {\mintinline{c}{myMatrix[n-1][1]}};
+%    \node [box, right of=mn1,node distance=3.4cm] (mn2) {\mintinline{c}{myMatrix[n-1][2]}};
+%    \node [right of=mn2,node distance=3cm]        (mnd) {$\cdots$};
+%    \node [box, text width=3.6cm, right of=mnd,node distance=3cm]   (mnn) {\mintinline{c}{myMatrix[n-1][n-1]}};
+%    \path [line] (pn) -- (mn0);
+%}
+
+\end{tikzpicture}
+}%end (a)
+
+\subfigure[Initialization of the first pointer.  On the first iteration of the \mintinline{c}{for} loop when
+\mintinline{c}{i = 0}, the first ``row'' is initialized when \mintinline{c}{malloc()} is invoked.]{
+\begin{tikzpicture}[scale=0.65,transform shape]
+
+% Define block styles
+\tikzstyle{box} = [rectangle,
+                   draw,
+                   fill=white,
+                   text width=3.1cm,
+                   text centered,
+                   inner sep=5pt,
+                   node distance=.75cm]
+
+\tikzstyle{line} = [draw, -latex']; %
+
+    \node [box] (init) at (0,0) {\mintinline{c}{**myMatrix}};
+
+    \node [box, below of=init,node distance=2cm] (p0) {\mintinline{c}{*myMatrix[0]}};
+
+    \node [box, right of=p0,node distance=4.5cm] (m00) {\mintinline{c}{myMatrix[0][0]}};
+    \node [box, right of=m00,node distance=3.4cm] (m01) {\mintinline{c}{myMatrix[0][1]}};
+    \node [box, right of=m01,node distance=3.4cm] (m02) {\mintinline{c}{myMatrix[0][2]}};
+    \node [right of=m02,node distance=3cm] (m0d) {$\cdots$};
+    \node [box, text width=3.5cm, right of=m0d,node distance=3cm] (m0n) {\mintinline{c}{myMatrix[0][n-1]}};
+    \path [line] (p0) -- (m00);
+
+    \node [box, below of=p0] (p1) {\mintinline{c}{*myMatrix[1]}};
+    \node[node distance = 3cm,right of=p1] (d1) {?};
+    \draw[line] (p1) -- (d1);
+    \node [box, below of=p1] (p2) {\mintinline{c}{*myMatrix[2]}};
+    \node[node distance = 3cm,right of=p2] (d2) {?};
+    \draw[line] (p2) -- (d2);
+    \node [below of=p2,node distance=1cm] (pd) {$\vdots$};
+    \node [box, below of=pd,node distance=1cm] (pn) {\mintinline{c}{*myMatrix[n-1]}};
+    \node[node distance = 3cm,right of=pn] (dn) {?};
+    \draw[line] (pn) -- (dn);
+    \path [line] (init) -- (p0);
+
+%}
+%\onslide<4->{
+%    \node [box, right of=p1,node distance=5cm] (m10) {\mintinline{c}{myMatrix[1][0]}};
+%    \node [box, right of=m10,node distance=3.4cm] (m11) {\mintinline{c}{myMatrix[1][1]}};
+%    \node [box, right of=m11,node distance=3.4cm] (m12) {\mintinline{c}{myMatrix[1][2]}};
+%    \node [right of=m12,node distance=3cm] (m1d) {$\cdots$};
+%    \node [box, text width=3.2cm, right of=m1d,node distance=3cm] (m1n) {\mintinline{c}{myMatrix[1][n-1]}};
+%    \path [line] (p1) -- (m10);
+%}
+%\onslide<5->{
+%    \node [box, right of=p2,node distance=5cm]    (m20) {\mintinline{c}{myMatrix[2][0]}};
+%    \node [box, right of=m20,node distance=3.4cm] (m21) {\mintinline{c}{myMatrix[2][1]}};
+%    \node [box, right of=m21,node distance=3.4cm] (m22) {\mintinline{c}{myMatrix[2][2]}};
+%    \node [right of=m22,node distance=3cm]        (m2d) {$\cdots$};
+%    \node [box, text width=3.2cm, right of=m2d,node distance=3cm]   (m2n) {\mintinline{c}{myMatrix[2][n-1]}};
+%    \path [line] (p2) -- (m20);
+%}
+%\onslide<6->{
+%    \node [box, right of=pn,node distance=5cm]    (mn0) {\mintinline{c}{myMatrix[n-1][0]}};
+%    \node [box, right of=mn0,node distance=3.4cm] (mn1) {\mintinline{c}{myMatrix[n-1][1]}};
+%    \node [box, right of=mn1,node distance=3.4cm] (mn2) {\mintinline{c}{myMatrix[n-1][2]}};
+%    \node [right of=mn2,node distance=3cm]        (mnd) {$\cdots$};
+%    \node [box, text width=3.6cm, right of=mnd,node distance=3cm]   (mnn) {\mintinline{c}{myMatrix[n-1][n-1]}};
+%    \path [line] (pn) -- (mn0);
+%}
+
+\end{tikzpicture}
+}%end (b)
+
+\subfigure[Initialization of the second pointer.  On the second iteration of the \mintinline{c}{for} loop when
+\mintinline{c}{i = 1}, the second ``row'' is initialized.]{
+\begin{tikzpicture}[scale=0.65,transform shape]
+
+% Define block styles
+\tikzstyle{box} = [rectangle,
+                   draw,
+                   fill=white,
+                   text width=3.1cm,
+                   text centered,
+                   inner sep=5pt,
+                   node distance=.75cm]
+
+\tikzstyle{line} = [draw, -latex']; %
+
+    \node [box] (init) at (0,0) {\mintinline{c}{**myMatrix}};
+
+    \node [box, below of=init,node distance=2cm] (p0) {\mintinline{c}{*myMatrix[0]}};
+
+    \node [box, right of=p0,node distance=4.5cm] (m00) {\mintinline{c}{myMatrix[0][0]}};
+    \node [box, right of=m00,node distance=3.4cm] (m01) {\mintinline{c}{myMatrix[0][1]}};
+    \node [box, right of=m01,node distance=3.4cm] (m02) {\mintinline{c}{myMatrix[0][2]}};
+    \node [right of=m02,node distance=3cm] (m0d) {$\cdots$};
+    \node [box, text width=3.5cm, right of=m0d,node distance=3cm] (m0n) {\mintinline{c}{myMatrix[0][n-1]}};
+    \path [line] (p0) -- (m00);
+
+    \node [box, below of=p0] (p1) {\mintinline{c}{*myMatrix[1]}};
+
+    \node [box, right of=p1,node distance=4.5cm] (m10) {\mintinline{c}{myMatrix[1][0]}};
+    \node [box, right of=m10,node distance=3.4cm] (m11) {\mintinline{c}{myMatrix[1][1]}};
+    \node [box, right of=m11,node distance=3.4cm] (m12) {\mintinline{c}{myMatrix[1][2]}};
+    \node [right of=m12,node distance=3cm] (m1d) {$\cdots$};
+    \node [box, text width=3.5cm, right of=m1d,node distance=3cm] (m1n) {\mintinline{c}{myMatrix[1][n-1]}};
+    \path [line] (p1) -- (m10);
+
+    \node [box, below of=p1] (p2) {\mintinline{c}{*myMatrix[2]}};
+    \node[node distance = 3cm,right of=p2] (d2) {?};
+    \draw[line] (p2) -- (d2);
+    \node [below of=p2,node distance=1cm] (pd) {$\vdots$};
+    \node [box, below of=pd,node distance=1cm] (pn) {\mintinline{c}{*myMatrix[n-1]}};
+    \node[node distance = 3cm,right of=pn] (dn) {?};
+    \draw[line] (pn) -- (dn);
+    \path [line] (init) -- (p0);
+
+%}
+%\onslide<4->{
+%    \node [box, right of=p1,node distance=5cm] (m10) {\mintinline{c}{myMatrix[1][0]}};
+%    \node [box, right of=m10,node distance=3.4cm] (m11) {\mintinline{c}{myMatrix[1][1]}};
+%    \node [box, right of=m11,node distance=3.4cm] (m12) {\mintinline{c}{myMatrix[1][2]}};
+%    \node [right of=m12,node distance=3cm] (m1d) {$\cdots$};
+%    \node [box, text width=3.2cm, right of=m1d,node distance=3cm] (m1n) {\mintinline{c}{myMatrix[1][n-1]}};
+%    \path [line] (p1) -- (m10);
+%}
+%\onslide<5->{
+%    \node [box, right of=p2,node distance=5cm]    (m20) {\mintinline{c}{myMatrix[2][0]}};
+%    \node [box, right of=m20,node distance=3.4cm] (m21) {\mintinline{c}{myMatrix[2][1]}};
+%    \node [box, right of=m21,node distance=3.4cm] (m22) {\mintinline{c}{myMatrix[2][2]}};
+%    \node [right of=m22,node distance=3cm]        (m2d) {$\cdots$};
+%    \node [box, text width=3.2cm, right of=m2d,node distance=3cm]   (m2n) {\mintinline{c}{myMatrix[2][n-1]}};
+%    \path [line] (p2) -- (m20);
+%}
+%\onslide<6->{
+%    \node [box, right of=pn,node distance=5cm]    (mn0) {\mintinline{c}{myMatrix[n-1][0]}};
+%    \node [box, right of=mn0,node distance=3.4cm] (mn1) {\mintinline{c}{myMatrix[n-1][1]}};
+%    \node [box, right of=mn1,node distance=3.4cm] (mn2) {\mintinline{c}{myMatrix[n-1][2]}};
+%    \node [right of=mn2,node distance=3cm]        (mnd) {$\cdots$};
+%    \node [box, text width=3.6cm, right of=mnd,node distance=3cm]   (mnn) {\mintinline{c}{myMatrix[n-1][n-1]}};
+%    \path [line] (pn) -- (mn0);
+%}
+
+\end{tikzpicture}
+}%end (c)
+
+\subfigure[After the termination of the \mintinline{c}{for} loop, each row has been initialized and
+the pointer-to-pointers can be treated like a 2-dimensional array.]{
+\begin{tikzpicture}[scale=0.65,transform shape]
+
+% Define block styles
+\tikzstyle{box} = [rectangle,
+                   draw,
+                   fill=white,
+                   text width=3.1cm,
+                   text centered,
+                   inner sep=5pt,
+                   node distance=.75cm]
+
+\tikzstyle{line} = [draw, -latex']; %
+
+    \node [box] (init) at (0,0) {\mintinline{c}{**myMatrix}};
+
+    \node [box, below of=init,node distance=2cm] (p0) {\mintinline{c}{*myMatrix[0]}};
+
+    \node [box, right of=p0,node distance=4.5cm] (m00) {\mintinline{c}{myMatrix[0][0]}};
+    \node [box, right of=m00,node distance=3.4cm] (m01) {\mintinline{c}{myMatrix[0][1]}};
+    \node [box, right of=m01,node distance=3.4cm] (m02) {\mintinline{c}{myMatrix[0][2]}};
+    \node [right of=m02,node distance=3cm] (m0d) {$\cdots$};
+    \node [box, text width=3.5cm, right of=m0d,node distance=3cm] (m0n) {\mintinline{c}{myMatrix[0][n-1]}};
+    \path [line] (p0) -- (m00);
+
+    \node [box, below of=p0] (p1) {\mintinline{c}{*myMatrix[1]}};
+
+    \node [box, right of=p1,node distance=4.5cm] (m10) {\mintinline{c}{myMatrix[1][0]}};
+    \node [box, right of=m10,node distance=3.4cm] (m11) {\mintinline{c}{myMatrix[1][1]}};
+    \node [box, right of=m11,node distance=3.4cm] (m12) {\mintinline{c}{myMatrix[1][2]}};
+    \node [right of=m12,node distance=3cm] (m1d) {$\cdots$};
+    \node [box, text width=3.5cm, right of=m1d,node distance=3cm] (m1n) {\mintinline{c}{myMatrix[1][n-1]}};
+    \path [line] (p1) -- (m10);
+
+    \node [box, below of=p1] (p2) {\mintinline{c}{*myMatrix[2]}};
+
+    \node [box, right of=p2,node distance=4.5cm]    (m20) {\mintinline{c}{myMatrix[2][0]}};
+    \node [box, right of=m20,node distance=3.4cm] (m21) {\mintinline{c}{myMatrix[2][1]}};
+    \node [box, right of=m21,node distance=3.4cm] (m22) {\mintinline{c}{myMatrix[2][2]}};
+    \node [right of=m22,node distance=3cm]        (m2d) {$\cdots$};
+    \node [box, text width=3.5cm, right of=m2d,node distance=3cm]   (m2n) {\mintinline{c}{myMatrix[2][n-1]}};
+    \path [line] (p2) -- (m20);
+
+    \node [below of=p2,node distance=1cm] (pd) {$\vdots$};
+    \node [box, below of=pd,node distance=1cm] (pn) {\mintinline{c}{*myMatrix[n-1]}};
+
+    \node [box, text width=3.6cm,right of=pn,node distance=4.8cm]  (mn0) {\mintinline{c}{myMatrix[n-1][0]}};
+    \node [box, text width=3.6cm,right of=mn0,node distance=3.8cm] (mn1) {\mintinline{c}{myMatrix[n-1][1]}};
+    \node [box, text width=3.6cm,right of=mn1,node distance=3.8cm] (mn2) {\mintinline{c}{myMatrix[n-1][2]}};
+    \node [right of=mn2,node distance=2.5cm]        (mnd) {$\cdots$};
+    \node [box, text width=3.75cm, right of=mnd,node distance=2.5cm]   (mnn) {\mintinline{c}{myMatrix[n-1][n-1]}};
+    \path [line] (pn) -- (mn0);
+
+    \path [line] (init) -- (p0);
+
+
+\end{tikzpicture}
+}%end (d)
+
+\caption[Dynamically Allocating Multidimensional Arrays]{The process of dynamically allocating
+a 2-dimensional array of integers using \mintinline{c}{malloc()} in a for-loop.}
+\label{figure:mallocIllustration2D}
+\end{figure}
+
+%\end{document}
+

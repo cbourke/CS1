@@ -115,6 +115,12 @@
   description={anything that is left over, redundant or getting in the way; in the context of code cruft is code that is no longer needed, legacy or simply poorly written source code}
 }
 
+\newglossaryentry{dangling pointer}
+{
+  name=dangling pointer,
+  description={when a reference to dynamically allocated memory is lost and the memory can no longer be deallocated, resulting in a memory leak.  Alternatively, when a reference points to memory that gets deallocated or reallocated but the pointer remains unmodified, still referencing the deallocated memory}
+}
+
 \newglossaryentry{dead code}
 {
   name=dead code,
@@ -170,6 +176,12 @@
 {
   name=expression,
   description={a combination of values, constants, literals, variables, operators and possibly function calls such that when evaluated, produce a resulting value}
+}
+
+\newglossaryentry{file}
+{
+  name=file,
+  description={a resource on a computer stored in memory that holds data}
 }
 
 \newglossaryentry{flowchart}
@@ -276,10 +288,22 @@
   description={the part of a floating-point number consisting of its significant digits (called a significand in scientific notation)}
 }
 
+\newglossaryentry{memory leak}
+{
+  name=memory leak,
+  description={the gradual loss of memory when a program fails to deallocate or free up unused memory, degrading performance and possibly resulting in the termination of the program when memory runs out}
+}
+
 \newglossaryentry{naming convention}
 {
   name=naming convention,
   description={a set of guidelines for choosing identifier names for variables, functions, etc. in a programming language.  Conventions may be generally accepted by all developers of a particular language or they may be established for use in a particular library, framework, or organization}
+}
+
+\newglossaryentry{network}
+{
+  name=network,
+  description={a collection of two or more computer systems linked together through a physical connection over which data can be transmitted using some protocol}
 }
 
 \newglossaryentry{operand}
@@ -340,6 +364,12 @@
 {
   name=interactive,
   description={an informal, abstract, high-level description of a process or algorithm}
+}
+
+\newglossaryentry{protocol}
+{
+  name=protocol,
+  description={a set of rules or procedures that define how communication takes place}
 }
 
 \newglossaryentry{pseudocode}
@@ -611,6 +641,8 @@
 \newacronym{replLabel}{REPL}{Read-Eval-Print Loop}
 
 \newacronym{romLabel}{ROM}{Read-Only Memory}
+
+\newacronym{sdkLabel}{SDK}{Software Development Kit}
 
 \newacronym{sqlLabel}{SQL}{Structured Query Language}
 
