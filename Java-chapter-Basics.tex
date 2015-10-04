@@ -362,17 +362,26 @@ char firstInitial;
 boolean isStudent;
 \end{minted}
 
-Each declaration specifies the variables type followed by the identifier and ending
-with a semicolon.  The identifier rules are fairly standard: a name can consist
-of lower and uppercase alphabetic characters, numbers, and underscores but
-may \emph{not} begin with a numeric character.  We adopt the modern camelCasing
-naming convention for variables in our code.
+Each declaration specifies the variables type followed by the 
+identifier and ending with a semicolon.  The identifier rules are 
+fairly standard: a name can consist of lower and uppercase 
+alphabetic characters, numbers, and underscores but may 
+\emph{not} begin with a numeric character.  We adopt the 
+modern camelCasing naming convention for variables in our 
+code.
 
-The Java specification provides default values for each of the 8 primitives if they
-are not immediately assigned a value.  For all numeric types, zero is the default value.
-For the \mintinline{java}{boolean} type, \mintinline{java}{false} is the default, and 
-the default \mintinline{java}{char} value is \mintinline{text}{\0}, the null-terminating character
-(zero in the \gls{asciiLabel} table).
+In general, variables \emph{must} be assigned a value before
+you can ``read'' them (say printing them) or otherwise using them
+in an expression.  You do not have to immediately assign a value
+when you declare them (though it is good practice), but some value
+must be assigned before they can be used or the compiler
+will issue an error.\footnote{Instance variables, that is variables
+declared as part of an object \emph{do} have default values.
+For objects, the default is \mintinline{java}{null}, for all numeric t
+ypes, zero is the default value.  For the \mintinline{java}{boolean} 
+type, \mintinline{java}{false} is the default, and the default 
+\mintinline{java}{char} value is \mintinline{text}{\0}, the 
+null-terminating character (zero in the \gls{asciiLabel} table).}
 
 The assignment operator is a single equal sign, \mintinline{java}{=} and is a right-to-left
 assignment.  That is, the variable that we wish to assign the value to appears on the

@@ -1,5 +1,11 @@
 %!TEX root = ComputerScienceOne.tex
 
+\newglossaryentry{abstraction}
+{
+  name=abstraction,
+  description={a technique for managing complexity whereby levels of complexity are established so that higher levels do not see or have to worry about details at lower levels}
+}
+
 \newglossaryentry{algorithm}
 {
   name=algorithm,
@@ -17,6 +23,12 @@
 {
   name=anti-pattern,
   description={a common software pattern that is used as a solution to recurring problems that is usually ineffective in solving the problem or introduces risks and other problems; a technical term for common ``bad-habits'' that can be found in software}
+}
+
+\newglossaryentry{array}
+{
+  name=array,
+  description={an ordered collection of pieces of data, usually of the same type}
 }
 
 \newglossaryentry{assignment operator}
@@ -85,10 +97,46 @@
   	identifier names.  A language is case insensitive if it does not}
 }
 
+\newglossaryentry{chomp}
+{
+  name=chomp,
+  description={the operation of removing any endline characters from a string (especially when read from a file); may also refer more generally to removing leading and trailing whitespace from a string or ``trimming'' it}
+}
+
 \newglossaryentry{code smell}
 {
   name=code smell,
   description={a symptom or common pattern in source code that is usually indicative of a deeper problem or design flaw; smells are usually not bugs and may not cause problems in and of themselves, but instead indicate a pattern of carelessness or low quality of software design or implementation}
+}
+
+\newglossaryentry{comparator}
+{
+  name=comparator,
+  description={a function or object that allows you to pass in two elements $a, b$ for comparison and returns an integer indicating their relative order: something negative, zero, or something positive if $a < b$, $a = b$ or $a > b$ respectively}
+}
+
+\newglossaryentry{compile}
+{
+  name=compile,
+  description={the process of translating code in a high-level programming language to a low level language such as assembly or machine code}
+}
+
+\newglossaryentry{computer engineering}
+{
+  name=computer engineering,
+  description={a discipline integrating electrical engineering and computer science that tends to focus on the development of hardware and its interaction with software}
+}
+
+\newglossaryentry{computer science}
+{
+  name=computer science,
+  description={the mathematical modeling and scientific study of computation}
+}
+
+\newglossaryentry{concatenation}
+{
+  name=concatenation,
+  description={the process of combining two (or more) strings to create a new string by appending one of them to the end of the other}
 }
 
 \newglossaryentry{contradiction}
@@ -224,6 +272,20 @@
   	the entire program}
 }
 
+\newglossaryentry{hardware}
+{
+  name=hardware,
+  description={(computer hardware) the physical components that make up a computer system such as the processor, motherboard, storage devices, input and output devices, etc.}
+}
+
+\newglossaryentry{hexadecimal}
+{
+  name=hexadecimal,
+  description={base-16 number system using the symbols 0, 1, \ldots, 9, A, B, C, D, E, F; usually denoted with a prefix \mintinline{text}{0x} such as
+\mintinline{text}{0xff1321ab01}}
+}
+
+
 \newglossaryentry{hoisting}
 {
   name=hoisting,
@@ -234,6 +296,18 @@
 {
   name=identifier,
   description={a symbol, token, or label that is used to refer to a variable.  Essentially, a variable's name}
+}
+
+\newglossaryentry{idiom}
+{
+  name=idiom,
+  description={in the context of programming, an idiom is a commonly used pattern, expression or way of structuring code that is well-understood for users of the language.  For example, a for-loop structure that iterates over elements in an array.  May also refer to a programming design pattern.}
+}
+
+\newglossaryentry{inheritance}
+{
+  name=inheritance,
+  description={an object oriented programming principle that allows you to derive an object from another object, usually to allow for more specificity}
 }
 
 \newglossaryentry{immutable}
@@ -269,6 +343,18 @@
   description={a unit of information in a digital computer consisting of 1024 bytes (equivalently, $2^{10}$ bytes), KB for short}
 }
 
+\newglossaryentry{lexicographic}
+{
+  name=lexicographic,
+  description={a generalization of the usual dictionary order as codified with the ASCII character table}
+}
+
+\newglossaryentry{linking}
+{
+  name=linking,
+  description={the process of generating an executable file from (multiple) object files}
+}
+
 \newglossaryentry{lint}
 {
   name=lint,
@@ -280,6 +366,12 @@
   name=literal,
   description={in a programming language, a literal is notation for specifying a value such as a number of string that can be 
   	directly assigned to a variable}
+}
+
+\newglossaryentry{map}
+{
+  name=map,
+  description={a data structure that allows you to store elements as key-value pairs with the key mapping to a value}
 }
 
 \newglossaryentry{magic number}
@@ -312,6 +404,14 @@
   description={a collection of two or more computer systems linked together through a physical connection over which data can be transmitted using some protocol}
 }
 
+\newglossaryentry{octal}
+{
+  name=octal,
+  description={base-8 number system using the symbols 0, 1, 2, \ldots, 6, 7; usually denoted with a single leading zero such as
+\mintinline{text}{0123742}}
+}
+
+
 \newglossaryentry{operand}
 {
   name=operand,
@@ -342,10 +442,28 @@
   description={when an arithmetic operation results in a number that is larger than the specified type can represent overflow occurs resulting in an invalid result}
 }
 
+\newglossaryentry{parse}
+{
+  name=parse,
+  description={to process data to identify its individual components or elements}
+}
+
+\newglossaryentry{persistence}
+{
+  name=persistence,
+  description={the characteristic of data that outlives the process or program that created it; the saving of data across multiple runs of a program}
+}
+
 \newglossaryentry{pointer}
 {
   name=pointer,
   description={a reference to a particular memory location in a computer}
+}
+
+\newglossaryentry{polymorphism}
+{
+  name=polymorphism,
+  description={an object oriented programming concept that allows you to treat a variable, method, or object as different types}
 }
 
 \newglossaryentry{primitive}
@@ -394,6 +512,18 @@
 {
   name=radix,
   description={the base of a number system.  Binary, octal, decimal, hexadecimal would be base 2, 8, 10, and 16 respectively}
+}
+
+\newglossaryentry{reentrant}
+{
+  name=reentrant,
+  description={a function that can be interrupted during its execution while another thread can successfully invoke the function without the two functions interfering with the data used in either function call}
+}
+
+\newglossaryentry{regular expression}
+{
+  name=regular expression,
+  description={a sequence of characters in which special characters and directives can be used to define a complex pattern that can be searched and matched in another string or data}
 }
 
 \newglossaryentry{refactor}
@@ -447,6 +577,18 @@
 {
   name=scope,
   description={a function signature is how a function is uniquely identified.  A signature includes the name (identifier) of the function, its parameter list (and maybe types) and the return type}
+}
+
+\newglossaryentry{software}
+{
+  name=software,
+  description={any set of machine-readable instructions that can be executed in a computer processor}
+}
+
+\newglossaryentry{software engineering}
+{
+  name=software engineering,
+  description={the study and application of engineering principles to the design, development, and maintenance of complex software systems}
 }
 
 \newglossaryentry{spaghetti code}
@@ -513,6 +655,18 @@
   description={an approach to problem solving where a problem is broken down into smaller parts}
 }
 
+\newglossaryentry{token}
+{
+  name=token,
+  description={when something (usually a string) is parsed, the individual components or elements are referred to as tokens}
+}
+
+\newglossaryentry{transpile}
+{
+  name=transpile,
+  description={to (automatically) translate code in one programming language into code in another programming language, usually between two high-level programming languages}
+}
+
 \newglossaryentry{truncation}
 {
   name=truncation,
@@ -547,6 +701,12 @@
   number underflow occurs resulting in an invalid result}
 }
 
+\newglossaryentry{Unicode}
+{
+  name=Unicode,
+  description={an international character encoding standard used in programming languages and data formats}
+}
+
 \newglossaryentry{validation}
 {
   name=validation,
@@ -561,6 +721,11 @@
   	is referred to using a name or \emph{identifier}}
 }
 
+\newglossaryentry{widget}
+{
+  name=widget,
+  description={a generic term for a graphical user interface component such as a button or text box}
+}
 
 \newacronym{acmLabel}{ACM}{Association for Computing Machinery}
 
@@ -572,19 +737,37 @@
 
 \newacronym{asciiLabel}{ASCII}{American Standard Code for Information Interchange}
 
+\newacronym{ceLabel}{CE}{Computer Engineering}
+
+\newacronym{claLabel}{CLA}{Command Line Arguments}
+
 \newacronym{cliLabel}{CLI}{Command Line Interface}
 
 \newacronym{cmsLabel}{CMS}{Content Management System}
 
+\newacronym{cmykLabel}{CMYK}{Cyan-Magenta-Yellow-Key}
+
 \newacronym{cpuLabel}{CPU}{Central Processing Unit}
 
+\newacronym{csLabel}{CS}{Computer Science}
+
 \newacronym{cssLabel}{CSS}{Cascading Style Sheets}
+
+\newacronym{csvLabel}{CSV}{Comma Separated Values}
+
+\newacronym{cyaLabel}{CYA}{Cover Your Ass}
+
+\newacronym{cwdLabel}{CWD}{Current Working Directory}
 
 \newacronym{dryLabel}{DRY}{Don't Repeat Yourself}
 
 \newacronym{ebLabel}{EB}{Exabyte}
 
 \newacronym{ecmaLabel}{ECMA}{European Computer Manufacturers Association}
+
+\newacronym{ediLabel}{EDI}{Electronic Data Interchange}
+
+\newacronym{eofLabel}{EOF}{End Of File}
 
 \newacronym{fifoLabel}{FIFO}{First-In First-Out}
 
@@ -597,6 +780,8 @@
 \newacronym{gdbLabel}{GDB}{GNU Debugger}
 
 \newacronym{gimpLabel}{GIMP}{GNU Image Manipulation Program}
+
+\newacronym{gifLabel}{GIF}{Graphics Interchange Format}
 
 \newacronym{gisLabel}{GIS}{Geographic Information System}
 
@@ -620,6 +805,8 @@
 
 \newacronym{jreLabel}{JRE}{Java Runtime Environment}
 
+\newacronym{jsonLabel}{JSON}{JavaScript Object Notation}
+
 \newacronym{jvmLabel}{JVM}{Java Virtual Machine}
 
 \newacronym{iecLabel}{IEC}{International Electrotechnical Commission}
@@ -634,6 +821,10 @@
 
 \newacronym{mbLabel}{MB}{Megabyte}
 
+\newacronym{mpegLabel}{MPEG}{Moving Picture Experts Group}
+
+\newacronym{mp3Label}{MP3}{MPEG-2 Audio Layer III}
+
 \newacronym{nistLabel}{NIST}{National Institute of Standards and Technology}
 
 \newacronym{oopLabel}{OOP}{Object-Oriented Programming}
@@ -644,6 +835,10 @@
 
 \newacronym{pbLabel}{PB}{Petabyte}
 
+\newacronym{phpLabel}{PHP}{PHP: Hypertext Preprocessor (a recursive backronym; used to stand for Personal Home Page)}
+
+\newacronym{pngLabel}{PNG}{Portable Network Graphics}
+
 \newacronym{pojoLabel}{POJO}{Plain Old Java Object}
 
 \newacronym{posixLabel}{POSIX}{Portable Operating System Interface}
@@ -652,9 +847,15 @@
 
 \newacronym{replLabel}{REPL}{Read-Eval-Print Loop}
 
+\newacronym{rgbLabel}{RGB}{Red-Green-Blue}
+
 \newacronym{romLabel}{ROM}{Read-Only Memory}
 
 \newacronym{sdkLabel}{SDK}{Software Development Kit}
+
+\newacronym{seLabel}{SE}{Software Engineering}
+
+\newacronym{seoLabel}{SEO}{Search Engine Optimization}
 
 \newacronym{sqlLabel}{SQL}{Structured Query Language}
 
@@ -666,7 +867,15 @@
 
 \newacronym{tbLabel}{TB}{Terabyte}
 
+\newacronym{tsvLabel}{TSV}{Tab Separated Values}
+
+\newacronym{uiLabel}{UI}{User Interface}
+
+\newacronym{urlLabel}{URL}{Uniform Resource Locator}
+
 \newacronym{utfLabel}{UTF-8}{Universal (Character Set) Transformation Format--8-bit}
+
+\newacronym{uxLabel}{UX}{User Experience}
 
 \newacronym{vlsiLabel}{VLSI}{Very Large Scale Integration}
 

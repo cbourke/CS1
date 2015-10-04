@@ -1,0 +1,241 @@
+%!TEX root = ComputerScienceOne.tex
+
+%%Chapter: FileIO in C
+
+C provides several functions to manipulate and
+process files.  Like other I/O functions, these
+are all defined in the standard input/output
+library, \mintinline{text}{stdio.h}.  Writing
+binary or plaintext data is determined by which
+functions you use.
+
+In general whether or not a file input/output
+stream is buffered or unbuffered is determined by
+the system configuration.  There are some ways
+in which this can be changed, but we will not 
+cover them in detail.
+
+\section{Opening Files}
+
+Files are represented in C by a \mintinline{c}{FILE}
+pointer type defined in the standard input/output
+library.  As a pointer, it essentially points to the
+file stored in memory.
+
+To open a file, you use the \mintinline{c}{fopen()} 
+function (short for \textbf{f}ile \textbf{open}) which
+takes two arguments and returns a \mintinline{c}{FILE}
+pointer:
+
+\mintinline{c}{FILE *fopen(const char *path, const char *mode);}
+
+The first argument is the file path/name that you want
+to open for processing.  The second argument is a
+string representing the ``mode'' that you want to open the
+file in.  There are several supported modes, but the two 
+we will be interested in are reading, in which case you
+pass it \mintinline{c}{"r"} and writing in which case you
+pass it \mintinline{c}{"w"}.  The path can be an absolute 
+path, relative path, or may be omitted if the file is in the
+current working directory.
+
+\begin{minted}{c}
+//open a file for reading (input):
+FILE *input = fopen("/user/apps/data.txt", "r");
+//open a file for reading (output):
+FILE *output = fopen("./results.txt", "w");
+
+if(input == NULL) {
+  fprintf(stderr, "Unable to open input file");
+  exit(1);
+}
+
+if(output == NULL) {
+  fprintf(stderr, "Unable to open output file");
+  exit(1);
+}
+\end{minted}
+
+The two checks above check that the file opened successfully.
+If the file opening failed, \mintinline{c}{fopen()} returns
+\mintinline{c}{NULL}.  Opening a file can fail for a number
+of reasons.  On \gls{posixLabel} systems for example, additional
+information can be obtained by accessing the standard error
+number, \mintinline{c}{errno} (see Section \ref{section:errno}).  
+Some errors that can result:
+\begin{itemize}
+  \item \mintinline{c}{ENOENT} -- No such file or directory
+  \item \mintinline{c}{EACCES} -- Permission denied
+  \item \mintinline{c}{ENOMEM} -- Insufficient storage space is available
+\end{itemize}
+among many other possibilities.  These error codes can be
+used to implement more specific error handling code if desired.
+
+\section{Reading \& Writing}
+
+When a file is opened, the file pointer returned by
+\mintinline{c}{fopen()} initially points to the beginning
+of the file.  As you read or write from it, the pointer
+advances through the file content.
+
+\subsection{Plaintext Files}
+
+To process plaintext we use two functions, \mintinline{c}{fprintf()}
+for output and \mintinline{c}{fscanf()} for input.  These
+two functions should look familiar.  They work almost 
+exactly the same as \mintinline{c}{printf()} and
+\mintinline{c}{scanf()} that work with the standard output
+and standard input respectively.  In fact, the standard in/out
+are both \emph{files} so it makes sense that they can be
+read from/written to.  The \mintinline{c}{f} prefixed versions
+are simply generalizations that can be used for any file.
+The only difference is that the first argument for these
+two functions is the file you want to output to or read from.
+
+\begin{minted}{c}
+int x = 10;
+double y = 3.14;
+
+//write to a plaintext file
+fprintf(output, "Hello World!\n");
+fprintf(output, "x = %d, y = %f\n", x, y);
+
+//read from a plaintext file
+fscanf(input, "%d", &x);
+fscanf(input, "%lf", &y);
+
+//these are equivalent to printf, scanf:
+fprintf(stdout, "Please enter an integer:");
+fscanf(stdin, "%d", &x);
+\end{minted}
+
+Using \mintinline{c}{fscanf()} for arbitrary string 
+input is potentially dangerous as there is limited
+bounds checking.  We must store the input value from
+the file into a string (character array), but if the
+file or line contains more characters than the 
+array can accommodate we may have a buffer overflow.
+
+A better way to read input is to use \mintinline{c}{fgets()}
+which allows us to limit the number of bytes that are
+read.
+
+\mintinline{c}{char *fgets(char *s, int size, FILE *stream);}
+
+The first argument is the string that the input
+data will be read into.  The second parameter is how
+we limit the number of characters that will be read.
+It actually reads in one fewer character, \mintinline{c}{size-1}
+to account for the null-terminating character which
+\mintinline{c}{fgets()} automatically inserts for us.
+The last argument is the file pointer that we wish to
+read from.
+
+The behavior of \mintinline{c}{fgets()} is that it reads 
+\emph{up to} \mintinline{c}{size-1} characters from the
+input file and places the results into \mintinline{c}{s}.
+If \mintinline{c}{fgets()} encounters either an \mintinline{c}{EOF}
+symbol or an endline character, \mintinline{c}{'\n'} it 
+stops reading.  In the case of an endline character, it is
+included in the result and may need to be \glslink{chomp}{chomped} out
+(that is, removed).
+
+The \mintinline{c}{fgets()} function can be used to process
+a file line by line until the end of the file is reached.
+Each line can be processed (perhaps tokenized) individually
+to extract particular pieces of data.  This is typically how
+a \gls{csvLabel} or similar file may be processed.  To determine
+if the end of the file has been reached, you can use the 
+return value of the function: it returns \mintinline{c}{NULL}
+when no more characters have been read.
+
+\begin{minted}{c}
+FILE *input = fopen("data.txt", "r");
+//this assumes that no line is more than 999 characters
+char line[1000];
+//read the first line
+char *s = fgets(line, 1000, input);
+while(s != NULL) {
+
+  //chomp the endline character from line:
+  line[strlen(line)-1] = '\0';
+
+  //process the current buffer
+  //for demonstration, we simply print it:
+  printf("line = %s\n", line);
+
+  //read the next line 
+  s = fgets(line, 1000, input);
+}
+\end{minted}
+
+A similar function, \mintinline{c}{int fgetc(FILE *stream);}
+allows us to get a single character from the input file 
+(returned as an \mintinline{c}{int}) if we prefer to read
+character by character.
+
+\subsection{Binary Files}
+
+To read and write binary data to files we use two different
+functions:
+
+\mintinline{c}{?size_t fread(void *ptr, size_t size, size_t nmemb, FILE *stream);} 
+
+for reading from a file and 
+
+\mintinline{c}{size_t fwrite(const void *ptr, size_t size, size_t nmemb, FILE *stream);}
+
+to write to a file.  Both functions have the exact same argument:
+\begin{enumerate}
+  \item \mintinline{c}{*ptr} is a pointer to the item that 
+  	is being read/written (possibly an array of elements)  \item \mintinline{c}{size} is the number of bytes that each 
+	element stored at \mintinline{c}{ptr} take, usually resolved
+	by using \mintinline{c}{sizeof()}
+  \item \mintinline{c}{nmemb} is the number of elements to be 
+  	written/read  \item \mintinline{c}{stream} is the file stream to be read 
+	from/written to
+\end{enumerate}
+
+These functions allow you to read/write an arbitrary amount of
+data.  When reading, it is your responsibility, as usual, to 
+ensure that the \mintinline{c}{ptr} is large enough to accommodate
+the data you are reading into it.
+
+\begin{minted}{c}
+int x = 10;
+
+FILE *binaryOutputFile = fopen("demo.bin", "w");
+
+//write a single int to a file:
+fwrite(&x, sizeof(int), 1, binaryOutputFile);
+
+FILE *binaryInputFile = fopen("input.bin", "r");
+
+//read a single int from the file:
+fread(&x, sizeof(int), 1, binaryInputFile);
+
+//read an entire array from the file:
+int *a = (int *) malloc(10 * sizeof(int));
+fread(a, sizeof(int), 10, binaryInputFile);
+\end{minted}
+
+\section{Closing Files}
+
+Once you are done processing a file, you should close it
+using the \mintinline{c}{fclose()} function:
+
+\mintinline{c}{int fclose(FILE *fp);}
+
+which takes a single argument, the \mintinline{c}{FILE}
+pointer of the file you wish to close.  Closing an invalid
+file may result in an error or segmentation fault.  In any
+case, after a file has been closed, it cannot be read from
+or written to.  Doing so on a closed file is undefined
+behavior. Failure to close a file \emph{may} result in a 
+corrupted file. 
+
+
+
+
+
+

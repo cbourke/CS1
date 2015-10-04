@@ -1,0 +1,198 @@
+%!TEX root = ComputerScienceOne.tex
+
+%%Chapter: FileIO in Java
+
+Java provides several different classes and 
+utilities that support manipulating and processing
+files.  In general, most file operations may
+result in an \mintinline{java}{IOException}, 
+a checked exception that \emph{must} be caught
+and handled.
+
+\section{File Input}
+
+Though there are several ways that you can do file
+input, the easiest is to use the familiar 
+\mintinline{java}{Scanner} class.  We've previously
+used this class to read from the standard input, 
+\mintinline{java}{System.in}, but it can also be
+used to read from a file using the \mintinline{java}{File} 
+class (in the \mintinline{java}{java.io} package).  
+The \mintinline{java}{File} class is just
+a representation of a file resource and does not
+represent the actual file (it cannot be opened and
+closed).  
+
+To initialize a \mintinline{java}{Scanner} to read
+from a file you can use the following.
+
+\begin{minted}{java}
+Scanner s = null;
+try {
+  s = new Scanner(new File("/user/apps/data.txt"));
+} catch (FileNotFoundException e) {
+  //handle the exception here
+}
+\end{minted}
+
+When initializing a \mintinline{java}{Scanner} to
+read from a file, the checked exception, 
+\mintinline{java}{FileNotFoundException} must be caught
+and handled.  Otherwise, once created, the \mintinline{java}{Scanner}
+class does not throw any checked exceptions.
+
+Once created, you can use the usual methods and functionality
+provided by the \mintinline{java}{Scanner} class including
+reading the \mintinline{java}{nextInt()}, \mintinline{java}{nextDouble()}, 
+next string using \mintinline{java}{next()} or even the
+entire \mintinline{java}{nextLine()}.  This last one
+can be used in conjunction with \mintinline{java}{hasNext()}
+to read an entire file, line-by-line.
+
+\begin{minted}{java}
+String line;
+while(s.hasNext()) {
+  line = s.nextLine();
+  //process the line
+}
+\end{minted}
+
+Once we are done reading the file, we can close the 
+\mintinline{java}{Scanner} to free up resources:
+\mintinline{java}{s.close();}.  We could have placed
+all this code within one large \mintinline{java}{try-catch}
+block with perhaps a \mintinline{java}{finally} block
+to close the \mintinline{java}{Scanner} once were were
+done to ensure that it would be closed regardless of
+any exceptions.  However, Java 7 introduced a new 
+construct, the \emph{try-with-resources} statement.
+
+The try-with resources statement allows us to place
+the initialization of a ``closeable'' resource (defined
+by the \mintinline{java}{AutoCloseable} interface) into
+the \mintinline{java}{try} statement.  The JVM will then
+automatically close this resource upon the conclusion of
+any the \mintinline{java}{catch} block or upon the conclusion
+of any \mintinline{java}{catch} block.  We can still provide
+a \mintinline{java}{finally} block if we wish, but this 
+relieves us of the need to explicitly close the resource
+in a \mintinline{java}{finally} block.  A full example:
+
+\begin{minted}{java}
+File f = new File("/user/apps/data.txt");
+//initialize a Scanner in the try statement
+try (Scanner s = new Scanner(f)) {
+  String line;
+  while(s.hasNext()) {
+    line = s.nextLine();
+	//process the line
+  }
+} catch (Exception e) {
+  //handle the exception here
+}
+\end{minted}
+
+Using the \mintinline{java}{Scanner} class to do file 
+input offers a more abstract interaction with a file.  
+It also uses a buffered input stream for performance.
+Binary files can still be read using \mintinline{java}{nextByte()}.
+However, the better solution is to use a class that
+models and abstracts the underlying file.  For example, 
+if you are reading or writing an image file, you should
+use the \mintinline{java}{java.awt.Image} class to
+read and write to files.  The \gls{jdkLabel} and other
+libraries offer a wide variety of classes to model all
+kinds of data.
+
+\section{File Output}
+
+Again, there are several ways to achieve file output, 
+but we'll look at the two most recommended ways.  First,
+we describe how to do convenient plaintext output 
+using a buffered stream for performance.  Unfortunately,
+to do this requires the nesting of several classes,
+the details of each we will not go into.  Essentially,
+we create a new \mintinline{java}{FileWriter} specifying
+the path and file name, we then ``wrap'' that in a
+\mintinline{java}{BufferedWriter} for better performance.
+Finally, for convenience, we wrap that into a 
+\mintinline{java}{PrintWriter} which offers many convenient
+methods for writing primitive and \mintinline{java}{String} 
+types.  It also offers a \mintinline{java}{printf()} style
+method for formatting.
+
+\begin{minted}{java}
+int x = 10;
+double pi = 3.14;
+FileWriter fw = null;
+try {
+  fw = new FileWriter("data.txt");
+} catch(IOException ioe) {
+  throw new RuntimeException(ioe);
+}
+PrintWriter pw = new PrintWriter(new BufferedWriter(fw));
+
+pw.println("Hello World!");
+pw.println(x);
+pw.printf("x = %d, pi = %f\n", x, pi);
+
+pw.close();
+\end{minted}
+
+The \mintinline{java}{close()} method will conveniently
+close all the underlying resource (the \mintinline{java}{BufferedWriter}
+and \mintinline{java}{FileWriter}) for us.  In addition, 
+it implements \mintinline{java}{AutoCloseable} and so it can
+be used in a try-catch-with resources statement.
+
+Another ``convenience'' of \mintinline{java}{PrintWriter} is
+that is ``swallows'' exceptions (just as the \mintinline{java}{Scanner}
+class did).  That means we don't have to deal explicitly with
+the checked \mintinline{java}{IOException}s that the
+underlying classes throw as the \mintinline{java}{PrinteWriter}
+silently catches them (though doesn't handle them).  However, 
+this can also be viewed as a disadvantage in that if we want
+to do error handling, we need to manually check if there was 
+an error (using \mintinline{java}{checkError()}).
+
+The \mintinline{java}{PrintWriter} class is intended mostly
+for formatted output.  It does not provide a way to write
+binary data to an output file.  Just as with binary input, 
+it is best to use a class that abstracts the file type and
+data so that we don't have to deal with the low-level details
+of the binary data.
+
+However, if necessary, binary output can be done using a
+\mintinline{java}{FileOutputStream}.  Typically, you can
+load all your data into a byte array and dump it all at
+once.
+
+\begin{minted}{java}
+byte data[] = ...;
+try (FileOutputStream fos = 
+         new FileOutputStream(new File("outfile.bin")) ){
+  fos.write(data);
+} catch(IOException ioe) {
+  throw new RuntimeException(ioe);
+}
+\end{minted}
+
+This example uses the try-catch-with resources statement
+so the \mintinline{java}{FileOutputStream} will automatically
+be closed for us.
+
+You \emph{could} wrap a \mintinline{java}{FileOutputStream} in a \mintinline{java}{BufferedWriter}, but it
+will likely not gain you anything in terms of performance.  A
+buffered output stream is better if your writes are 
+frequent and ``small.'' Here small means smaller than
+the size of the buffer (\mintinline{java}{BufferedWriter}
+is typically 8\gls{kbLabel}).  Writing several individual
+integer values for example would be better done by buffering
+them all and writing them all at once.  
+
+In our example, we simply wanted to dump a bunch of data, 
+likely more than 8KB in practice, all at once.  Moreover, 
+using a \mintinline{java}{BufferedWriter} would lose us the
+ability to write raw byte data.
+
+

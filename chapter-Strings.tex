@@ -1,42 +1,153 @@
 %!TEX root = ComputerScienceOne.tex
 
 %%Chapter: Strings
+\index{strings}
 
-TODO
+A \gls{string} is an ordered sequence of characters.
+We've previously seen string data types as literals.  Most 
+languages allow you to define and use static string literals
+using the double-quote syntax.  We used strings to specify
+output formatting using \mintinline{c}{printf()}-style functions
+for example.  When reading input from a user, we read it
+as a string and converted the input to numbers.  We also
+described some basic operations on strings including 
+concatenation.  We now examine strings in more depth.  
 
-Introduction: literals to dymamic strings
+Programming languages vary greatly in how they represent
+string data types.  Some languages have string types
+built-in to the language and others require that you use
+arrays and yet others treat strings as a special type of
+object.  
 
-string representations:
+One issue with string representations is determining where
+and how the string ends.  Some languages use a \emph{length
+prefix} string representation.  The length (that is, the number
+characters in the string) is stored in a special location at
+the beginning of a string.  Then the string characters are
+stored as an array.  Still other languages use a special
+character, the \emph{null-terminating character} to denote
+the end of a string.  Still other languages store strings
+as arrays or dynamic arrays and the ``bookkeeping''
+is done internally as part of an object representation.
 
-length prefixed string
+Other details vary as well.  Most languages support the
+basic ASCII characters, others have full Unicode support
+or support Unicode through a library.  Most languages
+also provide large libraries of functions and operations
+that make working with strings easier.
 
-null terminated
+\section{Basic Operations}
 
-arrays, dynamic arrays
+Depending on how a language supports strings, it may
+support various basic operations to create strings and
+assign them to variables.  Usually languages allow you
+to create and use string literals using the double quote 
+syntax.  Modifying a string or copying one string into 
+another may be supported by the built-in assignment
+operator or it may require the use of a \emph{copy}
+function.  When copying strings, similar issues come 
+into play as with arrays.  The ``copy'' could be a shallow
+copy or a deep copy (see Section \ref{subsection:shallowVsDeep}).
 
-\section{Using Strings}
+Other basic operations may include accessing and/or
+modifying individual characters in a string.  In order
+to do so, we may also need to know a string's length
+(so that we do not access invalid characters).  A
+language could provide this as part of the string itself
+(usually called a \emph{property} of the string) or again
+through a function call.  We can further use such functionality
+to iterate over the individual characters in a string using
+an index-controlled for-loop.
 
-declaration, assignment
+More advanced operations on strings include \gls{concatenation}
+which is the operation of combining one or more strings
+to create a new string.  Concatenation simply \emph{appends}
+one string to the end of another string.  Again, depending
+on the language this may be accomplished with a built-in
+operator or it may require a function call.
 
-Mutable vs manipulation of individual characters
+Another common operation is to extract a \emph{substring}
+from a string, that is create a new string from a portion of
+another string.  Commonly, this is done via some standard
+function that may operate by specifying indices and/or the
+length of the desired substring.
 
-finding the length 
+Finally, it is also common to deal with collections of strings.  
+Some languages allow you to create arrays of strings or 
+dynamic collections (lists or sets) of strings.  for languages
+in which strings are arrays of characters, an array of strings
+might be implemented with a 2-dimensional array of characters.
 
-\subsection{Collections of Strings}
+\section{Comparisons}
 
-\section{String Operations}
+When processing strings there are several other standard operations.
+In particular, we often have need to make comparisons between
+two string variables or between a string variable and a literal.
+Some languages allow you to use the same operators such as
+\mintinline{c}{==} or even \mintinline{c}{<} to make comparisons
+between strings.  The implied behavior would compare strings for
+equality (case sensitive) or for \gls{lexicographic} order.  For example
+``Apple'' $<$ ``Banana'' might evaluate to \True because 
+``Apple'' precedes ``Banana'' in alphabetic order.
 
-copying 
+Many languages, however, require that you make string comparisons
+using a function.  Using the equality operator \mintinline{c}{==} may
+be correct syntactically, but is usually making a pointer or 
+reference comparison which evaluates to true if and only if the
+two variables represent the same thing in memory.  Even if two
+string variables have the same \emph{content}, the equality operator
+may evaluate to \False if they are distinct (deep) copies of the
+same string.  Likewise, the inequality operators $<, \leq$, etc. may
+only be comparing memory addresses which is meaningless
+for comparing strings.
 
-concatenation
+The solution that many languages provide is the use of a 
+\gls{comparator}, which is either a function or an object that
+facilitates the comparison of strings (and more generally, any object).
+Generally, a comparator function takes two arguments, $a, b$
+and compares them, not just for equality, but for their relative
+order: does $a$ ``come before'' $b$ or does $b$ ``come before''
+$a$, or are they equal.  To distinguish between these three
+cases, a comparator returns an integer value with the following
+general contract: it returns
+\begin{itemize}
+  \item Something negative if $a < b$
+  \item Zero if $a = b$
+  \item Something positive if $a > b$
+\end{itemize}
+Using this contract we can determine the relative ordering of
+any two strings.  In general we cannot make any assumptions
+about the actual value that a comparator returns, only that it
+returns \emph{something} negative or positive.  The actual
+magnitude of the returned value need not be $-1$ or $+1$, 
+and it may not even have any predefined meaning.
 
-substring
+\section{Tokenizing}
 
-\section{Processing}
+It is common to store different pieces of data as a string such
+that each individual piece of data is demarcated by some 
+\emph{delimiter}.  For example, \gls{csvLabel} or \gls{tsvLabel}
+data use commas and tabs to delimit data.  For example, the
+string 
 
-comparisons
+\mintinline{text}{Smith,Joe,12345678,1985-09-08}
 
-iterating
+is a CSV string holding data on a particular person (last name, 
+first name, ID, date of birth).  Often we need to process such
+strings to extract each individual piece of data.
 
-tokenizing
+Processing such strings is usually referred to as \glslink{parse}{parsing}.
+In particular, a string is ``split'' into a collection of individual
+strings called \glspl{token} (thus the process is also sometimes
+referred to as tokenizing).  In the example above, the
+string would be processed into 4 individual strings, 
+\mintinline{text}{Smith}, \mintinline{text}{Joe}, \mintinline{text}{12345678},
+and \mintinline{text}{1985-09-08}.  Each string could further
+be tokenized if needed, such as parsing the date of birth
+to extract the year, month, and date.
 
+Most languages provide a function to facilitate tokenizing.  Some
+do so by directly returning an array or collection of the resulting
+tokens (usually with the delimiter removed).  Others have a
+more manual process that requires a loop structure to iterate
+over each token.

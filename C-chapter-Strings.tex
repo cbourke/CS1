@@ -2,4 +2,484 @@
 
 %%Chapter: Strings in C
 
-TODO
+C has no built-in string type.  Instead, strings are represented
+as arrays of \mintinline{c}{char} elements.  They differ from, say
+arrays of \mintinline{c}{int} or \mintinline{c}{double} types, however
+in that they are \emph{null terminated} arrays.  The end of the
+string must \emph{always} be denoted with a null-terminating 
+character, \mintinline{c}{'\0'} (the 0 valued character in the \gls{asciiLabel}
+table).  Failure to properly null-terminate a string may lead
+to undefined behavior or fatal errors.  
+
+C provides a good variety of functions in its standard string library
+(included in the \mintinline{text}{string.h} header).  All of these 
+functions operate under the assumption that the strings passed
+to it are null-terminated, thus its your responsibility to ensure that
+they are.  Moreover, some of the functions that operate on strings
+will inset the null-terminating character for us, but others will not.
+Thus, its important to understand the expectations and guarantees
+of each function.  
+
+TODO: figure depicting a string array
+
+\section{Character Arrays}
+
+We've previously used string literals when using the standard input
+and output functions, \mintinline{c}{printf()} and \mintinline{c}{scanf()}.
+You can also create static strings (as static arrays) using the standard
+assignment operator.  Some examples:
+
+\begin{minted}{c}
+char firstName[] = "Tom";
+char lastName[] = "Waits";
+\end{minted}
+
+This syntax can only be used when creating static strings (they are
+allocated on the stack and locally scoped).  The compiler is able
+to scan the string literal and determine how many characters are
+needed and even inserts the null-terminating character for us.  Thus, 
+the length of the two strings in the example are 3 and 5 respectively, 
+but the array size created for them will be 4 and 6 respectively to 
+accommodate the null-terminating character.
+
+Static strings have the same limitations as static arrays.  Since they
+are allocated on the stack, they cannot, for example, be returned from
+a function.  Just as with \mintinline{c}{int} and \mintinline{c}{double} 
+types, however, we can dynamically allocate memory to hold \mintinline{c}{char}
+types using \mintinline{c}{malloc()}.  The important difference being
+that we need to always allocate at least one more character to accommodate
+the null-terminating character.
+
+\begin{minted}{c}
+char *fullName = NULL;
+fullName = (char *) malloc(sizeof(char) * 10);
+\end{minted}
+
+This example creates a dynamically allocated \mintinline{c}{char} array
+that is able to hold \emph{9} characters (since one will be needed for
+the null-terminating character).  However, once we have created the array, 
+we cannot simply assign an entire string to it using the usual assignment
+operator.  
+
+\begin{minted}{c}
+//THIS IS *WRONG*:
+fullName = "Tom Waits";
+\end{minted}
+
+This will compile, but doesn't give us what we want.  Recall
+that \mintinline{c}{fullName} is a character pointer.  Using
+the assignment operator simply makes it \emph{point} to the
+static, literal string \mintinline{c}{"Tom Waits"}.  In fact, 
+we lose our reference to the dynamically allocated array that
+was created with \mintinline{c}{malloc()}, giving us a \gls{memory leak}.
+
+Instead, we need to use a function in the standard library to
+\emph{copy} a string.  The function in the standard library 
+that allows you to copy strings is as follows.
+
+\mintinline{c}{char *strcpy(char *dest, const char *src);}
+
+The name, \mintinline{c}{strcpy} is short for ``string copy.''
+\footnote{The abbreviations are mostly historic: in the 70s and
+80s when memory was measured in kilobytes, saving a few characters
+made a significant difference.} Both arguments are character
+pointers.  In keeping with the use of the assignment operator, 
+the second argument (``source'') is copied into
+the first, ``destination'' (just as with an assignment operator, 
+the value on the right-hand-side is copied into the variable on 
+the left-hand-side). Moreover, the second argument has been 
+marked as \mintinline{c}{const} indicating that it will not be 
+changed.  The contents of the first argument \emph{will} be 
+changed since we are copying a string into it, erasing whatever 
+contents it had prior.  Finally, the function returns a pointer 
+to the \mintinline{c}{dest} argument, mostly so that it can be
+used in nested function calls (though we'll avoid such confusingly
+terse ``tricks'').  From our example:
+
+\begin{minted}{c}
+//"assign" (copy) "Tom Waits" into the string fullName:
+strcpy(fullName, "Tom Waits");
+\end{minted}
+
+In addition, we can access and modify individual characters in
+a string using the usual indexing and assignment operator with
+\mintinline{c}{char} literals.  
+
+\begin{minted}{c}
+//access individual characters:
+char firstInitial = fullName[0]; //'T'
+char lastInitial = fullName[4]; //'W'
+
+//printing:
+printf("First Initial: %c\n", fullName[0]);
+
+//modifying:
+firstInitial[0] = 't';
+firstInitial[4] = 'w';
+//fullName is now "tom waits"
+\end{minted}
+
+\section{String Library}
+
+The standard string library provides many other convenient
+functions that allow you to process and modify strings.
+We highlight a few of the more common ones here.  A full
+list of supported functions can be found in standard 
+documentation.
+
+\subsubsection{Length}
+
+Like with regular arrays, we are responsible for ensuring
+that we do not access characters outside the character array
+of a string.  However, since a string is null-terminated, 
+there is a nice function provided by the string library to
+determine its length, 
+
+\mintinline{c}{size_t strlen(const char *s);}
+
+Recall that \mintinline{c}{size_t} can essentially be
+treated as an integer, indicating the number of bytes 
+in the passed string.  Since a character is a single
+byte, this function tells us how many character are in
+the given string \emph{not including} the null-terminating
+string.  This function, too is an abbreviation for
+``string length.'' 
+
+Using this function we can easily iterate over each 
+character in a string.
+
+\begin{minted}{c}
+int i;
+for(i=0; i<strlen(fullName); i++) {
+  printf("fullName[%d] = %c\n", i, fullName[i]);
+}
+\end{minted}
+
+\subsubsection{Concatenation}
+
+A concatenation function is provided that allows you 
+to append one string to the end of another.
+
+\mintinline{c}{char *strcat(char *dest, const char *src);}
+
+Similar to the \mintinline{c}{strcpy()} function, 
+\mintinline{c}{strcat()} appends the ``source'' (\mintinline{c}{src})
+string to the end of the ``destination'' (\mintinline{c}{dest})
+string.  Note that it is \emph{your} responsibility to ensure
+that the destination string is large enough to accommodate the
+source string.  If it is not, then it could lead to undefined
+behavior as \mintinline{c}{strcat()} overwrites memory after the
+end of the destination string.  Further, \mintinline{c}{strcat()}
+\emph{will} copy the null-terminating character for you so that
+the resulting string (now stored in \mintinline{c}{dest}) is valid.
+
+\begin{minted}{c}
+char *formattedName = (char *)malloc(11 * sizeof(char));
+//copy "Waits" into formattedName
+strcpy(formattedName, lastName);
+//append a ", " to formattedName
+strcat(formattedName, ", ");
+//append the firstName to the formattedName
+strcat(formattedName, firstName);
+//formattedName now contains "Waits, Tom"
+\end{minted}
+
+\subsubsection{Byte-Limited Versions}
+
+C also provides several \emph{byte-limited} versions of
+the copy and concatenation functions:
+
+\mintinline{c}{char *strncpy(char *dest, const char *src, size_t n);}
+
+\mintinline{c}{char *strncat(char *dest, const char *src, size_t n);}
+
+They work similarly in that they copy/concatenate the
+source, \mintinline{c}{src} string into the destination,
+\mintinline{c}{dest} string.  However, there is a third
+parameter, \mintinline{c}{n} which specifies \emph{at
+most} how many bytes to copy/concatenate.  The parameter, 
+\mintinline{c}{n} allows you to limit the number of 
+characters that the operation uses.  If either of
+these functions encounters the null-terminating character
+before \mintinline{c}{n} bytes have been copied/concatenated, 
+they stop and copy the null-terminating character for us.
+
+However, these functions do not always handle
+the null-terminating character for us.  If the null-terminating
+character appears in the first \mintinline{c}{n} bytes, 
+it will be copied for us, but if it is not, we need to 
+be sure to handle it ourselves.
+
+For example, 
+
+\begin{minted}{c}
+char email[] = "twaits@cse.unl.edu";
+char *login = (char *) malloc(7 * sizeof(char));
+
+//only copy the first 6 characters:
+strncpy(login, email, 6);
+//at this point, login contains "twaits" but is
+//not null-terminated, so we manually terminate it
+login[6] = '\0';
+\end{minted}
+
+\subsubsection{Computing a Substring}
+
+The byte-limited versions of the copy function can
+be used to compute a substring of another string.
+The parameter \mintinline{c}{n} can be used to limit
+the length of the string, but how might we specify
+where the substring should start?  
+
+For example, in the string \mintinline{c}{"Thomas Alan Waits"}
+we may want to get the substring representing his
+middle name, \mintinline{c}{"Alan"}.  The length
+is 5 (four characters and the null-terminating character) 
+and we can specify that the copying should start by 
+using an index.  In this case, we want the copying to
+start at index \mintinline{c}{7}, the 8th character.  
+If the string is stored in an array named \mintinline{c}{name}, 
+this would be \mintinline{c}{name[7]}.  However, indexing
+an array like this results in a single character and
+\mintinline{c}{strncpy()} expects a string (a 
+character \emph{pointer}).  Fortunately, we know how
+to do this: using the referencing operator, we can
+turn the 8th character into a character pointer, 
+\mintinline{c}{&name[7]}.  A full example:
+
+\begin{minted}{c}
+char name[] = "Thomas Alan Waits";
+char *middleName = (char *) malloc(sizeof(char) * 5);
+strncpy(middleName, &name[7], 5);
+//middleName now holds "Alan"
+\end{minted}
+
+\section{Arrays of Strings}
+
+We often need to deal with collections of strings.  An
+array of strings can be viewed as a 2-dimensional 
+character array.  Indeed, we've seen this before.  In
+the typical C program's \mintinline{c}{main()} function, 
+command line arguments are passed as the second
+parameter:
+
+\mintinline{c}{int main(int argc, char **argv)}
+
+which is represented as a double character pointer, 
+\mintinline{c}{char **}.  Conceptually, each row is
+a string, \mintinline{c}{char *}.  The first parameter,
+\mintinline{c}{argc} indicates how many rows there are.
+The \mintinline{c}{main()} function doesn't need to
+be told how big each ``row'' is since strings are 
+null-terminated.
+
+We can create our own arrays of strings similar to
+how we created 2-dimensional arrays of \mintinline{c}{int}
+and \mintinline{c}{double} types.
+
+\begin{minted}{c}
+//create an array that can hold 5 strings
+char **names = (char **) malloc(5 * malloc(sizeof(char*)));
+int i;
+for(i=0; i<5; i++) {
+  //each string can hold at most 19 characters
+  names[i] = (char *) malloc(sizeof(char) * 20);
+}
+strcpy(names[0], "Margaret Hamilton");
+strcpy(names[1], "Ada Lovelace");
+strcpy(names[2], "Grace Hopper");
+strcpy(names[3], "Marie Curie");
+strcpy(names[4], "Hedy Lamarr");
+\end{minted}
+
+\section{Comparisons}
+
+When comparing strings in C, we cannot use the numerical
+comparison operators such as \mintinline{c}{==}, or
+\mintinline{c}{<}.  Because strings are represented as
+arrays, using these operators actually compares the
+variable's \emph{memory addresses}.
+
+\begin{minted}{c}
+char *a = (char *) malloc(sizeof(char) * 13);
+char *b = (char *) malloc(sizeof(char) * 13);
+strcpy(a, "Hello World!");
+strcpy(b, "Hello World!");
+
+if(a == b) {
+  printf("strings match!\n");
+}
+\end{minted}
+
+The code above will not print anything even though
+the strings \mintinline{c}{a} and \mintinline{c}{b}
+have the same content.  This is because \mintinline{c}{a == b}
+is comparing the memory address of the two variables.
+Since they point to different memory addresses 
+(created by two separate calls to \mintinline{c}{malloc()})
+they are not equal.
+
+The C string library provides a standard \gls{comparator}
+function to compare strings based on their content:
+
+\mintinline{c}{int strcmp(const char *a, const char *b);}
+
+The function takes two strings and returns an integer based
+on the lexicographic ordering of \mintinline{c}{a} and
+\mintinline{c}{b}.  If \mintinline{c}{a} precedes \mintinline{c}{b}, 
+\mintinline{c}{strcmp()} returns something negative.  It
+returns zero if \mintinline{c}{a} and \mintinline{c}{b} 
+have the same content.  Otherwise it returns something
+positive if \mintinline{c}{b} precedes \mintinline{c}{a}.
+
+Some examples:
+
+\begin{minted}{c}
+int x;
+x = strcmp("apple", "banana"); //x is negative
+x = strcmp("zelda", "mario");  //x is positive
+x = strcmp("Hello", "Hello");  //x is zero
+
+//shorter strings precede longer strings:
+x = strcmp("apple", "apples"); //x is negative
+
+x = strcmp("Apple", "apple");  //x is negative
+\end{minted}
+
+In the last example, \mintinline{c}{"Apple"} precedes
+\mintinline{c}{"apple"} since uppercase letters are
+ordered before lowercase letters according to the
+\gls{asciiLabel} table.  We can also make comparisons
+ignoring case if we need to using the alternative:
+
+\mintinline{c}{int strcasecmp(const char *s1, const char *s2);}
+
+which is a case-insensitive version.  Here, 
+\mintinline{c}{strcasecmp("Apple", "apple")} will return 
+zero as the two strings are the same ignoring the cases.
+
+The comparison functions also have byte-limited versions, 
+
+\mintinline{c}{int strncmp(const char *s1, const char *s2, size_t n);}
+
+and
+
+\mintinline{c}{int strncasecmp(const char *s1, const char *s2, size_t n);}
+
+Both will only make comparisons in the first \mintinline{c}{n}
+bytes of the strings.  Thus, \mintinline{c}{strncmp("apple", "apples", 5)}
+will result in zero as the two strings are equal in the first
+5 bytes.
+
+\section{Conversions}
+
+We've previously examined the functions \mintinline{c}{atoi} 
+and \mintinline{c}{atof} that allow you to convert a strings
+that hold numeric values to \mintinline{c}{int} and 
+\mintinline{c}{double} values respectively.  Another way to
+convert strings to numbers is to use a function similar to
+the familiar \mintinline{c}{scanf()} function which reads
+its string from the standard input.  The \mintinline{c}{sscanf()}
+function reads its ``input'' from a string instead of the
+standard input.
+
+\begin{minted}{c}
+char s[] = "103212.3214";
+double x;
+sscanf(s, "%lf", &x);
+//x now has the value 103212.3214
+\end{minted}
+
+The \mintinline{c}{sscanf()} function differs in its first 
+argument: the string that contains the value you want to parse.
+Otherwise, the second two arguments are as in \mintinline{c}{scanf()}:
+the format (as a string) and the variable(s) that the results
+should be stored in (passed by reference).
+
+Likewise, there is a companion \mintinline{c}{sprintf()} which
+is similar to the \mintinline{c}{printf()} function, but instead
+of printing to the standard output, it ``prints'' to the string.
+That is, the result is placed in a string.
+
+\begin{minted}{c}
+int x = 10;
+double y = 3.14;
+char *s = (char *) malloc(sizeof(char) * 50);
+sprintf(s, "The value of x is %d, y = %f.", x, y);
+//s now contains "The value of x is 10, y = 3.140000."
+\end{minted}
+
+\section{Tokenizing}
+
+Recall that \emph{tokenizing} is the process of splitting
+up a string along some \emph{delimiter}.  For example, 
+the comma delimited string, \mintinline{c}{"Smith,Joe,12345678,1985-09-08"}
+contains four pieces of data delimited by a comma.  
+Our aim is to split this string up into four separate 
+strings so that we can process each one.
+
+The C string library provides a tokenizing function:
+
+\mintinline{c}{char *strtok(char *str, const char *delim);}
+
+which works as follows.  The first argument is the string
+that you want to tokenize and the second contains the
+delimiter that you want to split along.  The second argument
+is actually a string and allows you to specify more than one
+delimiter, but we'll restrict our attention to single 
+character delimiters.  The function returns a pointer to
+the first token in the string.  To get the second and
+all subsequent tokens, we call \mintinline{c}{strtok()} 
+again, but we pass it \mintinline{c}{NULL} as the first
+argument to continue parsing the same string. 
+
+If we pass a new string as the first argument to 
+\mintinline{c}{strtok()} the tokenization process will
+start over on the new string.  Note that the first
+argument does not have the \mintinline{c}{const} keyword.
+This is because \mintinline{c}{strtok()} \emph{will make
+changes} to the string during the tokenization process.
+If the string needs to be preserved, tokenization should
+be performed on a deep copy of the string.
+
+When there are no more tokens in the string, 
+\mintinline{c}{strtok()} returns \mintinline{c}{NULL} 
+to indicate no more tokens are in the string.  This
+logic can be used to write a while loop to iterate
+over each token.  Consider the following example.
+
+\begin{minted}{c}
+char data[] = "Smith,Joe,12345678,1985-09-08";
+char *token = NULL;
+//make the initial call to strtok:
+token = strtok(data, ",");
+while(token != NULL) {
+  printf("token: %s\n", token);
+  //get the next token:
+  token = strtok(NULL, ",");
+}
+\end{minted}
+
+This outputs the following:
+
+\begin{minted}{text}
+token: Smith
+token: Joe
+token: 12345678
+token: 1985-09-08
+\end{minted}
+
+
+It should be noted that \mintinline{c}{strtok()} is
+\emph{not} \gls{reentrant}.  It can only work on 
+one string at a time.  In a multithreaded application, 
+two threads cannot both use \mintinline{c}{strtok()}
+or they would end up processing each other's strings.
+Even in a non-threaded application, we need to be
+careful.  For example, we cannot process a string using
+\mintinline{c}{strtok()} in one function and then call
+another function that does the same.  C does provide
+a reentrant version, \mintinline{c}{strtok_r()} that
+can be used.
+
+

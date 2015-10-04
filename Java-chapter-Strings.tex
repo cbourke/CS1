@@ -2,4 +2,333 @@
 
 %%Chapter: Strings in Java
 
-TODO
+As we've previously seen, Java has a \mintinline{java}{String} 
+class in the standard \gls{jdkLabel}.  Internally, Java 
+strings are stored as arrays of characters.  However, because
+of the \mintinline{java}{String} class, we never directly 
+interact with this representation, making using strings
+much easier than in other languages.  Java strings have
+also supported \gls{Unicode} since version 1.
+
+Moreover, Java provides many methods as part of the 
+\mintinline{java}{String} class that can be used to process
+and manipulate strings.  These methods \emph{do not} change
+the strings since strings in Java are \gls{immutable}.  
+Instead, these methods operate by returning a \emph{new}
+modified string that can then be stored in a variable.
+
+\section{Basics}
+
+As we've previously seen, we can declare \mintinline{java}{String}
+variables and assign them values using the regular
+assignment operator.
+
+\begin{minted}{java}
+String firstName = "Thomas";
+String lastName = "Waits";
+
+//we can also reassign values
+firstName = "Tom";
+\end{minted}
+
+Note that the reassignment in the last line in the example
+does \emph{not} change the original string.  It just makes
+the variable \mintinline{java}{firstName} point to a new
+string.  If there are no other references to the old string,
+it becomes eligible for garbage collection and the \gls{jvmLabel}
+takes care of it.
+
+Strings can be \emph{copied} using the \mintinline{java}{String}
+class's copy constructor: 
+
+\mintinline{java}{String copy = new String(firstName);}
+
+However, since strings are immutable, there is rarely reason
+to create such a \gls{deep copy}.
+
+Though you can't change individual characters in a string, 
+you can access them using the \mintinline{java}{charAt()}
+method and providing an index.  Characters in a string are
+0-indexed just as with elements in arrays. 
+
+\begin{minted}{java}
+String fullName = "Tom Waits";
+//access individual characters:
+char firstInitial = fullName.charAt(0); //'T'
+char lastInitial = fullName.charAt(4); //'W'
+
+if(fullName.charAt(8) == 's') {
+  ...
+}
+\end{minted}
+
+\section{String Methods}
+
+The \mintinline{java}{String} class provides dozens of 
+convenient methods that allow you to process and modify strings.
+We highlight a few of the more common ones here.  A full
+list of supported functions can be found in standard 
+documentation.
+
+\subsubsection{Length}
+
+When accessing individual characters in a string, it
+is necessary that we know the length of the string so
+that we do not access invalid characters.  The 
+\mintinline{java}{length()} method returns an \mintinline{java}{int}
+that represents the number of characters in the
+string.  
+
+\begin{minted}{java}
+String s = "Hello World!";
+char last = s.charAt(s.length()-1);
+//last is '!'
+\end{minted}
+
+Using this method we can easily iterate over each 
+character in a string.
+
+\begin{minted}{java}
+for(int i=0; i<fullName.length(); i++) {
+  System.out.printf("fullName[%d] = %c\n", i, fullName.charAt(i));
+}
+
+//or we can use toCharArray and an enhanced for-loop:
+for(char c : fullName.toCharArray()) {
+  System.out.println(c);
+}
+\end{minted}
+
+\subsubsection{Concatenation}
+
+Java has a concatenation operator built into the language.
+The familiar plus sign, \mintinline{java}{+} can be used
+to combine one or more strings by appending them to each
+other.  Concatenation results in a new string.
+
+\begin{minted}{java}
+String firstName = "Tom";
+String lastName = "Waits";
+
+String formattedName = lastName + ", " + firstName;
+//formattedName now contains "Waits, Tom"
+\end{minted}
+
+Concatenation also works with numeric types and even
+objects.
+
+\begin{minted}{java}
+int x = 10;
+double y = 3.14;
+
+String s = "Hello, x is " + x + " and y = " + y;
+//s contains "Hello, x is 10 and y = 3.14"
+\end{minted}
+
+When used with objects, the concatenation operator 
+ends up invoking the object's \mintinline{java}{toString()}
+method.  The plus operator as a concatenation operator 
+is actually \gls{syntactic sugar}.  When the code is compiled, 
+it is actually replaced with equivalent code that uses 
+a series of the \mintinline{java}{StringBuilder} class's 
+(a mutable version of the \mintinline{java}{String} class) 
+\mintinline{java}{append()} method.  The first example
+above may actually be replaced with the following code 
+that does not use the concatenation operator.
+
+\begin{minted}{java}
+String firstName = "Tom";
+String lastName = "Waits";
+
+String formattedName = new StringBuilder(lastName)
+                       .append(", ")
+                       .append(firstName)
+                       .toString();
+\end{minted}
+
+You can also use the \mintinline{java}{StringBuilder} class
+yourself directly.
+
+\subsubsection{Computing a Substring}
+
+There are two methods that allow you to compute
+a substring of a string.  The first allows you to
+specify a beginning index with the entire remainder
+of the string being included in the returned string.
+The second allows you to specify a beginning index
+as well as an ending index.  In both cases, the
+beginning index is \emph{inclusive} (that is the resulting
+string includes the character at that index), but
+in the second, the ending index is \emph{exclusive}
+(it is not included).
+
+\begin{minted}{java}
+String name = "Thomas Alan Waits";
+
+String firstName  = name.substring(0, 6);  //"Thomas"
+String middleName = name.substring(7, 11); //"Alan"
+String lastName   = name.substring(12);    //"Waits"
+\end{minted}
+
+The result of the two argument \mintinline{java}{substring()}
+method will always have length equal to \mintinline{java}{endIndex - beginIndex}.
+
+\section{Arrays of Strings}
+
+We often need to deal with collections of strings.  In 
+Java, we can define arrays of strings.  Indeed, we've seen 
+arrays of strings before.  In a Java class's 
+\mintinline{c}{main()} method, 
+command line arguments are passed as an array of strings:
+
+\mintinline{java}{public static void main(String args[])}
+
+We can create our own arrays of strings similar to
+how we created arrays of \mintinline{java}{int}
+and \mintinline{java}{double} types.
+
+\begin{minted}{java}
+//create an array that can hold 5 strings
+String names[] = new String[5];
+
+names[0] = "Margaret Hamilton";
+names[1] = "Ada Lovelace";
+names[2] = "Grace Hopper";
+names[3] = "Marie Curie";
+names[4] = "Hedy Lamarr";
+\end{minted}
+
+Better yet, we can use dynamic collections such as
+a \mintinline{java}{List} or a \mintinline{java}{Set} 
+of strings.  
+
+\begin{minted}{java}
+List<String> names = new ArrayList<String>();
+
+names.add("Margaret Hamilton");
+names.add("Ada Lovelace");
+names.add("Grace Hopper");
+names.add("Marie Curie");
+names.add("Hedy Lamarr");
+
+System.out.println(names.get(2));  //prints "Grace Hopper"
+\end{minted}
+
+\section{Comparisons}
+
+When comparing strings in Java, we cannot use the 
+numerical comparison operators such as \mintinline{java}{==}, or
+\mintinline{java}{<}.  Because strings are represented as
+arrays, using these operators actually compares the
+variables' \emph{memory addresses}.
+
+\begin{minted}{java}
+String a = new String("Hello World!");
+String b = new String("Hello World!");
+
+if(a == b) {
+  System.out.println("strings match!");
+}
+\end{minted}
+
+The code above will not print anything even though
+the strings \mintinline{java}{a} and \mintinline{java}{b}
+have the same content.  This is because \mintinline{java}{a == b}
+is comparing the memory address of the two variables.
+Since they point to different memory addresses 
+(created by two separate calls to the constructors)
+they are not equal.
+
+Instead, there are several \gls{comparator} methods that 
+Java provides to compare strings.  Each string has a
+\mintinline{java}{compareTo()} method\footnote{This method
+is part of the \mintinline{java}{String} class due to the
+fact that strings implement the \mintinline{java}{Comparable}
+interface which defines a lexicographic ordering.} that takes another
+string and returns something negative, zero, or something
+positive depending on the relative lexicographic ordering 
+of the strings.
+
+\begin{minted}{java}
+int x;
+String a = "apple";
+String b = "zelda";
+String c = "Hello";
+x = a.compareTo("banana"); //x is negative
+x = b.compareTo("mario");  //x is positive
+x = c.compareTo("Hello");  //x is zero
+
+//shorter strings precede longer strings:
+x = a.compareTo("apples"); //x is negative
+
+String d = "Apple";
+x = d.compareTo("apple");  //x is negative
+\end{minted}
+
+In the last example, \mintinline{java}{"Apple"} precedes
+\mintinline{java}{"apple"} since uppercase letters are
+ordered before lowercase letters according to the
+\gls{asciiLabel} table.  We can also make comparisons
+ignoring case if we need to using \mintinline{java}{compareToIgnoreCase()} method which works the same way.  This is a 
+case-insensitive version of the method.  Here, 
+\mintinline{java}{d.compareToIgnoreCase("apple")} will return 
+zero as the two strings are the same ignoring the cases.
+
+Note that the commonly used \mintinline{java}{equals()} method
+only returns \mintinline{java}{true} or \mintinline{java}{false}
+depending on whether or not two strings are the same or 
+different.  They cannot be used to provide a relative
+ordering of two strings.
+
+\begin{minted}{java}
+String a = "apple";
+String b = "apple";
+String c = "Hello";
+
+boolean result;
+result = a.equals(b); //true
+result = a.equals(c); //false
+\end{minted}
+
+\section{Tokenizing}
+
+Recall that \emph{tokenizing} is the process of splitting
+up a string along some \emph{delimiter}.  For example, 
+the comma delimited string, \mintinline{java}{"Smith,Joe,12345678,1985-09-08"}
+contains four pieces of data delimited by a comma.  
+Our aim is to split this string up into four separate 
+strings so that we can process each one.
+
+Java provides a very simple method to do this called
+\mintinline{java}{split()} that takes a string delimiter
+and returns an array of strings containing the tokens.
+For example, 
+
+\begin{minted}{java}
+String data = "Smith,Joe,12345678,1985-09-08";
+
+String tokens[] = data.split(",");
+//tokens is { "Smith", "Joe", "12345678", "1985-09-08" }
+
+String dateTokens[] = tokens[3].split("-");
+//dateTokens is now { "1985", "09", "08" }
+\end{minted}
+
+The delimiter this method uses is actually a 
+\gls{regular expression}; a sequence of characters
+that define a search \emph{pattern} in which
+special characters can be used to define complex
+patterns.  For example, the complex expression
+\mintinline{text}{^[+-]?(\d+(\.\d+)?|\.\d+)([eE][+-]?\d+)?$}
+will match any valid numerical value including
+scientific notation.  We will not cover regular 
+expressions in depth, but to demonstrate their 
+usefulness, here's an example by which you can 
+split a string along any and all whitespace:
+
+\begin{minted}{java}
+String s = "Alpha Beta \t Gamma \n Delta    \t\nEpsilon";
+String tokens[] = s.split("[\\s]+");
+//tokens is now { "Alpha", "Beta", "Gamma", "Delta", "Epsilon" }
+\end{minted}
+

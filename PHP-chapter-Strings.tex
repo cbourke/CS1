@@ -2,4 +2,285 @@
 
 %%Chapter: Strings in PHP
 
-TODO
+As we've previously seen, PHP has a built-in string type.
+Internally, PHP strings are simply a sequence of bytes, 
+but for our purposes we can treat it as a 0-indexed 
+character array.  PHP strings are mutable and can be
+changed, but it is considered best practice to treat
+them as mutable and rely on the many functions PHP 
+provides to manipulate strings.
+
+\section{Basics}
+
+As we've previously seen, we can create strings by
+simply assigning a string literal value to a variable
+as PHP is a dynamically typed language.  Strings
+can be specified by either single quotes or double
+quotes (there are no individual characters in PHP, 
+only single character strings), but we will mostly
+use the double quote syntax.
+
+\begin{minted}{php}
+$firstName = "Thomas";
+$lastName = "Waits";
+
+//we can also reassign values
+$firstName = "Tom";
+\end{minted}
+
+The reassignment in the last line in the example
+effectively destroys the old string.  The assignment
+operator can also be used to make copies of strings
+
+\begin{minted}{php}
+$firstName = "Thomas";
+$alias = $firstName;
+\end{minted}
+
+It is important to understand that this assignment 
+essentially makes a \gls{deep copy} of the string.
+Changes to the first do not affect the second one.
+
+You can make changes to individual characters in a
+string by treating it like a zero-indexed array.
+
+\begin{minted}{php}
+$a = "hello";
+$a[0] = "H";
+$a[5] = "!";
+//a is now "Hello!"
+\end{minted}
+
+Note that the last line extends the string by adding
+an additional character.  You can even remove characters
+by setting them to the empty string.
+
+\begin{minted}{php}
+$a = "Apples!";
+$a[5] = "";
+//a is now "Apple!"
+\end{minted}
+
+\section{String Functions}
+
+PHP provides dozens of convenient functions that allow 
+you to process and modify strings.  We highlight a few 
+of the more common ones here.  A full list of supported 
+functions can be found in standard documentation.  Because
+of history of PHP, many of the same functions defined in
+the C string library can also be used in PHP.
+
+\subsubsection{Length}
+
+When accessing individual characters in a string, it
+is necessary that we know the length of the string so
+that we do not access invalid characters (though doing
+so is not an error, it just results in \mintinline{php}{NULL}).
+The \mintinline{php}{strlen()} function returns an
+integer that represents the number of characters in the
+string.  
+
+\begin{minted}{php}
+$s = "Hello World!";
+$x = strlen($s); //x is 12
+$s = "";
+$x = strlen($s); //x is 0
+
+//careful:
+$s = NULL
+$x = strlen($s); //x is 0
+\end{minted}
+
+As demonstrated in the last example, \mintinline{php}{strlen()}
+will return 0 even for \mintinline{php}{NULL} strings.
+Recall that we can distinguish between these two situations
+we can use \mintinline{php}{is_null()}.  Using this function
+we can easily iterate over each individual character in a string.
+
+\begin{minted}{php}
+$fullName = "Tom Waits";
+for($i=0; $i<strlen($fullName); $i++) {
+  printf("fullName[%d] = %s\n", $i, $fullName[$i]);
+}
+\end{minted}
+
+This would print the following
+
+\begin{minted}[fontsize=\scriptsize]{text}
+fullName[0] = T
+fullName[1] = o
+fullName[2] = m
+fullName[3] =  
+fullName[4] = W
+fullName[5] = a
+fullName[6] = i
+fullName[7] = t
+fullName[8] = s
+\end{minted}
+
+\subsubsection{Concatenation}
+
+PHP has a concatenation operator built into the language.
+To concatenate one or more strings together, you can use a
+simple period between them as the concatenation operator.
+Concatenation results in a new string.
+
+\begin{minted}{php}
+$firstName = "Tom";
+$lastName = "Waits";
+
+$formattedName = lastName . ", " . firstName;
+//formattedName now contains "Waits, Tom"
+\end{minted}
+
+Concatenation also works with other variable types.
+
+\begin{minted}{php}
+$x = 10;
+$y = 3.14;
+
+$s = "Hello, x is " . $x . " and y = " . $y;
+//s contains "Hello, x is 10 and y = 3.14"
+\end{minted}
+
+\subsubsection{Computing a Substring}
+
+PHP provides a simple function, \mintinline{php}{substr()} 
+to compute a substring of a string.  It takes at at 
+least 2 arguments: the string to operate on
+and the starting index.  There is a third, 
+optional parameter that allows you to 
+specify the length of the resulting substring.
+
+\begin{minted}{php}
+$name = "Thomas Alan Waits";
+
+$firstName  = substr($name, 0, 6); //"Thomas"
+$middleName = substr($name, 7, 4); //"Alan"
+$lastName   = substr($name, 12);   //"Waits"
+\end{minted}
+
+As in the final example, omitting the optional
+length parameter results in the entire remainder
+of the string being returned as the substring.
+
+\section{Arrays of Strings}
+
+We often need to deal with collections of strings.  
+In PHP we can define arrays of strings.  Indeed, we've seen 
+arrays of strings before.  When processing command line
+arguments, PHP defines an array of strings, 
+\mintinline{php}{$argv}.  Each string can be accessed
+using an index, \mintinline{php}{$argv[0]} for example
+is always the name of the script.
+
+We can create our own arrays of strings using the
+same syntax as with other arrays.
+
+\begin{minted}{php}
+$names = array(
+  "Margaret Hamilton",
+  "Ada Lovelace",
+  "Grace Hopper",
+  "Marie Curie",
+  "Hedy Lamarr");
+\end{minted}
+
+\section{Comparisons}
+
+When comparing strings in PHP, we can use the usual
+numerical operators such as \mintinline{php}{===}, 
+\mintinline{php}{<}, or \mintinline{php}{<=} which
+will compare the strings lexicographically.  However,
+this is generally discouraged because of type juggling
+issues and strict vs loose equality/inequality comparisons.
+
+Instead, there are several \gls{comparator} methods that 
+PHP provides to compare strings based on their content.
+\mintinline{php}{strcmp($a, $b)} takes two strings and returns 
+an integer based on the lexicographic ordering. of 
+\mintinline{php}{$a} and \mintinline{php}{$b}.  If 
+\mintinline{php}{$a} precedes \mintinline{php}{$b}, 
+\mintinline{php}{strcmp()} returns something negative.  It
+returns zero if \mintinline{php}{$a} and \mintinline{php}{$b} 
+have the same content.  Otherwise it returns something
+positive if \mintinline{php}{$b} precedes \mintinline{php}{$a}.
+
+Some examples:
+
+\begin{minted}{php}
+$x = strcmp("apple", "banana"); //x is negative
+$x = strcmp("zelda", "mario");  //x is positive
+$x = strcmp("Hello", "Hello");  //x is zero
+
+//shorter strings precede longer strings:
+$x = strcmp("apple", "apples"); //x is negative
+
+$x = strcmp("Apple", "apple");  //x is negative
+\end{minted}
+
+In the last example, \mintinline{php}{"Apple"} precedes
+\mintinline{php}{"apple"} since uppercase letters are
+ordered before lowercase letters according to the
+\gls{asciiLabel} table.  We can also make comparisons
+ignoring case if we need to using the alternative, 
+\mintinline{php}{strcasecmp($a, $b)}, a case-insensitive 
+version.  Here, \mintinline{php}{strcasecmp("Apple", "apple")} 
+will return zero as the two strings are the same 
+ignoring the cases.
+
+The comparison functions also have length-limited versions, 
+\mintinline{php}{strncmp($a, $b, $n)} and
+\mintinline{php}{strncasecmp($a, $b, $n)}.  Both will only 
+make comparisons in the first \mintinline{php}{$n}
+characters of the strings.  Thus, \mintinline{php}{strncmp("apple", "apples", 5)} will result in zero as the two strings are equal in the first
+5 characters.
+
+\section{Tokenizing}
+
+Recall that \emph{tokenizing} is the process of splitting
+up a string along some \emph{delimiter}.  For example, 
+the comma delimited string, \mintinline{php}{"Smith,Joe,12345678,1985-09-08"}
+contains four pieces of data delimited by a comma.  
+Our aim is to split this string up into four separate 
+strings so that we can process each one.
+
+PHP provides several functions to to this, 
+\mintinline{php}{explode()} and \mintinline{php}{preg_split()}.
+
+The simpler one, \mintinline{php}{explode()} takes
+two arguments: the first one is a string delimiter and
+the second is the string to be processed.  It then
+returns an array of strings.
+
+\begin{minted}{php}
+$data = "Smith,Joe,12345678,1985-09-08";
+
+$tokens = explode(",", $data);
+//tokens is [ "Smith", "Joe", "12345678", "1985-09-08" ]
+
+$dateTokens = explode("-", $tokens[3]);
+//dateTokens is now [ "1985", "09", "08" ]
+\end{minted}
+
+The more sophisticated one, \mintinline{php}{preg_split()}
+also takes two arguments\footnote{The ``preg'' stands
+for \textbf{P}erl Compatible \textbf{Reg}ular Expression.}
+, but instead of a simple
+delimiter, it actually uses a \gls{regular expression}; 
+a sequence of characters that define a search 
+\emph{pattern} in which special characters can 
+be used to define complex patterns.  For example, 
+the complex expression
+\mintinline{text}{^[+-]?(\d+(\.\d+)?|\.\d+)([eE][+-]?\d+)?$}
+will match any valid numerical value including
+scientific notation.  We will not cover regular 
+expressions in depth, but to demonstrate their 
+usefulness, here's an example by which you can 
+split a string along any and all whitespace:
+
+\begin{minted}{php}
+$s = "Alpha Beta \t Gamma \n Delta    \t\nEpsilon";
+$tokens = preg_split("/[\s]+/", $s);
+//tokens is now [ "Alpha", "Beta", "Gamma", "Delta", "Epsilon" ]
+\end{minted}
