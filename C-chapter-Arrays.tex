@@ -396,6 +396,69 @@ for(i=0; i<n; i++) {
 free(myMatrix);
 \end{minted}
 
+\subsection{Contiguous 2-D Arrays}
+
+The example depicted in Figure \ref{figure:mallocIllustration2D} 
+constructs a two dimensional array.  However, each ``row'' of the
+array was created using an independent call to \mintinline{c}{malloc()}
+which may result in non-contiguous memory blocks (each row may not
+be located in the memory address immediately following the previous
+row).  In general, this is not a problem for most situations
+(we can expect most implementations of \mintinline{c}{malloc()}
+to be efficient).  However, it might be better in some scenarios if 
+the two dimensional array were all one big block of contiguous memory.  
+
+We can achieve this by a single call to \mintinline{c}{malloc()} and
+some clever pointer manipulation.  We do this very similar to the
+previous example.  Our first call to \mintinline{c}{malloc()} to set
+up the pointer-to-pointers is the same.  However, instead of calling
+\mintinline{c}{malloc()} over and over in a for loop, we make one
+single call asking for a number of bytes to accommodate the entire
+$n \times m$ array.  We then store the result at the ``beginning''
+of the array (at index zero).
+
+\begin{minted}{c}
+int n = 5, m = 3, i, j;
+
+int **arr  = (int **)malloc(sizeof(int *) * n);
+arr[0] = (int *)malloc(sizeof(int) * (n * m));
+\end{minted}
+
+We're not done yet, however.  We still need to initialize all of the
+other pointers.  To do so, we dereference the array (once) to get
+the address of the start of the memory block and then compute
+an \emph{offset} from this beginning on where the next ``row'' should
+be.  Since each row has \mintinline{c}{m} elements, this arithmetic
+is simple.
+
+\begin{minted}{c}
+for(i=1; i<n; i++) {
+  arr[i] = (*arr + (m * i));
+}
+\end{minted}
+
+Now we can treat the array like we would any other two dimensional array
+by specifying two indices.
+
+\begin{minted}{c}
+for(i=0; i<n; i++) {
+  for(j=0; j<m; j++) {
+    arr[i][j] = 10 * i + j;
+  }
+}
+\end{minted}
+
+Which would result in an array that, conceptually, looks something like
+the following.
+
+\begin{minted}{text}
+[   0   1   2  ]
+[  10  11  12  ]
+[  20  21  22  ]
+[  30  31  32  ]
+[  40  41  42  ]
+\end{minted}
+
 \section{Dynamic Data Structures}
 
 The C standard library does not provide a variety of advanced, dynamic

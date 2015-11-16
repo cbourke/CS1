@@ -1,0 +1,89 @@
+%!TEX root = ComputerScienceOne.tex
+
+%%Chapter: Encapsulation
+
+One reason we prefer to write programs in high-level programming
+languages is that we can write programs using syntax that is closer 
+to plain English.  Granted, programming language syntax is a far cry 
+from ``natural'' language, but it is far closer than lower level 
+languages such as assembly or binary machine code.  However, from
+what we've seen so far, when writing programs we are still forced
+to utilize the primitive variable types built-in to the language
+we're using.  This is still quite limiting.
+
+As a motivating example, suppose we were to write a program that
+involved organizing the enrollment of students into courses.  To
+model a particular student, we would need a collection of variables, 
+say a first name, last name, GPA, and a unique identification number
+(likely a lot more, but let's keep it simple).  Each of these
+pieces of data could be modeled by strings, a floating-point number
+and perhaps an integer.\footnote{Depending on the identification
+number, it may be more appropriately modeled with a string.  Social
+Security Numbers for example are not purely numeric: they include
+dashes and may begin with zeros.}  Each of these pieces of 
+data are stored in separate, unrelated variables even though they
+represent a single \emph{entity}.  
+
+Even worse, suppose that we needed to keep track of a collection
+of students.  Each piece of data would need to be stored in 
+a separate array.  If we wanted to rearrange the data (say, sort
+it), we would need to do a lot of manual bookkeeping to make sure
+that the separate pieces of data that represented a single entity
+were all aligned at the same index in each of the arrays.  If we
+wanted to pass the data around to functions, we'd be forced to
+pass multiple arrays to each function.  This becomes all the more
+complex when we attempt to model entities with more pieces of 
+data.  
+
+The solution is to \emph{encapsulate} the pieces of data into
+one logical entity, sometimes referred to as an \emph{object}.  
+More formally, \emph{encapsulation} is a mechanism by which
+pieces of data can be grouped together along with the functions
+that operate on that data.  Encapsulation may also provides a 
+means to \emph{protect} that data.
+
+TODO: Contrast with array (also a collection of data); difference: 
+columns vs rows in a table
+
+\section{Objects}
+
+OOP: design paradigm; some non-OOP languages support some aspects, 
+not all OOP languages support all aspects or in the same way, etc.
+Big four: Abstraction, Encapsulation, Inheritance, Polymorphism; 
+for now we'll only focus on Encapsulation.
+
+Collection
+
+Protection
+
+Inclusion of methods
+
+\subsection{Structures}
+
+Only the collection of data
+
+\subsection{Construction}
+
+constructors or factory methods
+
+\subsection{Usage}
+
+variable types, 
+
+accessing member fields; getters/setters 
+
+passing as functions
+
+\subsection{Composition}
+
+ownership of other objects, collections of objects (aggregation) 
+
+\section{Design Considerations}
+
+bottom-up
+
+anytime you need to associate pieces of data, it may be appropriate to 
+collect it into an object
+
+
+

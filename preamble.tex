@@ -57,8 +57,6 @@
 \setlength{\parindent}{0pt}
 \setlength{\parskip}{.25cm}
 
-
-
 \usepackage{graphicx}
 \usepackage{framed}
 \usepackage{amssymb,amsmath,amsthm}
@@ -100,34 +98,6 @@
     text width=5em, text centered, rounded corners, node distance=5cm, minimum height=4em]
 \tikzstyle{line} = [draw, -latex']
 
-%\usepackage{listings}
-%\lstset{basicstyle=\ttfamily\small\color{black},
-%        showspaces=false,
-%        showtabs=false,
-%        %tab=\rightarrowfill,
-%        tabsize=2,
-%        showstringspaces=false,
-%        stringstyle=\ttfamily\bfseries\color{blue},
-%        keywordstyle=\color{darkmagenta},
-%        commentstyle=\color{blue},
-%        % NUMBERING STYLES
-%        numbers=left,
-%        stepnumber=1,
-%        numbersep=5pt,
-%        %Handle framing
-%        frame=tlBR,      %frame = single, tbrl/TBRL
-%        %rulesepcolor=\color{green},
-%        frameround=tttt, %t = rounded, f = square, starts at top right, runs clockwise
-%        %Handle Margins
-%        breaklines=true,
-%        boxpos=r,
-%        breakatwhitespace=false,
-%        xleftmargin=0.5cm,
-%        xrightmargin=0.5cm} %
-%\lstset{language=Java}
-%\renewcommand{\lstlistingname}{Code Sample}
-%\renewcommand{\lstlistlistingname}{Code Samples}
-
 \definecolor{mintedBackground}{rgb}{0.95,0.95,0.95}
 \definecolor{mintedInlineBackground}{rgb}{.90,.90,1}
 
@@ -149,7 +119,7 @@
 			    	    %list available: pygmentize -L styles
                bgcolor=mintedBackground} %prevents breaking across pages
                
-\setmintedinline{bgcolor={}}
+\setmintedinline{bgcolor={mintedInlineBackground}}
 \setminted[text]{bgcolor={mintedBackground},linenos=false,autogobble,xleftmargin=1em}
 %\setminted[php]{bgcolor=mintedBackgroundPHP} %startinline=True}
 \SetupFloatingEnvironment{listing}{name=Code Sample}

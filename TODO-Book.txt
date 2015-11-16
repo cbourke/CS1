@@ -26,6 +26,11 @@ Add a quote:
    http://cse.unl.edu/~lksoh/Classes/CSCE155N_Fall12/homeworks.html
 
 
+Longer term:
+ -A testing chapter
+ -Intro to OOP
+ -gotcha appendix for each language?
+  ex: char *s = “foo” vs char s[] = “foo”
 
 
 
