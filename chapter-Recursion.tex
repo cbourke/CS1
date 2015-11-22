@@ -3,3 +3,53 @@
 %%Chapter: Recursion
 
 TODO
+
+\begin{algorithm}[H]
+  \Input{An integer $n \geq 0$}
+  \Output{A countdown of integers $n, \ldots 0$}
+ 
+  \eIf{$n = 0$}{
+    output ``Happy New Year!!!'' \;
+  }{
+    output $n$ \;
+    $\textsc{CountDown}(n-1)$ \;
+  }
+\caption{Recursive $\textsc{CountDown}(n)$ Function}
+\label{algo:recursiveCountdown}
+\end{algorithm}
+
+
+\[
+F_n = \left\{
+\begin{array}{ll}
+1 & \text{if } n = 0 \\
+1 & \text{if } n = 1 \\
+F_{n-1} + F_{n-2} & \text{otherwise}
+\end{array}
+\right.
+\]
+
+$$1, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89, \ldots$$
+
+\begin{algorithm}[H]
+  \Input{An integer $n \geq 0$}
+  \Output{The $n$-th Fibonacci number, $F_n$}
+ 
+  \eIf{$n \leq 1$}{
+    output 1 \;
+  }{
+    output $\textsc{Fibonacci}(n-1) + \textsc{Fibonacci}(n-2)$ \;
+  }
+\caption{Recursive $\textsc{Fibonacci}(n)$ Function}
+\label{algo:recursiveFibonacci}
+\end{algorithm}
+
+
+
+
+\begin{figure}
+\centering
+\input{figures/figureFibonacciTree}
+\caption{Recursive Fibonacci Computation Tree}
+\label{figure:fibonacciTree}
+\end{figure}

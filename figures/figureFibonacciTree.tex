@@ -1,0 +1,39 @@
+
+\begin{tikzpicture}
+  [scale=.50,transform shape,
+   level distance=4cm,
+   every node/.style={rectangle,
+                      thin,
+                      draw=black,
+                      %top color = white,
+                      %bottom color = black!50,
+                      inner sep=5pt,
+                      %drop shadow={opacity=0.35,shadow xshift=.2ex, shadow yshift=-.2ex}
+                      },
+   edge from parent/.style={->,draw,>=latex'},
+   level 1/.style={sibling distance=16cm},
+   level 2/.style={sibling distance=8cm},
+   level 3/.style={sibling distance=4cm},
+   level 4/.style={sibling distance=4cm}]
+  \node {\mintinline{text}{fibonacci(5)}}
+     child {node {\mintinline{text}{fibonacci(4)}}
+       child {node {\mintinline{text}{fibonacci(3)}}
+         child {node {\mintinline{text}{fibonacci(2)}}
+          child {node {\mintinline{text}{fibonacci(1)}}}
+          child {node {\mintinline{text}{fibonacci(0)}}}
+         }
+         child {node {\mintinline{text}{fibonacci(1)}}}
+       }
+       child {node {\mintinline{text}{fibonacci(2)}}
+          child {node {\mintinline{text}{fibonacci(1)}}}
+          child {node {\mintinline{text}{fibonacci(0)}}}
+       }
+     }
+     child {node {\mintinline{text}{fibonacci(3)}}
+        child {node {\mintinline{text}{fibonacci(2)}}
+          child {node {\mintinline{text}{fibonacci(1)}}}
+          child {node {\mintinline{text}{fibonacci(0)}}}
+        }
+        child {node {\mintinline{text}{fibonacci(1)}}}
+     };
+\end{tikzpicture}

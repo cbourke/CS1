@@ -1,0 +1,718 @@
+%!TEX root = ComputerScienceOne.tex
+
+%%Chapter: Searching & Sorting in C
+
+The standard C library provides several functions to search and sort
+arrays of \emph{any} type of element including \mintinline{c}{int}, 
+\mintinline{c}{double}, or even user defined structures such as our
+\mintinline{c}{Student} example from Chapter \ref{chapter:c:structs}.  
+These functions are able to operate on any type of array because they
+take generic \mintinline{c}{void} pointers.  However, these functions
+still need a way to \emph{order} the generic elements.  To understand
+how this all works we need to understand both \emph{comparator} functions
+and \emph{function pointers}.
+
+\section{Comparator Functions}
+
+Let's consider a ``generic'' quick sort algorithm as was presented in
+Algorithm \ref{algo:quickSort}.  The algorithm itself specifies how to 
+sort elements, but
+it doesn't specify how they are \emph{ordered}.  The difference is subtle
+but important.  Essentially, quick sort needs to know when two elements, 
+$a, b$ are in order, out of order, or equivalent in order to decide which
+partition each element goes on.  However, it doesn't ``know'' anything about
+the elements $a$ and $b$ themselves.  They could be numbers, they could
+be strings, they could be user-defined objects.  
+
+A sorting algorithm still needs to be able to determine the proper ordering 
+in order to sort.  In C this is achieved through a \emph{comparator function}, 
+which is a function that is responsible for comparing two elements and
+determining their proper order.  A comparator function has the following 
+signature and behavior:
+
+\mintinline{c}{int cmp(const void *a, const void *b);}
+
+\begin{itemize}
+  \item The function takes two generic \mintinline{c}{void} pointers which
+  	point to the elements being compared.  
+  \item Moreover, the \mintinline{c}{const} keyword is used to indicate that
+  	no changes will be made to the elements.
+  \item The function returns an integer indicating the relative ordering of
+  	the two elements:
+	\begin{itemize}
+	  \item It returns something negative, \mintinline{c}{< 0} if \mintinline{c}{a}
+	  comes before \mintinline{c}{b} (that is, $a < b$)
+	  \item It returns zero if \mintinline{c}{a} and \mintinline{c}{b} are
+	  equal ($a = b$)
+	  \item It returns something positive, \mintinline{c}{> 0} if \mintinline{c}{a}
+	  comes after \mintinline{c}{b} (that is, $a > b$)
+	\end{itemize}
+\end{itemize}
+
+Note that there is no guarantee on the value's magnitude, it does \emph{not}
+necessarily return $-1$ or $+1$; it just returns \emph{something} negative or
+positive.  We've previously seen this pattern when comparing strings.  The
+standard string library provides a function, \mintinline{c}{strcmp()} that
+has the same basic contract: it takes two strings and returns something
+negative, zero or something positive depending no the lexicographic ordering
+of the two strings.  Strictly speaking, however, \mintinline{c}{strcmp()} is
+\emph{not} a comparator function.  It is defined to take two 
+\mintinline{c}{const char *} parameters, not \mintinline{c}{const void *}
+pointers.
+
+The C language (and thus the compiler) ``knows'' how to compare built-in
+primitive types like \mintinline{c}{int} and \mintinline{c}{double} using the
+built-in comparison operators.  However, to generalize the comparison operation, 
+we use \mintinline{c}{void *} pointers so that we can write and use general
+comparator functions that can be used in generic searching and sorting functions
+as we'll see below.
+
+As an example, let's write a comparator function that orders integers in
+ascending order.  We'll call our function \mintinline{c}{cmpInt()} and use
+the signature above.
+
+\begin{minted}{c}
+int cmpInt(const void *a, const void *b) {
+
+}
+\end{minted}
+
+But how we implement this function?  Obviously we want to compare the values
+stored in the pointer variables, so we need to dereference them.  However, 
+the comparison, \mintinline{c}{(*a < *b)} for example is not comparing integer
+values.  The variables \mintinline{c}{a} and \mintinline{c}{b} are 
+\mintinline{c}{void} pointers, not \mintinline{c}{int} pointers.  Thus, the 
+first step is to \emph{make} them \mintinline{c}{int} pointers by doing an
+explicit type cast:
+
+\begin{minted}{c}
+const int *x = (const int *) a;
+const int *y = (const int *) b;
+\end{minted}
+
+Now the variables \mintinline{c}{x} and \mintinline{c}{y} \emph{are} 
+\mintinline{c}{int} pointers which can be dereferenced and compared (we 
+preserve the keyword \mintinline{c}{const} to ensure we do not make changes
+to the variables).  Altogether, we have the full comparator function.
+
+\begin{minted}{c}
+int cmpInt(const void *a, const void *b) {
+  const int *x = (const int *) a;
+  const int *y = (const int *) b;
+  if(*x < *y) {
+    return -1;
+  } else if(*x == *y) {
+    return 0;
+  } else {
+    return -1;
+  }
+}
+\end{minted}
+
+What if we wanted to order integers in the opposite order?  We could write
+another comparator in which the comparisons or values are reversed.  Even
+simpler, we could reuse the comparator above and ``flip'' the sign by 
+multiplying by $-1$ (that is, after one of the purposes of writing functions:
+code reuse).  Even simpler, we could flip the arguments we pass to 
+\mintinline{c}{cmpInt()} to reverse the order.
+
+\begin{minted}{c}
+int cmpIntDesc(const void *a, const void *b) {
+  return cmpInt(b, a);
+}
+\end{minted}
+
+The examples above illustrate the standard implementation pattern of 
+comparator functions:
+\begin{enumerate}
+  \item Make the general \mintinline{c}{const void *} pointers into a 
+    \mintinline{c}{const} pointer to the specific type you want to compare
+    by making an explicit type cast.
+  \item Use the state of the type (one or more components if you are comparing
+  	structures) to determine their order.
+  \item Return an integer that expresses the desired order of elements.
+\end{enumerate}
+
+The cautious observer may be asking: what happens if I call a comparator
+and pass it pointers to mismatched elements?  For example, what if I pass
+two \mintinline{c}{double} pointers to \mintinline{c}{cmpInt()}?  Obviously, the
+code will not work as intended (it will end up comparing the upper 32 bits of the
+\mintinline{c}{double} values, which leads to unintended behavior).  However, 
+the function was designed with certain expectations (namely, that a user would
+only ever provide it valid, pointers to \mintinline{c}{int} values).  If
+a user violates these expectations, its their fault, not ours.  This is no
+different from many other functions in the standard library.  Passing non-null
+terminated strings to most string functions for example is undefined behavior.
+
+To illustrate some more examples, consider the \mintinline{c}{Student} structure
+we defined in Code Sample \ref{code:c:studentStructure}.  The following Code
+Samples demonstrate various ways of ordering \mintinline{c}{Student} structures based on one or more of their components.
+
+\begin{minted}{c}
+/**
+ * A comparator function to order Student structures by 
+ * last name/first name in alphabetic order
+ */
+int studentByNameCmp(const void *s1, const void *s2) {
+
+  const Student *a = (const Student *)s1;
+  const Student *b = (const Student *)s2;
+  int result = strcmp(a->lastName, b->lastName);
+  if(result == 0) {
+    return strcmp(a->firstName, b->firstName);
+  } else {
+    return result;
+  }
+}
+\end{minted}
+
+\begin{minted}{c}
+/**
+ * A comparator function to order Student structures by 
+ * last name/first name in reverse alphabetic order
+ */
+int studentByNameCmpDesc(const void *s1, const void *s2) {
+
+  return studentByNameCmp(s2, s1);
+}
+\end{minted}
+
+\begin{minted}{c}
+/**
+ * A comparator function to order Student structures by 
+ * id in ascending numerical order
+ */
+int studentIdCmp(const void *s1, const void *s2) {
+
+  const Student *a = (const Student *)s1;
+  const Student *b = (const Student *)s2;
+  if(a->nuid < b->nuid) {
+    return -1;
+  } else if(a->nuid == b->nuid) {
+    return 0;
+  } else {
+    return 1;
+  }
+}
+\end{minted}
+
+\begin{minted}{c}
+/**
+ * A comparator function to order Student structures by 
+ * GPA in descending order
+ */
+int studentGpaCmp(const void *s1, const void *s2) {
+
+  const Student *a = (const Student *)s1;
+  const Student *b = (const Student *)s2;
+  if(a->gpa > b->gpa) {
+    return -1;
+  } else if(a->gpa == b->gpa) {
+    return 0;
+  } else {
+    return 1;
+  }
+}
+\end{minted}
+
+\section{Function Pointers}
+
+Now that we have comparator functions to order elements, we need a way
+of passing a comparator to a generic search or sort function so that it
+can be \emph{used} by that function.  To achieve this in C, we use
+\emph{function pointers}.  
+
+Recall that a pointer is simply a reference to some memory location.
+As we've already seen, pointers can point to variables of simple
+data types such as \mintinline{c}{int} or \mintinline{c}{double}, 
+arrays of these types or even user-defined structures.  We've also
+seen that pointers can be generic using the \mintinline{c}{void} keyword.
+The \mintinline{c}{malloc()} function for example, returned a generic
+void pointer, \mintinline{c}{(void *)}, to allow it to be used to allocate
+memory for \emph{any} type.
+
+Generic void pointers simply point to the start of a memory block, not 
+necessarily to a memory location of any particular type of variable.  As
+we've also already seen, the program code itself lives in memory (the
+stack).  It thus makes sense that we could reference a memory location
+that, instead of containing variables, contains executable code, in 
+particular a \emph{function}.  This is what a function pointer does:
+it points to a memory location where the code for the function is
+stored.
+
+To declare a function pointer, we need to specify more information than a
+typical \mintinline{c}{int *} or \mintinline{c}{double *} pointer.  Since
+it points to a function, we need to specify the function's signature: its
+return type and parameter list.  Consider the following example:
+
+\mintinline{c}{int (*ptrToFunc)(int, double, char) = NULL;}
+
+In this declaration, we've created a function pointer named \mintinline{c}{ptrToFunc}.
+This pointer is capable of pointing to any function whose return type is
+\mintinline{c}{int} (indicated by the first keyword) and which takes 
+\emph{three} parameters: an \mintinline{c}{int}, a \mintinline{c}{double} 
+and a \mintinline{c}{char}.  The assignment operation has initialized this
+pointer to \mintinline{c}{NULL}.
+
+Consider another example: let's declare a function pointer that is capable
+of pointing to the math library's \mintinline{c}{sqrt()} function.  The
+\mintinline{c}{sqrt()} function returns a \mintinline{c}{double} and takes
+a single \mintinline{c}{double} parameter.  Adapting the syntax above, 
+we would create this pointer as follows.
+
+\mintinline{c}{double (*ptrToSqrt)(double) = NULL;}
+
+Again, we have initialized it to \mintinline{c}{NULL}; it does not yet
+reference the \mintinline{c}{sqrt()} function.  To make it reference this
+function, we need to assign it a value.  Recall that to get the memory
+location of a regular variable, say \mintinline{c}{int x;}, we use the
+referencing operator, \mintinline{c}{&x}.  Similarly, with functions we
+\emph{can} use the referencing function, in this case \mintinline{c}{&sqrt}
+to get the memory address of the \mintinline{c}{sqrt()} function, however
+this is not necessary.  Similar to arrays, the identifier (name) of a
+function serves as its memory address!  That is, \mintinline{c}{sqrt} by
+itself is the memory location of the function.  Thus to assign 
+\mintinline{c}{ptrToSqrt} to point to \mintinline{c}{sqrt()}, we simply
+need to do the following:
+
+\mintinline{c}{ptrToSqrt = sqrt;}
+
+Note the difference: usually we \emph{invoke} \mintinline{c}{sqrt()} by 
+writing parentheses and providing an argument.  Additional examples 
+of this syntax can be found in Code Sample \ref{code:c:moreFunctionPointerSyntax}.
+
+\subsubsection{Callbacks}
+
+The main use for function pointers is so that references to functions can be passed 
+as parameters to other functions.  The passed function is known as a 
+\gls{callback}.  This gives us the ability to write a more abstract and
+generic function.  
+
+For example, in \gls{guiLabel} programming, we frequently need to associate
+a particular function with a particular \emph{event}.  For example, suppose
+we create a button; we need to be able to specify what happens when that
+button gets clicked.  We do so by providing a function as a callback to
+a \emph{registration} function that associates the ``click'' event with the
+provided function.  Thus, whenever a user clicks the button, the callback
+is invoked (``called back'').  
+
+Let's illustrate some syntax usage with another example.  Suppose we want to 
+create a \mintinline{c}{getMax()} function.  We \emph{could} write one 
+function for arrays of integers, another for arrays of \mintinline{c}{double}s, 
+another for \mintinline{c}{Student} arrays that gets the student with the
+maximum GPA, then another for the ID, then another for the name and so on.  
+Or, we could program a \emph{generic} \mintinline{c}{getMax()} function
+that could be used for \emph{any} type by taking a comparator function as
+a callback.  To illustrate, consider the following non-generic function for
+integers.
+
+\begin{minted}{c}
+int getMax(const int *arr, int n) {
+  int i, max_index = 0;
+  for(i=1; i<n; i++) {
+    if(arr[max_index} < arr[i] {
+      //we've found something larger, update the max_index:
+      max_index = i;
+    }
+  }
+  return max_index;
+}
+\end{minted}
+
+This simple function iterates through the array, keeping track of the maximum
+value found ``so far'' and updating it when it finds something larger.  Because
+we've specified that \mintinline{c}{arr} is an array if \mintinline{c}{int}
+values, we can use the less-than comparison operator (line 4).  Now let's make
+it more generic: rather than taking an array of \mintinline{c}{int} values, 
+it will now take a generic \mintinline{c}{void} array.  Further, we will
+pass a function pointer to this function that references a generic comparator
+function that can be used to replace the less-than comparison operator.
+
+\begin{minted}{c}
+int getMax(const void *arr, int n, 
+           int(*cmp)(const void *, const void *)) {
+  int i, max_index = 0;
+  for(i=1; i<n; i++) {
+    ...
+  }
+  return max_index;
+}
+\end{minted}
+
+There are a couple of issues here that we have to deal with here.  When
+working with generic \mintinline{c}{void *} pointers in C and using arrays, 
+you cannot simply index using the usual 0, 1, 2, etc. indices.  Recall that 
+when elements are stored in an array, the index represents an \emph{offset} 
+of a memory address.  If the array is an array of integers or 
+\mintinline{c}{double} or some other build-in type, the compiler knows how 
+large each one is and is able to compute the appropriate offset given the 
+usual 0, 1, 2, etc. indices.
+	
+However, when dealing with \mintinline{c}{void *} elements, a function must 
+be told how many bytes each element takes, say \mintinline{c}{size}.  Then 
+each element can be indexed by multiplying an index by the size.  That is, 
+
+\begin{minted}{c}
+arr[0 * size] //first element
+arr[1 * size] //second element
+arr[2 * size] //third element
+...
+arr[i * size] //i-th element
+\end{minted}
+
+Thus, we also need to provide this to our \mintinline{c}{getMax()} function.
+Once we do, we can use the comparator to determine which is the larger of
+two elements in the array (indexed using the scheme above).  To do this, we
+call the comparator on the maximum element we've found so far and the 
+$i$-th element in the loop.  If it returns something negative, then we know
+that the ``max'' element is less than the $i$-th element and so update our 
+\mintinline{c}{max_index} variable.  Making these changes results in the
+this final version.
+
+\begin{minted}{c}
+int getMax(const void *arr, int n, size_t size, 
+           int(*cmp)(const void *, const void *)) {
+  int i, max_index = 0;
+  for(i=1; i<n; i++) {
+    if(cmp(arr[max_index * size], arr[i * size]) < 0) {
+      //we've found something larger, update the max_index:
+      max_index = i;
+    }
+  }
+  return max_index;
+}
+\end{minted}
+
+Now to illustrate how we can use this generic function.  Suppose we have
+an array of integers and the \mintinline{c}{cmpInt()} comparator function
+above.  
+
+\begin{minted}{c}
+int arr[] = {8, 2, 9, 10, 4, 2, 2, 5, 6, 7};
+int max_index = getMax(arr, 10, sizeof(int), cmpInt);
+printf("maximum value: %d\n", arr[max_index]);
+\end{minted}
+
+In this example, the \mintinline{c}{getMax()} function would return
+the index 3 and print the maximum value stored there, 10.  The 
+\mintinline{c}{getMax()} function returns the index corresponding to the
+``maximum'' element \emph{according to the comparator} used.  If instead
+we had used \mintinline{c}{cmpIntDesc()} the ``maximum'' element would have
+been the least element, (2 in the example above) because it would have
+been the element ordered ``last'' by the \emph{descending} comparator.
+
+Consider another example with our \mintinline{c}{Student} structure.
+
+\begin{minted}{c}
+int n = 10;
+Student *roster = (Student *) malloc(sizeof(Student) * n);
+
+...
+
+int max_index = getMax(roster, n, sizeof(Student), studentByNameCmp);
+\end{minted}
+
+Since \mintinline{c}{studentByNameCmp()} orders by lexicographic ordering, 
+a student with the last name ``Zadora'' would have been ``larger'' than 
+someone with a last name ``Anderson.''  Thus the code above will return 
+an index corresponding to the \emph{last} student in lexicographic ordering
+of their name.
+
+Similarly, if we had used the \mintinline{c}{studentGpaCmp()} comparator 
+instead, \mintinline{c}{getMax()} would have returned an index for the
+student with the \emph{lowest} GPA as this comparator ordered highest to
+lowest.
+
+Another variation on this function would be to return a \emph{pointer}
+to the maximum element rather than an index.  The same logic would have
+applied, but the return type would be a \mintinline{c}{void *} pointer
+and the return statement would return the memory address of the maximum
+element instead.
+
+\begin{minted}{c}
+void * getMax(const void *arr, int n, size_t size, 
+              int(*cmp)(const void *, const void *)) {
+  int i, max_index = 0;
+  for(i=1; i<n; i++) {
+    if(cmp(arr[max_index * size], arr[i * size]) < 0) {
+      //we've found something larger, update the max_index:
+      max_index = i;
+    }
+  }
+  return &arr[max_index * size];
+}
+\end{minted}
+
+\subsubsection{Full Example}
+
+\begin{listing}[H]
+\inputminted[fontsize=\scriptsize]{c}{code/functionPointers.c}
+\caption{C Function Pointer Syntax Examples}
+\label{code:c:moreFunctionPointerSyntax}
+\end{listing}
+
+\section{Searching \& Sorting}
+
+We now turn our attention to the search and sorting functions provided by
+the standard library.  As you can imagine, both are generic implementations
+that take advantage of function pointers and comparator functions.
+
+\subsection{Searching}
+
+\subsubsection{Linear Search}
+
+The C search library, \mintinline{c}{search.h} provides a linear search 
+function to search arrays, named \mintinline{c}{lfind()} (linear find).  This
+function does not require that the array be sorted and performs a linear
+search algorithm, returning a \emph{pointer} to the first element such that
+the comparator returns 0 (indicating equality).  The full signature of the
+function is as follows.
+
+\begin{minted}{c}
+void *lfind(const void *key, 
+            const void *base, 
+            size_t *nmemb, 
+            size_t size, 
+            int(*compar)(const void *, const void *));
+\end{minted}
+
+Each argument represents:
+\begin{itemize}
+  \item \mintinline{c}{key} -- a ``dummy'' structure instance matching the
+    element you are searching for.  For example, if you are searching for a
+    \mintinline{c}{Student} with the last name \mintinline{c}{"Smith"} then
+    you can construct an instance with the same last name, ignoring the value
+    of all other components.  
+  \item \mintinline{c}{base} -- a pointer to the array to be searched
+  \item \mintinline{c}{nmemb} -- the size of the array (number of ``members'')
+  \item \mintinline{c}{size} -- the size, in bytes, of each element in the array
+   	(generally you use use \mintinline{c}{sizeof()} to determine this)
+  \item \mintinline{c}{compar} -- a pointer to a comparator function to use
+    in the search.
+\end{itemize}
+
+As with our \mintinline{c}{getMax()} example, \mintinline{c}{lfind()} returns
+a pointer to the element it finds.  If no such element is found, this function
+will return \mintinline{c}{NULL}.  
+
+In the same library, there is another linear search function named 
+\mintinline{c}{lsearch()} with the same parameter types (except that the array
+is not \mintinline{c}{const} as we'll see why).  However, it differs
+in that if it does not find a matching element, it still returns \mintinline{c}{NULL}
+but also attempts to \emph{insert} the element being searched for at the
+end of the array.  That is, the function will assume there is room at the end
+of the array to accommodate the inserted element (if not, the behavior is undefined).
+The function will also increment the \mintinline{c}{nmemb} variable to reflect
+this new element.  Great care should be exercised when using this version to ensure
+that there is enough valid memory to accommodate any inserts.
+
+\subsubsection{Binary Search}
+
+In the standard library (\mintinline{c}{stdlib.h}) there is an additional binary
+search function that can be used to more efficiently search a \emph{sorted}
+array.  The prototype:
+
+\begin{minted}{c}
+void *bsearch(const void *key, 
+              const void *base, 
+              size_t nmemb, 
+              size_t size, 
+              int (*compar)(const void *, const void *));
+\end{minted}
+
+All parameters are exactly as with \mintinline{c}{lfind()} as is the behavior:
+it returns a pointer to the first element that it finds (though first does not  
+necessarily mean the first in the order of the array) and \mintinline{c}{NULL} if 
+no matching element is found.
+
+It is an important requirement that the array be sorted \emph{with the same
+comparator} as was used to sort the array or \mintinline{c}{NULL} may be 
+returned erroneously.
+
+\subsection{Sorting}
+
+The standard library (\mintinline{c}{stdlib.h}) also provides a generic sorting
+function, \mintinline{c}{qsort()}.  Though the name suggests a Quick Sort implementation, it does not necessarily have to be (it was when the function was
+designed).  Modern implementations of \mintinline{c}{qsort()} may implement 
+alternatives such as Merge Sort or non-recursive hybrid Quick Sort algorithms.
+
+The prototype and parameters are similar to the search functions but do not
+include a key.  The array is also not \mintinline{c}{const} indicating that
+it \emph{will} be changed (which is the whole point of calling the function).
+
+\begin{minted}{c}
+void qsort(void *base, 
+           size_t nmemb, 
+           size_t size, 
+           int(*compar)(const void *, const void *))
+\end{minted}           
+
+\begin{itemize}
+  \item \mintinline{c}{base} -- pointer an array of elements
+  \item \mintinline{c}{nmemb} -- the size of the array (number of members)
+  \item \mintinline{c}{size} -- the size (in bytes) of each element (use \mintinline{c}{sizeof()})
+  \item \mintinline{c}{compar} -- a comparator function used to order elements
+  \item Sorts in ascending order according to the provided comparator function
+\end{itemize}
+
+The advantages to using \mintinline{c}{qsort()} (as well as \mintinline{c}{lfind()} 
+and \mintinline{c}{bsearch()}) should be clear.  There is no need to write a 
+new function that reimplements the same algorithm for every possible ordering of
+every possible user-defined structure.  We need only to create a comparator
+function and pass it to \mintinline{c}{qsort()}.  There is less code, and less
+chance of bugs.  The \mintinline{c}{qsort()} function is well-designed, 
+optimized, and most importantly well-tested and proven.
+
+These functions represent a sort of ``weak'' form of polymorphic behavior found
+in more modern object-oriented programming languages and other languages that
+support ``generic programming.''  Polymorphism is the characteristic that
+the same code can be executed on different types, greatly reducing the need
+for duplicate code.
+
+\subsection{Examples}
+
+We illustrate the usage of these functions in Code Samples 
+\ref{code:c:searchExamples} and \ref{code:c:sortExamples}.
+
+\begin{listing}[H]
+\inputminted[fontsize=\scriptsize]{c}{code/searchDemo.c}.
+\caption{C Search Examples}
+\label{code:c:searchExamples}
+\end{listing}
+
+\begin{listing}[H]
+\inputminted[]{c}{code/sortDemo.c}.
+\caption{C Sort Examples}
+\label{code:c:sortExamples}
+\end{listing}
+
+\section{Other Considerations}
+
+\subsection{Sorting Pointers to Elements}
+
+Recall that it is sometimes preferable to maintain an array of pointers
+to structures rather than an array of structures.  Sorting is a scenario
+where this is particularly true.  When sorting an array of structure
+elements, the entire structure is copied back and forth as elements
+are swapped.  Depending on the number of bytes of a structure, this can
+be quite expensive.  It is generally more efficient to sort an array of 
+pointers to structures instead.  A prime example of this is sorting an
+array of strings.
+
+An array of strings can be thought of as a 2-dimensional array of 
+\mintinline{c}{char}s.  Specifically, an array of strings is a 
+\mintinline{c}{char **} type.  That is, an array of pointers to 
+pointers of \mintinline{c}{char}s.  We may be tempted to use 
+\mintinline{c}{strcmp} in the standard string library, passing it 
+to \mintinline{c}{qsort()}.  
+Unfortunately this will not work.  \mintinline{c}{qsort()} requires 
+two \mintinline{c}{const void *} types, while \mintinline{c}{strcmp} 
+takes two \mintinline{c}{const char *} types.  This difference is 
+subtle but important.\footnote{A full discussion can be found on the 
+c-faq, \url{http://c-faq.com/lib/qsort1.html}.}
+
+The recommended way of doing this is to define a different comparator 
+function as follows.
+
+\begin{listing}[H]
+\begin{minted}{c}
+/* compare strings via pointers */
+int pstrcmp(const void *p1, const void *p2)
+{
+  return strcmp(*(char * const *)p1, *(char * const *)p2);
+}
+\end{minted}
+\caption{C Comparator Function for Strings}
+\end{listing}
+
+Observe the behavior of this function: it uses the standard 
+\mintinline{c}{strcmp} function, but makes the proper explicit type 
+casting before doing so.  The \mintinline{c}{*(char * const *)} casts 
+the generic void pointers as pointers to strings (or pointers to 
+pointers to characters), then dereferences it to be compatible
+with \mintinline{c}{strcmp}.
+
+Another case is when we wish to sort user-defined structures.  The 
+\mintinline{c}{Student} structure presented earlier is ``small'' in 
+that it only has a few fields.  When structures are stored in an 
+array and sorted, there may be many \emph{swaps} of individual 
+elements which involves a lot of memory copying.  If the structures 
+are small this is not too bad, but for ``larger'' structures this 
+could be potentially expensive.  Instead, it may be preferred to 
+have an array of \emph{pointers} to structures.  Swapping elements 
+involves only swapping pointers instead of the entire structure.  
+This is far cheaper as a memory address is likely to be far smaller 
+than the actual structure it points to.  This is essentially 
+equivalent to the string scenario: we have an array of pointers 
+to be sorted, our comparator function then needs to deal with pointers 
+to pointers.\footnote{Again, a full discussion can be found on c-faq,
+\url{http://c-faq.com/lib/qsort2.html}.}  An example appears in Code 
+Sample \ref{code:SortingStructures}.
+
+\begin{listing}[H]
+\begin{minted}{c}
+Student **roster = (Student **) malloc(sizeof(Student *) * n);
+qsort(roster, n, sizeof(Student *), studentPtrLastNameCmp);
+
+...
+
+int studentPtrLastNameCmp(const void *s1, const void *s2) {
+  //we receive a pointer to an individual element in the array
+  //but individual elements are POINTERS to students thus we cast 
+  //them as (const Student **) then dereference to get a pointer 
+  //to a Student!
+  const Student *a = *(const Student **)s1;
+  const Student *b = *(const Student **)s2;
+  int result = strcmp(a->lastName, b->lastName);
+  if(result == 0) {
+    return strcmp(a->firstName, b->firstName);
+  } else {
+    return result;
+  }
+}
+\end{minted}
+\caption{Sorting Structures via Pointers}
+\label{code:SortingStructures}
+\end{listing}
+
+Another issue when sorting arrays of pointers is that we may now 
+have to deal with \mintinline{c}{NULL} elements.  When sorting 
+arrays of elements this is not an issue as a properly initialized 
+array will contain non-null elements (though elements could still
+be uninitialized, the memory space is still valid).
+
+How we handle \mintinline{c}{NULL} pointers is more of a design 
+decision.  We could ignore it and any attempt to access a 
+\mintinline{c}{NULL} structure will result in undefined
+behavior (or segmentation faults, etc.).  Or we could give 
+\mintinline{c}{NULL} values an explicit ordering with respect to 
+other elements.  That is, we could order all \mintinline{c}{NULL}
+pointers \emph{before} non-\mintinline{c}{NULL} elements (and consider 
+all \mintinline{c}{NULL} pointers to be equal).  An example with respect 
+to our \mintinline{c}{Student} structure is given in Code Snippet 
+\ref{code:SortingStructuresWithNulls}.
+
+\begin{listing}[H]
+\begin{minted}{c}
+int studentPtrLastNameCmpWithNulls(const void *s1, const void *s2) {
+  const Student *a = *(const Student **)s1;
+  const Student *b = *(const Student **)s2;
+  if(a == NULL && b == NULL) {
+    return 0;
+  } else if(a == NULL && b != NULL) {
+    return -1;
+  } else if (a != NULL && b == NULL) {
+    return 1;
+  }
+  int result = strcmp(a->lastName, b->lastName);
+  if(result == 0) {
+    return strcmp(a->firstName, b->firstName);
+  } else {
+    return result;
+  }
+}
+\end{minted}
+\caption{Handling Null Values}
+\label{code:SortingStructuresWithNulls}
+\end{listing}
+

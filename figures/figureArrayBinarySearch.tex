@@ -1,0 +1,57 @@
+%\documentclass[12pt]{scrbook}
+%
+%\usepackage{tikz}
+%\usepackage{minted}
+%\usetikzlibrary{decorations.pathreplacing,arrows}
+%
+%\usepackage{fullpage}
+%\usepackage{subfigure}
+%\begin{document}
+%
+%
+%Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
+%
+%\begin{figure}
+%\centering
+
+\begin{tikzpicture}[scale=1.2]
+
+\draw (0,0) rectangle (1,1);
+\node (a) at (0.5, 0.5) {$a_1$};
+
+\draw (1,0) rectangle (4,1);
+\node at (2.5, 0.5) {$\cdots$};
+
+\draw (4,0) rectangle (5,1);
+\node (b) at (4.5, 0.5) {$a_{\frac{n}{2}-1}$};
+
+\draw (5,0) rectangle (6,1);
+\node (am) at (5.5, 0.5) {$a_{\frac{n}{2}}$};
+
+\draw (6,0) rectangle (7,1);
+\node (c) at (6.5, 0.5) {$a_{\frac{n}{2}+1}$};
+
+\draw (7,0) rectangle (10,1);
+\node at (8.5, 0.5) {$\cdots$};
+
+\draw (10,0) rectangle (11,1);
+\node (d) at (10.5, 0.5) {$a_{n}$};
+
+
+\node (m) at (5.5, -0.85) {$m$};
+\draw[->,shorten >=0.5cm] (m) -- (am);
+
+
+  \draw [decorate,decoration={brace,mirror,amplitude=10pt},xshift=-4pt,yshift=0pt] ([xshift=0cm,yshift=-.5cm]a.south) -- ([xshift=0cm,yshift=-0.5cm]b.south) node [black,midway,yshift=-0.75cm] {$< m$};
+
+  \draw [decorate,decoration={brace,mirror,amplitude=10pt},xshift=-4pt,yshift=0pt] ([xshift=0cm,yshift=-.5cm]c.south) -- ([xshift=0cm,yshift=-0.5cm]d.south) node [black,midway,yshift=-0.75cm] {$> m$};
+
+
+\end{tikzpicture}
+
+%\caption[Array of Integers]{Array of Integers}
+%\label{figure:arrayForSearching}
+%\end{figure}
+%
+%\end{document}
+%

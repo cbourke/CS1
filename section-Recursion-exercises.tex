@@ -5,7 +5,45 @@
 \section{Exercises}
 
 \begin{exer}
-TODO
+The binomial coefficients, $C(n,k)$ or ${n \choose k}$ (``$n$ choose
+$k$''), are defined as the number of ways you can select $k$ distinct
+items from a collection of $n$ items.  A direct combinatorial
+definition is
+$${n \choose k} = \frac{n!}{k!(n-k)!}$$
+An alternative is Pascal's identity, which gives a recurrence to
+compute this value:
+$${n \choose k} = {n-1 \choose k} + {n-1 \choose k-1}$$
+Where ${n \choose 0} = 1$ for any $n$ and for all $k > n$, ${n\choose
+k} = 0$. Finally, ${n \choose 1} = n$.
+\begin{enumerate}
+  \item Write a recursive function using Pascal's identity to compute
+  	${n \choose k}$.  Benchmark its performance.
+  \item Write a recursive version that uses memoization to avoid 
+  	recomputing values
+  \item Modify your functions to utilize an arbitrary precision 
+  	numeric type so that you can compute arbitrarily large values.
+\end{enumerate}
 \end{exer}
 
+\begin{exer}
+The Jacobsthal sequence is very similar to the Fibonacci sequence 
+in that it is defined by its two previous terms.  The difference is that 
+the second term is multiplied by two.  
+$$J_n = \left\{
+\begin{array}{ll}
+0 & \textrm{if } n = 0 \\
+1 & \textrm{if } n = 1 \\
+J_{n-1} + 2J_{n-2} & \textrm{otherwise}
+\end{array}
+\right.$$
+
+\begin{enumerate}
+  \item Write a recursive function that computes the $n$-th Jacobsthal
+    number.  Benchmark its performance.
+  \item Write a recursive version that uses memoization to avoid 
+  	recomputing values
+  \item Modify your functions to utilize an arbitrary precision 
+  	numeric type so that you can compute arbitrarily large values.
+\end{enumerate}
+\end{exer}
 

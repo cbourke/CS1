@@ -163,6 +163,8 @@ How might we include this in our \mintinline{c}{Student} structure?
 Once we have defined a structure we can use it as we would a normal
 variable, so it makes sense that we could include it in another structure.
 
+\begin{listing}
+\centering
 \begin{minted}{c}
 typedef struct {
   char *firstName;
@@ -172,6 +174,9 @@ typedef struct {
   Date dateOfBirth;
 } Student;
 \end{minted}
+\caption{A \mintinline{c}{Student} structure declaration}
+\label{code:c:studentStructure}
+\end{listing}
 
 This is a good illustration of a form of \emph{composition} where 
 one structure may be \emph{composed} of other structures.  Since

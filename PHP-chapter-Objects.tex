@@ -2,5 +2,425 @@
 
 %%Chapter: Objects in PHP
 
-TODO
+Object-oriented features have been continually added to PHP with
+each successive version.  Starting with version 5, PHP has had a full,
+class-based object oriented programming support, meaning
+that it facilitates the creation of objects through the use of classes
+and class declarations.  Classes are essentially ``blueprints'' for 
+creating instances of objects.  
+
+An \emph{object} is an entity that is characterized by \emph{identity}, 
+\emph{state} and \emph{behavior}.  The identity of an object is an
+aspect that distinguishes it from other objects.  The variables and
+values that a variable takes on within an object is its state.  Typically
+the variables that belong to an object are referred to as \emph{member} 
+variables.  Finally, an object may also have functions that operate
+on the data of an object.  In the context of object oriented programming, 
+a function that belongs to an object is referred to as a (member)
+\emph{method}.
+
+A class declaration simply specifies the member variables and member 
+methods that belong to instances of the
+class.  We discuss how to create and use instances of a class below.
+However, to begin, let's define a class that models a student by
+defining member variables to support a first name, last name, a
+unique identifier, and GPA.
+
+To declare a class, we use the \mintinline{php}{class} keyword.
+Inside the class (denoted by curly brackets), we place any code that
+\emph{belongs} to the class.  To declare member variables within
+a class, we place specify the variable names and their \emph{visibility}
+inside the class, but outside any methods in the class.
+
+\begin{minted}{php}
+class Student {
+
+  //member variables:
+  private $firstName;
+  private $lastName;
+  private $id;
+  private $gpa;
+
+}
+\end{minted}
+
+To organize code, it is common practice to place class declarations in
+separate files with the same name as the class.  For example, this
+\mintinline{php}{Student} class declaration would be placed in a 
+file named \mintinline{text}{Student.php} and included in any other
+script files that utilized the class.
+
+\section{Data Visibility}
+
+Recall that encapsulation involves not only the grouping of data, but
+the \emph{protection} of data.  The class declaration above achieves
+the grouping of data.  To provide for the protection of data, PHP
+defines several \emph{visibility} keywords that specify what segments
+of code can ``see'' the variables.  Visibility in this context determines
+whether or not a segment of code can \emph{access} and/or \emph{modify}
+the variable's value.  PHP defines three levels of visibility using
+they keywords \mintinline{php}{public}, \mintinline{php}{protected}
+and \mintinline{php}{private}.  Each of these keywords can
+be applied to both member variables and member methods.
+
+\begin{itemize}
+  \item \mintinline{php}{public} -- This is the least restrictive 
+    visibility level and makes the member variable visible to any
+    code segment.
+  \item \mintinline{php}{protected} -- This is a bit more restrictive
+    and makes it so that the member variable is only visible to the
+    code in the same class, or any \emph{subclass} of the 
+    class.\footnote{Subclasses are involved with \emph{inheritance}, 
+    another object oriented programming concept that we will not
+    discuss here.}
+  \item \mintinline{php}{private} -- this is the most restrictive 
+    visibility level, \mintinline{php}{private} member variables are
+    only visible to instances of the class itself.  
+\end{itemize}
+
+Table \ref{table:phpVisibilityKeywords} summarizes these four keywords
+with respect to their access levels.  It is important to understand that
+\emph{protection} is in the context of encapsulation and does not involve
+protection in the sense of ``security.''  The protection is this context
+is a design principle.  Limiting the access of variables only affects 
+how the rest of the code base interacts with our class and its data.  
+Encapsulation can easily be ``broken'' by other code (through reflection
+or other means) and the values of variables can be accessed or modified.
+
+\begin{table}[h]
+\centering
+\begin{tabular}{|l|c|c|c|}
+\hline
+Modifier & Class  & Subclass & World \\
+\hline\hline
+\mintinline{php}{public} & Y  & Y & Y \\
+\hline
+\mintinline{php}{protected} & Y  & Y & N \\
+\hline
+\mintinline{php}{private} & Y & N & N \\
+\hline
+\end{tabular}
+\caption{PHP Visibility Keywords \& Access Levels}
+\label{table:phpVisibilityKeywords}
+\end{table}
+
+In general, it is best practice to make member variables 
+\mintinline{php}{private} and control access to them via accessor and
+mutator methods (see below) unless there is a compelling design
+reason to increase their visibility.
+
+\section{Methods}
+
+The third aspect of encapsulation involves the grouping of methods that
+act on an object's data.  Within a class, we can declare member methods
+using the syntax we're already familiar with.  We declare a member
+method by using the keyword \mintinline{php}{function} and providing a signature and body.  We can use the same visibility
+keywords as with member variables in order allow or restrict access
+to the methods.  With methods, visibility and access determine whether 
+or not the method may be invoked.
+
+%TODO: discuss static keyword
+%In contrast to the methods we defined in Chapter 
+%\ref{chapter:php:functions}, when defining a member method, we
+%do \emph{not} use the \mintinline{java}{static} keyword.  Making
+%a variable or a method \mintinline{java}{static} means that the 
+%method belongs to the class and not to instances of the class.  
+%Thus, a \mintinline{java}{static} method would not be able to
+%access the member variables or methods of an instance unless 
+%it also had a reference to that instance.  
+
+Again, we add to our example by providing two \mintinline{php}{public}
+methods that compute and return a result on the member variables.  
+We also use javadoc-style comments to document each member method.
+
+\begin{minted}{php}
+class Student {
+
+  //member variables:
+  private $firstName;
+  private $lastName;
+  private $id;
+  private $gpa;
+
+  /**
+   * Returns a formatted String of the Student's
+   * name as Last, First.
+   */
+  public function getFormattedName() {
+    return $this->lastName . ", " . $this->firstName;
+  }
+  
+  /**
+   * Scales the GPA, which is assumed to be on a
+   * 4.0 scale to a percentage.
+   */
+  public function getGpaAsPercentage() {
+    return $this->gpa / 4.0;
+  }
+  
+}
+\end{minted}
+
+There is some new syntax in the example above.  In the member methods, 
+we need a way to refer to the instance's member variables.  The
+keyword \mintinline{php}{$this} is used to refer to the instance, 
+this is known as \gls{open recursion}.  
+
+When an instance of a class is created, for example, 
+
+\mintinline{php}{$s = new Student();}
+
+the reference variable \mintinline{php}{$s} is how we can refer
+to it.  This variable, however, exists \emph{outside} the class.  
+Inside the class, we need a way to refer to the instance itself.
+Since we don't have a variable \emph{inside} the class to reference 
+the instance itself, PHP provides the keyword \mintinline{php}{$this}
+in order to do so.  Then, to access the member variables we use
+the \emph{arrow operator} (more below) and reference the member
+variable via its identifier \emph{but with no dollar sign}.
+\footnote{You \emph{can} use the syntax \mintinline{php}{$this->$foo}
+but it will assume that \mintinline{php}{$foo} is a string that
+contains the \emph{name} of another variable, for example, 
+if \mintinline{php}{$foo = "firstName";} then \mintinline{php}{$this->$foo}
+would resolve to the instance's \mintinline{php}{$firstName}
+variable.  This is useful if your object has been dynamically 
+created by adding variables at runtime that were not part of
+the original class declaration.}
+
+\subsection{Accessor \& Mutator Methods}
+
+Since we have made all the member variables \mintinline{php}{private},
+no code outside the class may access or modify their values.  It is
+generally good practice to make member variables \mintinline{php}{private} 
+to restrict access.  However, if we still want code outside the object to
+access or mutate (that is, change) the variables, we can define accessor 
+and mutator methods (or just simply \emph{getter} and \emph{setter} 
+methods) to facilitate this.
+
+Each getter method returns the value of the instance's variable while
+each setter method takes a value and sets the instance's variable to
+the new value.  It is common to name each getter/setter by prefixing
+a \mintinline{php}{get} and \mintinline{php}{set} to the variable's
+name using lower camel casing.  For example:
+
+\begin{minted}{php}
+public function getFirstName() {
+  return $this->firstName;
+}
+
+public function setFirstName($firstName) {
+  $this->firstName = $firstName;
+} 
+\end{minted}
+
+One advantage to using getters and setters (as opposed to naively
+making everything \mintinline{php}{public}) is that you can have 
+greater control over the values that your variables can take.  For 
+example, we may want to do some data validation by rejecting
+\mintinline{php}{null} values or invalid values.  For example:
+
+\begin{minted}{php}
+public function setFirstName($firstName) {
+  if($firstName === null) {
+     throw new Exception("names cannot be null");
+  } else {
+    $this->firstName = $firstName;
+  }
+} 
+
+public function setGpa($gpa) {
+  if($gpa < 0.0 || $gpa > 4.0) {
+     throw new Exception("GPAs must be in [0, 4.0]");
+  } else {
+    $this->gpa = $gpa;
+  }
+} 
+\end{minted}
+
+Controlling access of member variables through getters and setters
+is good encapsulation.  Doing so makes your code more predictable and
+more testable.  Making your member variables \mintinline{php}{public}
+means that any piece of code can change their values.  There is no
+way to do validation or prevent bad values.  
+
+In fact, it is good practice to not even have setter methods.  If 
+the value of member variables cannot be changed, it makes the object
+\gls{immutable}.  Immutability is a nice property because it makes 
+instances of the class thread-safe.  That is, we can use instances of the class in a multithreaded program without having to worry about threads changing the values of the instance on one another.  
+
+\section{Constructors}
+
+If we make the (good) design decision to make our class immutable,
+we still need a way to initialize the values.  This is where 
+a \emph{constructor} comes in.  A constructor is a special method
+that specifies how an object is constructed.  With built-in
+variables such as an numbers or strings, PHP ``knows'' how to 
+interpret and assign a value to such a variable.  However, with 
+user-defined objects such as our \mintinline{php}{Student} class, 
+we need to specify how the object is created.
+
+Just as with functions outside of classes, PHP does not support 
+function overloading inside classes.  That is, you can only have
+one and only one function with a given identifier (name).  Thus,
+there is only \emph{one} possible constructor.  Moreover, PHP 
+reserves the name \mintinline{php}{__construct} for the constructor
+method.  The two underscores are a naming convention used by PHP
+to denote ``Magic Methods'' that are reserved and have a special
+purpose in the language.  Further, magic methods \emph{must} be
+made \mintinline{php}{public}.  Some magic methods provide default
+behavior while others do not.  For example, if you do not
+define a constructor method, the default behavior will be to
+create an object whose member variables all have \mintinline{php}{null} values.  
+
+The following constructor allows a user to construct an instance of
+our \mintinline{php}{Student} instance and specify all four member 
+variables.
+
+\begin{minted}{php}
+public function __construct($firstName, $lastName, $id, $gpa) {
+  $this->firstName = $firstName;
+  $this->lastName = $lastName;
+  $this->id = $id;
+  $this->gpa = $gpa;
+}
+\end{minted}
+
+Though we cannot define multiple constructors, we can use the 
+default value feature of PHP functions to allow a user to call our
+constructor with a different number of parameters.  For example, 
+
+\begin{minted}{php}
+public function __construct($firstName, $lastName, 
+                            $id = 0, $gpa = 0.0) {
+  $this->firstName = $firstName;
+  $this->lastName = $lastName;
+  $this->id = $id;
+  $this->gpa = $gpa;
+}
+\end{minted}
+
+\section{Usage}
+
+Once we have defined our class and its constructors, we can 
+create and use instances of it.  Just as with regular variables, 
+we simply need to assign them to an instance of an object and
+their type will dynamically change to match.  To create new
+instances, we invoke a constructor by using the \mintinline{php}{new} 
+keyword and providing arguments to the constructor.
+
+\begin{minted}{php}
+$s = new Student("Alan", "Turing", 1234, 3.4);
+$t = new Student("Margaret", "Hamilton", 4321, 3.9);
+$u = new Student("John", "Smith");
+\end{minted}
+
+The process of creating a new instance by invoking a constructor is
+referred to as \emph{instantiation}.  Once instances have been instantiated,
+they can be used by invoking their methods via the same arrow
+operator we used to access member variables.  Outside the class, however
+this will only work if the member method is \mintinline{php}{public}.
+
+\begin{minted}{php}
+print $t->getFormattedName() . "\n";
+
+if($s->getGpa() < $t->getGpa()) {
+  print $t->getFirstName() . " has a better GPA\n";
+}
+\end{minted}
+
+\section{Common Methods}
+
+%TODO: move or rename this section to subsection?
+
+Another useful magic method is the \mintinline{php}{__toString()} 
+method which returns a string representation of the object.  Unlike
+the constructor method, there is \emph{no} default behavior with the
+\mintinline{php}{__toString()} method.  If you do not define this
+function, it cannot be used (and any attempts to do so will result
+in a fatal error).  We can define the method to return the values of 
+all or some of the class's variables in whatever format we want.
+
+\begin{minted}{php}
+public function __toString() {
+  return sprintf("%s, %s (ID = %d); %.2f", 
+         $this->lastName,
+         $this->firstName,
+         $this->id,
+         $this->gpa);
+}
+\end{minted}
+
+This would return a string containing something similar to 
+
+\mintinline{text}{"Hamilton, Margaret (ID = 4321); 3.90"}
+
+The \mintinline{php}{__toString()} method is a very convenient way to
+print instances of your class.  
+
+\section{Composition}
+
+Another important concept when designing classes is \emph{composition}.
+Composition is a mechanism by which an object is made up of other objects.
+One object is said to ``own'' an instance of another object.  
+
+To illustrate the importance of composition, we could extend the 
+design of our \mintinline{php}{Student} class to include a date of 
+birth.  However, a date of birth is also made up of multiple pieces
+of data (a year, a month, a date, and maybe even a time and/or locale).
+We could design our own date/time class to model this, but its generally
+best to use what the language already provides.  PHP 5.2 introduced the
+\mintinline{php}{DateTime} object in which there is a lot of functionality
+supporting the representation and comparison of dates and time.
+
+We can take this concept further and have our own user-defined classes
+own instances of each other.  For example, we could define a 
+\mintinline{php}{Course} class and then update our 
+\mintinline{php}{Student} class to own a collection of 
+\mintinline{php}{Course} objects representing a student's class 
+schedule (this type of collection ownership is sometimes referred to 
+as \emph{aggregation} rather than composition).
+
+Both of these design updates beg the question: who is responsible for 
+instantiating the instances of \mintinline{php}{$dateOfBirth} and the 
+\mintinline{php}{$schedule}?  Should we force the ``outside'' user
+of our \mintinline{php}{Student} class to build a
+\mintinline{php}{DateTime} instance and pass it to a constructor?
+Should we allow the outside code to simply provide us a date of birth
+as a string and make the constructor responsible for creating the
+proper \mintinline{php}{DateTime} instance?  Do we require that a user 
+create a complete array of \mintinline{php}{Course} instances and 
+provide it to the constructor at instantiation?
+
+A more flexible approach might be to allow the construction of a 
+\mintinline{php}{Student} instance without having to provide a course 
+schedule.  Instead, we could add a method that allowed the outside 
+code to add a course to the student.  For example, 
+
+\begin{minted}{php}
+public function addCourse($c) {
+  $this->schedule[] = $c;
+}
+\end{minted}
+
+This adds some flexibility to our object, but removes the immutability
+property.  Design is always a balance and compromise between competing
+considerations.
+
+\section{Example}
+
+We present the full and completed \mintinline{php}{Student} class in
+Code Sample \ref{code:php:studentClass}.
+
+%\begin{listing}[H]
+\newpage
+%bgcolor={} resets the bgcolor to none so that the long minted
+% example will break correctly across pages.
+\inputminted[fontsize=\small,bgcolor={}]{php}{code/Student.php}
+%use the captionof command in the caption package to give it a 
+%caption and label:
+\captionof{listing}{The completed PHP \mintinline{php}{Student} class.
+\label{code:php:studentClass}
+}
+%\end{listing}
+
 

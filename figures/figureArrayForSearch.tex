@@ -1,0 +1,46 @@
+%\documentclass[12pt]{scrbook}
+%
+%\usepackage{tikz}
+%\usepackage{minted}
+%\usetikzlibrary{decorations.pathreplacing,arrows}
+%
+%\usepackage{fullpage}
+%\usepackage{subfigure}
+%\begin{document}
+%
+%
+%Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
+
+\begin{figure}
+\centering
+
+\begin{tikzpicture}
+% size of each node
+\def\sz{9mm}
+% node style definition
+\tikzstyle{block} = [
+	draw, fill=black!10, rectangle,
+	minimum height=\sz, minimum width=\sz ];
+\tikzstyle{plain} = [draw=none,fill=none];
+% array element definition
+\def\arr{42, 4, 9, 4, 102, 34, 12, 2, 0 };
+%\def\x{0}; % x pos of arr
+%\def\y{0}; % y pos of arr
+%\newcounter{ind};
+\setcounter{ind}{0};
+\node[plain] at (-1.75, 1) { index };
+\node[plain] at (-1.75, 0) { contents };
+\foreach \item in \arr
+{
+	\node[block] at (\theind*\sz,0) { \item };
+	\node[plain] at (\theind*\sz,1.0) { \theind };
+	\addtocounter{ind}{1};
+}
+\end{tikzpicture}
+
+\caption[Array of Integers]{Array of Integers}
+\label{figure:arrayForSearching}
+\end{figure}
+
+%\end{document}
+

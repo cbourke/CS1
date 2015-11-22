@@ -35,6 +35,10 @@
 %    \vskip0.5em}%
 %}
 
+%Used so that we can add captions to "floats" that
+%are broken over multiple pages
+\usepackage{caption}
+
 %as per online advice
 \usepackage{microtype}
 %\usepackage[T1]{fontenc}
@@ -146,6 +150,9 @@
 \theoremstyle{definition}
 \newtheorem{exer}{Exercise}
 \numberwithin{exer}{chapter}
+
+\newtheorem{problem}{Problem}
+
 
 %\usepackage{xspace}
 \newcommand{\Neg}{\ensuremath{\neg}}
