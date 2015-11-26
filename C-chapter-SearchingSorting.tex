@@ -14,13 +14,13 @@ and \emph{function pointers}.
 
 \section{Comparator Functions}
 
-Let's consider a ``generic'' quick sort algorithm as was presented in
+Let's consider a ``generic'' Quick Sort algorithm as was presented in
 Algorithm \ref{algo:quickSort}.  The algorithm itself specifies how to 
 sort elements, but
 it doesn't specify how they are \emph{ordered}.  The difference is subtle
-but important.  Essentially, quick sort needs to know when two elements, 
+but important.  Essentially, Quick Sort needs to know when two elements, 
 $a, b$ are in order, out of order, or equivalent in order to decide which
-partition each element goes on.  However, it doesn't ``know'' anything about
+partition each element goes in.  However, it doesn't ``know'' anything about
 the elements $a$ and $b$ themselves.  They could be numbers, they could
 be strings, they could be user-defined objects.  
 

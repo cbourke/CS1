@@ -2,8 +2,6 @@
 
 %%Chapter: FileIO in PHP
 
-TODO: filegetcontents, URL opening
-
 Because of the history of PHP, file functions, 
 just like string functions, were mostly influenced
 by the C standard library functions and have
@@ -83,10 +81,12 @@ Here is an example processing an entire file line-by-line:
 \begin{minted}{php}
 $h = fopen("input.data", "r"); 
 while(!feof($h)) {
-  //read the next line:  $line = fgets($h);
+  //read the next line:
+  $line = fgets($h);
   //trim it:
   $line = trim($line);
-  //process it, we'll just print it  print $line; 
+  //process it, we'll just print it
+  print $line; 
 }
 \end{minted}
 

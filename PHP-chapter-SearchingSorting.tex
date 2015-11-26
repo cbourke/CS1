@@ -1,0 +1,234 @@
+%!TEX root = ComputerScienceOne.tex
+
+%%Chapter: Searching & Sorting in PHP
+
+PHP provides over a dozen different sorting functions each with 
+different properties and behavior.  Recall that PHP has associative arrays
+which store elements as key-value pairs.  Some functions sort by keys,
+others sort by the value (with some in ascending order, others in 
+descending order).  Some functions preserve the key-value mapping
+and others do not.  
+
+For simplicity, we will focus on two of the most common sorting functions, 
+\mintinline{php}{sort()}, which sorts the elements in ascending order
+and \mintinline{php}{usort()} which sorts according to a comparator
+function.
+
+\section{Comparator Functions}
+
+Let's consider a ``generic'' Quick Sort algorithm as was presented in
+Algorithm \ref{algo:quickSort}.  The algorithm itself specifies how to 
+sort elements, but it doesn't specify how they are \emph{ordered}.  
+The difference is subtle but important.  Essentially, Quick Sort needs 
+to know when two elements, $a, b$ are in order, out of order, or equivalent 
+in order to decide which partition each element goes in.  However, it 
+doesn't ``know'' anything about the elements $a$ and $b$ themselves.  
+They could be numbers, they could be strings, they could be user-defined 
+objects.  
+
+A sorting algorithm still needs to be able to determine the proper ordering 
+in order to sort.  In PHP this is achieved through a \emph{comparator function}, 
+which is a function that is responsible for comparing two elements and
+determining their proper order.  A comparator function has the following 
+signature and behavior.
+
+\begin{itemize}
+  \item The function takes two elements \mintinline{php}{$a} and 
+    \mintinline{php}{$b} to be compared.  
+  \item The function returns an integer indicating the relative ordering of
+  	the two elements:
+	\begin{itemize}
+	  \item It returns something negative if \mintinline{php}{$a}
+	  comes before \mintinline{php}{$b} (that is, $a < b$)
+	  \item It returns zero if \mintinline{php}{$a} and \mintinline{php}{$b} are
+	  equal ($a = b$)
+	  \item It returns something positive if \mintinline{php}{$a}
+	  comes after \mintinline{php}{$b} (that is, $a > b$)
+	\end{itemize}
+\end{itemize}
+
+Note that there is no guarantee on the value's magnitude, it does \emph{not}
+necessarily return $-1$ or $+1$; it just returns \emph{something} negative or
+positive.  We've previously seen this pattern when comparing strings.  The
+standard PHP library provides a function, \mintinline{php}{strcmp($a, $b)} that
+has the same basic contract: it takes two strings and returns something
+negative, zero or something positive depending no the lexicographic ordering
+of the two strings.  
+
+The PHP language ``knows'' how to compare built-in types like numbers
+and strings.  However, to generalize the comparison operation, 
+we can define comparator functions that encapsulate more complex logic.
+As a simple first example, let's write a comparator function that orders 
+numbers in ascending order.  
+
+\begin{minted}{php}
+function cmpInt($a, $b) {
+  if($a < $b) {
+    return -1;
+  } else if($a === $b) {
+    return 0;
+  } else {
+    return -1;
+  }
+}
+\end{minted}
+
+What if we wanted to order integers in the opposite order?  We could write
+another comparator in which the comparisons or values are reversed.  Even
+simpler, we could reuse the comparator above and ``flip'' the sign by 
+multiplying by $-1$ (that is, after one of the purposes of writing functions:
+code reuse).  Even simpler still, we could just flip the arguments we pass to 
+\mintinline{php}{cmpInt()} to reverse the order.
+
+\begin{minted}{php}
+function cmpIntDesc($a, $b) {
+  return cmpInt($b, $a);
+}
+\end{minted}
+
+To illustrate some more examples, consider the \mintinline{php}{Student} class
+we defined in Code Sample \ref{code:php:studentClass}.  The following Code
+Samples demonstrate various ways of ordering \mintinline{php}{Student} 
+instances based on one or more of their components.
+
+\begin{minted}{php}
+/**
+ * A comparator function to order Student instances by 
+ * last name/first name in alphabetic order
+ */
+function studentByNameCmp($a, $b) {
+
+  int result = strcmp($a->getLastName(), $b->getLastName());
+  if(result == 0) {
+    return strcmp($a->getFirstName(), $b->getFirstName());
+  } else {
+    return result;
+  }
+}
+\end{minted}
+
+\begin{minted}{php}
+/**
+ * A comparator function to order Student instances by 
+ * last name/first name in reverse alphabetic order
+ */
+function studentByNameCmpDesc($a, $b) {
+
+  return studentByNameCmp($b, $a);
+}
+\end{minted}
+
+\begin{minted}{php}
+/**
+ * A comparator function to order Student instances by 
+ * id in ascending numerical order
+ */
+function studentIdCmp($a, $b) {
+
+  if($a->getId() < $b->getId()) {
+    return -1;
+  } else if($a->getId() === $b->getId()) {
+    return 0;
+  } else {
+    return 1;
+  }
+}
+\end{minted}
+
+\begin{minted}{php}
+/**
+ * A comparator function to order Student instances by 
+ * GPA in descending order
+ */
+function studentGpaCmp($a, $b) {
+
+  if($a->getGpa() > $b->getGpa()) {
+    return -1;
+  } else if($a->getGpa() == $b->getGpa()) {
+    return 0;
+  } else {
+    return 1;
+  }
+}
+\end{minted}
+
+\subsection{Searching}
+
+PHP provides a linear search function, \mintinline{php}{array_search()} that
+can be used to search for an element in an array.  The array can be specified
+to use loose comparisons (default) or strict comparisons.  It returns the
+key (i.e.\ index) of the first matching element it finds and 
+\mintinline{php}{false} if the search was unsuccessful.  For example:
+
+\begin{minted}{php}
+$arr = array(10, 8, 3, 12, 4, 42, 7, 108);
+$index = array_search(12, $arr); //index is now 3
+
+$arr = array("hello", 10, "mixed", 12, "20");
+//a loose search:
+$index = array_search(20, $arr); //index is now 4
+//a strict search:
+$index = array_search(20, $arr, false); //index is now false.
+\end{minted}
+
+PHP does not provide a standard binary search function.  Though you can
+write your own binary search implementation, likely the reason that that
+PHP does not provide one is because one is not needed.  The purpose of
+binary search is to search a sorted array efficiently.  However, PHP
+arrays are not usual arrays: they are associative arrays, essentially
+key-value maps.  Retrieving an element via its key is essentially a 
+constant-time operation, even more efficient that binary search.  A better
+solution may be to simply store the elements using a proper key which
+can be used to retrieve the element later on.  Even this solution is 
+not ideal as PHP associative array keys are limited to integers and
+strings.  
+
+\subsection{Sorting}
+
+PHP's \mintinline{php}{sort()} function can be used to sort elements
+in ascending order.  This is useful if you have arrays of numbers or
+strings, but doesn't work very well if you have an array of mixed types
+or objects.  
+
+\begin{minted}{php}
+$arr = array("banana", "Apple", "zebra", "apple", "bananas");
+sort($arr);
+//arr is now ("Apple", "apple", "banana", "bananas", "zebra")
+
+$arr = array(10, 8, 3, 12, 4, 42, 7, 108);
+sort($arr);
+//arr is now (3, 4, 7, 8, 10, 12, 42, 108)
+\end{minted}
+
+PHP provides a more versatile sorting function, \mintinline{php}{usort()}
+(\textbf{u}ser defined sort) that accepts a comparator function that
+it uses to define the ordering of elements.  To pass a comparator function
+to the \mintinline{php}{usort()} function, we pass a string value containing
+the name of the comparator function we wish to use.  Recall that function
+names in PHP are case insensitive, though it is still best practice to
+match the naming. Several examples of the usage 
+of this function are presented in Code Sample \ref{code:php:sortExamples}.
+
+\begin{listing}[H]
+\begin{minted}{php}
+$arr = array(10, 8, 3, 12, 4, 42, 7, 108);
+usort($arr, "cmpIntDesc");
+//arr is now 108, 42, 12, 10, 8, 7, 4, 3
+
+//roster is an array of Student instances
+$roster = ...
+
+//sort by name:
+usort($roster, "studentByNameCmp");
+
+//sort by ID:
+usort($roster, "studentIdCmp");
+
+//sort by GPA:
+usort($roster, "studentGpaCmp");
+\end{minted}
+\caption{Using PHP's \mintinline{php}{usort()} Function}
+\label{code:php:sortExamples}
+\end{listing}
+
+

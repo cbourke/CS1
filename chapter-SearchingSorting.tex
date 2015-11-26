@@ -12,6 +12,7 @@ a good framework from which to study the relative efficiency and complexity
 of algorithms through algorithm analysis.
 
 \section{Searching}
+\index{searching}
 
 Searching is a very basic operation.  Given a collection of data, we
 wish to find a particular element or elements that match a certain 
@@ -454,21 +455,26 @@ these functions are well-designed, well-tested, optimized and more efficient
 than any custom alternatives.
 
 \subsection{Selection Sort}
+\index{Selection Sort}
+\index{sorting!Selection Sort}
 
-TODO: HERE
+The first sorting algorithm we'll examine is \emph{Selection Sort} which is
+similar to the way a human would sort a collection of objects.  The basic idea
+is that you search through the collection and find the minimal element 
+(we say minimal and not minimum because there could be elements with the
+same value).  Once we've found a minimal element, we can swap it with the
+``first'' element, placing the minimal element where it needs to be in
+the collection.  
 
-\begin{itemize}
-  \item Iterate through the elements in the list and find the minimal element in the list
-  \item Swap the minimal element with the ``first'' element
-  \item Repeat the process on the remaining $n-1$ elements
-  \item Pseudocode presented in Algorithm \ref{algo:selectionSort}
-  \item Java code (for integers) presented in Code Sample \ref{code:javaSelectionSort}
-  \item C code (for integers) presented in Code Sample \ref{code:cSelectionSort}
-  \item Example
-  \item Note: Selection sort is not stable, an example: $2_a, 2_b, 1, 5$; the first swap would result in $1, 2_b, 2_a, 5$ and no subsequent changes would be made.
-\end{itemize}
-
-\subsubsection{Pseudocode}
+We repeat this process for the remaining elements, $a_2, \ldots, a_n$, 
+finding the minimal element among these and swapping with $a_2$.  In 
+general, if we have already sorted the first $i-1$ elements, 
+$a_1, \ldots, a_{i-1}$ then we only need to examine the elements
+$a_i, \ldots, a_n$ for the minimal element, swapping it with $a_i$.
+We end this process after we have sorted the first $n-1$ elements, 
+$a_1, \ldots, a_{n-1}$ since the last element $a_n$ will already
+be where it needs to be.  We present Selection Sort as Algorithm 
+\ref{algo:selectionSort}.
 
     \begin{algorithm}[H]
      \Input{A collection $A = \{a_1, \ldots, a_n\}$}
@@ -476,7 +482,7 @@ TODO: HERE
      \For{$i = 1, \ldots, (n-1)$}{
        $a_{min} \leftarrow a_i$ \;
        \For{$j = (i+1), \ldots, n$}{
-         \If{$a_{min} > a_j$}{
+         \If{$a_{min} > a_j$}{ \label{algo:selectionSortComp}
            $min \leftarrow a_j$ \;
          }
        }
@@ -486,34 +492,100 @@ TODO: HERE
     \label{algo:selectionSort}
     \end{algorithm}
 
+\subsubsection{Example}
+
+We illustrate the execution of Selection Sort in Figure
+\ref{figure:selectionSortExample}. 
+
+\input{figures/figureExampleSelectionSort}
+
 \subsubsection{Analysis}
 
-\begin{itemize}
-  \item Comparison performed: once, inner loop, outer loop
-  \item In total:
-    $$\sum_{i=1}^{n-1} \sum_{j=(i+1)}^{n} 1 = \sum_{i=1}^{n-1} (n - i) = n(n-1) - \sum_{i=1}^{n-1} i =  n(n-1) - \frac{n(n-1)}{2} =  \frac{n(n-1)}{2}$$
-  \item Selection Sort is $O(n^2)$
-\end{itemize}
+We now analyze Selection Sort to determine how complex it is.  First, the
+elementary operation is the comparison on line \ref{algo:selectionSortComp}.
+We need to determine how many times this line is executed with respect
+to the size of the input, $n$.
+
+First, we make the observation that on the $i$-th iteration, the first
+$i-1$ elements are sorted and we need not make any comparisons among
+them.  We start by assuming that the $a_i$ is the minimum element and
+compare it to the remaining $n-i$ elements, requiring $n-i$ comparisons,
+to find the minimal element.  For example, in the first iteration we
+make $n-1$ comparisons, the second we make $n-2$, etc.  The last
+iteration we make only 1 comparison.  Totaling these all up gives us
+
+$$(n-1) + (n-2) + (n-3) + \cdots + 3 + 2 + 1$$
+
+Rewritten this is 
+
+$$\sum_{i=1}^{n-1} i = 1 + 2 + 3 + \cdots + (n-2) + (n-1)$$
+
+We can use Gauss's Formula to solve this summation.
+
+\index{Gauss's Formula}
+\begin{theorem}[Gauss's Formula]
+The sum of integers $1$ up to $n$ can be written as follows.
+$$\sum_{i=1}^{n} i = 1 + 2 + 3 + \cdots + (n-1) + n = \frac{n(n+1)}{2}$$
+\end{theorem}
+
+In Selection Sort, the number of comparisons doesn't sum up to $n$, 
+only $n-1$.  Substituting this in gives us 
+
+$$\sum_{i=1}^{n-1} i = \frac{n(n-1)}{2}$$
+
+Another way to analyze the code is to count the number of comparisons
+with respect to the for-loop index variables.  In particular, there
+is one comparison made on line 4.  Line 4 itself is executed once
+for each time the inner for-loop on line 3 executes which executes 
+for $j$ running from $i+1$ up to $n$.  Line 3 and the entire inner
+for loop executes once for each time the outer for loop executes, 
+that is for $i$ running from $1$ up to $n-1$. This gives us the 
+following summation.
+  $$\underbrace{\sum_{i=1}^{n-1} \, \underbrace{\sum_{j=i+1}^{n} \, \underbrace{
+  \vphantom{\left(\frac{a^{0.3}}{b}\right)}
+1}_{\textrm{line 4}}}_{\textrm{line 3}}}_{\textrm{line 1}}$$
+Solving this summation gives us:
+\begin{align*}
+  \sum_{i=1}^{n-1} \sum_{j=i+1}^{n} 1 & = \sum_{i=1}^{n-1} n-i \\
+  ~ & = \sum_{i=1}^{n-1} n - \sum_{i=1}^{n-1} i \\
+  ~ & = n(n-1) - \frac{n(n-1)}{2}\\
+  ~ & = \frac{n(n-1)}{2}\\
+\end{align*}
+
+That is, Selection Sort is a \emph{quadratic} sorting algorithm, 
+requiring roughly $n^2$ comparisons to sort an array of $n$ elements.
+We analyze this further below.
 
 \subsection{Insertion Sort}
+\index{Insertion Sort}
+\index{sorting!Insertion Sort}
 
-\begin{itemize}
-  \item If we consider just the first element, the list is \emph{sorted}
-  \item Now consider the second element: we can \emph{insert} it in the currently sorted sublist
-  \item In general: at the $k$-th iteration, assume that elements $a_1, \ldots, a_k$ are sorted
-  \item Insert element $a_{k+1}$ into the proper location among elements $a_1, \ldots, a_k$
-  \item Insertion is performed by \emph{shifting} $a_{k+1}$ down until its in the right spot
-  \item Pseudocode presented in Algorithm \ref{algo:insertionSort}
-  \item Java code (for integers) presented in Code Sample \ref{code:javaInsertionSort}
-  \item C code (for integers) presented in Code Sample \ref{code:cInsertionSort}
-  \item Example
-\end{itemize}
+Another basic sorting algorithm is \emph{Insertion Sort} which works 
+slightly differently than Selection Sort.  Rather than finding a minimal
+element and swapping with the ``current'' element, the current element
+is \emph{inserted} in the list where it needs to be.
 
-\subsubsection{Pseudocode}
+If we consider just the first element, the collection is sorted by
+definition.  Now consider the second element: either its greater than
+the first element and so is sorted, or it is less than the first element
+and needs to be swapped.  In either case, the first two elements are now
+sorted.  If we continue this, then on the $i$-th iteration, the first
+$i$ elements, $a_1, \ldots, a_i$ are sorted (just as with Selection Sort).
+Now consider the $(i+1)$-th element: we will \emph{insert} it amongst
+the elements $a_1, \ldots, a_i$ where it needs to be.
 
-    \begin{algorithm}[H]
-     \Input{A collection $A = \{a_1, \ldots, a_n\}$}
-     \Output{An array $A'$ containing all elements of $A$ in nondecreasing order}
+We insert the ``current'' element, $a_{i+1}$ by comparing it to $a_i$: 
+if $a_i > a_{i+1}$, then we swap them.  We keep comparing the current
+element to the one immediately next to it, moving the elements ``up'' the
+collection until we find an element that is less than or equal to the
+current element at which point we stop.  Now the elements $a_1, \ldots, a_{i+1}$
+are now sorted.  In contrast to selection sort, we still need to process
+the last element as it might not be where it needs to be.  The
+full pseudocode is presented in Algorithm \ref{algo:insertionSort}.
+
+\begin{algorithm}[H]
+  \Input{A collection $A = \{a_1, \ldots, a_n\}$}
+  \Output{An array $A'$ containing all elements of $A$ in nondecreasing order}
      \For{$i = 2, \ldots, n$}{
        $x \leftarrow a_i$ \;
        $j \leftarrow i$ \;
@@ -523,228 +595,438 @@ TODO: HERE
        }
        $a_j \leftarrow x$ \;
      }
-    \caption{Insertion Sort}
-    \label{algo:insertionSort}
-    \end{algorithm}
+\caption{Insertion Sort}
+\label{algo:insertionSort}
+\end{algorithm}
+
+\subsubsection{Example}
+
+\input{figures/figureExampleInsertionSort}
 
 \subsubsection{Analysis}
 
-\begin{itemize}
-  \item Best case: list is already sorted, number of comparisons is $(n-1)$
-  \item Worst case: reversed list; each iteration shifts the element all the way down
-  \item First iteration: 1 comparison, 2nd: at most 2, etc., last iteration: at most $(n-1)$ comparisons
-	$$\sum_{i=1}^{n-1} i = \frac{n(n-1)}{2}$$
-  \item Worst case: $O(n^2)$
-  \item A more complex analysis for the \emph{average case}, but still $O(n^2)$
-  \item Practical consideration: insertion sort is inherently adaptive; good performance in practice
-  \item Very efficient on small lists, especially if there is already some structure (partially ordered) to them
-\end{itemize}
+As we can see in the example run of Insertion Sort, not every iteration needs
+to make comparisons with all elements in the sorted part of the collection.
+In iteration 4 we only had to make one comparison and we were done.  In other
+iterations such as the last two, we had to make comparisons to \emph{every}
+element in the sorted part of the collection.  This suggests that Insertion
+Sort is adaptive and may have a different complexity depending on the structure
+of the collection its sorting.  
+
+Let's consider the best case in which the number of comparisons is minimized.
+Suppose, for example, we ran Insertion Sort on a collection that was already
+sorted.  Each iteration would only need one comparison to determine that the
+element was already where it needed to be.  As there are only $n-1$ iterations,
+in the best case, Insertion Sort makes $n-1$ comparisons.  
+
+In contrast, the worst case would occur if the list was already sorted, but
+in reverse order.  The $i$-th iteration would require $i$ comparisons to
+move the current element all the way to the front of the collection.  Again, 
+this gives us a summation:
+$$\sum_{i=1}^{n-1} i = \frac{n(n-1)}{2}$$
+matching the complexity of Selection Sort.
+
+We could also analyze Insertion Sort with respect to average case.  On 
+average, we would expect to make about $\frac{1}{2}$ of the total 
+possible comparisons on each iteration.  That is, 
+$$\sum_{i=1}^{n-1} \frac{i}{2}$$
+Moving the constant outside the summation and applying Gauss's Formula
+would give us an expected number of comparisons to be
+$$\frac{n(n-1)}{4}$$
+This is still a quadratic function, but the constant involved and the
+fact that Insertion Sort is more adaptive to the input makes Insertion
+Sort a much better algorithm in practice than Selection Sort.  In
+fact, Insertion Sort is very efficient on ``small'' arrays in practice
+and is used in many hybrid algorithm implementations (see Section
+\ref{subsection:otherSorts}).
 
 
 \subsection{Quick Sort}
+\index{Quick Sort}
+\index{sorting!Quick Sort}
 
-Due to Tony Hoare in the early 1960s \cite{Hoare:1961:AQ:366622.366644,Quicksort}
+Selection Sort and Insertion Sort are simple algorithms, but inefficient, 
+making a quadratic number of comparisons in even the average case.  A
+more sophisticated and efficient algorithm is Quick Sort, first developed
+by Tony Hoare in the early 1960s \cite{Hoare:1961:AQ:366622.366644,Quicksort}.
 
+Quick Sort is a divide-and-conquer style algorithm that attempts to solve
+the sorting problem by splitting a collection up into two parts, then
+\emph{recursively} sorting each part.  
 
-\begin{itemize}
-  \item Choose a \emph{pivot} element $a_p$
-  \item Partition all other elements \emph{around} this pivot: move all less elements to the ``left'' side of the list; all greater elements to the ``right''
-  \item Place pivot element between them
-  \item Repeat the process on the two partitions until each sublist is trivially sorted (empty or a single element)
-  \item Pseudocode presented in Algorithm \ref{algo:quickSort} and \ref{algo:partition}
-  \item Java code (for integers) presented in Code Sample \ref{code:javaQuickSort}
-  \item C code (for integers) presented in Code Sample \ref{code:cQuickSort}
-  \item Example
-\end{itemize}
+The basic idea is as follows.  First, choose a \emph{pivot} element $p$
+in the collection.  We will then \emph{partition} all the elements in the
+collection around this pivot element by placing all elements less than
+$p$ in the ``left'' partition and all elements greater than $p$ in the
+``right'' partition.  This is a concept similar to binary search.  After
+partitioning all the elements, we place $p$ between them so that $p$ is
+where it needs to be.  We then repeat this process on the two partitions
+recursively.  The recursion stops when the size of the sub-collection is
+trivially sorted (it is empty or consists of a single element).
 
-\subsubsection{Pseudocode}
+Quick Sort is presented as Algorithm \ref{algo:quickSort} with a 
+partitioning subroutine presented in Algorithm \ref{algo:partition}.  
+The partitioning chooses the first element in the sub-collection as
+the pivot element.  Further, the partitioning is done in-place: we
+maintain two index variables, $i, j$ and increment/decrement them 
+respectively to find a pair that are both in the wrong partitions, 
+swapping them.  The partitioning continues until the two index 
+variables meet each other.  As a final step, the pivot element
+is placed between the two partitions and the index at which it is
+placed is returned to the main \textsc{QuickSort} routine so that
+it can make two recursive calls on the two partitions.
 
-    \begin{algorithm}[H]
-     \Input{A collection $A = \{a_1, \ldots, a_n\}$, indices $l, r$}
-     \Output{An array $A'$ containing all elements of $A$ in nondecreasing order}
-      \If{$l<r$}{
-        $s = $ \textsc{Partition}$(A[l\ldots r])$ \;
-        \textsc{QuickSort}$(A[l\ldots (s-1)])$ \;
-        \textsc{QuickSort}$(A[(s+1) \ldots r])$ \;
-      }
-    \caption{Quick Sort}
-    \label{algo:quickSort}
-    \end{algorithm}
+We depict a few examples of the partitioning algorithm.  Figure 
+\ref{figure:partitionExample1} depicts the first partitioning on the
+same example array while Figures \ref{figure:partitionExample2} and
+\ref{figure:partitionExample3} depict subsequent partitioning operations
+on subarrays as part of the recursion.
 
-    \begin{algorithm}[H]
-     \Input{Integer array $\mathcal{A}$, sub-indices $1 \leq l, r \leq n$}
-     \Output{A \emph{partitioned} integer array $\mathcal{A}'$ such that
-             all $A[l\ldots(j-1)] \leq A[j] \leq A[(j+1)\ldots r]$ and
-             an index $j$ of the pivot element.}
-     $pivot \leftarrow A[l]$ \; %\emph{//note the first element is arbitrarily chosen}\\
-     $i \leftarrow l$ \;
-     $j \leftarrow (r+1)$ \;
-     \Repeat{$i \geq j$}{
-       \Repeat{$a_i \geq pivot$}{
-         $i \leftarrow (i+1)$ \;
-         }
-       \Repeat{$a_j \leq pivot$}{
-         $j \leftarrow (j-1)$ \;
-         }
-       swap $a_i$, $a_j$ \;
-       }
-       swap $a_i$, $a_j$ \Comment{Undo the last swap}
-       swap $a_l$, $a_j$ \Comment{Swap the pivot}
-    \textbf{return} $j$ \;
-    \caption{In-Place Partition}
-    \label{algo:partition}
-    \end{algorithm}
+\begin{algorithm}[H]
+  \Input{A collection $A = \{a_1, \ldots, a_n\}$, indices $l, r$}
+  \Output{$A$, sorted in ascending order}
+  \If{$l<r$}{
+    $p \leftarrow \textsc{Partition}(A, l, r)$ \;
+    \textsc{QuickSort}$(A, l, p-1)$ \;
+    \textsc{QuickSort}$(A, p+1, r)$ \;
+  }
+\caption{\textsc{QuickSort}}
+\label{algo:quickSort}
+\end{algorithm}
+
+\begin{algorithm}[H]
+  \Input{A collection $A = \{a_1, \ldots, a_n\}$, indices $l, r$}
+  \Output{An index $s$ such that the sub-collection $A$ from $l$ to $r$ 
+          has been \emph{partitioned} around $s$ so that all elements 
+          $a_l, \ldots a_{s-1}$ are \emph{less} than $a_s$ and all elements 
+          $a_{s+1}, \ldots, a_r$ are greater than $a_s$}
+  $pivot \leftarrow a_l$ \; 
+  $i \leftarrow (l+1)$ \;
+  $j \leftarrow r$ \;
+  \While{$i < j$}{
+    \While{$i < j \And a_i \leq pivot$}{
+      $i \leftarrow (i+1)$ \;
+    }
+    \While{$i < j \And a_j \geq pivot$}{
+      $j \leftarrow (j-1)$ \;
+    }
+    swap $a_i$, $a_j$ \;
+  }
+  \Comment{Swap the pivot}
+  \eIf{$a_i \leq pivot$}{
+    swap $pivot$, $a_i$ \;
+    \textbf{output} $i$ \;
+  }{
+    swap $pivot$, $a_{i-1}$ \;
+    \textbf{output} $(i-1)$ \;
+  }    
+\caption{In-Place \textsc{Partition}}
+\label{algo:partition}
+\end{algorithm}
+
+\input{figures/figureExampleQuickSort1}
+\input{figures/figureExampleQuickSort2}
+\input{figures/figureExampleQuickSort3}
 
 \subsubsection{Analysis}
 
-\begin{itemize}
-  \item Performance of quick sort is highly dependent on how the \emph{even} the partitioning is
-  \item Partitioning depends on pivot choice
-\end{itemize}
+We can easily analyze how many comparisons are made by the \textsc{Partition}
+subroutine.  Suppose that we are given a (sub)array of $n$ elements.  Since 
+the pivot element must be compared to every other element in the (sub)array, 
+it must make $n-1$ comparisons to partition the elements around the pivot.
+If we count the last comparison to determine where to place the pivot, it 
+would be $n$ (but the difference is trivial).  
 
-Best Case
-\begin{itemize}
-  \item Ideal pivot choice: always choose the median element
-  \item Evenly divides the list into two equal parts
-  \item Two calls to quick sort on lists roughly half the size
-  \item A linear number of comparisons to partition
-  \item Recurrence:
-	$$C(n) = 2C\left(\frac{n}{2}\right) + n$$
-  \item By the Master Theorem, $O(n\log{n})$
-\end{itemize}
+The analysis of Quick Sort itself is a bit more involved and is highly
+dependent on how well the \textsc{Partition} subroutine splits the
+array.  In the worst case, our pivot choice will always partition the
+array into one ``empty'' subarray and one subarray with $n-1$ elements
+(we do not count the pivot element).  One such example of this would
+be if our collection is already sorted.  In this case, one of the
+recursive calls would result in no comparisons and the other would result
+in $n-1$ comparisons.  This lopsided recursion would result in the
+following number of comparisons:
+$$n + (n-1) + (n-2) + \cdots + 3 + 2 + 1$$
+which is exactly Gauss's Formula, meaning that Quick Sort would perform
+$$\frac{n(n+1)}{2}$$
+in the worst case.
 
-Worst Case
-\begin{itemize}
-  \item Worst pivot choice: an extremal element
-  \item Divides into an empty list and a list of size $(n-1)$
-  \item Only one recursive call is necessary, but on a list of size $(n-1)$
-  \item Recurrence:
-	$$C(n) = C(n-1) + n$$
-  \item Back substitution yields $O(n^2)$
-\end{itemize}
+However, in the sorting scenario, we cannot always assume the worst case.
+If we are given random data, then the likelihood that we will always have
+such an extremely lopsided partitioning is extremely small.  A more reasonable
+analysis would involve the average case: where each partition is roughly an
+equal size, \emph{about} $\frac{n}{2}$.  This happens when our pivot
+choice is the median (or \emph{close} to the median) element.
 
-Average Case
-\begin{itemize}
-  \item Even if the list is is split by a constant proportion, still $O(n\log{n})$
-  \item A careful average case analysis also yields
-	$$C(n) \approx 1.38n\log{n}$$
-  \item Still $O(n\log{n})$
-\end{itemize}
+To analyze the number of comparisons in this case, we can setup a 
+\emph{recurrence relation}:
+  $$C(n) = 2C\left( \frac{n}{2} \right) + n$$
+Here, $C(n)$ represents the number of comparisons made by Quick Sort
+on an array of size $n$.  The first term on the right hand side represents
+the fact that we make 2 recursive calls on subarrays of size (roughly)
+$\frac{n}{2}$.  The second term captures the number of comparisons we
+make in the \textsc{Partition} subroutine.  Solving this recurrence is
+a bit beyond the scope of the current discussion.  However, it can be
+shown that this is roughly equal to 
+  $$n\log{(n)}$$
+comparisons in the best case.  
 
-Pivot Choice: Pivot choice greatly affects performance; several strategies:
-\begin{itemize}
-  \item Median-of-Three -- Among three elements choose the median.
-        \begin{itemize}
-         \item Guarantees that the pivot choice will never be the
-               worst case.
-         \item Does not guarantee $\Theta(n\log{n})$.
-        \end{itemize}
-  \item Random Element -- Randomly select an index for a pivot element.
-        \begin{itemize}
-         \item Guarantees \emph{average} running time of $\Theta(n\log{n})$.
-         \item Extra work to randomly select a pivot.
-        \end{itemize}
-  \item Linear Time Median Finding.
-        \begin{itemize}
-         \item An algorithm exists that runs in $\Theta(n)$ time to
-               find the median of $n$ objects.
-         \item Guarantees $\Theta(n\log{n})$ in all cases.
-         \item Complicated; recursive; \emph{huge} overhead.
-        \end{itemize}
-\end{itemize}
+The difference between the best and worst case scenarios is in our pivot
+choice.  The ideal pivot choice is, of course, the median element.  However,
+to find the median, the usual strategy is to sort the collection first, 
+which sort of puts the cart before the horse.  If the data we're sorting is
+in more-or-less random order, then the choice of the first element as a
+pivot is good enough.  However, there are other strategies.
+
+One strategy is to randomly choose a pivot element.  A random choice 
+would make the worst-case scenario very unlikely over many runs of the
+algorithm.  Another strategy is to choose the median of three elements 
+(either fixed or randomized), ensuring that neither partition will ever
+be empty.  This strategy can be taken further to find the 
+median-of-three amongst each third of the array and then take the median
+of these (or the ``ninther'').  The more effort you put into finding the
+median the more the performance degrades in practice.\footnote{For
+example, there does exist a median-finding algorithm that runs in
+linear time which would guarantee the theoretically best running time, but
+the algorithm is recursive and has a large overhead, making its us
+slow in practice.}  A more sophisticated analysis of these strategies
+yields a complexity similar to the best case \cite{Bentley:1993:ESF:172704.172710}.
 
 \subsection{Merge Sort}
+\index{Merge Sort}
+\index{sorting!Merge Sort}
 
-Due to John von Neumann, 1945 (as reported by Knuth \cite{Knuth:1970:VNF:356580.356581}).
+Another ``fast'' sorting algorithm is Merge Sort, due to John von 
+Neumann, 1945 (as reported by Knuth \cite{Knuth:1970:VNF:356580.356581}).
+The performance is similar to Quick Sort's best/average case, making
+  $$n \log{(n)}$$
+comparisons.  However, Merge Sort's performance does not depend on the
+structure of the input array or a pivot choice, guaranteeing this performance
+in the best/average/worst case.\footnote{Still, Quick Sort is more common
+in practice because it has less memory requirements and the pivot choice
+strategies can mitigate the risk of the worst-case scenario.}
 
-\begin{itemize}
-  \item Divide the list into two (roughly) equal parts and recursively sort each
-  \item Recursion stops when the list is trivially sorted (empty or a single element)
-  \item When returning from the recursion, \emph{merge} the two lists together
-  \item Since both sublists are sorted, we only need to maintain an index to each list, add the least element, etc.
-  \item Only a linear amount of work to merge two sorted lists
-  \item Pseudocode presented in Algorithm \ref{algo:mergeSort}
-  \item Java code (for integers) presented in Code Sample \ref{code:javaMergeSort}
-  \item C code (for integers) presented in Code Sample \ref{code:cMergeSort}
-  \item Example
-\end{itemize}
+Merge Sort works by \emph{first} dividing the list into two (roughly) 
+equal partitions.  It then recursively sorts each partition.  The
+recursion stops when the subarray is of size $\leq 1$ just as with Quick
+Sort.  The difference, however, is what Merge Sort does after the
+recursion.  After having sorted the left partition, $L$ and the right
+partition $R$, Merge Sort \emph{merges} the two sorted partitions into
+one.
 
-\subsubsection{Pseudocode}
+The \textsc{Merge} subroutine works by maintaining two index variables, 
+$i, j$, one for each partition.  Suppose that the index variables 
+correspond to the elements $L_i$ and $R_j$ in the left/right partition.
+If $L_i \leq R_j$, we add $L_i$ to the end of a temporary array and
+increment $i$.  Otherwise we place $R_j$ into the temporary array
+and increment $j$.  We continue until we have examined every element
+in one or both partitions (if one partition still has elements in it, 
+we can simply copy the rest over in order).  This merge operation works
+because each subarray is sorted.
 
-    \begin{algorithm}[H]
-     \Input{An array, sub-indices $1\leq l, r \leq n$}
-     \Output{An array $A'$ such that $A[l, \ldots, r]$ is sorted}
-     \If{$l < r$} {
-        $\textsc{MergeSort}(A, l, \lfloor\frac{r+l}{2}\rfloor)$ \;
-        $\textsc{MergeSort}(A, \lceil\frac{r+l}{2}\rceil, r)$ \;
-        Merge sorted lists $A[l, \ldots, \lfloor\frac{r+l}{2}\rfloor]$ and$A[\lceil\frac{r+l}{2}\rceil, \ldots, r]$ \;
-      }
-    \caption{Merge Sort}
-    \label{algo:mergeSort}
-    \end{algorithm}
+Merge Sort is presented as Algorithm \ref{algo:mergeSort} with the
+\textsc{Merge} subroutine as Algorithm \ref{algo:merge}.
+
+\begin{algorithm}
+  \Input{A (sub)collection $A = \{a_l, \ldots, a_r\}$, indices $l, r$}
+  \Output{A collection $A'$ which is $A$ sorted}
+  \eIf{$l < r$} {
+    $m \leftarrow \lfloor\frac{l+r}{2}\rfloor$ \;
+    $L \leftarrow \textsc{MergeSort}(A, l, m)$ \;
+    $R \leftarrow \textsc{MergeSort}(A, m+1, r)$ \;
+    output $\textsc{Merge}(L, R)$ \;    
+  }{
+    output $A$ \;
+  }
+\caption{\textsc{MergeSort}}
+\label{algo:mergeSort}
+\end{algorithm}
+
+\begin{algorithm}[H]
+  \Input{Two sorted collections, $L$, $R$ of size $n, m$ respectively.}
+  \Output{A sorted collection $A$ consisting of all elements of $L$ and $R$}
+  $A \leftarrow $ a new, empty collection \;
+  $i \leftarrow 1$ \;
+  $j \leftarrow 1$ \;
+  $k \leftarrow 1$ \Comment{index variable for $A$} \;
+  \While{$i \leq n \And j \leq m$}{
+    \eIf{$L_i \leq R_i$}{
+      $A_k \leftarrow L_i$ \;
+      $i \leftarrow (i+1)$ \;
+    }{
+      $A_k \leftarrow L_j$ \;
+      $j \leftarrow (j+1)$ \;
+    }
+    $k \leftarrow (k+1)$ \;
+  }
+  \Comment{At least one collection is empty, we can blindly copy the other}
+  \While{$i \leq n$}{
+    $A_k \leftarrow L_i$ \;
+    $i \leftarrow (i+1)$ \;
+    $k \leftarrow (k+1)$ \;
+  }
+  \While{$j \leq m$}{
+    $A_k \leftarrow R_j$ \;
+    $j \leftarrow (j+1)$ \;
+    $k \leftarrow (k+1)$ \;
+  }
+  output $A$ \;
+\caption{\textsc{Merge}}
+\label{algo:merge}
+\end{algorithm}
+
+\subsubsection{Example}
+
+We present an example run of Merge Sort in Figure \ref{figure:mergeSortExample}
+(here, we have made the collection of size 8 to emphasize the even split).  
+An example run of the \textsc{Merge} subroutine on the last merge operation
+of this algorithm is presented in Figure \ref{figure:mergeExample}.
+
+\input{figures/figureExampleMergeSort}
 
 \subsubsection{Analysis}
 
-\begin{itemize}
-  \item Because merge sort divides the list \emph{first}, an even split is \emph{guaranteed}
-  \item After the recursion, a linear amount of work is done to merge the two lists
-  \item Basic idea:
-	\begin{itemize}
-	  \item Keep two index pointers to each sublist
-	  \item Copy the minimal element, advance the pointer
-	  \item Until one list is empty, then just copy the rest of the other
-	\end{itemize}
-  \item Requires use of $O(n)$-sized temporary array
-  \item Recurrence:
-	$$C(n) = 2C\left(\frac{n}{2}\right) + n$$
-  \item By the Master Theorem, $O(n\log{n})$
-  \item In fact, a guarantee (best, worst, average are the same)
-\end{itemize}
+Because Merge Sort divides the list \emph{first}, an even split is
+\emph{guaranteed}.  After the recursion, the \textsc{Merge} subroutine
+requires at most $n-1$ comparisons to merge the two collections.  This
+leads to a recurrence relation similar to Quick Sort, 
+  $$C(n) = 2C\left( \frac{n}{2} \right) + (n-1)$$
+A similar analysis yields a complexity of 
+  $n \log{(n)}$
 
-\subsection{Heap Sort}
+\subsection{Other Sorts}
+\label{subsection:otherSorts}
 
-Due to J.\ W.\ J.\ Williams, 1964 \cite{williams1964algorithm}.
+There are dozens of other sorting algorithms and many more variations on
+sorting algorithms, each with some unique properties and advantages.  
+For example, Heap Sort, due to J.\ W.\ J.\ Williams, 1964 
+\cite{williams1964algorithm}, uses a data structure called a \emph{heap}.
+\index{Heap Sort}\index{sorting!Heap Sort}  A heap stores elements in
+a \emph{tree} structure and offers efficient insertion of elements and
+retrieval of the minimal (or maximal for a ``max-heap'') element.  The
+sorting algorithm then simply inserts each element into the heap, and
+retrieves each element out of the heap.  Because of the the heap data
+structure, elements come out of the heap in order.  
 
-\subsection{Tim Sort}
+Other sorting algorithms are variations on those we've already seen or
+\emph{hybrid} sorting algorithms.  For example, we've already noted that
+Insertion Sort is efficient on ``small'' arrays.  One common technique
+is to use a fast sorting algorithm such as Quick Sort or Merge Sort, but
+then switch over to Insertion Sort at some point in the recursion rather
+than recursing to the point that the collection is of size 1 (or 0).  
+This switch point is usually tuned using empirical experiments.  
 
-Due to Tim Peters in 2002 \cite{Peters2002} who originally wrote it for the Python language.  It has since been adopted 
-in Java (version 7 for arrays of non-primitive types).
+A more recent sorting algorithm is Tim Sort, due to Tim Peters in 2002 
+\cite{Peters2002} \index{Tim Sort}\index{sorting!Tim Sort} who originally 
+developed it as the default sorting algorithm for the Python language.  
+It has since been adopted in Java (version 7 for arrays of non-primitive 
+types).  Tim Sort is a sort of ``bottom-up'' Merge Sort/Insertion Sort
+hybrid.  Instead of recursing, it looks for subsequences of elements that
+are already in order or nearly in order, then merges them.  It was designed
+to have many of the desirable properties of a sorting algorithm 
+including \emph{stability} (see below).
 
-\subsection{Summary}
 
-To summarize, consider the properties of each sorting algorithm
-as depicted in Table \ref{table:sortingSummary}.
+\subsection{Comparison \& Summary}
+
+To illustrate just how much more efficient an $n\log{(n)}$ sorting algorithm
+is over a naive $n^2$ algorithm consider the same scenarios as with searching.
+Suppose we want to sort a huge collection of 1 trillion, $10^{12}$, elements.
+Doing so with Selection Sort or Insertion Sort would require about 
+  $$n^2 = (10^{12})^2 = 10^{24}$$
+or 1 septillion comparisons.  The same sorting operation using either
+Quick Sort or Merge Sort would require only
+  $$n\log{(n)} = 10^{12} \log{10^{12}} \approx 4 \times 10^{13}$$
+or just under 40 trillion comparisons.  This is 25 \emph{billion} times
+fewer operations.  
+
+As another example, suppose that we sort a collection with $n$ elements
+and then want to double the size of our collection to $2n$.  How do each
+of these types of algorithms perform?  For the slow, $n^2$ algorithms we
+have 
+  $$(2n)^2 = 4n^2$$
+That is, doubling the input size \emph{quadruples} the number of operations
+Selection Sort and Insertion Sort perform.  However, for Quick Sort and
+Merge Sort, we only have
+  $$2n \log{(2n)} = 2n\left( \log{(2)} + \log{(n)}\right) = 2n\log{(n)} + 2n$$
+That is, only about twice as many operations (with an additive term of $2n$).
+
+Table \ref{table:sortingSummary} gives a summary of the complexity and other
+properties of the sorting algorithms we've seen.
 
 \begin{table}[h]
 \centering
-\begin{tabular}{|c|c|c|c|c|p{3cm}|}
+\begin{tabular}{|c|c|c|c|c|p{5cm}|}
 \hline
-\multirow{2}{*}{Algorithm} & \multicolumn{3}{|c|}{Complexity} & \multirow{2}{*}{Stability} & \multirow{2}{*}{Notes} \\ \cline{2-4}
+\multirow{2}{*}{Algorithm} & \multicolumn{3}{|c|}{Complexity} & \multirow{2}{*}{Stable?} & \multirow{2}{*}{Notes} \\ \cline{2-4}
 ~ & Best & Average & Worst & ~ & ~ \\
 \hline
-Bubble Sort & $O(n^2)$ & $O(n^2)$ & $O(n^2)$ & Stable & \\
+%Bubble Sort & $O(n^2)$ & $O(n^2)$ & $O(n^2)$ & Stable & \\
+%\hline
+Selection Sort & $\sim n^2$ & $\sim n^2$ & $\sim n^2$ & No & \\
 \hline
-Selection Sort & $O(n^2)$ & $O(n^2)$ & $O(n^2)$ & Not Stable & \\
+Insertion Sort & $\sim n$ & $\sim n^2$ & $\sim n^2$ & Yes & Best in practice for small collections\\
 \hline
-Insertion Sort & $O(n)$ & $O(n^2)$ & $O(n^2)$ & Stable & Best in practice for small collections\\
+Quick Sort & $\sim n\log{n}$ & $\sim n\log{n}$ & $\sim n^2$ & No & Performance depends on pivot choices\\
 \hline
-Quick Sort & $O(n\log{n})$ & $O(n\log{n})$ & $O(n^2)$ & Not Stable & Performance depends on pivot choices\\
-\hline
-Merge Sort & $\Theta(n\log{n})$ & $O(n\log{n})$ & $O(n\log{n})$ & Stable & Guaranteed $\Theta(n\log{n})$ \\
+Merge Sort & $\sim n\log{n}$ & $\sim n\log{n}$ & $\sim n\log{n}$ & Yes & Requires extra space \\
 \hline
 \end{tabular}
-\caption{Summary of Sorting Algorithms}
+\caption{Summary of Sorting Algorithms.  See Section
+\ref{subsection:sortingStability} for a discussion on stability.}
 \label{table:sortingSummary}
 \end{table}
 
-\section{Other Considerations}
+\section{Searching \& Sorting In Practice}
 
-\subsection{Preventing Arithmetic Errors in Binary Search}
+\subsection{Using Libraries and Comparators}
+\index{comparator}
 
-Recall that in binary search, we need to compute the index of the middle element.
-Given a left $l$ and right $r$ index variable, we computed the middle index
-as 
-  $$m \leftarrow \lfloor \frac{l + r}{2} \rfloor$$
+In practice you do not write your own searching and sorting
+algorithm implementations.  Instead, you use the functionality provided
+by the language, a framework, or a library.  First, there is rarely a
+good reason to ``reinvent'' the wheel and write your own if the functionality
+already exists.  Second, the algorithms and code provided by a language
+or library are typically optimized and have been well-tested.  Established
+libraries tend to have proven themselves over millions of computing hours.
+
+Typically, searching and sorting functions in a language are made to
+be \emph{generic}: they don't \emph{just} search a collection of numbers
+or strings.  Instead, they accept collections of \emph{any type}.  The
+basic algorithms for searching and sorting are generic themselves (after
+all we presented them as pseudocode).  The only real difference between
+an implementation for, say, numbers versus an sorting algorithm for 
+student objects is \emph{how} they are compared.  
+
+This genericness extends to objects.  It would be extremely inefficient, 
+development-wise, to have to rewrite Quick Sort for a collection of 
+student objects to sort them by name, then another to sort them by GPA, 
+then another for ID, and repeat them all again for a reversed ordering.
+Instead, a single, generic sorting algorithm is implemented that can
+be \emph{configured} by passing in a \emph{comparator}.
+
+A comparator is a function or object that provides functionality to determine
+how to order two elements (usually of the same type).  In general, a
+comparator takes two arguments, $a, b$ which are the elements to be 
+compared and returns an integer value with the following ``contract'':
+\begin{itemize}
+  \item Something negative, $< 0$ if $a$ comes before $b$, $a < b$
+  \item Zero if $a$ and $b$ are equivalent, $a = b$
+  \item Something positive, $> 0$ if $a$ comes after $b$, $a > b$
+\end{itemize}
+We've previously seen this type of functionality when comparing strings in
+Chapter \ref{chapter:strings}.  Using comparators allows us to reuse
+the generic search and sorting algorithms.  Now for each sorting that
+we want, we only need to create a comparator to define the \emph{ordering}
+rather than reimplementing the whole algorithm every single time.
+
+\subsection{Preventing Arithmetic Errors}
+
+Recall that in binary search, we need to compute the index of the middle 
+element.\footnote{Some implementations of Quick Sort will do something 
+similar when choosing the ``middle'' element as a pivot.}  Given a left 
+$l$ and right $r$ index variable, we computed the middle index as
+  $$m \leftarrow \left\lfloor \frac{l + r}{2} \right\rfloor$$
 Though mathematically correct, when implementing an expression like this, 
 care must be taken.  We may initially translate this pseudocode into a line
 that looks something like the following.
@@ -754,7 +1036,7 @@ that looks something like the following.
 However, this is prone to arithmetic errors in certain situations, particularly
 when dealing with large arrays.  If the variables \mintinline{c}{left} 
 and \mintinline{c}{right} have a sum that exceeds the maximum value that 
-a signed 32-bit integer can hold ($2^31 - 1 = 2,147,483,647$), then 
+a signed 32-bit integer can hold ($2^{31} - 1 = 2,147,483,647$), then 
 overflow will occur before the division by 2, leading to a (potentially) 
 negative index value and thus an invalid out-of-bounds error or exception.
 
@@ -777,21 +1059,176 @@ of binary search, unreported for nearly a decade \cite{Bloch2006}.
 
 \subsection{Avoiding the Difference Trick}
 
+Another issue related to arithmetic overflow is a common ``trick'' 
+used in comparators when ordering integer values.  Consider the following
+example: we want to order integer values in ascending order, the basic
+logic would look something like the following.
+
+\begin{algorithm}[H]
+\uIf{$a < b$}{
+  output $-1$ \;
+}
+\uElseIf{$a = b$}{
+  output $0$ \;
+}
+\Else{
+  output $+1$ \;
+}
+\end{algorithm}
+
+For example, if $a = 5, b = 10$ then our comparator would output $-1$.  If
+the values were $a = 10, b = 5$ it would output $+1$, and if they were
+equal, $a = b = 10$ then it would output zero.  A common ``trick'' is to
+instead compute the difference between these values, $a - b$.  Observe:
+
+\begin{center}
+\begin{tabular}{ccc}
+$a$ & $b$ & $a - b$ \\
+\hline\hline
+5 & 10 & $-5$ \\
+10 & 5 & $5$ \\
+5 & 5 & $0$ \\
+\end{tabular}
+\end{center}
+
+The \emph{sign} of the difference in each of these examples matches the 
+logic of our if-else-if statement.  The lazy programmer may be tempted to
+write a one liner, ``output $(a - b)$'' instead of the if-else-if statement.
+However, this would fail for certain values of $a$ and $b$.  Suppose 
+both of them are 32-bit 2s complement integers.  And suppose that 
+$a = 2^{31} - 1$, the maximum representable value, and $b = -10$.  In
+the logic above, $b$ would come before $a$ and so we would expect a 
+positive result.  However, our arithmetic trick would give the following 
+result:
+  $$(2^{31} - 1) - (-10) = 2^{31} + 9$$
+which, mathematically, is positive, but exceeds the maximum representable
+value, leading to overflow.  In most systems, the result of this arithmetic
+is $-2,147,483,639$, a negative value.  There are many other input values
+that could cause arithmetic overflow.  Only if you are \emph{absolutely} 
+sure that no arithmetic overflow is possible should you even consider
+using this ``trick.''
+
+Another issue with this trick is when comparing floating point values.
+GPAs for example: suppose that $a = 4.0$ and $b = 3.9$.  Their difference
+would be $a - b = 0.1$.  However, a comparator returns an \emph{integer}
+value.  In some languages this result would be casted to an integer, 
+truncating the fractional value, so that $0.1 \rightarrow 0$, meaning
+that a GPA of 3.9 is ``equivalent'' to the 4.0.  
+
+For these reasons, it is best to avoid this trick altogether.
+
 \subsection{Importance of a Total Order}
 
-Breaking ties, sorted types
+In many applications it is important to design your comparator to
+provide a \emph{total order}.  For example, suppose we have students
+``Gary Busey'' with an ID of 1234 and another student with the same
+name, ``Gary Busey'' but with an ID of 4321.  It is entirely possible
+(and common) for different people to have different names.  However,
+a comparator that ordered student objects base \emph{only} on the
+name fields would interpret these as the same person.  
 
-\subsection{More Gotchas}
+The distinction is especially important when using a comparator in a
+sorted collection (such as a Binary Search Tree, or Ordered Hash Map
+data structure) that \emph{maintains} an ordering on the elements.
+Many of these data structures do not allow ``duplicate'' elements where
+duplicity is determined by the comparator.  Attempting to insert both
+of these students will likely result in only one of them being in
+the collection as the second will be interpreted as a a duplicate.
+
+In such scenarios it is important to design your comparator to 
+\emph{break ties} by using some \emph{unique} data field of an object
+such as an ID.
+
+\subsection{Artificial Ordering}
+\index{natural order}
+
+Many languages recognize what is called a ``natural ordering'' on certain
+elements.  For example, numbers have a natural ordering: from least to
+greatest.  Strings also have a natural ordering: lexicographic ordering.
+However, we often wish to order elements in an artificial ordering.
+
+For example, suppose we wish to include the year of a student, Freshman,
+Sophomore, Junior, or Senior.  If we modeled these as strings, the
+natural ordering would be alphabetical:
+  $$Freshman, Junior, Senior, Sophomore$$
+However, if we order students by year, we would want the artificial
+order of Freshman, Sophomore, Junior, or Senior.  
+
+To do this, we might have a whole series of if-else-if statements to
+order these elements
+\begin{algorithm}[H]
+\Input{Two student objects, $a, b$}
+\uIf{$a.year = b.year$}{
+  output 0 \;
+}
+\uElseIf{$a.year = ``Freshman''$}{
+  output $-1$ \;
+}
+\uElseIf{$b.year = ``Freshman''$}{
+  output $1$ \;
+}
+\uElseIf{$a.year = ``Sophomore''$}{
+  output $-1$ \;
+}
+$\ldots$
+\end{algorithm}
+
+However, this logic is complex and does not provide a good solution if
+we want to then add support for ``Pre-freshman'' or ``Graduate'', etc.
+
+Another solution would be to model the year using a data type that has a 
+natural ordering.  For example, we could define an enumerated type
+and associate each of the years with 0, 1, 2, 3; giving them a
+natural ordering.
+
+Alternatively, we could use a data structure, such as a map, to model
+the artificial ordering.  For example, we could map ``Freshman'' to 0, 
+``Sophomore'' to 1, etc. Then, when we wanted to order two elements, we
+could look up the ``natural value'' via the map and use their natural
+ordering to order our elements.
+
 
 \subsection{Sorting Stability}
+\label{subsection:sortingStability}
+\index{sorting!stability}
 
+One desirable property of sorting algorithms is \emph{stability}.  A
+sorting algorithm is \emph{stable} if the relative order of ``equal'' 
+elements is preserved.  For example, suppose we have the following
+integer values:
+  $$10, 2_a, 5, 2_b$$
+The subscripts on the two 2 values are for demonstration purposes only.
+A stable sorting algorithm would sort the elements as:
+  $$2_a, 2_b, 5, 10$$
+preserving the relative ordering of the two 2 elements.  However, an
+unstable sorting algorithm may instead produce
+  $$2_b, 2_a, 5, 10$$
+The collection is still sorted, but the two equal elements have been 
+reversed from their original ordering.
 
-Sorting stability: A sorting algorithm is said to be \emph{stable} if the relative order of ``equal'' elements is preserved.
-\begin{itemize}
-  \item Example: suppose that a list contains $10, 2_a, 5, 2_b$; a stable sorting algorithm would produce $2_a, 2_b, 5, 10$
-	while a non-stable sorting algorithm may produce $2_b, 2_a, 5, 10$.
-  \item Stable sorts are important for data presentation (sorting by two columns/categories)
-  \item Stability depends on inequalities used and behavior of algorithms
-\end{itemize}
+Sorting stability is often desirable for data presentation.  A user
+can typically sort table data by clicking on a column header.  Suppose
+we sorted a table of students first by GPA then by year.  We would expect
+that all Freshman would be grouped together and within that group, would
+be ordered by GPA (because the first ordering would be preserved).  An
+unstable sorting algorithm would result in all Freshman being grouped together, but within that grouping, the students would not necessarily be ordered 
+by GPA.
+
+As indicated in Table \ref{table:sortingSummary}, some algorithms (as presented)
+are stable and others are not.  For example, Selection Sort is not stable.  
+Consider the following input:
+ $$2_a, 2_b, 1, 5$$
+In the first iteration, $1$ and $2_a$ would be swapped, resulting in a
+sorted collection, but with $2_b$ preceding $2_a$.
+
+Insertion Sort, however, is stable: it only moves an element down the
+collection if it is \emph{strictly} less than its adjacent element.  Likewise,
+Merge Sort is stable since we ``prefer'' elements from the left partition
+when equal.
+
+Quick Sort is not stable as the partitioning can easily place things out of
+their original relative ordering.  Usually, sorting algorithms can be 
+\emph{made} to be stable by doing some extra work, but it may impact the
+performance.
 
 

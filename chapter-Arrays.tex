@@ -439,6 +439,9 @@ the operating system when the program terminates.
 
 \subsection{Shallow vs. Deep Copies}
 \label{subsection:shallowVsDeep}
+\index{shallow copy}
+\index{deep copy}
+
 
 In most languages, an array variable is actually a \emph{reference}
 to the array in memory.  We could create an array referred to 
@@ -458,6 +461,8 @@ affect the other.  This distinction is illustrated in Figure
 
 
 \section{Multidimensional Arrays}
+\index{multidimensional arrays}
+\index{arrays!multidimensional}
 
 A normal array is usually one dimensional.  One can think an array
 as a single ``row'' in a table that contains a certain number of entries.
@@ -527,6 +532,7 @@ created, its size is fixed and cannot, in general, be changed.  However,
 dynamic collections can grow (and shrink) as needed when you 
 add or remove elements from them.
 
+\index{lists}
 \emph{Lists} are ordered collections that are essentially dynamic arrays.  
 Lists are ordered and are usually zero-indexed just like arrays.  Lists
 are generally objects and provide methods that can be used to add, 
@@ -541,6 +547,7 @@ in \emph{nodes} that are linked together.  Adding a new element
 simply involves creating a new node and linking it to the last element
 in the list.
 
+\index{sets}
 Some languages also define what are called \emph{sets}.  Sets allow
 you to store elements dynamically just like lists, but sets are generally
 \emph{unordered}.  There is no concept of a first, second, or last 
@@ -552,6 +559,7 @@ for example, would only ever appear once.  If you added 10 to a set
 that already contained it, the operation would have no effect on the
 set.
 
+\index{associative arrays}
 Another type of dynamic array are \emph{associative arrays} (sometimes
 called \emph{dictionaries}).  An associative array
 holds elements, but may not be restricted in how they are indexed.
@@ -562,6 +570,7 @@ be fully defined nor contiguous.  In an associative array you could
 define an element at index 5 and then place the next element at index
 10, skipping index 6 through 9 which would remain undefined.
 
+\index{maps}
 One way to look at associative arrays is as a \emph{map}.  A map
 is a data structure that stores elements as key-value pairs.  Both 
 they keys and values could be any arbitrary type (integers or strings)

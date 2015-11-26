@@ -1,0 +1,448 @@
+%\documentclass[12pt]{scrbook}
+%
+%\usepackage{tikz}
+%\usepackage{minted}
+%\usetikzlibrary{decorations.pathreplacing,arrows}
+%\usetikzlibrary{arrows,decorations.pathmorphing,backgrounds,positioning,fit,petri}
+%
+%\usepackage{fullpage}
+%\usepackage{subfigure}
+%\begin{document}
+%
+%
+%Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
+%
+
+
+
+
+\begin{figure}
+\centering
+
+\subfigure[First iteration.  We find the minimal element, 0, at the last
+index, swapping it with the first element.  At this point, the first
+element is sorted.]{
+
+\begin{tikzpicture}[scale=.65,transform shape]
+
+\tikzset{>=stealth',shorten <=.2cm,>=stealth',shorten >=.2cm}
+% size of each node
+\def\sz{9mm}
+% node style definition
+\tikzstyle{block} = [
+	draw, fill=black!10, rectangle,
+	minimum height=\sz, minimum width=\sz ];
+\tikzstyle{plain} = [draw=none,fill=none];
+
+%\node[plain] at (-1.75, 1) { index };
+%\node[plain] at (0*\sz,1.0) { 0 };
+%\node[plain] at (1*\sz,1.0) { 1 };
+%\node[plain] at (2*\sz,1.0) { 2 };
+%\node[plain] at (3*\sz,1.0) { 3 };
+%\node[plain] at (4*\sz,1.0) { 4 };
+%\node[plain] at (5*\sz,1.0) { 5 };
+%\node[plain] at (6*\sz,1.0) { 6 };
+%\node[plain] at (7*\sz,1.0) { 7 };
+%\node[plain] at (8*\sz,1.0) { 8 };
+%\node[plain] at (-1.75, 0) { contents };
+%
+
+\node[block,fill=black!30] (a0) at (0*\sz,0) { 42 };
+\node[block] (a1) at (1*\sz,0) { 4 };
+\node[block] (a2) at (2*\sz,0) { 9 };
+\node[block] (a3) at (3*\sz,0) { 4 };
+\node[block] (a4) at (4*\sz,0) { 102 };
+\node[block] (a5) at (5*\sz,0) { 34 };
+\node[block] (a6) at (6*\sz,0) { 12 };
+\node[block] (a7) at (7*\sz,0) { 2 };
+\node[block,fill=green!30] (a8) at (8*\sz,0) { 0 };
+
+\draw[<->] (a0.south) to [bend right] node[pos=.5,below] {swap} (a8.south);
+
+\end{tikzpicture}~~~~~\begin{tikzpicture}[scale=.65,transform shape]
+\draw[white] (0,0) rectangle (1, -2.05);
+
+\tikzset{>=stealth',shorten <=.2cm,>=stealth',shorten >=.2cm}
+\def\sz{9mm}
+\tikzstyle{block} = [
+	draw, fill=black!10, rectangle,
+	minimum height=\sz, minimum width=\sz ];
+\tikzstyle{plain} = [draw=none,fill=none];
+
+\node[block,fill=black!50] (a0) at (0*\sz,0) { 0 };
+\node[block] (a1) at (1*\sz,0) { 4 };
+\node[block] (a2) at (2*\sz,0) { 9 };
+\node[block] (a3) at (3*\sz,0) { 4 };
+\node[block] (a4) at (4*\sz,0) { 102 };
+\node[block] (a5) at (5*\sz,0) { 34 };
+\node[block] (a6) at (6*\sz,0) { 12 };
+\node[block] (a7) at (7*\sz,0) { 2 };
+\node[block] (a8) at (8*\sz,0) { 42 };
+
+\end{tikzpicture}
+
+}
+
+\subfigure[Second Iteration.  Now starting with the second element, the
+minimal element among the remaining is found at the second to last element.
+4 and 2 are swapped.  At this point, the first two elements are sorted.]{
+
+\begin{tikzpicture}[scale=.65,transform shape]
+
+\tikzset{>=stealth',shorten <=.2cm,>=stealth',shorten >=.2cm}
+\def\sz{9mm}
+\tikzstyle{block} = [
+	draw, fill=black!10, rectangle,
+	minimum height=\sz, minimum width=\sz ];
+\tikzstyle{plain} = [draw=none,fill=none];
+
+\node[block,fill=black!50] (a0) at (0*\sz,0) { 0 };
+\node[block,fill=black!30] (a1) at (1*\sz,0) { 4 };
+\node[block] (a2) at (2*\sz,0) { 9 };
+\node[block] (a3) at (3*\sz,0) { 4 };
+\node[block] (a4) at (4*\sz,0) { 102 };
+\node[block] (a5) at (5*\sz,0) { 34 };
+\node[block] (a6) at (6*\sz,0) { 12 };
+\node[block,fill=green!30] (a7) at (7*\sz,0) { 2 };
+\node[block] (a8) at (8*\sz,0) { 42 };
+
+\draw[<->] (a1.south) to [bend right] node[pos=.5,below] {swap} (a7.south);
+
+\end{tikzpicture}~~~~~\begin{tikzpicture}[scale=.65,transform shape]
+\draw[white] (0,0) rectangle (1, -1.75);
+
+\tikzset{>=stealth',shorten <=.2cm,>=stealth',shorten >=.2cm}
+\def\sz{9mm}
+\tikzstyle{block} = [
+	draw, fill=black!10, rectangle,
+	minimum height=\sz, minimum width=\sz ];
+\tikzstyle{plain} = [draw=none,fill=none];
+
+\node[block,fill=black!50] (a0) at (0*\sz,0) { 0 };
+\node[block,fill=black!50] (a1) at (1*\sz,0) { 2 };
+\node[block] (a2) at (2*\sz,0) { 9 };
+\node[block] (a3) at (3*\sz,0) { 4 };
+\node[block] (a4) at (4*\sz,0) { 102 };
+\node[block] (a5) at (5*\sz,0) { 34 };
+\node[block] (a6) at (6*\sz,0) { 12 };
+\node[block] (a7) at (7*\sz,0) { 4 };
+\node[block] (a8) at (8*\sz,0) { 42 };
+
+%\draw[<->] (a1.south) to [bend right] node[pos=.5,below] {swap} (a7.south);
+
+\end{tikzpicture}
+
+}
+
+\subfigure[Third iteration.  Since we are using the strictly-less than comparison, the first 4 is the minimal element and swapped with 9.]{
+
+\begin{tikzpicture}[scale=.65,transform shape]
+
+\tikzset{>=stealth',shorten <=.2cm,>=stealth',shorten >=.2cm}
+\def\sz{9mm}
+\tikzstyle{block} = [
+	draw, fill=black!10, rectangle,
+	minimum height=\sz, minimum width=\sz ];
+\tikzstyle{plain} = [draw=none,fill=none];
+
+\node[block,fill=black!50] (a0) at (0*\sz,0) { 0 };
+\node[block,fill=black!50] (a1) at (1*\sz,0) { 2 };
+\node[block,fill=black!30] (a2) at (2*\sz,0) { 9 };
+\node[block,fill=green!30] (a3) at (3*\sz,0) { 4 };
+\node[block] (a4) at (4*\sz,0) { 102 };
+\node[block] (a5) at (5*\sz,0) { 34 };
+\node[block] (a6) at (6*\sz,0) { 12 };
+\node[block] (a7) at (7*\sz,0) { 4 };
+\node[block] (a8) at (8*\sz,0) { 42 };
+
+\draw[<->] (a2.south) to [bend right] node[pos=.5,below] {swap} (a3.south);
+
+\end{tikzpicture}~~~~~\begin{tikzpicture}[scale=.65,transform shape]
+\draw[white] (0,0) rectangle (1, -1.1);
+
+\tikzset{>=stealth',shorten <=.2cm,>=stealth',shorten >=.2cm}
+\def\sz{9mm}
+\tikzstyle{block} = [
+	draw, fill=black!10, rectangle,
+	minimum height=\sz, minimum width=\sz ];
+\tikzstyle{plain} = [draw=none,fill=none];
+
+\node[block,fill=black!50] (a0) at (0*\sz,0) { 0 };
+\node[block,fill=black!50] (a1) at (1*\sz,0) { 2 };
+\node[block,fill=black!50] (a2) at (2*\sz,0) { 4 };
+\node[block] (a3) at (3*\sz,0) { 9 };
+\node[block] (a4) at (4*\sz,0) { 102 };
+\node[block] (a5) at (5*\sz,0) { 34 };
+\node[block] (a6) at (6*\sz,0) { 12 };
+\node[block] (a7) at (7*\sz,0) { 4 };
+\node[block] (a8) at (8*\sz,0) { 42 };
+
+%\draw[<->] (a1.south) to [bend right] node[pos=.5,below] {swap} (a7.south);
+
+\end{tikzpicture}
+
+}
+
+\subfigure[Fourth iteration.  At this point, the first 3 elements are
+sorted.  We find the minimal element (the other 4) and swap it with
+9.  At the end of this iteration, the first 4 elements are sorted.]{
+
+\begin{tikzpicture}[scale=.65,transform shape]
+
+\tikzset{>=stealth',shorten <=.2cm,>=stealth',shorten >=.2cm}
+\def\sz{9mm}
+\tikzstyle{block} = [
+	draw, fill=black!10, rectangle,
+	minimum height=\sz, minimum width=\sz ];
+\tikzstyle{plain} = [draw=none,fill=none];
+
+\node[block,fill=black!50] (a0) at (0*\sz,0) { 0 };
+\node[block,fill=black!50] (a1) at (1*\sz,0) { 2 };
+\node[block,fill=black!50] (a2) at (2*\sz,0) { 4 };
+\node[block,fill=black!30] (a3) at (3*\sz,0) { 9 };
+\node[block] (a4) at (4*\sz,0) { 102 };
+\node[block] (a5) at (5*\sz,0) { 34 };
+\node[block] (a6) at (6*\sz,0) { 12 };
+\node[block,fill=green!30] (a7) at (7*\sz,0) { 4 };
+\node[block] (a8) at (8*\sz,0) { 42 };
+
+\draw[<->] (a3.south) to [bend right] node[pos=.5,below] {swap} (a7.south);
+
+\end{tikzpicture}~~~~~\begin{tikzpicture}[scale=.65,transform shape]
+\draw[white] (0,0) rectangle (1, -1.5);
+
+\tikzset{>=stealth',shorten <=.2cm,>=stealth',shorten >=.2cm}
+\def\sz{9mm}
+\tikzstyle{block} = [
+	draw, fill=black!10, rectangle,
+	minimum height=\sz, minimum width=\sz ];
+\tikzstyle{plain} = [draw=none,fill=none];
+
+\node[block,fill=black!50] (a0) at (0*\sz,0) { 0 };
+\node[block,fill=black!50] (a1) at (1*\sz,0) { 2 };
+\node[block,fill=black!50] (a2) at (2*\sz,0) { 4 };
+\node[block,fill=black!50] (a3) at (3*\sz,0) { 4 };
+\node[block] (a4) at (4*\sz,0) { 102 };
+\node[block] (a5) at (5*\sz,0) { 34 };
+\node[block] (a6) at (6*\sz,0) { 12 };
+\node[block] (a7) at (7*\sz,0) { 9 };
+\node[block] (a8) at (8*\sz,0) { 42 };
+
+%\draw[<->] (a1.south) to [bend right] node[pos=.5,below] {swap} (a7.south);
+
+\end{tikzpicture}
+
+}
+
+\subfigure[Fifth iteration.  The 9 is swapped with 102, sorting
+the first 5 elements.]{
+
+\begin{tikzpicture}[scale=.65,transform shape]
+
+\tikzset{>=stealth',shorten <=.2cm,>=stealth',shorten >=.2cm}
+\def\sz{9mm}
+\tikzstyle{block} = [
+	draw, fill=black!10, rectangle,
+	minimum height=\sz, minimum width=\sz ];
+\tikzstyle{plain} = [draw=none,fill=none];
+
+\node[block,fill=black!50] (a0) at (0*\sz,0) { 0 };
+\node[block,fill=black!50] (a1) at (1*\sz,0) { 2 };
+\node[block,fill=black!50] (a2) at (2*\sz,0) { 4 };
+\node[block,fill=black!50] (a3) at (3*\sz,0) { 4 };
+\node[block,fill=black!30] (a4) at (4*\sz,0) { 102 };
+\node[block] (a5) at (5*\sz,0) { 34 };
+\node[block] (a6) at (6*\sz,0) { 12 };
+\node[block,fill=green!30] (a7) at (7*\sz,0) { 9 };
+\node[block] (a8) at (8*\sz,0) { 42 };
+
+\draw[<->] (a4.south) to [bend right] node[pos=.5,below] {swap} (a7.south);
+
+\end{tikzpicture}~~~~~\begin{tikzpicture}[scale=.65,transform shape]
+\draw[white] (0,0) rectangle (1, -1.4);
+
+\tikzset{>=stealth',shorten <=.2cm,>=stealth',shorten >=.2cm}
+\def\sz{9mm}
+\tikzstyle{block} = [
+	draw, fill=black!10, rectangle,
+	minimum height=\sz, minimum width=\sz ];
+\tikzstyle{plain} = [draw=none,fill=none];
+
+\node[block,fill=black!50] (a0) at (0*\sz,0) { 0 };
+\node[block,fill=black!50] (a1) at (1*\sz,0) { 2 };
+\node[block,fill=black!50] (a2) at (2*\sz,0) { 4 };
+\node[block,fill=black!50] (a3) at (3*\sz,0) { 4 };
+\node[block,fill=black!50] (a4) at (4*\sz,0) { 9 };
+\node[block] (a5) at (5*\sz,0) { 34 };
+\node[block] (a6) at (6*\sz,0) { 12 };
+\node[block] (a7) at (7*\sz,0) { 102 };
+\node[block] (a8) at (8*\sz,0) { 42 };
+
+%\draw[<->] (a1.south) to [bend right] node[pos=.5,below] {swap} (a7.south);
+
+\end{tikzpicture}
+
+}
+
+\subfigure[Sixth iteration.  12 is swapped with 34.]{
+
+\begin{tikzpicture}[scale=.65,transform shape]
+
+\tikzset{>=stealth',shorten <=.2cm,>=stealth',shorten >=.2cm}
+\def\sz{9mm}
+\tikzstyle{block} = [
+	draw, fill=black!10, rectangle,
+	minimum height=\sz, minimum width=\sz ];
+\tikzstyle{plain} = [draw=none,fill=none];
+
+\node[block,fill=black!50] (a0) at (0*\sz,0) { 0 };
+\node[block,fill=black!50] (a1) at (1*\sz,0) { 2 };
+\node[block,fill=black!50] (a2) at (2*\sz,0) { 4 };
+\node[block,fill=black!50] (a3) at (3*\sz,0) { 4 };
+\node[block,fill=black!50] (a4) at (4*\sz,0) { 9 };
+\node[block,fill=black!30] (a5) at (5*\sz,0) { 34 };
+\node[block,fill=green!30] (a6) at (6*\sz,0) { 12 };
+\node[block] (a7) at (7*\sz,0) { 102 };
+\node[block] (a8) at (8*\sz,0) { 42 };
+
+\draw[<->] (a5.south) to [bend right] node[pos=.5,below] {swap} (a6.south);
+
+\end{tikzpicture}~~~~~\begin{tikzpicture}[scale=.65,transform shape]
+\draw[white] (0,0) rectangle (1, -1.1);
+
+\tikzset{>=stealth',shorten <=.2cm,>=stealth',shorten >=.2cm}
+\def\sz{9mm}
+\tikzstyle{block} = [
+	draw, fill=black!10, rectangle,
+	minimum height=\sz, minimum width=\sz ];
+\tikzstyle{plain} = [draw=none,fill=none];
+
+\node[block,fill=black!50] (a0) at (0*\sz,0) { 0 };
+\node[block,fill=black!50] (a1) at (1*\sz,0) { 2 };
+\node[block,fill=black!50] (a2) at (2*\sz,0) { 4 };
+\node[block,fill=black!50] (a3) at (3*\sz,0) { 4 };
+\node[block,fill=black!50] (a4) at (4*\sz,0) { 9 };
+\node[block,fill=black!50] (a5) at (5*\sz,0) { 12 };
+\node[block] (a6) at (6*\sz,0) { 34 };
+\node[block] (a7) at (7*\sz,0) { 102 };
+\node[block] (a8) at (8*\sz,0) { 42 };
+
+%\draw[<->] (a1.south) to [bend right] node[pos=.5,below] {swap} (a7.south);
+
+\end{tikzpicture}
+
+}
+
+\subfigure[Seventh iteration.  34 ends up being the minimal element
+and we essentially swap it with itself.  Even though the ``current''
+element was also the minimal element, we still had to compare
+the current element with all other elements; in this case we made 2
+comparisons.]{
+
+\begin{tikzpicture}[scale=.65,transform shape]
+
+\tikzset{>=stealth',shorten <=.2cm,>=stealth',shorten >=.2cm}
+\def\sz{9mm}
+\tikzstyle{block} = [
+	draw, fill=black!10, rectangle,
+	minimum height=\sz, minimum width=\sz ];
+\tikzstyle{plain} = [draw=none,fill=none];
+
+\node[block,fill=black!50] (a0) at (0*\sz,0) { 0 };
+\node[block,fill=black!50] (a1) at (1*\sz,0) { 2 };
+\node[block,fill=black!50] (a2) at (2*\sz,0) { 4 };
+\node[block,fill=black!50] (a3) at (3*\sz,0) { 4 };
+\node[block,fill=black!50] (a4) at (4*\sz,0) { 9 };
+\node[block,fill=black!50] (a5) at (5*\sz,0) { 12 };
+\node[block,fill=green!30] (a6) at (6*\sz,0) { 34 };
+\node[block] (a7) at (7*\sz,0) { 102 };
+\node[block] (a8) at (8*\sz,0) { 42 };
+
+\node[below of=a6] {swap} ;
+%\draw[<->] (a6.south) to [bend right] node[pos=.5,below] {swap} (a6.south);
+
+\end{tikzpicture}~~~~~\begin{tikzpicture}[scale=.65,transform shape]
+\draw[white] (0,0) rectangle (1, -1.2);
+
+\tikzset{>=stealth',shorten <=.2cm,>=stealth',shorten >=.2cm}
+\def\sz{9mm}
+\tikzstyle{block} = [
+	draw, fill=black!10, rectangle,
+	minimum height=\sz, minimum width=\sz ];
+\tikzstyle{plain} = [draw=none,fill=none];
+
+\node[block,fill=black!50] (a0) at (0*\sz,0) { 0 };
+\node[block,fill=black!50] (a1) at (1*\sz,0) { 2 };
+\node[block,fill=black!50] (a2) at (2*\sz,0) { 4 };
+\node[block,fill=black!50] (a3) at (3*\sz,0) { 4 };
+\node[block,fill=black!50] (a4) at (4*\sz,0) { 9 };
+\node[block,fill=black!50] (a5) at (5*\sz,0) { 12 };
+\node[block,fill=black!50] (a6) at (6*\sz,0) { 34 };
+\node[block] (a7) at (7*\sz,0) { 102 };
+\node[block] (a8) at (8*\sz,0) { 42 };
+
+%\draw[<->] (a1.south) to [bend right] node[pos=.5,below] {swap} (a7.south);
+
+\end{tikzpicture}
+
+}
+
+\subfigure[Eighth iteration.  This is the final iteration, we swap
+42 and 102.  After this iteration, the final element, 102 is already
+where it needs to be.]{
+
+\begin{tikzpicture}[scale=.65,transform shape]
+
+\tikzset{>=stealth',shorten <=.2cm,>=stealth',shorten >=.2cm}
+\def\sz{9mm}
+\tikzstyle{block} = [
+	draw, fill=black!10, rectangle,
+	minimum height=\sz, minimum width=\sz ];
+\tikzstyle{plain} = [draw=none,fill=none];
+
+\node[block,fill=black!50] (a0) at (0*\sz,0) { 0 };
+\node[block,fill=black!50] (a1) at (1*\sz,0) { 2 };
+\node[block,fill=black!50] (a2) at (2*\sz,0) { 4 };
+\node[block,fill=black!50] (a3) at (3*\sz,0) { 4 };
+\node[block,fill=black!50] (a4) at (4*\sz,0) { 9 };
+\node[block,fill=black!50] (a5) at (5*\sz,0) { 12 };
+\node[block,fill=black!50] (a6) at (6*\sz,0) { 34 };
+\node[block,fill=black!30] (a7) at (7*\sz,0) { 102 };
+\node[block,fill=green!30] (a8) at (8*\sz,0) { 42 };
+
+\draw[<->] (a7.south) to [bend right] node[pos=.5,below] {swap} (a8.south);
+
+\end{tikzpicture}~~~~~\begin{tikzpicture}[scale=.65,transform shape]
+\draw[white] (0,0) rectangle (1, -1.1);
+
+\tikzset{>=stealth',shorten <=.2cm,>=stealth',shorten >=.2cm}
+\def\sz{9mm}
+\tikzstyle{block} = [
+	draw, fill=black!10, rectangle,
+	minimum height=\sz, minimum width=\sz ];
+\tikzstyle{plain} = [draw=none,fill=none];
+
+\node[block,fill=black!50] (a0) at (0*\sz,0) { 0 };
+\node[block,fill=black!50] (a1) at (1*\sz,0) { 2 };
+\node[block,fill=black!50] (a2) at (2*\sz,0) { 4 };
+\node[block,fill=black!50] (a3) at (3*\sz,0) { 4 };
+\node[block,fill=black!50] (a4) at (4*\sz,0) { 9 };
+\node[block,fill=black!50] (a5) at (5*\sz,0) { 12 };
+\node[block,fill=black!50] (a6) at (6*\sz,0) { 34 };
+\node[block,fill=black!50] (a7) at (7*\sz,0) { 42 };
+\node[block] (a8) at (8*\sz,0) { 102 };
+
+%\draw[<->] (a1.south) to [bend right] node[pos=.5,below] {swap} (a7.south);
+
+\end{tikzpicture}
+
+}
+
+\caption[Selection Sort Example]{Example execution of Selection Sort.}
+\label{figure:selectionSortExample}
+
+\end{figure}
+
+
+%\end{document}
+

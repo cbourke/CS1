@@ -2,41 +2,161 @@
 
 %%Chapter: Searching & Sorting in Java
 
-Intro
+Java provides several methods to search and sort arrays as well as 
+\mintinline{java}{List}s of elements of \emph{any} type.  These
+methods are able to operate on collections of any type because there
+are several \emph{overloaded} versions of these functions as well as
+versions that take a \mintinline{java}{Comparator} object that specifies
+\emph{how} the elements should be ordered.
 
 \section{Comparators}
 
+Let's consider a ``generic'' Quick Sort algorithm as was presented in
+Algorithm \ref{algo:quickSort}.  The algorithm itself specifies how to 
+sort elements, but it doesn't specify how they are \emph{ordered}.  The 
+difference is subtle but important.  Essentially, Quick Sort needs to 
+know when two elements, $a, b$ are in order, out of order, or equivalent 
+in order to decide which partition each element goes in.  However, it 
+doesn't ``know'' anything about the elements $a$ and $b$ themselves.  
+They could be numbers, they could be strings, they could be user-defined 
+objects.  
+
+A sorting algorithm still needs to be able to determine the proper ordering 
+in order to sort.  In Java this is achieved by using a 
+\mintinline{java}{Comparator} object, which is responsible for comparing 
+two elements and determining their proper order.  A \mintinline{java}{Comparator<T>}
+is an interface in Java that specifies a single method: 
+
+\mintinline{java}{public int compare(T a, T b)}
+
 \begin{itemize}
-  \item Resource:\\ \url{http://docs.oracle.com/javase/tutorial/collections/interfaces/order.html}
-  \item Interface documentation:\\ \url{http://docs.oracle.com/javase/6/docs/api/java/util/Comparator.html}
-  \item Objects may have a natural ordering (built-in types or objects that are \mintinline{java}{Comparable}),
-	otherwise \mintinline{java}{Comparator} classes may be created that define an ordering
-  \item \mintinline{java}{Comparator<T>} is a parameterized interface
+  \item A \mintinline{java}{Comparator<T>} is parameterized to operate on any
+  	type \mintinline{java}{T}
+  \item The method takes two instances, \mintinline{java}{a} and \mintinline{java}{b}
+    whose type matches the parameterized type \mintinline{java}{T}
+  \item The method returns an integer indicating the relative ordering of
+  	the two elements:
 	\begin{itemize}
-	  \item \mintinline{java}{T} is the type that the comparator is used on (\mintinline{java}{Integer, Double, Student})
-	  \item As an interface, it only specifies one method: \\
-		\mintinline{java}{public int compare(T a, T b)}
-	  \item Basic contract: returns
-	    \begin{itemize}
-	      \item Something negative if $a < b$
-	      \item Zero if $a$ equals $b$
-	      \item Something positive if $a > b$
-	    \end{itemize}
+	  \item It returns something negative, \mintinline{java}{< 0} if 
+	  \mintinline{java}{a} comes before \mintinline{java}{b} (that is, $a < b$)
+	  \item It returns zero if \mintinline{java}{a} and \mintinline{java}{b} are
+	  equal ($a = b$)
+	  \item It returns something positive, \mintinline{java}{> 0} if 
+	  \mintinline{java}{a} comes after \mintinline{java}{b} (that is, $a > b$)
 	\end{itemize}
-  \item Usual to create comparators as anonymous classes (classes created and defined in-line,
-		not in a separate class; comparators are ad-hoc, use-as-needed classes)
-  \item Design Tip: Don't Repeat Yourself; utilize comparison functions already provided by the language!
-  \item Take care with algebraic tricks (subtraction) to return a difference:
-  \begin{itemize}
-    \item Some combinations may not give correct results due to overflow
-    \item Differences with floating point numbers may give incorrect results when truncated to integers
-  \end{itemize}
 \end{itemize}
 
-\subsection{Examples}
+Note that there is no guarantee on the value's magnitude, it does \emph{not}
+necessarily return $-1$ or $+1$; it just returns \emph{something} negative or
+positive.  We've previously seen this pattern when comparing strings and
+other wrapper classes.  Each of the standard types implements something similar, 
+the \mintinline{java}{Comparable} interface, that specifies a \mintinline{java}{compareTo()} method with the same basic contract.  Strings for example, are
+ordered in lexicographic ordering, numeric types such as 
+\mintinline{java}{Integer} and \mintinline{java}{Double} also have 
+\mintinline{java}{compareTo()} methods that order elements in ascending order.
+Java refers to these built-in orderings as ``natural'' orderings.  
 
-\begin{listing}[H]
+For user-defined classes, however, we need to specify how to order them.  
+We could use the \mintinline{java}{Comparable<T>} interface as the built-in
+wrapper classes have, but using a \mintinline{java}{Comparator} is more 
+flexible.  Making a class \mintinline{java}{Comparable} locks you into \emph{one}
+``natural'' ordering.  If you wanted a different ordering, you would still have
+to use a \mintinline{java}{Comparator}.  Even for the wrapper classes, if we
+wanted a descending order, we would need to use a \mintinline{java}{Comparator}.
+
+As an example, let's write a \mintinline{java}{Comparator} orders 
+\mintinline{java}{Integer} types in ascending order, matching the
+``natural'' ordering already defined.
+
 \begin{minted}{java}
+Comparator<Integer> cmpInt = new Comparator<Integer>(){
+  public int compare(Integer a, Integer b) {
+    if(a < b) {
+      return -1;
+    } else if(a == b) {
+      return 0;
+    } else {
+      return 1;
+    }
+  }
+};
+\end{minted}
+
+This is new syntax.  When we create a \mintinline{java}{Comparator} in 
+Java we are creating a new instance of a class.  However, we didn't define
+a class--we didn't use \mintinline{java}{public class...} nor did we place
+it into a \mintinline{text}{.java} source file.  Instead, this is an
+\gls{anonymous class} declaration.  The class we've created has no name; 
+the \mintinline{java}{cmpInt} is the \emph{variable's} name, but the
+class itself has no name, its ``anonymous.''  This syntax allows us to
+define and instantiate a class \emph{inline} without having to create a
+separate class source file.  This is an advantage because we generally
+do not need multiple instances of a \mintinline{java}{Comparator}; they
+would all have the same functionality anyway.  An anonymous class allows
+us to create ad-hoc classes with a one-time (or one purpose) use.
+
+Another issue with this method is that it may not be able to handle 
+\mintinline{java}{null} values.  When \mintinline{java}{a} and \mintinline{java}{b}
+get unboxed for the comparisons, if they are \mintinline{java}{null}, 
+a \mintinline{java}{NullPointerException} will be thrown.  We discuss
+how to deal with this below in Section \ref{subsection:sortingObjectsWithNulls}.
+
+Another issue with this \mintinline{java}{Comparator} is the second
+case where we use the equality operator \mintinline{java}{==} to compare
+values.  With the less-than operator, the two integers get unboxed and
+their values are compared.  However, when we use the \mintinline{java}{==}
+operator on object instances, it is comparing \emph{memory addresses} in
+the \gls{jvmLabel}, not the actual values.  We could solve this issue by
+rearranging our cases so that the equality is our final case, avoiding the
+use of the equality operator.  Even better, however, we can exploit the
+built-in natural ordering of the integers by using the \mintinline{java}{compareTo()}
+method.
+
+\begin{minted}{java}
+Comparator<Integer> cmpInt = new Comparator<Integer>(){
+  public int compare(Integer a, Integer b) {
+    return a.compareTo(b);
+  }
+};
+\end{minted}
+
+What if we wanted to order integers in the opposite, descending order?  
+We could simply write another \mintinline{java}{Comparator} that reversed
+the ordering:
+
+\begin{minted}{java}
+Comparator<Integer> cmpIntDesc = new Comparator<Integer>(){
+  public int compare(Integer a, Integer b) {
+    return b.compareTo(a);
+  }
+};
+\end{minted}
+
+We might be tempted to instead \emph{reuse} the original comparator and
+write line 3 above simply as 
+
+\mintinline{java}{return cmpInt(b, a);}
+
+However, Java will not allow you to reference another ``outside'' variable
+like this inside a \mintinline{java}{Comparator} object.  An anonymous
+class in Java is a sort of weak \gls{closure}; a function that has a scope
+in which variables are \emph{bound}.  In this case, the anonymous class
+has a reference to the \mintinline{java}{cmpInt} variable, but it is
+not necessarily ``bound'' as the variable could be reassigned outside
+the \mintinline{java}{Comparator}.  If we want to do something like this, 
+Java forces us to make the \mintinline{java}{cmpInt} variable 
+\mintinline{java}{final} so that it cannot change.
+
+To illustrate some more examples, consider the \mintinline{java}{Student} 
+object we defined in Code Sample \ref{code:java:studentClass}.  The following 
+Code Samples demonstrate various ways of ordering \mintinline{java}{Student} 
+instances based on one or more of their member variable values.
+
+\begin{minted}{java}
+/**
+ * This Comparator orders Student objects by 
+ * last name/first name
+ */
 Comparator<Student> byName = new Comparator<Student>() {
   @Override
   public int compare(Student a, Student b) {
@@ -47,7 +167,13 @@ Comparator<Student> byName = new Comparator<Student>() {
     }
   }
 };
-		
+\end{minted}
+
+\begin{minted}{java}
+/**
+ * This Comparator orders Student objects by 
+ * last name/first name in descending (Z-to-A) order
+ */
 Comparator<Student> byNameDesc = new Comparator<Student>() {
   @Override
   public int compare(Student a, Student b) {
@@ -58,58 +184,102 @@ Comparator<Student> byNameDesc = new Comparator<Student>() {
     }
   }
 };
-		
-Comparator<Student> byNUID = new Comparator<Student>() {
+\end{minted}
+
+\begin{minted}{java}
+/**
+ * This Comparator orders Student objects by 
+ * id in ascending order
+ */
+Comparator<Student> byId = new Comparator<Student>() {
   @Override
   public int compare(Student a, Student b) {
-  	//careful, this difference trick, may lead to over/underflow:
-	//return (a.getNUID() - b.getNUID());
-	//its better anyway to use:
-	return a.getNUID().compareTo(b.getNUID());
+  	return a.getId().compareTo(b.getId());
   }
 };
 \end{minted}
-\caption{Java Comparator Examples for the \mintinline{java}{Student} class}
-\end{listing}
 
+\begin{minted}{java}
+/**
+ * This Comparator orders Student objects by 
+ * GPA in descending order
+ */
+Comparator<Student> byGpa = new Comparator<Student>() {
+  @Override
+  public int compare(Student a, Student b) {
+  	return b.getGpa().compareTo(a.getGpa());
+  }
+};
+\end{minted}
 
 \section{Searching \& Sorting}
 
+We now turn our attention to the search and sorting methods provided by
+the Java language.  Most of these methods are generic implementations 
+that either sort an array or collection using the natural ordering or 
+take a take a parameterized \mintinline{java}{Comparator<T>} to determine
+the ordering.
 
 \subsection{Searching}
 
-In practice, we don't reinvent the wheel: we don't write a custom search function for every type and for every sorting order.
+\subsubsection{Linear Search}
 
-Instead we:
-\begin{enumerate}
-  \item Use standard search functions provided by the language
-  \item \emph{Configure} using a \mintinline{java}{Comparator} rather 
-    than \emph{Code}
-\end{enumerate}
+Java \mintinline{java}{Set} and \mintinline{java}{List} collections provide
+several linear search methods.  Both have a 
+\mintinline{java}{public boolean contains(Object o)} method that returns
+\mintinline{java}{true} or \mintinline{java}{false} depending on whether or
+not the object is in the collection.  The \mintinline{java}{List} collection
+has an additional \mintinline{java}{public int indexOf(Object o)} method
+that returns the index of the first matched element and $-1$ if no such 
+element is found (\mintinline{java}{Set}s
+are unordered and have no indices, so this method would not apply).  
 
-\begin{itemize}
-  \item Built-in functions require that the \mintinline{java}{equals()} 
-    and \mintinline{java}{hashCode()} methods are properly overridden 
-    (see Appendix \ref{sec:appendix:equalsHashCode})
-  \item Linear search: \mintinline{java}{List.indexOf(Object o)}
-  \item Binary Search: \mintinline{java}{int Collections.binarySearch(List list, Object key)}
-    \begin{itemize}
-      \item Searches the specified list for the specified object using the binary search algorithm
-      \item Returns the index at which \mintinline{java}{key} appears
-      \item Returns something negative if not found
-      \item Requires that the list contains elements that have a \emph{Natural Ordering}
-     \end{itemize}
-  \item Binary Search: \mintinline{java}{int Collections.binarySearch(List, Object, Comparator)}
-    \begin{itemize}
-      \item Searches the given list for the specified object using the binary search algorithm
-      \item Uses the provided \mintinline{java}{Comparator} to determine 
-      order (\emph{not} the \mintinline{java}{equals()} method), see 
-      Appendix \ref{sec:appendix:javaComparatorInterface}
-     \end{itemize}
-  \item Binary Search with arrays: \mintinline{java}{Arrays.binarySearch(T[] a, T key, Comparator)}
-\end{itemize}
+All of these functions are equality-based and they do not take a 
+\mintinline{java}{Comparator} object.  Instead, the elements are compared
+using the object's \mintinline{java}{equals()} (and possibly 
+\mintinline{java}{hashCode()}) method.  The first element \mintinline{java}{x}
+such that  \mintinline{java}{x.equals(o)} returns \mintinline{java}{true} 
+is the element that is determined to match.  For this reason, it is important
+to override both of these methods when designing objects (for additional
+discussion, see Section \ref{subsection:importanceOfEqualsHashCode} below).
 
-\subsection{Examples}
+\subsubsection{Binary Search}
+
+The \mintinline{java}{Arrays} and \mintinline{java}{Collections} classes
+provide many variations on methods that implement a binary search.  All
+of these methods assume that the array or \mintinline{java}{List} being
+searched are sorted appropriately (you cannot use binary search on a 
+\mintinline{java}{Set} as it is an unordered collection).
+
+The \mintinline{java}{Arrays} class provides several 
+\mintinline{java}{binarySearch()} methods, one for each primitive type 
+as well as variations that search within a specified range of elements.
+The most generally useful version is as follows:
+
+\mintinline{java}{public static <T> int Arrays.binarySearch(T[] a, T key, Comparator<T> c)}
+
+That is, it takes an array of elements as well as key and a 
+\mintinline{java}{Comparator} all of the same type \mintinline{java}{T}.
+It returns an integer representing the index at which it finds the first
+matching element (there is no guarantee that the first element in the
+sorted list is returned).  If no match is found, then the method returns
+something negative.\footnote{It actually returns a negative value corresponding
+to the \emph{insertion point} at which the element would be if it had
+existed.}  Another version has the same behavior but can be called without
+a \mintinline{java}{Comparator}, relying instead on the natural ordering of
+elements.  For this variation, the type of elements \emph{must} implement
+the \mintinline{java}{Comparable} interface.
+
+The \mintinline{java}{Collections} class provides a similar method, 
+
+\begin{minted}{java}
+public static <T> int Collections.binarySearch(List<T> list, T key, 
+                                               Comparator<T> c)}
+\end{minted}
+
+The only difference is that the method takes a \mintinline{java}{List} instead
+of an array.  Otherwise, the behavior is the same.  We present several examples
+in Code Sample \ref{code:java:searchExamples}.
 
 \begin{listing}[H]
 \begin{minted}{java}
@@ -138,32 +308,34 @@ System.out.println("at index " + castroIndex + ": " +
 //  the comparator
 castroKey = new Student(null, null, 131313, 0.0);
 //sort the list according to the comparator
-Collections.sort(roster, byNUID);
-castroIndex = Collections.binarySearch(roster, castroKey, byNUID);
+Collections.sort(roster, byId);
+castroIndex = Collections.binarySearch(roster, castroKey, byId);
 System.out.println("at index " + castroIndex + ": " + 
   roster.get(castroIndex));
 \end{minted}
 \caption{Java Search Examples}
+\label{code:java:searchExamples}
 \end{listing}
 
 \subsection{Sorting}
 
-Arrays:
-\begin{itemize}
-  \item \mintinline{java}{java.util.Arrays} provides a \mintinline{java}{sort()} method for all primitive types in ascending order
-  \item \mintinline{java}{sort(Object[] a)} allows you to sort arrays of objects that have a \emph{natural ordering}: classes that implement the \mintinline{java}{Comparable} interface
-  \item \mintinline{java}{sort(T[] a, Comparator<? super T> c)} allows you to sort objects according to the order defined by a provided \mintinline{java}{Comparator} (see Appendix \ref{sec:appendix:javaComparatorInterface})
-\end{itemize}
+As with searching, the \mintinline{java}{Arrays} and \mintinline{java}{Collections}
+provide parameterized sorting methods to sort arrays and \mintinline{java}{List}s.
+In Java 6 and prior, the implementation was a hybrid merge/insertion sort.  Java 7
+switched the implementation to Tim Sort.  Here too, there are several variations 
+that rely on the natural ordering or allow you to sort a subpart of the collection.
 
-Lists:
-\begin{itemize}
-  \item \mintinline{java}{java.util.Collections} provides two sort methods to sort \mintinline{java}{List} collections
-  \item \mintinline{java}{sort(List<T> list)} -- sorts in ascending order according to the \emph{natural ordering}
-  \item \mintinline{java}{sort(List<T> list, Comparator<? super T> c)}  -- sorts according to the order defined by the given comparator
-  \item Java specification dictates that the sorting algorithm \emph{must} be stable
-  \item Java 1 -- 6: hybrid merge/insertion sort
-  \item Java 7: ``timsort'' (a bottom-up merge sort that merges ``runs'' of ordered sub lists)
-\end{itemize}
+The \mintinline{java}{Arrays} provides the following method, which sorts 
+arrays of a particular type with a \mintinline{java}{Comparator} for that type.
+
+\mintinline{java}{static <T> void sort(T[] a, Comparator<T> c)}
+
+Likewise, \mintinline{java}{Collections} provides the following method.
+
+\mintinline{java}{static <T> void sort(List<T> list, Comparator<T> c)}
+
+Several examples of the usage of these methods are presented in Code
+Sample \ref{code:java:sortExamples}.
 
 \begin{listing}[H]
 \begin{minted}{java}
@@ -181,25 +353,80 @@ Collections.sort(roster, byGPA);
 Arrays.sort(rosterArr, byGPA);
 \end{minted}
 \caption{Using Java Collection's Sort Method}
+\label{code:java:sortExamples}
 \end{listing}
-
 
 \section{Other Considerations}
 
 \subsection{Sorted Collections}
 
-Include \mintinline{java}{SortedSet<T>}
+The Java Collections framework also provides several sorted data structures.
+Though an ordered collection such as a \mintinline{java}{List} can be sorted
+calling the \mintinline{java}{Collections.sort()} method, a sorted data
+structure \emph{maintains} an ordering.  That is, as you add elements to 
+the data structure, they are inserted in the appropriate spot.  Such data 
+structures also prevent you from arbitrarily inserting elements in any 
+order.  
+
+Java defines the \mintinline{java}{SortedSet<T>} interface for sorted 
+collections with a \mintinline{java}{TreeSet<T>} implementation.\footnote{As 
+the name implies, the implementation is a balanced binary
+search tree, in particular a red-black tree.}  You can construct a
+\mintinline{java}{TreeSet<T>} by providing it a \mintinline{java}{Comparator<T>}
+to use to maintain the ordering (alternatively, you may omit the
+\mintinline{java}{Comparator} and the \mintinline{java}{TreeSet} will
+use the natural ordering of elements).
+
+\begin{minted}{java}
+Comparator<Integer> cmpIntDesc = new Comparator<Integer>() { ... };
+SortedSet<Integer> sortedInts = new TreeSet<Integer>(cmpIntDesc);
+sortedInts.add(10);
+sortedInts.add(30);
+sortedInts.add(20);
+//sortedInts has elements 30, 20, 10 in descending order
+
+SortedSet<Student> sortedStudents = new TreeSet<Student>(byName);
+//add students, they will be sorted by name
+for(Student s : sortedStudents) {
+  System.out.println(s);
+}
+\end{minted}
+
+When using a \mintinline{java}{SortedSet} it is important that the 
+\mintinline{java}{Comparator} properly orders all elements.  A 
+\mintinline{java}{SortedSet} is still a \mintinline{java}{Set}: it
+does not allow duplicate elements.  If the \mintinline{java}{Comparator} 
+you use returns zero for any element that you attempt to insert, it
+will not be inserted.  To demonstrate how this might fail, consider
+our \mintinline{java}{byName} \mintinline{java}{Comparator} for 
+\mintinline{java}{Student} objects.  Suppose two students have
+the same first name and last name, ``John Doe'' and ``John Doe'', but
+have different IDs (as they are different people) and maybe different
+GPAs.  The \mintinline{java}{Comparator} would return 0 for these
+two objects because they have the same first/last name, even though
+they are distinct people.  Thus, only one of these objects could 
+exist in the \mintinline{java}{SortedSet}.
+
+To solve this problem, it is important to define \mintinline{java}{Comparator}s
+that ``break ties'' appropriately.  In this case, we would want to 
+modify the \mintinline{java}{Comparator} to return a comparison
+of IDs if the first \emph{and} last name are the same.  
 
 \subsection{Handling \mintinline{java}{null} values}
+\label{subsection:sortingObjectsWithNulls}
 
+When sorting collections or arrays of objects, we may need to consider 
+the possibility of uninitialized \mintinline{java}{null} objects.  Some
+collections allow \mintinline{java}{null} element(s) while others do not.
+How we handle these is a design decision.  We could ignore it in which 
+case such elements would likely result in a \mintinline{java}{NullPointerException} 
+and expect the user to prevent or handle such instances.  This may be 
+the preferable choice in most instances, in fact.
 
-When sorting collections or arrays of objects, we may need to consider the possibility of uninitialized
-\mintinline{java}{null} objects.  How we handle these are a design decision.  We could ignore it in which case
-such elements would likely result in a \mintinline{java}{NullPointerException} and expect the user to prevent
-or handle such instances.  This may be the preferable choice in most instances, in fact.
-
-Alternatively, we could handle \mintinline{java}{null} objects in the design of our Comparator.  Code
-Snippet \ref{code:SortingObjectsWithNulls} presents a comparator for our \mintinline{java}{Student} class that orders \mintinline{java}{null}
+Alternatively, we could handle \mintinline{java}{null} objects in the 
+design of our \mintinline{java}{Comparator}.  Code Sample 
+\ref{code:java:sortingObjectsWithNulls} presents a \mintinline{java}{Comparator} 
+for our \mintinline{java}{Student} class that orders \mintinline{java}{null}
 instances first.
 
 \begin{listing}[H]
@@ -224,44 +451,94 @@ Comparator<Student> byNameWithNulls = new Comparator<Student>() {
 };
 \end{minted}
 \caption{Handling Null Values in Java Comparators}
-\label{code:SortingObjectsWithNulls}
+\label{code:java:sortingObjectsWithNulls}
 \end{listing}
+
+This solution only handles \mintinline{java}{null} \mintinline{java}{Student}
+values not \mintinline{java}{null} values within the \mintinline{java}{Student}
+object.  If the getters used in the \mintinline{java}{Comparator} return
+\mintinline{java}{null} values, then we could still have 
+\mintinline{java}{NullPointerException}s.  
+
 
 \subsection{Importance of \mintinline{java}{equals()} and \mintinline{java}{hashCode()} Methods}
+\label{subsection:importanceOfEqualsHashCode}
 
-TODO: callback to the objects chapter
+Recall that in Chapter \ref{chapter:java:objects} we briefly discussed the
+importance of overloading the \mintinline{java}{equals()} and 
+\mintinline{java}{hashCode()} methods of our objects.  We reiterate this
+in the context of searching.  Recall that the \mintinline{java}{Set} and
+\mintinline{java}{List} collections provide linear search methods that do
+not require the use of a \mintinline{java}{Comparator}.  This is because
+the collections use the object's \mintinline{java}{equals()} (and in the
+case of hash-based data structures such as \mintinline{java}{HashSet}, the
+\mintinline{java}{hashCode()} method) to determine when a particular 
+instance has been found.
 
-\begin{itemize}
-  \item Every class in Java is a sub-class of the \mintinline{java}{java.lang.Object} class
-  \item \mintinline{java}{Object} defines several methods whose default behavior is to operate on Java Virtual Machine memory addresses:
-    \begin{itemize}
-      \item \mintinline{java}{public String toString()} -- returns a hexadecimal representation of the memory address of the object
-      \item \mintinline{java}{public int hashCode()} -- may convert the memory address to an integer and return it
-      \item \mintinline{java}{public boolean equals(Object obj)} -- will compare \mintinline{java}{obj} to \mintinline{java}{this} instance and return \mintinline{java}{true} or \mintinline{java}{false} if they have the same or different memory address
-    \end{itemize}
-  \item When defining your own objects, its best practice to override these methods to be dependent on the entire state of the object
-  \item Doing so is \emph{necessary} if you use your objects in the Collections library
-  \item If not, then creating a key object will never match an array element as \mintinline{java}{equals()} will always return false (since the key and any actual element will not have the same memory address)
-  \item Good tutorial: \url{http://www.javapractices.com/topic/TopicAction.do?Id=17}
-  \item Eclipse Tip: Let Eclipse do it for you!  Source $\rightarrow$ Generate equals and hashCode, Generate toString, etc.
-\end{itemize}
+To illustrate the importance of these methods, consider the following 
+code.
 
-\subsection{Example}
+\begin{minted}{java}
+Student a = new Student("Joe", "Smith", 1234, 3.5);		
+Student b = new Student("Joe", "Smith", 1234, 3.5);
+		
+Set<Student> s = new HashSet<Student>();
+s.add(a);
+s.add(b);
+\end{minted}
 
-\begin{listing}[H]
-\inputminted[fontsize=\scriptsize]{java}{Student.java}
-\caption{Java \mintinline{java}{Student} class, getters omitted
-for space}
-\end{listing}
+If we \emph{do not} override the \mintinline{java}{equals()} and
+\mintinline{java}{hashCode()} methods, at the end of this code 
+snippet, the set will contain \emph{both} of the \mintinline{java}{Student}
+instances even though they are \emph{conceptually} the same object
+(all of their member variables will have the same values).  
+
+However, if we \emph{do} override the \mintinline{java}{equals()} and
+\mintinline{java}{hashCode()} methods as described in Section 
+\ref{section:javaCommonMethods}, then the code snippet above would
+result in the \mintinline{java}{Set} only having one object (the
+first one added).  This is because during the attempt to add the second
+instance, the \mintinline{java}{equals()} method would have returned
+\mintinline{java}{true} when compared to the first instance and the
+\emph{duplicate} element would not have been added to the \mintinline{java}{Set}
+(as \mintinline{java}{Set}s do not allow duplicates).
+
+Also recall that we saw some of the advantages of immutable objects. 
+Again, we point out another advantage.  Suppose that we properly 
+override the \mintinline{java}{equals()} and the \mintinline{java}{hashCode()} 
+methods in our \mintinline{java}{Student} object.  Further, suppose
+that we make our \mintinline{java}{Student} class mutable: allowing
+a user to change the ID via a setter.  Consider the following code snippet.
+
+\begin{minted}{java}
+Student a = new Student("Joe", "Smith", 1234, 3.5);		
+Student b = new Student("Joe", "Smith", 5679, 3.5);
+		
+Set<Student> s = new HashSet<Student>();
+s.add(a);
+s.add(b);
+//s now contains both students
+b.setId(1234);
+\end{minted}
+
+When we instantiate the two \mintinline{java}{Student} instances, they
+are distinct as their IDs are different.  So when we add them to the set, 
+their \mintinline{java}{equals()} method returns \mintinline{java}{false}
+and they are both added to the \mintinline{java}{Set}.  However, when 
+we change the ID using the setter on the last line, both objects are now
+identical, violating the no-duplicates property of the \mintinline{java}{Set}.
+This is not a failing of the \mintinline{java}{Set} class, just one of
+the many consequences of designing mutable objects.  
+
 
 \subsection{Java 8: Lambda Expressions}
 
-
 Java 8 introduced a lot of functional-style syntax, including 
-\emph{lambda expressions}.  For a full treatment of these features, 
-see \url{https://docs.oracle.com/javase/tutorial/java/javaOO/lambdaexpressions.html} and \url{http://www.oracle.com/webfolder/technetwork/tutorials/obe/java/Lambda-QuickStart/index.html}.  One use
-case for these is if we want to sort a list with respect to
-one data field, we need not build a full \mintinline{java}{Comparator}.
+\glspl{lambda expression}.  Lambda expressions are essentially anonymous
+functions that can be passed around to other methods or objects.
+One use for lambda expressions is if we want to sort a \mintinline{java}{List}
+with respect to one data field, we need not build a full 
+\mintinline{java}{Comparator}.  Instead we can use the following syntax.
 
 \begin{minted}{java}
 List<Student> roster = ...
@@ -270,10 +547,11 @@ roster.sort((a, b) -> a.getLastName().compareTo(b.getLastName()));
 \end{minted}
 
 The new syntax is the use of the arrow operator as a lambda 
-expression.  It essentially maps a pair, \mintinline{java}{(a, b)}
+expression.  In this case, it maps a pair, \mintinline{java}{(a, b)}
 to the value of the expression 
 \mintinline{java}{a.getLastName().compareTo(b.getLastName())}
-(which takes advantage of the fact that strings implement the \mintinline{java}{Comparable} interface). 
+(which takes advantage of the fact that strings implement the 
+\mintinline{java}{Comparable} interface). 
 
 With respect to \mintinline{java}{Comparator}s, we can use the following 
 syntax to build a more complex ordering.
@@ -281,14 +559,16 @@ syntax to build a more complex ordering.
 \begin{minted}{java}
 Comparator<Student> c = 
   (a, b) -> a.getLastName().compareTo(b.getLastName());
-c = c.thenComparing( (a, b) -> a.getFirstName().compareTo(b.getFirstName()));
+c = c.thenComparing( (a, b) -> 
+                     a.getFirstName().compareTo(b.getFirstName()));
 c = c.thenComparing( (a, b) -> a.getGpa().compareTo(b.getGpa()));
 
 //pass the comparator to the sort method:
 roster.sort(c);
 \end{minted}
 
-We can make this even more terse using method references.
+We can make this even more terse using method references, another
+new feature in Java 8.
 
 \begin{minted}{java}
 //using getters as key extractors 

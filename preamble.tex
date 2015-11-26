@@ -59,7 +59,7 @@
 \makeindex
 
 \setlength{\parindent}{0pt}
-\setlength{\parskip}{.25cm}
+\setlength{\parskip}{.30cm}
 
 \usepackage{graphicx}
 \usepackage{framed}
@@ -69,6 +69,8 @@
 
 \theoremstyle{remark}
 \newtheorem{ExInternal}{Exercise}[section]
+
+
 
 \makeatletter
 \let\@exercises\@empty%
@@ -129,6 +131,9 @@
 \SetupFloatingEnvironment{listing}{name=Code Sample}
 \SetupFloatingEnvironment{listing}{listname=List of Code Samples}
 
+\BeforeBeginEnvironment{minted}{\vspace{.25cm}}
+\AfterEndEnvironment{minted}{\vspace{.25cm}}
+
 \usepackage[boxed,slide,linesnumbered,algochapter]{algorithm2e}
 \SetKwProg{Fn}{Function}{}{end}
 \SetKwComment{Comment}{//}{}
@@ -148,6 +153,7 @@
 \usepackage[yyyymmdd,hhmmss]{datetime}
 
 \theoremstyle{definition}
+\newtheorem{theorem}{Theorem}
 \newtheorem{exer}{Exercise}
 \numberwithin{exer}{chapter}
 
