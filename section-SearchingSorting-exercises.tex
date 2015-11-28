@@ -33,5 +33,64 @@ benchmark it against a binary search implementation.
 \end{exer}
 
 \begin{exer}
-TODO
+Data has a ``natural'' ordering: numbers are ordered in nondecreasing 
+order, strings are ordered lexicographically (according to the ASCII text 
+table).  However, in many situations, the natural ordering isn't the 
+\emph{expected} ordering.  For example, class years are usually ordered Freshman, Sophomore, Junior, Senior whereas the natural ordering 
+would order them Freshman, Junior, Senior, Sophomore.  
+
+Write a program to sort a collection of strings according to 
+an arbitrary artificial ordering.  That is, instead of the A--Z 
+alphabetic ordering, we will order them according to an alternative 
+ordering of the English alphabet.  As an example, one possible
+ordering would be:
+
+\mintinline{text}{n e d c r h a l g k m z f w j o b v x q y i p u s t}
+
+Your job will be to \emph{sort} a list of English language words 
+using this artificial ordering of the English alphabet.  Specifically, 
+you will read in an input file in the following format.  The first line 
+is the new ordering of English letters, each separated by a space.  
+Each line after that contains a single string.  
+You will read in this file, process it and produce a reordered list 
+of the words sorted according to the new ordering.  
+
+An example input:
+
+\begin{minted}{text}
+n e d c r h a l g k m z f w j o b v x q y i p u s t
+vcawufotrb
+laencfuesw
+gvtkwekfom
+vrsfqictqc
+wmcvmjmtet
+qetegyqelu
+newaxdtjlt
+nfrfrwkknj
+fzqrvgblov
+gkkmgwwwpa
+\end{minted}
+
+The result ordering: 
+
+\begin{minted}{text}
+Artificial Ordering: 
+newaxdtjlt
+nfrfrwkknj
+laencfuesw
+gkkmgwwwpa
+gvtkwekfom
+fzqrvgblov
+wmcvmjmtet
+vcawufotrb
+vrsfqictqc
+qetegyqelu
+\end{minted}
+
+For simplicity, you can assume that all words will be lower 
+case and no non-alphabetic characters are used.  However, 
+you may not assume that all words will be the same length. 
+Words of a shorter length that are a prefix of another word 
+should be ordered first.  For example, ``newax'' should come 
+before ``newaxn'' in the ordering above.
 \end{exer}
