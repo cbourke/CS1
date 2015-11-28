@@ -2,4 +2,97 @@
 
 %%Chapter: Recursion in PHP
 
-TODO
+PHP supports recursion with no special syntax.  However,
+recursion is generally expensive and iterative or
+other non-recursive solutions are generally preferred.  We present
+a few examples to demonstrate how to write recursive functions in PHP.
+
+The first example of a recursive function we gave was the toy count down
+example.  In PHP it could be implemented as follows.
+
+\begin{minted}{php}
+function countDown($n) {
+  if($n===0) {
+    printf("Happy New Year!\n");
+  } else {
+    printf("%d\n", $n);
+    countDown($n-1);
+  }
+}
+\end{minted}
+
+As another example that actually does something useful, consider the
+following recursive summation function that takes an array, its size
+and an index variable.  The recursion works as follows: if the index
+variable has reached the size of the array, it stops and returns zero
+(the base case).  Otherwise, it makes a recursive call to 
+\mintinline{php}{recSum()}, incrementing the index variable by 1.  When
+the function returns, it adds its result to the $i$-th element
+in the array.  To invoke this function we would call it with an initial
+value of 0 for the index variable: \mintinline{php}{recSum($arr, 0)}.
+
+\begin{minted}{php}
+function recSum($arr, $i) {
+  if($i === count($arr)) {
+    return 0;
+  } else {
+    return recSum($arr, $i+1) + $arr[$i];
+  }
+}
+\end{minted}
+
+This example was not tail-recursive as the recursive call was not the
+final operation (the sum was the final operation).  To make this function
+tail recursive, we can carry the summation through to each function call
+ensuring that the summation is done prior to the recursive function call.
+
+\begin{minted}{php}
+function recSumTail($arr, $i, $sum) {
+  if($i === count($arr)) {
+    return $sum;
+  } else {
+    return recSumTail($arr, $i+1, $sum + $arr[$i]);
+  }
+}
+\end{minted}
+
+As a final example, consider the following PHP implementation of the 
+naive recursive Fibonacci sequence.  An additional condition has been
+included to check for ``invalid'' negative values of $n$ for which
+we throw an exception.
+
+\begin{minted}{php}
+function fibonacci($n) {
+  if($n < 0) {
+    throw new Exception("Undefined for n<0.");
+  } else if($n <= 1) {
+    return 1;
+  } else {
+    return fibonacci($n-1) + fibonacci($n-2);
+  }
+}
+\end{minted}
+
+PHP is not a language that provides implicit memoization.  Instead, 
+we need to explicitly keep track of values using a table.  In the
+following example, the table is passed through as an argument.
+
+\begin{minted}{php}
+function fibonacciMemoization($n, $table) {
+  if($n < 0) {
+    return 0;
+  } else if($n <= 1) {
+    return 1;
+  } else if(isset($table[$n])) {
+    return $table[$n];
+  } else {
+    $a = fibonacciMemoization($n-1, $table);
+    $b = fibonacciMemoization($n-2, $table);
+    $result = ($a + $b);
+    $table[$n] = $result;
+    return $result;
+  }
+}
+\end{minted}
+
+
