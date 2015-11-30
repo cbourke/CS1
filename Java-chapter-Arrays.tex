@@ -330,7 +330,8 @@ double x = values.get(1); //get the second value, 2.71
 double y = values.get(2); //get the third value, 42.0
 \end{minted}
 
-Any attempt to access an element that does not exist will
+Any attempt to access an element that lies outside the bounds of
+the \mintinline{java}{List}, will
 result in an \mintinline{java}{IndexOutOfBoundsException} just as 
 with arrays.  To stay within bounds you can use the \mintinline{java}{size()}
 method to determine how many elements are in the collection.

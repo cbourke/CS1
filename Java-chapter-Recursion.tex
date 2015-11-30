@@ -103,7 +103,7 @@ only represent up to to $F_{45}$.  Using \mintinline{java}{BigInteger} we
 can support much larger values.  An example:
 
 \begin{minted}{java}
-public static BigInteger fibMemoization(int n, Map<Integer, BigInteger> m) {
+public static BigInteger fibMem(int n, Map<Integer, BigInteger> m) {
   if(n < 0) {
     throw new IllegalArgumentException("Undefined for n < 0");
   } else if(n <= 1) {
@@ -111,8 +111,8 @@ public static BigInteger fibMemoization(int n, Map<Integer, BigInteger> m) {
   } else {
     BigInteger result = m.get(n);
     if(result == null) {
-      BigInteger a = fibMemoization(n-1, m);
-      BigInteger b = fibMemoization(n-2, m);
+      BigInteger a = fibMem(n-1, m);
+      BigInteger b = fibMem(n-2, m);
       result = a.add(b);
       m.put(n, result);
     }

@@ -262,7 +262,10 @@ terms, and interest as command line inputs.
 Adapting the formula for the monthly payment and using the standard
 math library's \mintinline{c}{pow} function, we get
 
-\mintinline{c}{double monthlyPayment = (monthlyInterestRate * principle) / (1 - pow( (1 + monthlyInterestRate), -n));}
+\begin{minted}{c}
+double monthlyPayment = (monthlyInterestRate * principle) / 
+                        (1 - pow( (1 + monthlyInterestRate), -n));
+\end{minted}
 
 However, recall that we may have problems due to accuracy.  The monthly
 payment could come out to be a fraction of a cent, say \$43.871.  For 

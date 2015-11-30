@@ -62,11 +62,13 @@ error codes are represented as integers, you simply use the numerical
 comparison operator, \mintinline{c}{==}.  You can check for no error
 by making a comparison to zero.
 
-In addition, the standard string library, \mintinline{c}{string.h} provides a function,
-\mintinline{c}{char * strerror(errno)} that can be used to map the value in
-\mintinline{c}{errno} to a human-readable error message.  We discuss
-strings in detail later on, but we can see how to use this function in the
-following demonstration (see below).  The output of this program is as follows.
+In addition, the standard string library, defined in the header file, 
+\mintinline{c}{string.h} provides a function, 
+\mintinline{c}{char * strerror(errno)} that can be used to map 
+the value in \mintinline{c}{errno} to a human-readable error message.  
+We discuss strings in detail later on, but we can see how to use this 
+function in the following demonstration (see below).  The output of this 
+program is as follows.
 
 \begin{minted}{text}
 result: 1.4142, error: 0

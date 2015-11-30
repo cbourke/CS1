@@ -36,9 +36,9 @@ try {
 \end{minted}
 
 When initializing a \mintinline{java}{Scanner} to
-read from a file, the checked exception, 
-\mintinline{java}{FileNotFoundException} must be caught
-and handled.  Otherwise, once created, the \mintinline{java}{Scanner}
+read from a file, the exception, 
+\mintinline{java}{FileNotFoundException} \emph{must} be caught
+and handled as it is a \emph{checked} exception.  Otherwise, once created, the \mintinline{java}{Scanner}
 class does not throw any checked exceptions.
 
 Once created, you can use the usual methods and functionality
@@ -140,8 +140,9 @@ pw.close();
 \end{minted}
 
 The \mintinline{java}{close()} method will conveniently
-close all the underlying resource (the \mintinline{java}{BufferedWriter}
-and \mintinline{java}{FileWriter}) for us.  In addition, 
+close all the underlying resource (in this case, the 
+\mintinline{java}{BufferedWriter} and \mintinline{java}{FileWriter}) 
+for us.  In addition, 
 it implements \mintinline{java}{AutoCloseable} and so it can
 be used in a try-catch-with resources statement.
 

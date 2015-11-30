@@ -14,6 +14,9 @@
 \begin{figure}
 \centering
 
+{
+\setmintedinline{bgcolor={}}
+
 \subfigure[Initialization of the pointer-to-pointers.  The first invocation of \mintinline{c}{malloc()} sets up
 an array of integer pointers, \mintinline{c}{int *} that are uninitialized (where they point to is undefined).]{
 \begin{tikzpicture}[scale=0.65,transform shape]
@@ -282,6 +285,7 @@ the pointer-to-pointers can be treated like a 2-dimensional array.]{
 
 \end{tikzpicture}
 }%end (d)
+}%end \setmintedinline{bgcolor={}}
 
 \caption[Dynamically Allocating Multidimensional Arrays]{The process of dynamically allocating
 a 2-dimensional array of integers using \mintinline{c}{malloc()} in a for-loop.}

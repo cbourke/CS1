@@ -1,9 +1,10 @@
 
 
-
 Analogies:
  Periods end sentences -> semicolons end executable lines
  Paragraphs are separated by lines -> blocks are demarcated with curly brackets
+ Variables are nouns and should be named as such, functions are verbs and
+  should be named likewise
  Shakespearian plays are annotated: lines needing more explanation have
   footnotes; but not all lines need explaining -> comments should be used
   to document important or unclear things; code itself should be self-documenting
@@ -17,30 +18,12 @@ Add a quote:
  really sure you want to do that?
 
 
-155 Book
- -transfer word notes
- -gather exercises
+Exercises:
  -Exercise ideas: http://www.dreamincode.net/forums/topic/78802-martyr2s-mega-project-ideas-list/
   Leenkiat:
    http://cse.unl.edu/~lksoh/Classes/CSCE155N_Spring13/homeworks.html
    http://cse.unl.edu/~lksoh/Classes/CSCE155N_Fall12/homeworks.html
 
-
 Longer term:
  -A testing chapter
  -Intro to OOP
- -gotcha appendix for each language?
-  ex: char *s = “foo” vs char s[] = “foo”
-
-
-
-
-
-%MOVE THIS TO STRUCTS/CLASSES?
-%C allows you to define several \emph{user defined types}.  User defined
-%types are types in addition to the built-in primitive types of a language 
-%such as \mintinline{c}{int}, \mintinline{c}{double}, etc.  C was designed
-%to be \emph{extensible} in that you can add your own types if necessary.
-%After all, computer programs are intended to model the real world and
-%not everything in the real world is conceptually a number.  By using
-%user defined types, we can more closely model the real world.

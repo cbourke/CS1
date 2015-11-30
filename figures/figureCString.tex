@@ -1,18 +1,10 @@
-%\documentclass[12pt]{scrbook}
-%
-%\usepackage{tikz}
-%\usepackage{minted}
-%\usetikzlibrary{decorations.pathreplacing,arrows}
-%
-%\usepackage{fullpage}
-%\usepackage{subfigure}
-%\begin{document}
-%
-%
-%Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
+
 
 \begin{figure}
 \centering
+
+{
+\setmintedinline{bgcolor={}}
 
 \begin{tikzpicture}
 % size of each node
@@ -23,7 +15,7 @@
 	minimum height=\sz, minimum width=\sz ];
 \tikzstyle{plain} = [draw=none,fill=none];
 % array element definition
-\def\arr{\mintinline{text}{H}, 
+\def\arr{\mintinline[bgcolor={}]{text}{H}, 
          \mintinline{text}{e}, 
          \mintinline{text}{l}, 
          \mintinline{text}{l}, 
@@ -48,6 +40,7 @@
 }
 \draw[->,>=stealth'] (a) -- (a0);
 \end{tikzpicture}
+}
 
 \caption[Example of a character array (string) in C.]{A string in
 C is achieved by using a \mintinline{c}{char} array.  However, the
@@ -56,6 +49,3 @@ Though an array may have space for additional characters, they are
 irrelevant if the null terminator precedes them.}
 \label{figure:cStringExample}
 \end{figure}
-
-%\end{document}
-
