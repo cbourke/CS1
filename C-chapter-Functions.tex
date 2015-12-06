@@ -1,6 +1,7 @@
 %!TEX root = ComputerScienceOne.tex
 
 %%Chapter: Functions in C
+\index{functions!c}
 
 As a procedural-style language, functions are essential in C 
 programming.  As we've already seen, C provides a large
@@ -31,12 +32,13 @@ in garbage.
 \section{Defining \& Using Functions}
 
 For modern C, defining functions is a two step process.  First,
-you \emph{declare} the function by define the function signature 
-using a \emph{prototype}.  Then later, you \emph{define} the
+you \emph{declare} a and its signature using a \emph{prototype}.  
+Then you \emph{define} the
 function by providing a function body that defines what the
 function does.
 
 \subsection{Declaration: Prototypes}
+\index{function prototype}
 
 Just as with variables, functions in C must be \emph{declared} before
 they can be used.  The modern way to declare a function in C is to
@@ -79,10 +81,10 @@ In each of these, the return type is the first thing specified.  The
 function identifier (name) is then specified.  Function names must
 follow the same naming rules as variables: they must begin with
 an alphabetic character and may contain alphanumeric characters
-as well as underscores.  However, using modern coding conventions 
+as well as underscores.  Using modern coding conventions 
 we usually name functions using lower camel casing.
 
-Note again, each prototype ends with a semicolon.  Further, 
+Each prototype ends with a semicolon.  Further, 
 prototypes do \emph{not} specify what the function does, they
 only specify its signature.  Later in the program, we can provide
 the actual definition of each function by using the following syntax.
@@ -126,6 +128,7 @@ void printCopyright();
 //definition:
 void printCopyright() {
   printf("(c) Bourke 2015\n");
+  return;
 }
 \end{minted}
 
@@ -136,17 +139,18 @@ the function takes no parameters as in \mintinline{c}{void printCopyright(void);
 
 \subsection{Organizing Functions}
 
-The separation of a declaration (prototype) and a function definition
+The separation of a function declaration (prototype) and a function definition
 provides a natural way to organize functions in C.  We place 
 prototypes into a \emph{header} file which has a file extension
 \mintinline{text}{.h} and then place the corresponding function
-definitions into a \emph{source} file with the usual file extension, 
+definitions into a \emph{source} file with the file extension, 
 \mintinline{text}{.c}.
 
 We've seen this before with the standard libraries: we use
 \mintinline{c}{#include<math.h>} to ``include'' the math library's
 header file in our code.  This essentially brings in the math
-library function prototypes so that we can write calls to, say, 
+library function prototypes so that we can write calls to functions
+like 
 \mintinline{c}{sqrt()} or \mintinline{c}{sin()}.  Only when we compile 
 do we actually need to \emph{link} our code to the function definitions.
 
@@ -163,10 +167,9 @@ the header file:
 
 We use the double quote syntax with user-defined libraries while the
 usual less-than/greater-than syntax is used with standard libraries.
-With the less-than/greater-than syntax, the compiler will usually 
+With the less-than/greater-than syntax, the compiler will  
 attempt to look for the header file(s) in a specified system directory
 which it will fail to find if it is a user-defined library.
-
 Furthermore, other elements are usually included in header files
 such as preprocessor directives and other declarations (such as
 enumerated types and structures which we introduce later).
@@ -195,12 +198,12 @@ double monthlyPayment = getMonthlyPayment(p, r, 60);
 
 By default, all primitive types including \mintinline{c}{int}, 
 \mintinline{c}{double}, and \mintinline{c}{char} are passed by 
-valuefunction arguments are passed by value.  To be
-able to pass arguments by reference, we need to use
+value.  To be able to pass arguments by reference, we need to use
 \emph{pointers}.
 
 \section{Pointers}
 \label{section:cPointers}
+\index{pointers}
 
 Consider the following line of C code.
 
@@ -235,20 +238,20 @@ double *ptrB;
 \end{minted}
 
 If \mintinline{c}{ptrA} represents a memory location, what values can
-it take on?  At the end of the day, a memory location is just a number, 
+it take on?  A memory location is just a number, 
 so you \emph{could} do something like the following.
 
 \mintinline{c}{ptrA = 10;} 
 
 Though syntactically this makes sense (and generally the compiler 
-will let you do this with perhaps at most a warning), its not really what you want.  
+will let you do this with at most a warning), it is not really what you want.  
 This assigns to the pointer variable \mintinline{c}{ptrA} the value 10, 
 which will be interpreted as the \emph{memory address} 10.  This
 memory address may not belong to your program, or it may not even
 exist as a valid memory address.  Attempts to access the value stored
 at an arbitrary memory location may be illegal and may result in the
-operating system killing the program with a \gls{segmentation fault}
-or similar error.
+operating system killing the program with a \index{segmentation fault} 
+\gls{segmentation fault} or similar error.
 
 There are many reasons why a program should not be allowed 
 access to arbitrary memory locations, but one of the prime reasons
@@ -270,10 +273,12 @@ ptrA = &a;
 ptrB = &b;
 \end{minted}
 
-The operation \mintinline{c}{&a} gets the memory address of the
+The operation \mintinline{c}{&a} results in the memory address of the
 variable \mintinline{c}{a} and we can assign it to a pointer value.
-Again, note that the pointer type and variable type should match.
-making a \mintinline{c}{double} pointer point to an \mintinline{c}{int}
+The pointer type and variable type should match; an integer pointer
+should point to an \mintinline{c}{int}, a double pointer should point 
+to a \mintinline{c}{double}.
+Making a \mintinline{c}{double} pointer point to an \mintinline{c}{int}
 variable type such as
 
 \mintinline{c}{ptrB = &a;}
@@ -282,7 +287,7 @@ is valid syntax, but since the two types use different amounts of memory
 you may get garbage results.
 
 There is a special value used in C called \mintinline{c}{NULL} which
-is a (case-sensitive) keyword used for uninitialized, undefined, empty or otherwise
+is a (case-sensitive) keyword used for an uninitialized, undefined, empty or otherwise
 invalid or meaningless value.  In the context of memory locations, 
 \mintinline{c}{NULL} ``points'' to nothing.  As with regular variables,
 its best practice to initialize pointer values to \mintinline{c}{NULL}.
@@ -307,7 +312,7 @@ if(ptrA == NULL) {
 
 Once we have a valid pointer to a memory location, we may want
 to manipulate the contents of the memory it references.  To do this
-we use the inverse operator, the \emph{dereferencing operator}
+we use the inverse operation, the \emph{dereferencing operator}
 which again uses an asterisk.  Given a pointer variable \mintinline{c}{ptrA}, 
 we apply an asterisk in front of it to turn it into a regular variable.
 Consider the following example.
@@ -328,12 +333,13 @@ ptrA = &a;
 printf("a = %d\n", a); //prints "a = 20"
 \end{minted}
 
-How each of these lines of code operate in memory is depicted
-in Figure \ref{figure:cPointers}.  
+Figure \ref{figure:cPointers} depicts how these lines of
+code operate in memory.
 
 \input{figures/figureCPointers}
 
 \subsection{Passing By Reference}
+\index{pass by reference}
 
 Now that we have the ability to reference a memory location 
 using pointers, we can write functions that pass variables by 
@@ -467,22 +473,21 @@ in Chapter \ref{chapter:c:searchingSorting}.
 \subsection{Generalized Rounding}
 
 Recall that the standard math library provides a \mintinline{c}{round()}
-function that rounds a number to the nearest whole number.  Often, we've
+function that rounds a number to the nearest whole number.  We've
 had need to round to cents as well.  We now have the ability to write
 a function to do this for us.  Before we do, however, let's think more
 generally.  What if we wanted to round to the nearest tenth?  Or
 what if we wanted to round to the nearest 10s or 100s place?  Let's
 write a general purpose rounding function that allows us to specify
-\emph{which} decimal place to round.  
+\emph{which} decimal place to round to.  
 
 The most natural input values would be to specify the place using
 an integer exponent.  That is, if we wanted to round to the nearest
 tenth, then we would pass it $-1$ as $0.1 = 10^{-1}$, $-2$ if we wanted
-to round to the nearest 100th, etc.  On the positive end passing in 0
+to round to the nearest 100th, etc.  In the other direction, passing in 0
 would correspond to the usual round function, 1 to the nearest 10s spot, 
-and so on.  
-
-Moreover, we could demonstrate good code reuse (as well as procedural
+and so on.  Moreover, we could demonstrate good code reuse (as well as 
+\index{procedural abstraction} procedural
 abstraction) by \emph{scaling} the input value and reusing the functionality
 already provided in the math library's \mintinline{c}{round()} function.  We
 could further define a \mintinline{c}{roundToCents()} function that used 
@@ -549,8 +554,8 @@ one for the ``plus'' root and one for the ``minus'' root both of
 which take the coefficients, $a, b, c$ as arguments.  However,
 if we wrote a single function that took the coefficients as parameters
 by value as well as two other parameters by reference, we could
-place \emph{both} root values, one in each of the by-reference
-variables.
+compute \emph{both} root values and place each one in two pass 
+by reference variables.
 
 \begin{minted}{c}
 void quadraticRoots(double a, double b, double c, 
@@ -564,7 +569,7 @@ void quadraticRoots(double a, double b, double c,
 
 By using pass by reference variables, we avoid multiple functions.
 We also note that the return value in this case is unused since
-we are ``returning'' the root values in the two pass-by-reference
+we are ``returning'' the root values in the two pass by reference
 variables.  This frees up the return value to be used to communicate
 \emph{errors} to the calling function.  Recall that there could
 be several ``bad'' inputs to this function.  The roots could be complex

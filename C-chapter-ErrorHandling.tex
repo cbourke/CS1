@@ -23,8 +23,8 @@ terminate.
 \section{Language Supported Error Codes}
 \label{section:errno}
 
-In the standard libraries, some functions are designed to indicate a
-n error by returning a special ``flag'' value such as $-1$ or 
+In the standard libraries, some functions are designed to indicate an 
+error by returning a special ``flag'' value such as $-1$ or 
 \mintinline{c}{NULL}.  In general, though, the standard library functions
 communicate an error code represented as an integer value.
 As previously mentioned, C uses the convention that 0 
@@ -67,8 +67,8 @@ In addition, the standard string library, defined in the header file,
 \mintinline{c}{char * strerror(errno)} that can be used to map 
 the value in \mintinline{c}{errno} to a human-readable error message.  
 We discuss strings in detail later on, but we can see how to use this 
-function in the following demonstration (see below).  The output of this 
-program is as follows.
+function in Code Sample \ref{code:c:errorHandling}.  The output of 
+this program is as follows.
 
 \begin{minted}{text}
 result: 1.4142, error: 0
@@ -86,7 +86,11 @@ integer values 33 and 34 respectively.  These numbers are
 not necessarily the same on all systems so comparisons must 
 be made against the macro names for portability.
 
+\begin{listing}
 \inputminted{c}{code/errorDemo.c}
+\caption{Using the \mintinline{c}{errno.h} library}
+\label{code:c:errorHandling}
+\end{listing}
 
 \subsection{POSIX Error Codes}
 
@@ -107,13 +111,11 @@ corresponds to a ``Permission denied'' error.
 \section{Error Handling By Design}
 
 In our own code we \emph{could} communicate errors to calling
-functions by setting \mintinline{c}{errno}, however, we may run 
+functions by setting the \mintinline{c}{errno} variable, however, we may run 
 into compatibility issues with the standard error codes or POSIX 
 error codes.  Instead, it may be more appropriate to do error 
 handling by utilizing the return value of a function to communicate
-an error code.  
-
-That is, to do error handling we could design our functions to always
+an error code.  We could design our functions to always
 return an \mintinline{c}{int} value to indicate an error: 0 for no error
 and some non-zero value to indicate various different types of errors.
 Of course, as a consequence any value that needs to be ``returned''
@@ -124,9 +126,7 @@ As an example, let's revisit the quadratic roots example in Section
 \ref{subsection:c:quadraticRoots}.  By returning the two output values
 via pass by reference variables, we freed up the return value.  We
 can now modify our function to return an integer indicating an
-error code instead.
-
-Previously we had identified several different types of errors: division
+error code instead. Previously we had identified several different types of errors: division
 by zero (if $a = 0$), complex roots (if $b^2 - 4ac < 0$) and a 
 \mintinline{c}{NULL} pointer error if the variables passed by reference
 were \mintinline{c}{NULL}.  We can now modify our function to 
@@ -212,13 +212,13 @@ in our program.  For example,
 DayOfWeek today = MONDAY;
 
 if(today == SUNDAY || today == SATURDAY) {
-  printf("Its the weekend!\n");
+  printf("It is the weekend!\n");
 }
 \end{minted}
 
 Note the modern naming conventions: the type identifier uses 
 upper camel casing while the enumerated values follow an 
-upper case underscore convention.  Though our example does
+uppercase underscore convention.  Though our example does
 not contain a value with multiple words, if it had, we would have
 used an underscore to separate them.  Furthermore, enumerated
 type declarations are usually placed in separate header files
@@ -230,9 +230,8 @@ in our example, \mintinline{c}{SUNDAY} is actually \mintinline{c}{0},
 \mintinline{c}{MONDAY} is \mintinline{c}{1}, and 
 \mintinline{c}{SATURDAY} is \mintinline{c}{6}.  When we do
 assignments or equality comparisons, we're actually just
-comparing integers.  
-
-Consequently, a \mintinline{c}{DayOfWeek} variable \emph{may}
+comparing integers.  Consequently, a \mintinline{c}{DayOfWeek} 
+variable \emph{may}
 be assigned values that do not correspond to our enumeration. 
 For example, 
 
@@ -240,7 +239,7 @@ For example,
 
 is valid code and will not (in general) result in any compiler errors
 or warnings, even though it is assigning an invalid value to the 
-variable.  Care must be taken to only assign valid values to an
+variable.  You should only assign valid values to an
 enumerated type variable.  Proper error checking should also
 be done.
 
@@ -272,7 +271,7 @@ typedef enum {
 \end{minted}
 
 Now in the \mintinline{c}{quadraticRoots()} function, we can
-return the appropriate error code.
+return the appropriate error code as an enumerated type value.
 
 \begin{minted}{c}
 ErrorCode quadraticRoots(double a, double b, double c, 

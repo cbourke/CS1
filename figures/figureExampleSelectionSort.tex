@@ -12,8 +12,8 @@
 %
 %Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
 %
-
-
+%
+%
 
 
 \begin{figure}
@@ -155,7 +155,7 @@ minimal element among the remaining is found at the second to last element.
 \node[block] (a7) at (7*\sz,0) { 4 };
 \node[block] (a8) at (8*\sz,0) { 42 };
 
-\draw[<->] (a2.south) to [bend right] node[pos=.5,below] {swap} (a3.south);
+\draw[<->] (a2.south) to [out=-45,in=-135,looseness=2.25] node[pos=.5,below] {swap} (a3.south);
 
 \end{tikzpicture}~~~~~\begin{tikzpicture}[scale=.65,transform shape]
 \draw[white] (0,0) rectangle (1, -1.1);
@@ -305,7 +305,7 @@ the first 5 elements.]{
 \node[block] (a7) at (7*\sz,0) { 102 };
 \node[block] (a8) at (8*\sz,0) { 42 };
 
-\draw[<->] (a5.south) to [bend right] node[pos=.5,below] {swap} (a6.south);
+\draw[<->] (a5.south) to [out=-45,in=-135,looseness=2.25] node[pos=.5,below] {swap} (a6.south);
 
 \end{tikzpicture}~~~~~\begin{tikzpicture}[scale=.65,transform shape]
 \draw[white] (0,0) rectangle (1, -1.1);
@@ -389,7 +389,7 @@ comparisons.]{
 
 \subfigure[Eighth iteration.  This is the final iteration, we swap
 42 and 102.  After this iteration, the final element, 102 is already
-where it needs to be.]{
+where it belongs.]{
 
 \begin{tikzpicture}[scale=.65,transform shape]
 

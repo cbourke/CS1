@@ -2,14 +2,15 @@
 
 %%Chapter: C Basics
 
-The C programming language is a relatively old language, but still widely used to this
-day.  It is nearly universal in that nearly every system, platform, and operating system
+The C programming language is a relatively old language, but still widely 
+used.  It is universal in that nearly every system, platform, and operating system
 has a C compiler that produces machine code for that system.  C is used extensively
 in systems programming for operating system kernels, embedded systems, microcontrollers, 
 and supercomputers.  It is generally an ``imperative'' language which is a paradigm that
 characterizes computation in terms of executable statements and functions that change 
-a program's state (variable values).  C has been highly influential in the design of other
-languages including C++, Objective-C, C\#, Java, PHP, Python, among many others.  
+a program's state (variable values).  C has been highly influential in 
+the design and syntax of other
+languages including C++, Objective-C, C\#, Java, and PHP, among many others.  
 Many languages have adopted the basic syntactic elements and structured programming 
 approach of the C language.
 
@@ -18,14 +19,14 @@ born out of the need for a new language for the PDP-11 minicomputer that used th
 Unix operating system (written by Ken Thompson).  From its inception, C has had a close relation to Unix; in fact the
 operating system was subsequently rewritten in C, making it the first OS to be written in 
 a language other than assembly.  The language was dubbed ``C'' as its predecessor was
-named ``B'', a simplified version of BCPL (Basic Combined Programming Language).  
+named ``B,'' a simplified version of BCPL (Basic Combined Programming Language).  
 The first formal specification was published as \emph{The C Programming Language} by
 Kernighan and Ritchie (1978) \cite{Kernighan:1988:CPL:576122} often referred to as 
 ``The K\&R Book'' which would later become the \gls{ansiLabel} C standard.
 
 C gained in popularity and directly influenced object-oriented variations of it.  
-Bjarne Stroustrup developed C++ while at Bell Labs during 1979--1983.  
-Brad Cox and Tom Love developed Objective-C during 1981--1983 at their
+Bjarne Stroustrup developed C++ while at Bell Labs from 1979--1983.  
+Brad Cox and Tom Love developed Objective-C from 1981--1983 at their
 company Stepstone.  Subsequent standards of the C language have added
 and extended features.  In 1990, the \gls{isoLabel}/\gls{iecLabel} 9899:1990 
 standard, referred to as C89 or C90, was adopted.  About every 10 years 
@@ -33,12 +34,14 @@ since, a new standard has been adopted; ISO/IEC 9899:1999 (referred
 to as C99) in 1999 and ISO/IEC 9899:2011 (C11) in 2011.
 
 \section{Getting Started: Hello World}
+\index{Hello World!C}
 
-The hallmark of the introduction of programming languages is the \emph{Hello World!}
-program.  It consists of a simple program whose only purpose is to print out the message
-``Hello World!'' to the user in some manner.  The simplicity of the program allows the
+The hallmark of an introduction to a new programming language is 
+the \emph{Hello World!} program.  It consists of a simple program whose 
+only purpose is to print out the message ``Hello World!'' to the user 
+in some manner.  The simplicity of the program allows the
 focus to be on the basic syntax of the language.  It is also typically used to ensure that 
-your development environment, compiler, runtime environment, etc. are functioning 
+your development environment, compiler, runtime environment, etc.\ are functioning 
 properly with a minimal example.  The Hello World! program is generally attributed to 
 Brian Kernighan who used it as an example of programming in C in 1974 \cite{Kernighan:1974}.
 A basic Hello World! program in C can be found in Code Sample \ref{code:helloWorldInC}.
@@ -99,13 +102,14 @@ elements include the following.
 \end{itemize}
 
 Though not a syntactic requirement, the proper use of whitespace is important for
-good, readable code.  Code inside code blocks is indented at the same indentation.
+good, readable code.  Code inside code blocks is indented at the same indentation level.
 Nested code blocks are indented further.  Think of a typical table of contents or
 the outline of a formal paper or essay.  Sections and subsections or points and 
-points all follow proper indentation with elements at the same level at the same
+subpoints all follow proper indentation with elements at the same level at the same
 indentation.  This convention is used to organize code and make it more readable.
  
 \subsection{Preprocessor Directives}
+\index{preprocessor directive}
 
 The lines, 
 
@@ -117,7 +121,7 @@ The lines,
 are \emph{preprocessor directives}.  Preprocessor directives are instructions to
 the compiler to \emph{modify} the source code before it starts to compile it.  These
 particular lines are ``including'' standard libraries of functions so that the program can
-use the functionality that has already been implemented for us.  
+use functionality that has already been implemented for us.  
 
 The first, \mintinline{c}{stdlib.h} represents the C standard (\mintinline{c}{std}) 
 library (\mintinline{c}{lib}).  This library is
@@ -125,24 +129,24 @@ so essential that many compilers will automatically include it even if you do no
 explicitly do so in your program.  Still, it is best practice to include it in your code.
 
 The second, \mintinline{c}{stdio.h} is the standard (\mintinline{c}{std}) input/output 
-(\mintinline{c}{io}) library which contains basic I/O functions that we can use.  
-In particular, the standard output function \mintinline{c}{printf} is part of this library.
+(\mintinline{c}{io}) library which contains basic input/output (I/O) functions that we can use.  
+In particular, the standard output function \mintinline{c}{printf()} is part of this library.
 
 Failure to include a library means that you will not be able to use the functions
 it provides in your program.  Using the functions without including the library may
 result in a compiler error.  The \mintinline{c}{.h} in the library names stands for 
 ``header''; function declarations are typically contained in a header file while 
 their definitions are placed in a source file of the same name.  We'll explore
-this convention in detail when we look at functions in C (Chapter \ref{chapter:c:functions}.
+this convention in detail when we look at functions in C (Chapter \ref{chapter:c:functions}).
 
 There are many other important standard libraries that we'll touch on as 
-needed, but another one that may be of immediate interest is the standard
+needed; of immediate interest is the standard
 mathematics library, \mintinline{c}{math.h}.  It includes many useful functions
 to compute common mathematical functions such as the square root and 
 natural logarithm.  Table \ref{table:cMathFunctions} highlights several of 
 these functions.  To use them you'd include the math library in your source
 file \mintinline{c}{#include<math.h>} and then ``call'' them by providing input 
-and getting the output.  For example:
+and assigning the output value to a variable.  For example:
 
 \begin{minted}{c}
 double x = 1.5;
@@ -196,12 +200,12 @@ illustrate, consider the following example.
 \end{minted}
 
 The macro defines an ``alias'' for the \mintinline{c}{MILES_PER_KM} identifier as the
-value $1.60934$.  Essentially, the C preprocessor will go through the code and any
+value $1.609$.  Essentially, the C preprocessor will go through the code and any
 instance of \mintinline{c}{MILES_PER_KM} will be replaced with \mintinline{c}{1.609}.
 The advantage of using a macro like this is that we can use the identifier \mintinline{c}{MILES_PER_KM}
-throughout our program instead of mysterious numbers whose meaning and intent
+throughout our program instead of \glspl{magic number} whose meaning and intent
 may not be immediately clear.  Moreover, if we want to change the definition (say make it more
-precise, $1.60934$) then we only need to change the macro instead of making the
+precise, using $1.60934$ instead) then we only need to change the macro instead of making the
 same change throughout our program.
 
 As a stylistic note: macro constants in C are usually associated with uppercase 
@@ -216,7 +220,7 @@ Comments can be written in a C program either as a single line using
 two forward slashes, \mintinline{c}{//comment} or as a multiline comment using
 a combination of forward slash and asterisk: \mintinline{c}{/* comment */}.  
 With a single line comment, everything on the line \emph{after} the forward
-slashes is ignored.  With a multiline comment, everything in between the forward
+slashes is ignored.  With a multiline comment, everything between the forward
 slash/asterisk is ignored.  Comments are ultimately ignored by the compiler so
 the amount of comments do not have an effect on the final executable code.
 Consider the following example.
@@ -238,33 +242,32 @@ font to distinguish them from the rest of the code (just as our example above do
 Failure to close a multiline comment will likely result in a compiler error but with
 color-coded comments its easy to see the mistake visually.
 
-\subsection{The \mintinline{c}{main} Function}
+\subsection{The \mintinline{c}{main()} Function}
 
-Every executable program has to have a beginning: a point at which the
-program starts to execute.  In C, the starting point is the \mintinline{c}{main}
+Every executable program starts its execution somewhere. In C, 
+the starting point is the \mintinline{c}{main()}
 function.  When a program is compiled to an executable and the program
-is invoked, the code in the \mintinline{c}{main} function starts executing.  In our
-example, the code associated with the \mintinline{c}{main} function placed
-in between the two curly brackets is part of the \mintinline{c}{main} function.
+is invoked, the code in the \mintinline{c}{main()} function starts executing.  In our example, the code between the two curly brackets defines the
+\mintinline{c}{main()} function.
 At the end of the function we have a \mintinline{c}{return} statement.  We'll
-examine \mintinline{c}{return} statements in detail when we examine functions, 
-for now though, the program is ``returning'' a zero value to the operating system.
+examine \mintinline{c}{return} statements in detail when we examine functions. 
+The program is ``returning'' a zero value to the operating system.
 The convention in C is that zero indicates ``no error occurred'' while a 
 non-zero value is used to indicate that ``some'' error occurred (the 
 value used is determined by system standards such as the \gls{posixLabel}
 standard).
 
-In addition, our \mintinline{c}{main} function has two \emph{arguments}:
+In addition, our \mintinline{c}{main()} function has two \emph{arguments}:
 \mintinline{c}{argc} and \mintinline{c}{argv} which serve to communicate
 any command line arguments provided to the program (review Section
 \ref{subsection:commandLineInput} for details).  The first, \mintinline{c}{argc} is an integer that indicates
 the \emph{number} of arguments provided \emph{including} the executable
 file name itself.  The second, \mintinline{c}{argv} actually stores the 
-arguments as strings.  We'll be able to understand the syntax later on, but
+arguments as strings.  We will understand the syntax later on, but
 for now we can at least understand how we might convert these arguments
-to different types such as integers and floating-point numbers.
+to different types such as integers and floating point numbers.
 
-First, recall that \mintinline{c}{argv} is the argument \emph{vector}: it 
+Recall that \mintinline{c}{argv} is the argument \emph{vector}: it 
 is an array (see Chapter \ref{chapter:c:arrays}) of the command line arguments.  
 To access them, you can \emph{index} them starting at zero, the first being \mintinline{c}{argv[0]}, the
 second \mintinline{c}{argv[1]}, etc. (the last one of course would be at
@@ -272,8 +275,8 @@ second \mintinline{c}{argv[1]}, etc. (the last one of course would be at
 executable file being run.  The remaining are the command line 
 arguments provided by the user.
 
-To convert them you can use two different functions, \mintinline{c}{atoi}
-and \mintinline{c}{atof} which are short for \textbf{a}lphanumeric \textbf{to}
+To convert them you can use two different functions, \mintinline{c}{atoi()}
+and \mintinline{c}{atof()} which are short for \textbf{a}lphanumeric \textbf{to}
 \textbf{i}nteger and \textbf{f}loafing-point number respectively.  An 
 example:
 
@@ -287,28 +290,28 @@ double y = atof(argv[2]);
 \end{minted}
 
 \section{Variables}
+\index{variables!C}
 
-As previewed, the three main primitive types supported in C are \mintinline{c}{int},
-\mintinline{c}{double}, and \mintinline{c}{char} which support integers, floating-point
+As previewed, the three primary primitive types supported in C are \mintinline{c}{int},
+\mintinline{c}{double}, and \mintinline{c}{char} which support integers, floating point
 numbers, and single \gls{asciiLabel} characters.  
 
 Integer (\mintinline{c}{int}) types are only guaranteed to ``be at least'' 16 bytes by
 the C standard but are usually 32-bit signed integers on most modern 
-systems\footnote{You may have to deal with 16-bit \mintinline{c}{int} types 
-in legacy systems/compilers or in modern embedded systems.}.  With a  32-bit signed 
-\mintinline{c}{int} we can represent integers between $-2,147,483,648$ and 
-2,147,483,647.
-
-Doubles (\mintinline{c}{double}) types are usually double-precision floating-point
-numbers as per the \gls{ieeeLabel} 754 standard and provide about 16 digits
+systems.\footnote{You may have to deal with 16-bit \mintinline{c}{int} types 
+in legacy systems/compilers or in modern embedded systems.}  With a  32-bit signed 
+\mintinline{c}{int} we can represent integers in the range $-2,147,483,648$ to 
+2,147,483,647.  Doubles (\mintinline{c}{double}) types are double-precision 
+floating point numbers as per the \gls{ieeeLabel} 754 standard and provide about 16 digits
 of precision.  
 
-Though C does provide a \mintinline{c}{float} (single precision floating-point 
+C provides a \mintinline{c}{float} (single precision floating point 
 number) type and there are various modifiers such as \mintinline{c}{short}, \mintinline{c}{long}, 
 \mintinline{c}{unsigned} and \mintinline{c}{signed} that can be used, but these
 are either system-dependent or rely on later versions of the C standard (such as
 C99).  We will restrict our focus to more portable, interoperable code and stick
-with the basic two types in most of our code.
+with the basic \mintinline{c}{int} and \mintinline{c}{double} types in 
+our code.
 
 Finally, the \mintinline{c}{char} type is typically a single byte that represents a
 single ASCII character.  For all intents and purposes a \mintinline{c}{char} can 
@@ -327,14 +330,14 @@ double costPerUnit;
 char firstInitial;
 \end{minted}
 
-Each declaration specifies the variables type followed by the identifier and ending
+Each declaration specifies the variable's type followed by the identifier and ending
 with a semicolon.  The identifier rules are fairly standard: a name can consist
 of lower and uppercase alphabetic characters, numbers, and underscores but
 may \emph{not} begin with a numeric character.  We adopt the modern camelCasing
 naming convention for variables in our code.
 
 The assignment operator is a single equal sign, \mintinline{c}{=} and is a right-to-left
-assignment.  That is, the variable that we wish to assign the value to appears on the
+assignment.  The variable that we wish to assign the value to appears on the
 left-hand-side while the value (literal, variable or expression) is on the right-hand-size.
 Using our variables from before, we can assign them values:
 
@@ -346,18 +349,18 @@ firstInitial = 'C';
 
 An important thing to understand and to keep in mind is: if you 
 declare a variable but do not assign it a value, its value is \emph{undefined}.  
-That is, if we code something like \mintinline{c}{int a;}, the value
+If we code something like \mintinline{c}{int a;}, the value
 of the variable \mintinline{c}{a} is \emph{not} necessarily zero; depending
 on the system, it could contain a special value that indicates ``uninitialized
 memory'' or it could contain garbage, or it \emph{could} have the value zero.
 The C standard does \emph{not} specify default values for variables.  The
 default value of variables is highly system dependent--on the compiler, the
-libraries, and even the operating system.  Do not make any assumptions on 
+libraries, and even the operating system.  You should not make any assumptions on 
 the initial or default values of variables.  If you need such assumptions, then 
 values must be assigned.
 
 For brevity, C allows you to declare a variable and immediately assign it a value on the same
-line.  So these two code blocks could have been more compactly written as:
+line.  Our example could be written more compactly written as follows.
 
 \begin{minted}{c}
 int numUnits = 42;
@@ -374,7 +377,7 @@ int numOrders, numUnits = 42, numCustomers = 10, numItems;
 double costPerUnit = 32.79, salesTaxRate;
 \end{minted}
 
-Another convenient keyword is \mintinline{c}{const}, short for ``constant''.  We can 
+Another convenient keyword is \mintinline{c}{const}, short for ``constant.''  We can 
 apply it to any variable to indicate that it is a read-only variable.  Of course, we
 \emph{must} assign it a value at declaration.  For example:
 
@@ -387,12 +390,13 @@ Any attempt to reassign the values of \mintinline{c}{const} variables will resul
 in a compiler error.
 
 \section{Operators}
+\index{operators!C}
 
 C supports the standard arithmetic operators for addition, subtraction, multiplication, and
 division using \mintinline{c}{+}, \mintinline{c}{-}, \mintinline{c}{*}, and
 \mintinline{c}{/} respectively.  Each of these operators is a binary operator that
-acts on two operands which can either be literals or other variables and follow
-the usually rules of arithmetic when it comes to order of precedence (multiplication 
+acts on two operands which can be literals, variables or expressions and 
+follow the usual rules of arithmetic when it comes to order of precedence (multiplication 
 and division before addition and subtraction).
 
 \begin{minted}{c}
@@ -421,22 +425,22 @@ Special care must be taken when dealing with \mintinline{c}{int} types.
 For all four operators, if both operands are integers, the result will be an
 integer.  For addition, subtraction, and multiplication this isn't a big deal, but
 for division it means that when we divide, say \mintinline{c}{10 / 20}, the result
-is not $0.5$ as expected.  The number 0.5 is a floating-point number.  As
-such, the fractional part gets \gls{truncation}{truncated} (cut off and thrown out) leaving
+is not $0.5$ as expected.  The number 0.5 is a floating point number.  As
+such, the fractional part gets \glslink{truncation}{truncated} (cut off and thrown out) leaving
 only zero.  In the code above, \mintinline{c}{d = a / b;} the variable \mintinline{c}{d}
 ends up getting the value zero because of this.
 
-Similarly, attempting to assign a floating-point number to an integer also
+Similarly, attempting to assign a floating point number to an integer also
 results in truncation because an \mintinline{c}{int} type cannot handle
 the fractional part.  In the line \mintinline{c}{d = b + y} above, \mintinline{c}{b + y}
-is correctly $20 + 3.4 = 23.4$, but when assigned to the \mintinline{c}{int}
-variable \mintinline{c}{d} the $.4$ gets truncated and \mintinline{c}{d} has
-the value 23.
+correctly evaluates as $20 + 3.4 = 23.4$, but when assigned to the \mintinline{c}{int}
+variable \mintinline{c}{d} the $.4$ gets truncated and \mintinline{c}{d} is
+assigned the value 23.  Assigning an \mintinline{c}{int} value to a 
+\mintinline{c}{double} variable is
+not a problem as the integer $2$ implicitly becomes the floating point number $2.0$.
 
-Assigning an \mintinline{c}{int} value to a \mintinline{c}{double} variable is
-not a problem as the integer $2$ becomes the floating-point number $2.0$.
-
-A solution to this problem is to use explicit \gls{type casting} to force at
+A solution to this problem is to use explicit \index{type casting}
+\gls{type casting} to force at
 least one of the operands in an integer division to become a \mintinline{c}{double}
 type.  For example:
 
@@ -465,12 +469,12 @@ x = 29 % 5; //x is 4
 
 \section{Basic I/O}
 
-The C Standard I/O library (\mintinline{c}{stdio.h}) contains many functions that facilitate
-input and output including \mintinline{c}{printf} for standard output and \mintinline{c}{scanf}
+The standard I/O library (\mintinline{c}{stdio.h}) contains many functions that facilitate
+input and output including \mintinline{c}{printf()} for standard output and \mintinline{c}{scanf()}
 (\textbf{scan f}ormatted input) for standard input.
 
-The \mintinline{c}{printf} function works exactly as discussed in Section \ref{subsection:printfStyleFormatting}.
-The \mintinline{c}{scanf} function works using similar placeholders as \mintinline{c}{printf}.
+The \mintinline{c}{printf()} function works exactly as discussed in Section \ref{subsection:printfStyleFormatting}.
+The \mintinline{c}{scanf()} function works using similar placeholders as \mintinline{c}{printf()}.
 To illustrate how it works, consider the following lines of code:
 
 \begin{minted}{c}
@@ -479,23 +483,23 @@ printf("Please enter a number: ");
 scanf("%d", &a);
 \end{minted}
 
-The \mintinline{c}{printf} statement prompts the user for an input.  The \mintinline{c}{scanf} then
+The \mintinline{c}{printf()} statement prompts the user for an input.  The \mintinline{c}{scanf()} then
 executes and the program \emph{waits} for the user to enter input.  The user is free to 
 start typing.  When the user is done, they hit the enter key at which point the program resumes
 and reads the input from the standard input buffer, converts the value entered by the user into
 an integer and places the result in the variable \mintinline{c}{a} where it can now be used
 by the remainder of the program.
 
-A few points of interest.  First, the same placeholder as \mintinline{c}{printf} was used, \mintinline{c}{%d}
-for \mintinline{c}{int} values.  However, when we ``passed'' the variable \mintinline{c}{a} to \mintinline{c}{scanf}
+A few points of interest.  First, the same placeholder as \mintinline{c}{printf()} was used, \mintinline{c}{%d}
+for \mintinline{c}{int} values.  However, when we ``passed'' the variable \mintinline{c}{a} to \mintinline{c}{scanf()}
 we placed an ampersand, \mintinline{c}{&} in front of it.  This is passing the variable \emph{by reference}
 and we'll explore that concept further in Chapter \ref{chapter:c:functions}, but for now just know that
-when using variables with \mintinline{c}{scanf}, an ampersand is required.  Failure to place an
-ampersand in front of a variable with \mintinline{c}{scanf} will likely result in a \emph{segmentation fault}
+when using variables with \mintinline{c}{scanf()}, an ampersand is required.  Failure to place an
+ampersand in front of a variable with \mintinline{c}{scanf()} will likely result in a \emph{segmentation fault} \index{segmentation fault}
 (an illegal memory access).
 
-You can use the same placeholder, \mintinline{c}{%c} with \mintinline{c}{scanf} to read in single 
-characters as well.  However, for floating-point numbers, in particular \mintinline{c}{double} types, 
+You can use the same placeholder, \mintinline{c}{%c} with \mintinline{c}{scanf()} to read in single 
+characters as well.  However, for floating point numbers, in particular \mintinline{c}{double} types, 
 the placeholder \mintinline{c}{%lf} must be used (which stands for long float, a double precision
 number).  Failure to use the correct placeholder may result in garbage results as the input will
 be interpreted incorrectly.  Another example:
@@ -506,26 +510,25 @@ printf("Please enter a fractional number: ");
 scanf("%lf", &x);
 \end{minted}
 
-Another potential problem is that \mintinline{c}{scanf} expects a certain \emph{format} (thus its 
+Another potential problem is that \mintinline{c}{scanf()} expects a certain \emph{format} (thus its 
 name).  If we prompt the user for a number but they just start mashing the keyboard giving 
-non-numerical input, we may get incorrect results.  \mintinline{c}{scanf} will likely interpret
+non-numerical input, we may get incorrect results.  \mintinline{c}{scanf()} will interpret
 the input as zero.  It may be very difficult to distinguish between the case of a user actually
-entering in zero as a legitimate input versus bad input.  In general, \mintinline{c}{scanf} is
-not a good mechanism for reading input (and in fact can be very dangerous), but it is a 
-good starting point.
+entering in zero as a legitimate input versus bad input.  In general, \mintinline{c}{scanf()} is
+not a good mechanism for reading input (and in fact can be very dangerous), but it does provide a good starting point.
 
 \section{Examples}
 
 \subsection{Converting Units}
 
-Let's start with a simple task: let's write a program that will prompt the user to enter a temperature
+Let's write a program that will prompt the user to enter a temperature
 in degrees Fahrenheit and convert it to degrees Celsius using the formula
   $$C = (F - 32) \cdot \frac{5}{9}$$
 
 We begin with the basic program outline which will include preprocessor directives to bring
-in the standard library and the standard input/output library (after all, we'll need to prompt
+in the standard library and the standard input/output library (we'll need to prompt
 for input and print the result as output to the user).  Further, we want our program to 
-be executable, so we need to put our code into the main method.  Finally, we'll document
+be executable, so we need to put our code into the \mintinline{c}{main()} function.  Finally, we'll document
 our program to indicate its purpose.
 
 \begin{minted}{c}
@@ -545,12 +548,12 @@ int main(int argc, char **argv) {
 \end{minted}
 
 It is common for programmers to use a comment along with a \mintinline{c}{TODO} note to
-themselves as a reminder of things that they still need to do with the program.  
+themselves as a reminder of things that they still need to implement in a program.  
 
 Let's first outline the basic steps that our program will go through:
 \begin{enumerate}
   \item We'll first prompt the user for input, asking them for a temperature in Fahrenheit
-  \item Next we'll read the user's input, likely into a floating-point number as degrees can be fractional
+  \item Next we'll read the user's input, likely into a floating point number as degrees can be fractional
   \item Once we have the input, we can calculate the degrees Celsius by using the formula above
   \item Lastly, we will want to print the result to the user to inform them of the value
 \end{enumerate}
@@ -580,19 +583,19 @@ int main(int argc, char **argv) {
 As we read each step it becomes apparent that we'll need a couple of variables:
 one to hold the Fahrenheit (input) value and one for the Celsius (output) value.  It also
 makes sense that each of these should be \mintinline{c}{double} variables as we
-want to support fractional values.  So at the top of our \mintinline{c}{main} function, we'll add
+want to support fractional values.  So at the top of our \mintinline{c}{main()} function, we'll add
 the variable declarations:
 
 \mintinline{c}{double fahrenheit, celsius;}
 
-Each of the steps is now straightforward; we'll use a \mintinline{c}{printf} statement in the
+Each of the steps is now straightforward; we'll use a \mintinline{c}{printf()} statement in the
 first step to prompt the user for input:
 
 \mintinline{c}{printf("Please enter degrees in Fahrenheit: ");}
 
 In the second step, we'll use the standard input to read the \mintinline{c}{fahrenheit} 
 variable value from the user.  Recall that we use the placeholder \mintinline{c}{%lf} 
-for reading \mintinline{c}{double} values and use an ampersand when using \mintinline{c}{scanf}:
+for reading \mintinline{c}{double} values and use an ampersand when using \mintinline{c}{scanf()}:
 
 \mintinline{c}{scanf("%lf", &fahrenheit);}
 
@@ -600,7 +603,7 @@ We can now compute \mintinline{c}{celsius} using the formula provided:
 
 \mintinline{c}{celsius = (fahrenheit - 32) * (5 / 9);}
 
-Finally, we use \mintinline{c}{printf} again to output the result to the user:
+Finally, we use \mintinline{c}{printf()} again to output the result to the user:
 
 \mintinline{c}{printf("%f Fahrenheit is %f Celsius\n", fahrenheit, celsius);}  
 
@@ -613,11 +616,10 @@ This will \emph{always} end up being zero.
 One way we could fix it would be to pull out our calculators and find that
 $\frac{5}{9} = 0.55555\ldots$ and replace \mintinline{c}{5/9} with \mintinline{c}{0.555555}.
 But, how many fives?  It may be difficult to tell how accurate we can make
-this floating-point number by hardcoding it ourselves.  A much better approach
+this floating point number by hardcoding it ourselves.  A much better approach
 would be to let the compiler take care of the optimal computation for us by
 making at least one of the numbers a \mintinline{c}{double} to prevent
 integer truncation.  That is, we should instead use \mintinline{c}{5.0 / 9}.
-
 The full program can be found in Code Sample \ref{code:c:fahrenheitToCelsiusProgram}.
 
 \begin{listing}[H]
@@ -660,7 +662,7 @@ the user for the coefficients, $a, b, c$ to a quadratic polynomial,
   $$ax^2 + bx + c$$
 and computing its roots using the quadratic formula, 
   $$x = \frac{-b \pm \sqrt{b^2 - 4ac}}{2a}$$
-As before, we can create a basic program with a \mintinline{c}{main}
+As before, we can create a basic program with a \mintinline{c}{main()}
 function and start filling in the details.  In particular, we'll need to prompt
 for the input $a$, then read it in; then prompt for $b$, read it in and
 repeat for $c$.  We'll also need several variables: three for the coefficients
@@ -688,7 +690,7 @@ root1 = (-b + sqrt(b*b - 4*a*c) ) / (2*a);
 root1 = (-b - sqrt(b*b - 4*a*c) ) / (2*a);
 \end{minted}
 
-Finally, we print the output using \mintinline{c}{printf}.  The full program 
+Finally, we print the output using \mintinline{c}{printf()}.  The full program 
 can be found in Code Sample \ref{code:c:quadraticRootsProgram}.
 
 \begin{listing}[h]
@@ -726,8 +728,8 @@ int main(int argc, char **argv) {
 \end{listing}
 
 This program was interactive.  As an alternative, we could have read 
-all three of the inputs as command line arguments, taking care that we
-need to convert them to floating-point numbers.  Lines 12--17 in the
+all three of the inputs as command line arguments, converting them 
+to floating point numbers.  Lines 12--17 in the
 program could have been changed to 
 
 \begin{minted}{c}
@@ -742,13 +744,13 @@ for this program.  For example:
   \item What if the user entered zero for $a$?
   \item What if the user entered some combination such that $b^2 < 4ac$?
   \item What if the user entered non-numeric values?
-  \item For the command line argument version, what if the user provided less than
-  	three argument?  Or more?
+  \item For the command line argument version, what if the user provided 
+  	less than three arguments?  Or more?
 \end{itemize}
-How might we prevent the consequences of such bad inputs?  That is, 
-how might we handle the even that a users enters those bad inputs and
-how do we communicate these errors to the user?  To do so we'll need 
-conditionals.
+How might we prevent the consequences of such bad inputs?   
+How might we handle the event that a user enters bad input and
+how do we communicate these errors to the user?  To begin to 
+resolve these issues, we'll need conditionals.
 
 
 

@@ -4,7 +4,7 @@
 \index{error handling}
 
 Writing perfect code is difficult.  The more complex a system or
-code base, the more likely it is to have \glspl{bug}.  That is, flaws
+code base, the more likely it is to have \index{bug} \glspl{bug}.  That is, flaws
 or mistakes in a program that result in incorrect behavior or 
 unintended consequences.  The term ``bug'' has been used in
 engineering for quite a while.  The term was popularized in the
@@ -28,8 +28,8 @@ In September 1999 the Mars Climate Orbiter, a project intended to
 study the Martian climate and atmosphere was lost after it entered
 into the upper atmosphere of Mars and disintegrated.
 The error was due to a subsystem that 
-measured the craft's momentum in non-standard pound force per 
-second when all other systems expected the standard newton
+measured the craft's momentum in a non-standard pound force per 
+second unit when all other systems expected the standard newton
 second unit \cite{mars1999}.  The loss of the project was
 calculated at over \$125 million.
 
@@ -49,7 +49,7 @@ it can cause a complete system failure.
 
 There are a variety of reasons for why bugs make it into systems.
 Bugs could be the result of a fundamental misunderstanding of
-the problem or requirements.  Poorly managed projects and
+the problem or requirements.  Poor management and
 the pressure of time constraints to deliver a project may make
 developers more careless.  A lack of proper testing may mean
 many more bugs survive the development process than otherwise
@@ -62,30 +62,16 @@ Working in teams where regular code reviews are held so that
 colleagues can examine, critique, and catch potential bugs
 are essential for writing robust code.
 
-WHERE TO PLACE THIS?
-
-Much of what we now consider Software Engineering was
-pioneered by people like Margaret Hamilton who was the
-lead Apollo flight software designer at NASA.  During the Apollo 
-11 Moon landing (1969), an error in one system 
-caused the lander's computer to become overworked with
-data.  However, because the system was designed with a
-robust architecture, it could detect and handle such situations
-by prioritizing more important tasks (those related to landing)
-over lower priority tasks.  The resilience that was built into
-the system is credited with its success \cite{hamiltonApollo11}.
-
-END
-
 Modern coding tools and techniques can also help to improve
-the robustness of code.  For example, \glspl{debugger} are 
+the robustness of code.  For example, \index{debugger}
+\glspl{debugger} are 
 tools that help a developer \gls{debug} (that is, find and fix
-the cause of an error) a program.  Debuggers generally
-allow you to simulate the execution of a program statement
-by statement and view the current state of the program such
+the cause of an error) a program.  Debuggers 
+allow you to simulate the execution of a program statement-by-statement 
+and view the current state of the program such
 as variable values.  You can ``step through'' the execution
 line by line to find where an error occurs in order to localize
-an identify a bug.
+and identify a bug.
 
 Other tools allow you to perform \gls{static analysis} on 
 source code to search for \emph{potential} problems.  
@@ -102,29 +88,41 @@ to good programming principles such as properly initializing
 variables or failure to check for null values are examples of
 smells.  Static analysis tools automatically examine the
 code base for potential issues like these.  For example, a
-\gls{lint} (or linter) is a tool that can examine source code 
+\index{linter} \gls{lint} (or linter) is a tool that can examine source code 
 suspicious or non-portable code or code that does not
 comply with generally accepted standards or ways of 
 doing things.
 
 Even if code contains no bugs, it is still susceptible to
 errors.  For example, a program could connect to a 
-remote database to pull and process data.  However, if
+remote database to \gls{query} and process data.  However, if
 the network connection is temporarily unavailable, the
 program will not be able to execute properly.  Because
 of the potential of such errors, it is important to write
-robust and resilient code.  We must anticipate possible 
+cod that is not only bug free but is also robust and resilient.  We must anticipate possible 
 error conditions and write code to detect, prevent, or 
 recover from such errors.  Generally, this is referred to 
 as \emph{error handling}.
 
+Much of what we now consider Software Engineering was
+pioneered by people like Margaret Hamilton who was the
+lead Apollo flight software designer at NASA.  During the Apollo 
+11 Moon landing (1969), an error in one system 
+caused the lander's computer to become overworked with
+data.  However, because the system was designed with a
+robust architecture, it could detect and handle such situations
+by prioritizing more important tasks (those related to landing)
+over lower priority tasks.  The resilience that was built into
+the system is credited with its success \cite{hamiltonApollo11}.
+
+
 \section{Error Handling}
 
 In general, errors are potential conditions or situations 
-that can be readily be anticipated by a developer.  For
+that can reasonably be anticipated by a developer.  For
 example, if we write code to open and process a file, 
 there are several things that could go wrong.  The file
-may not exist, or we may not have permissions to read
+may not exist, or we may not have permission on the system to read
 it, or the formatting in the file may be corrupted or not
 as expected.  Still yet, everything could be fine with the
 file, but it may contain erroneous or invalid values.
@@ -145,7 +143,8 @@ that needs to be addressed.  Still yet, there may be some
 error conditions that we cannot recover from at all as they
 are completely unexpected.  In such instances, we may
 want the error to result in the termination of the program
-in which case the error is considered \emph{fatal}.  
+in which case the error is considered \index{fatal error}
+\emph{fatal}.  
 
 \section{Error Handling Strategies}
 
@@ -154,42 +153,42 @@ handling.  We'll look at two general methods here: defensive
 programming and exceptions.
 
 \subsection{Defensive Programming}
+\index{defensive programming}
 
 Defensive programming is a ``look before you leap'' strategy.
 Suppose we have a potentially ``dangerous'' section of code; 
 that is, a line or block of code whose execution could encounter
-an error condition.  Before we execute the code, we perform
+or result in an error condition.  Before we execute the code, we perform
 a check to see if the error condition is present (usually using
 a conditional statement).  If the error condition does not hold, 
 then we proceed with the code as normal.  However, if the
 error condition does hold, instead of executing the code, we
 execute alternative code that \emph{handles} the error.
 
-For example, suppose we are about to divide by a number.
+Suppose we are about to divide by a number.
 To prevent a division by zero error, we can check if our
 denominator is zero or not.  If it is, then we raise or handle
-the error instead of performing the division.  
-
-What should be done in such a case?  We could, as an 
+the error instead of performing the division.  What should be 
+done in such a case?  We could, as an 
 alternative, use a predefined value as a result instead.  Or 
 we could notify the user and ask for an alternative.  Or we
 could log the error and proceed as normal.  Or we could 
 decide that the error is so egregious that it should be fatal
 and terminate the execution of the program.
 
-Which is the right way to handle this error?  It depends on 
+Which is the right way to handle this error?  It really depends on 
 your design requirements really.  This raises the question, 
 though: ``who'' is responsible for making these decisions?
 Suppose we're designing a function for a library that is 
-for use not just by our project but others as well (as is the
+not just for our project but others as well (as is the
 case with the standard library functions).  Further, the
 function we're designing could have multiple different 
 error conditions that it checks for.  In this scenario there
 are two entities that could handle the errors: the function
 itself and the code that invokes the function.
 
-Suppose that we decide to handle the errors inside the 
-function.  That is, as designers of the function, we've made
+Suppose that we decide to handle the errors \emph{inside} the 
+function.  As designers of the function, we've made
 the decision to handle the errors \emph{for} the user (the
 code that invokes our function).  Regardless of how we
 decide to handle the errors, this design decision has
@@ -207,6 +206,7 @@ the error condition to the calling function so that it can
 know what type of error happened and handle it appropriately.
 
 \subsubsection{Error Codes}
+\index{error code}
 
 One common pattern to communicate errors to a calling
 function is to use the return type as an \emph{error code}.
@@ -256,12 +256,11 @@ process file data \;
 
 A problem arises when an error condition is checked and
 does not hold.  Then, later in the execution, circumstances change
-and the error condition then holds.  However, since it was already
+and the error condition does hold.  However, since it was already
 checked for, the program remains under the assumption that the
 error condition does not hold.  For example, suppose that another
 process or program deletes the file that we wish to process after 
 its existence has been checked but before we start processing it.
-
 Because of the sequential nature of our program, this type of 
 error checking is susceptible to these issues.
 
@@ -296,7 +295,7 @@ does not result in an exception, then control flow will skip over the
 \mintinline{text}{catch} statement and resume normally after.  
 
 It is important to understand how exceptions interrupt the normal
-control flow.  For example, consider the following pseudocode
+control flow.  For example, consider the following pseudocode.
 
 \begin{minted}{text}
 try {
@@ -314,7 +313,7 @@ exception.  Control flow is then transferred to the \mintinline{text}{catch}
 block, skipping \mintinline{text}{statement3} entirely.  In 
 general, there may not be a mechanism for your \mintinline{text}{catch}
 block to recover and execute \mintinline{text}{statement3}.
-Therefore, maybe necessary to make your \mintinline{text}{try-catch}
+Therefore, it may be necessary to make your \mintinline{text}{try-catch}
 blocks fine-grained, perhaps having only a single statement within
 the \mintinline{text}{try} statement.
 
@@ -324,8 +323,8 @@ such as a string error message.  Still other languages may support
 many different types of exceptions and you may be able to provide
 \emph{multiple} \mintinline{text}{catch} statements to handle each
 one differently.  In such languages, the order in which you place
-your \mintinline{text}{catch} statements may be important as similar
-to an \mintinline{text}{if-else-if} statement, the first one that matches
+your \mintinline{text}{catch} statements may be important.  Similar
+to an if-else-if statement, the first one that matches the exception
 will be the one that executes.  Thus, it is best practice to order
 your \mintinline{text}{catch} blocks from the most specific to the
 most general. 
@@ -367,10 +366,11 @@ a \mintinline{text}{finally} statement, we can be assured that
 it will execute regardless of an error or exception.
 
 In addition to handling exceptions, a language may allow you
-to ``throw'' usually by using the keyword \mintinline{text}{throw}.
+to ``throw'' your own exceptions by using the keyword 
+\mintinline{text}{throw}.
 In this way you can also practice defensive programming.
 You could write a conditional statement to check for an error
-condition and then \mintinline{text}{throw} and exception.
+condition and then \mintinline{text}{throw} an appropriate exception.
 
 
 

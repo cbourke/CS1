@@ -1,6 +1,7 @@
 %!TEX root = ComputerScienceOne.tex
 
 %%Chapter: Loops in C
+\index{loops!C}
 
 C supports while loops, for loops, and do-while loops using the keywords
 \mintinline{c}{while}, \mintinline{c}{for}, and \mintinline{c}{do} (along with 
@@ -58,16 +59,16 @@ while(i <= 10) {
 
 In the while loop, we never increment the counter variable \mintinline{c}{i}, 
 the loop does nothing, and so the computation will continue on
-forever!  Some compilers will warn you about this, others will not.  It
+forever!  Some compilers may warn you about this, others will not.  It
 is valid C and it will compile and run, but obviously won't work as intended.
-Avoid this problem by using proper syntax.
+Avoid this problem by using proper syntax and good style.
 
 Another common use case for a while loop is a flag-controlled loop in which
 we use a Boolean flag rather than an expression to determine if a loop
 should continue or not.  Recall that in C, zero is treated as \False and 
 any non-zero numeric value is treated as \True.  We can thus create an
 implicit Boolean flag by using an integer variable and setting it to 1 for
-\True and 0 for \False (when we want the loop to terminate.  An example
+\True and 0 for \False (when we want the loop to terminate).  An example
 can be found in Code Sample \ref{code:c:flagControlledWhileLoop}.
 
 \begin{listing}
@@ -103,7 +104,7 @@ for(i=1; i<=10; i++) {
   \label{code:c:forLoop}
 \end{listing}
 
-Again, note the syntax: semicolons are placed at the end of the initialization and
+Semicolons are placed at the end of the initialization and
 continuation condition, but \emph{not} the iteration statement.  Just as with while
 loops, the opening curly bracket is placed on the same line as the \mintinline{c}{for}
 keyword.  Code within the loop body is indented, all at the same indentation level.
@@ -121,7 +122,7 @@ extensions to C).  For maximum portability, we'll follow the older convention.
 
 \section{Do-While Loops}
 
-Finally, C does support do-while loops.  Recall that the difference between a
+C supports do-while loops.  Recall that the difference between a
 while loop and a do-while loop is when the continuation condition is checked.
 For a while loop it is \emph{prior} to the beginning of the loop body and in
 a do-while loop it is at the \emph{end} of the loop.  This means that a do-while 
@@ -143,14 +144,15 @@ do {
 Note the syntax and style: the opening curly bracket is again on the same
 line as the keyword \mintinline{c}{do}.  The \mintinline{c}{while} keyword and
 continuation condition are on the same line as the closing curly bracket.
-In a slight departure from consistent syntax, a semicolon \emph{does} appear
+In a slight departure from prior syntax, a semicolon \emph{does} appear
 at the end of the continuation condition even though it is not an
 executable statement.
 
 \section{Other Issues}
+\label{section:c:loops:otherissues}
 
 C does not support a traditional foreach loop.  When iterating over a
-collection like an array, you iterate a traditional index variable, typically
+collection like an array, you iterate an index variable, typically
 with a for loop.  However, there are some syntactic tricks that you can
 use to get the same effect.  Some of this will be a preview of Chapter
 \ref{chapter:c:arrays} where we discuss arrays in C, but in short, you can
@@ -161,7 +163,7 @@ double arr[] = {1.41, 2.71, 3.14};
 int n = 3;
 int i = 0;
 double x;
-for(x=arr[i]; i<n; x=arr[++i]) {
+for(x=arr[0]; i<n; x=arr[++i]) {
   //x now holds the i-th element in arr
 }
 \end{minted}
@@ -177,11 +179,12 @@ operator (see Section \ref{subsubsection:incrementOperators}).
 
 \subsection{Normalizing a Number}
 
-Let's revisit the example from Section \ref{subsection:whileLoopExample} in which 
-we \emph{normalize} a number by continually dividing it by 10 until it is less 
-than 10.  The code in Code Sample \ref{code:c:normalizeWhileLoop} specifically
-refers to the value $32145.234$ but would work equally well with any value of 
-\mintinline{c}{x}.
+Let's revisit the example from Section \ref{subsection:whileLoopExample} in 
+which we \emph{normalize} a number by continually dividing it by 10 until it
+is in the range $[1, 10)$.
+The code in Code Sample \ref{code:c:normalizeWhileLoop} specifically
+refers to the value $32145.234$ but would work equally well with any 
+non-negative value of \mintinline{c}{x}.
 
 \begin{listing}[H]
 \begin{minted}{c}
@@ -246,10 +249,10 @@ for(i=0; i<n; i++) {
   \label{code:c:nestedForLoops}
 \end{listing}
 
-The inner loop execute for $j = 0, 1, 2, \ldots, 19 < m = 20$ for a total
-of 20 times.  However, it executes 20 times \emph{for each} iteration of
-the outer loop.  Since the outer loop execute for $i = 0, 1, 2, \ldots, 9 < n = 10$, 
-the total number of times the \mintinline{c}{printf} statement execute is
+The inner loop executes for $j = 0, 1, 2, \ldots, 19 < m = 20$ for a total
+of 20 iterations.  However, it executes 20 times \emph{for each} iteration of
+the outer loop.  Since the outer loop executes for $i = 0, 1, 2, \ldots, 9 < n = 10$, 
+the total number of times the \mintinline{c}{printf()} statement execute is
 $10 \times 20 = 200$.  In this example, the sequence $(0, 0), (0, 1), (0, 2), \ldots, (0,19), (1, 0), \ldots, (9, 19)$
 will be printed.
 
@@ -257,10 +260,9 @@ will be printed.
 
 Let's adapt the solution for the loan amortization schedule we developed in 
 Section \ref{subsection:loanAmortization}.  First, we'll read the principle, 
-terms, and interest as command line inputs.
-
-Adapting the formula for the monthly payment and using the standard
-math library's \mintinline{c}{pow} function, we get
+terms, and interest as command line inputs.  Adapting the formula for the 
+monthly payment and using the standard
+math library's \mintinline{c}{pow()} function, we get
 
 \begin{minted}{c}
 double monthlyPayment = (monthlyInterestRate * principle) / 
@@ -270,7 +272,7 @@ double monthlyPayment = (monthlyInterestRate * principle) /
 However, recall that we may have problems due to accuracy.  The monthly
 payment could come out to be a fraction of a cent, say \$43.871.  For 
 accuracy, we need to ensure that all of the figures for currency are rounded
-to the nearest cent.  The standard math library does have a \mintinline{c}{round}
+to the nearest cent.  The standard math library does have a \mintinline{c}{round()}
 function, but it only rounds to the nearest whole number, not the nearest
 100th.
 
@@ -284,7 +286,7 @@ In C, we could simply do the following.
 
 We can use the same trick to round the monthly interest payment and any
 other number expected to be whole cents.  To output our numbers, we use
-\mintinline{c}{printf} and take care to align our columns to make make it look 
+\mintinline{c}{printf()} and take care to align our columns to make it look 
 nice.  To finish our adaptation, we handle the final month separately to account
 for an over/under payment due to rounding.  The full solution can be found
 in Code Sample \ref{code:c:loanAmortization}.

@@ -2,11 +2,13 @@
 
 %%Chapter: Recursion
 
-Suppose we wanted to write a simple program that counted down, printing
+Suppose we wanted to write a simple program that performed a 
+countdown, printing
 10, 9, 8, \ldots, 2, 1 and when it reached zero it printed a ``Happy
 New Year'' message.  Likely our first instinct would be to write a 
-very simple for-loop using an increment variable.  But what if we lived
-in a world \emph{without} the usual loop control structures that we are now
+very simple for loop using an increment variable.  But suppose
+we lived in a world \emph{without} the usual loop control structures 
+that we are now
 familiar with.  How might we write such a program?
 
 After thinking about it for a while, we might think: well, we don't have
@@ -38,26 +40,26 @@ like Algorithm \ref{algo:recursiveCountdown}.
 
 The function in this case is called $\textsc{CountDown}()$.  In Line 
 \ref{algo:line:recursiveCall} the function calls itself on a decremented
-value.  When a function calls itself, it is a \emph{recursive} function and
-many languages support \emph{recursion}.
+value.  When a function calls itself, it is a \emph{recursive} function.
+When a allows functions to call themselves they support \emph{recursion}.
 
 This is not that odd of a concept.  We've seen many examples where functions
-invoke other functions.  As we've seen, each function call simply creates
+invoke other functions.  Each function call simply creates
 a new stack frame on the program stack.  There is nothing particularly special
-about which functions call which other functions, so there is very little
+about which functions call which other functions, so there is little
 difference when a function calls itself. 
 
 This was not just a toy example.  There are many programming languages in which
 recursion is used as a matter of course.  Functional programming languages
 tend to avoid control structures like loops and even (mutable) variables.  
 Instead, control flow is defined by evaluating a series of functions, making
-recursion a fundamental operation.  
+recursion a fundamental technique.
 
 Recursion is extensively used in mathematics.  Recurrence relations or
 recursive functions are common.  The Fibonacci sequence is
 a common, if not overused\footnote{The Fibonacci sequence is nothing
 special; its simply a second order linear homogenous recurrence relation
-with coefficients of 1.  You can define many such relations.  The 
+with coefficients of 1.  The 
 near reverence that so many people attribute to it borders on mysticism.}
 example.  It has a simple definition: the next value in the sequence is
 simply the sum of the two previous values.  The sequence starts with the 
@@ -93,22 +95,22 @@ as follows.
 
 Though hackneyed, it does provide a good example for how recursive functions
 work.  We'll also utilize it as an example of \emph{why you should avoid
-recursion in practice}.  We'll also use it to illustrate how the problems
+recursion in practice}.  We use it to illustrate how the problems
 with recursion can be mitigated or avoided altogether.
 
 \section{Writing Recursive Functions}
 
 When writing a recursive function, there are several key elements that
-we need to take care of to ensure that it functions correctly.  In particular, 
+we need to take care of to ensure that it executes correctly.  In particular, 
 every recursive function requires at least one \emph{base case} or
 base condition which serves as a terminating condition for the recursion.
 A base case is a condition which, instead of making a recursive call, 
-it processes and returns a value.  Without a base case, the recursion would 
+processes and returns a value.  Without a base case, the recursion would 
 continue unbounded: the  function would call itself over and over again, 
 creating new stack frame after stack frame until we run out of stack space.  
 If a program makes too many function calls and runs out of stack memory, 
-it may lead to a \gls{stack overflow}\gls{stack overflow} and the 
-termination of the program.  As we'll see below, even if we don't have
+it may lead to a \gls{stack overflow} and the 
+termination of the program.  Even if we don't have
 unbounded recursion, it is still possible to run out of stack space
 even with simple recursion.
 
@@ -123,6 +125,7 @@ case.  The first decrements $n$ by 1 and the second by 2, eventually
 reaching $n = 1$.
 
 \subsection{Tail Recursion}
+\index{tail recursion}
 
 Making many function calls can be costly in terms of stack space.  One
 optimization that can be made is to use \emph{tail recursion}.  The last
@@ -166,13 +169,13 @@ languages require it or ``guarantee'' it in other ways.
 
 Recursion is not essential; some languages do not even support recursion.
 In fact, any recursive function can be rewritten to not use recursion.
-Usually, you can write an equivalent loop structure or use a stack
-data structure to replace the recursion.
+Usually, you can write an equivalent loop structure or use an in-memory
+\gls{stack} data structure to replace the recursion.
 So why use it?  Proponents would argue that recursion allows you to 
 write simple code that more closely matches mathematical functions and
 expressions.  Recursion is also a natural way to think about certain
 problem solving techniques such as divide-and-conquer (see Chapter 
-\ref{chapter:searchingSorting}.  It is also a natural way to code
+\ref{chapter:searchingSorting}).  It is also a natural way to code
 in functional programming languages.
 
 These arguments, however, are \emph{subjective}.  One person's 
@@ -180,7 +183,7 @@ These arguments, however, are \emph{subjective}.  One person's
 spaghetti code hack.  What is ``natural'' for one person may be 
 ``weird'' and ``odd'' for another.  However, there are many other
 arguments against recursion, many of which are \emph{objective} 
-reasons: that recursion is more expensive, less efficient, and can
+reasons: that recursion is more expensive and can
 easily lead to inefficient, exponential algorithms.
 
 In general, recursion requires lots of function calls which requires 
@@ -212,16 +215,16 @@ $\textsc{Fibonacci}(3)$ is called twice, $\textsc{Fibonacci}(2)$
 is called 3 times, etc.  15 total function calls are made to
 compute $\textsc{Fibonacci}(5)$.  In general, the computation
 of $\textsc{Fibonacci}(n)$ will result in an \emph{exponential}
-number of function calls.  In fact, the number of function calls
+number of function calls.  The number of function calls
 to compute $F_n$ with this recursive solution will be equal to 
   $$F_{n-2} + \sum_{i=0}^{n-1} F_{i}$$ 
-That is, more than the first $n-1$ Fibonacci numbers combined!
+That is more than the first $n-1$ Fibonacci numbers combined!
 It should come as no surprise that the Fibonacci sequence
-grows \emph{exponentially} and thus sow would the number of 
+grows \emph{exponentially} and thus so would the number of 
 operations with this recursive solution.
 
 To put this in perspective, consider computing $F_{45} = 1,836,311,903$ 
-($n = 45)$, the maximum representable value for a 32-bit signed 2s
+($n = 45)$, the maximum representable value for a 32-bit signed two's
 complement integer.  Executing a C implementation of this recursive
 algorithm took about 8 seconds\footnote{On a 2.7GHz Intel Core i7.} 
 and required 3,672,623,805 function calls!
@@ -248,10 +251,10 @@ we compute it by making the appropriate recursive calls.  Once computed,
 we place the value into the table so that it can be looked up on subsequent
 function calls.  This approach is usually referred to as \gls{memoization}.
 
-The ``table'' in this case is very general: it can be achieved using 
+The ``table'' in this scenario is very general: it can be achieved using 
 a number of different data structures including simple arrays, or even
 maps (mapping input value(s) to output values).  The table is essentially
-serving as a \gls{cache} for the previously computed values. An 
+serving as a \index{cache} \gls{cache} for the previously computed values. An 
 illustration of how this might work can be found in Algorithm 
 \ref{algo:recursiveFibonacciMemoization}.  Here, the recursion only
 occurs if the value $F_n$ is not yet defined.
@@ -278,11 +281,12 @@ problems with recomputing values as we observed above.  In languages
 such as C and Java, memoization becomes our responsibility and is not
 an optimization provided by the language itself.  
 
-Note, however, that if we are filling in a table of values anyway, we
+However, if we are filling in a table of values anyway, we
 really don't need to make recursive calls at all.  We simply need to 
 figure out in what order to fill out the values in the table.  This is
 actually the basis of a powerful programming technique known as
-\gls{dynamic programming} which is a ``bottom-up'' approach to solving
-problems by combining solutions to smaller ones.
+\index{dynamic programming} \gls{dynamic programming} which is a 
+``bottom-up'' approach to solving problems by combining solutions 
+to smaller ones.
 
 

@@ -2,8 +2,9 @@
 
 %Chapter - Conditionals
 
-When writing code, its important to be able to distinguish between one or more situations.  
-Based on some \emph{condition} being \True or \False, you may want to perform some action
+When writing code, its important to be able to distinguish between one 
+or more situations.  Based on some \emph{condition} being \True or 
+\False, you may want to perform some action
 if its true, while performing another, different action if it is false.  Alternatively, you may simply
 want to perform one action if and only if the condition is true, and do nothing (move forward
 in your program) if it is false.
@@ -12,16 +13,16 @@ Normally, the \emph{control flow} of a program is \emph{sequential}: each statem
 top-to-bottom one after the other.  A \emph{conditional} statement (sometimes called \emph{selection} 
 control structures) interrupts this normal control
 flow and executes statements only if some specified condition holds.  The usual way of achieving
-this in a programming languages is through the use conditional statements such as the \emph{if}
+this in a programming language is through the use conditional statements such as the \emph{if}
 statement, \emph{if-else} statement, and \emph{if-else-if} statement.
 
 By using conditional statements, we can design more expressive programs whose behavior 
 depends on their \emph{state}: if the value of some variable is greater than some threshold, we
-can perform action $a$, otherwise, we can perform action $b$.  You do this on a daily basis
+can perform action $A$, otherwise, we can perform action $B$.  You do this on a daily basis
 as you make decisions for yourself.  At a cafe you may want to purchase the grande coffee which
 costs \$2.  If you have \$2 or more, then you'll buy it.  Otherwise, if you have less than \$2, you 
 can settle for the normal coffee which costs \$1.  Yet still, if you have less than \$1 you'll not be
-able to make a purchase.  The value of your pocket book determines the decision and subsequent
+able to make a purchase.  The value of your pocket book determines your decision and subsequent
 actions that you take.
 
 Similarly, our programs need to be able to ``make decisions'' based on various conditions 
@@ -35,11 +36,12 @@ are specified by coding logical statements using \emph{logical operators}.
 
 In logic, everything is black and white: a logical statement is an assertion that is 
 either \True or it is \False.  As previously discussed, some programming languages
-allow you to define and use boolean variables that can be assigned the value \True
+allow you to define and use Boolean variables that can be assigned the value \True
 or \False.  We can also formulate statements that involve other types of variables 
 whose truth values are determined by the values of the variables at run time.
 
 \subsection{Comparison Operators}
+\index{comparison operators}
 
 Suppose we have a variable $age$ representing the age of an individual.  Suppose
 we wish to execute some code if the person is an adult, $age \geq 18$ and a different
@@ -65,11 +67,12 @@ are not equivalent, just as they are not in mathematics.  However,
 are equivalent.  Thus, the order of operands is important and can change the 
 meaning and truth value of an expression.
 
-A full listing of binary operators can be found in Table \ref{table:comparisonOperators}.
-In this table, we present both the mathematical inspired notation used in our pseudocode
+A full listing of binary operators can be found in Table 
+\ref{table:comparisonOperators}. In this table, we present both the 
+mathematical notation used in our pseudocode
 examples as well as the most common ways of representing these comparison
 operators in most programming languages.  The need for alternative representations
-is because some symbols are not part of the \gls{asciiLabel} character set common
+is because the mathematical symbols are not part of the \gls{asciiLabel} character set common
 to most keyboards.  
 
   \begin{table}
@@ -102,7 +105,7 @@ Comparisons can also be used with more complex expressions such as
   $$\sqrt{b^2 - 4ac} \, < \, 0$$
 which could commonly be expressed in code as 
 
-\mintinline{c}{  sqrt(b*b - 4*a*c)   < 0}
+\mintinline{c}{sqrt(b*b - 4*a*c) < 0}
 
 Observe that both operands \emph{could} be constants, such as $5 \leq 10$
 but there would be little point.  Since both are constants, the truth value of
@@ -113,7 +116,7 @@ examine them in more detail below.
 
 \subsubsection{Pitfalls}
 
-Sometimes you may want to check that a variable falls in a \emph{range}.  For
+Sometimes you may want to check that a variable falls within a certain \emph{range}.  For
 example, we may want to test that $x$ lies in the interval $[0, 10]$ (between
 0 and 10 inclusive on both ends).  Mathematically we could express this as
   $$0 \leq x \leq 10$$
@@ -128,7 +131,7 @@ used in the second comparison which results in a question such as $\True \leq 10
 or $\False \leq 10$.
 
 Some languages would treat this as a syntax error and not allow such an expression
-to be compiled since you cannot compare a boolean value to a numerical value.
+to be compiled since you cannot compare a Boolean value to a numerical value.
 However, other languages \emph{may} allow this, typically representing \True
 with some nonzero value such as 1 and \False with 0.  In either case, the
 expression would evaluate to \True since both $0 \leq 10$ and $1 \leq 10$.  
@@ -142,22 +145,19 @@ operator (typically only one equals sign, \mintinline{c}{=}) and the equality op
 (typically two equal signs, \mintinline{c}{==}).  As before, some languages will not
 allow it.  The expression \mintinline{c}{a = 10} would \emph{not} have a truth value
 associated with it.  Attempts to use the expression in a logical statement would
-be a syntax error.  
-
-Still yet, other languages may permit the expression and would
+be a syntax error.  Other languages may permit the expression and would
 give it a truth value equal to the value of the variable.  For example, \mintinline{c}{a = 10}
-would take on the value 10 and treated as \True (nonzero value) while 
+would take on the value 10 and be treated as \True (nonzero value) while 
 \mintinline{c}{a = 0} would take on the value 0 and be treated as \False (zero).
 In either case, we probably do not get the result that we want.  Take care that you
-use proper equality comparison operator.  
+use proper equality comparison operators.  
 
 \subsubsection{Other Considerations}
 
 The comparison operators that we've examined are generally used for comparing
 numerical types.  However, sometimes we wish to compare non-numeric 
 types such as single characters or strings.  Some languages allow you to
-use numeric operators with these types as well.  We examine specific uses
-in subsequent chapters.
+use numeric operators with these types as well.  
 
 Some dynamically typed languages (PHP, JavaScript, etc.) have additional rules 
 when comparison operators are used with \emph{mixed} types (that is, we compare
@@ -189,7 +189,18 @@ examples:
   $$\neg p, \quad \neg(a > 10), \quad \neg(a \leq b)$$
 We will adopt this notation in our pseudocode, however most programming 
 languages use the exclamation mark, \mintinline{c}{!} for the negation operator, 
-similar to its usage in the inequality comparison, \mintinline{c}{!=}.
+similar to its usage in the inequality comparison operator, \mintinline{c}{!=}.
+The negation operator applies to the variable or statement immediately following
+it, thus
+  $$\neg(a \leq b) \quad \textrm{and}\quad \neg a \leq b$$
+are not the same thing (indeed, the second expression may not even
+be valid depending on the language).  Further, when used with comparison
+operators, it is better to use the ``opposite'' comparison.  For example, 
+  $$\neg(a \leq b) \quad \textrm{and} \quad (a > b)$$
+are equivalent, but the second expression is preferred as it is simpler.
+Likewise, 
+  $$\neg(a = b) \quad\textrm{and}\quad (a \neq b)$$
+are equivalent, but the second expression is preferred.
 
 \begin{table}
   \centering
@@ -205,18 +216,6 @@ similar to its usage in the inequality comparison, \mintinline{c}{!=}.
   \label{table:logicalNot}
 \end{table}
 
-The negation operator applies to the variable or statement immediately following
-it, thus
-  $$\neg(a \leq b) \quad \textrm{and}\quad \neg a \leq b$$
-are not the same thing (indeed, the second expression may not even
-be valid depending on the language).  Further, when used with comparison
-operators, it is better to use the ``opposite'' comparison.  For example, 
-  $$\neg(a \leq b) \quad \textrm{and} \quad (a > b)$$
-are equivalent, but the second expression is preferred as it is simpler.
-Likewise, 
-  $$\neg(a = b) \quad\textrm{and}\quad (a \neq b)$$
-are equivalent, but the second expression is preferred.
-
 %More historical usage of notation: \url{http://jeff560.tripod.com/set.html}
  
 \subsection{Logical And}
@@ -231,12 +230,12 @@ the logical and is \False.
 
 Many programming languages use two ampersands, \mintinline{c}{a && b} to denote
 the logical $\And$ operator.\footnote{In logic, the ``wedge'' symbol, $p \wedge q$ is
-used to denote the logical and.  It was first used again by Heyting, 1930 \cite{Heyting1930} but should
+used to denote the logical \And.  It was first used again by Heyting, 1930 \cite{Heyting1930} but should
 not be confused for the keyboard caret, \string^, symbol.  Many programming
 languages do use the caret as an operator, but it is usually the \emph{exclusive-or}
-operator which is \True if and only if exactly one of its operands is \True}.  However,
-for our pseudocode we will adopt the notation $\And$, thus the logical and can be expressed 
-as $a \And b$.  Table \ref{table:logicalAnd} contains a truth table representation 
+operator which is \True if and only if exactly one of its operands is \True.}  However,
+for our pseudocode we will adopt the notation $\And$ and we will
+use expressions such as $a \And b$.  Table \ref{table:logicalAnd} contains a truth table representation 
 of the logical $\And$ operator.
 
 \begin{table}
@@ -257,12 +256,12 @@ of the logical $\And$ operator.
 
 The logical $\And$ is used to combine logical statements to form more complex logical
 statements.  Recall that we couldn't directly use two comparison operators to check that 
-a variable falls in a range, $0 \leq x \leq 10$.  However, we can now use a logical $\And$ to
+a variable falls within a range, $0 \leq x \leq 10$.  However, we can now use a logical $\And$ to
 express this:
   $$(0 \leq x) \And (x \leq 10)$$
 This expression is \True only if both comparisons are true.
 
-Though the conjunction is a binary operator, we can write statements that involve more
+Though the \And\ operator is a binary operator, we can write statements that involve more
 than one variable or expression by using multiple instances of the operator.  For example, 
   $$b^2 - 4ac \geq 0 \And a \neq 0 \And c > 0$$
 The above statement would be evaluated left-to-right; the first two operands would be evaluated
@@ -278,7 +277,7 @@ be \True.
 
 The logical \emph{or} operator is the binary operator that is \True if \emph{at least one} of its
 operands is \True.  If both of its operands are \False, then the logical or is \False.  This is
-in contrast to what is usually meant in colloquially.  If someone says ``you can have
+in contrast to what is usually meant by ``or'' colloquially.  If someone says ``you can have
 cake or ice-cream,'' usually they implicitly also mean, ``but not both.''  With the logical
 or operator, if both operands are \True, the result is still \True.
 
@@ -319,8 +318,9 @@ statement will be \True.  The statement is only \False when \emph{all three} of 
 operands is \False.
 
 \subsection{Compound Statements}
+\index{compound logic}
 
-The logical \And and \Or operators can be combined to express even more complex
+The logical \And\ and \Or\ operators can be combined to express even more complex
 logical statements.  For example, you can express the following statements involving
 \emph{both} of the operators:
   $$a \And (b \Or c) \quad a \Or (b \And c)$$
@@ -343,6 +343,8 @@ keep things simple.  Logical statements should be written in the most simple and
 succinct (but \emph{correct}) way possible.  
 
 \subsubsection{Tautologies and Contradictions}
+\index{tautology}
+\index{contradiction}
 
 Some logical statements have the same meaning regardless of the
 variables involved.  For example, 
@@ -366,7 +368,7 @@ tautologies or contradictions: if an if-statement is predicated on a tautology
 it will \emph{always} be executed.  Likewise, an if-statement involved with 
 a contradiction will \emph{never} be executed.  In either case, many compilers
 or code analysis tools may indicate and warn about these situations and 
-encourage you to modify the code or to remove ``\gls{dead code}''.  Some
+encourage you to modify the code or to remove ``\gls{dead code}.''  Some
 languages may not even allow you write such statements.
 
 There are always exceptions to the rule.  Sometimes you may wish to 
@@ -380,6 +382,7 @@ for example in which case a statement similar to the following may be written.
 \end{algorithm}
 
 \subsubsection{De Morgan's Laws}
+\index{De Morgan's laws}
 
 Another tool to simplify your logic is De Morgan's Laws.  When a logical $\And$
 statement is negated, it is equivalent to an \emph{unnegated} logical $\Or$ statement
@@ -397,7 +400,7 @@ which is more concise and arguably more readable.
 \subsubsection{Order of Precedence}
 \index{order of precedence!logic}
 
-Recall that numerical operators have a well-defined order of precedence that is
+Recall that numerical operators have a well defined order of precedence that is
 taken from mathematics (multiplication is performed before addition for example, 
 see Section \ref{subsection:NumericalOperators_OrderOfPrecedence}).  When 
 working with logical operators, we also have an order of precedence that somewhat
@@ -419,7 +422,7 @@ Order & Operator \\
 
 For example, the statement
   $$a \Or b \And c$$
-is somewhat ambiguous.  We don't just read it left-to-right since the $\And$ 
+is somewhat ambiguous.  We don't just evaluate it left-to-right since the $\And$ 
 operator has a higher order of precedence (this is similar to the mathematical
 expression $a + b \cdot c$ where the multiplication would be evaluated first).  
 Instead, this statement would be evaluated by evaluating the $\And$ operator
@@ -463,12 +466,17 @@ for most operations would be negligible, but in some cases the second operand co
 be very ``expensive'' to compute (it could be a complex function call, require a database 
 query to determine, etc.) in which case it could make a substantial difference.
 
-Historically, avoiding even a few operations in old computers meant a difference on the
+Historically, avoiding even a few operations in old computers meant 
+a difference on the
 order of milliseconds or even seconds.  Thus, it made sense to avoid unnecessary
 operations.  This is now known as \gls{short circuiting} and to this day is still supported
-in many if not most programming languages.  Though the differences are less stark in
+in most programming languages.\footnote{ Historically, the short-circuited 
+version of the $\And$ operator was known as \emph{McCarthy's sequential 
+conjunction operation} which was formally defined by John McCarthy (1962) 
+as ``if $p$ then $q$, else false'', eliminating the evaluation
+of $q$ if $p$ is \False \cite{Mccarthy62towardsa}.}  Though the differences are less stark in
 terms of CPU resources, most developers and programmers have come to \emph{expect}
-the behavior and write statements under the assumption that short-circuiting will occur.
+this behavior and write statements under the assumption that short-circuiting will occur.
 
 Short circuiting is commonly used to ``check'' for invalid operations.  This is commonly 
 used to prevent invalid operations.  For example, consider the following statement:
@@ -477,21 +485,17 @@ The first operand is checking to see if $d$ is not zero and the second checks to
 its reciprocal is greater than 1.  With short-circuiting, if $d = 0$, then the second operand
 will not be evaluated and the division by zero will be prevented.  If $d \neq 0$ then the
 first operand is \True and so the second operand will be evaluated as normal.  Without
-short-circuiting, both operands would be evaluated leading to a division by zero.
+short-circuiting, both operands would be evaluated leading to a division by zero error.
 
-There are many other common patterns that rely on short-circuiting to avoid invalid
-or undefined operations.  Checking that a variable is valid (defined or not \Null) before
-using it to evaluate an expression, or checking that an index variable is within the 
-range of an array's size before accessing its value for example.  
-
-Historically, the short-circuited version of the $\And$ operator was known as 
-\emph{McCarthy's sequential conjunction operation} which was formally defined 
-by John McCarthy (1962) as ``if $p$ then $q$, else false'', eliminating the evaluation
-of $q$ if $p$ is \False \cite{Mccarthy62towardsa}.  
+There are many other common patterns that rely on short-circuiting to 
+avoid invalid or undefined operations.  For example, short-circuiting is 
+used to check that a variable is valid (defined or not \Null) before
+using it, or to check that an index variable is within the 
+range of an array's size before accessing a value.  
 
 Because of short-circuiting, the logical $\And$ is effectively \emph{not commutative}.
 An operator is commutative if the order of its operands is irrelevant.  For example, 
-addition and multiplication are all commutative, 
+addition and multiplication are both commutative, 
   $$x + y = y + x \quad x \cdot y = y \cdot x$$
 but subtraction and division are not, 
   $$x - y \neq y - x \quad x / y \neq y / x$$
@@ -509,7 +513,7 @@ operand will not be evaluated.  In the expression,
 if $a$ evaluates to \True, then $b$ is not evaluated (since if either operand is \True, 
 the entire expression is \True).
 
-\section{If Statement}
+\section{The If Statement}
 \index{if statement}
 \index{conditionals!if statement}
 
@@ -566,7 +570,7 @@ statement is \False.  This control flow is featured in Figure \ref{figure:ifFlow
 %\label{figure:ifFlowChart}
 %\end{figure}
 
-An example of the syntax using pseudocode can be found in Algorithm \ref{algo:ifStatement}.
+An example using pseudocode can be found in Algorithm \ref{algo:ifStatement}.
 The use of the keyword ``if'' is common to most programming languages.  The 
 logical statement associated with the if-statement immediately follows the 
 ``if'' keyword and is usually surrounded by parentheses.  The code block 
@@ -587,16 +591,16 @@ skipped in its entirety.
 
 A simple if-statement can be viewed as a ``do this if \emph{and only if} 
 the condition holds.''  Alternatively, ``if this condition holds do this, otherwise 
-don't''.  In either case, once the if-statement executes, the program returns
+don't.''  In either case, once the if-statement finishes execution, the program returns
 to the normal sequential control flow.  
 
-\section{If-Else Statement}
+\section{The If-Else Statement}
 \index{if-else statement}
 \index{conditionals!if-else statement}
 
 An if-statement allows you to specify a code segment that is executed or
 is not executed.  An if-else statement allows you to specify an alternative.
-An else-if statement allows you to define a condition such that if the 
+An if-else statement allows you to define a condition such that if the 
 condition is \True, one code block executes and if the condition is \False, 
 an entirely different code block executes.
 
@@ -646,7 +650,7 @@ of control returns and the remaining program continues executing sequentially.
 }
 \end{algorithm}
 
-\section{If-Else-If Statement}
+\section{The If-Else-If Statement}
 \index{if-else-if statement}
 \index{conditionals!if-else-if statement}
 
@@ -686,10 +690,10 @@ is checked in order.  If and when one of the conditions is satisfied (evaluates
 to \True), the code block associated with that condition is executed and 
 \emph{all other code blocks are ignored}.  
 
-Remember, each of the code blocks in an if-else-if control structure are 
+Each of the code blocks in an if-else-if control structure are 
 mutually exclusive.  One and \emph{only} one of the code blocks will 
 ever execute.  Similar to the sequential control flow, the \emph{first} 
-condition that is satisfied is the one that executes.  If \emph{none} of the
+condition that is satisfied is the one that is executed.  If \emph{none} of the
 conditions is satisfied, then the code block associated with the else-statement
 is the one that is executed.   
 
@@ -707,7 +711,7 @@ In our example, we only identified three possibilities.  You can generalize an
 if-else-if statement to specify as many conditions as you like.  This generalization
 is depicted in Algorithm \ref{algo:generalIfElseIfStatement} and visualized in Figure 
 \ref{figure:figureIfElseIfFlowChart}.  Similar to the 
-if-statement, the else-statement and subsequent code block is actually optional.  
+if-statement, the else-statement and subsequent code block is optional.  
 If omitted, then it may  be possible that \emph{none} of the code blocks is executed.
 
 \begin{algorithm}[H]
@@ -766,10 +770,11 @@ and completely specified both lower bounds and upper bounds in our condition.
 For example, the condition for ``intrusive'' could have been 
   $$(decibel > 50) \And (decibel \leq 70)$$
 However, doing this is unnecessary if we order our conditions appropriately 
-and we can potentially write simpler conditions if we keep the fact that the
+and we can potentially write simpler conditions if we remember the fact that the
 if-else-if statement is mutually exclusive.
 
 \section{Ternary If-Else Operator}
+\index{ternary if-else operator}
 
 Another conditional operator is the ternary if-then-else operator.  It is often 
 used to write an expression that can take on one of two values depending on the
@@ -778,8 +783,8 @@ which has the following syntax:
 
 \mintinline{c}{  E ? X : Y}
 
-Where \mintinline{c}{E} is a boolean expression.  If \mintinline{c}{E} evaluates to \True, the
-statement takes on the value \mintinline{c}{X} which does not need to be a boolean
+Here, \mintinline{c}{E} is a Boolean expression.  If \mintinline{c}{E} evaluates to \True, the
+statement takes on the value \mintinline{c}{X} which does not need to be a Boolean
 value: it can be anything (an integer, string, etc.).  If \mintinline{c}{E} evaluates to \False, 
 the statement takes on the value \mintinline{c}{Y}.  
 
@@ -788,9 +793,8 @@ A simple usage of this expression is to find the minimum of two values:
 \mintinline{c}{  min = ( (a < b) ? a : b );} 
 
 If $a < b$ is true, then \mintinline{c}{min} will take on the value $a$.  Otherwise it will take
-on the value $b$ (in which case $a \geq b$ and so $b$ is minimal).
-
-Most programming languages support this special syntax as it provides a nice convenience
+on the value $b$ (in which case $a \geq b$ and so $b$ is minimal). Most 
+programming languages support this special syntax as it provides a nice convenience
 (yet another example of \gls{syntactic sugar}).
 
 \section{Examples}
@@ -809,7 +813,8 @@ again prompt them for an amount (to allow different types of discounts).  Otherw
 the discount will be zero.  We can then proceed to calculate each of the amounts
 above.  To do this we'll need an if-statement.  We could also use a conditional
 statement to check to see if the input makes sense: we wouldn't want a discount
-amount that is greater than 100\% after all.
+amount that is greater than 100\%.  The full algorithm is presented in 
+Algorithm \ref{algo:receiptProgram}.
 
 \begin{algorithm}[H]
 Prompt the user for a subtotal \;
@@ -853,12 +858,12 @@ the quotient then we could prevent such errors.  We present this idea in Algorit
 }
 \end{algorithm}
 
-This approach to programming is known as \gls{defensive programming}.  We are essentially
+This approach to programming is known as \index{defensive programming}
+\gls{defensive programming}.  We are essentially
 checking the conditions for an invalid operation \emph{before} performing that operation.  
 In the example above, we simply chose not to perform the operation.  Alternatively, we could
 use an if-else statement to perform alternate operations or \emph{handle} the situation
-differently.  Defensive programming is akin to ``looking before leaping'': before taking another,
-potentially dangerous step, you look to see if you are at the edge of a cliff, and if so you 
+differently.  Defensive programming is akin to ``looking before leaping'': before taking a potentially dangerous step, you look to see if you are at the edge of a cliff, and if so you 
 don't take that dangerous step.
 
 %\subsection{Making the Grade}
@@ -873,12 +878,12 @@ be placed second.  For this exercise let's suppose that we want to order them fi
 their last names (so that Anderson comes before Zadora).  What if they have the same
 last name, like Jane Smith and John Smith?  If the last names are equal, then we'll want
 to order them by their first names (Jane before John).  If both their first names and last
-names are the same, we'll say any order is okay.
+names are the same, we'll say either order is okay.
 
 Names will likely be represented using strings, so let's say that $<$, $=$ and $>$ apply
 to strings, ordering them lexicographically (which is consistent with alphabetic ordering).
 We'll first need to compare their last names.  If equal, then we'll need another conditional
-construct.  This is achieved by \emph{nesting} conditional statements as in Algorithm 
+construct.  This is achieved by \index{nesting} \emph{nesting} conditional statements as in Algorithm 
 \ref{algo:comparingStudents}.
 
 
@@ -908,8 +913,8 @@ construct.  This is achieved by \emph{nesting} conditional statements as in Algo
 \subsection{Life \& Taxes}
 \label{subsubsection:lifeAndTaxes}
 
-Another example in which there are several cases that have to be considered is computing the 
-income tax liability using marginal tax brackets.  Table \ref{table:taxBrackets}
+Another example in which there are several cases that have to be 
+considered is computing an income tax liability using marginal tax brackets.  Table \ref{table:taxBrackets}
 contains the 2014 US Federal tax margins and marginal rates for a married couple filing jointly based
 on the Adjusted Gross Income (income after deductions).
 
@@ -946,7 +951,8 @@ is the child tax credit.  The rules are as follows:
   \item The credit is not refundable: if the credit results in a negative tax liability, the tax liability is simply \$0
 \end{itemize}
 
-As an example: suppose that a couple has \$35,000 AGI and has two children.  Their tax liability is
+As an example: suppose that a couple has \$35,000 AGI (placing them
+in the second tax bracket) and has two children.  Their tax liability is
 $$\$1,815 + 0.15 \times (\$35,000 - \$18,150) = \$4,342.50$$
 However, the two children represent a \$2,000 refund, so their total tax liability would be \$2,342.50.
 
@@ -981,17 +987,17 @@ named $income$.  Using a series of if-else-if statements as presented in  Algori
 }
 \end{algorithm}
 
-To compute the amount of a tax credit and adjust the tax accordingly by using
+We can then compute the amount of a tax credit and adjust the tax accordingly by using
 similar if-else-if and if-else statements as in Algorithm \ref{algo:taxCreditIfElseIf}.
 
 \begin{algorithm}[H]
 \caption{Computing Tax Credit with If-Else-If}
 \label{algo:taxCreditIfElseIf}
-\uIf{$income \geq 110000$}{
+\uIf{$income \geq 110,000$}{
   $credit \leftarrow 0$ \;
 }
 \uElseIf{$numberOfChildren \leq 3$}{
-  $credit \leftarrow numberOfChildren * 1000$ \;
+  $credit \leftarrow numberOfChildren * 1,000$ \;
 }
 \Else{
   $credit \leftarrow 3000$ \;
@@ -1000,7 +1006,7 @@ similar if-else-if and if-else statements as in Algorithm \ref{algo:taxCreditIfE
 \eIf{$credit > tax$}{
   $tax \leftarrow 0$ \;
 }{
-  $tax \leftarrow tax - credit$ \;
+  $tax \leftarrow (tax - credit)$ \;
 }
 \end{algorithm}
 

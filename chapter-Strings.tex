@@ -6,7 +6,7 @@
 A \gls{string} is an ordered sequence of characters.
 We've previously seen string data types as literals.  Most 
 languages allow you to define and use static string literals
-using the double-quote syntax.  We used strings to specify
+using the double quote syntax.  We used strings to specify
 output formatting using \mintinline{c}{printf()}-style functions
 for example.  When reading input from a user, we read it
 as a string and converted the input to numbers.  We also
@@ -17,14 +17,12 @@ Programming languages vary greatly in how they represent
 string data types.  Some languages have string types
 built-in to the language and others require that you use
 arrays and yet others treat strings as a special type of
-object.  
-
-One issue with string representations is determining where
+object.  One issue with string representations is determining where
 and how the string ends.  Some languages use a \emph{length
-prefix} string representation.  The length (that is, the number
+prefix} string representation.  The length (the number
 characters in the string) is stored in a special location at
 the beginning of a string.  Then the string characters are
-stored as an array.  Still other languages use a special
+stored as an array.  Other \gls{oopLabel} languages use a special
 character, the \emph{null-terminating character} to denote
 the end of a string.  Still other languages store strings
 as arrays or dynamic arrays and the ``bookkeeping''
@@ -54,7 +52,7 @@ modifying individual characters in a string.  In order
 to do so, we may also need to know a string's length
 (so that we do not access invalid characters).  A
 language could provide this as part of the string itself
-(usually called a \emph{property} of the string) or again
+(usually called a \emph{property} of the string) or 
 through a function call.  We can further use such functionality
 to iterate over the individual characters in a string using
 an index-controlled for-loop.
@@ -62,17 +60,13 @@ an index-controlled for-loop.
 More advanced operations on strings include \gls{concatenation}
 which is the operation of combining one or more strings
 to create a new string.  Concatenation simply \emph{appends}
-one string to the end of another string.  Again, depending
-on the language this may be accomplished with a built-in
-operator or it may require a function call.
-
-Another common operation is to extract a \emph{substring}
+one string to the end of another string.  Another common 
+operation is to extract a \emph{substring}
 from a string, that is create a new string from a portion of
 another string.  Commonly, this is done via some standard
 function that may operate by specifying indices and/or the
-length of the desired substring.
-
-Finally, it is also common to deal with collections of strings.  
+length of the desired substring.  Finally, it is also common 
+to deal with collections of strings.  
 Some languages allow you to create arrays of strings or 
 dynamic collections (lists or sets) of strings.  for languages
 in which strings are arrays of characters, an array of strings
@@ -95,14 +89,14 @@ Many languages, however, require that you make string comparisons
 using a function.  Using the equality operator \mintinline{c}{==} may
 be correct syntactically, but is usually making a pointer or 
 reference comparison which evaluates to true if and only if the
-two variables represent the same thing in memory.  Even if two
+two variables represent the same memory address.  Even if two
 string variables have the same \emph{content}, the equality operator
 may evaluate to \False if they are distinct (deep) copies of the
 same string.  Likewise, the inequality operators $<, \leq$, etc. may
 only be comparing memory addresses which is meaningless
 for comparing strings.
 
-The solution that many languages provide is the use of a 
+The solution that many languages provide is the use of a \index{comparator}
 \gls{comparator}, which is either a function or an object that
 facilitates the comparison of strings (and more generally, any object).
 Generally, a comparator function takes two arguments, $a, b$
@@ -134,11 +128,12 @@ string
 
 \mintinline{text}{Smith,Joe,12345678,1985-09-08}
 
-is a CSV string holding data on a particular person (last name, 
+is a CSV string holding data about a particular person (last name, 
 first name, ID, date of birth).  Often we need to process such
 strings to extract each individual piece of data.
 
-Processing such strings is usually referred to as \glslink{parse}{parsing}.
+Processing such strings is usually referred to as \index{parse} 
+\glslink{parse}{parsing}.
 In particular, a string is ``split'' into a collection of individual
 strings called \glspl{token} (thus the process is also sometimes
 referred to as tokenizing).  In the example above, the
@@ -148,7 +143,7 @@ and \mintinline{text}{1985-09-08}.  Each string could further
 be tokenized if needed, such as parsing the date of birth
 to extract the year, month, and date.
 
-Most languages provide a function to facilitate tokenizing.  Some
+Most languages provide a function to facilitate tokenization.  Some
 do so by directly returning an array or collection of the resulting
 tokens (usually with the delimiter removed).  Others have a
 more manual process that requires a loop structure to iterate

@@ -6,7 +6,7 @@ Computers are awesome.  The human race has seen more advancements in the
 last 50 years than in the entire 10,000 years of human history.  Technology has
 transformed the way we live our daily lives, how we interact with each other, and
 has changed the course of our history.  Today, everyone carries smart phones
-which have more computational power than supercomputers from 20 years ago.
+which have more computational power than supercomputers from even 20 years ago.
 Computing has become ubiquitous, the ``internet of things'' will soon become
 a reality in which every device will become interconnected and data will be collected
 and available even about the smallest of minutiae.
@@ -47,10 +47,9 @@ it is only the beginning.  This book is intended to get you started
 on your journey.
 
 \section{Problem Solving}
+\index{problem solving}
 
-At its heart, Computer Science is about problem solving.  Not problem solving
-as a discipline, it would be hubris to think that Computer Science holds a 
-monopoly on ``problem solving.''  Indeed, it would be hard to find any 
+At its heart, Computer Science is about problem solving.  That is not to say that \emph{only} Computer Science is about problem solving.  It would be hubris to think that Computer Science holds a monopoly on ``problem solving.''  Indeed, it would be hard to find any 
 discipline in which solving problems was not a substantial aspect or 
 motivation if not integral.  Instead, Computer Science is the study of
 computers and computation.  It involves studying and understanding 
@@ -76,7 +75,6 @@ Ultimately, what is desired in a solution?  What are the objectives that
 need to be achieved?  What would an ideal solution look like or what
 would it do?  Who would use the solution and how would they use it?
 By answering these questions, we get an idea of \emph{where we want to be}.
-
 Once we know where we are and where we want to be, the problem solving
 process can begin: how do we get from point $A$ to point $B$?
 
@@ -108,8 +106,8 @@ possible impediments or problems that were not readily apparent.  A
 design allows you to an opportunity to think through possible alternative
 solutions and weigh the advantages and disadvantages of each.  
 Designing a solution also allows you to understand the problem better.
-
-Design can involve gathering requirements and developing use cases.  
+Design can involve gathering requirements and developing 
+\index{use case} use cases.  
 How would an individual \emph{use} the proposed solution?  What features
 would they need or want?  
 
@@ -117,7 +115,7 @@ Implementations can involve building prototype solutions to test the
 feasibility of the design.  It can involve building individual components and
 integrating them together.
 
-Testing involves finding, designing, and developing test cases: actual
+Testing \index{testing} involves finding, designing, and developing test cases: actual
 instances of the problem that can be used to test your solution.  Ideally, the
 a test case instance involves not only the ``input'' of the problem, but also
 the ``output'' of the problem: a feasible or optimal solution that is known
@@ -140,18 +138,18 @@ times until an ideal solution, or at least acceptable, solution is achieved.
 Yet another phase of problem solving is maintenance.  The solution
 we create may need to be maintained in order to remain functional
 and stay relevant.  Design flaws or bugs may become apparent that
-were missed in the process.  The solution may need to be updated
+were missed in previous phases.  The solution may need to be updated
 to adapt to new technology or requirements.  
 
 In software design there are two general techniques for problem solving;
-top-down and bottom-up design.  A \gls{top-down design} strategy approaches a problem
+top-down and bottom-up design.  A \gls{top-down design} \index{top-down design} strategy approaches a problem
 by breaking it down into smaller and smaller problems until either a solution
 is obvious or trivial or a preexisting solution (the aforementioned ``off-the-shelf'' 
 solution) exists.  The solutions to the subproblems are combined and
 interact to solve the overall problem.
 
-A bottom-up strategy attempts to first completely define the smallest
-components or entities that make up a system first.  Once these have
+A bottom-up \index{bottom-up design} strategy attempts to first completely define the smallest
+components or entities that make up a system \emph{first}.  Once these have
 been defined and implemented, they are combined and interactions
 between them are defined to produce a more complex system.
 
@@ -160,16 +158,16 @@ between them are defined to produce a more complex system.
 Everyone has some level of familiarity with computers and computing 
 devices just as everyone has familiarity with automotive basics.  However, 
 just because you drive a car everyday doesn't mean you can tell the 
-difference between a crankshaft and a piston.  To start, let's familiarize
+difference between a crankshaft and a piston.  To get started, let's familiarize
 ourselves with some basic concepts.
 
-A computer is a device, usually electronic, that stores, receives, 
+A computer \index{computer} is a device, usually electronic, that stores, receives, 
 processes, and outputs information.  Modern computing devices include
 everything from simple sensors to mobile devices, tablets, desktops, 
-mainframes/servers, supercomputers, to huge grid clusters consisting
+mainframes/servers, supercomputers and huge grid clusters consisting
 of multiple computers networked together.
 
-Computer hardware usually refers to the physical components in a 
+Computer hardware \index{hardware} usually refers to the physical components in a 
 computing system which includes input devices such as a mouse/touchpad, 
 keyboard, or touchscreen, output devices such as monitors, storage 
 devices such as hard disks and solid state drives, as well as the
@@ -183,21 +181,26 @@ logical operations and complex instructions.  In addition to the \gls{cpuLabel}
 a processor may contain an \gls{aluLabel} that performs arithmetic 
 operations such as addition, multiplication, division, etc.
 
-Computer Software usually refers to the actual machine instructions
+Computer Software \index{software} usually refers to the actual machine instructions
 that are run on a processor.  Software is usually written in a high-level
 programming language such as C or Java and then converted to 
 machine code that the processor can execute.
 
-Computers ``speak'' in binary code.  Binary is nothing more than a 
-structured collection of 0s and 1s.  A single 0 or 1 is referred to as a \gls{bit}.  
+Computers ``speak'' in binary code.  Binary \index{binary} is nothing more than a 
+structured collection of 0s and 1s.  A single 0 or 1 is referred to as a \index{bit}\gls{bit}.  
 Bits can be collected to form larger chunks of information: 8 bits form 
-a \gls{byte}, 1024 bytes is referred to as a kilobyte, etc.  Table 
+a \index{byte}\gls{byte}, 1024 bytes is referred to as a \index{kilobyte}
+kilobyte, etc.  Table 
 \ref{table:memoryUnits} contains a several more binary units.
 Each unit is in terms of a power of 2 instead of a power of 10.  
 As humans, we are more familiar with decimal--base-10 numbers
 and so units are usually expressed as powers of 10, kilo- refers
 to $10^3$, mega- is $10^6$, etc.  However, since binary is base-2
 (0 or 1), units are associated with the closest power of 2.
+Computers are binary machines because it is the most practical to
+implement in electronic devices.  0s and 1s can be easily represented
+by low/high voltage; low/high frequency; on-off; etc.  It is much easier
+to design and implement systems that switch between only two states.
 
 \begin{table}
 \centering
@@ -213,19 +216,15 @@ Exabyte (EB) & $2^{60}$ &  1,152,921,504,606,846,976\\
 Zettabyte (ZB) & $2^{70}$ &  1,180,591,620,717,411,303,424\\
 Yottabyte (YB) & $2^{80}$ &  1,208,925,819,614,629,174,706,176\\
 \end{tabular}
-\caption{Various units of digital information with respect to bytes.}
+\caption[Memory Units]{Various units of digital information with 
+respect to bytes.  Memory is usually measured using powers of two.}
 \label{table:memoryUnits}
 \end{table}
 
-Computers are binary machines because it is the most practical to
-implement in electronic devices.  0s and 1s can be easily represented
-by low/high voltage; low/high frequency; on-off; etc.  It is much easier
-to design and implement systems that switch between only two states.
-
-Computer \emph{memory} can refer to \emph{secondary memory}
+Computer \index{memory}\emph{memory} can refer to \emph{secondary memory}
 which are typically longterm storage devices such as hard disks, flash 
 drives, SD cards, optical disks (CDs, DVDs), etc. These generally have
-large capacity but are slower (the time it takes to 
+a large capacity but are slower (the time it takes to 
 access a chunk of data is longer).  Or, it can refer to \emph{main memory}
 (or primary memory): data stored on chips that is much faster but also
 more expensive and thus generally smaller.
@@ -233,51 +232,56 @@ more expensive and thus generally smaller.
 The first hard disk (IBM 350) was developed in 1956 by IBM and had a capacity of
 3.75MB and cost \$3,200 (\$27,500 in 2015 dollars) per month to lease.
 For perspective, the first commercially available TB hard drive was released in 2007.
-As of 2015, terabyte hard disks can be commonly purchased for $50-$100.  
+As of 2015, terabyte hard disks can be commonly purchased for \$50--\$100.  
 
-Main memory, sometimes referred to as \gls{ramLabel} consists of a collection
+Main memory, \index{main memory} sometimes referred to as \gls{ramLabel} consists of a collection
 of \emph{addresses} along with \emph{contents}.  An address usually refers
-to a single byte of memory.  The content, that is the byte of data that is stored at an address,
-can be anything.  It can represent a number, a letter, etc.  In the end, to the computer
-its all just a bunch of 0s and 1s.  For convenience, data, in particular memory
-addresses are represented using hexadecimal, which is a base-16 counting
+to a single byte of memory (called \emph{byte-addressing}).  The content, that is the byte of data that is stored at an address,
+can be anything.  It can represent a number, a letter, etc.  To the computer
+it is all just a bunch of 0s and 1s.  For convenience, memory
+addresses are represented using \index{hexadecimal} hexadecimal, which is a base-16 counting
 system using the symbols $0, 1, \ldots, 9, a, b, c, d, e, f$.  Numbers
 are prefixed with a \texttt{0x} to indicate they represent hexadecimal numbers.
+Figure \ref{figure:memory} depicts memory and its address/contents.
 
-\begin{table}
+\begin{figure}
 \centering
 \input{figures/figureMemory}
-\caption[Depiction of Computer Memory]{Depiction of Computer Memory.  Each address 
-refers to a byte, but different types of data (integers, floating-point numbers, characters) take
-different amounts of memory.  Memory addresses and some data is represented in 
-\emph{hexadecimal}.}
-\end{table}
+\caption[Depiction of Computer Memory]{Depiction of Computer Memory.  
+Each address refers to a byte, but different types of data (integers, 
+floating-point numbers, characters) may require different amounts of memory.  
+Memory addresses and some data is represented in \emph{hexadecimal}.}
+\label{figure:memory}
+\end{figure}
 
 Separate computing devices can be connected to each other through
-a \emph{network}.  Networks can be wired which provide large bandwidth 
-(the amount of data that can be sent at any one time), but expensive to
+a \emph{network}.  Networks can be wired with electrical signals or 
+light as in fiber optics which provide large bandwidth \index{bandwidth}
+(the amount of data that can be sent at any one time), but can be expensive to
 build and maintain.  They can also be wireless, but provide shorter range
 and lower bandwidth.  
 
 \section{Basic Program Structure}
 
-Programs start out as \emph{source code}, a collection of instructions usually written
-in a high-level programming language.  A source file containing source code is nothing
+Programs start out as \emph{source code}, a collection of instructions 
+usually written in a high-level programming language.  A source file 
+containing source code is nothing
 more than a plain text file that can be edited by any text editor.  However, many 
 developers and programmers utilize modern \gls{ideLabel} \index{Integrated Development Environment}
 that provide a text editor with \emph{code highlighting}: various elements are 
-displayed in various colors to make the code more readable and various elements
+displayed in different colors to make the code more readable and elements
 can be easily identified.  Mistakes such as unclosed comments or curly brackets
 can be readily apparent with such editors.  IDEs can also provide automated 
 compile/build features and other tools that make the development process easier
 and faster.
 
-Some languages are \emph{compiled} languages meaning that a source file
-must be translated into the machine code that a processor can understand and
-execute.  This is actually a multistep process.  A compiler may first preprocess the
-source file(s) and perform some pre-compiler operations.  It may then transform
-the source code into another language such as an assembly language, a lower
-level, more machine-like language.  Ultimately, the compiler transforms the source
+Some languages are \emph{compiled} \index{compiled language} languages 
+meaning that a source file must be translated into machine code that 
+a processor can understand and execute.  This is actually a multistep 
+process.  A compiler may first preprocess the source file(s) and perform 
+some pre-compiler operations.  It may then transform the source code into 
+another language such as an assembly language, a lower-level more 
+machine-like language.  Ultimately, the compiler transforms the source
 code into object code, a binary format that the machine can understand.  
 
 To produce an executable file that can actually be run, a \emph{linker} may then
@@ -285,27 +289,30 @@ take the object code and link in any other necessary objects or precompiled
 library code necessary to produce a final program.  Finally, an executable
 file (still just a bunch of binary code) is produced.
 
-We can now execute the program.  When a program is executed, a request
+Once an executable file has been produced we can run the program.  
+When a program is executed, a request
 is sent to the operating system to load and run the program.  The operating 
 system loads the executable file into memory and may setup additional memory
-for its variables as well as its \emph{call stack} (memory to enable the program
+for its variables as well as its \emph{call stack} \index{call stack}
+(memory to enable the program
 to make function calls).  Once loaded and setup, the operating system begins
 executing the instructions at the program's entry point.  
 
 In many languages, a program's entry point is defined by a \emph{main} function
 or method.  A program may contain many functions and pieces of code, but this
-special function is defined as the one that gets called when a program starts.  
+special function is defined as the one that gets \emph{invoked} 
+when a program starts.  
 Without a main function, the code may still be useful: libraries contain many 
 useful functions and procedures so that you don't have to write a program 
 from scratch.  However, these functions are not intended to be run by themselves.
 Instead, they are written so that other programs can use them.  A program
-becomes executable when a main entry point is provided.  
+becomes executable only when a main entry point is provided.  
 
-This compile-link-execute process is roughly depicted in Figure \ref{figure:compilingProcess}.  An 
-example of a simple C program can be found in Figure \ref{code:c:squareRoot}
-along with the resulting assembly code produced by a compiler (gcc) in Figure
+This compile-link-execute process is roughly depicted in Code Sample \ref{figure:compilingProcess}.  An 
+example of a simple C program can be found in Code Sample \ref{code:c:squareRoot}
+along with the resulting assembly code produced by a compiler in Figure
 \ref{code:c:squareRootAssembly} and the final machine code represented
-in hexadecimal in Figure \ref{code:c:squareRootMachine}.
+in hexadecimal in Code Sample \ref{code:c:squareRootMachine}.
 
 \begin{figure}
 \centering
@@ -334,9 +341,8 @@ in hexadecimal in Figure \ref{code:c:squareRootMachine}.
 \label{code:c:squareRootMachine}
 \end{listing}
 
-
-In contrast, some languages are \emph{interpreted}, 
-not compiled.  Instead, the source code is contained in a file usually referred
+In contrast, some languages are \index{interpreted language}\emph{interpreted}, 
+not compiled.  The source code is contained in a file usually referred
 to as a \emph{script}.  Rather than being run directly by an operating system, 
 the operating system loads and execute another program called an \emph{interpreter}.
 The interpreter then loads the script, parses, and execute its instructions.
@@ -351,8 +357,8 @@ represents a compromise between compiled and interpreted languages.
 Java source code is compiled into Java bytecode which is not actually machine
 code that the operating system and hardware can run directly.  Instead, it is
 compiled code for a \gls{jvmLabel}.  This allows a developer to write highly
-portable code, compile it and it is runnable on any \gls{jvmLabel} on any system
-(write-once, compile-once, run-anywhere).  
+portable code, compile it once and it is runnable on any \gls{jvmLabel} 
+on any system (write-once, compile-once, run-anywhere).  
 
 In general, interpreted languages are slower than compiled languages because
 they are being run through another program (the interpreter) instead of
@@ -361,57 +367,69 @@ have been introduced to solve this problem.  \gls{jitLabel} compilers have
 been developed that take scripts that are not usually compiled, and compile
 them to a native machine code format which has the potential to run 
 much faster than when interpreted.  Modern web browsers typically do this
-for JavaScript code (Chrome's V8 JavaScript engine for example).
+for JavaScript code (Google Chrome's V8 JavaScript engine for example).
 
-Transpilers are source-to-source compilers.  They don't produce assembly
-or machine code, instead they take one language and translate it to
-another language.  This is sometimes done to ensure that scripting languages
+Another related technology are \index{transpiler} \emph{transpilers}.  
+Transpilers are source-to-source compilers.  They 
+don't produce assembly
+or machine code, instead they translate code in one high-level programming
+language to another high-level programming language.  This is sometimes 
+done to ensure that scripting languages
 like JavaScript are backwards compatible with previous versions of the language.
 Transpilers can also be used to translate one language into the same language
 but with different aspects (such as parallel or synchronized code) automatically
 added.  They can also be used to translate older languages such as Pascal
 to more modern languages as a first step in updating a legacy system.
 
-\clearpage 
-
 \section{Syntax Rules \& Pseudocode}
 
-Programming languages are a lot like spoken languages in that they have 
-\emph{syntax} rules.  These rules dictate the appropriate arrangements of words,
-punctuation, and other symbols that form valid statements in the language.
-For example, many programming languages, commands or statements are terminated
-by semicolons (just as most sentences are terminated with a period).  
-This is an example of ``punctuation'' a programming language.  
+Programming languages are a lot like human languages in that they have 
+\emph{syntax} rules.  These rules dictate the appropriate arrangements 
+of words, punctuation, and other symbols that form valid statements in the 
+language.  For example, in many programming languages, commands or statements 
+are terminated by semicolons (just as most sentences are ended 
+with a period).  This is an example of ``punctuation'' a programming 
+language.  In English paragraphs are separated by lines, in programming
+languages \emph{blocks} of code are separated by curly brackets.  
+Variables are comparable to nouns and operations and functions are 
+comparable to verbs.  Complex documents often have footnotes that
+provide additional explanations; code has \emph{comments} that provide
+documentation and explanation for important elements. English is read 
+top-to-bottom, left-to-right.  Programming languages 
+are similar: individual executable commands are written one per line.  When 
+a program executes, each command executes one after the other, top-to-bottom.  
+This is known as \index{sequential control flow} sequential control flow.
 
-In general, individual executable commands are written one per line.  When 
-a program executes, each command executes one after the other.  This is
-known as sequential control flow.
-
-A \emph{block} of code is a section of code that has been logically grouped
+A \emph{block} \index{code block}\index{block|see {code block}} of code 
+is a section of code that has been logically grouped
 together.  Many languages allow you to define a block by enclosing the
 grouped code around opening and closing curly brackets.  Blocks can
 be \emph{nested} within each other to form sub-blocks.
 
 Most languages also have reserved words and symbols that have special 
 meaning.  For example, many languages assign special meaning to keywords
-such as \mintinline{c}{for}, \mintinline{c}{if}, \mintinline{c}{while}, etc. that 
-are used to define various \emph{control structures} such as conditionals and
-loops.  Special symbols include operators such as \mintinline{c}{+} and 
-\mintinline{c}{*} for performing basic arithmetic.
+such as \mintinline{c}{for}, \mintinline{c}{if}, \mintinline{c}{while}, etc.\ 
+that are used to define various \emph{control structures} such as 
+conditionals and loops.  Special symbols include operators such as 
+\mintinline{c}{+} and \mintinline{c}{*} for performing basic arithmetic.
 
 Failure to adhere to the syntax rules of a particular language will 
 lead to bugs and programs that fail to compile and/or run.  Natural
-languages are very forgiving: we can generally discern what someone 
+languages such as English are very forgiving: we can generally discern 
+what someone 
 is trying to say even if they speak in broken English (to a point).  
 However, a compiler or interpreter isn't as smart as a human.  Even
-a small syntax error will cause a compiler to completely fail to 
+a small \index{syntax error} syntax error (an error in the source 
+code that does not conform
+to the language's rules) will cause a compiler to completely fail to 
 understand the code you have written.  Learning a programming
 language is a lot like learning a new spoken language (but, fortunately
 a lot easier).  
 
 In subsequent parts of this book we focus on particular languages.  However,
 in order to focus on concepts, we'll avoid specific syntax rules by using
-\gls{pseudocode}, informal, high-level descriptions of algorithms and 
+\index{pseudocode}\gls{pseudocode}, informal, high-level descriptions of 
+algorithms and 
 processes.  Good pseudocode makes use of plain English and mathematical
 notation, making it more readable and abstract.  A small example can 
 be found in Algorithm \ref{algo:examplePseudocode}.
@@ -433,7 +451,7 @@ output $min$ \;
 
 \section{Documentation, Comments, and Coding Style}
 
-Good code is not just functional, its also beautiful.  Good code
+Good code is not just functional, it is also beautiful.  Good code
 is organized, easy to read, and well documented.  Organization
 can be achieved by separating code into useful functions and
 collecting functions into \emph{modules} or libraries.  Good
@@ -444,17 +462,21 @@ It would be difficult to read an essay that contained
 random line breaks, paragraphs were not indented, it contained
 different spacing or different fonts, etc.  Likewise, code should be 
 legible.  Well written code is consistent and makes good use
-of whitespace and indentation.  Code in the same code block
+of whitespace and indentation.  Code within the same code block
 should be indented at the same level.  Nested blocks should
 be further indented just like the outline of an essay or table
 of contents.
 
-Code should be well-documented.  The code itself should be
+Code should also be well documented.  Each line or segment of
+code should be
 clear enough that it tells the user \emph{what} the code does
-and \emph{how} it does it.  This is called ``self-documenting''
-code.  In addition, well-written code should contain sufficient and
-clear \emph{comments}.  A comment in a program is intended for
-a human user to read.  A comment is ultimately ignored and
+and \emph{how} it does it.  This is referred to as ``self-documenting''
+code.  A person familiar with the particular language should be able 
+to read your code and immediately understand what it does.
+In addition, well-written code should contain sufficient and
+clear \index{comment}\emph{comments}.  A comment in a program is intended for
+a human user to read.  A comment is ultimately ignored by the
+compiler/interpreter and
 has no effect on the actual program.  Good comments tell the
 user \emph{why} the code was written or why it was written
 the way it was.  Comments provide a high-level description of
@@ -463,9 +485,13 @@ particular method or algorithm is of interest, it should also be
 documented.  
 
 There are typically two ways to write comments.  Single line
-comments usually begin with two forward slashes, \mintinline{text}{//}.
-Everything after the slashes until the next line is ignored 
-by the program.  Multiline comments begin with a \mintinline{text}{/*}
+comments usually begin with two forward slashes, 
+\mintinline{text}{//}.\footnote{You can remember the difference
+between a forward slash \mintinline{text}{/} and a backslash
+\mintinline{text}{\ } by thinking of a person facing right and 
+either leaning backwards (backslash) or forwards (forward slash).}
+Everything after the slashes until the next line is ignored.  
+Multiline comments begin with a \mintinline{text}{/*}
 and end with a \mintinline{text}{*/}; everything between them 
 is ignored even if it spans multiple lines.  This syntax is shared
 among many languages including C, Java, PHP and others.
@@ -495,12 +521,13 @@ begins with a \mintinline{text}{/**}.  Asterisks are aligned together
 on each line.  Certain commenting systems allow you to place
 other marked up data inside these comments such as labeling
 parameters (\mintinline{text}{@param x}) or use HTML code
-to provide links.  These doc-style comments are used to provide
+to provide links and style.  These doc-style comments are used 
+to provide
 documentation for major parts of the code especially functions
 and data structures.  Though not part of the language, other
 documentation tools can be used to gather the information in
-doc-style comments to produce documentation documents (such
-as web pages).
+doc-style comments to produce formatted documentation such as web pages
+or \gls{pdfLabel} documents.
 
 Comments should not be trivial: they should not explain something
 that should be readily apparent to an experienced user or
@@ -515,7 +542,7 @@ be appropriate to document it in a series of comments.
 Comments can also detail how a function or piece of code
 should be used.  This is typically done when developing an
 \gls{apiLabel} for use by other programmers.  The API's
-available functions should be well-documented so that users
+available functions should be well documented so that users
 will know how and when to use a particular function.  It
 can document the function's expectations and behavior such
 as how it handles bad input or error situations.

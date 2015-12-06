@@ -1,13 +1,5 @@
 
 
-Analogies:
- Periods end sentences -> semicolons end executable lines
- Paragraphs are separated by lines -> blocks are demarcated with curly brackets
- Variables are nouns and should be named as such, functions are verbs and
-  should be named likewise
- Shakespearian plays are annotated: lines needing more explanation have
-  footnotes; but not all lines need explaining -> comments should be used
-  to document important or unclear things; code itself should be self-documenting
 
 Add a quote:
  Because of the low-level nature of C, you can really get yourself

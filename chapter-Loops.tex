@@ -2,8 +2,8 @@
 
 %%Chapter: Loops
 
-Computers are really good at automation.  A key aspect of automation is that we be
-able to repeat a process over and over on different pieces of data until some condition
+Computers are really good at automation.  A key aspect of automation is 
+the ability to repeat a process over and over on different pieces of data until some condition
 is met.  For example, if we have a collection of numbers and we want to find their
 sum we would \emph{iterate} over each number, adding it to a total, until we have
 examined every number.  Another example may include sending an email message
@@ -51,8 +51,7 @@ the program continues.
 
 The iteration statement is intended to update the state of a program to make progress
 toward the termination condition.  If we didn't make such progress, the loop would continue
-on forever as the termination condition would never be satisfied.  This is known as an 
-\emph{infinite loop} \index{infinite loop}, and results in a program that never terminates.
+on forever as the termination condition would never be satisfied.  This is known as an \index{infinite loop} \emph{infinite loop} \index{infinite loop}, and results in a program that never terminates.
 
 As a simple example, consider the following outline.
 
@@ -68,9 +67,7 @@ each value: $i=1, i=2, \ldots, i=10$, after which the loop terminates.  Overall,
 loop executes a total of 10 times.  Prior to each of the 10 executions, the value of $i$
 is checked; as it is less than or equal to 10, the action is performed.  At the end of
 each of the 10 iterations, the variable $i$ is incremented by 1 and the termination
-condition is checked again, repeating the process.
-
-There are several different types of loops that vary in syntax and style but they 
+condition is checked again, repeating the process.  There are several different types of loops that vary in syntax and style but they 
 all have the same three basic components. 
 
 \section{While Loops}
@@ -79,7 +76,7 @@ all have the same three basic components.
 
 A \emph{while loop} is a type of loop that places the three components in their 
 logical order.  The initialization statement is written before the loop code.  
-Typically the keyword \emph{while} is used to specify the continuation/termination
+Typically the keyword \textsc{while} is used to specify the continuation/termination
 condition.  Finally, the iteration statement is usually performed at the end of the loop
 \emph{inside} the code block associated with the loop.  A small, counter-controlled 
 while loop is presented in Algorithm \ref{algo:counterControlledWhileLoop} which 
@@ -89,7 +86,7 @@ illustrates the previous example of iterating a variable $i$ from 1 to 10.
 \caption{Counter-Controlled While Loop}
 \label{algo:counterControlledWhileLoop}
 $i \leftarrow 1$ \Comment{Initialization statement}
-\While{$i \leq 10$}{ 
+\While{$\left( i \leq 10 \right)$}{ 
   Perform some action \;
   $i \leftarrow (i + 1)$ \Comment{Iteration statement}
 }
@@ -113,20 +110,20 @@ code is specified after the loop.
 \subsection{Example}
 \label{subsection:whileLoopExample}
 
-In the previous example we knew how many times we wanted the loop to execute.  
-Though you can use a while loop in counter-controlled situations, while loops are 
+In the previous example we knew that we wanted the loop to execute ten
+times.  Though you can use a while loop in counter-controlled situations, while loops are 
 typically used in scenarios when you may not know how many iterations you want 
 the loop to execute for.  Instead of a straightforward iteration, the loop itself may
 update a variable in a less-than-predictable manner.  
 
-As an example, consider the problem of \emph{normalizing} a number as is typically
-done in scientific notation.  Given a number $x$ (for simplicity, we'll consider $x \geq 0$),
-we divide it by 10 until its value is in the interval $[0, 10)$, keeping track of how many times we've 
+As an example, consider the problem of \emph{normalizing} a number as is typically done in scientific notation.  Given a number $x$ (for simplicity, we'll consider $x \geq 1$),
+we divide it by 10 until its value is in the interval $[1, 10)$, keeping track of how many times we've 
 divided by 10.  For example, if we have the number $x = 32,145.234$, we would divide
 by 10 four times, resulting in $3.2145234$ so that we could express it as
   $$3.2145234 \times 10^{4}$$
-A simple realization of this process is presented in Algorithm \ref{algo:normalizingNumberWhileLoop}.
-The number of times the loop executes depends on how large $x$ is.  For the example
+A simple realization of this process is presented in Algorithm 
+\ref{algo:normalizingNumberWhileLoop}.  Rather than some fixed number of
+iterations, the number of times the loop executes depends on how large $x$ is.  For the example
 mentioned, it executes 4 times; for an input of $x = 10,000,000$ it would execute 7 times.
 A while loop allows us to specify the repetition process without having to know up front
 how many times it will execute.
@@ -135,6 +132,7 @@ how many times it will execute.
 \caption{Normalizing a Number With a While Loop}
 \label{algo:normalizingNumberWhileLoop}
 \Input{A number $x$, $x \geq 0$}
+\Output{$x$ normalized, $k$ its exponent}
 $k \leftarrow 0$ \;
 \While{$x > 10$}{
   $x \leftarrow (x / 10)$ \;
@@ -152,15 +150,13 @@ the three components on the same line.  In many cases, this results in a loop th
 is more readable; if the code block in a while loop is long it may be difficult to see
 the initialization, continuation, and iteration statements clearly.  For loops are 
 typically used to iterate over elements stored in a collection such as an
-array (see Chapter \ref{chapter:arrays}).
-
-Usually the keyword \emph{for} is used to identify all three components.  A 
-general example is given in Algorithm \ref{algo:generalForLoop}.
+array (see Chapter \ref{chapter:arrays}).  Usually the keyword \textsc{for} is used to identify all three components.  
+A general example is given in Algorithm \ref{algo:generalForLoop}.
 
 \begin{algorithm}[]
 \caption{A General For Loop}
 \label{algo:generalForLoop}
-\For{(initialization statement); (continuation condition); (iteration statement)}{
+\For{$\left(\right. \langle initialization \rangle$; $\langle continuation \rangle$; $\langle iteration \rangle \left.\right)$}{
   Perform some action \;
 }
 \end{algorithm}
@@ -171,13 +167,13 @@ the three loop components in a for-loop (otherwise there may be some ambiguity a
 to where each of the components begins and ends).  However, the semicolons are
 typically only placed after the initialization statement and continuation condition and 
 are \emph{omitted} after the iteration statement.  A more concrete example is given in 
-Algorithm \ref{algo:counterControlledForLoop} which represents an equivalent code
-snippet as the counter-controlled while loop we examined earlier.
+Algorithm \ref{algo:counterControlledForLoop} which is equivalent
+to the counter-controlled while loop we examined earlier.
 
 \begin{algorithm}[h]
 \caption{Counter-Controlled For Loop}
 \label{algo:counterControlledForLoop}
-\For{$i \leftarrow 1$; $i \leq 10$; $i \leftarrow (i + 1)$}{
+\For{$\left(\right.$ $i \leftarrow 1$; $i \leq 10$; $i \leftarrow (i + 1)$ $\left.\right)$}{
   Perform some action \;
 }
 \end{algorithm}
@@ -199,19 +195,19 @@ iteration we add the value of $i$ \emph{for that iteration} to a running total, 
 \caption{Summation of Numbers in a For Loop}
 \label{algo:summationForLoop}
 $sum \leftarrow 0$ \;
-\For{$i \leftarrow 1$; $i \leq 10$; $i \leftarrow (i + 1)$}{
+\For{$\left(\right.$ $i \leftarrow 1$; $i \leq 10$; $i \leftarrow (i + 1)$ $\left.\right)$}{
   $sum \leftarrow (sum + i)$ \;
 }
 \end{algorithm}
 
 Again, the initialization of $i = 1$ is only performed once.  On the first iteration of the loop, 
 $i = 1$ and so $sum$ will be given the value $sum + i = 0 + 1 = 1$  At the end of the loop, 
-$i$ will be incremented will have a value of $2$.  The continuation condition is still satisfied, 
+$i$ will be incremented and will have a value of $2$.  The continuation condition is still satisfied, 
 so once again the loop body executes and $sum$ will be given the value $sum + i = 1 + 2 = 3$.
 On the 10th (last) iteration, $sum$ will have a value $1 + 2 + 3 + \cdots + 9 = 45$ and $i = 10$.
 Thus $sum + i = 45 + 10 = 55$ after which $i$ will be incremented to 11.  The continuation condition
 is \emph{still} checked, but since $11 \not\leq 10$, the loop body will not be executed and
-the loop will terminate.
+the loop will terminate, resulting in a final $sum$ value of $55$.
 
 \section{Do-While Loops}
 \index{do-while loop}
@@ -249,7 +245,7 @@ at the beginning of the loop body.
 
 Do-while loops are typically used in scenarios in which the first iteration is used to ``setup'' 
 the continuation condition (thus, it needs to be executed at least once).  A common example
-is if the loop body performs an operation that may have result in an error code (or flag) that is
+is if the loop body performs an operation that may result in an error code (or flag) that is
 either \emph{true} (an error occurred) or \emph{false} (no error occurred).  
 
 \begin{algorithm}[h]
@@ -271,10 +267,10 @@ we'll perform the action before checking to see if it should be performed again.
 \index{loops!foreach loop}
 
 Many languages support a special type of loop for iterating over individual elements in 
-a collection (such as a set, list, or array).  In general, such loops are referred to as \emph{foreach}
+a collection (such as a set, list, or an array).  In general, such loops are referred to as \emph{foreach}
 loops.  These types of loops are essentially \gls{syntactic sugar}: iterating over a collection
 could be achieved with a for loop or a while loop, but foreach loops provide a more
-convenient way to iterate when dealing with collections.  We will revisit these loops
+convenient way to iterate over a collections.  We will revisit these loops
 when we examine arrays in Chapter \ref{chapter:arrays}.  For now, we look at a simple example
 in Algorithm \ref{algo:foreachLoop}.
 
@@ -289,11 +285,11 @@ in Algorithm \ref{algo:foreachLoop}.
 How the elements are stored in the collection and how they are iterated over is not our 
 (primary) concern.  We simply want to apply the same block of code to each element, 
 the foreach loop handles the details on how each element is iterated over.  The syntax
-also provides us a way to refer to each element (the $a$ variable in the algorithm).  On
+also provides a way to refer to each element (the $a$ variable in the algorithm).  On
 each iteration of the loop, the foreach loop updates the reference $a$ to the \emph{next}
 element in the array.  The loop terminates after it has iterated through each and every
 one of the elements.  In this way, a foreach loop simplifies the syntax: we don't have to 
-specify any of the three components ourselves.  This is very convenient.  As a more
+specify any of the three components ourselves.  As a more
 concrete example, consider iterating over each student in a course roster.  For each
 student, we wish to compute their grade and then email them the results.  The foreach
 loop allows us to do this without worrying about the iteration details (see Algorithm 
@@ -302,7 +298,7 @@ loop allows us to do this without worrying about the iteration details (see Algo
 \begin{algorithm}[h]
 \caption{Foreach Loop Computing Grades}
 \label{algo:foreachGradeLoop}
-\ForEach{student $s$ in the class $C$}{
+\ForEach{(student $s$ in the class $C$)}{
   $g \leftarrow $ compute $a$'s grade \;
   send $a$ an email informing them of their grade $g$ \;
 }
@@ -311,6 +307,7 @@ loop allows us to do this without worrying about the iteration details (see Algo
 \section{Other Issues}
 
 \subsection{Nested Loops}
+\index{nested loops}
 
 Just as with conditional statements, we can nest loops within loops to perform
 more complex processes.  Though you can do this with any type of loop, we 
@@ -321,8 +318,8 @@ present a simple example using for loops in Algorithm \ref{algo:nestedForLoops}.
 \label{algo:nestedForLoops}
 $n \leftarrow 10$ \;
 $m \leftarrow 20$ \;
-\For{$i \leftarrow 1$; $i \leq m$; $i \leftarrow (i + 1)$}{
-  \For{$j \leftarrow 1$; $j \leq n$; $j \leftarrow (j + 1)$}{
+\For{($i \leftarrow 1$; $i \leq m$; $i \leftarrow (i + 1)$)}{
+  \For{($j \leftarrow 1$; $j \leq n$; $j \leftarrow (j + 1)$)}{
     output $(i, j)$ \;
   }
 }
@@ -333,12 +330,10 @@ executes 10 times.  Since the inner for loop is \emph{nested} inside the
 outer loop, the entire inner loop executes all 10 iterations \emph{for each}
 of the 20 iterations of the outer loop.  Thus, in total the inner most output
 operation executes $10 \times 20 = 200$ times.  Specifically, it outputs 
-$(1, 1), (1, 2), \ldots, (1, 10), (2, 1), (2, 2), \ldots, (2, 10), (3, 1), \ldots, (20, 10)$.
-
-Some common  use cases for nested loops are when you process two dimensional data
-such as data found in a table that includes rows and columns.  Processing matrices
-is another common use case.  Finally, nested loops can be used to process all \emph{pairs}
-in a collection of elements.
+$(1, 1), (1, 2), \ldots, (1, 10), (2, 1), (2, 2), \ldots, (2, 10), (3, 1), \ldots, (20, 10)$.  Nested loops are comment when iterating over elements 
+in two-dimensional 
+arrays such as tabular data or matrices.  Nested loops can also be used 
+to process all \emph{pairs} in a collection of elements.
 
 \subsection{Infinite Loops}
 \label{subsection:infiniteLoops}
@@ -437,9 +432,9 @@ Other common errors are the result of misidentifying either the
 initialization statement or the continuation condition.  Starting a
 counter at 1 instead of zero, or using a $\leq$ comparison instead
 of a $<$ , etc.  These can lead to a loop being \emph{off-by-one} 
-and a resulting error.
+resulting in a logic error.
 
-Other errors can be avoided by using the proper types of variables.
+Other errors are teh result of using improper variable types.
 Recall that operations involving floating-point numbers can have 
 round off and precision errors, $\frac{1}{3} + \frac{1}{3} + \frac{1}{3}$
 may not be equal to one for example.  It is best to avoid using 
@@ -459,25 +454,25 @@ can be rewritten as an equivalent for loop.  Any do-while loop can be rewritten 
 equivalent while loop!  
 
 So why do we have different types of loops?  The short answer is that we want our programming
-languages to be as flexible as possible.  We could design a language in which every loop
+languages to be flexible.  We could design a language in which every loop
 \emph{had} to be a while loop for example, but there are some situations in which it would be 
-less ``natural'' to write code with a while loop.  By providing several options, programmers have
+more ``natural'' to write code with a for loop.  By providing several options, programmers have
 the choice of which type of loop to write.  
 
 In general, there are no ``rules'' as to which loop to apply to which situation.  There are general
 trends, best practices, and situations where it is more common to use one loop rather than another,
 but in the end it does come down to personal choice and style.  Some software projects or
-organizations may have established guidelines or accepted style that may need to be followed
-in the interest of consistency and uniformity.  
+organizations may have established guidelines or style guide that establishes such guidelines in the interest of consistency and uniformity.  
 
 \section{Problem Solving With Loops}
 
-Loops can be applied to any problem that requires repetition of some sort or two simplify
+Loops can be applied to any problem that requires repetition of some sort 
+or to simplify
 repeated code.  When designing loops, it is important to identify the three components by asking
 the questions:
 \begin{itemize}
   \item Where does the loop start?  What variables or other state may need to be initialized or setup
-  	prior to the loop beginning?
+  	prior to the beginning of the loop?	
   \item What code needs to be repeated?  How can it be generalized to depend on loop control variables?
   	This helps you to identify and write the loop body.
   \item When should the loop end?  How many times do we want it to execute?  This helps you to 
@@ -490,13 +485,13 @@ the questions:
 
 \subsection{For vs While Loop}
 
-Recall the classic geometric series, 
+Let's consider how to write a loop to compute the classic geometric series, 
   $$\frac{1}{1-x} = \sum_{k=0}^\infty x^k = 1 + x + x^2 + x^3 + \cdots$$
 Obviously a computer cannot compute an infinite series as it is required to 
 terminate in a finite number of steps.  Thus, we can approach this problem in
 a number of different ways.  
 
-One way we could approximate the series is to compute it out to a fixed, say $n$, 
+One way we could approximate the series is to compute it out to a fixed
 number of terms.  To do so, we could initialize a $sum$ variable to zero, then 
 iteratively compute and add terms to the $sum$ until we have computed $n$ 
 terms.  To keep track of the terms, we can define a counter variable, $k$ as in 
@@ -509,20 +504,21 @@ However, since $k$ starts at 0, we would want to continue while $k < n$.  We
 would not want to continue the iteration when $k = n$ as that would make $n + 1$
 iterations (again since $k$ starts at 0).  Further, since we know the number of
 iterations we want to execute, a for loop is arguably the most appropriate loop
-for this problem.  Such a solution is presented in Algorithm \ref{algo:geometricSeriesForLoop}.
+for this problem.  Our solution is presented in Algorithm \ref{algo:geometricSeriesForLoop}.
 
 \begin{algorithm}[h]
 \caption{Computing the Geometric Series Using a For Loop}
 \label{algo:geometricSeriesForLoop}
 \Input{$x$, $n \geq 0$}
+\Output{An approximated value of $\frac{1}{1-x}$ using a geometric series}
 $sum \leftarrow 0$ \;
-\For{$k = 0$; $k < n$; $k \leftarrow (k + 1)$}{
+\For{($k = 0$; $k < n$; $k \leftarrow (k + 1)$)}{
   $sum \leftarrow (sum + x^k)$ \;
 }
 output $sum$ \;
 \end{algorithm}
 
-As an alternative consider the following approach: instead of computing a 
+As an alternative, consider the following approach: instead of computing a 
 predefined number of terms, what if we computed terms until the difference
 between the value in the previous iteration and the value in the current 
 iteration is negligible, say less than some small $\epsilon$ amount.  We could
@@ -553,9 +549,15 @@ $k \leftarrow 1$ \;
 output $sum$ \;
 \end{algorithm}
 
+On lines 1--2 we initialize our values to ensure that the while loop will
+execute at least once.  In the continuation condition, we use the absolute
+value of the difference as the series can \emph{oscillate} between negative
+and positive values.
+
 \subsection{Primality Testing}
 
-An integer $n > 1$ is called \emph{prime} if the only integers that divide it are 1 
+An integer $n > 1$ is called \emph{prime} if the only integers that 
+divide it evently are 1 
 and itself.  Otherwise it is called \emph{composite}.  For example, 30 is composite
 as it is divisible by 2, 3, and 5 among others.  However, 31 is prime as it is only 
 divisible by 1 and 31.
@@ -567,7 +569,7 @@ divides $n$, then $n$ is composite.  Otherwise, if none of them do, $n$ is prime
 Observe that we only need to go up to $\sqrt{n}$ since any prime divisor greater
 than that will correspond to \emph{some} prime divisor less than $\sqrt{n}$.
 
-A for loop can thus be constructed: our initialization clearly starts at $i = 2$, 
+A simple for loop can be constructed to capture this idea. Our initialization clearly starts at $i = 2$, 
 incrementing by 1 each time until $i$ has exceeded $\sqrt{n}$.  This solution
 is presented in Algorithm \ref{algo:primalityTesting}.  Of course this is certainly
 not the most efficient way to solve this problem, but we will not go into 
@@ -577,7 +579,7 @@ more advanced algorithms here.
 \caption{Determining if a Number is Prime or Composite}
 \label{algo:primalityTesting}
 \Input{$n > 1$}
-\For{$i\leftarrow 2$; $i \leq \sqrt{n}$; $i \leftarrow (i + 1)$}{
+\For{($i\leftarrow 2$; $i \leq \sqrt{n}$; $i \leftarrow (i + 1)$)}{
   \If{$i$ divides $n$}{
     output \emph{composite} \;
   }
@@ -588,11 +590,12 @@ output $prime$ \;
 Now consider this more general problem: given an integer $m > 1$, determine
 \emph{how many} prime numbers $\leq m$ there are.  A key observation is that 
 we've \emph{already solved} part of the problem: determining if a given number
-is prime in the previous exercise.  To solve this problem, we could \emph{reuse}
+is prime in the previous exercise.  To solve this more general problem, we could \emph{reuse}
 or adapt our previous solution.  In particular, we could surround the previous
 solution in an \emph{outer} loop and iterate over integers from 2 up to $m$.  
 The inner loop would then determine if the integer is prime and instead of 
-outputting a result, could keep track of a counter of the number of primes.
+outputting a result, could increment a counter of the number of primes
+it has found so far.
 This solution is presented in Algorithm \ref{algo:primalityCounting}.
 
 \begin{algorithm}[H]
@@ -600,14 +603,14 @@ This solution is presented in Algorithm \ref{algo:primalityCounting}.
 \label{algo:primalityCounting}
 \Input{$m > 1$}
 $numberOfPrimes \leftarrow 0$ \;
-\For{$j=2$; $j\leq m$; $j \leftarrow (j + 1)$}{
+\For{($j=2$; $j\leq m$; $j \leftarrow (j + 1)$)}{
   $isPrime \leftarrow true$ \;
-  \For{$i\leftarrow 2$; $i \leq \sqrt{j}$; $i \leftarrow (i + 1)$}{
-    \If{$i$ divides $j$}{
+  \For{($i\leftarrow 2$; $i \leq \sqrt{j}$; $i \leftarrow (i + 1)$)}{
+    \If{($i$ divides $j$)}{
       $isPrime \leftarrow false$ \;
     }
   }
-  \If{$isPrime$}{
+  \If{($isPrime$)}{
     $numberOfPrimes \leftarrow (numberOfPrimes + 1)$ \;
   }
 }
@@ -627,8 +630,8 @@ Where $i = \frac{apr}{12}$ is the monthly interest rate, and $n$ is the number o
 (in months).
 
 For simplicity, suppose we borrow $P = \$1,000$ at 5\% interest ($apr = 0.05$) to 
-be paid back over a term of 2 years ($n = 24$).  Our monthly payment would thus
-be 
+be paid back over a term of 2 years ($n = 24$).  Our monthly payment would 
+(rounded) be 
   $$ {monthlyPayment} = \frac{\frac{.05}{12}\cdot 1000}{1 - (1 + \frac{.05}{12})^{-24}} = \$43.87$$
 When the borrower makes the first month's payment, some of it goes to interest, 
 some of it goes to paying down the balance.  Specifically, one month's interest on \$1,000 is
@@ -641,8 +644,7 @@ And so on until the balance is fully paid.  This process is known as \emph{loan 
 Let's write a program that will calculate a loan amortization schedule given the 
 inputs as described above.  To start, we'll need to compute the monthly payment
 using the formula above and for that we'll need a monthly interest rate.  The
-balance will be updated month-to-month, so we'll use another variable to represent
-that that gets updated.  Finally, we'll want to track the current month in the loan 
+balance will be updated month-to-month, so we'll use another variable to represent the balance.  Finally, we'll want to track the current month in the loan 
 schedule process.  
 
 Once we have these variables setup, we can start a loop that will repeat once for
@@ -650,7 +652,7 @@ each month in the loan schedule.  We could do this using either type of loop, bu
 for this exercise, let's use a while loop.  Using our $month$ variable, we'll start by
 initializing it to 1 and run the loop through the last month, $n$.  
 
-On each iteration compute that month's interest and principle payments as above, 
+On each iteration we compute that month's interest and principle payments as above, 
 update the balance, and also be sure to update our $month$ counter variable to
 ensure we're making progress toward the termination condition.  On each 
 iteration we'll also output each of these variables to the user.  The full 
@@ -662,7 +664,8 @@ A monthly payment can't be \$43.871 cents.  We'll need to take care to round
 properly.  This introduces another issue: by rounding the final month's payment
 may not match the expected monthly payment (we may over or under pay in the 
 final month).  An actual implementation may need to handle the final month's 
-payment separately with different logic and operations than are inside the loop.
+payment separately with different logic and operations than are outside 
+the loop.
 
 \begin{algorithm}[H]
 \Input{A principle, $P$, a number of terms, $n$, an APR, $apr$}
@@ -671,7 +674,7 @@ $balance \leftarrow P$ \Comment{The initial balance is the principle}
 $i \leftarrow \frac{apr}{12}$ \Comment{monthly interest rate}
 $monthlyPayment \leftarrow \frac{iP}{1 - (1 + i)^{-n}} $ \;
 $month \leftarrow 1$ \Comment{A month counter}
-\While{$month \leq n$}{
+\While{($month \leq n$)}{
   $monthInterest \leftarrow i \cdot balance$ \;
   $monthPrinciple \leftarrow monthlyPayment - monthInterest$ \;
   $balance \leftarrow balance - monthPrinciple$ \;

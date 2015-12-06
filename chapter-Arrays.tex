@@ -5,12 +5,12 @@
 Rarely do we ever deal with a single piece of data in a program.  Instead, 
 most data is made up of a collection of similar elements.  A program to
 compute grades would be designed to operate on an entire roster of 
-students.  Scientific data represents a collection of many different samples.
-A bank maintains and processes many different accounts, etc.
+students.  Scientific data represents a collection of many different samples
+or measurements. A bank maintains and processes many different accounts, etc.
 
 \emph{Arrays} are a way to collect similar pieces of data together in an
 \emph{ordered collection}.  The pieces of data stored in an array are
-referred to as \emph{elements} in an ordered manner.  That is, there is 
+referred to as \emph{elements} and are stored in an ordered manner.  That is, there is 
 a ``first'' element, ``second'' element, etc. and a ``last'' element.  Though
 the elements are ordered, they are not necessarily \emph{sorted} in any 
 particular manner.  Instead, the order is usually determined by the order
@@ -24,10 +24,10 @@ numbers.  Other languages allow you to create arrays that can hold
 of any type, so it could hold integers, floating-point numbers, strings, objects, 
 or even other arrays.
 
-Some languages treat arrays as full-fledged object types that have 
-not only elements as their content, but methods that can be called
+Some languages treat arrays as full-fledged object types that  
+not only hold elements, but have methods that can be called
 to manipulate or transform the contents of the array.  Other languages
-treat arrays as a more primitive type, simply using arrays as storage
+treat arrays as a primitive type, simply using arrays as storage
 data structures.
 
 Languages can vary greatly in how they implement and represent
@@ -40,15 +40,19 @@ allowing you to create arrays and manipulate their contents.
 
 Though there can be great variation in how a language uses arrays,
 there are some commonalities.  Languages may allow you to create
+\index{static array} \index{arrays!static| see {static array}}
 \emph{static} arrays or \emph{dynamically allocated arrays} (see
 Section \ref{section:arraysInDepth} below for a detailed discussion).  Static
 arrays are generally created using the program stack space while 
-dynamically allocated arrays are stored in the \emph{heap}.  In either
+dynamically allocated arrays are stored in the \index{heap}
+\emph{heap}.  In either
 case you generally declare an array by specifying its size.  In statically
 typed languages, you must also declare the array's type (integer, 
 floating-point, etc.).
 
 \subsubsection{Indexing Arrays}
+\index{arrays!indexing}
+\index{index}
 
 Once an array has been created you can use it by assigning values
 to it or by retrieving values from it.  Because there is more than one
@@ -65,8 +69,8 @@ the syntax \mintinline{c}{arr[i]}.  An example is presented in Figure
 \input{figures/figureArray}
 
 For most programming languages, indices start at zero.  This is 
-known as zero-indexing.\footnote{Though, some languages do 
-use 1-indexing, there are very strong arguments in favor of 
+known as zero-indexing.\footnote{Some languages do 
+use 1-indexing but there are very strong arguments in favor of 
 zero-indexing \cite{Dijkstra82}.} Thus, the first element is at 
 \mintinline{c}{arr[0]}, the second at \mintinline{c}{arr[1]}
 etc.  When an array is stored in memory, each element is usually 
@@ -77,8 +81,8 @@ acts as an \emph{offset} in memory from the beginning of the
 array.  For example, if we have an array of integers which each take
 4 bytes each, then the 5th element would be stored at index $4$, 
 which is an an offset equal to $4 \times 4 = 16$ bytes away from the 
-beginning of the array.  The first element, being at index $0$ is thus
-at $4 \times 0 = 0$ bytes from the beginning of the array (that is, 
+beginning of the array.  The first element, being at index $0$ is 
+$4 \times 0 = 0$ bytes from the beginning of the array (that is, 
 the first element is at the beginning of the array).
 
 Once an element has been indexed, it can essentially be treated as
@@ -86,15 +90,16 @@ a regular variable, assigning and retrieving values as you would regular
 variables.  Care must be taken so that you do not make a reference
 to an element that does not exist.  For example, using a negative
 index or an index $i \geq n$ in an array of $n$ elements.  Depending
-on the language, index an array element that is out-of-bounds may
+on the language, indexing an array element that is out-of-bounds may
 result in undefined behavior, an exception being thrown, or a
 corruption of memory.
 
 \subsubsection{Iteration}
+\index{arrays!iteration}
 
 Since we can simply index elements in an array, it is natural to
-iterate over elements in an array using a for-loop.  We can create
-a for-loop using an index variable $i$ which starts at 0, and increments
+iterate over elements in an array using a for loop.  We can create
+a for loop using an index variable $i$ which starts at 0, and increments
 by one on each iteration, accessing the $i$-th element using the
 syntax described above, \mintinline{c}{arr[i]}.  One issue is that
 such a loop would need to know how large the array is in order
@@ -102,21 +107,20 @@ to define a terminating condition.
 
 \begin{algorithm}
 $n \leftarrow$ size of array $arr$ \;
-\For{$i=0, \ldots, (n-1)$}{
+\For{($i\leftarrow 0; i < (n-1); i\leftarrow (i+1)$)}{
   process element $arr[i]$ \;
 }
 \end{algorithm}
 
 Some languages build the size of the array into a property that 
 can be accessed.  Java, for example, has a \mintinline{java}{arr.length} 
-property.  Other languages provide functions that you can pass an
-array to in order to get its size.  Still other languages (such as C), 
+property.  Other languages provide functions that you can use to
+determine their size.  Still other languages (such as C), 
 place the burden of ``bookkeeping'' the size of an array on you, the
 programmer.  Whenever you pass an array to a function you need
 to also pass a size parameter that informs the function of how many
 elements are in the array.  Yet other functions may also require you
-not only tell it the size of the array, but also the size of each element
-in the array.
+to pass the size of each element in the array.
 
 \index{foreach loop}
 
@@ -137,16 +141,16 @@ The actual syntax may vary if a language supports such a loop.
 \subsubsection{Using Arrays in Functions}
 
 Most programming languages allow you to use arrays as both function 
-parameters and as return types.  That is, you can pass arrays to
+parameters and as return types.  You can pass arrays to
 functions and functions can be defined that return arrays.  Typically, 
 when arrays are passed to functions, they are passed by reference
 so as to avoid making an entirely new copy of the array.  As a 
 consequence, if the function makes changes to the array elements, 
 those changes may be realized in the calling function.  Sometimes 
-you may want to design functions that make changes to an array.  
+you may want this behavior.  
 However, sometimes you may not want the function to make
 changes to the passed array.  Some languages allow you to use 
-various keywords to prevent any changes to the passed array.
+various keywords to \emph{prevent} any changes to the passed array.
 
 If a function is designed to return an array, care must be taken to
 ensure that the correct type of array is returned.  Recall that static
@@ -159,8 +163,9 @@ has been dynamically allocated (on the heap).
 
 \section{Static \& Dynamic Memory}
 \label{section:arraysInDepth}
+\index{static vs dynamic memory}
 
-Recall that some arrays can be declared as \emph{static} arrays,
+Recall that arrays can be declared as \emph{static} arrays,
 meaning that when you declare them, they are allocated and
 stored on the program's call stack within the stack frame in which
 they are declared.  For example, if a function \mintinline{c}{foo()}
@@ -174,12 +179,12 @@ large as a couple of \glspl{mbLabel} or on some older systems or
 those with limited resources, even on the order of a few hundred
 \glspl{kbLabel}.  When dealing with data of any substantial
 size, you could quickly run out of stack space, resulting in
-a \emph{stack overflow}. 
+a \index{stack overflow} \emph{stack overflow}. 
 
 Another problem arises if we want to return a static array from
 a function.  Recall that when a function returns control to the 
 calling function, its stack frame is popped off the top and 
-goes out-of-scope (cf.\ Section\ref{section:howFunctionsWork}).
+goes out-of-scope (see Section \ref{section:howFunctionsWork}).
 Since the array is part of the stack frame of the function, it
 too goes out of scope.  Depending on how the system works, 
 the contents of the frame may be completely changed in the
@@ -187,8 +192,7 @@ the contents of the frame may be completely changed in the
 if the contents remain unchanged when the function returns,
 they will almost certainly be overwritten when another function
 call is made and a new stack frame overwrites the old one.
-
-For this reason, static arrays are of very limited use.  They
+For these reasons, static arrays are of very limited use.  They
 must be kept small and cannot be returned from a function.
 
 \subsubsection{Demonstration in C}
@@ -241,7 +245,7 @@ int main(int argc, char **argv) {
 
 However, when the function \mintinline{c}{foo()} ends execution and 
 returns control back to the \mintinline{c}{main()} function, (sometimes 
-called \emph{unwinding}), the contents of \mintinline{c}{foo()}'s stack
+called \gls{unwinding}), the contents of \mintinline{c}{foo()}'s stack
 frame are altered as part of the process.  Some of the contents are the
 same, but elements have been completely altered.  Printing the ``returned'' 
 contents of the array gives us garbage:  
@@ -265,8 +269,7 @@ location (which happens to be a memory address in the
 
 \begin{figure}[H]
 \centering
-\subfigure[Program stack at the end of the execution of \mintinline{c}{foo()} prior to its returning
-control back to \mintinline{c}{main()}.]{
+\subfigure[Program stack at the end of the execution of \mintinline{c}{foo()} prior to returning control back to \mintinline{c}{main()}.]{
 
 \begin{tabular}{rr|l|l|}
 
@@ -346,16 +349,18 @@ may be changed, unavailable, etc.}
 \end{figure}
 
 \subsection{Dynamic Memory}
+\index{dynamic memory}
 
-The solution is to use \emph{dynamically allocated arrays}.  Such arrays
+The solution to the problems presented by static arrays is to use 
+\emph{dynamically allocated arrays}.  Such arrays
 are not allocated and stored in the program call stack, but instead are
 stored in another area called the \emph{heap}.  In fact, because of the 
 shortcomings of static arrays, some languages only allow you to use 
 dynamically allocated arrays even if it is done so implicitly.
 
 Recall that when a program is loaded into memory, its code is placed
-on the program call stack in memory.  On top of that, any static data 
-(global variables or data for example) is placed and subsequent 
+on the program call stack in memory.  On top of that is any static data 
+(global variables or data for example). Subsequent 
 function calls place new stack frames on top of that.  In addition, 
 at the ``other end'' of the program's memory space, the \emph{heap}
 is allocated.  The heap is a ``pile'' of memory like the stack is, but it
@@ -376,7 +381,7 @@ grows ``downward.''  Allocation and deallocation may fragment the heap space tho
 \label{figure:stackAndHeap}
 \end{figure}
 
-Initially a program is allocated a certain amount of memory for its heap.
+Initially, a program is allocated a certain amount of memory for its heap.
 When a program attempts to dynamically allocate memory, say for a
 new array of integers, it makes a request to the operating system for
 a certain amount of memory (a certain number of bytes).  The system
@@ -391,6 +396,7 @@ heap space and runs out, the operating system may terminate the program or it
 may attempt to reserve even more memory for the program.
 
 \subsubsection{Memory Management}
+\index{memory management}
 
 If a program no longer needs a dynamically allocated memory space, 
 it should ``clean up'' after itself by deallocating or ``freeing'' the memory, 
@@ -399,12 +405,12 @@ the program or some other program or process on the system.
 The process of allocating and deallocating memory is generally
 referred to as \emph{memory management}.  If a program does not
 free up memory, it may eventually run out and be forced to terminate.  
-Even if it does not run out of available memory, its performance may 
-degrade.  
+Even if it does not necessarily run out of available memory, its 
+performance may degrade or it may impact system performance. 
 
 If a program has poor memory management and fails to deallocate
 memory when it is no longer needed, the memory ``leaks'': the available
-memory is gradually lost because it is not released back to the 
+memory gradually runs out because it is not released back to the 
 heap for reallocation.  Programs which such poor memory management
 are said to have a \gls{memory leak}\index{memory leak}. Sometimes
 this is a consequence of a \gls{dangling pointer}: when a program
@@ -412,7 +418,8 @@ dynamically allocates a chunk of memory but then due to carelessness,
 loses the reference to the memory chunk, making it impossible
 to free up.
 
-Some languages have automatic \gls{garbage collection} that
+Some languages have automatic \index{garbage collection}
+\gls{garbage collection} that
 handle memory management for us.  The language itself is
 able to monitor the dynamically allocated pieces of memory 
 and determine if any variable in the program still references it.
@@ -425,23 +432,21 @@ responsible for deallocating it.
 
 Even if a language offers automated memory management, 
 it is still possible to have memory leaks and other memory
-allocation issues.  That is, automated memory management
+allocation issues.  Automated memory management
 does not solve all of our memory management problems.  
 Moreover, it comes at a cost.  The additional resources and
 overhead required to monitor memory can have a significant
 performance cost.  However, with modern garbage collection
 systems and algorithms, the performance gap between
 garbage collected languages and user-managed memory
-languages has been shrinking.
-
-In any case, all program memory is reclaimed by 
+languages has been shrinking. In any case, all program memory 
+is reclaimed by 
 the operating system when the program terminates.
 
 \subsection{Shallow vs. Deep Copies}
 \label{subsection:shallowVsDeep}
 \index{shallow copy}
 \index{deep copy}
-
 
 In most languages, an array variable is actually a \emph{reference}
 to the array in memory.  We could create an array referred to 
@@ -527,7 +532,7 @@ element that does not exist.
 
 Aside from basic arrays, many languages have rich libraries of other
 \emph{dynamic} collections.  Dynamic collections are not the same
-thing as dynamically allocated arrays.  With a normal array, once 
+thing as dynamically allocated arrays.  Once an array is  
 created, its size is fixed and cannot, in general, be changed.  However,
 dynamic collections can grow (and shrink) as needed when you 
 add or remove elements from them.
@@ -539,16 +544,17 @@ are generally objects and provide methods that can be used to add,
 remove, and retrieve elements from the list.  If you add an element
 to a list, the list will automatically grow to accommodate it, so its size
 is not fixed when created.  Two common implementations of lists are
-array-based lists and linked lists.  Array-based lists use an array to
+array-based lists and linked lists.  Array-based lists 
+index{array-based list} use an array to
 store elements.  When the array fills up, the list allocates a new, 
 larger array to hold more elements, copying the original contents
-over to the new array with a larger capacity.  Linked lists hold elements
+over to the new array with a larger capacity.  Linked lists \index{linked list} hold elements
 in \emph{nodes} that are linked together.  Adding a new element
 simply involves creating a new node and linking it to the last element
 in the list.
 
 \index{sets}
-Some languages also define what are called \emph{sets}.  Sets allow
+Some languages also define what are called \index{set} \emph{sets}.  Sets allow
 you to store elements dynamically just like lists, but sets are generally
 \emph{unordered}.  There is no concept of a first, second, or last 
 element in a set.  Iterating over the elements in a set could result

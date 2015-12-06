@@ -3,13 +3,13 @@
 %%Chapter: Encapsulation
 
 One reason we prefer to write programs in high-level programming
-languages is that we can write programs using syntax that is closer 
-to plain English.  Granted, programming language syntax is a far cry 
-from ``natural'' language, but it is far closer than lower level 
+languages is that we can use syntax that is closer 
+to plain English.  Though programming language syntax is a far cry 
+from ``natural'' language, it is far closer than lower level 
 languages such as assembly or binary machine code.  However, from
 what we've seen so far, when writing programs we are still forced
 to utilize the primitive variable types built-in to the language
-we're using.  This is still quite limiting.
+we're using, which is still quite limiting.
 
 As a motivating example, suppose we were to write a program that
 involved organizing the enrollment of students into courses.  To
@@ -19,7 +19,7 @@ say a first name, last name, GPA, and a unique identification number
 pieces of data could be modeled by strings, a floating-point number
 and perhaps an integer.\footnote{Depending on the identification
 number, it may be more appropriately modeled with a string.  Social
-Security Numbers for example are not purely numeric: they include
+Security Numbers for example are not purely numeric; they include
 dashes and may begin with zeros.}  Each of these pieces of 
 data are stored in separate, unrelated variables even though they
 represent a single \emph{entity}.  
@@ -35,18 +35,21 @@ pass multiple arrays to each function.  This becomes all the more
 complex when we attempt to model entities with more pieces of 
 data.  
 
-The solution is to \emph{encapsulate} the pieces of data into
-one logical entity, sometimes referred to as an \emph{object}.  
+The solution is to \index{encapsulation}
+\emph{encapsulate} the pieces of data into
+one logical entity, sometimes referred to as an \index{object}
+\emph{object}.  
 More formally, \emph{encapsulation} is a mechanism by which
 pieces of data can be grouped together along with the functions
 that operate on that data.  Encapsulation may also provides a 
-means to \emph{protect} that data by controlling the visibility
-of that data from code outside the object.
+means to \emph{protect} that data by controlling the \index{visibility}
+visibility of that data from code outside the object.
 
 Contrast this with an array which is also a collection of data.
-However, an array usually contains pieces of similar data while
-an object may collect pieces of dissimilar data that make up a
-larger entity.  Its kind of like the difference between rows
+However, an array usually contains pieces of similar data (all
+elements are integers or all elements are floating point numbers) 
+while an object may collect pieces of dissimilar data that make up a
+larger entity.  It is like the difference between rows
 and columns in a table.  Consider the student data in Table
 \ref{table:studentData}.  Each row represents a record while each
 column represents a collection of data from each record.  A
@@ -75,7 +78,7 @@ Peter & Capaldi & 13 & 2.9 \\
 \label{table:studentData}
 \end{table}
 
-Without objects, to represent this data in code we would need at least
+To represent this data in code without objects we would need at least
 4 separate arrays, more if we wanted to model more data for a student.  
 Moreover, data in separate arrays or collections have no real logical
 relationship to each other.  The solution that most programming languages
@@ -83,44 +86,48 @@ provide is allowing you to \emph{define} an object or structure that
 collects pieces of data into one logical unit, allowing you to \emph{name}
 the object (say ``Student'') so that you can deal with the data in
 a more abstract way.  With objects, we can treat each row in the table
-as a single, distinct entity allowing us to collect student objects
+as a single, distinct entity allowing us to collect Student objects
 into a single array or collection rather than many separate ones.
 
 \section{Objects}
 
-Though languages will differ in how they support objects, they all have
+Though languages differ in how they support objects, they all have
 some commonalities.  A language needs to provide ways to define objects,
 create \emph{instances} of objects, and to use them in code.
 
 \subsection{Defining}
+\index{objects!defining}
 
 Most object oriented programming languages such as C++ and Java are 
+\index{class-based}
 \emph{class-based} languages.  Meaning that they allow you to define
-objects by declaring and defining a ``class.''  A class is essentially
-a blue print for what the object \emph{is} and how it is defined.  
-Generally, a class declaration allows you to specify member variables
-and member methods.  Further, full encapsulation is achieved by using
+objects by declaring and defining a \index{class} ``class.''  A class is essentially
+a blueprint for what the object \emph{is} and how it is defined.  
+Generally, a class declaration allows you to specify \index{member variables}
+member variables
+and \index{member methods} member methods which are part of the class.  
+Further, full encapsulation is achieved by using
 \emph{visibility} keywords such as \mintinline{java}{public} or
 \mintinline{java}{private} to either allow or restrict access to variables
 and methods from code \emph{outside} the object.  
 
-Some languages (such as C) do not support full encapsulation, rather they
-allow you to define \emph{structures} which allow for the grouping of data, 
+Non-object-oriented languages may not support full encapsulation.  Instead
+they may allow you to define \emph{structures} which support the grouping of data, 
 but make it difficult or impossible to achieve the other two aspects of
 encapsulation (the grouping of methods that act on that data and the
 protection of data).
 
-In either case, a language usually allows you to define the member variables
+In either case, a language allows you to define the member variables
 and to \emph{name} the class or structure so that instances can be referred
 to by that \emph{type}.  Built-in types such as numbers or strings already
 have a type name defined by the language.  However, an object is a 
-\emph{user-defined} type that is not built in to the language.  Once defined,
+\emph{user-defined} type that is not built-in to the language.  Once defined,
 however, the class or structure \emph{can} be referred to just like any
 built-in variable type.
 
-Often, it is usual to create objects that are made of other objects.  For
+It is not unusual to create objects that are made of other objects.  For
 example, a student object may be defined by using two strings for its first
-and last name.  In the language, a string itself may be an object.  As a
+and last name.  In the language, a string may also be an object.  As a
 more complex example, suppose that we wanted an additional member variable
 to model a student's date of birth.  A date may itself be an object as it
 consists of several pieces of information (a year, month, and date at least).
@@ -129,31 +136,30 @@ as \emph{composition} \index{composition} as the object is \emph{composed} of
 other objects.  Further, an object may consist of a \emph{collection}
 of other objects (suppose that a student object owned an array of 
 course objects representing their schedule).  This is a form of composition
-known as \emph{aggregation} (multiple objects have been aggregated
+known as \index{aggregation} \emph{aggregation} (multiple objects have been aggregated
 by the object).
 
 \subsection{Creating}
 
 Once a blueprint for an object (or structure) has been declared and defined, 
-the second element that a language usually provides for is a way to 
-\emph{create} instances of the object.  The concept of an ``object'' is
-general and abstract.  Its like the \emph{idea} of a student.  Only once
-we have created an actual instance that lives in memory do we have an 
-actual \emph{instance}.  Creating instances of an object is usually
+we need a way to \emph{create} instances of the object.  The concept of an ``object'' is
+general and abstract.  It is more like the \emph{idea} of a student.  Only 
+once we have created an entity that exists in memory do we have an 
+actual \emph{instance} of the class.  Creating instances of an object is usually
 referred to as \emph{instantiation}.  
 
 Languages may be able to automatically create instances of your object
 with \emph{default} values.  After all, your object is likely 
-\emph{composed} of built-in types.  The student example above for
+composed of built-in types.  The student example above for
 example could be modeled with two strings, an integer, and a floating
 point number.  The language/compiler/interpreter ``knows'' how to deal
 with these built-in types, so it can extend that knowledge to create
 instances of your object which are essentially just collections of 
 types that it already knows how to deal with.
 
-Object oriented languages usually provide a special method for you to
-be able to give more specifics about how an object is created.  These
-are called \emph{constructor} methods.  Sometimes you can define 
+Object-oriented languages usually provide a special method for you to
+be able to specify the details of how to create an instance.  These
+are called \index{constructor} \emph{constructor} methods.  Sometimes you can define 
 multiple constructors methods that take different number(s) of arguments
 and/or have different behavior.  Constructor methods typically have
 special syntax or have the same name as the class.
@@ -164,16 +170,17 @@ of your object.  Sometimes these are referred to as \emph{factory} functions
 as they are responsible for ``manufacturing'' instances of your object.
 
 \subsection{Using Objects}
+\index{objects!using}
 
-After defining and then creating an object, you can usually use it like
+After defining and creating an object, you can usually use it like
 any regular variable.  In a strongly typed language you would declare a
 variable whose type matches the declared class or structure.  The variable
 type can usually be passed and returned from functions, assigned to 
 other variables, etc.
 
-A language can also provide a means to access the member variables or
+A language also provides ways to access the member variables or
 methods that are \emph{visible} to the outside world.  Languages usually
-allow you to do this through the ``dot operator'' or the ``arrow operator''.
+allow you to do this through the ``dot operator'' or the ``arrow operator.''
 Suppose we have an instance of a student object stored in a variable
 \mintinline{c}{s}.  To access the first name of this instance, we may
 be able to use either \mintinline{c}{s.firstName} or 
@@ -187,18 +194,20 @@ object, we may not have a reference (the variable \mintinline{c}{s} was
 ostensibly declared and used outside the object and so is not in
 scope inside the object).  However, we still have need to reference
 member variables or methods from inside the object.  Many languages
-provide a means to do this using \gls{open recursion} \index{open recursion}
-using a keyword such as \mintinline{java}{this} or \mintinline{php}{self}
+use \gls{open recursion} \index{open recursion}, a mechanism by which
+we can write code so that an instance is able to refer to itself.
+Languages use keywords such as \mintinline{java}{this} or \mintinline{php}{self}
 or something similar.  The keyword is essentially a self-reference to
 the object itself so that you can refer to ``this'' object from within
 the object.
 
 \section{Design Principles \& Best Practices}
 
-Using objects in your code follows more of a bottom-up design rather than
+Using objects in your code follows more of a \index{bottom-up design}
+bottom-up design rather than
 a top-down design approach.  In a top-down design, a program is designed
 by breaking a program or problem down into smaller and smaller components.
-A bottom-up design approaches a problem differently.  First, real-world
+Bottom-up design approaches a problem differently.  First, real-world
 entities involved with the problem are modeled by defining objects.  
 Then objects are used as building blocks that can be combined and made
 to interact to solve a problem.
@@ -209,12 +218,12 @@ entity into its constituent components.  We do this until the component
 can either be modeled by a built-in type such as a string or number or
 by an existing object.  In general, you want to keep things as simple
 as possible.  Any time you need to associate pieces of data together into
-one logical unit, it is likely appropriate to encapsulate them
+one logical unit, it is appropriate to encapsulate them
 into an object.
 
 A good design principle is to utilize composition as much as possible.
 If you have multiple pieces of data that define a logical entity or 
-unit, it is good design to create another object.  For example, if a
+unit, it is good design to create another object.  For example, suppose a
 student object needs to model a mailing address; think about what an
 address is: it is a street address, city, state, zip, etc.  Rather
 than having these as member fields to your object, it is probably

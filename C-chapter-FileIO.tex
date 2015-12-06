@@ -1,15 +1,14 @@
 %!TEX root = ComputerScienceOne.tex
 
 %%Chapter: FileIO in C
+\index{file I/O!C}
 
 C provides several functions to manipulate and
 process files.  Like other I/O functions, these
 are all defined in the standard input/output
 library, \mintinline{text}{stdio.h}.  Writing
 binary or plaintext data is determined by which
-functions you use.
-
-In general whether or not a file input/output
+functions you use. Whether or not a file input/output
 stream is buffered or unbuffered is determined by
 the system configuration.  There are some ways
 in which this can be changed, but we will not 
@@ -17,14 +16,12 @@ cover them in detail.
 
 \section{Opening Files}
 
-Files are represented in C by a \mintinline{c}{FILE}
+Files are represented in C by a \mintinline{c}{FILE *}
 pointer type defined in the standard input/output
 library.  As a pointer, it essentially points to the
-file stored in memory.
-
-To open a file, you use the \mintinline{c}{fopen()} 
+file stored in memory. To open a file, you use the \mintinline{c}{fopen()} 
 function (short for \textbf{f}ile \textbf{open}) which
-takes two arguments and returns a \mintinline{c}{FILE}
+takes two arguments and returns a \mintinline{c}{FILE *}
 pointer:
 
 \mintinline{c}{FILE *fopen(const char *path, const char *mode);}
@@ -42,7 +39,7 @@ current working directory.
 \begin{minted}{c}
 //open a file for reading (input):
 FILE *input = fopen("/user/apps/data.txt", "r");
-//open a file for reading (output):
+//open a file for writing (output):
 FILE *output = fopen("./results.txt", "w");
 
 if(input == NULL) {
@@ -75,12 +72,12 @@ used to implement more specific error handling code if desired.
 
 When a file is opened, the file pointer returned by
 \mintinline{c}{fopen()} initially points to the beginning
-of the file.  As you read or write from it, the pointer
+of the file.  As you read from it or write to it, the pointer
 advances through the file content.
 
 \subsection{Plaintext Files}
 
-To process plaintext we use two functions, \mintinline{c}{fprintf()}
+To process a plaintext file we use two functions, \mintinline{c}{fprintf()}
 for output and \mintinline{c}{fscanf()} for input.  These
 two functions should look familiar.  They work almost 
 exactly the same as \mintinline{c}{printf()} and
@@ -169,7 +166,7 @@ while(s != NULL) {
 }
 \end{minted}
 
-A similar function, \mintinline{c}{int fgetc(FILE *stream);}
+A similar function, \mintinline{c}{int fgetc(FILE *stream)}
 allows us to get a single character from the input file 
 (returned as an \mintinline{c}{int}) if we prefer to read
 character by character.
@@ -179,24 +176,26 @@ character by character.
 To read and write binary data to files we use two different
 functions:
 
-\mintinline{c}{?size_t fread(void *ptr, size_t size, size_t nmemb, FILE *stream);} 
+\mintinline{c}{size_t fread(void *ptr, size_t size, size_t nmemb, FILE *stream);} 
 
 for reading from a file and 
 
 \mintinline{c}{size_t fwrite(const void *ptr, size_t size, size_t nmemb, FILE *stream);}
 
-to write to a file.  Both functions have the exact same argument:
+to write to a file.  Both functions have the exact same arguments:
 \begin{enumerate}
-  \item \mintinline{c}{*ptr} is a pointer to the item that 
-  	is being read/written (possibly an array of elements)  \item \mintinline{c}{size} is the number of bytes that each 
-	element stored at \mintinline{c}{ptr} take, usually resolved
+  \item \mintinline{c}{ptr} is a pointer to the item that 
+  	is being read/written (possibly an array of elements)
+  \item \mintinline{c}{size} is the number of bytes that each 
+	element stored at \mintinline{c}{ptr} take, usually determined
 	by using \mintinline{c}{sizeof()}
   \item \mintinline{c}{nmemb} is the number of elements to be 
-  	written/read  \item \mintinline{c}{stream} is the file stream to be read 
+  	written/read
+  \item \mintinline{c}{stream} is the file stream to be read 
 	from/written to
 \end{enumerate}
 
-These functions allow you to read/write an arbitrary amount of
+These functions allow you to read/write an arbitrary amount of binary
 data.  When reading, it is your responsibility, as usual, to 
 ensure that the \mintinline{c}{ptr} is large enough to accommodate
 the data you are reading into it.
@@ -230,7 +229,7 @@ which takes a single argument, the \mintinline{c}{FILE}
 pointer of the file you wish to close.  Closing an invalid
 file may result in an error or segmentation fault.  In any
 case, after a file has been closed, it cannot be read from
-or written to.  Doing so on a closed file is undefined
+or written to, doing so is undefined
 behavior. Failure to close a file \emph{may} result in a 
 corrupted file. 
 

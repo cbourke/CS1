@@ -1,10 +1,11 @@
 %!TEX root = ComputerScienceOne.tex
 
 %%Chapter: C Conditionals
+\index{conditionals!C}
 
 C supports the basic if, if-else, and if-else-if conditional structures as well as switch
 statements.  Logical statements are built using the standard logical operators for
-numeric comparisons as well as logical operators such as negations, \And, and 
+numeric comparisons as well as logical operators such as negation, \And, and 
 \Or.  However, there are a few idiosyncrasies that need to be understood.
 
 \section{Logical Operators}
@@ -28,8 +29,12 @@ int d = 0;
 
 The six standard comparison operators are presented in Table \ref{table:c:comparisonOperators}
 using these variables as examples.  The comparison operators are the same when
-used with \mintinline{c}{double} types as well and \mintinline{c}{int} types and 
-\mintinline{c}{double} types can be compared with each other without type casting.
+used with \mintinline{c}{double} types as well and \mintinline{c}{int} types 
+can be compared with each other without type casting. The three basic logical operators are also supported as described in 
+Table \ref{table:c:logicOperators} using the same code snippet variable
+values as examples.
+
+
 
 \begin{table}
 \centering
@@ -76,10 +81,6 @@ Greater Than Or Equal To & \mintinline{c}{>=} &
 \caption{Comparison Operators in C}
 \label{table:c:comparisonOperators}
 \end{table}
-
-The three basic logical operators are also supported as described in 
-Table \ref{table:c:logicOperators} using the same code snippet variable
-values as examples.
 
 \begin{table}
 \centering
@@ -143,7 +144,7 @@ for \emph{single characters} because of the nature of the ASCII text table (see 
 Each alphanumeric character, including the various symbols and whitespace characters, 
 is associated with an integer 0--127.  We can therefore write statements like \mintinline{c}{('A' < 'a')}, 
 which is \True since uppercase letters are ordered before lowercase letters in the ASCII
-table (\mintinline{c}{('A'} is 65 and \mintinline{c}{('a'} is 97 and so $65 < 97$ is \True).
+table (\mintinline{c}{'A'} is 65 and \mintinline{c}{'a'} is 97 and so $65 < 97$ is \True).
 Several more examples can be found in Table \ref{table:c:asciiComparisonExamples}.
 
 \begin{table}[h]
@@ -163,7 +164,7 @@ Comparison Example & Result \\
 \end{table}
 
 Numeric comparison operators \emph{cannot} be used to compare strings in C.  For example,
-if we could write \mintinline{c}{("aardvark" < "zebra")} which would be valid C, and it would 
+we \emph{could} write \mintinline{c}{("aardvark" < "zebra")} which would be valid C, and it would 
 even have a result.  However, that result wouldn't necessarily be \True or \False.  The reason
 for this is that strings in C are actually represented as arrays, which in turn are represented
 as \emph{memory locations}.  We'll explore these issues in greater depth later on, but for
@@ -172,7 +173,7 @@ the results will not be as expected.
 
 \section{If, If-Else, If-Else-If Statements}
 
-Conditional statements in C utilize the key words \mintinline{c}{if}, \mintinline{c}{else}, and
+Conditional statements in C utilize the keywords \mintinline{c}{if}, \mintinline{c}{else}, and
 \mintinline{c}{else if}.  Conditions are placed inside parentheses immediately after the 
 \mintinline{c}{if} and \mintinline{c}{else if} keywords.  Examples of all three can be 
 found in Code Sample \ref{code:c:conditionalExamples}.
@@ -231,9 +232,9 @@ if(x < 10) {
 printf("x is less than 10\n");
 \end{minted}
 
-Which is obviously not what we wanted.  The semicolon ended up binding 
-to the empty executable statement, and the code block containing the
-print statement immediately followed, but was \emph{not} bound to the
+This is obviously not what we wanted.  The semicolon ended up binding 
+to the empty executable statement.  The code block containing the
+print statement immediately followed, but it was \emph{not} bound to the
 conditional statement which is why the print statement executed regardless
 of the value of $x$.
 
@@ -292,7 +293,7 @@ same indentation level.
 The logarithm of $x$ is the exponent that some \emph{base} must 
 be raised to get $x$.  The most common logarithm is the natural logarithm, 
 $\ln{(x)}$ which is base $e = 2.71828\ldots$.  But logarithms can be in any base 
-$b > 1$\footnote{Bases can also be $0< b < 1$, but we'll restrict our attention to
+$b > 1$.\footnote{Bases can also be $0< b < 1$, but we'll restrict our attention to
 increasing functions only.}  What if we wanted to compute $\log_2{(x)}$?  
 Or $\log_{\pi}{(x)}$?  Let's write a program that will prompt the user for a
 number $x$ and a base $b$ and computes $\log_b{(x)}$.
@@ -324,9 +325,9 @@ if(x <= 0 || b <= 1) {
 }
 \end{minted}
 
-This code has something new: \mintinline{c}{exit(1)}.  The \mintinline{c}{exit}
+This code has something new: \mintinline{c}{exit(1)}.  The \mintinline{c}{exit()}
 function immediately terminates the program regardless of the rest of the
-code that may remain.  The argument passed to \mintinline{c}{exit} is an 
+code that it may remain.  The argument passed to \mintinline{c}{exit} is an 
 integer that represents an \emph{error code}.  The convention is that 
 zero indicates ``no error'' while non-zero values indicate some error.  This
 is a simple way of performing \emph{error handling}: if the user provides
@@ -335,7 +336,7 @@ again and provide good input.  By prematurely terminating the program
 we avoid any illegal operation that would give a bad result.
 
 Alternatively, we could have split the conditions into two statements and given
-a more descriptive error message.  We use this design in the full program 
+more descriptive error messages.  We use this design in the full program 
 which can be found in Code Sample \ref{code:c:logarithmProgram}.  The 
 program also takes the input as command line arguments.  Now that we have
 conditionals, we can actually check that the correct number of arguments
@@ -343,7 +344,7 @@ was provided by the user and quit in the event that they don't provide
 the correct number.
 
 \begin{listing}[h]
-\begin{minted}{c}
+\begin{minted}[fontsize=\small]{c}
 #include<stdlib.h>
 #include<stdio.h>
 #include<math.h>
@@ -389,7 +390,7 @@ read them in from the user.  At the same time we can check for bad input (negati
 for both the inputs.
 
 \begin{minted}{c}
-double income, tax, numChildren, credit;
+double income, baseTax, numChildren, credit, totalTax;
 
 printf("Please enter your Adjusted Gross Income: ");
 scanf("%lf", &income);
@@ -421,7 +422,7 @@ just as in the original example.
 
 Next we compute the child tax credit, taking care that it does
 not exceed \$3,000.  A conditional based on the number of children
-should suffice as at this point in the program we already know it is
+suffices as at this point in the program we already know it is
 zero or greater.
 
 \begin{minted}{c}
@@ -447,7 +448,7 @@ should only be zero, not negative).
 The full program is presented in Code Sample \ref{code:c:taxProgram}.
 
 \begin{listing}[h]
-\begin{minted}[fontsize=\footnotesize]{c}
+\begin{minted}[fontsize=\scriptsize]{c}
 #include<stdlib.h>
 #include<stdio.h>
 

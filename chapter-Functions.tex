@@ -12,8 +12,8 @@ maps numeric values to their squares.  The input is a variable $x$.  When
 we assign an actual value to $x$ and evaluate the function, then the function
 has a value, its output.  For example, setting $x = 2$ as input, the output
 would be $2^2 = 4$.  Mathematical functions can have multiple inputs, 
-  $$f(x,y) = x^2 + y^2 \quad f(\beta, y, z) = 2x + 3y - 4z$$
-But will still only ever have \emph{one} output value.
+  $$f(x,y) = x^2 + y^2 \quad f(x, y, z) = 2x + 3y - 4z$$
+However, a function will oly ever have a single output value.
 
 In programming languages, a \gls{function} (sometimes called subroutine 
 or procedure) can take multiple inputs and produce one output value.  We've 
@@ -21,23 +21,23 @@ already seen some examples of these functions.  For example, most languages
 provide a math library that you can use to evaluate the square root or 
 sine of a value $x$.  We've also seen some functions with multiple input 
 values such as the ``power'' function that allows you to compute $f(x, y) = x^y$.
-The main entry point to many programs is defined by a main function.
+Finally, the main entry point to many programs is defined by a main function.
 
 More formally, a function is a sequence of instructions (code) that is 
 packaged into a \emph{unit} that can be reused.  A function performs 
-a specific task: given a number of inputs, it performs some sequence 
+a specific task: given a number of inputs, it executes some sequence 
 of operations (executes some code) and ``returns'' (outputs) a result.
-The output can be captured into a variable or other expression by 
+The output can be captured into a variable or used in an expression by 
 whatever code \emph{invoked} or ``called'' the function.
 
 Defining and using functions in programming has numerous advantages.
 The most obvious advantage is that it allows you a way to \emph{organize} 
-code.  By separating a program it into distinct units code it is more organized 
+code.  By separating a program it into distinct units of code it is more organized 
 and it is clearer what each piece or segment of code does.  This also 
-facilitates \gls{top-down design}: one way to approach a problem is to 
+facilitates \index{top-down design} \gls{top-down design}: one way to approach a problem is to 
 split it up into a series of subproblems until each subproblem is either trivial 
 to deal  with, or an existing, ``off-the-shelf'' solution already exists for it.
-Functions may be the logical unit for each subproblem.  
+Functions may serve as the logical unit for each subproblem.  
 
 Another advantage is that by organizing code into functions, those functions 
 can be \emph{reused} in multiple places either in your program/project 
@@ -52,7 +52,8 @@ better and easier \emph{testing}.  By isolating pieces of code, we can
 rigorously test those pieces of code by themselves without worrying 
 about the larger program or contexts.  
 
-Finally, functions facilitates \gls{procedural abstraction}.  Placing code 
+Functions facilitates \index{procedural abstraction} 
+\gls{procedural abstraction}.  Placing code 
 into functions allows you to abstract the details of how the function computes 
 its answer.  As an example: consider a standard math library's square root
 function: it may use some interpolation method, a Taylor series, or some 
@@ -64,17 +65,17 @@ in our program.
 
 \section{Defining \& Using Functions}
 
-Like variables, many programming languages may require that you, in 
-some way, declare the function before you can use it.  A function
+Like variables, many programming languages may require that you declare a 
+function before you can use it.  A function
 declaration may simply include a description of the function's input/output
-and name.  A function declaration may require require you to define
+and name.  A function declaration may require you to define
 the function's body at the same time or separately.  Functions can also
-have scope: some areas of the code may be able to ``see'' the function
+have \index{scope} scope: some areas of the code may be able to ``see'' the function
 or know about it and be able to invoke the function while other areas of
 the code may \emph{not} be able to see the function and therefore may
 not be able to invoke it.  
 
-Some interpreted programming languages use function \gls{hoisting} which allows
+Some interpreted programming languages use function \index{hoisting} \gls{hoisting} which allows
 you to use/invoke functions \emph{before} you declare them.  This works
 because the interpreter does an initial scan of the code and
 identifies all function declarations.  Only after it has ``hoisted'' all functions
@@ -88,7 +89,7 @@ identified by its name (also called an \emph{identifier}), its list of
 \emph{input parameters}, and its \emph{output}.  A function signature
 allows the programming language to uniquely identify each function
 so that when you invoke a function there is no ambiguity in which function
-should be called.
+you are calling.
 
 \begin{algorithm}[H]
 \Fn{sum(a, b)}{
@@ -126,7 +127,7 @@ is used with function names.
 
 When defining the parameters to a function (its input), you usually provide
 a comma delimited list of variable names.  In the case of statically typed
-languages, the types of the variable parameters are also specified.  This
+languages, the types of the variable parameters are also specified.  The
 order is important as when you invoke the function, the number of inputs
 must match the number of parameters in the function declaration.  The 
 variable types may also need to match.  In some dynamically typed languages, 
@@ -147,12 +148,12 @@ to indicate no return value and such functions are known as ``void
 functions.''  When a function doesn't have any input values, its parameter
 list is usually empty.
 
-The function signature may then be accompanied by the function \emph{body}
+The function signature may be accompanied by the function \emph{body}
 which contains the actual code that specifies what the function does.  
-Typically the function body is demarcated with opening and closing curly
-brackets, \mintinline{text}{{ ... }}.  Within the function you can generally
+Typically the function body is demarcated with a code block using 
+opening and closing curly brackets, \mintinline{text}{{ ... }}.  Within the function you can generally
 write any valid code including declaring variables.  When you declare a 
-variable inside a function, however, it is \emph{local} to that function.
+variable inside a function, however, it is \index{scope!local} \emph{local} to that function.
 That is, the variable's scope is only defined within the function.  A local
 variable cannot be accessed outside the function, indeed the local
 variable does not usually survive when the function ends its
@@ -161,16 +162,18 @@ Function parameters are essentially locally scoped variables as well
 and can usually be treated as such.
 
 \subsection{Calling Functions}
+\index{invoking functions}
+\index{calling functions|see {invoking functions}}
 
 When a function has been defined and is in scope, you can \emph{invoke}
 or ``call'' the function by coding the function name and providing the input
-parameters which can typically be either variables or literals.  When
+parameters which can be either variables or literals.  When
 provided as inputs, parameters are referred to as \emph{arguments}
 to the function.  The arguments are typically provided as a comma delimited
 list and placed inside parentheses.  
 
 Invoking a function changes the usual flow of control.  When invoked, control
-is handed over to the function.  When the function finishes executing the
+flow is transferred over to the function.  When the function finishes executing the
 code in its body, control flow returns to the point in the code that invoked it.
 It is common for a program to be written so that a function calls another function
 and that function calls another.  This can form a deep chain of function calls in 
@@ -195,7 +198,7 @@ indicating its name (identifier) and passing it arguments.}
 Functions provide code organization, but functions themselves should also
 be organized.  We've seen this with standard libraries.  Functions that provide
 basic input/output are all grouped together into one library.  
-Functions that involve math functions are grouped together into a math library.
+Functions that involve math functions are grouped together into a separate math library.
 
 Some languages allow you to define and ``import'' individual libraries 
 which organize similar functions together.  Some languages do this by 
@@ -204,8 +207,9 @@ you import these modules do the functions come into scope and can be
 used in your code.  If you do not import these modules, then the functions
 are out of scope and cannot be used.  
 
-In some languages, functions, once imported, are part of the \emph{global
-scope} and can be ``seen'' by any part of the code.  This can cause
+In some languages once a function is imported it is part of the 
+\index{global scope|see {scope!global}} \index{scope!global}
+\emph{global scope} and can be ``seen'' by any part of the code.  This can cause
 \emph{conflicts}: if you import modules from two different libraries each
 with different functions that have the same name or signature, then 
 the two function definitions may be in conflict or it may make your
@@ -225,7 +229,8 @@ by adding a library-specific prefix to every function.
 
 To understand how functions work in practice, it is necessary to 
 understand how a program operates at a lower level.  In particular,
-each program has a \gls{program stack} (also called a call stack).  
+each program has a \index{program stack} 
+\gls{program stack} (also called a call stack).  
 A \gls{stack} is a data structure that holds elements in a \gls{lifoLabel}
 manner.  Elements are added to the ``top'' of the stack in an operation
 called \emph{push} and elements can be removed from the top
@@ -236,10 +241,11 @@ stack.
 In the context of a program, a call stack is used to keep track of the 
 flow of control.  Depending on the operating system, compiler and architecture, 
 the details of how elements are stored in the program stack may 
-vary.  However, in general when a program begins, the operating 
+vary.  In general when a program begins, the operating 
 system loads it into memory at the bottom of the call stack.  Global 
 variables (static data) are stored on top of the main program.  Each
-time a function is called, a new \emph{stack frame} is placed on
+time a function is called, a new \emph{stack frame} is created and
+pushed on
 top of the stack.  This frame contains enough space to hold values
 for the arguments passed to the function, local variables declared
 and used by the function, as well as a space for a return value and
@@ -248,11 +254,9 @@ that the program should return to after the execution of the function.
 That way, when the function finishes its execution, the stack frame
 can be removed (popped) and the lower stack frame of the calling
 function is preserved.  This is a very efficient way to keep track of
-the flow of control in a program.  As function calls function calls
+the flow of control in a program.  As each function calls 
 another function, each stack frame is preserved by pushing a new
-one on top of the program stack.
-
-Each time a function terminates execution and returns, the removal
+one on top of the program stack.  Each time a function terminates execution and returns, the removal
 of the stack frame means that all local variables go \emph{out of
 scope}.  Thus, variables that are local to a function are not accessible
 outside the function.
@@ -304,9 +308,10 @@ top, but this may differ depending on the architecture.}
 %itself.  Each function in a program is stored at some memory address
 
 \subsection{Call By Value}
+\index{call by value}
 
 When a function is invoked, arguments are passed to it.  When you
-invoke a function you can pass it variables as arguments.  However,
+invoke a function you can pass it variables as arguments.  However, the
 variables themselves are not passed to the function, but instead the
 values \emph{stored} in the variables at the time that you call the
 function are passed to the function.  This mechanism is known as 
@@ -353,9 +358,11 @@ int k = sum(n, m);
 \input{figures/figurePassByValue}
 
 \subsection{Call By Reference}
+\index{call by reference}
 
 Some languages allow you to pass a parameter to a function by
-providing its memory address.  Since the memory address is being
+providing its memory address instead of the value stored in it.  
+Since the memory address is being
 provided to the function, the function is able to access the original
 variable and manipulate the contents stored at that memory address.
 In particular, the function is now able to make changes to the original
@@ -363,17 +370,17 @@ variable.  This mechanism is known as \gls{call by reference} and
 the variables are \emph{passed by reference}.
 
 %(TODO: again, can this be done with pseudocode?). 
-To illustrate consider the following C code. Here, the variable \mintinline{c}{a}
+To illustrate, consider the following C code. Here, the variable \mintinline{c}{a}
 is passed by reference (\mintinline{c}{b} is still passed by value, 
 the \mintinline{c}{*a} and \mintinline{c}{&n} in the following code
 are dereferencing and referencing operators respectively.  For
 details, see Section \ref{section:cPointers}).  Below when we
-invoke the \mintinline{c}{sum} function, we pass not the value
+invoke the \mintinline{c}{sum()} function, we pass not the value
 stored in \mintinline{c}{n}, but the memory address of the
 variable \mintinline{c}{n}.  Thus, when we change the value of
 the variable \mintinline{c}{a} in the function, we are actually 
 changing the value of \mintinline{c}{n} (since we have access
-to its memory location.  At the conclusion of this snippet of
+to its memory location).  At the conclusion of this snippet of
 code, the value stored in \mintinline{c}{n} has been changed to
 10.  The program stack frames are depicted in Figure \ref{figure:PassByReference}.
 
@@ -400,13 +407,15 @@ on the language, type of variable, and the syntax used.
 
 \subsection{Functions as Entities}
 
-In programming languages, any entity that can be stored in variables or
+In programming languages, any entity that can be stored in a variable or
 passed as an argument to a function or returned as a value from a function
-are referred to as ``first-class citizens.''  Numerical values for example are
+is referred to as a ``first-class citizen.''  \index{first-class citizen}
+Numerical values for example are
 usually first-class  citizens as they can be stored in variables and passed 
-around in functions.
+to functions.
 
-\emph{Functional Programming} is a programming language paradigm in
+\emph{Functional Programming} \index{functional programming}
+is a programming language paradigm in
 which functions themselves are first-class citizens.  That is, functions can
 be assigned to variables, functions can be passed to other functions as 
 arguments, and functions can even return functions as a result.  This is
@@ -426,7 +435,7 @@ at runtime for it to be considered a language in which functions are
 In any case, there are several advantages to being able to pass functions
 around as arguments or store them in variables.  Passing a function
 to another function as an argument gives you the ability to provide a
-\gls{callback}.  A callback is simply a function that gets passed to another
+\gls{callback}.  A \index{callback} callback is simply a function that gets passed to another
 function as an argument.  The idea is that the function that receives
 the callback will execute or ``call back'' the passed function at some
 point.
@@ -448,7 +457,8 @@ passing in a function as a callback to ``register'' it with the click ``event.''
 
 %Closures? https://en.wikipedia.org/wiki/Closure_(computer_programming)
 
-A related issue is \glspl{anonymous function}.  Typically, we simply 
+A related issue is \glspl{anonymous function} (also known as 
+\glspl{lambda expression}).  Typically, we simply 
 want to create a function so that we can pass it as a callback to another 
 function.  We may have no intention of actually calling this function directly
 as it may not be of much use other than passing it as a callback.  Some 
@@ -459,6 +469,7 @@ the function we passed it to), it is known as an anonymous function.
 
 \subsection{Function Overloading}
 \label{subsection:functionOverloading}
+\label{function overloading}
 
 Some languages do not allow you to define more than one function with
 the same name in the same scope.  This is to prevent ambiguity in the
@@ -466,9 +477,10 @@ code.  When you write code to invoke a function and there are several
 functions with that name, which one are you actually calling?  
 
 Some languages \emph{do} allow you to define multiple functions
-with the same name as long as they differ in either the number of
-or type of parameters.  For example, you could define two absolute
-value functions with the same name, but one of them takes a floating
+with the same name as long as they differ in either the number (also
+called \emph{arity}) or 
+type of parameters.  For example, you could define two absolute
+value, $|x|$ functions with the same name, but one of them takes a floating
 point number while the other takes an integer as its parameter.  This
 is known as \gls{function overloading} because you are ``overloading''
 the code by defining multiple functions with the same name.
@@ -488,6 +500,8 @@ use different names for functions that perform the same operation
 but on different types.  
 
 \subsection{Variable Argument Functions}
+\index{variable argument function|see {vararg function}}
+\index{vararg function}
 
 Many languages allow you to define special functions that take
 a \emph{variable number} of parameters.  Often they are referred
@@ -504,10 +518,14 @@ you would have to implement a \mintinline{text}{printf} version for
 no arguments, 1 argument, 2 arguments, etc.  Even then, you
 would only be able to support up to $n$ arguments for as many 
 functions as you defined.  By using a vararg function, we can write
-a single function that operates on all of these possibilities.
+a single function that operates on all of these possibilities.  It
+is import to note, a vararg function is \emph{not} an example of
+function overloading.  There is still only \emph{one} function defined, 
+it just takes a variable number of arguments.
 
 \subsection{Optional Parameters \& Default Values}
 \label{subsection:optionalParameters}
+\index{optional parameters}
 
 Suppose that you define a function which has, say, three 
 parameters.  Now suppose you invoke the function but only

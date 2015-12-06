@@ -4,8 +4,9 @@
 
 Searching and sorting are two fundamental operations when dealing
 with collections of data.  Both operations are not only important in
-and of themselves, but they also form the basis of many other algorithms
-and operations.  These operations are so essential that a wide variety
+and of themselves, but they also form the basis of many algorithms
+and other more complex operations.  These operations are so essential 
+that a wide variety
 of algorithms and techniques have been developed to solve them, each
 with their own advantages and disadvantages.  This variety provides
 a good framework from which to study the relative efficiency and complexity
@@ -26,7 +27,7 @@ and a \emph{key} element $e_k$\\
 \textbf{Output:} The element $a_i$ in $A$ such that $a_i = e_k$
 \end{problem}
 
-The ``equality'' or comparison in this problem statement is not explicitly 
+The ``equality'' in this problem statement is not explicitly 
 specified.  In 
 fact, this is a very general, abstract statement of the basic search 
 problem.  We didn't specify that the ``collection'' was an array, a list, 
@@ -39,7 +40,7 @@ consider.  For example, we could generalize it to find the ``first''
 or ``last'' such element if our collection is ordered.  We could find
 \emph{all} elements that match our criteria.  Some basic operations that 
 we've already considered such as finding the minimum or maximum
-(\emph{extremal} elements), or median element are variations on this search 
+(\emph{extremal} elements), or median element are also variations on this search 
 problem.
 
 When designing a solution to any of these variations additional 
@@ -51,9 +52,10 @@ exception?, etc.).
 
 When implementing a solution in a programming language, we of course
 will need to be more specific about the type of collection being
-searched, the type of elements in the collection, etc.  However, we
+searched and the type of elements in the collection.  However, we
 will still want to keep our solution as general as possible.  As we'll 
-see, most programming languages facilitate some sort of \emph{generic}
+see, most programming languages facilitate some sort of 
+\index{generic programming} \emph{generic}
 programming so that we do not need to reimplement the solution for
 \emph{each} type of collection or for \emph{each} type of variable.  
 Instead, we can write one solution, then \emph{configure} it to allow
@@ -73,7 +75,7 @@ pseudocode is presented as Algorithm \ref{algo:linearSearch}.
 \begin{algorithm}[H]
   \Input{A collection of elements $A = \{a_1, \ldots, a_n\}$ and a key $e_k$}
   \Output{An element $a$ in $A$ such that $a = e_k$ according to some criteria; $\phi$ if no such element exists}
-  \ForEach{$a_i \in A$}{
+  \ForEach{$a_i in A$}{
     \If{$a_i = e_k$}{ \label{algo:linearSearch:elemOp}
       output $a_i$ \;
     }
@@ -101,9 +103,8 @@ total of 10 comparisons being made.  Finally a search for $e_k = 4$
 would only require two comparisons as we find 4 at the second index.
 There is a duplicate element at index 3, but the way we've defined
 linear search is to find the ``first'' such element.  Again, we could
-design any number of variations on this solution.
-
-We give a more detailed analysis of this algorithm below.
+design any number of variations on this solution. We give a more 
+detailed analysis of this algorithm below.
 
 \subsection{Binary Search}
 \index{search!binary search}
@@ -124,14 +125,13 @@ right half are greater than $m$.}
 \label{figure:binarySearchDemo}
 \end{figure}
 
-Observe that since the array is sorted, everything in the left-half 
+Since the array is sorted, everything in the left-half 
 of the array is $< m$ and everything in the right-half of the array 
-is $> m$.  We will now make one comparison between $e_k$ and $m$.
-There are three cases to consider.\footnote{If duplicate elements
+is $> m$.\footnote{If duplicate elements
 are in the array, then elements in the left/right half \emph{could}
 be less than or equal to and greater than or equal to $m$, but this
-will not affect how our algorithm works.}
-
+will not affect how our algorithm works.}  We will now make one 
+comparison between $e_k$ and $m$. There are three cases to consider.
 \begin{enumerate}
   \item If $e_k = m$, then we've found \emph{an} element that matches
   	our key and search criteria and we are done.  We can output
@@ -166,7 +166,7 @@ was unsuccessful.
 \begin{algorithm}[H]
   \Input{A \emph{sorted} collection of elements $A = \{a_1, \ldots, a_n\}$, 
          bounds $1 \leq l, r \leq n$, and a key $e_k$}
-  \Output{An element $a \in A$ such that $a = e_k$ according to some criteria; 
+  \Output{An element $a$ in $A$ such that $a = e_k$ according to some criteria; 
           $\phi$ if no such element exists}
   \If{$l > r$}{
     output $\phi$ \;
@@ -221,6 +221,7 @@ algorithm is shown in Figure \ref{figure:binarySearchExample}.
 \input{figures/figureBinarySearchExample}
 
 \subsection{Analysis}
+\index{search algorithm!analysis}
 
 When algorithms are implemented and run on a computer, they require a
 certain amount of \emph{resources}.  In general, we could consider a lot
@@ -229,11 +230,12 @@ analysis involves quantifying how many resource(s) an algorithm requires
 to execute with respect to the size of the input it is run on.
 
 When analyzing algorithms, we want to keep the analysis as abstract and 
-general as possible independent of any particular language, framework or
+general as possible, independent of any particular language, framework or
 hardware.  We could always update the hardware on which we run our implementation, 
-but that does not necessarily make the \emph{algorithm} faster, it only means
-that more \emph{steps} of the algorithm can be run in less time.  The
-number of operations that the algorithm performs remains the same.  In
+but that does not necessarily make the \index{algorithm} 
+\emph{algorithm} faster.  The algorithm would still execute the same
+\emph{number} of operations.  Faster machines just mean that more
+steps can be performed in less time.  In
 fact, the concept of an algorithm itself is a mathematical concept that
 predates modern computers by thousands of years.  One of the oldest algorithms,
 for example, Euler's GCD (greatest common divisor) algorithm dates to 300
@@ -241,11 +243,10 @@ BCE.  Whether or not you're ``running'' it on a piece of papyrus 2,300 years
 ago or on a modern supercomputer, the same number of divisions and subtractions
 are performed.
 
-To keep things abstract, we analyze an algorithm using pseudocode and identify
-an \emph{elementary operation}.  This is generally the most common or most
+To keep things abstract, we analyze an algorithm by identifying
+an \index{elementary operation} \emph{elementary operation}.  This is generally the most common or most
 ``expensive'' operation that the algorithm performs.  Sometimes there may be more
-than one reasonable choice for an elementary operation which may give different
-analysis results.  However, we generally do \emph{not} consider basic operations
+than one reasonable choice for an elementary operation which may give different results in our analysis.  However, we generally do \emph{not} consider basic operations
 that are necessary to the \emph{control flow} of an algorithm.  For example, 
 variable assignments or the iteration of index variables.
 
@@ -295,29 +296,30 @@ linear functions,
   $$f_1(n) = n \quad f_2(n) = \frac{1}{2}n$$
 The only difference being the constant factor $\frac{1}{2}$.  In fact, this
 is why the algorithm is called \emph{linear} search.  The number of comparison
-operations performed by the algorithm \emph{grows} linearly with respect
+operations performed by the algorithm \emph{grows linearly} with respect
 to the input size.  For example, if we were to double the input size from
 $n$ to $2n$, then we would expect the number of comparisons to search the
-collection would also double (this applies in either the worst-case or average-case
+collection would also double (this applies in either the worst-case and average-case
 scenarios).  This is what is most important in algorithm analysis: quantifying
 the complexity of an algorithm by the rate of growth of the operations (and
 thus resources) required to execute the algorithm as the input size $n$ 
-grows.\footnote{In fact, this is the basis of Big-O analysis, something that 
+grows.\footnote{This is the basis of Big-O analysis, something that 
 we will not discuss in detail here, but is of prime importance when analyzing
 algorithms.}
 
 \subsubsection{Binary Search Analysis}
+\index{binary search!analysis}
 
 Like linear search, the input size is the size of the collection $n$ and the
 elementary operation is the comparison.  As presented in the pseudocode, 
 binary search would seem to perform \emph{two} comparisons (Lines
-\ref{algo:binarySearch:elemOp1} and \ref{algo:binarySearch:elemOp1} in Algorithm
+\ref{algo:binarySearch:elemOp1} and \ref{algo:binarySearch:elemOp2} in Algorithm
 \ref{algo:binarySearchIterative}).  However, to make the analysis simpler, we
 will instead count one comparison operation per iteration of the 
 while loop.  This is a reasonable simplification; in practice the comparison
 operation would likely involve a single function call, after which 
 distinguishing between the three cases is a simple matter of control flow.
-Further, even if we were to consider both operations, it would only contribute
+Further, even if we were to consider both comparisons, it would only contribute
 a constant factor of 2 to the final analysis.
 
 Since we perform one comparison for each iteration of the while loop, we need
@@ -336,7 +338,11 @@ been cut down to 1:
   $$\frac{n}{2^k} = 1$$
 Solving for $k$ gives us the number of iterations:
   $$k = \log_2{(n)}$$
-That is, binary search performs a logarithmic number of comparisons in the worst
+Adding one additional comparison for the final iteration gives us a
+total of 
+  $$k = \log_2{(n)}$$
+comparisons (see Table \ref{table:binarySearchComparisons}).  Thus, binary search performs a logarithmic number of 
+comparisons in the worst
 case.  As we will see, this is \emph{exponentially} better than linear search.
 
 {\renewcommand{\arraystretch}{1.5}
@@ -357,7 +363,8 @@ $\log_2{(n)}+1$ & 0 & 1 \\
 \hline
 \multicolumn{2}{c|}{Total} & $\log_2{(n)} + 1$ \\
 \end{tabular}
-\caption{Number of comparisons and array size during the execution of binary search.}
+\caption[Binary Search Comparison Total]{Number of comparisons and array size 
+after the iteration during the execution of binary search.}
 \label{table:binarySearchComparisons}
 \end{table}
 }
@@ -366,14 +373,12 @@ $\log_2{(n)}+1$ & 0 & 1 \\
 
 Binary search presents a clear advantage over linear search.  There is
 an \emph{exponential} difference between a linear function, $\frac{n}{2}$
-and a logarithmic function, $\log_2{(n)}$.
-
-To put this in
+and a logarithmic function, $\log_2{(n)}$.  To put this in
 perspective, consider searching a \emph{moderately} large database of 1
-trillion ($10^{12}$) records.\footnote{In the era of ``big data'', 1 trillion
+trillion ($10^{12}$) records.\footnote{In the era of ``big data,'' 1 trillion
 records only qualifies as \emph{moderately} large.}  Using linear search, 
-even in the average-case scenario would require about
-  $$\frac{10^{12}}{2} = 5 \times 10^11$$
+even the average-case scenario would require about
+  $$\frac{10^{12}}{2} = 5 \times 10^{11}$$
 or about 500 billion comparisons.  However, using binary search would only
 require at most 
   $$\log_2{(10^{12})} = 12 \cdot \log_2{(10)} < 40$$ 
@@ -398,7 +403,7 @@ far longer to search.
 \begin{figure}[h]
 \centering
 \includegraphics[scale=0.5]{images/windows7Example}
-\caption{Illustrative example of the benefit of ordered (indexed) elements, Windows 7}
+\caption{Example of the benefit of ordered (indexed) elements in Windows 7}
 \label{figure:windows7Example}
 \end{figure}
 
@@ -410,6 +415,7 @@ unordered sets.}  Thus, we now turn our attention to the problem of sorting
 a collection.
 
 \section{Sorting}
+\index{sorting}
 
 Sorting a collection of data is another fundamental data operation.  It is
 conceptually simple, but is ubiquitous.  There are a large variety of
@@ -421,18 +427,18 @@ a natural way to store and organize data.
 \begin{problem}[Sorting]
 ~\\
 \textbf{Given:} a collection of \emph{orderable} elements, $A =\{a_1, a_2, \ldots, a_n\}$\\
-\textbf{Output:} A permuted list of elements $A' = \{a_1', a_2', \ldots, a_n'\}$ according to a specified order
+\textbf{Output:} $A$, sorted in ascending order
 \end{problem}
 
 The requirement that the collection be made of ``orderable'' elements can be
-a bit technical\footnote{We require that $A$ be a \emph{total order}, a 
+a bit technical,\footnote{We require that $A$ be a \emph{total order} a 
 partially ordered binary relation such that all pairs are comparable.}, but essentially 
 we need to be guaranteed that given two elements, $a, b$ in the collection, 
 we can determine whether $a < b$, $a = b$ or $a > b$.  If such a determination
 cannot be made, then sorting is impossible.
 
 Again, we can consider variations on this problem.  We may want our collection
-to be sorted in ascending or descending order.\footnote{Technically, these are
+to be sorted in descending order instead of ascending.\footnote{Technically, these are
 referred to as \emph{non-decreasing} and \emph{non-increasing} respectively.  
 This is because the collection could contain duplicate elements and not lead
 to a strictly increasing or strictly decreasing ordering.} We may also want
@@ -440,8 +446,9 @@ the collection itself to be \emph{permuted} (that is, reordered) or we may
 instead want a \emph{copy} of the collection to be created and sorted so that
 the original is unchanged.
 
-We will examine several standard sorting algorithms (though there are dozens
-of algorithms, we will only focus on a few of the more common ones).  As with 
+We will examine several standard sorting algorithms. Though there are dozens
+of sorting algorithms, we will only focus on a few of the more common ones.  
+As with 
 searching, we can analyze a sorting algorithm based on the number of 
 comparisons it makes in the worst, best, or average cases.  We may also look
 at alternative resources or operations: how many swaps does the algorithm make?
@@ -463,7 +470,7 @@ similar to the way a human would sort a collection of objects.  The basic idea
 is that you search through the collection and find the minimal element 
 (we say minimal and not minimum because there could be elements with the
 same value).  Once we've found a minimal element, we can swap it with the
-``first'' element, placing the minimal element where it needs to be in
+``first'' element, $a_1$, placing the minimal element where it belongs in
 the collection.  
 
 We repeat this process for the remaining elements, $a_2, \ldots, a_n$, 
@@ -474,7 +481,8 @@ $a_i, \ldots, a_n$ for the minimal element, swapping it with $a_i$.
 We end this process after we have sorted the first $n-1$ elements, 
 $a_1, \ldots, a_{n-1}$ since the last element $a_n$ will already
 be where it needs to be.  We present Selection Sort as Algorithm 
-\ref{algo:selectionSort}.
+\ref{algo:selectionSort}.  We illustrate the execution of Selection 
+Sort in Figure \ref{figure:selectionSortExample}. 
 
     \begin{algorithm}[H]
      \Input{A collection $A = \{a_1, \ldots, a_n\}$}
@@ -492,34 +500,24 @@ be where it needs to be.  We present Selection Sort as Algorithm
     \label{algo:selectionSort}
     \end{algorithm}
 
-\subsubsection{Example}
-
-We illustrate the execution of Selection Sort in Figure
-\ref{figure:selectionSortExample}. 
-
 \input{figures/figureExampleSelectionSort}
 
 \subsubsection{Analysis}
+\index{Selection Sort!analysis}
 
 We now analyze Selection Sort to determine how complex it is.  First, the
 elementary operation is the comparison on line \ref{algo:selectionSortComp}.
 We need to determine how many times this line is executed with respect
-to the size of the input, $n$.
-
-First, we make the observation that on the $i$-th iteration, the first
+to the size of the input, $n$.  Observe that on the $i$-th iteration, the first
 $i-1$ elements are sorted and we need not make any comparisons among
 them.  We start by assuming that the $a_i$ is the minimum element and
 compare it to the remaining $n-i$ elements, requiring $n-i$ comparisons,
 to find the minimal element.  For example, in the first iteration we
 make $n-1$ comparisons, the second we make $n-2$, etc.  The last
 iteration we make only 1 comparison.  Totaling these all up gives us
-
-$$(n-1) + (n-2) + (n-3) + \cdots + 3 + 2 + 1$$
-
-Rewritten this is 
-
-$$\sum_{i=1}^{n-1} i = 1 + 2 + 3 + \cdots + (n-2) + (n-1)$$
-
+  $$(n-1) + (n-2) + (n-3) + \cdots + 3 + 2 + 1$$
+Which can be rewritten as 
+  $$\sum_{i=1}^{n-1} i = 1 + 2 + 3 + \cdots + (n-2) + (n-1)$$
 We can use Gauss's Formula to solve this summation.
 
 \index{Gauss's Formula}
@@ -534,9 +532,9 @@ only $n-1$.  Substituting this in gives us
 $$\sum_{i=1}^{n-1} i = \frac{n(n-1)}{2}$$
 
 Another way to analyze the code is to count the number of comparisons
-with respect to the for-loop index variables.  In particular, there
+with respect to the for loop index variables.  In particular, there
 is one comparison made on line 4.  Line 4 itself is executed once
-for each time the inner for-loop on line 3 executes which executes 
+for each time the inner for loop on line 3 executes which executes 
 for $j$ running from $i+1$ up to $n$.  Line 3 and the entire inner
 for loop executes once for each time the outer for loop executes, 
 that is for $i$ running from $1$ up to $n-1$. This gives us the 
@@ -552,7 +550,7 @@ Solving this summation gives us:
   ~ & = \frac{n(n-1)}{2}\\
 \end{align*}
 
-That is, Selection Sort is a \emph{quadratic} sorting algorithm, 
+This illustrates that Selection Sort is a \emph{quadratic} sorting algorithm, 
 requiring roughly $n^2$ comparisons to sort an array of $n$ elements.
 We analyze this further below.
 
@@ -563,11 +561,11 @@ We analyze this further below.
 Another basic sorting algorithm is \emph{Insertion Sort} which works 
 slightly differently than Selection Sort.  Rather than finding a minimal
 element and swapping with the ``current'' element, the current element
-is \emph{inserted} in the list where it needs to be.
+is \emph{inserted} in the list where it belongs.
 
 If we consider just the first element, the collection is sorted by
 definition.  Now consider the second element: either its greater than
-the first element and so is sorted, or it is less than the first element
+the first element and so is already sorted, or it is less than the first element
 and needs to be swapped.  In either case, the first two elements are now
 sorted.  If we continue this, then on the $i$-th iteration, the first
 $i$ elements, $a_1, \ldots, a_i$ are sorted (just as with Selection Sort).
@@ -576,12 +574,14 @@ the elements $a_1, \ldots, a_i$ where it needs to be.
 
 We insert the ``current'' element, $a_{i+1}$ by comparing it to $a_i$: 
 if $a_i > a_{i+1}$, then we swap them.  We keep comparing the current
-element to the one immediately next to it, moving the elements ``up'' the
-collection until we find an element that is less than or equal to the
+element to the one immediately to its left, shifting the current element
+down the collection until we find an element that is less than or equal 
+to the
 current element at which point we stop.  Now the elements $a_1, \ldots, a_{i+1}$
-are now sorted.  In contrast to selection sort, we still need to process
+are now sorted.  In contrast to Selection Sort, we \emph{do} need to process
 the last element as it might not be where it needs to be.  The
 full pseudocode is presented in Algorithm \ref{algo:insertionSort}.
+An example of an execution of Insertion Sort can be found in Figure\ref{figure:insertionSortExample}.
 
 \begin{algorithm}[H]
   \Input{A collection $A = \{a_1, \ldots, a_n\}$}
@@ -599,19 +599,17 @@ full pseudocode is presented in Algorithm \ref{algo:insertionSort}.
 \label{algo:insertionSort}
 \end{algorithm}
 
-\subsubsection{Example}
-
 \input{figures/figureExampleInsertionSort}
 
 \subsubsection{Analysis}
 
 As we can see in the example run of Insertion Sort, not every iteration needs
 to make comparisons with all elements in the sorted part of the collection.
-In iteration 4 we only had to make one comparison and we were done.  In other
+For example, in iteration 4 we only had to make one comparison and we were done.  In other
 iterations such as the last two, we had to make comparisons to \emph{every}
-element in the sorted part of the collection.  This suggests that Insertion
+element in the sorted part of the collection.  This illustrates that Insertion
 Sort is adaptive and may have a different complexity depending on the structure
-of the collection its sorting.  
+of the collection it sorts.
 
 Let's consider the best case in which the number of comparisons is minimized.
 Suppose, for example, we ran Insertion Sort on a collection that was already
@@ -634,7 +632,7 @@ Moving the constant outside the summation and applying Gauss's Formula
 would give us an expected number of comparisons to be
 $$\frac{n(n-1)}{4}$$
 This is still a quadratic function, but the constant involved and the
-fact that Insertion Sort is more adaptive to the input makes Insertion
+fact that Insertion Sort is more adaptive to the input make Insertion
 Sort a much better algorithm in practice than Selection Sort.  In
 fact, Insertion Sort is very efficient on ``small'' arrays in practice
 and is used in many hybrid algorithm implementations (see Section
@@ -649,7 +647,6 @@ Selection Sort and Insertion Sort are simple algorithms, but inefficient,
 making a quadratic number of comparisons in even the average case.  A
 more sophisticated and efficient algorithm is Quick Sort, first developed
 by Tony Hoare in the early 1960s \cite{Hoare:1961:AQ:366622.366644,Quicksort}.
-
 Quick Sort is a divide-and-conquer style algorithm that attempts to solve
 the sorting problem by splitting a collection up into two parts, then
 \emph{recursively} sorting each part.  
@@ -658,7 +655,7 @@ The basic idea is as follows.  First, choose a \emph{pivot} element $p$
 in the collection.  We will then \emph{partition} all the elements in the
 collection around this pivot element by placing all elements less than
 $p$ in the ``left'' partition and all elements greater than $p$ in the
-``right'' partition.  This is a concept similar to binary search.  After
+``right'' partition.  This concept is similar to binary search.  After
 partitioning all the elements, we place $p$ between them so that $p$ is
 where it needs to be.  We then repeat this process on the two partitions
 recursively.  The recursion stops when the size of the sub-collection is
@@ -735,7 +732,7 @@ subroutine.  Suppose that we are given a (sub)array of $n$ elements.  Since
 the pivot element must be compared to every other element in the (sub)array, 
 it must make $n-1$ comparisons to partition the elements around the pivot.
 If we count the last comparison to determine where to place the pivot, it 
-would be $n$ (but the difference is trivial).  
+would be $n$ comparisons (but the difference is trivial).  
 
 The analysis of Quick Sort itself is a bit more involved and is highly
 dependent on how well the \textsc{Partition} subroutine splits the
@@ -767,16 +764,17 @@ the fact that we make 2 recursive calls on subarrays of size (roughly)
 $\frac{n}{2}$.  The second term captures the number of comparisons we
 make in the \textsc{Partition} subroutine.  Solving this recurrence is
 a bit beyond the scope of the current discussion.  However, it can be
-shown that this is roughly equal to 
+shown that this is roughly equivalent to 
   $$n\log{(n)}$$
 comparisons in the best case.  
 
 The difference between the best and worst case scenarios is in our pivot
-choice.  The ideal pivot choice is, of course, the median element.  However,
-to find the median, the usual strategy is to sort the collection first, 
-which sort of puts the cart before the horse.  If the data we're sorting is
+choice.  Though the ideal pivot choice is the median element,
+to find the median the usual strategy is to sort the collection first. 
+This puts the cart before the horse.  If the data we are sorting is
 in more-or-less random order, then the choice of the first element as a
-pivot is good enough.  However, there are other strategies.
+pivot is good enough as it is unlikely that we will always have a 
+bad paritioning.  However, there are other strategies.
 
 One strategy is to randomly choose a pivot element.  A random choice 
 would make the worst-case scenario very unlikely over many runs of the
@@ -788,7 +786,7 @@ of these (or the ``ninther'').  The more effort you put into finding the
 median the more the performance degrades in practice.\footnote{For
 example, there does exist a median-finding algorithm that runs in
 linear time which would guarantee the theoretically best running time, but
-the algorithm is recursive and has a large overhead, making its us
+the algorithm is recursive and has a large overhead, making its use
 slow in practice.}  A more sophisticated analysis of these strategies
 yields a complexity similar to the best case \cite{Bentley:1993:ESF:172704.172710}.
 
@@ -802,7 +800,7 @@ The performance is similar to Quick Sort's best/average case, making
   $$n \log{(n)}$$
 comparisons.  However, Merge Sort's performance does not depend on the
 structure of the input array or a pivot choice, guaranteeing this performance
-in the best/average/worst case.\footnote{Still, Quick Sort is more common
+in the best/average/worst case.\footnote{Still, Quick Sort is still more common
 in practice because it has less memory requirements and the pivot choice
 strategies can mitigate the risk of the worst-case scenario.}
 
@@ -875,8 +873,6 @@ Merge Sort is presented as Algorithm \ref{algo:mergeSort} with the
 \label{algo:merge}
 \end{algorithm}
 
-\subsubsection{Example}
-
 We present an example run of Merge Sort in Figure \ref{figure:mergeSortExample}
 (here, we have made the collection of size 8 to emphasize the even split).  
 An example run of the \textsc{Merge} subroutine on the last merge operation
@@ -891,8 +887,7 @@ Because Merge Sort divides the list \emph{first}, an even split is
 requires at most $n-1$ comparisons to merge the two collections.  This
 leads to a recurrence relation similar to Quick Sort, 
   $$C(n) = 2C\left( \frac{n}{2} \right) + (n-1)$$
-A similar analysis yields a complexity of 
-  $n \log{(n)}$
+A similar analysis yields a complexity of $n \log{(n)}$.
 
 \subsection{Other Sorts}
 \label{subsection:otherSorts}
@@ -924,7 +919,7 @@ types).  Tim Sort is a sort of ``bottom-up'' Merge Sort/Insertion Sort
 hybrid.  Instead of recursing, it looks for subsequences of elements that
 are already in order or nearly in order, then merges them.  It was designed
 to have many of the desirable properties of a sorting algorithm 
-including \emph{stability} (see below).
+including \emph{stability} (see Section \ref{subsection:sortingStability}).
 
 
 \subsection{Comparison \& Summary}
@@ -945,13 +940,11 @@ and then want to double the size of our collection to $2n$.  How do each
 of these types of algorithms perform?  For the slow, $n^2$ algorithms we
 have 
   $$(2n)^2 = 4n^2$$
-That is, doubling the input size \emph{quadruples} the number of operations
+Doubling the input size \emph{quadruples} the number of operations
 Selection Sort and Insertion Sort perform.  However, for Quick Sort and
 Merge Sort, we only have
   $$2n \log{(2n)} = 2n\left( \log{(2)} + \log{(n)}\right) = 2n\log{(n)} + 2n$$
-That is, only about twice as many operations (with an additive term of $2n$).
-
-Table \ref{table:sortingSummary} gives a summary of the complexity and other
+That is, only about twice as many operations (with an additive term of $2n$). Table \ref{table:sortingSummary} gives a summary of the complexity and other
 properties of the sorting algorithms we've seen.
 
 \begin{table}[h]
@@ -985,17 +978,17 @@ Merge Sort & $\sim n\log{n}$ & $\sim n\log{n}$ & $\sim n\log{n}$ & Yes & Require
 In practice you do not write your own searching and sorting
 algorithm implementations.  Instead, you use the functionality provided
 by the language, a framework, or a library.  First, there is rarely a
-good reason to ``reinvent'' the wheel and write your own if the functionality
+good reason to ``reinvent the wheel'' and write your own if the functionality
 already exists.  Second, the algorithms and code provided by a language
 or library are typically optimized and have been well-tested.  Established
-libraries tend to have proven themselves over millions of computing hours.
+libraries have been developed with thousands of man-hours and have proven themselves over millions of computing hours.
 
 Typically, searching and sorting functions in a language are made to
 be \emph{generic}: they don't \emph{just} search a collection of numbers
 or strings.  Instead, they accept collections of \emph{any type}.  The
 basic algorithms for searching and sorting are generic themselves (after
 all we presented them as pseudocode).  The only real difference between
-an implementation for, say, numbers versus an sorting algorithm for 
+an implementation for, say, numbers versus a sorting algorithm for 
 student objects is \emph{how} they are compared.  
 
 This genericness extends to objects.  It would be extremely inefficient, 
@@ -1005,14 +998,15 @@ then another for ID, and repeat them all again for a reversed ordering.
 Instead, a single, generic sorting algorithm is implemented that can
 be \emph{configured} by passing in a \emph{comparator}.
 
-A comparator is a function or object that provides functionality to determine
+A \index{comparator} comparator is a function or object that provides functionality to determine
 how to order two elements (usually of the same type).  In general, a
 comparator takes two arguments, $a, b$ which are the elements to be 
-compared and returns an integer value with the following ``contract'':
+compared and returns an integer value with the following ``contract.''
+It returns:
 \begin{itemize}
-  \item Something negative, $< 0$ if $a$ comes before $b$, $a < b$
-  \item Zero if $a$ and $b$ are equivalent, $a = b$
-  \item Something positive, $> 0$ if $a$ comes after $b$, $a > b$
+  \item something negative, $< 0$ if $a$ comes before $b$, $a < b$
+  \item zero if $a$ and $b$ are equivalent, $a = b$
+  \item something positive, $> 0$ if $a$ comes after $b$, $a > b$
 \end{itemize}
 We've previously seen this type of functionality when comparing strings in
 Chapter \ref{chapter:strings}.  Using comparators allows us to reuse
@@ -1044,7 +1038,6 @@ One solution would be to use a variable type that supports larger
 values.  For example, a 64-bit signed integer would be able to handle
 arrays of 9.223 quintillion elements.  However, depending on the language, 
 you may not be able to use such variable types as index values.
-
 Another solution is to use operations that do not introduce this 
 potential for overflow.  For example, 
   $$\frac{l + r}{2} = l + \frac{(r - l)}{2}$$
@@ -1076,7 +1069,7 @@ logic would look something like the following.
 }
 \end{algorithm}
 
-For example, if $a = 5, b = 10$ then our comparator would output $-1$.  If
+For example, if $a = 5$ and $b = 10$ then our comparator would output $-1$.  If
 the values were $a = 10, b = 5$ it would output $+1$, and if they were
 equal, $a = b = 10$ then it would output zero.  A common ``trick'' is to
 instead compute the difference between these values, $a - b$.  Observe:
@@ -1113,9 +1106,8 @@ GPAs for example: suppose that $a = 4.0$ and $b = 3.9$.  Their difference
 would be $a - b = 0.1$.  However, a comparator returns an \emph{integer}
 value.  In some languages this result would be casted to an integer, 
 truncating the fractional value, so that $0.1 \rightarrow 0$, meaning
-that a GPA of 3.9 is ``equivalent'' to the 4.0.  
-
-For these reasons, it is best to avoid this trick altogether.
+that a GPA of 3.9 is ``equivalent'' to the 4.0. Given the potential for 
+errors, it is best to avoid this trick altogether.
 
 \subsection{Importance of a Total Order}
 
@@ -1123,18 +1115,17 @@ In many applications it is important to design your comparator to
 provide a \emph{total order}.  For example, suppose we have students
 ``Gary Busey'' with an ID of 1234 and another student with the same
 name, ``Gary Busey'' but with an ID of 4321.  It is entirely possible
-(and common) for different people to have different names.  However,
-a comparator that ordered student objects base \emph{only} on the
+(and common) for different people to have the same names.  However,
+a comparator that ordered student objects based \emph{only} on the
 name fields would interpret these as the same person.  
 
 The distinction is especially important when using a comparator in a
 sorted collection (such as a Binary Search Tree, or Ordered Hash Map
 data structure) that \emph{maintains} an ordering on the elements.
 Many of these data structures do not allow ``duplicate'' elements where
-duplicity is determined by the comparator.  Attempting to insert both
+duplication is determined by the comparator.  Attempting to insert both
 of these students will likely result in only one of them being in
 the collection as the second will be interpreted as a a duplicate.
-
 In such scenarios it is important to design your comparator to 
 \emph{break ties} by using some \emph{unique} data field of an object
 such as an ID.
@@ -1146,7 +1137,6 @@ Many languages recognize what is called a ``natural ordering'' on certain
 elements.  For example, numbers have a natural ordering: from least to
 greatest.  Strings also have a natural ordering: lexicographic ordering.
 However, we often wish to order elements in an artificial ordering.
-
 For example, suppose we wish to include the year of a student, Freshman,
 Sophomore, Junior, or Senior.  If we modeled these as strings, the
 natural ordering would be alphabetical:
@@ -1179,9 +1169,8 @@ we want to then add support for ``Pre-freshman'' or ``Graduate'', etc.
 Another solution would be to model the year using a data type that has a 
 natural ordering.  For example, we could define an enumerated type
 and associate each of the years with 0, 1, 2, 3; giving them a
-natural ordering.
-
-Alternatively, we could use a data structure, such as a map, to model
+natural ordering. Alternatively, we could use a data structure, 
+such as a map, to model
 the artificial ordering.  For example, we could map ``Freshman'' to 0, 
 ``Sophomore'' to 1, etc. Then, when we wanted to order two elements, we
 could look up the ``natural value'' via the map and use their natural
@@ -1200,7 +1189,9 @@ integer values:
 The subscripts on the two 2 values are for demonstration purposes only.
 A stable sorting algorithm would sort the elements as:
   $$2_a, 2_b, 5, 10$$
-preserving the relative ordering of the two 2 elements.  However, an
+preserving the relative ordering of the two 2 elements.  The element
+$2_a$ came before $2_b$ prior to sorting and remains so after sorting.  
+However, an
 unstable sorting algorithm may instead produce
   $$2_b, 2_a, 5, 10$$
 The collection is still sorted, but the two equal elements have been 
@@ -1219,7 +1210,7 @@ are stable and others are not.  For example, Selection Sort is not stable.
 Consider the following input:
  $$2_a, 2_b, 1, 5$$
 In the first iteration, $1$ and $2_a$ would be swapped, resulting in a
-sorted collection, but with $2_b$ preceding $2_a$.
+sorted collection and no further swaps, but with $2_b$ preceding $2_a$.
 
 Insertion Sort, however, is stable: it only moves an element down the
 collection if it is \emph{strictly} less than its adjacent element.  Likewise,

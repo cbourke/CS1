@@ -1,16 +1,3 @@
-%\documentclass[12pt]{scrbook}
-%
-%\usepackage{tikz}
-%\usepackage{minted}
-%\usetikzlibrary{decorations.pathreplacing}
-%
-%\usepackage{fullpage}
-%\usepackage{subfigure}
-%\begin{document}
-%
-%
-%Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
-
 
 \begin{tikzpicture}[auto,scale=1.0,transform shape,every node/.style={text centered}]
 
@@ -30,10 +17,15 @@
 \node [above] (aheap) at (2, 7) {Available Heap};
 \node [above] (uheap) at (2, 10) {Allocated Heap};
 
+\node (sg) at (5.75, 1) {Stack Growth};
+\node[above of=sg] (phantomsg) {~};
+\draw[->] (sg) -- (phantomsg);
+
+\node (hg) at (5.75, 12) {Heap Growth};
+\node[below of=hg] (phantomhg) {~};
+\draw[->] (hg) -- (phantomhg);
 
 \end{tikzpicture}
 
 
 
-
-%\end{document}

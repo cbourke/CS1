@@ -19,7 +19,7 @@
 refers to the same array.]{
 \begin{tikzpicture}
 % size of each node
-\def\sz{12mm}
+\def\sz{10mm}
 % node style definition
 \tikzstyle{block} = [
 	draw, fill=black!10, rectangle,
@@ -48,10 +48,10 @@ refers to the same array.]{
 \end{tikzpicture}
 }%end (a)
 
-\subfigure[When an element in a shallow copy is changed, \mintinline{c}{A[i] = -1;}, it is changed from the perspective of both $A$ and $B$.]{
+\subfigure[When an element in a shallow copy is changed, \mintinline{c}{A[6] = -1;}, it is changed from the perspective of both $A$ and $B$.]{
 \begin{tikzpicture}
 % size of each node
-\def\sz{12mm}
+\def\sz{10mm}
 % node style definition
 \tikzstyle{block} = [
 	draw, fill=black!10, rectangle,
@@ -85,7 +85,7 @@ refers to the same array.]{
 are stored in separate memory locations.]{
 \begin{tikzpicture}
 % size of each node
-\def\sz{12mm}
+\def\sz{10mm}
 % node style definition
 \tikzstyle{block} = [
 	draw, fill=black!10, rectangle,
@@ -124,11 +124,11 @@ are stored in separate memory locations.]{
 \end{tikzpicture}
 }
 
-\subfigure[When an element in a deep copy is changed, \mintinline{c}{A[i] = -1;}, it is changed
+\subfigure[When an element in a deep copy is changed, \mintinline{c}{A[6] = -1;}, it is changed
 only in the array $A$.  The element in $B$ is unaffected.]{
 \begin{tikzpicture}
 % size of each node
-\def\sz{12mm}
+\def\sz{10mm}
 % node style definition
 \tikzstyle{block} = [
 	draw, fill=black!10, rectangle,
