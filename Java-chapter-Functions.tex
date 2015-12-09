@@ -1,6 +1,8 @@
 %!TEX root = ComputerScienceOne.tex
 
 %%Chapter: Methods in Java
+\index{functions!in Java}
+\index{Java!functions}
 
 As an object-oriented programming language, functions in
 Java are usually referred to as \emph{methods} and are 
@@ -15,13 +17,15 @@ need to be placed within a class.  Usually methods that
 act on data in the class (or instances of the class, see
 Chapter \ref{chapter:java:objects}) or have common
 functionality are placed into one class.  For example, all
-the basic math methods are all part of the 
+the basic math methods are part of the 
 \mintinline{java}{java.lang.Math} class.  It is not uncommon
 to place similar methods together into one ``utility'' class.
 
-Java supports method overloading, so within the same 
+Java supports \index{method overloading} 
+method overloading, so within the same 
 class you can define multiple methods with the same name
-as long as they differ in either the number of type of 
+as long as they differ in either the number (also called \emph{arity})
+or type of 
 parameters.  For example, in the \mintinline{java}{java.lang.Math}
 class, there are 3 versions of the absolute value method,
 \mintinline{java}{abs()}, one that takes/returns an 
@@ -31,21 +35,22 @@ can easily be solved by ensuring that you place your
 methods in a class/package that is unique to your application.
 
 In Java, the 8 primitive types (\mintinline{java}{int}, \mintinline{java}{double},
-\mintinline{java}{char}, \mintinline{java}{boolean}, etc.) are 
-passed by value.  All object types, however, such as the 
+\mintinline{java}{char}, \mintinline{java}{boolean}, etc.) are always
+\index{pass by value} passed by value.  All object types, however, such as the 
 wrapper classes \mintinline{java}{Integer}, \mintinline{java}{Double}
-as well as \mintinline{java}{String}, etc. are passed by 
-reference.  That is, the memory address in the \gls{jvmLabel}
-is passed to the method.  This is done for efficiency, for 
+as well as \mintinline{java}{String}, etc.\ are \index{pass by reference} 
+passed by reference.  That is, the memory address in the \gls{jvmLabel}
+is passed to the method.  This is done for efficiency.  For 
 objects that are ``large'' it would be inefficient to copy the
 entire object into the call stack in order to pass it to a
 method.  
 
-However, though object types are passed by reference, the
+Though object types are passed by reference, the
 method cannot necessarily change them.  Recall that the wrapper
 classes \mintinline{java}{Integer}, \mintinline{java}{Double} and
-the \mintinline{java}{String} class are all \gls{immutable}, meaning
-that once created they cannot be modified.  Thus, even though
+the \mintinline{java}{String} class are all \index{immutable}
+\gls{immutable}, meaning
+that once created they cannot be modified.  Though
 they are passed by reference, the method that receives them
 cannot change them.
 
@@ -53,21 +58,23 @@ There are many \emph{mutable} objects in Java.  The
 \mintinline{java}{StringBuilder} class for example is a mutable
 object.  If you pass a \mintinline{java}{StringBuilder} instance
 to a method, that method is free to invoke mutator methods 
-(any methods that \emph{change} the object's state).  Since
+on the object such as \mintinline{java}{.append()} that 
+\emph{change} the object's state.  Since
 it is the \emph{same} object as in the calling method, the
 calling method can ``see'' those changes.
 
-As of Java 5, you can write and use vararg methods.  The
+As of Java 5, you can write and use \index{vararg function}
+vararg methods.  The
 \mintinline{java}{System.out.printf()} method is a prime
 example of this.  However, we will not discuss in detail how
 to do this.  Instead, refer to standard Java documentation.
-Finally, parameters are not optional in Java.  This is because
+Finally, parameters are \emph{not} optional in Java.  This is because
 Java supports method overloading.  You can write multiple
 versions of the same method that each take a different
 number of arguments.  You can even design them so that
 the more specific versions (with fewer arguments) invoke
 the more general versions (with more arguments), passing
-in sensible ``defaults.'' when doing so.
+in sensible ``defaults.''
 
 \section{Defining Methods}
 
@@ -75,7 +82,8 @@ Defining methods is fairly straightforward.  First you create
 class to place them in.  Then you provide the method signature
 along with the body of the method.  In addition, there are 
 several \emph{modifiers} that you can place in the method 
-signature to specify its \emph{visibility} and whether or not
+signature to specify its \index{visibility}
+\emph{visibility} and whether or not
 the method ``belongs'' to the class or to instances of the 
 class.  This is a concept we'll explore in Chapter \ref{chapter:java:objects}.
 For now, we'll only focus on what is needed to get started.
@@ -133,28 +141,26 @@ used was \mintinline{java}{public}.  This makes the method visible
 to all other parts of the code base.  Any other piece of code can
 invoke the method and take advantage of the functionality it
 provides.  Alternatively, we could have used the keywords 
-\mintinline{java}{private}, to make it only visible to other methods
-in the same class, \mintinline{java}{protected} or ``package
-protected'' by omitting the modifier altogether.  We'll discuss
-these in detail later on.  We'll mostly want our methods to
-be available, so we'll make most of them \mintinline{java}{public}.
-
-The second modifier is \mintinline{java}{static} which makes it
-so that the method belongs to the class itself rather than instances
-of the class.  We'll discuss objects and instances in detail later
-on.  For now, we'll simply make all of our methods \mintinline{java}{static}.
+\mintinline{java}{private} (which makes it visible only to other methods
+in the same class) \mintinline{java}{protected} or ``package
+protected'' by omitting the modifier altogether.  We will
+want our methods to be available to other classes, so we'll make 
+most of them \mintinline{java}{public}.  The second modifier is 
+\mintinline{java}{static} which makes it so that the method belongs 
+to the class itself rather than instances of the class.  We discuss
+visibility keywords and instances in detail in Chapter 
+\ref{chapter:java:objects}.  For now, we will make all of our methods \mintinline{java}{static}.
 
 After the modifiers, we provide the method signature including 
 the return type, its identifier (name), and its parameter list.
 Method names must follow the same naming rules as variables: 
 they must begin with an alphabetic character and may contain 
 alphanumeric characters as well as underscores.  However, 
-using modern coding conventions  we usually name methods 
-using lower camel casing.
-
-Immediately after the signature we provide a method body which
-contains the code that will be run upon invocation of the method.
-The method body is enclosed using opening/closing curly brackets.
+using modern coding conventions  we name methods 
+using lower camel casing.  Immediately after the signature we 
+provide a method body which contains the code that will be 
+run upon invocation of the method.  The method body is enclosed 
+using opening/closing curly brackets.
 
 \subsection{Void Methods}
 
@@ -166,11 +172,12 @@ good practice to include a \mintinline{java}{return} statement.
 \begin{minted}{java}
 public static void printCopyright()
   System.out.println("(c) Bourke 2015");
+  return;
 }
 \end{minted}
 
 In the example above, we've also illustrated how to define a 
-method that has no inputs.  
+method that has no input parameters.  
 
 \subsection{Using Methods}
 

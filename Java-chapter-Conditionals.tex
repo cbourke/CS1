@@ -1,11 +1,13 @@
 %!TEX root = ComputerScienceOne.tex
 
 %%Chapter: Java Conditionals
+\index{conditionals!in Java}
+\index{Java!conditionals}
 
 Java supports the basic if, if-else, and if-else-if conditional structures as well as switch
 statements.  Java has Boolean types and logical statements are built using the standard 
 logical operators for numeric comparisons as well as logical operators such as negations, 
-\And, and \Or that can be used with Boolean types.
+\And, and \Or\ that can be used with Boolean types.
 
 \section{Logical Operators}
 
@@ -35,8 +37,7 @@ boolean y = false;
 
 The six standard comparison operators are presented in Table \ref{table:java:comparisonOperators}
 using these variables as examples.  The comparison operators are the same when
-used with \mintinline{java}{double} types as well and \mintinline{java}{int} types and 
-\mintinline{java}{double} types can be compared with each other without type casting.
+used with \mintinline{java}{double} types as well and \mintinline{java}{int} types and can be compared with each other without type casting.
 
 \begin{table}
 \centering
@@ -131,7 +132,7 @@ in one statement, for example,
 
 \mintinline{java}{(b*b < 4*a*c || a == 0 || args.length != 4)}
 
-it is important to understand the order in which each one gets evaluated.
+It is important to understand the order in which each one gets evaluated.
 Table \ref{table:java:operatorPrecedence} summarizes the order of precedence
 for the operators seen so far.  This is not an exhaustive list of Java operators.
 
@@ -163,7 +164,7 @@ for \emph{single characters} because of the nature of the ASCII text table (see 
 Each alphanumeric character, including the various symbols and whitespace characters, 
 is associated with an integer 0--127.  We can therefore write statements like \mintinline{java}{('A' < 'a')}, 
 which is \True since uppercase letters are ordered before lowercase letters in the ASCII
-table (\mintinline{java}{('A'} is 65 and \mintinline{java}{('a'} is 97 and so $65 < 97$ is \True).
+table (\mintinline{java}{'A'} is 65 and \mintinline{java}{'a'} is 97 and so $65 < 97$ is \True).
 Several more examples can be found in Table \ref{table:java:asciiComparisonExamples}.
 
 \begin{table}[h]
@@ -198,7 +199,6 @@ a \mintinline{java}{String} is an object; the \mintinline{java}{s} and \mintinli
 are \emph{references} to that object in memory.  When we use the equality comparison, \mintinline{java}{==}
 we're asking if \mintinline{java}{s} and \mintinline{java}{t} are the \emph{same memory address}.
 In this case, likely they are not and so the result is \mintinline{java}{false}.  However, similar code, 
-for example, 
 
 \begin{minted}{java}
 String s = new String("liger");
@@ -209,7 +209,7 @@ boolean b = (s == t);
 would also result in \mintinline{java}{false} because \mintinline{java}{s} and \mintinline{java}{t} represent
 different strings in memory, even though they have the same sequence of characters.
 We'll explore how to properly compare strings later.  For now, avoid using the
-comparison operators with strings.
+equality operators with strings.
 
 \section{If, If-Else, If-Else-If Statements}
 
@@ -245,7 +245,7 @@ if(x < 10) {
 \label{code:java:conditionalExamples}
 \end{listing}
 
-Some observations about the syntax: the statement, \mintinline{java}{if(x < 10)}
+The statement, \mintinline{java}{if(x < 10)}
 does not have a semicolon at the end.  This is because it is a conditional statement
 that determines the flow of control and \emph{not} an executable statement.  
 Therefore, no semicolon is used.  Suppose we made a mistake and \emph{did}
@@ -333,7 +333,7 @@ same indentation level.
 The logarithm of $x$ is the exponent that some \emph{base} must 
 be raised to get $x$.  The most common logarithm is the natural logarithm, 
 $\ln{(x)}$ which is base $e = 2.71828\ldots$.  But logarithms can be in any base 
-$b > 1$\footnote{Bases can also be $0< b < 1$, but we'll restrict our attention to
+$b > 1$.\footnote{Bases can also be $0< b < 1$, but we'll restrict our attention to
 increasing functions only.}  What if we wanted to compute $\log_2{(x)}$?  
 Or $\log_{\pi}{(x)}$?  Let's write a program that will prompt the user for a
 number $x$ and a base $b$ and computes $\log_b{(x)}$.
@@ -342,7 +342,7 @@ Arbitrary bases can be computed using the change of base formula:
   $$\log_b(x) = \frac{\log_a{(x)}}{\log_a{(b)}}$$
 If we can compute \emph{some} base $a$, then we can compute any base 
 $b$.  Fortunately we have such a solution.  Recall that the standard library 
-provides a function to compute the natural logarithm, \mintinline{java}{Math.log()}).
+provides a function to compute the natural logarithm, \mintinline{java}{Math.log()}.
 This is one of the fundamentals of problems solving: if a solution already 
 exists, use it.  In this case, a solution exists for a different, but similar problem
 (computing the natural logarithm), but we can \emph{adapt} the solution 
@@ -351,7 +351,7 @@ using the change of base formula.  In particular, if we have variables
 
   \mintinline{java}{Math.log(x) / Math.log(b)}
   
-But wait: we have a problem similar to the examples in the previous section.  
+However, we have a problem similar to the examples in the previous section.  
 The user could enter invalid values such as $b = -10$ or $x = -2.54$ 
 (logarithms are undefined for non-positive values in any base).  We want
 to ensure that $b > 1$ and $x > 0$.  With conditionals, we can now do this.  
@@ -365,9 +365,9 @@ if(x <= 0 || b <= 1) {
 }
 \end{minted}
 
-This code has something new: \mintinline{java}{System.exit(1)}.  The \mintinline{java}{exit}
+This code has something new: \mintinline{java}{System.exit(1)}.  The \mintinline{java}{exit()}
 function immediately terminates the program regardless of the rest of the
-code that may remain.  The argument passed to \mintinline{java}{exit} is an 
+code that it may remain.  The argument passed to \mintinline{java}{exit()} is an 
 integer that represents an \emph{error code}.  The convention is that 
 zero indicates ``no error'' while non-zero values indicate some error.  This
 is a simple way of performing \emph{error handling}: if the user provides
@@ -431,7 +431,7 @@ for both the inputs.
 
 \begin{minted}{java}
 Scanner s = new Scanner(System.in);
-double income, tax, numChildren, credit;
+double income, baseTax, numChildren, credit, totalTax;
 
 System.out.println("Please enter your Adjusted Gross Income: ");
 income = s.nextDouble();
@@ -489,7 +489,7 @@ should only be zero, not negative).
 The full program is presented in Code Sample \ref{code:java:taxProgram}.
 
 \begin{listing}[h]
-\begin{minted}[fontsize=\footnotesize]{java}
+\begin{minted}[fontsize=\scriptsize]{java}
 import java.util.Scanner;
 
 public class Taxes {

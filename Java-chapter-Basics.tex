@@ -16,7 +16,7 @@ ranked as one of the top 2 languages (see \url{http://www.tiobe.com}).  It
 is now owned and maintained by Oracle, but there are many open
 source tools, compilers and runtime environments available.  Java is
 used in everything from mobile devices (Android) and desktop applications 
-to enterprise-level servers.  
+to enterprise application servers.  
 
 From its inception, Java was designed with 5 basic principles:
 \begin{enumerate}
@@ -31,18 +31,18 @@ Java offers many key features that have made it popular.  It is unique
 in that it is not entirely compiled nor interpreted.  Instead, Java source
 code is compiled into an intermediate form, called Java bytecode.  
 This bytecode is not directly runnable on a processor.  Instead, a
-\gls{jvmLabel}, an application that was written and compiled a 
-particular processor, interprets the bytecode and runs the application.
+\gls{jvmLabel}, an application that was written and compiled for a 
+particular system, interprets the bytecode and runs the application.
 This added layer of abstraction means that Java source code can
 be written once (and compiled once) and then run anywhere on 
 any device that has a \gls{jvmLabel}.  The added layer of abstraction
-makes development easier, but does come at a cost in performance.
+makes development easier, but comes at a cost in performance.
 However, the most recent \glspl{jvmLabel} have offered performance
 that is comparable to native machine code in many applications.
 
 Another key feature is that Java has its own automated \gls{garbage 
 collection}.  Some languages require manual memory management, 
-meaning that requesting, managing, and freeing up memory is part
+meaning that requesting, managing, and freeing memory is part
 of the code that you write as a developer.  Failure to handle memory
 management properly can lead to wasted resources (memory leaks), 
 poor or unstable performance, and even more serious security issues 
@@ -52,17 +52,18 @@ The \gls{jvmLabel} handles the allocation and clean up of memory automatically.
 In following with the five design principles, Java is similar in syntax to
 C (called ``C-style syntax'').  Executable statements are terminated
 by semicolons, code blocks are defined by opening/closing curly brackets, 
-etc.  Java is also fundamentally an \gls{oopLabel} language.
-With the exception of a few primitive types, in Java, everything is
-an object or belongs to an object.
+etc.  Java is also fundamentally a class-based \gls{oopLabel} language.
+With the exception of a few primitive types, in Java everything is
+a class or belongs to an class.
 
 \section{Getting Started: Hello World}
+\index{hello world!Java}
 
-The hallmark of the introduction of programming languages is the \emph{Hello World!}
+The hallmark of an introduction to a new programming language is the \emph{Hello World!}
 program.  It consists of a simple program whose only purpose is to print out the message
-``Hello World!'' to the user in some manner.  The simplicity of the program allows the
+``Hello World!'' to the user.  The simplicity of the program allows the
 focus to be on the basic syntax of the language.  It is also typically used to ensure that 
-your development environment, compiler, runtime environment, etc. are functioning 
+your development environment, compiler, runtime environment, etc.\ are functioning 
 properly with a minimal example.  A basic Hello World! program in Java can be found in 
 Code Sample \ref{code:java:helloWorldProgram}.
 
@@ -94,7 +95,7 @@ However, as a first step, you should be able to write, compile, and run the abov
 program on the environment you intend to use for the rest of this book.  This may 
 require that you download and install a \gls{jdkLabel} and \gls{ideLabel}.  Eclipse
 (\url{http://eclipse.org/}) is the industry standard, though IntelliJ (\url{https://www.jetbrains.com/idea/})
-and NetBeans (\url{https://netbeans.org/}) are also popular among many others.
+and NetBeans (\url{https://netbeans.org/}) are also popular.
 
 \section{Basic Elements}
 
@@ -120,13 +121,13 @@ include the following.
 	\begin{center}
 	\includegraphics[scale=0.20]{images/ore.png}
 	\end{center}
-	The string \mintinline{java}{"\u4FFA\u306F \u6700\u9AD8\u3060\u305C\uFF01"}
+	The string \mintinline{java}{"\u4FFA\u306F\u6700\u9AD8\u3060\u305C\uFF01"}
 	represents the phrase 
 	\begin{center}
-	\includegraphics[scale=1.0]{images/japanesePhrase.png}
+	\includegraphics[scale=.30]{images/japanesePhraseHiRes}
 	\end{center}
   \item Executable statements are terminated by a semicolon, \mintinline{java}{;}
-  \item Code blocks are defined by using opening and closing curly brackets, 
+  \item Code blocks are defined using opening and closing curly brackets, 
   	\mintinline{java}{{ ... }}.  Moreover, code blocks can be \emph{nested}: code
 	blocks can be defined within other code blocks.  
   \item Variables are \glslink{scope}{scoped} to the code block in which they are declared
@@ -138,18 +139,18 @@ Though not a syntactic requirement, the proper use of whitespace is important fo
 good, readable code.  Code inside code blocks is indented at the same indentation.
 Nested code blocks are indented further.  Think of a typical table of contents or
 the outline of a formal paper or essay.  Sections and subsections or points and 
-points all follow proper indentation with elements at the same level at the same
+subpoints all follow proper indentation with elements at the same level at the same
 indentation.  This convention is used to organize code and make it more readable.
 
 \subsection{Program Structure}
 
 \subsubsection{Classes}
+\index{class}
 
 In Java, everything is a \emph{class} or belongs to a class.  A class is an 
 extensible program or blueprint for creating objects.  Objects are an integral
 part of \gls{oopLabel} that we'll explore later.  However, to start out our
 programs will be simple enough that the can be contained in a single class.
-
 To declare a class, you use the following syntax.
 
 \mintinline{java}{public class HelloWorld { ... }}
@@ -161,7 +162,7 @@ name.  In our previous example, the class must be in a file named
 
 When naming classes, the most commonly accepted naming convention 
 is to use uppercase camel casing (also called PascalCase) in which each
-word in the name is capitalized including the first.  Examples:
+word in the name is capitalized including the first, 
 \mintinline{java}{Employee}, \mintinline{java}{SavingsAccount}, 
 \mintinline{java}{ImageFile}, etc.  Class names (as well as their source file
 names) are case sensitive.
@@ -174,8 +175,8 @@ structure which allows subdirectories and separate directories at the same
 level.  It all starts at the \emph{root} directory called the ``default'' package.
 
 Within a source file, we declare which package the file belongs to using
-the keyword \mintinline{java}{package} followed by a ``fully qualified
-package declaration'' which is essentially just the names of the directories
+the keyword \mintinline{java}{package} followed by a \emph{fully qualified
+package declaration} which is essentially just the names of the directories
 that the file is located in, separated by a period.  The declaration is terminated
 by a semicolon.  For example, the package declaration, 
 
@@ -191,7 +192,7 @@ Mathematics related classes can be placed in one package while
 image related classes can be placed in another, etc.  It also provides
 separate name spaces for classes.  There could be 3 or 4 different
 classes named \mintinline{java}{List} for example.  They could not
-be located in the same directory, however: if you wanted to use one
+be located in the same directory; if you wanted to use one
 which one would you be referring to?  By separating them into 
 packages, they can all exist without conflict.  When we want to
 use a particular one, we \emph{import} that class with its fully
@@ -204,7 +205,7 @@ class so that its methods and functionality can be used.  For example,
 there is a class named \mintinline{java}{Scanner} (located in the
 package \mintinline{java}{java.util}) that makes it easy to read input
 from the standard input.  To include it in our program so that we can
-use its functionality, we would need\footnote{Strictly, speaking you
+use its functionality, we would need\footnote{You
 can still use it without importing it, but you'd need to use a fully
 qualified path name at declaration/instantiation.} to import it: 
 
@@ -217,7 +218,7 @@ explicit \mintinline{java}{import} statement.
 
 You may see some code that uses a \emph{wildcard} like
 \mintinline{java}{import java.util.*;} which ends up importing
-every class in that package.  This is generally considered bad
+\emph{every} class in that package.  This is generally considered bad
 practice.  In general, code should be intentional and specific, 
 importing every class even if they are not used goes against
 this principle. 
@@ -236,17 +237,65 @@ In many of our examples we'll use \mintinline{java}{unl.cse}
 Computer Science \& Engineering) which illustrates this 
 general-to-specific organization.
 
-\subsection{The \mintinline{java}{main} Method}
+There are many other important classes and packages provided by the
+standard \gls{jdkLabel} that we'll examine as needed.  Of immediate
+interest is the \mintinline{java}{Math} class and its library of
+common mathematical functions such as the square root and the natural 
+logarithm.  Table \ref{table:javaMathFunctions} highlights several of 
+these functions.  To use them you'd need to invoke them by using the
+class name and dot operator.  For example:
+
+\begin{minted}{java}
+double x = 1.5;
+double y, z;
+y = Math.sqrt(x); //y now has the value $\sqrt{x} = \sqrt{1.5}$
+z = Math.sin(x); //z now has the value $\sin{(x)} = \sin{(1.5)}$
+\end{minted}
+
+In both of the method calls above, the value of the variable 
+\mintinline{java}{x} is ``passed'' to the math function which computes 
+and ``returns'' the result which then gets assigned to another variable.
+
+\begin{table}
+\centering
+\begin{tabular}{l|l}
+\hline
+Function & Description \\
+\hline
+\mintinline{java}{Math.abs(x)}  & Absolute value function, $|x|$\textsuperscript{a}\\
+\mintinline{java}{Math.ceil(x)} & Ceiling function, $\lceil 46.3\rceil = 47.0$\\
+\mintinline{java}{Math.floor(x)} & Floor function, $\lfloor 46.3 \rfloor =46.0$\\
+\\
+\mintinline{java}{Math.cos(x)} & Cosine function\textsuperscript{b}\\
+\mintinline{java}{Math.sin(x)} & Sine function\textsuperscript{b}\\
+\mintinline{java}{Math.tan(x)} & Tangent function\textsuperscript{b}\\
+\\
+\mintinline{java}{Math.exp(x)} & Exponential function, $e^x$, $e = 2.71828\ldots$ \\
+\mintinline{java}{Math.log(x)}  & Natural logarithm, $\ln{(x)}$\textsuperscript{c} \\
+\mintinline{java}{Math.log10(x)} & Logarithm base 10, $\log_{10}{(x)}$\textsuperscript{c} \\
+\\
+\mintinline{java}{Math.pow(x,y)} & The power function, computes $x^y$\\
+\mintinline{java}{Math.sqrt(x)} & Square root function\textsuperscript{c}\\
+
+\hline
+\end{tabular}
+\caption[Several methods defined in the Java \mintinline{java}{Math} library]{Several methods defined in the Java \mintinline{java}{Math} library.  \textsuperscript{a}There are several versions of the absolute value method, 
+one for each numeric type but all with the same name.  \textsuperscript{b}all trigonometric functions assume input is in \emph{radians}, \textbf{not} degrees. \textsuperscript{c}Input is assumed to be positive, $x > 0$.}
+\label{table:javaMathFunctions}
+\end{table}
+
+
+\subsection{The \mintinline{java}{main()} Method}
 
 Every executable program has to have a beginning: a point at which the
 program starts to execute.  In Java, a class may contain many variables 
 and methods, but a class is only \emph{executable} if it contains a 
-\mintinline{java}{main} method.  When a Java class is compiled and
-the JVM is started, the JVM loads the class into memory and 
-starts executing code contained in the \mintinline{java}{main} method.
+\mintinline{java}{main()} method.  When a Java class is compiled and
+the \gls{jvmLabel} is started, the JVM loads the class into memory and 
+starts executing code contained in the \mintinline{java}{main()} method.
 
-In addition, our \mintinline{java}{main} method takes an \emph{array}
-of \mintinline{java}{String} types which which serve to communicate
+In addition, our \mintinline{java}{main()} method takes an \emph{array}
+of \mintinline{java}{String} types which serve to communicate
 any command line arguments provided to the program (review Section
 \ref{subsection:commandLineInput} for details).  The array, 
 \mintinline{java}{args} stores the arguments as strings.  The number
@@ -257,7 +306,7 @@ an integer indicating how many arguments were provided.  This does
 already be known to the programmer.
 
 To access any one argument, it will be necessary to
-\emph{index}.  The index for the first argument is zero, thus the
+\emph{index} the array.  The index for the first argument is zero, thus the
 first argument is \mintinline{java}{args[0]}, the second is \mintinline{java}{args[1]}, etc.
 The last one would be at \mintinline{java}{args[args.length-1]}.
 
@@ -281,7 +330,7 @@ two forward slashes, \mintinline{java}{//comment} or as a multiline comment usin
 a combination of forward slash and asterisk: \mintinline{java}{/* comment */}.  
 With a single line comment, everything on the line \emph{after} the forward
 slashes is ignored.  With a multiline comment, everything in between the forward
-slash/asterisk is ignored.  Comments are ultimately ignored by the compiler so
+slash/asterisk is ignored.  Comments are ultimately ignored so
 the amount of comments do not have an effect on the final executable code.
 Consider the following example.
 
@@ -304,15 +353,15 @@ color-coded comments its easy to see the mistake visually.
 
 Another common comment style convention is the Javadoc (Java Documentation)
 style of comments.  Javadoc style comments are multiline comments that begin
-with \mintinline{java}{/**} (that is, two asterisks).  The Javadoc framework allows you
+with \mintinline{java}{/**}.  The Javadoc framework allows you
 to \emph{markup} your comments with tags and links so that documentation can
 be automatically generated and published.  We will sometimes use this style, but
-we will not cover the details.  For documentation, see Oracle's website, \url{http://www.oracle.com/}.
+we will not cover the details.  
 
 \section{Variables}
 
 Java has 8 built-in \gls{primitive} types supporting numbers (integers 
-and floating-point numbers), Booleans, and characters.  Table \ref{table:javaPrimitives}
+and floating point numbers), Booleans, and characters.  Table \ref{table:javaPrimitives}
 contains a complete description of these types.  Each of these primitive
 types also has a corresponding \emph{wrapper} class defined in the 
 \mintinline{java}{java.lang} package.  Wrapper classes provide \emph{object}
@@ -341,12 +390,12 @@ aforementioned \mintinline{java}{Integer.parseInt()} method is part of the
 
 The wrapper classes, however, are different.  These are objects, so when a reference is declared
 for them, by default, that reference refers to \mintinline{java}{null}.  The keyword \mintinline{java}{null}
-is used to indicate a special memory address that represents ``nothing''.  In fact, the
+is used to indicate a special memory address that represents ``nothing.''  In fact, the
 default value for \emph{any} object type is \mintinline{java}{null}.  Care must be taken
 when mixing primitive types and their wrapper classes (see below) as \mintinline{java}{null}
 references may result in a \mintinline{java}{NullPointerException}.  Finally, instances
 of the wrapper classes are \gls{immutable}.  Once they are created, they cannot be changed.
-References can be made to reference a different object, but the object's value cannot
+References can be made to refer to a different object, but the object's value cannot
 be changed.  
 
 \subsection{Declaration \& Assignment}
@@ -362,23 +411,21 @@ char firstInitial;
 boolean isStudent;
 \end{minted}
 
-Each declaration specifies the variables type followed by the 
+Each declaration specifies the variable's type followed by the 
 identifier and ending with a semicolon.  The identifier rules are 
-fairly standard: a name can consist of lower and uppercase 
+fairly standard: a name can consist of lowercase and uppercase 
 alphabetic characters, numbers, and underscores but may 
 \emph{not} begin with a numeric character.  We adopt the 
 modern camelCasing naming convention for variables in our 
-code.
-
-In general, variables \emph{must} be assigned a value before
-you can ``read'' them (say printing them) or otherwise using them
+code.  In general, variables \emph{must} be assigned a value before
+you can use them
 in an expression.  You do not have to immediately assign a value
 when you declare them (though it is good practice), but some value
 must be assigned before they can be used or the compiler
 will issue an error.\footnote{Instance variables, that is variables
 declared as part of an object \emph{do} have default values.
-For objects, the default is \mintinline{java}{null}, for all numeric t
-ypes, zero is the default value.  For the \mintinline{java}{boolean} 
+For objects, the default is \mintinline{java}{null}, for all numeric 
+types, zero is the default value.  For the \mintinline{java}{boolean} 
 type, \mintinline{java}{false} is the default, and the default 
 \mintinline{java}{char} value is \mintinline{text}{\0}, the 
 null-terminating character (zero in the \gls{asciiLabel} table).}
@@ -415,7 +462,7 @@ int numOrders, numUnits = 42, numCustomers = 10, numItems;
 double costPerUnit = 32.79, salesTaxRate;
 \end{minted}
 
-Another convenient keyword is \mintinline{java}{final}.  Though it has several uses, 
+Another useful keyword is \mintinline{java}{final}.  Though it has several uses, 
 when applied to a variable declaration, it makes it a read-only variable.  After a
 value has been assigned to a \mintinline{java}{final} variable, its value cannot
 be changed.  
@@ -434,7 +481,7 @@ Java supports the standard arithmetic operators for addition, subtraction, multi
 division using \mintinline{java}{+}, \mintinline{java}{-}, \mintinline{java}{*}, and
 \mintinline{java}{/} respectively.  Each of these operators is a binary operator that
 acts on two operands which can either be literals or other variables and follow
-the usually rules of arithmetic when it comes to order of precedence (multiplication 
+the usual rules of arithmetic when it comes to order of precedence (multiplication 
 and division before addition and subtraction).
 
 \begin{minted}{java}
@@ -467,7 +514,8 @@ In addition, you can \emph{mix} the wrapper classes with their primitive types.
 You must be careful though.  The wrapper classes are object references which
 can be \mintinline{java}{null}.  If a \mintinline{java}{null} reference is used
 in an arithmetic expression, it will result in a \mintinline{java}{NullPointerException}
-which can be caught and handled.  If not caught, it will end up being a fatal
+which can be caught and handled (see Chapter \ref{chapter:java:errorHandling}).  
+If not caught, it will end up being a fatal
 error.  Some examples:
 
 \begin{minted}{java}
@@ -491,23 +539,24 @@ c = a + d; //NullPointerException
 \end{minted}
 
 This works because of a mechanism called \emph{autoboxing} (or \emph{autounboxing} in
-this case).  The wrapper class is acting like a ``box'': its an object that stores
+this case).  The wrapper class is acting like a ``box'': it is an object that stores
 the value of a primitive type.  When it gets used in an arithmetic expression, it
 gets ``unboxed'' and converted to a primitive type so that the arithmetic
 operation is performed on compatible primitive types.  This is all done by the 
 compiler and is completely transparent to us.  However, that is the reason that
 we may get a \mintinline{java}{NullPointerExcpetion}.  Our code actually gets
 converted from \mintinline{java}{c = a + d;} to \mintinline{java}{c = a +d.doubleValue();}.
-The \mintinline{java}{doubleValue} method returns a \mintinline{java}{double} primitive
+The \mintinline{java}{doubleValue()} method returns a \mintinline{java}{double} primitive
 value.  However, if \mintinline{java}{d} is \mintinline{java}{null}, you can't call
-a method on it; thus the \mintinline{java}{NullPointerException}.
+a method on it; thus the \mintinline{java}{NullPointerException} is thrown
+as a consequence.
 
 Special care must be taken when dealing with \mintinline{java}{int} types.  
 For all four operators, if both operands are integers, the result will be an
 integer.  For addition, subtraction, and multiplication this isn't an issue, but
 for division it means that when we divide, say \mintinline{java}{(10 / 20)}, the result
-is not $0.5$ as expected.  The number 0.5 is a floating-point number.  As
-such, the fractional part gets \gls{truncation}{truncated} (cut off and thrown out) leaving
+is not $0.5$ as expected.  The number 0.5 is a floating point number.  As
+such, the fractional part gets \glslink{truncation}{truncated} (cut off and thrown out) leaving
 only zero.  In the code above, \mintinline{java}{d = a / b;} the variable \mintinline{java}{d}
 ends up getting the value zero because of this.
 
@@ -522,7 +571,7 @@ double x;
 x = (double) a / b; 
 \end{minted}
 
-Assigning a floating-point number to an integer is not allowed in
+Assigning a floating point number to an integer is not allowed in
 Java and attempting to do so will be treated as a compiler error.  This
 is because Java does not support \emph{implicit} type casts.
 However, you \emph{can} do so if you provide an \emph{explicit} type cast
@@ -532,10 +581,9 @@ as in the code above,
 
 In this code, \mintinline{java}{b + y} is correctly computed as $20 + 3.4 = 23.4$, 
 but the explicit type cast (down to an integer) results in truncation.  The $.4$ 
-gets cutoff and \mintinline{java}{d} gets the value 23.
-
-Assigning an \mintinline{java}{int} value to a \mintinline{java}{double} variable is
-not a problem as the integer $2$ becomes the floating-point number $2.0$.
+gets cutoff and \mintinline{java}{d} gets the value 23. Assigning an 
+\mintinline{java}{int} value to a \mintinline{java}{double} variable is
+not a problem as the integer $2$ becomes the floating point number $2.0$.
 
 Java also supports the integer remainder operator using the \mintinline{java}{%} symbol.
 This operator gives the remainder of the result of dividing two integers.  Examples:
@@ -550,19 +598,20 @@ x = 29 % 5; //x is 4
 
 \section{Basic I/O}
 
-Java provides several ways to perform input and output operations on the standard
+Java provides several ways to perform input and output operations 
+with the standard
 input/output as part of the \mintinline{java}{System} class.  The \mintinline{java}{System}
 class contains a standard output stream which can be accessed using \mintinline{java}{System.out}.
 It also has a standard input stream which can be accessed using \mintinline{java}{System.in}.
 
-For output, there are several methods that can be used but we'll focus on \mintinline{java}{println}
-and \mintinline{java}{printf}.  The first is for printing strings on a single line.  The \mintinline{java}{ln}
+For output, there are several methods that can be used but we'll focus on \mintinline{java}{System.out.println()}
+and \mintinline{java}{System.out.printf()}.  The first is for printing strings on a single line.  The \mintinline{java}{ln}
 at the end indicates that the method will insert an endline character, \mintinline{text}{\n} for you.
 The second is a \mintinline{java}{printf}-style output method that takes placeholders like \mintinline{java}{%d} 
 and \mintinline{java}{%f} (review Section \ref{subsection:printfStyleFormatting} for details).
 
 The easiest way to read input is through the \mintinline{java}{Scanner} class.  You can create
-a new instance of the scanner class and associate it with the standard input using the following
+a new instance of the \mintinline{java}{Scanner} class and associate it with the standard input using the following
 code.
 
 \mintinline{java}{Scanner s = new Scanner(System.in);}
@@ -589,14 +638,14 @@ System.out.printf("Great, you entered %d\n", a);
 One potential problem with using \mintinline{java}{Scanner} is that the 
 methods cannot force a user to enter good input.  In the example above,
 if the user, instead of entering a number, entered \mintinline{java}{"Hello"}, 
-the conversion to a number would fail.  This would result in a 
+the conversion to a number would fail and result in a 
 \mintinline{java}{InputMismatchException}.
 
 \section{Examples}
 
 \subsection{Converting Units}
 
-Let's start with a simple task: let's write a program that will prompt 
+Let's write a program that will prompt 
 the user to enter a temperature in degrees Fahrenheit and convert 
 it to degrees Celsius using the formula
   $$C = (F - 32) \cdot \frac{5}{9}$$
@@ -605,7 +654,7 @@ We begin with the basic program outline which will include a package and
 class declaration.  We'll also need
 to read from the standard input, so we'll import the \mintinline{java}{Scanner}
 class.  We'll want want our class to be executable, so we need to 
-put a \mintinline{java}{main} method in our class.  Finally, we'll document
+put a \mintinline{java}{main()} method in our class.  Finally, we'll document
 our program to indicate its purpose.
 
 
@@ -635,11 +684,11 @@ that they still need to do with the program.
 Let's first outline the basic steps that our program will go through:
 \begin{enumerate}
   \item We'll first prompt the user for input, asking them for a temperature in Fahrenheit
-  \item Next we'll read the user's input, likely into a floating-point number as degrees can be fractional
+  \item Next we'll read the user's input, likely into a floating point number as degrees can be fractional
   \item Once we have the input, we can calculate the degrees Celsius by using the formula above
   \item Lastly, we will want to print the result to the user to inform them of the value
 \end{enumerate}
-Sometimes its helpful to write an outline of such a program directly in the code using
+Sometimes it is helpful to write an outline of such a program directly in the code using
 comments to provide a step-by-step process.  For example:
 
 \begin{minted}{java}
@@ -668,16 +717,16 @@ public class TemperatureConverter {
 As we read each step it becomes apparent that we'll need a couple of variables:
 one to hold the Fahrenheit (input) value and one for the Celsius (output) value.  It also
 makes sense that each of these should be \mintinline{java}{double} variables as we
-want to support fractional values.  So at the top of our \mintinline{java}{main} method, 
+want to support fractional values.  At the top of our \mintinline{java}{main()} method, 
 we'll add the variable declarations:
 
 \mintinline{java}{double fahrenheit, celsius;}
 
-We'll also need a scanner, initialized to read from the standard input: 
+We'll also need a \mintinline{java}{Scanner}, initialized to read from the standard input: 
 
 \mintinline{java}{Scanner s = new Scanner(System.in);}
 
-Each of the steps is now straightforward; we'll use a \mintinline{java}{Sytem.out.println} statement in the
+Each of the steps is now straightforward; we'll use a \mintinline{java}{System.out.println()} statement in the
 first step to prompt the user for input:
 
 \mintinline{java}{System.out.println("Please enter degrees in Fahrenheit: ");}
@@ -693,7 +742,7 @@ We can now compute \mintinline{java}{celsius} using the formula provided:
 
 \mintinline{java}{celsius = (fahrenheit - 32) * (5 / 9);}
 
-Finally, we use \mintinline{java}{System.out.printf} to output the result to the user:
+Finally, we use \mintinline{java}{System.out.printf()} to output the result to the user:
 
 \mintinline{java}{System.out.printf("%f Fahrenheit is %f Celsius\n", fahrenheit, celsius);}  
 
@@ -706,11 +755,10 @@ This will \emph{always} end up being zero.
 One way we could fix it would be to pull out our calculators and find that
 $\frac{5}{9} = 0.55555\ldots$ and replace \mintinline{java}{(5 / 9)} with \mintinline{java}{0.555555}.
 But, how many fives?  It may be difficult to tell how accurate we can make
-this floating-point number by hardcoding it ourselves.  A much better approach
+this floating point number by hardcoding it ourselves.  A much better approach
 would be to let the compiler take care of the optimal computation for us by
 making at least one of the numbers a \mintinline{java}{double} to prevent
 integer truncation.  That is, we should instead use \mintinline{java}{5.0 / 9}.
-
 The full program can be found in Code Sample \ref{code:java:fahrenheitToCelsiusProgram}.
 
 \begin{listing}[H]
@@ -754,11 +802,11 @@ the user for the coefficients, $a, b, c$ to a quadratic polynomial,
   $$ax^2 + bx + c$$
 and computing its roots using the quadratic formula, 
   $$x = \frac{-b \pm \sqrt{b^2 - 4ac}}{2a}$$
-As before, we can create a basic program with a \mintinline{java}{main}
+As before, we can create a basic program with a \mintinline{java}{main()}
 method and start filling in the details.  In particular, we'll need to prompt
 for the input $a$, then read it in; then prompt for $b$, read it in and
 repeat for $c$.  We'll also need several variables: three for the coefficients
-$a, b, c$ and \emph{two} more; one for each root.  Thus, we have 
+$a, b, c$ and \emph{two} more; one for each root. 
 
 \begin{minted}{java}
     double a, b, c, root1, root2;
@@ -772,17 +820,16 @@ $a, b, c$ and \emph{two} more; one for each root.  Thus, we have
     c = s.nextDouble();
 \end{minted}
 
-Now to compute the roots: we need to take care that we correctly adapt the
+Now to compute the roots: we need to adapt the
 formula so it accurately reflects the order of operations.  We also need to use
-the standard math library's square root function (unless you want to write 
-your own!  Carefully adapting the formula leads to 
+the standard math library's square root method.
 
 \begin{minted}{java}
 root1 = (-b + Math.sqrt(b*b - 4*a*c) ) / (2*a);
 root2 = (-b - Math.sqrt(b*b - 4*a*c) ) / (2*a);
 \end{minted}
 
-Finally, we print the output using \mintinline{java}{System.out.printf}.  The full program 
+Finally, we print the output using \mintinline{java}{System.out.printf()}.  The full program 
 can be found in Code Sample \ref{code:java:quadraticRootsProgram}.
 
 \begin{listing}[h]
@@ -827,7 +874,7 @@ public class QuadraticRoots {
 
 This program was interactive.  As an alternative, we could have read 
 all three of the inputs as command line arguments, taking care that we
-need to convert them to floating-point numbers.  Lines 16--21 in the
+need to convert them to floating point numbers.  Lines 16--21 in the
 program could have been changed to 
 
 \begin{minted}{java}
@@ -843,9 +890,9 @@ for this program.  For example:
   \item What if the user entered some combination such that $b^2 < 4ac$?
   \item What if the user entered non-numeric values?
   \item For the command line argument version, what if the user provided less than
-  	three argument?  Or more?
+  	three arguments?  Or more?
 \end{itemize}
-How might we prevent the consequences of such bad inputs?  That is, 
-how might we handle the even that a users enters those bad inputs and
-how do we communicate these errors to the user?  To do so we'll need 
-conditionals.
+How might we prevent the consequences of such bad input?  
+How might we handle the event that a user enters bad input and
+how do we communicate these errors to the user?  To start to resolve
+these issues, we'll need conditionals.

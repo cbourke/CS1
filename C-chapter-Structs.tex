@@ -1,19 +1,20 @@
 %!TEX root = ComputerScienceOne.tex
 
 %%Chapter: Structs in C
+\index{structures}
+\index{encapsulation!C}
 
 Strictly speaking, C is not an object-oriented programming language, 
 it is an \emph{imperative} (or, relatedly a \emph{structured} or 
-\emph{procedural}) programming language.  This characterizes the
-language as one that changes a program's state through statements
+\emph{procedural}) programming language.  This means that C can be 
+characterized as a language that changes a program's state through statements
 and the use of function calls.  Though C does not have objects, it
 does support a ``weak'' form of encapsulation through the use
 of \emph{structures}.  Structures are a user-defined type that 
-collect multiple pieces of data together into one logical unit.
+collects multiple pieces of data together into one logical unit.
 Once defined, structures can be used in a program just like any
-other variable type; variables can be declared, passed and returned
+other variable type; structure variables can be declared, passed and returned
 from functions, pointers to structures can be used, etc.
-
 Structures form a ``weak'' form of encapsulation in that they only
 provide the grouping of data.  The protection of data through 
 visibility keywords is not supported.  The grouping of functions
@@ -25,10 +26,11 @@ paradigms.}  However, even this weak form provides a very useful
 and convenient way to collect related pieces of data.
 
 \section{Defining Structures}
+\index{structures!defining}
 
 To define a structure, we use the keyword \mintinline{c}{struct}
 along with the previously introduced keyword \mintinline{c}{typedef}.
-To motivate an example, let's reconsider the student entity, which
+To motivate an example, let's reconsider a student entity, which
 has a first and last name (strings), ID (integer), and a GPA 
 (a floating point number).  Each of these pieces of data can be
 encapsulated into a structure as follows.
@@ -49,7 +51,7 @@ Note the syntax and naming conventions:
   	delimited using semicolons (in contrast to an enumerated type which 
 	is a list, these elements do \emph{not} constitute a list).
   \item A structure may contain any number of elements of any type.
-  \item The name of the structure is provided at the end, ended with
+  \item The name (identifier) of the structure is provided at the end, ended with
   	a semicolon.
   \item We use a modern naming convention: each element is named
   	using lower camel casing while the name of the structure itself
@@ -59,7 +61,7 @@ Note the syntax and naming conventions:
 In addition, structure declarations are generally placed in a header 
 file along with any any function prototypes that use the structure as 
 a parameter or a return type.  Once you have defined a structure you
-can now use it as you would a built-in variable type.  For example, 
+can use it as you would a built-in variable type.  For example, 
 
 \mintinline{c}{Student s;}
 
@@ -77,7 +79,7 @@ struct Student {
 };
 \end{minted}
 
-That is, without the keyword \mintinline{c}{typedef} and with
+This syntax omits the keyword \mintinline{c}{typedef} and places
 the structure name at the beginning.  The difference is a bit 
 technical (the original syntax creates an anonymous structure
 with the \mintinline{c}{Student} identifier placed in the 
@@ -120,7 +122,7 @@ conventions to avoid conflicts.
 Finally, though C does not provide a mechanism for the protection of
 data, many libraries and code bases will begin certain member variables
 with underscore(s) to indicate that they are ``internal'' variables
-used by the library that should \emph{not} be accessed or modified.
+used by the library and should \emph{not} be accessed or modified.
 For example, \mintinline{c}{_someVariable} or \mintinline{c}{__anotherVariable} would indicate ``private'' variables that should
 not be tampered with.  The C language itself would still allow you 
 access and modify the variables, but doing so may violate assumptions
@@ -128,12 +130,12 @@ and expectations of the library code, leading to undefined behavior.
 
 \subsection{Nested Structures}
 
-Consider adding another member element to the \mintinline{c}{Student}
+Consider adding another member variable to the \mintinline{c}{Student}
 structure to model a student's date of birth.  How might we model
 a date?  Unix systems model time as a single integer value that
-represents the number of milliseconds that have pasted since the
-unix \emph{epoch}, January 1st, 1970 (also known as Coordinated 
-Universal Time or UTC).  For example, the New Horizons space probe
+represents the number of milliseconds that have passed since the
+Unix \emph{epoch}, January 1st, 1970 (also known as \gls{utcLabel}).  
+For example, the New Horizons space probe
 was launched on January 19th, 2006 at 19:00:00 UTC.  This corresponds
 to 1,137,697,200, roughly 1.137 billion milliseconds since the
 epoch.  Another way to model time is as a string.  There are several
@@ -146,8 +148,8 @@ as \mintinline{text}{"2006-01-19T19:00:00+00:00"}.
 To keep things simple, we'll model our date using three numbers: a
 year, a month and a date.  But how should we implement this?  
 Conceptually, a date is a single entity, separating these three 
-numbers doesn't make much sense.  This is a good use case for defining
-a structure.
+numbers doesn't make much sense.  This is a perfect opportunity to 
+define another structure.
 
 \begin{minted}{c}
 typedef struct {
@@ -157,7 +159,6 @@ typedef struct {
 } Date;
 \end{minted}
 
-How might we include this in our \mintinline{c}{Student} structure?
 Once we have defined a structure we can use it as we would a normal
 variable, so it makes sense that we could include it in another structure.
 
@@ -176,7 +177,8 @@ typedef struct {
 \label{code:c:studentStructure}
 \end{listing}
 
-This is a good illustration of a form of \emph{composition} where 
+This is a good illustration of a form of \index{composition} 
+\emph{composition} where 
 one structure may be \emph{composed} of other structures.  Since
 the \mintinline{c}{Student} structure ``owns'' an instance of the
 \mintinline{c}{Date} structure, it is necessary to ensure that 
@@ -199,11 +201,12 @@ Student t;
 
 These static declarations will allocate enough space on the stack
 to hold all of the data associated with the structures (the two
-pointers, integer, and double).  However, the values stored in 
+\mintinline{c}{char *} pointers, \mintinline{c}{int}, and 
+\mintinline{c}{double}).  However, the values stored in 
 each of the structure's member variables are undefined.  With
 this style of declaration, C does not define default values.
 
-Alternatively, another way to declare instances of our structures
+Another way to declare instances of our structures
 is to use the following syntax.
 
 \begin{minted}{c}
@@ -222,7 +225,7 @@ Student t = {
 \end{minted}
 
 The first declaration creates a \mintinline{c}{Student} structure
-with defaulted values (zero for any numeric types, \mintinline{c}{null}
+with default values (zero for any numeric types, \mintinline{c}{null}
 for any pointers).  The second creates a \mintinline{c}{Student}
 structure initialized with the values provided in the curly brackets.
 The order matters here and will match the ordering of the original
@@ -230,16 +233,16 @@ structure declaration.  Since the \mintinline{c}{dateOfBirth} is a
 structure itself, a nested set of values within curly brackets is 
 necessary.  One draw back to this type of declaration is that the
 character pointers are statically declared.  The strings \mintinline{c}{"Grace"} and \mintinline{c}{"Hopper"} are initialized in a 
-\emph{read-only} segment of memory, so any attempts to change
+\emph{read-only} segment of memory, any attempts to change
 the \emph{contents} of these strings are undefined behavior.  
 The pointers themselves, however, can be reassigned.
 
-This static declaration also suffers the same limitations as
-static arrays: they are allocated on the stack and cannot, therefore
-be returned from functions.  In addition, since structures consist
-of multiple pieces of data, their memory footprint is larger.  
+This static declaration allocates the structure on the stack.
+Since structures consist of multiple pieces of data, their memory 
+footprint is larger.  
 Allocating larger and larger structures on the stack runs the
-risk of running out of stack memory resulting in a stack overflow.
+risk of running out of stack memory resulting in a 
+\index{stack overflow} stack overflow.
 To solve this, we can instead use dynamically allocated structures.
 
 To dynamically allocate a structure, we use a pointer to a structure
@@ -251,9 +254,7 @@ macro are ``smart'' enough to look at the structure declaration and
 determine the size of each of its variables and add up the total
 number of bytes required.
 
-\begin{minted}{c}
-Student *s = (Student *) malloc(sizeof(Student) * 1);
-\end{minted}
+\mintinline{c}{Student *s = (Student *) malloc(sizeof(Student) * 1);}
 
 The multiplication by 1 in this example is not strictly necessary, but
 emphasizes the fact that we are allocating space for one structure
@@ -275,8 +276,8 @@ structure, such as
 
 we can use the \emph{direct component selector operator}, which is
 simply just a period followed by the member variable we wish to 
-access.  Commonly, this is referred to simply as the \emph{dot
-operator}.
+access.  Commonly, this is referred to simply as the 
+\index{dot operator} \emph{dot operator}.
 
 \begin{minted}{c}
 Student s;
@@ -313,8 +314,9 @@ Student *s = ...;
 
 This can be a bit unwieldy, so C provides a convenience operator, 
 the \emph{indirect component selector operator}, or more commonly,
-the \emph{arrow operator} that allows us to select a member variable
-with a single operator that resembles a left-pointing arrow.
+the \index{arrow operator} \emph{arrow operator} that allows us 
+to select a member variable
+with a single operator that resembles a right-pointing arrow.
 
 \begin{minted}{c}
 Student *s = (Student *) malloc(sizeof(Student));
@@ -339,9 +341,14 @@ s->dateOfBirth.year = 2525;
 Note the last line: the \mintinline{c}{dateOfBirth} member variable
 was another structure, but not a pointer to a structure, so we
 use the dot operator to access the \mintinline{c}{year} member
-variable.
+variable.  Alternatively, we could have defined \mintinline{c}{dateOfBirth}
+to be a pointer, \mintinline{c}{Date *dateOfBirth;} in the 
+\mintinline{c}{Student} structure.  If we had, then to access the 
+\mintinline{c}{year} member variable using two arrow operators, 
+\mintinline{c}{s->dateOfBirth->year}.
 
 \section{Arrays of Structures}
+\index{structures!arrays}
 
 Just as we can create arrays of built-in types such as integers, 
 we can also create arrays of our user-defined structures.  As
@@ -367,7 +374,7 @@ regular structure and so we use the dot operator to access
 each of its member variables.  As with any other array, 
 each element takes up a number of bytes, equal to 
 \mintinline{c}{sizeof(Student)}.  We can swap and reassign
-each element just like any other variable, for example, 
+each element just like any other variable.  For example, 
 the following code swaps the first two elements using
 a temporary variable.
 
@@ -425,15 +432,9 @@ In the first prototype, we would pass a \mintinline{c}{Student} structure
 \emph{by value} to the function.  As we've already seen, this would
 mean that every byte of the structure would be copied onto the stack.
 For larger structures, we risk a stack overflow while for even smaller
-structures this can be very inefficient.  
-
-The second prototype won't even work properly.  As we've already seen, 
-we cannot return statically declared variables (we cannot return a local,
-statically declared array for example) as the stack frame in which it
-exists would be popped off the top of the call stack when returning
-from the function.
-
-The solution to both of these problems is to only deal with dynamically
+structures this can be very inefficient.  Likewise, the second prototype
+would return a structure.  When assigned to a variable, every byte is
+copied.  A better solution is to use dynamically
 allocated structures, passing them by reference to functions, and
 returning pointers to dynamically allocated instances as return types.
 For example, the functions above would be better implemented as follows.
@@ -453,16 +454,16 @@ consider several idiomatic examples of using structure with functions.
 Properly creating and initializing structure instances can be a
 complex and tedious task.  However, it is likely that we will need
 to repeat this operation over and over.  We can simplify our task
-if we write a function that creates a structure instance for us while
-we provide the function the values we want it initialized to.  
+if we write a utility function that creates a structure instance for us.
+We provide the function the values we want initialized to.  
 Such functions are sometimes referred to as \emph{factory} functions
 as they can be used to manufacture as many instances as we want
-(in object oriented programming languages, such methods are called
+(in object-oriented programming languages, such methods are called
 constructors).
 
-We will need to take care that we make \emph{deep} copies of 
+We will need to take care that we make \index{deep copy} \emph{deep} copies of 
 any dynamically allocated elements such as strings.  Shallow
-copies where references are shared may lead to unexpected 
+copies \index{shallow copy} where references are shared may lead to unexpected 
 behavior as changes to one string may affect multiple structures.
 
 \begin{minted}{c}
@@ -492,7 +493,7 @@ Student * createStudent(const char *firstName,
 \end{minted}
 
 Another common operation is to create a copy of a given structure.
-However, we will want to again ensure that everything is a \emph{deep}
+We will want to again ensure that everything is a \emph{deep}
 copy so that the two structures are not sharing references.  We
 can easily do this by reusing the functionality we just wrote in
 the factory function.
@@ -513,12 +514,11 @@ Another common operation with structures is to output their data
 as a human-readable string representation.  We could write
 a function that output a structure's member variables to the standard
 output using \mintinline{c}{printf()}.  However, it would more 
-useful if we created a more general function that returned a 
+useful if we created a general function that returned a 
 string representation of the structure.  That way, we could decide
 what to do with the string: output it to the standard output,
-to a file, etc.
-
-Not all structure instances will require the same length string, however.
+to a file, etc.  Not all structure instances will require the same 
+length string.
 Some students for example may have long names, while others have
 short.  We can handle this by first calculating the length of 
 the string necessary for whatever formatting we've chosen.
@@ -548,7 +548,9 @@ char * studentToString(const Student *s) {
 Here, we've utilized a variation on the familiar \mintinline{c}{printf()}
 function, \mintinline{c}{sprintf()} which ``prints'' the result not
 to the standard output or a file, but to a string, specified as
-the first argument.
+the first argument.  This function would end up returning a string 
+similar to the following for our previous example: 
+\mintinline{text}{"Hopper, Grace, ID = 87654321 (GPA = 3.90)"}
 
 \subsection{Passing Arrays of Structures}
 
@@ -577,8 +579,8 @@ When we pass in the array of structures, it is not passed by
 value.  That is, the total number of bytes for each student is
 \emph{not} copied onto the call stack.  Nevertheless, as we've
 previously seen it is sometimes preferable to maintain an array
-of pointers to structures.  If we had such an array, we would instead
-of a function that looks something like this.
+of pointers to structures.  If we had an array of pointers, we 
+would have a function that looks something like the following.
 
 \begin{minted}{c}
 /**

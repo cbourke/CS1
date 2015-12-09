@@ -1,8 +1,10 @@
 %!TEX root = ComputerScienceOne.tex
 
 %%Chapter: Recursion in C
+\index{recursion!C}
+\index{C!recursion}
 
-C supports recursion with no special syntax.  However, as a structured, 
+C supports recursion with no special syntax necessary.  However, as a structured, 
 procedural language, recursion is generally expensive and iterative or
 other non-recursive solutions are generally preferred.  We present
 a few examples to demonstrate how to write recursive functions in C.
@@ -73,9 +75,10 @@ int fibonacci(int n) {
 }
 \end{minted}
 
-C is not a language that provides implicit memoization.  Instead, 
+C is not a language that provides implicit \index{memoization} 
+memoization.  Instead, 
 we need to explicitly keep track of values using a table.  In the
-following example, the table is passed through as an argument.
+following example, the table is passed to the function as an argument.
 
 \begin{minted}{c}
 int fibonacciMemoization(int n, int *table) {
@@ -96,9 +99,9 @@ int fibonacciMemoization(int n, int *table) {
 \end{minted}
 
 It is the responsibility of the calling function to ensure that the 
-\mintinline{c}{table} array is large enough to accommodate all values
-(it should be at least of size $(n+1)$ to compute the $n$-th Fibonacci
-number).
+\mintinline{c}{table} array is large enough to accommodate all values.
+In this case should be at least of size $(n+1)$ to compute the $n$-th Fibonacci
+number.
 
 
 
