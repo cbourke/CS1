@@ -2,7 +2,7 @@
 
 %%Chapter: Methods in Java
 \index{functions!in Java}
-\index{Java!functions}
+\index{Java!methods}
 
 As an object-oriented programming language, functions in
 Java are usually referred to as \emph{methods} and are 
@@ -296,9 +296,9 @@ main after: b = Hello world!
 
 \subsection{Generalized Rounding}
 
-Recall that the standard math library provides a 
+Recall that the math library provides a 
 \mintinline{java}{Math.round()} method that rounds a number to 
-the nearest whole number.  Often, we've had need to round to 
+the nearest whole number.  We've had need to round to 
 cents as well.  We now have the ability to write a method to do 
 this for us.  Before we do, however, let's think more generally.  
 What if we wanted to round to the nearest tenth?  Or
@@ -306,14 +306,12 @@ what if we wanted to round to the nearest 10s or 100s place?  Let's
 write a general purpose rounding method that allows us to specify
 \emph{which} decimal place to round to.  
 
-The most natural input values would be to specify the place using
+The most natural input would be to specify the place using
 an integer exponent.  That is, if we wanted to round to the nearest
 tenth, then we would pass it $-1$ as $0.1 = 10^{-1}$, $-2$ if we wanted
-to round to the nearest 100th, etc.  On the positive end passing in 0
+to round to the nearest 100th, etc.  In the other direction, passing in 0
 would correspond to the usual round function, 1 to the nearest 10s spot, 
-and so on.  
-
-Moreover, we could demonstrate good code reuse (as well as procedural
+and so on. We could demonstrate good code reuse (as well as good procedural
 abstraction) by \emph{scaling} the input value and reusing the functionality
 already provided in the math library's \mintinline{java}{Math.round()} 
 method.  We could further define a \mintinline{java}{roundToCents()} 

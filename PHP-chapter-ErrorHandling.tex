@@ -17,14 +17,12 @@ control structure to handle exceptions and allows you to
 \section{Throwing Exceptions}
 
 Though PHP defines several different types of exceptions, 
-we'll only look at the generic \mintinline{php}{Exception} class.
+we'll only cover the generic \mintinline{php}{Exception} class.
 We can \mintinline{php}{throw} an exception in PHP by using the
 keyword \mintinline{php}{throw} and creating a new \mintinline{php}{Exception}
 with an error message.  
 
-\begin{minted}{php}
-throw new Exception("Something went wrong");
-\end{minted}
+\mintinline{php}{throw new Exception("Something went wrong");}
 
 By using a generic \mintinline{php}{Exception}, we
 can only attach a message to the exception (which can be
@@ -38,7 +36,7 @@ To catch an exception in PHP you can use the standard
 \mintinline{php}{try-catch} control block.  Optionally (and as
 of PHP version 5.5.0) you can use the \mintinline{php}{finally} 
 block to clean up any resources or execute code regardless of
-whether or not an exception was raised.  Let's take, for example, 
+whether or not an exception was raised.  Consider
 the simple task of reading input from a user 
 and manually parsing its value into an integer.  If the
 user enters a non-numeric value, parsing will fail
@@ -69,8 +67,8 @@ try {
 \end{minted}
 
 In this example, we've simply displayed an error message to
-the standard error output and exited the program.  That is, 
-we've made the design decision that this error should be fatal.
+the standard output and exited the program.  
+We've made the design decision that this error should be fatal.
 We could have chosen to handle this error differently in the
 \mintinline{php}{catch} block.  The \mintinline{php}{$e->getMessage()}
 prints the message that the exception was created with.  In
@@ -80,14 +78,13 @@ this case, \mintinline{php}{"Invalid input!"}.
 
 As of PHP 5.3.0 it is possible to define custom exceptions 
 by \emph{extending} the \mintinline{php}{Exception} class.
-To do this, you need to declare a new class.  We will cover
-the details of classes later on.  For now, we simply look at
-an example.  
-
+To do this, you need to declare a new class.  We cover classes
+and objects in Chapter \ref{chapter:php:objects}.  
+For now, we present a simple example.
 Consider the example in the previous chapter of computing
 the roots of a quadratic polynomial.  One possible error 
 situation is when the roots are complex numbers.  We could
-define a new PHP class as follows.
+define a new PHP exception class as follows.
 
 \begin{minted}{php}
 /**
@@ -98,7 +95,7 @@ class ComplexRootException extends Exception
     public function __construct($message = null, 
     			    $code = 0, 
     			    Exception $previous = null) {
-        // simply call the parent constructor
+        // call the parent constructor
         parent::__construct($message, $code, $previous);
     }
 
@@ -130,17 +127,14 @@ try {
 
 In the code above we had \emph{two} \mintinline{php}{catch}
 blocks.  Since we can have multiple types of exceptions, we
-can also catch each different type and handle them differently
-if we choose.  
-
-Each \mintinline{php}{catch} block catches a different 
+can catch each different type and handle them differently
+if we choose. Each \mintinline{php}{catch} block catches a different 
 type of exception.  The last \mintinline{php}{catch} block 
-was written to catch a generic \mintinline{php}{Exception}.  This last
-block will essentially catch any other type of exception.  
+was written to catch a generic \mintinline{php}{Exception}.   
 Much like an \mintinline{php}{if-else-if} statement, the
 first type of exception that is caught is the block that will
-be executed and they are all mutually exclusive.  Thus, a
-``catch all' block like this should always be the last 
+be executed and they are all mutually exclusive.  Thus, a generic
+``catch all'' block like this should always be the last 
 \mintinline{php}{catch} block.  The most specific types
 of exceptions should be caught first and the most general
 types should be caught last.

@@ -8,11 +8,11 @@ As we've previously seen, Java has a \mintinline{java}{String}
 class in the standard \gls{jdkLabel}.  Internally, Java 
 strings are stored as arrays of characters.  However, because
 of the \mintinline{java}{String} class, we never directly 
-interact with this representation, making using strings
+interact with this representation. Making using strings
 much easier than in other languages.  Java strings have
 also supported \gls{Unicode} since version 1.
 
-Moreover, Java provides many methods as part of the 
+Java provides many methods as part of the 
 \mintinline{java}{String} class that can be used to process
 and manipulate strings.  These methods \emph{do not} change
 the strings since strings in Java are \gls{immutable}.  
@@ -21,7 +21,7 @@ modified string that can then be stored in a variable.
 
 \section{Basics}
 
-As we've previously seen, we can declare \mintinline{java}{String}
+We can declare \mintinline{java}{String}
 variables and assign them values using the regular
 assignment operator.
 
@@ -38,10 +38,8 @@ does \emph{not} change the original string.  It just makes
 the variable \mintinline{java}{firstName} point to a new
 string.  If there are no other references to the old string,
 it becomes eligible for garbage collection and the \gls{jvmLabel}
-takes care of it.
-
-Strings can be \emph{copied} using the \mintinline{java}{String}
-class's copy constructor: 
+takes care of it. Strings can be \emph{copied} using the 
+\mintinline{java}{String} class's copy constructor: 
 
 \mintinline{java}{String copy = new String(firstName);}
 
@@ -75,7 +73,7 @@ documentation.
 \subsubsection{Length}
 
 When accessing individual characters in a string, it
-is necessary that we know the length of the string so
+is necessary to know the length of the string so
 that we do not access invalid characters.  The 
 \mintinline{java}{length()} method returns an \mintinline{java}{int}
 that represents the number of characters in the
@@ -95,7 +93,7 @@ for(int i=0; i<fullName.length(); i++) {
   System.out.printf("fullName[%d] = %c\n", i, fullName.charAt(i));
 }
 
-//or we can use toCharArray and an enhanced for-loop:
+//or we can use toCharArray and an enhanced for loop:
 for(char c : fullName.toCharArray()) {
   System.out.println(c);
 }
@@ -128,15 +126,17 @@ String s = "Hello, x is " + x + " and y = " + y;
 \end{minted}
 
 When used with objects, the concatenation operator 
-ends up invoking the object's \mintinline{java}{toString()}
+internally invokes the object's \mintinline{java}{toString()}
 method.  The plus operator as a concatenation operator 
 is actually \gls{syntactic sugar}.  When the code is compiled, 
 it is actually replaced with equivalent code that uses 
 a series of the \mintinline{java}{StringBuilder} class's 
 (a mutable version of the \mintinline{java}{String} class) 
-\mintinline{java}{append()} method.  The first example
-above may actually be replaced with the following code 
-that does not use the concatenation operator.
+\mintinline{java}{append()} method.  The compiler will actually
+replace the code using the concatenation operator with
+code that does not
+use the concatenation operator.  The example above would
+be replaced with something like the following.
 
 \begin{minted}{java}
 String firstName = "Tom";
@@ -162,7 +162,7 @@ as well as an ending index.  In both cases, the
 beginning index is \emph{inclusive} (that is the resulting
 string includes the character at that index), but
 in the second, the ending index is \emph{exclusive}
-(it is not included).
+(the character at the end index is \emph{not} included).
 
 \begin{minted}{java}
 String name = "Thomas Alan Waits";
@@ -220,8 +220,8 @@ System.out.println(names.get(2));  //prints "Grace Hopper"
 
 When comparing strings in Java, we cannot use the 
 numerical comparison operators such as \mintinline{java}{==}, or
-\mintinline{java}{<}.  Because strings are represented as
-arrays, using these operators actually compares the
+\mintinline{java}{<}.  Because strings are objects, 
+using these operators actually compares the
 variables' \emph{memory addresses}.
 
 \begin{minted}{java}
@@ -239,10 +239,9 @@ have the same content.  This is because \mintinline{java}{a == b}
 is comparing the memory address of the two variables.
 Since they point to different memory addresses 
 (created by two separate calls to the constructors)
-they are not equal.
+they will not be equal.
 
-Instead, there are several \gls{comparator} methods that 
-Java provides to compare strings.  Each string has a
+Instead, the \mintinline{java}{String} class provides a 
 \mintinline{java}{compareTo()} method\footnote{This method
 is part of the \mintinline{java}{String} class due to the
 fact that strings implement the \mintinline{java}{Comparable}
@@ -270,9 +269,9 @@ x = d.compareTo("apple");  //x is negative
 In the last example, \mintinline{java}{"Apple"} precedes
 \mintinline{java}{"apple"} since uppercase letters are
 ordered before lowercase letters according to the
-\gls{asciiLabel} table.  We can also make comparisons
-ignoring case if we need to using \mintinline{java}{compareToIgnoreCase()} method which works the same way.  This is a 
-case-insensitive version of the method.  Here, 
+\gls{asciiLabel} table.  We can also make case-insensitive
+comparisons using the \mintinline{java}{compareToIgnoreCase()} 
+method which works the same way.  Here, 
 \mintinline{java}{d.compareToIgnoreCase("apple")} will return 
 zero as the two strings are the same ignoring the cases.
 
@@ -295,7 +294,7 @@ result = a.equals(c); //false
 \section{Tokenizing}
 
 Recall that \emph{tokenizing} is the process of splitting
-up a string along some \emph{delimiter}.  For example, 
+up a string using some \emph{delimiter}.  For example, 
 the comma delimited string, \mintinline{java}{"Smith,Joe,12345678,1985-09-08"}
 contains four pieces of data delimited by a comma.  
 Our aim is to split this string up into four separate 

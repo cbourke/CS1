@@ -4,7 +4,7 @@
 \index{recursion!in PHP}
 \index{PHP!recursion}
 
-PHP supports recursion with no special syntax.  However,
+PHP supports recursion with no special syntax necessary.  However,
 recursion is generally expensive and iterative or
 other non-recursive solutions are generally preferred.  We present
 a few examples to demonstrate how to write recursive functions in PHP.
@@ -29,7 +29,7 @@ and an index variable.  The recursion works as follows: if the index
 variable has reached the size of the array, it stops and returns zero
 (the base case).  Otherwise, it makes a recursive call to 
 \mintinline{php}{recSum()}, incrementing the index variable by 1.  When
-the function returns, it adds its result to the $i$-th element
+the function returns, it adds the result to the $i$-th element
 in the array.  To invoke this function we would call it with an initial
 value of 0 for the index variable: \mintinline{php}{recSum($arr, 0)}.
 

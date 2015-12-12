@@ -6,7 +6,7 @@
 
 Java supports error handling through the use of exceptions.
 Java has many different predefined types of exceptions that
-you can freely use in your own code.  It also allows you to
+you can use in your own code.  It also allows you to
 define your own exception types by creating new classes
 that \emph{inherit} from the predefined classes.  Java uses
 the standard \mintinline{java}{try-catch-finally} control structure
@@ -15,27 +15,23 @@ your own exceptions.
 
 \section{Exceptions}
 
-Java defines a base class named \mintinline{java}{Throwable}
-that an object type that can be thrown using the keyword
-\mintinline{java}{throw}.  There are two majors subtypes of
+Java defines a base class named \mintinline{java}{Throwable}.  
+There are two majors subtypes of
 \mintinline{java}{Throwable}: \mintinline{java}{Error} and 
 \mintinline{java}{Exception}.  The \mintinline{java}{Error} class
 is used primarily for \emph{fatal} errors such as the \gls{jvmLabel}
 running out of memory or some other extreme case that your
 code cannot reasonably be expected to recover from.  
-
 There are dozens of types of exceptions that are subclasses
 of the standard Java \mintinline{java}{Exception} class defined by
 the \gls{jdkLabel} including \mintinline{java}{IOException} 
 (and its subclasses such as \mintinline{java}{FileNotFoundException})
 or \mintinline{java}{SQLException} (when working with \gls{sqlLabel}
-databases).
-
-An important subclass of \mintinline{java}{Exception} is 
+databases). An important subclass of \mintinline{java}{Exception} is 
 \mintinline{java}{RuntimeException} which represent \emph{unchecked}
 exceptions that do \emph{not} need to be explicitly caught
-(see Section \ref{section:java:checkedExceptions} below for 
-further details).  We'll mostly focus on this type of exception.
+(see Section \ref{section:java:checkedExceptions}).  We'll mostly 
+focus on this type of exception.
 
 \subsection{Catching Exceptions}
 
@@ -107,15 +103,15 @@ block will essentially catch any other type of exception.
 Much like an \mintinline{java}{if-else-if} statement, the
 first type of exception that is caught is the block that will
 be executed and they are all mutually exclusive.  Thus, a
-``catch all' block like this should always be the last 
+``catch all'' block like this should always be the \emph{last} 
 \mintinline{java}{catch} block.  The most specific types
 of exceptions should be caught first and the most general
 types should be caught last.
 
 \subsection{Throwing Exceptions}
 
-We can also manually \mintinline{java}{throw} an exception
-if we need to.  For example, we can \mintinline{java}{throw}
+We can also manually \mintinline{java}{throw} an exception.  
+For example, we can \mintinline{java}{throw}
 a generic \mintinline{java}{RuntimeException} using the following.
 
 \begin{minted}{java}
@@ -123,7 +119,7 @@ throw new RuntimeException("Something went wrong");
 \end{minted}
 
 By using a generic \mintinline{java}{RuntimeException}, we
-can only attach a message to the exception (which can be
+can attach a message to the exception (which can be
 printed by code that catches the exception).  If we want
 more fine-grained control over the type of exceptions, we
 need to define our own exceptions.
@@ -131,12 +127,11 @@ need to define our own exceptions.
 \subsection{Creating Custom Exceptions}
 
 To create your own exceptions, you need to create a new
-class to represent the exception and make it \emph{extends} 
+class to represent the exception and make it \emph{extend} 
 \mintinline{java}{RuntimeException} by using the keyword
 \mintinline{java}{extends}.  This makes your exception a 
 subclass or \emph{subtype} of the \mintinline{java}{RuntimeException}.
 This is a concept known as \emph{inheritance} in \gls{oopLabel}.
-
 Consider the example in the previous chapter of computing
 the roots of a quadratic polynomial.  One possible error 
 situation is when the roots are complex numbers.  We could
@@ -154,8 +149,7 @@ public class ComplexRootException extends RuntimeException {
 }
 \end{minted}
 
-Now in our code we can catch and even throw this new type
-of exception.
+Now in our code we can throw and catch this new type of exception.
 
 \begin{minted}{java}
 //throw this exception:
@@ -179,9 +173,9 @@ A \emph{checked} exception in Java is an exception that \emph{must}
 be explicitly caught and handled.  For example, the generic 
 \mintinline{java}{Exception} class is a checked exception (others 
 include \mintinline{java}{IOException}, \mintinline{java}{SQLException}, 
-etc.).  If a checked exception is thrown within a block of code such 
-as a method then it must either be caught and handled within that
-block of code or the (say) method must be specified to explicitly 
+etc.).  If a checked exception is thrown within a block of code 
+then it must either be caught and handled within that
+block of code or the method must be specified to explicitly 
 throw the exception.  For example, the method
 
 \begin{minted}{java}
@@ -243,14 +237,15 @@ The \mintinline{java}{RuntimeException} class and any of its
 subclasses are unchecked exceptions.  In our  \mintinline{java}{ComplexRootException}
 example above, because we extended  \mintinline{java}{RuntimeException}
 we made it an unchecked exception, allowing the calling
-function to decide not only \emph{how} to handle it, but also
+function to decide not only \emph{how} to handle it, but 
 whether or not to handle it \emph{at all}.  If we had instead 
 decided to extend \mintinline{java}{Exception} we would
 have made our exception a checked exception.
 
 There is considerable debate as to whether or not checked 
 exceptions are a good thing (and as to whether or not unchecked
-exceptions are a good thing).  Many feel (the author included) that 
+exceptions are a good thing).  Many\footnote{The author included.} 
+feel that 
 checked exceptions were a mistake and their usage should be
 avoided.  The rationale behind checked exceptions is summed up
 in the following quote from the Java documentation \cite{javaCheckedExceptions}.
@@ -263,28 +258,28 @@ exception
 \end{quote}
 
 The problem is that the \gls{jdkLabel}'s own design violates this principle.
-For example, \mintinline{java}{FileNotFound} is a checked exception; the
+For example, \mintinline{java}{FileNotFoundException} is a checked exception; the
 reasoning being that a program could \emph{reprompt} the user for a different
 file.  The problem is the assumption that the program we are writing is 
 always interactive.  In fact most software is \emph{not} interactive and 
-is instead designed to interact with other software.  Reprompting is \emph{not}
-an option in the vast majority of cases.  
+is instead designed to interact with other software.  Reprompting is 
+\emph{not} appropriate or even an option in the vast majority of cases.  
 
 As another example, consider Java's SQL library which allows you to 
 programmatically connect to an \gls{sqlLabel} database.  Nearly every
 method in the \gls{apiLabel} explicitly throws a checked \mintinline{java}{SQLException}.
 It stretches the imagination to understand how our code or even a
 user would be able to recover (programmatically at least) from 
-a lost internet connection or a bad password, etc.  
-
-In general and in the opinion of this author, you should use
-unchecked exceptions.
+a lost internet connection or a bad password, etc. 
+In general, you should use unchecked exceptions.
 
 \section{Enumerated Types}
+\index{enumerated types!in Java}
+\index{Java!enumerated types}
 
-Another way to prevent errors is by restricting the values of a variable
-that a programmer is allowed to use.  Java allows you to define a 
-special class called an 
+Another way to prevent errors is by restricting the values of a 
+variable that a programmer is allowed to use.  Java allows you to 
+define a special class called an 
 \gls{enumerated type} which allow you to define a fixed
 list of possible values.  For example, the days of the
 week or months of the year are possible values used in a date.
@@ -293,11 +288,12 @@ day of the week or month any time soon).  An enumerated
 class allows us to define these values using human-readable 
 keywords.
 
-To create an enumerated type class we use the keywords 
-\mintinline{java}{enum} (short for enumeration).  Since an
+To create an enumerated type class we use the keyword 
+\mintinline{java}{enum} (short for enumeration) instead of 
+\mintinline{java}{class}.  Since an
 enumerated type is a class, it must follow the same rules.
 It must be in a \mintinline{text}{.java} source file of the same
-name.  Inside the class we provide a comma-delimited 
+name.  Inside the \mintinline{java}{enum} we provide a comma-delimited 
 list of keywords to define our enumeration.  
 Consider the following example.
 
@@ -318,7 +314,7 @@ In the example, since the name of the enumeration is
 named \mintinline{text}{Day.java}.  We can now declare 
 variables of this type.  The possible \emph{values} it can 
 take are restricted to \mintinline{c}{SUNDAY}, 
-\mintinline{c}{MONDAY}, etc. and we can use these keywords 
+\mintinline{c}{MONDAY}, etc.\ and we can use these keywords 
 in our program.  However these values belong to the
 class \mintinline{java}{Day} and must be accessed statically.
 For example,
@@ -333,7 +329,7 @@ if(today == Day.SUNDAY || today == Day.SATURDAY) {
 
 Note the naming conventions: the name of the enumerated type
 follows the same upper camel casing that all classes use while 
-the enumerated values follow an upper case underscore convention.  
+the enumerated values follow an uppercase underscore convention.  
 Though our example does not contain a value with multiple words, 
 if it had, we would have used an underscore to separate them.  
 
@@ -341,13 +337,11 @@ Using an enumerated type has two advantages.  First, it enforces
 that only a particular set of predefined values can be used.  You
 would not be able to assign a value to a \mintinline{java}{Day} 
 variable that was not already defined by the \mintinline{java}{Day}
-enumeration.
-
-Second, without an enumerated type we'd be forced
+enumeration. Second, without an enumerated type we'd be forced
 to use a collection of \glspl{magic number} to indicate values.  
 Even for something as simple as the days of the week we'd be
 constantly trying to remember: which day is Wednesday again?
-I forget, do our weeks start with Monday or Sunday?  Etc.  By
+Do our weeks start with Monday or Sunday?  By
 using an enumerated type these questions are mostly moot as
 we can use the more human-readable keywords and eliminate
 the guess work.

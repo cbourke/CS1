@@ -3,8 +3,8 @@
 %%Chapter: Objects in PHP
 
 Object-oriented features have been continually added to PHP with
-each successive version.  Starting with version 5, PHP has had a full,
-class-based object oriented programming support, meaning
+each new version.  Starting with version 5, PHP has had a full,
+class-based object-oriented programming support, meaning
 that it facilitates the creation of objects through the use of classes
 and class declarations.  Classes are essentially ``blueprints'' for 
 creating instances of objects.  
@@ -13,13 +13,12 @@ An \emph{object} is an entity that is characterized by \emph{identity},
 \emph{state} and \emph{behavior}.  The identity of an object is an
 aspect that distinguishes it from other objects.  The variables and
 values that a variable takes on within an object is its state.  Typically
-the variables that belong to an object are referred to as \emph{member} 
-variables.  Finally, an object may also have functions that operate
-on the data of an object.  In the context of object oriented programming, 
-a function that belongs to an object is referred to as a (member)
-\emph{method}.
+the variables that belong to an object are referred to as \emph{member 
+variables}.  Finally, an object may also have functions that operate
+on the data of an object.  In the context of object-oriented programming, 
+a function that belongs to an object is referred to as a \emph{member method}.
 
-A class declaration simply specifies the member variables and member 
+A class declaration specifies the member variables and member 
 methods that belong to instances of the
 class.  We discuss how to create and use instances of a class below.
 However, to begin, let's define a class that models a student by
@@ -28,8 +27,8 @@ unique identifier, and GPA.
 
 To declare a class, we use the \mintinline{php}{class} keyword.
 Inside the class (denoted by curly brackets), we place any code that
-\emph{belongs} to the class.  To declare member variables within
-a class, we place specify the variable names and their \emph{visibility}
+\emph{belongs} to the class.  To declare member variables in
+a class, we specify the variable names and their \emph{visibility}
 inside the class, but outside any methods in the class.
 
 \begin{minted}{php}
@@ -71,7 +70,7 @@ be applied to both member variables and member methods.
     and makes it so that the member variable is only visible to the
     code in the same class, or any \emph{subclass} of the 
     class.\footnote{Subclasses are involved with \emph{inheritance}, 
-    another object oriented programming concept that we will not
+    another object-oriented programming concept that we will not
     discuss here.}
   \item \mintinline{php}{private} -- this is the most restrictive 
     visibility level, \mintinline{php}{private} member variables are
@@ -81,11 +80,9 @@ be applied to both member variables and member methods.
 Table \ref{table:phpVisibilityKeywords} summarizes these four keywords
 with respect to their access levels.  It is important to understand that
 \emph{protection} is in the context of encapsulation and does not involve
-protection in the sense of ``security.''  The protection is this context
+protection in the sense of ``security.''  Protection is this context
 is a design principle.  Limiting the access of variables only affects 
 how the rest of the code base interacts with our class and its data.  
-Encapsulation can easily be ``broken'' by other code (through reflection
-or other means) and the values of variables can be accessed or modified.
 
 \begin{table}[h]
 \centering
@@ -129,7 +126,7 @@ or not the method may be invoked.
 %access the member variables or methods of an instance unless 
 %it also had a reference to that instance.  
 
-Again, we add to our example by providing two \mintinline{php}{public}
+We add to our example by providing two \mintinline{php}{public}
 methods that compute and return a result on the member variables.  
 We also use javadoc-style comments to document each member method.
 
@@ -164,7 +161,7 @@ class Student {
 There is some new syntax in the example above.  In the member methods, 
 we need a way to refer to the instance's member variables.  The
 keyword \mintinline{php}{$this} is used to refer to the instance, 
-this is known as \gls{open recursion}.  
+this is known as \index{open recursion!in PHP} \gls{open recursion}.  
 
 When an instance of a class is created, for example, 
 
@@ -177,8 +174,8 @@ Since we don't have a variable \emph{inside} the class to reference
 the instance itself, PHP provides the keyword \mintinline{php}{$this}
 in order to do so.  Then, to access the member variables we use
 the \emph{arrow operator} (more below) and reference the member
-variable via its identifier \emph{but with no dollar sign}.
-\footnote{You \emph{can} use the syntax \mintinline{php}{$this->$foo}
+variable via its identifier 
+\emph{but with no dollar sign}.\footnote{You \emph{can} use the syntax \mintinline{php}{$this->$foo}
 but it will assume that \mintinline{php}{$foo} is a string that
 contains the \emph{name} of another variable, for example, 
 if \mintinline{php}{$foo = "firstName";} then \mintinline{php}{$this->$foo}
@@ -193,8 +190,8 @@ Since we have made all the member variables \mintinline{php}{private},
 no code outside the class may access or modify their values.  It is
 generally good practice to make member variables \mintinline{php}{private} 
 to restrict access.  However, if we still want code outside the object to
-access or mutate (that is, change) the variables, we can define accessor 
-and mutator methods (or just simply \emph{getter} and \emph{setter} 
+access or mutate (that is, change) the variable values, we can define accessor 
+and mutator methods (or simply \emph{getter} and \emph{setter} 
 methods) to facilitate this.
 
 Each getter method returns the value of the instance's variable while
@@ -254,18 +251,19 @@ If we make the (good) design decision to make our class immutable,
 we still need a way to initialize the values.  This is where 
 a \emph{constructor} comes in.  A constructor is a special method
 that specifies how an object is constructed.  With built-in
-variables such as an numbers or strings, PHP ``knows'' how to 
-interpret and assign a value to such a variable.  However, with 
+variable types such as an numbers or strings, PHP ``knows'' how to 
+interpret and assign a value.  However, with 
 user-defined objects such as our \mintinline{php}{Student} class, 
 we need to specify how the object is created.
 
 Just as with functions outside of classes, PHP does not support 
-function overloading inside classes.  That is, you can only have
+function overloading inside classes.  That is, you can have
 one and only one function with a given identifier (name).  Thus,
 there is only \emph{one} possible constructor.  Moreover, PHP 
 reserves the name \mintinline{php}{__construct} for the constructor
 method.  The two underscores are a naming convention used by PHP
-to denote ``Magic Methods'' that are reserved and have a special
+to denote \index{PHP!magic method} 
+``magic methods'' that are reserved and have a special
 purpose in the language.  Further, magic methods \emph{must} be
 made \mintinline{php}{public}.  Some magic methods provide default
 behavior while others do not.  For example, if you do not
@@ -302,7 +300,7 @@ public function __construct($firstName, $lastName,
 \section{Usage}
 
 Once we have defined our class and its constructors, we can 
-create and use instances of it.  Just as with regular variables, 
+create and use instances of it.  With regular variables, 
 we simply need to assign them to an instance of an object and
 their type will dynamically change to match.  To create new
 instances, we invoke a constructor by using the \mintinline{php}{new} 
@@ -353,9 +351,6 @@ public function __toString() {
 This would return a string containing something similar to 
 
 \mintinline{text}{"Hamilton, Margaret (ID = 4321); 3.90"}
-
-The \mintinline{php}{__toString()} method is a very convenient way to
-print instances of your class.  
 
 \section{Composition}
 

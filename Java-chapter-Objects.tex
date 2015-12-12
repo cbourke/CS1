@@ -1,12 +1,14 @@
 %!TEX root = ComputerScienceOne.tex
 
 %%Chapter: Objects in Java
+\index{objects!in Java}
+\index{Java!objects}
 
-Java is a class-based object oriented programming language, meaning
+Java is a class-based object-oriented programming language, meaning
 that it facilitates the creation of objects through the use of classes.
 Classes are essentially ``blueprints'' for creating instances of 
 objects.  We've been implicitly using classes all along since everything
-in Java must be a class or belong to a class.  Now, however, we will
+in Java is a class or belongs to a class.  Now, however, we will
 start using classes in more depth rather than simply using static 
 methods.
 
@@ -16,16 +18,17 @@ aspect that distinguishes it from other objects.  The variables and
 values that a variable takes on within an object is its state.  Typically
 the variables that belong to an object are referred to as \emph{member} 
 variables.  Finally, an object may also have functions that operate
-on the data of an object.  In the context of object oriented programming, 
-a function that belongs to an object is referred to as a (member)
-\emph{method}.
+on the data of an object.  In the context of object-oriented programming, 
+a function that belongs to an object is referred to as a 
+\emph{member method}.
 
-As a class-based object oriented language, Java implements objects
-using \emph{classes}.  A class is essentially a blue print for creating
+As a class-based object-oriented language, Java implements objects
+using \emph{classes}.  A class is essentially a blueprint for creating
 \emph{instances} of the class.  A class simply specifies the
 member variables and member methods that belong to instances of the
-class.  We discuss how to create and use instances of a class below.
-However, to begin, let's define a class that models a student by
+class.  We can create actual instances through the use of special
+\emph{constructor} methods. To begin, let's define a class that 
+models a student by
 defining member variables to support a first name, last name, a
 unique identifier, and GPA.
 
@@ -58,10 +61,10 @@ Our \mintinline{java}{Student} class would need to be in a file named
 \mintinline{text}{Student.class}.  
 
 \section{Data Visibility}
+\index{visibility}
 
 Recall that encapsulation involves not only the grouping of data, but
-the \emph{protection} of data.  The class declaration above achieves
-the grouping of data.  To provide for the protection of data, Java
+the \emph{protection} of data.  To provide for the protection of data, Java
 defines several \emph{visibility} keywords that specify what segments
 of code can ``see'' the variables.  Visibility in this context determines
 whether or not a segment of code can \emph{access} and/or \emph{modify}
@@ -77,9 +80,9 @@ be applied to both member variables and member methods.
     class.
   \item \mintinline{java}{protected} -- This is a bit more restrictive
     and makes it so that the member variable is only visible to the
-    code in the same class, same package,or any \emph{subclass} of the 
+    code in the same class, same package, or any \emph{subclass} of the 
     class.\footnote{Subclasses are involved with \emph{inheritance}, 
-    another object oriented programming concept that we will not
+    another object-oriented programming concept that we will not
     discuss here).}
   \item No modifier -- the absence of any modifier means that the member
     variable is visible to any class in the same package.  This is also
@@ -94,11 +97,13 @@ be applied to both member variables and member methods.
 
 Table \ref{table:javaVisibilityKeywords} summarizes these four keywords
 with respect to their access levels.  It is important to understand that
-\emph{protection} is in the context of encapsulation and does not involve
+\emph{protection} in the context of encapsulation and does not involve
 protection in the sense of ``security.''  The protection is this context
 is a design principle.  Limiting the access of variables only affects 
 how the rest of the code base interacts with our class and its data.  
-Encapsulation can easily be ``broken'' by other code (through reflection
+Encapsulation can easily be ``broken'' by other code (through 
+reflection\footnote{Reflection is a mechanism by which you can write
+code that modifies other code at runtime.  It is more of an \emph{aspect-oriented} programming paradigm.}
 or other means) and the values of variables can be accessed or modified.
 
 \begin{table}[h]
@@ -120,7 +125,7 @@ none (default)        & Y & Y & N & N \\
 \label{table:javaVisibilityKeywords}
 \end{table}
 
-We will now update our class declaration to incorporate these visibility
+We now update our class declaration to incorporate these visibility
 keywords.  In general, it is best practice to make member variables 
 \mintinline{java}{private} and control access to them via accessor and
 mutator methods (see below) unless there is a compelling design
@@ -143,10 +148,11 @@ public class Student {
 \section{Methods}
 
 The third aspect of encapsulation involves the grouping of methods that
-act on an object's data.  Within a class, we can declare member methods
+act on an object's data (its \emph{state}).  Within a class, we 
+can declare member methods
 using the syntax we're already familiar with.  We declare a member
 method by providing a signature and body.  We can use the same visibility
-keywords as with member variables in order allow or restrict access
+keywords as with member variables in order to allow or restrict access
 to the methods.  With methods, visibility and access determine whether 
 or not the method may be invoked.
 
@@ -155,13 +161,9 @@ In contrast to the methods we defined in Chapter
 do \emph{not} use the \mintinline{java}{static} keyword.  Making
 a variable or a method \mintinline{java}{static} means that the 
 method belongs to the class and not to instances of the class.  
-Thus, a \mintinline{java}{static} method would not be able to
-access the member variables or methods of an instance unless 
-it also had a reference to that instance.  
-
-Again, we add to our example by providing two \mintinline{java}{public}
+We add to our example by providing two \mintinline{java}{public}
 methods that compute and return a result on the member variables.  
-We also use javadoc style comments to document each member method.
+We also use Javadoc style comments to document each member method.
 
 \begin{minted}{java}
 package unl.cse;
@@ -198,9 +200,11 @@ public class Student {
 Since we have made all the member variables \mintinline{java}{private},
 no code outside the class may access or modify their values.  It is
 generally good practice to make member variables private to restrict
-this access.  However, if we still want code outside the object to
-access or mutate (that is, change), we can define accessor and mutator
-methods (or just simply getter and setter methods) to facilitate this.
+access.  However, if we still want code outside the object to
+access or mutate (that is, change) an instance's variables, we can 
+define accessor and mutator
+methods (or just simply \emph{getter} and \emph{setter} methods) 
+to facilitate this.
 
 Each getter method returns the value of the instance's variable while
 each setter method takes a value and sets the instance's variable to
@@ -222,7 +226,7 @@ In the setter example, there is a problem: the code has no effect.
 There are two variables named \mintinline{java}{firstName}: the
 instance's member variable and the variable in the method parameter.
 The scoping rules of Java mean that the parameter variable name(s)
-take precedent.  This code has no effect because its essentially setting
+take precedent.  This code has no effect because it is setting
 the parameter variable to itself.  It is essentially doing the following.
 
 \begin{minted}{java}
@@ -230,8 +234,8 @@ int a = 10;
 a = a;
 \end{minted}
 
-Setting a variable to itself has no effect.  To solve this, we use
-something called \gls{open recursion}.  When an instance of a class
+To solve this, we use something called \index{open recursion}
+\gls{open recursion}.  When an instance of a class
 is created, for example, 
 
 \mintinline{java}{Student s = ...;}
@@ -261,7 +265,8 @@ public void setFirstName(String firstName) {
 \end{minted}
 
 One advantage to using getters and setters (as opposed to naively
-making everything public) is that you can have greater control over
+making everything \mintinline{java}{public}) is that you can have 
+greater control over
 the values that your variables can take.  For example, we may want
 to do some data validation by rejecting \mintinline{java}{null}
 values or invalid values.  For example:
@@ -269,7 +274,7 @@ values or invalid values.  For example:
 \begin{minted}{java}
 public void setFirstName(String firstName) {
   if(firstName == null) {
-     throw new IllegalArgumentException("names cannot be null");
+    throw new IllegalArgumentException("names cannot be null");
   } else {
     this.firstName = firstName;
   }
@@ -277,7 +282,7 @@ public void setFirstName(String firstName) {
 
 public void setGpa(double gpa) {
   if(gpa < 0.0 || gpa > 4.0) {
-     throw new IllegalArgumentException("GPAs must be in [0, 4.0]");
+    throw new IllegalArgumentException("GPAs must be in [0, 4.0]");
   } else {
     this.gpa = gpa;
   }
@@ -297,20 +302,19 @@ classes (\mintinline{java}{Integer}, \mintinline{java}{String}, etc.).
 Immutability is a nice property because it makes instances of the
 class thread-safe.  That is, we can use instances of the class in a 
 multithreaded program without having to worry about threads changing
-the values of the instance on one another.  Immutable classes are also
-safer to use in certain collections such as \mintinline{java}{Set}s.
+the state of instances on one another.  Immutable classes are also
+safer to use in certain collections such as a \mintinline{java}{Set}.
 Elements in a \mintinline{java}{Set} are unique; attempting to 
 add a duplicate element will have no effect on the \mintinline{java}{Set}.
 However, if the elements we add are mutable, we could end up
-with duplicates.  This is because uniqueness is tested only when the
-element is added to the set.  We could add an element that is unique,
-then end up changing it so that it matches another element in the
-\mintinline{java}{Set}, violating the assumption of the collection.
+with duplicates (see Section \ref{section:javaCommonMethods}).
 
 \section{Constructors}
+\index{constructor}
 
 If we make the (good) design decision to make our class immutable,
-we still need a way to initialize the values.  This is where 
+we still need a way to initialize the object's member variables.  
+This is where 
 \emph{constructors} come in.  A constructor is a special method
 that specifies how an object is constructed.  With built-in primitive
 variables such as an \mintinline{java}{int}, the Java language
@@ -337,8 +341,8 @@ public Student(String firstName, String lastName,
 \end{minted}
 
 Java allows us to define multiple constructors, or even no constructor
-at all.  If we do not specify a constructor, Java provides every 
-class with a \emph{default}, no argument constructor.  This 
+at all.  If we do not specify a constructor, Java provides
+a \emph{default}, no argument constructor.  This 
 constructor uses default values for all member variables (zero
 for numerical types, \mintinline{java}{false} for \mintinline{java}{boolean}
 types, and \mintinline{java}{null} for objects).  If we do specify
@@ -381,7 +385,8 @@ public Student(String firstName, String lastName) {
 }
 \end{minted}
 
-Another, very useful type of constructor is the \emph{copy constructor}
+Another, very useful type of constructor is the \index{copy constructor}
+\emph{copy constructor}
 that allows you to make a \emph{copy} of an instance by passing
 it to a constructor.  The following example copies each of the
 member variables of \mintinline{java}{s} into \mintinline{java}{this}.
@@ -435,13 +440,13 @@ if(s.getGpa() < t.getGpa()) {
 
 Every class in Java has several methods that they \emph{inherit} 
 from the \mintinline{java}{java.lang.Object} class.  Here, we will 
-highlight three of these methods.
+highlight three of these important methods.
 
 The \mintinline{java}{toString()} method returns a \mintinline{java}{String}
 representation of the object.  However, the default behavior that all
 classes inherit from the \mintinline{java}{Object} class is that it
 returns a string containing the fully qualified class name 
-(that is package, and class name) along with a \gls{hexadecimal}
+(package and class name) along with a \gls{hexadecimal}
 representation of the \gls{jvmLabel} memory address at which the
 instance is stored.  An example with our \mintinline{java}{Student}
 class may produce something like: \mintinline{text}{unl.cse.Student@272d7a10}.
@@ -450,9 +455,7 @@ We can \emph{override} this functionality and change the behavior
 of the \mintinline{java}{toString()} method to return whatever we want.
 To do so, we simply define the function (with a signature that matches
 the \mintinline{java}{toString()} method in the \mintinline{java}{Object}
-class) in our class.  For example, we can change the method to
-return the values of all the class's variables in whatever format we 
-want.
+class) in our class.  
 
 \begin{minted}{java}
 public String toString() {
@@ -483,8 +486,8 @@ takes another object \mintinline{java}{obj} and returns
 \mintinline{java}{true} or \mintinline{java}{false} depending on 
 whether or not the instance is ``equal'' to \mintinline{java}{obj}.
 Recall that identity is one of the defining characteristics of
-objects.  This method is how Java achieves identity; it defines
-exactly what ``equality'' means.  By default, the behavior
+objects.  This method is how Java achieves identity; this method allows you to 
+define what ``equality'' means.  By default, the behavior
 inherited from the \mintinline{java}{Object} class simply checks
 if the object, \mintinline{java}{this} and the passed object, 
 \mintinline{java}{obj} are located at the same memory address, 
@@ -564,7 +567,7 @@ if two instances are equal (that is, \mintinline{java}{equals()}
 returns \mintinline{java}{true}) then they \emph{must} have
 the same \mintinline{java}{hashCode()} value.  This requirement
 is necessary to ensure that hash table-based data structures
-operate properly.  Note that it is \emph{okay} if unequal objects
+operate properly.  It is \emph{okay} if unequal objects
 have equal or unequal hash values.  This rule only applies when
 the objects are equal.  
 
@@ -585,6 +588,7 @@ public int hashCode() {
 \end{minted}
 
 \section{Composition}
+\index{composition}
 
 Another important concept when designing classes is \emph{composition}.
 Composition is a mechanism by which an object is made up of other objects.
@@ -608,8 +612,8 @@ date of birth:
 private LocalDate dateOfBirth;
 \end{minted}
 
-We can take this concept further and have our own user-defined classes
-own instances of each other.  For example, we could define a 
+We can take this concept further and design our classes to own 
+collections of other classes.  For example, we could define a 
 \mintinline{java}{Course} class and then update our \mintinline{java}{Student} class to own a collection of \mintinline{java}{Course}
 objects representing a student's class schedule (this type of
 collection ownership is sometimes referred to as \emph{aggregation}
@@ -625,7 +629,7 @@ the instances of \mintinline{java}{dateOfBirth} and the
 of our \mintinline{java}{Student} class to build the 
 \mintinline{java}{LocalDate} instance and pass it to a constructor?
 Should we allow the outside code to simply provide us a date of birth
-as a string?  Both of these are design choices that have advantages
+as a string?  Both of these design choices have advantages
 and disadvantages that have to be considered.
 
 What about the course schedule?  We could require that a user

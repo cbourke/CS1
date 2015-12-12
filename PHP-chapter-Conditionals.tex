@@ -25,7 +25,7 @@ depending on how they are used.  First, let's consider the four basic
 inequality operators, \mintinline{php}{<},  \mintinline{php}{<=},  \mintinline{php}{>},  
 and \mintinline{php}{>=}.  When used to compare numeric types
 to numeric types, these operators work as expected and the value of 
-the numbers are compared and the result is either \True or \False.  Examples:
+the numbers are compared.
 
 \begin{minted}{php}
 $a = 10;
@@ -43,7 +43,8 @@ $r = ($b >= $c); //true
 When these operators are used to compare strings to strings, the strings
 are compared lexicographically according to the standard ASCII text table.
 Some examples follow, but it is better to use a function (in particular 
-\mintinline{php}{strcmp} which we discuss later) to do string comparisons.
+\mintinline{php}{strcmp} see Chapter \ref{chapter:php:strings}) to do 
+string comparisons.
 
 \begin{minted}{php}
 $s = "aardvark";
@@ -75,15 +76,15 @@ With the equality operators, \mintinline{php}{==} and \mintinline{php}{!=}, some
 similar happens.  When the types of the two operands match, the expected 
 comparison is made: when numbers are compared to numbers their values are
 compared; when strings are compared to strings, their content is
-compared (case sensitively).  However, when the types are different, again, 
-type juggling happens and strings are converted to numbers for the purpose
+compared (case sensitively).  However, when the types are different they 
+are type juggled and strings are converted to numbers for the purpose
 of comparison.  Thus, a comparison like \mintinline{php}{(10 == "10")} ends
 up being \True!  The operators are \mintinline{php}{==} and \mintinline{php}{!=}
 are referred to as \emph{loose} comparison operators because of this.
 
 What if we want to ensure that we're comparing apples to apples?  To rectify
 this, PHP offers another set of comparison operators, \emph{strict} comparison
-operators, \mintinline{php}{===} and \mintinline{php}{!==} (the same, but with
+operators, \mintinline{php}{===} and \mintinline{php}{!==} (each has
 an extra equals sign, \mintinline{php}{=}).  These operators will make a 
 comparison \emph{without} type juggling either operand first.  Now a 
 similar comparison, \mintinline{php}{(10 === "10")} ends up evaluating
@@ -100,8 +101,9 @@ $r = ($a === $b); //false
 $r = ($a !== $b); //true
 \end{minted}
 
-The three basic logical operators, not \mintinline{php}{!}, $\And$ \mintinline{php}{&&},
-and $\Or$ \mintinline{php}{||} are also supported.  
+The three basic logical operators, not \mintinline{php}{!}, and 
+\mintinline{php}{&&}, and or \mintinline{php}{||} are also supported in
+PHP.  
 %The operands applied to these
 %operators will be converted to Boolean values according to the rules described in
 %Table \ref{table:truthyPHPValues}.
@@ -142,9 +144,10 @@ order specified.}
 
 \section{If, If-Else, If-Else-If Statements}
 
-Conditional statements in PHP utilize the key words \mintinline{php}{if}, \mintinline{php}{else}, and
-\mintinline{php}{else if}.  Conditions are placed inside parentheses immediately after the 
-\mintinline{php}{if} and \mintinline{php}{else if} keywords.  Examples of all three can be 
+Conditional statements in PHP utilize the keywords \mintinline{php}{if}, 
+\mintinline{php}{else}, and \mintinline{php}{else if}.  Conditions are 
+placed inside parentheses immediately after the \mintinline{php}{if} and 
+\mintinline{php}{else if} keywords.  Examples of all three can be 
 found in Code Sample \ref{code:php:conditionalExamples}.
 
 \begin{listing}
@@ -174,7 +177,7 @@ if($x < 10) {
 \label{code:php:conditionalExamples}
 \end{listing}
 
-Some observations about the syntax: the statement, \mintinline{php}{if($x < 10)}
+Observe that the statement, \mintinline{php}{if($x < 10)}
 does not have a semicolon at the end.  This is because it is a conditional statement
 that determines the flow of control and \emph{not} an executable statement.  
 Therefore, no semicolon is used.  Suppose we made a mistake and \emph{did}
@@ -201,14 +204,14 @@ if($x < 10) {
 printf("x is less than 10\n");
 \end{minted}
 
-Which is obviously not what we wanted.  The semicolon ended up binding 
-to the empty executable statement, and the code block containing the
+This is obviously not what we wanted.  The semicolon was bound 
+to the empty executable statement and the code block containing the
 print statement immediately followed, but was \emph{not} bound to the
 conditional statement which is why the print statement executed regardless
 of the value of $x$.
 
 Another convention that we've used in our code is where we have placed the
-curly brackets.  First, if a conditional statement is bound to only one statement, 
+curly brackets.  If a conditional statement is bound to only one statement, 
 the curly brackets are not necessary.  However, it is best practice to include them
 even if they are not necessary and we'll follow this convention.  Second, the
 opening curly bracket is on the same line as the conditional statement while
@@ -262,11 +265,10 @@ same indentation level.
 The logarithm of $x$ is the exponent that some \emph{base} must 
 be raised to get $x$.  The most common logarithm is the natural logarithm, 
 $\ln{(x)}$ which is base $e = 2.71828\ldots$.  But logarithms can be in any base 
-$b > 1$\footnote{Bases can also be $0< b < 1$, but we'll restrict our attention to
+$b > 1$.\footnote{Bases can also be $0< b < 1$, but we'll restrict our attention to
 increasing functions only.}  What if we wanted to compute $\log_2{(x)}$?  
 Or $\log_{\pi}{(x)}$?  Let's write a program that will prompt the user for a
 number $x$ and a base $b$ and computes $\log_b{(x)}$.
-
 Arbitrary bases can be computed using the change of base formula: 
   $$\log_b(x) = \frac{\log_a{(x)}}{\log_a{(b)}}$$
 If we can compute \emph{some} base $a$, then we can compute any base 
@@ -280,7 +282,7 @@ using the change of base formula.  In particular, if we have variables
 
   \mintinline{php}{log(x) / log(b)}
   
-But wait: we have a problem similar to the examples in the previous section.  
+We have a problem similar to the examples in the previous section.  
 The user could enter invalid values such as $b = -10$ or $x = -2.54$ 
 (logarithms are undefined for non-positive values in any base).  We want
 to ensure that $b > 1$ and $x > 0$.  With conditionals, we can now do this.  
@@ -294,7 +296,7 @@ if($x <= 0 || $b <= 1) {
 }
 \end{minted}
 
-This code has something new: \mintinline{php}{exit(1)}.  The \mintinline{php}{exit}
+This code has something new: \mintinline{php}{exit(1)}.  The \mintinline{php}{exit()}
 function immediately terminates the script regardless of the rest of the
 code that may remain.  The argument passed to \mintinline{php}{exit} is an 
 integer that represents an \emph{error code}.  The convention is that 
@@ -308,7 +310,7 @@ Alternatively, we could have split the conditions into two statements and given
 a more descriptive error message.  We use this design in the full program 
 which can be found in Code Sample \ref{code:php:logarithmProgram}.  The 
 program also takes the input as command line arguments.  Now that we have
-conditionals, we can actually check that the correct number of arguments
+conditionals, we can check that the correct number of arguments
 was provided by the user and quit in the event that they don't provide
 the correct number.
 
@@ -388,7 +390,7 @@ if($income <= 18150) {
 
 Next we compute the child tax credit, taking care that it does
 not exceed \$3,000.  A conditional based on the number of children
-should suffice as at this point in the program we already know it is
+suffices as at this point in the program we already know it is
 zero or greater.
 
 \begin{minted}{php}

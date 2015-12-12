@@ -9,9 +9,7 @@ just like string functions, were mostly influenced
 by the C standard library functions and have
 very similar naming and usage.  Writing
 binary or plaintext data is determined by which
-functions you use.
-
-In general whether or not a file input/output
+functions you use. In general whether or not a file input/output
 stream is buffered or unbuffered is determined by
 the system configuration.  There are some ways
 in which this can be changed, but we will not 
@@ -19,7 +17,8 @@ cover them in detail.
 
 \section{Opening Files}
 
-Files are represented in PHP as a ``resource'' that
+Files are represented in PHP as a ``resource'' (also 
+referred to as a \emph{handle}) that
 can be passed around to other functions to read and
 write to the file.  For our purposes, a resource is
 simply a variable that can be stored and passed
@@ -27,7 +26,7 @@ to other functions.
 
 To open a file, you use the \mintinline{php}{fopen()} 
 function (short for \textbf{f}ile \textbf{open}) which
-requires two arguments and returns a file resource.
+requires two arguments and returns a file handle.
 The first argument is the file path/name that you want
 to open for processing.  The second argument is a
 string representing the ``mode'' that you want to open the
@@ -41,7 +40,7 @@ current working directory.
 \begin{minted}{php}
 //open a file for reading (input):
 $input = fopen("/user/apps/data.txt", "r");
-//open a file for reading (output):
+//open a file for writing (output):
 $output = fopen("./results.txt", "w");
 
 if(!$input) {
@@ -55,13 +54,13 @@ if(!$output) {
 }
 \end{minted}
 
-The two checks above check that the file opened successfully.
+The two conditionals above check that the file opened successfully.
 If opening the file failed, \mintinline{php}{fopen()} returns
 \mintinline{php}{false} (and the interpreter issues  warning).  
 
 \section{Reading \& Writing}
 
-When a file is opened, the file resource returned by
+When a file is opened, the file handle returned by
 \mintinline{php}{fopen()} initially points to the beginning
 of the file.  As you read or write from it, the resource
 advances through the file content.
@@ -69,17 +68,19 @@ advances through the file content.
 \subsubsection{Reading}
 
 There are a couple of ways to read input from a file.
-To read a file line by line, we could use \mintinline{php}{fgets()}
+To read a file line by line, we can use \mintinline{php}{fgets()}
 to get each line.  It takes a single argument: the file
-``handle'' that was returned by \mintinline{php}{fopen()}
-and returns a string representing the entire line 
+handle that was returned by \mintinline{php}{fopen()}
+and returns a string containing the entire line 
 \emph{including} the endline character.  If necessary, 
 leading and trailing whitespace can be removed using 
 \mintinline{php}{trim()}.  To determine the end of a
 file you can use \mintinline{php}{feof()} which returns
-true when the resource has reached the end of the file.
-Here is an example processing an entire file line-by-line:
+\mintinline{php}{true} when the handle has reached the end of the file.
+Code Sample \ref{code:php:lineByLine} contains a full example of
+processing a file line-by-line.
 
+\begin{listing}
 \begin{minted}{php}
 $h = fopen("input.data", "r"); 
 while(!feof($h)) {
@@ -91,6 +92,9 @@ while(!feof($h)) {
   print $line; 
 }
 \end{minted}
+\caption{Processing a file line-by-line in PHP}
+\label{code:php:lineByLine}
+\end{listing}
 
 Alternatively there is a convenient function, 
 \mintinline{php}{file_get_contents()} that will retrieve
@@ -104,10 +108,10 @@ There are several ways that we can output to
 files, but the easiest is to simply use \mintinline{php}{fwrite()}
 (short for \textbf{f}ile \textbf{write}).  This is a
 ``binary-safe'' file output function that takes
-two arguments: the file ``handle'' to write to and
+two arguments: the file handle to write to and
 a string of data to be written.  It also returns
 an integer representing the number of bytes written
-to the file (or \mintinline{php}{FALSE} on error).
+to the file (or \mintinline{php}{false} on error).
 
 \begin{minted}{php}
 $x = 10;
@@ -122,7 +126,7 @@ fwrite($output, "x = $x, y = $y\n");
 
 A nice feature of PHP is that you can use URLs as file
 names to read and write to a URL.  ``Reading'' from a
-URL would simply mean connecting to a remote resource, 
+URL mean connecting to a remote resource, 
 such as a webservice and downloading its contents 
 (which may be \gls{htmlLabel}, \gls{xmlLabel} or \gls{jsonLabel}
 data).  Writing to a URL may be used to \emph{post}

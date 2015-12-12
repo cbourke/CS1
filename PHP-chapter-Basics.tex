@@ -2,7 +2,8 @@
 
 %%Chapter: PHP Basics
 
-Back in the mid-1990s the world-wide web was in its infancy but
+In the mid-1990s the \glslink{wwwLabel}{World Wide Web}
+was in its infancy but
 becoming more and more popular.  For the most part, web pages
 contained static content: articles and text that was ``just-there.''
 Web pages were far from the fully interactive and dynamic 
@@ -16,7 +17,7 @@ web server's Common Gateway Interface.  When a user visited
 a webpage, instead of just retrieving static content, a script
 was invoked: it could do a number of operations and 
 send back \gls{htmlLabel} formatted as a response.  This made
-web pages much more dynamic: by serving it through a script,
+web pages much more dynamic.  By serving it through a script,
 a counter could be maintained that tracked how many people
 had visited the site.  Lerdorf eventually released his source
 code in 1995 and it became widely used.
@@ -29,31 +30,41 @@ influenced or inspired by C.  In fact, many of the standard
 functions available in the language are directly from the C
 language.
 
-As a scripting language, PHP is not compiled: instead, PHP
+PHP is a scripting language and is not compiled.  Instead, PHP
 code is \emph{interpreted} by a PHP interpreter.  Though there
 are several interpreters available, the de facto PHP 
 interpreter is the Zend Engine, a free and open source
 project that is widely available on many platforms, operating
-systems, and web servers.
-
-Because it was originally intended to serve web pages, PHP 
+systems, and web servers.  Because it was originally intended 
+to serve web pages, PHP 
 code can be \emph{interleaved} with static HTML tags.  This
 allows PHP code to be embedded in web pages and dynamically
 interpreted/rendered when a user requests a webpage through
 a web browser.  Though rendering web pages is its primary 
 purpose, PHP can be used as a general scripting language 
-from the command line (which is how we'll present it here).
+from the command line.
+
+PHP is a dirty, ugly language held together by duct tape, cracked
+asbestos-filled spackle and sadness.  It is the cockroach of languages: it 
+is invasive and it is a survivor.  It is a hydra; rewrite one PHP app
+and two more pop up.  It is much maligned and a source of ridicule.
+It is the source of hundreds of bad practices, thousands of bad 
+programmers, millions of bugs and an infinite abyss of security 
+holes and vulnerabilities.  It is a language that was born in the
+wild and raised in the darkness by two schizophrenic monkeys.
+But its got character; and in this world, that's enough.
 
 \section{Getting Started: Hello World}
 
-The hallmark of the introduction of programming languages is the \emph{Hello World!}
-program.  It consists of a simple program whose only purpose is to print out the message
-``Hello World!'' to the user in some manner.  The simplicity of the program allows the
-focus to be on the basic syntax of the language.  It is also typically used to ensure that 
-your development environment, compiler, runtime environment, etc. are functioning 
-properly with a minimal example.  A basic Hello World! program in PHP can be found 
-in Code Sample \ref{code:php:helloWorld}.  A version in which the PHP code is
-interleaved in HTML is presented in Code Sample \ref{code:php:helloWorldHTML}.
+The hallmark of an introduction to a new programming language is the 
+\emph{Hello World!} program.  It consists of a simple program whose 
+only purpose is to print the message ``Hello World!'' to the user.  
+The simplicity of the program allows the focus to be on the basic syntax 
+of the language.  It is also typically used to ensure that 
+your development environment, interpretrer, runtime environment, 
+etc.\ are functioning properly with a minimal example.  A basic Hello World! program in PHP can be found in Code Sample \ref{code:php:helloWorld}.  
+A version in which the PHP code is interleaved in HTML is presented in 
+Code Sample \ref{code:php:helloWorldHTML}.
 
 \begin{listing}
 \begin{minted}{php}
@@ -85,22 +96,23 @@ interleaved in HTML is presented in Code Sample \ref{code:php:helloWorldHTML}.
 \label{code:php:helloWorldHTML}
 \end{listing}
 
-We will not focus on any particular development environment, code editor, or any 
-particular operating system, compiler, or ancillary standards in our presentation.  However,
-as a first step, you should be able to write and run the above program on the
-environment you intend to use for the rest of this book.  This may require that you download
+We will not focus on any particular development environment, code editor, 
+or any particular operating system, interpreter, or ancillary standards in our 
+presentation.  However, as a first step, you should be able to write and run the 
+above program on the environment you intend to use for the rest of this book.  
+This may require that you download
 and install a basic PHP interpreter/development environment (such as a standard 
 LAMP, WAMP or MAMP technology stack) or a full IDE (such as Eclipse, PhpStorm, etc.).
 
 \section{Basic Elements}
 
-Using the Hello World! program as a starting point, we will now examine the basic
-elements of the PHP language.
+Using the Hello World! program as a starting point, we will examine 
+the basic elements of the PHP language.
 
 \subsection{Basic Syntax Rules}
 
 PHP has adopted many aspects of the C programming language 
-(the interpreter is written in C).  However, there are some major aspects in which 
+(the interpreter itself is written in C).  However, there are some major aspects in which 
 it differs from C.  The major aspects and syntactic elements of PHP include
 the following.
 \begin{itemize}
@@ -114,7 +126,7 @@ the following.
   \item Strings and characters are essentially the same thing (characters are strings of length 1).
   	Strings and characters can be delimited by \emph{either} single quotes \emph{or} double
 	quotes.  \mintinline{php}{"this is a string"}, \mintinline{php}{'this is also a string'}; 
-	\mintinline{php}{'A'} and \mintinline{php}{"a"} are both single-character strings.
+	\mintinline{php}{'A'} and \mintinline{php}{"a"} are both single character strings.
   \item Executable statements are terminated by a semicolon, \mintinline{php}{;}
   \item Code blocks are defined by using opening and closing curly brackets, 
   	\mintinline{php}{{ ... }}.  Moreover, code blocks can be \emph{nested}: code
@@ -130,15 +142,15 @@ Though not a syntactic requirement, the proper use of whitespace is important fo
 good, readable code.  Code inside code blocks is indented at the same indentation.
 Nested code blocks are indented further.  Think of a typical table of contents or
 the outline of a formal paper or essay.  Sections and subsections or points and 
-points all follow proper indentation with elements at the same level at the same
+subpoints all follow proper indentation with elements at the same level at the same
 indentation.  This convention is used to organize code and make it more readable.
 
 \subsection{PHP Tags}
 
 PHP code can be interleaved with static HTML or text.  Because of this, 
 we need a way to indicate what should be interpreted as PHP and what
-should be left alone.  We can do this using PHP \emph{tags}: the
-opening tag is \mintinline{php}{<?php} and the closing tag is \mintinline{php}{?>}.
+should be treated as static text.  We can do this using PHP \emph{tags}: the
+opening tag is \mintinline{text}{<?php} and the closing tag is \mintinline{text}{?>}.
 Anything placed between these tags will be interpreted as PHP code which
 must adhere to the syntax rules of the language.  
 
@@ -147,7 +159,7 @@ interleave multiple sections of HTML or text.  When an interpreter runs
 a PHP script, it will start processing the script file.  Whenever it sees the
 opening PHP tag, it begins to execute the commands and stops executing
 commands when it sees the closing tag.  The text outside the PHP tags is
-treated as raw data; the interpreter includes it as part of its output without
+treated as raw data. The interpreter includes it as part of its output without
 modifying or processing it.
 
 \subsection{Libraries}
@@ -156,7 +168,7 @@ PHP has many built-in functions that you can use.  These standard
 libraries are loaded and available to use without any special command
 to import or include them.  Full documentation on each of these
 functions is maintained in the PHP manual, available online at
-\url{http://php.net/manual/en/index.php}.   The manual's web
+\url{http://php.net/}.   The manual's web
 pages also contain many curated comments from PHP developers
 which contain further explanations, tips \& tricks, suggestions, and
 sample code to provide further assistance.  
@@ -170,7 +182,7 @@ natural logarithm.  Table \ref{table:phpMathFunctions} highlights several of
 these functions; full documentation can be found in the PHP manual 
 (\url{http://php.net/manual/en/ref.math.php}).  To use these, you 
 simply ``call'' them by providing input 
-and getting the output.  For example:
+and assigning the output to a variable.
 
 \begin{minted}{php}
 $x = 1.5;
@@ -206,7 +218,7 @@ Function & Description \\
 
 \hline
 \end{tabular}
-\caption[Several functions defined in the PHP math library]{Several functions defined in the PHP math library.  \textsuperscript{a}all trigonometric functions assume input is in \emph{radians}, \textbf{not} degrees. \textsuperscript{b}Input is assumed to be positive, $x > 0$.  \textsuperscript{c}alternatively, PHP supports exponentiation by using \mintinline{php}{x ** y}.}
+\caption[Several functions defined in the PHP math library]{Several functions defined in the PHP math library.  \textsuperscript{a}All trigonometric functions assume input is in \emph{radians}, \textbf{not} degrees. \textsuperscript{b}Input is assumed to be positive, $x > 0$.  \textsuperscript{c}Alternatively, PHP supports exponentiation by using \mintinline{php}{x ** y}.}
 \label{table:phpMathFunctions}
 \end{table}
 
@@ -217,9 +229,8 @@ two forward slashes, \mintinline{php}{//comment} or as a multiline comment using
 a combination of forward slash and asterisk: \mintinline{php}{/* comment */}.  
 With a single line comment, everything on the line \emph{after} the forward
 slashes is ignored.  With a multiline comment, everything in between the forward
-slash/asterisk is ignored.  Comments are ultimately ignored by the compiler so
-the amount of comments do not have an effect on the final executable code.
-Consider the following example.
+slash/asterisk is ignored.  Comments are ultimately ignored by the 
+interpreter.  Consider the following example.
 
 \begin{minted}{php}
 //this is a single line comment
@@ -235,7 +246,8 @@ $y = 3.14;
 
 Most code editors and \glspl{ideLabel} will present comments in a special color or
 font to distinguish them from the rest of the code (just as our example above does).
-Failure to close a multiline comment will likely result in a compiler error but with
+Failure to close a multiline comment will likely result in a fatal
+interpreter error but with
 color-coded comments its easy to see the mistake visually.
 
 \subsection{Entry Point \& Command Line Arguments}
@@ -246,15 +258,12 @@ script with inputs when you run it from the command line.  These \emph{command
 line arguments} are stored in two variables, \mintinline{php}{$argc} and 
 \mintinline{php}{$argv}.  The first variable, \mintinline{php}{$argc} is an integer that indicates
 the \emph{number} of arguments provided \emph{including} the name
-of the script file being executed.  The second, \mintinline{php}{$argv} actually stores the 
-arguments as strings.  We'll be able to understand the syntax later on, but
-for now we can at least understand how we can access these arguments.
-
-The variable \mintinline{php}{$argv} is an array (see Section 
-\ref{chapter:php:arrays}) consisting of the command line arguments.  
+of the script file being executed.  The second, \mintinline{php}{$argv} 
+is an array (see Section \ref{chapter:php:arrays}) of strings consisting 
+of the command line arguments.  
 To access them, you can \emph{index} them starting at zero, the first 
-being \mintinline{php}{$argv[0]}, the second \mintinline{php}{$argv[1]}, etc. 
-(the last one of course would be at \mintinline{php}{$argv[$argc-1]}).  
+being \mintinline{php}{$argv[0]}, the second \mintinline{php}{$argv[1]},  
+the last one would be \mintinline{php}{$argv[$argc-1]}.  
 The first one is always the name of the script file being run.  The 
 remaining are the command line arguments provided by the user
 when the script is executed.  We'll see several examples later.
@@ -265,23 +274,20 @@ PHP is a dynamically typed language.  As a consequence, you do not declare
 variables before you start using them.  If you need to store a value into a variable, 
 you simply name the variable and use an assignment operator to assign the
 value.  Since you do not declare variables, you also do not specify a variable's
-type.  If you assign a string to a variable, its type becomes a string.  If you
+type.  If you assign a string value to a variable, its type becomes a string.  If you
 assign an integer to a variable, its type becomes an integer.  If you reassign
 the value of a variable to a value with a different type, the variable's type
 also changes.  
 
-Internally, however, PHP does support several different types: Booleans, 
-integers, floating-point numbers, strings, arrays, and objects.
-
+Internally PHP supports several different types: Booleans, 
+integers, floating point numbers, strings, arrays, and objects.
 The way that integers are represented may be platform dependent, but 
 are usually 32-bit signed two's complement integers, able to represent
-integers between $-2,147,483,648$ and 2,147,483,647.
-
-Floating-point numbers are also platform-dependent, but are usually
-64-bit double precision numbers are defined by the \gls{ieeeLabel} 754 standard,
-providing about 16 digits of precision.  
-
-Strings and single characters are the same thing in PHP.  Strings are
+integers between $-2,147,483,648$ and 2,147,483,647.  Floating point 
+numbers are also platform dependent, but are usually
+64-bit double precision numbers defined by the \gls{ieeeLabel} 754 standard,
+providing about 16 digits of precision.  Strings 
+and single characters are the same thing in PHP.  Strings are
 represented as sequences of characters from the extended ASCII text 
 table (see Table \ref{table:asciiTable}) which includes all characters in
 the range 0--255.  PHP does not have native Unicode support for 
@@ -290,10 +296,10 @@ international characters.
 \subsection{Using Variables}
 
 To use a variable in PHP, you simply need to assign a value to a named
-variable identifier and the variable comes into scope.  Variable names
+variable identifier and the variable is in scope.  Variable names
 \emph{always} begin with a single dollar sign, \mintinline{text}{$}.
 The assignment operator is a single equal sign, \mintinline{php}{=} 
-and is a right-to-left assignment.  That is, the variable that we wish to 
+and is a right-to-left assignment.  The variable that we wish to 
 assign the value to appears on the left-hand-side while the value 
 (literal, variable or expression) is on the right-hand-size.  For example:
 
@@ -304,19 +310,19 @@ $firstInitial = "C";
 \end{minted}
 
 Each assignment also implicitly changes the variable's type.  Each of the
-variables above becomes an integer, floating-point number, and string 
+variables above becomes an integer, floating point number, and string 
 respectively.  Assignment statements are terminated by a semicolon like
 most executable statements in PHP.  The identifier rules are fairly standard: 
-a variable's name can consist of lower and uppercase alphabetic characters, 
+a variable's name can consist of lowercase and uppercase alphabetic characters, 
 numbers, and underscores.  You can also use the extended ASCII character
 set in variable names but it is not recommended (umlauts and other diacritics
 can easily be confused).  Variable names are \emph{case sensitive}.  As
 previously mentioned, variable names must \emph{always} begin with a dollar
-sign, \mintinline{text}{$}.  Stylistically, we adopt the modern camelCasing
-naming convention for variables in our code.
+sign, \mintinline{text}{$}.  Stylistically, we adopt the modern lower
+camel casing naming convention for variables in our code.
 
 If you do not assign a value to a variable, that variable remains undefined
-or ``unset''.  Undefined variables are treated as \mintinline{php}{null} in PHP.
+or ``unset.''  Undefined variables are treated as \mintinline{php}{null} in PHP.
 The concept of ``null'' refers to uninitialized, undefined, empty, missing, or
 meaningless values.  In PHP the keyword \mintinline{php}{null} is used which
 is case insensitive (\mintinline{php}{null}, \mintinline{php}{Null} and \mintinline{php}{NULL}
@@ -330,7 +336,6 @@ expression or conditional, \mintinline{php}{null} is treated as \mintinline{php}
 PHP also allows you to define \emph{constants}: values that cannot 
 be changed once set.  To define a constant, you invoke a function 
 named \mintinline{php}{define} and providing a name and value.
-Examples:
 
 \begin{minted}{php}
 define("PI", 3.14159);
@@ -341,7 +346,7 @@ define("COST_PER_UNIT", 2.50);
 Constant names are case sensitive.  By convention, we use uppercase
 underscore casing.  An attempt to redefine a constant value will raise a 
 script warning, but will ultimately have no effect.  When referring to constants
-later on in the script, you use the constant's name.  You do not
+later in the script, you use the constant's name.  You do not
 treat it as a string, nor do you use a dollar sign. For example:
 
 \mintinline{php}{$area = $r * $r * PI;}
@@ -352,8 +357,8 @@ PHP supports the standard arithmetic operators for addition, subtraction,
 multiplication, and division using \mintinline{php}{+}, \mintinline{php}{-}, 
 \mintinline{php}{*}, and \mintinline{php}{/} respectively.  Each of these 
 operators is a binary operator that acts on two operands which can either 
-be literals or other variables and follow the usually rules of arithmetic when 
-it comes to order of precedence (multiplication 
+be literals, variables or expressions and follow the usual rules of 
+arithmetic when it comes to order of precedence (multiplication 
 and division before addition and subtraction).
 
 \begin{minted}{php}
@@ -362,7 +367,7 @@ $d = $a + 5;
 $d = $a + $b;
 $d = $a - $b;
 $d = $a + $b * $c;
-$d = $a * $b; //d becomes a floating-point number with a value .5
+$d = $a * $b; //d becomes a floating point number with a value .5
 
 $x = 1.5, $y = 3.4, $z = 10.5;
 $w = $x + 5.0;
@@ -372,7 +377,7 @@ $w = $x + $y * $z;
 $w = $x * $y;
 $w = $x / $y;
 
-//mixing integers and floating-point numbers is no problem
+//mixing integers and floating point numbers is no problem
 $w = $a + $x;  
 \end{minted}
 
@@ -387,9 +392,10 @@ $x = 29 % 5; //x is 4
 
 \subsection{Type Juggling}
 
-The expectations of an arithmetic expression involving two variables that are either 
-integers or floating-point numbers are straightforward.  We expect the sum/product/etc. 
-as a result.  However, since PHP is dynamically typed, a variable involved in an
+The expectations of an arithmetic expression involving two variables that 
+are either integers or floating point numbers are straightforward.  We 
+expect the sum/product/etc.\ as a result.  However, since PHP is 
+dynamically typed, a variable involved in an
 arithmetic expression could be anything, including a Boolean, object, array, or string.
 When a Boolean is involved in an arithmetic expression, \mintinline{php}{true} is 
 treated as 1 and \mintinline{php}{false} is treated as zero.  If an array is involved
@@ -399,16 +405,17 @@ and \mintinline{php}{null} is treated as 0.
 
 However, when string values are involved in an arithmetic expression, PHP
 does something called \emph{type juggling}. \index{type juggling} When juggled,
-an attempt is made to convert the string variable into a numeric value by parsing
+an attempt is made to convert a string variable into a numeric value by parsing
 it.  The parsing goes over each numeric character, converting the value to a 
-numeric type (either an integer or floating-point number).  The first type a
+numeric type (either an integer or floating point number).  The first type a
 non-numeric character is encountered, the parsing stops and the value parsed
 \emph{so far} is the value used in the expression.
 
-Consider the following examples in Code Sample \ref{code:php:typeJuggling}.
-In the first block, \mintinline{php}{$a} is type juggled to the value $10$. when
-added to \mintinline{php}{5}.  In the second example, \mintinline{php}{$a}
-represents a floating-point number, and is converted to $3.14$, the result
+Consider the examples in Code Sample \ref{code:php:typeJuggling}.
+In the first segment, \mintinline{php}{$a} is type juggled to the value 
+$10$, then added to \mintinline{php}{5}, resulting in 15.  In the second 
+example, \mintinline{php}{$a}
+represents a floating point number, and is converted to $3.14$, the result
 of adding to 5 is thus $8.14$.  In the third example, the string does not
 contain any numerical values.  In this case, the parsing stops at
 the first character and what has been parsed \emph{so far} is zero!
@@ -419,21 +426,17 @@ has been parsed \emph{so far} is $10$.
 \begin{listing}
 \begin{minted}{php}
 $a = "10";
-$b = 5 + $a;
-print $b; //b = 15
+$b = 5 + $a; //b = 15
 
 $a = "3.14";
-$b = 5 + $a;
-print "b = $b"; //b = 8.14
+$b = 5 + $a; //b = 8.14
 
 $a = "ten";
-$b = 5 + $a;
-print "b = $b"; //b = 5
+$b = 5 + $a; //b = 5
 
 //partial conversions also occur:
 $a = "10ten";
-$b = 5 + $a;
-print "b = $b"; //b = 15
+$b = 5 + $a; //b = 15
 \end{minted}
 \caption{Type Juggling in PHP}
 \label{code:php:typeJuggling}
@@ -450,16 +453,16 @@ $c = intval("ten"); //c has the value zero
 \end{minted}
 
 In all three of the examples above, the strings are converted just as 
-they are when type juggled.  However, the variables are guaranteed
-to have the type indicated (integer or floating-point number).  
+they are when type juggled.  However, the variables are \emph{guaranteed}
+to have the type indicated (integer or floating point number).  
 
 There are several utility functions that can be used to help
 determine the type of variable.  The function \mintinline{php}{is_numeric($x)}
 returns \mintinline{php}{true} if \mintinline{php}{$x} is a numeric (integer
-or floating-point number) or represents a \emph{pure} numeric string.
+or floating point number) or represents a \emph{pure} numeric string.
 The functions \mintinline{php}{is_int($x)} and \mintinline{php}{is_float($x)} each return
 \mintinline{php}{true} or \mintinline{php}{false} depending on whether
-or not \mintinline{php}{$x} is of that type.   For example:
+or not \mintinline{php}{$x} is of that type.
 
 \begin{minted}{php}
 $a = 10;
@@ -551,8 +554,8 @@ Value of \mintinline{php}{$var} & \mintinline{php}{isset($var)} & \mintinline{ph
 \subsection{String Concatenation}
 
 Strings in PHP can be concatenated (combined) in several different ways.
-One way you can combine strings is by using the concatenation operator
-which in PHP is the period.  Some examples:
+One way you can combine strings is by using the concatenation operator.
+In PHP the string concatenation operator is a single period.
 
 \begin{minted}{php}
 $s = "Hello";
@@ -560,9 +563,8 @@ $t = "World!";
 $msg = $s . " " . $t; //msg contains "Hello World!"
 \end{minted}
 
-Another way you can combine strings is by placing variable values directly
-in a string.  The variables inside the string are replaced with the variable's 
-values.  Example:
+Another way you can combine strings is by placing variables directly
+inside a string.  The variables inside the string are replaced with the variable's values.  Example:
 
 \begin{minted}{php}
 $x = 13;
@@ -574,12 +576,12 @@ $msg = "Hello, $name, your number is $x";
 \section{Basic I/O}
 
 Recall the main purpose of PHP is as a scripting language to serve dynamic
-webpages.  However, it does support a \gls{cliLabel} and so it does support
+webpages.  However, it does support
 input and output from the standard input/output.  There are several
-keywords that allow you to print output to the standard output.  The keywords
-\mintinline{php}{print} and \mintinline{php}{echo} (which are essentially aliases
-of each other) allow you to print any variable or string.  PHP also has the
-standard \mintinline{php}{printf} function to allow formatted output.  Some
+ways to print output to the standard output.  The keywords
+\mintinline{php}{print} and \mintinline{php}{echo} (which are aliases
+of each other) allow you to print any variable or string.  PHP also has 
+a \mintinline{php}{printf()} function to allow formatted output.  Some
 examples:
 
 \begin{minted}{php}
@@ -596,10 +598,10 @@ printf("The value of a is %d, and b is %f\n", $a, $b);
 \end{minted}
 
 There are also several ways to perform standard input, but the easiest is to
-use \mintinline{php}{fgets} (short for \textbf{f}lie \textbf{get s}tring) using the
+use \mintinline{php}{fgets} (short for \textbf{f}ile \textbf{get s}tring) using the
 keyword \mintinline{php}{STDIN} (Standard Input).  This function will return, 
 as a string, everything the user enters up to \emph{and including} the enter
-key (interpreted as the endline character, \mintinline{text}{\n}.  To remove
+key (interpreted as the endline character, \mintinline{text}{\n}).  To remove
 the endline character, you can use another function, \mintinline{php}{trim}
 which removes leading and trailing whitespace from a string.  A full example:
 
@@ -610,13 +612,11 @@ $a = fgets(STDIN);
 $a = trim($a);
 \end{minted}
 
-Alternatively, lines 3--4 could be combined into one:
-
-\mintinline{php}{$a = trim(fgets(STDIN));}
-
-The call to \mintinline{php}{fgets} \emph{waits} (referred to as ``blocking'')
-for the user to enter input.  The user is free to start typing.  When the user i
-s done, they hit the enter key at which point the program resumes and reads 
+Alternatively, lines 3--4 could be combined into one: 
+\mintinline{php}{$a = trim(fgets(STDIN));} The call to 
+\mintinline{php}{fgets} \emph{waits} (referred to as ``blocking'')
+for the user to enter input.  The user is free to start typing.  When the user 
+is done, they hit the enter key at which point the program resumes and reads 
 the input from the standard input buffer, and returns it as a string value which
 we assign to the variable \mintinline{php}{$a}.
 
@@ -625,15 +625,15 @@ If we prompt the user for a number but they just start mashing the keyboard givi
 non-numerical input, we may get incorrect results.  We can use the 
 conversion functions mentioned above to attempt to properly convert the values.
 However, this only guarantees that the resulting variable is of the type we want
-(integer or floating-point value for example).  A non numerical input may be 
-treated as zero in the end.  The standard input is not a good mechanism 
-for reading input, but it provides a good starting point.
+(integer or floating point value for example).  The standard input is not a good mechanism 
+for reading input, but it provides a good starting point to develop a few
+simple programs.
 
 \section{Examples}
 
 \subsection{Converting Units}
 
-Let's start with a simple task: let's write a program that will prompt 
+Let's write a program that prompts 
 the user to enter a temperature in degrees Fahrenheit and convert it 
 to degrees Celsius using the formula
   $$C = (F - 32) \cdot \frac{5}{9}$$
@@ -657,16 +657,16 @@ script.
 
 It is common for programmers to use a comment along with a 
 \mintinline{php}{TODO} note to themselves as a reminder of things 
-that they still need to do with the program.  
-
-Let's first outline the basic steps that our program will go through:
+that they still need to do with the program.  Let's first outline 
+the basic steps that our program will go through:
 \begin{enumerate}
   \item We'll first prompt the user for input, asking them for a temperature in Fahrenheit
-  \item Next we'll read the user's input, likely into a floating-point number as degrees can be fractional
+  \item Next we'll read the user's input and use a conversion function 
+    to ensure the input is a floating point number
   \item Once we have the input, we can calculate the degrees Celsius by using the formula above
   \item Lastly, we will want to print the result to the user to inform them of the value
 \end{enumerate}
-Sometimes its helpful to write an outline of such a program directly in the code using
+Sometimes it is helpful to write an outline of such a program directly in the code using
 comments to provide a step-by-step process.  For example:
 
 \begin{minted}{php}
@@ -689,11 +689,10 @@ comments to provide a step-by-step process.  For example:
 
 As we read each step it becomes apparent that we'll need a couple of 
 variables: one to hold the Fahrenheit (input) value and one for the Celsius 
-(output) value.  We'll want to ensure that these are floating-point numbers
-which we can do by making some explicit conversion.  
-
-We'll use a \mintinline{php}{printf} statement in the first step to prompt 
-the user for input:
+(output) value.  We'll want to ensure that these are floating point numbers
+which we can do by making some explicit conversion.  We use a 
+\mintinline{php}{printf()} statement in the first step to prompt 
+the user for input.
 
 \mintinline{php}{printf("Please enter degrees in Fahrenheit: ");}
 
@@ -703,8 +702,8 @@ from the standard input, but may have to \mintinline{php}{trim} the trailing whi
 
 \mintinline{php}{$fahrenheit = trim(fgets(STDIN));}
 
-If we want to ensure that the variable \mintinline{php}{$fahrenheit} is a floating-point
-value, we can further use \mintinline{php}{floatval()}:
+If we want to ensure that the variable \mintinline{php}{$fahrenheit} is a floating point
+value, we can use \mintinline{php}{floatval()}:
 
 \mintinline{php}{$fahrenheit = floatval($fahrenheit);}
 
@@ -712,7 +711,7 @@ We can now compute \mintinline{php}{$celsius} using the formula provided:
 
 \mintinline{php}{$celsius = ($fahrenheit - 32) * (5 / 9);}
 
-Finally, we use \mintinline{php}{printf} again to output the result to the user:
+Finally, we use \mintinline{php}{printf()} again to output the result to the user:
 
 \mintinline{php}{printf("%f Fahrenheit is %f Celsius\n", $fahrenheit, $celsius);}  
 
@@ -768,17 +767,16 @@ printf("Please enter c: ");
 $c = floatval(trim(fgets(STDIN)));
 \end{minted}
 
-Now to compute the roots: we need to take care that we correctly adapt the
-formula so it accurately reflects the order of operations.  We also need to use
-the math library's square root function (unless you want to write 
-your own!  Carefully adapting the formula leads to 
+We need to take care that we correctly adapt the formula so it accurately 
+reflects the order of operations.  We also need to use the math library's 
+square root function.  
 
 \begin{minted}{php}
 $root1 = (-$b + sqrt($b*$b - 4*$a*$c) ) / (2*$a);
 $root2 = (-$b - sqrt($b*$b - 4*$a*$c) ) / (2*$a);
 \end{minted}
 
-Finally, we print the output using \mintinline{php}{printf}.  The full program 
+Finally, we print the output using \mintinline{php}{printf()}.  The full program 
 can be found in Code Sample \ref{code:php:quadraticRootsProgram}.
 
 \begin{listing}[h]
@@ -811,8 +809,8 @@ printf("  root2 = %f\n", $root2);
 \end{listing}
 
 This program was interactive.  As an alternative, we could have read 
-all three of the inputs as command line arguments, taking care that we
-need to convert them to floating-point numbers.  Lines 8--13 in the
+all three of the inputs as command line arguments, taking care 
+to convert them to floating point numbers.  Lines 8--13 in the
 program could have been changed to 
 
 \begin{minted}{php}
@@ -821,19 +819,20 @@ $b = floatval($argv[2]);
 $c = floatval($argv[3]);
 \end{minted}
 
-Finally, think about the possible inputs a user could provide that may cause problems
+Finally, think about the possible input a user could provide that may cause problems
 for this program.  For example:
 \begin{itemize}
   \item What if the user entered zero for $a$?
   \item What if the user entered some combination such that $b^2 < 4ac$?
   \item What if the user entered non-numeric values?
   \item For the command line argument version, what if the user provided less than
-  	three argument?  Or more?
+  	three arguments?  Or more?
 \end{itemize}
-How might we prevent the consequences of such bad inputs?  That is, 
-how might we handle the even that a users enters those bad inputs and
-how do we communicate these errors to the user?  To do so we'll need 
-conditionals.
+How might we prevent the consequences of such bad input?  
+How might we handle the event that a user enters bad input and
+how do we communicate these errors to the user?  To begin to resolve
+these issues, we'll need conditionals.
+
 
 
 

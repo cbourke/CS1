@@ -7,11 +7,12 @@
 PHP allows you to use arrays, but PHP arrays are actually
 \emph{associative arrays}.  Though you can treat them
 as regular arrays and use contiguous integer indices, they
-are more flexible.  You can also use strings as indices for
-example.  In addition, since PHP is dynamically typed, PHP 
+are more flexible than that.  Integer indices need to be
+contiguous or start at zero and you can use strings as indices.  
+In addition, since PHP is dynamically typed, PHP 
 arrays allow mixed types.  An array has no fixed type and 
 you can place different mixed types into the same array.
-Moreover, PHP arrays are dynamic, so there is no memory
+PHP arrays are dynamic, so there is no memory
 management or allocation/deallocation of memory space.
 Arrays will grow and shrink automatically as you add and 
 remove elements.
@@ -21,9 +22,8 @@ remove elements.
 Since PHP is dynamically typed, you do not need to 
 declare an array or specify a particular type
 of variable that it holds.  However, there are several
-ways that you can initialize an array.
-
-To create an empty array, you can call the \mintinline{java}{array()}
+ways that you can initialize an array. To create an empty array, 
+you can call the \mintinline{java}{array()}
 function.  Optionally, you can provide an initial list of elements
 to insert into the array by providing the list of elements as 
 arguments to the function.
@@ -62,7 +62,7 @@ printf("$arr[1] = %d\n", $arr[1]);
 \end{minted}
 
 Attempting to access an element at an invalid index does
-not actually result in an error or an exception (though a
+not result in an error or an exception (though a
 \emph{warning} may be issued depending on how PHP is
 setup).  Instead, if you attempt to access an invalid element, 
 it will be treated as a \mintinline{php}{null} value.  
@@ -104,8 +104,8 @@ index elements.
 \begin{minted}{php}
 $arr = array();
 $arr[0] = 5;
-$arr['foo'] = 10;
-$arr['hello'] = 'world';
+$arr["foo"] = 10;
+$arr["hello"] = "world";
 
 print "value = " . $arr["hello"];
 \end{minted}
@@ -114,13 +114,13 @@ Note that strings that contain integer values will be
 type-juggled into their numeric values.  For example, 
 \mintinline{php}{$arr["10"] = 3;} will be equivalent to
 \mintinline{php}{$arr[10] = 3;}.  However, strings containing
-floating-point values will not be coerced but will remain
+floating point values will not be coerced but will remain
 as strings, \mintinline{php}{$arr["3.15"] = 7;} for example.
 
 \subsection{Non-Contiguous Indices}
 
-Another consequence of PHP arrays being associative
-arrays is that indices need not be contiguous.  For example,
+Another aspect of PHP associative arrays is that integer indices 
+need not be contiguous.  For example,
 
 \begin{minted}{php}
 $arr = array();
@@ -138,7 +138,7 @@ either integers or strings and need not be ordered or
 contiguous, we can use a special key-value initialization
 syntax to define not only the values, but the keys that
 map to those values when we initialize an array.  The
-``double arrow'', \mintinline{php}{=>} is used to denote
+``double arrow,'' \mintinline{php}{=>} is used to denote
 the mapping.
 
 \begin{minted}{php}
@@ -152,11 +152,10 @@ $arr = array(
 
 \section{Useful Functions}
 
-There are dozens of useful functions that PHP defines that can
+There are dozens of useful functions PHP defines that can
 be used with arrays.  We'll only highlight a few of the more
-useful ones. 
-
-First, the \mintinline{php}{count()} function can be used to
+useful ones.  First, the \mintinline{php}{count()} function 
+can be used to
 compute how many elements are stored in the array.
 
 \begin{minted}{php}
@@ -241,7 +240,7 @@ the same order and are of the same type.
 
 If we have an array in PHP that we \emph{know} is
 0-indexed and all elements are contiguous, we can 
-use a normal for-loop to iterate over its elements
+use a normal for loop to iterate over its elements
 by incrementing an index variable.
 
 \begin{minted}{php}
@@ -273,9 +272,7 @@ the variable names \mintinline{php}{$key} and
 iteration of the loop.  You need not use the identifiers
 \mintinline{php}{$key} and \mintinline{php}{$val}; you 
 can use any legal variable names for the key/value 
-variables.
-
-If you do not need the keys when iterating, you can
+variables.  If you do not need the keys when iterating, you can
 use the following shorthand syntax.
 
 \begin{minted}{php}
@@ -287,13 +284,27 @@ foreach($arr as $val) {
 
 \section{Adding Elements}
 
-You can easily add elements to an array by simply
+You can easily add elements to an array by
 providing an index and using the assignment operator
 as in the previous examples.  There are also several
-functions that PHP defines that can insert elements to
+functions PHP defines that can insert elements to
 the beginning (\mintinline{php}{array_unshift()}), end
 (\mintinline{php}{array_push()}) or at an arbitrary position
 (\mintinline{php}{array_splice()}).
+
+\begin{minted}{php}
+$arr = array(10, 20, 30);
+
+array_unshift($arr, 15);
+//arr is now [15, 10, 20, 30]
+
+array_push($arr, 25);
+//arr is now [15, 10, 20, 30, 25]
+
+//insert 35 at index 3:
+array_splice($arr, 3, 0, 35);
+//arr is now [15, 10, 20, 35, 30, 25]
+\end{minted}
 
 Another, simpler way of adding elements is to use the
 following syntax:
@@ -310,7 +321,7 @@ By using the assignment operator but not specifying
 the index, the element will be added to the next available
 integer index.  Since there were already 3 elements in the
 array, each subsequent element is inserted at index 3, 4, and
-finally 5.  In general, the element will be inserted at the
+5 respectively.  In general, the element will be inserted at the
 maximum index value already used plus one.  The
 example above results in the following.
 
@@ -342,7 +353,7 @@ print_r($arr);
 
 This example would result in the following.
 
-\begin{minted}{text}
+\begin{minted}[fontsize=\scriptsize]{text}
 Array
 (
     [0] => 10
@@ -435,9 +446,7 @@ Array
 
 PHP supports multidimensional arrays in the sense that
 elements in an array can be of any type, including other 
-arrays.
-
-We can use all the same syntax and operations for single
+arrays. We can use the same syntax and operations for single
 dimensional arrays.  For example, we can use the double
 arrow syntax and assign arrays as values to create a 2-dimensional
 array.

@@ -23,9 +23,7 @@ class (in the \mintinline{java}{java.io} package).
 The \mintinline{java}{File} class is just
 a representation of a file resource and does not
 represent the actual file (it cannot be opened and
-closed).  
-
-To initialize a \mintinline{java}{Scanner} to read
+closed).  To initialize a \mintinline{java}{Scanner} to read
 from a file you can use the following.
 
 \begin{minted}{java}
@@ -69,13 +67,13 @@ done to ensure that it would be closed regardless of
 any exceptions.  However, Java 7 introduced a new 
 construct, the \emph{try-with-resources} statement.
 
-The try-with resources statement allows us to place
+The \index{try-with-resources} try-with-resources statement 
+allows us to place
 the initialization of a ``closeable'' resource (defined
 by the \mintinline{java}{AutoCloseable} interface) into
 the \mintinline{java}{try} statement.  The JVM will then
 automatically close this resource upon the conclusion of
-any the \mintinline{java}{catch} block or upon the conclusion
-of any \mintinline{java}{catch} block.  We can still provide
+the try-catch block.  We can still provide
 a \mintinline{java}{finally} block if we wish, but this 
 relieves us of the need to explicitly close the resource
 in a \mintinline{java}{finally} block.  A full example:
@@ -98,7 +96,8 @@ Using the \mintinline{java}{Scanner} class to do file
 input offers a more abstract interaction with a file.  
 It also uses a buffered input stream for performance.
 Binary files can still be read using \mintinline{java}{nextByte()}.
-However, the better solution is to use a class that
+However, when dealing with binary files, the better 
+solution is to use a class that
 models and abstracts the underlying file.  For example, 
 if you are reading or writing an image file, you should
 use the \mintinline{java}{java.awt.Image} class to
@@ -108,13 +107,12 @@ kinds of data.
 
 \section{File Output}
 
-Again, there are several ways to achieve file output, 
-but we'll look at the two most recommended ways.  First,
-we describe how to do convenient plaintext output 
+There are several ways to achieve file output, 
+but we'll look at the two most useful ways.  First,
+we consider how to do plaintext output 
 using a buffered stream for performance.  Unfortunately,
-to do this requires the nesting of several classes,
-the details of each we will not go into.  Essentially,
-we create a new \mintinline{java}{FileWriter} specifying
+to do this requires the nesting of several classes. 
+We create a new \mintinline{java}{FileWriter} specifying
 the path and file name, we then ``wrap'' that in a
 \mintinline{java}{BufferedWriter} for better performance.
 Finally, for convenience, we wrap that into a 
@@ -142,10 +140,10 @@ pw.close();
 \end{minted}
 
 The \mintinline{java}{close()} method will conveniently
-close all the underlying resource (in this case, the 
+close all the underlying resources (in this case, the 
 \mintinline{java}{BufferedWriter} and \mintinline{java}{FileWriter}) 
-for us.  In addition, 
-it implements \mintinline{java}{AutoCloseable} and so it can
+for us.  In addition, \mintinline{java}{PrintWriter}
+implements \mintinline{java}{AutoCloseable} and so it can
 be used in a try-catch-with resources statement.
 
 Another ``convenience'' of \mintinline{java}{PrintWriter} is
@@ -157,7 +155,6 @@ silently catches them (though doesn't handle them).  However,
 this can also be viewed as a disadvantage in that if we want
 to do error handling, we need to manually check if there was 
 an error (using \mintinline{java}{checkError()}).
-
 The \mintinline{java}{PrintWriter} class is intended mostly
 for formatted output.  It does not provide a way to write
 binary data to an output file.  Just as with binary input, 
@@ -180,19 +177,17 @@ try (FileOutputStream fos =
 }
 \end{minted}
 
-This example uses the try-catch-with resources statement
+This example uses a try-with-resources statement
 so the \mintinline{java}{FileOutputStream} will automatically
-be closed for us.
-
-You \emph{could} wrap a \mintinline{java}{FileOutputStream} in a \mintinline{java}{BufferedWriter}, but it
+be closed for us. You \emph{could} wrap a \mintinline{java}{FileOutputStream} 
+in a \mintinline{java}{BufferedWriter}, but it
 will likely not gain you anything in terms of performance.  A
 buffered output stream is better if your writes are 
 frequent and ``small.'' Here small means smaller than
 the size of the buffer (\mintinline{java}{BufferedWriter}
 is typically 8\gls{kbLabel}).  Writing several individual
 integer values for example would be better done by buffering
-them all and writing them all at once.  
-
+them and writing them all at once.  
 In our example, we simply wanted to dump a bunch of data, 
 likely more than 8KB in practice, all at once.  Moreover, 
 using a \mintinline{java}{BufferedWriter} would lose us the

@@ -4,8 +4,8 @@
 \index{functions!in PHP}
 \index{PHP!functions}
 
-Functions are essential in PHP programming.  As we've 
-already seen, PHP provides a large library of standard 
+Functions are essential in PHP programming.  
+PHP provides a large library of standard 
 functions to perform basic input/output, math, and many 
 other functions.  PHP also provides the ability to define 
 and use your own functions.
@@ -13,8 +13,8 @@ and use your own functions.
 PHP does not support function overloading, so when you
 define a function and give it a name, that name cannot be
 in conflict with any other function name in the standard library
-or any other code that you might use.  Therefore, careful 
-though should go into the design of your functions.  
+or any other code that you might use.  Careful 
+thought should go into the design and naming of your functions.  
 
 PHP supports both call by value and call by reference.
 As of PHP 5.6, vararg functions are also supported (though
@@ -22,8 +22,8 @@ earlier versions supported some vararg-like functions
 such as \mintinline{php}{printf()}).  However, we will not
 go into detail here.  Finally, another feature of PHP is that
 function parameters are all optional.  You may invoke
-a function with a subset of the parameters; depending on
-your PHP setup, it may be issue a warning that a parameter
+a function with a subset of the parameters.  Depending on
+your PHP setup, the interpreter may issue a warning that a parameter
 was omitted.  However, PHP allows you to define default 
 values for optional parameters.
 
@@ -31,7 +31,8 @@ values for optional parameters.
 
 In general, you can define functions anywhere in your PHP script
 or codebase.  They can even appear \emph{after} code that
-invokes them because PHP essentially \emph{hoists} the function
+invokes them because PHP \index{function hoisting} 
+\index{hoisting} \emph{hoists} the function
 definitions by doing two passes of the script.  However, it is good
 style to include function definitions at the top of your script or
 in a separate PHP file for organization.
@@ -42,7 +43,7 @@ In PHP, to declare a function you use the keyword
 \mintinline{php}{function}.  Because PHP is dynamically typed, 
 a function can return \emph{any} type.  Therefore, you do
 not declare the return type (just as you do not declare a variable's
-type).  After the \mintinline{php}{function} keyword you do
+type).  After the \mintinline{php}{function} keyword you
 provide an identifier and parameters as the function signature.
 Immediately following, you provide the function body enclosed
 with opening/closing curly brackets.  
@@ -94,7 +95,7 @@ quirk of PHP is that function names are \emph{case insensitive}.
 Though we declared a function, \mintinline{php}{getDistance()}
 above, it could be invoked with either \mintinline{php}{getdistance()}, 
 \mintinline{php}{GETDISTANCE} or any other combination of
-capital/lower case letters.  However, good code will use consistent
+uppercase/lowercase letters.  However, good code will use consistent
 naming and your function calls \emph{should} match their
 declaration.
 
@@ -104,9 +105,8 @@ up returning is the return type of the function.  Since you do not
 specify variable or return types, functions are usually referred
 to as returning a ``mixed'' type.  You could design a function that,
 given one set of inputs, returns a number while another set of
-inputs ends up returning a string.  
-
-You can use the syntax \mintinline{php}{return;} to return no
+inputs returns a string.  You can use the syntax 
+\mintinline{php}{return;} to return no
 value (you do not use the keyword \mintinline{text}{void}).  
 In practice, however, the function ends up returning 
 \mintinline{php}{null} when doing this.  
@@ -130,9 +130,11 @@ include_once("utils.php");
 
 //we can now use the functions in utils.php:
 $p = getMonthlyPayment(1000, 0.05, 12);
+
+?>
 \end{minted}
 
-The \mintinline{php}{include_once} function essentially loads and
+The \mintinline{php}{include_once} function loads and
 evaluates the given PHP source file at the point in the code in which
 it is invoked.  The ``once'' in the function refers to the fact that if
 the source file was already included in the script/code before, it will
@@ -165,12 +167,11 @@ by value.  To be able to pass arguments by reference, we need to
 use slightly different syntax when defining our functions.
 
 To specify that a parameter is to be passed by reference, we place
-an ampersand, \mintinline{php}{&} in front of it in the function signature.
-\footnote{Those familiar with pointers in C will note that this is the
-exact \emph{opposite} of the C operator.}
-No other syntax is necessary and when you call the function, PHP
+an ampersand, \mintinline{php}{&} in front of it in the function 
+signature.\footnote{Those familiar with pointers in C will note 
+that this is the exact \emph{opposite} of the C operator.}
+No other syntax is necessary.  When you call the function, PHP
 automatically takes care of the referencing/dereferencing for you.
-Consider the following examples.
 
 \begin{minted}{php}
 <?php
@@ -203,9 +204,9 @@ The first function, \mintinline{php}{swap()} passes both variables
 by value.  Swapping the values only affects the \emph{copies} of
 the parameters.  The original variables \mintinline{php}{$x} and
 \mintinline{php}{$y} will be unaffected.  In the second function, 
-\mintinline{php}{swap2()}, both variables are passed by reference
+\mintinline{php}{swapByRef()}, both variables are passed by reference
 as there are ampersands in front of them.  Swapping them inside
-the function, swaps the original variables.  The output to this 
+the function swaps the original variables.  The output to this 
 code is as follows.
 
 \begin{minted}{text}
@@ -218,6 +219,65 @@ Observe that when we invoked the function,
 \mintinline{php}{swapByRef($x, $y);} we used the same syntax
 as the pass by value version.  The only syntax needed to 
 pass by reference is in the function signature itself.
+
+\subsection{Optional \& Default Parameters}
+
+Parameters in PHP functions are optional.  You can invoke a function
+without providing a subset of parameters.  However, if a parameter
+is not provided, PHP will treat the parameter as \mintinline{php}{null}.
+If we invoked the \mintinline{php}{getDistance()} function with only
+two parameters:
+
+\mintinline{php}{getDistance(10.0, 20.0);}
+
+then inside the function, \mintinline{php}{$x1} and \mintinline{php}{$y1}
+would take on the values 10 and 20, but \mintinline{php}{$x2} and
+\mintinline{php}{$y2} would be \mintinline{php}{null}.  When used in the
+distance formula calculations, both would be treated as zero.  If we
+had invoked the function with \emph{no} arguments,
+
+\mintinline{php}{getDistance();} 
+
+then all four parameters would be treated as \mintinline{php}{null}
+(and thus zero in the calculations).  
+
+PHP also allows you to define alternative default values for function
+parameters.  Consider the following example.
+
+\begin{minted}{php}
+function getMonthlyPayment($principle, $apr = 0.05, $terms = 60) {
+  $rate = ($apr / 12);
+  $mp = (($principle * $rate) / (1-pow(1+$rate, -$terms)));
+  return round($mp * 100) / 100;
+}
+\end{minted}
+
+In this example, the second and third parameter have been given default
+values of 0.05 and 60 respectively.  If a call to this function omits
+these parameters, they are not treated as \mintinline{php}{null}, but take
+on these defaults instead.  
+
+\begin{minted}{php}
+$x = getMonthlyPayment(10000, 0.07, 72);
+print $x."\n"; //170.49
+
+//terms will be 60
+$x = getMonthlyPayment(10000, 0.07);
+print $x."\n"; //198.01
+
+//apr will be 0.05, terms will be 60
+$x = getMonthlyPayment(10000);
+print $x."\n"; //188.71
+
+//balance will be null (0), apr will be 0.05, terms will be 60
+$x = getMonthlyPayment();
+print $x."\n"; //0 but also a warning
+\end{minted}
+
+It would not be possible to invoke \mintinline{php}{getMonthlyPayment()} by
+omitting only the second argument.  Providing $n$ arguments will match
+the first $n$ parameters.  Thus, in your function design you should place
+any optional/default parameters \emph{last}.
 
 \subsection{Function Pointers}
 
@@ -252,17 +312,18 @@ as callbacks to other functions.  We will revisit this concept in Chapter
 
 Recall that the standard math library provides a \mintinline{php}{round()}
 function that rounds a number to the nearest whole number.  
-Often, we've had need to round to cents as well.  We now have 
+We've had need to round to cents as well.  We now have 
 the ability to write a function to do this for us.  Before we do, 
 however, let's think more generally.  What if we wanted to round 
 to the nearest tenth?  Or what if we wanted to round to the nearest 
 10s or 100s place?  Let's write a general purpose rounding function 
-that allows us to specify \emph{which} decimal place to round.  
+that allows us to specify \emph{which} decimal place to round to.  
 
-The most natural input values would be to specify the place using
+The most natural input would be to specify the place using
 an integer exponent.  That is, if we wanted to round to the nearest
 tenth, then we would pass it $-1$ as $0.1 = 10^{-1}$, $-2$ if we wanted
-to round to the nearest 100th, etc.  On the positive end passing in 0
+to round to the nearest 100th, etc.  In the other direction, 
+passing in 0
 would correspond to the usual round function, 1 to the nearest 10s 
 spot, and so on.  
 
@@ -312,13 +373,13 @@ Consider again the problem of computing the roots of a quadratic
 equation, 
   $$ax^2 + bx + c = 0$$
 using the quadratic formula,
- $$\frac{-b \pm \sqrt{b^2 - 4ac}}{2a}$$
+ $$x = \frac{-b \pm \sqrt{b^2 - 4ac}}{2a}$$
 Since there are two roots, we may have to write two functions, 
 one for the ``plus'' root and one for the ``minus'' root both of 
 which take the coefficients, $a, b, c$ as arguments.  However,
 if we wrote a single function that took the coefficients as parameters
 by value as well as two other parameters by reference, we could
-place \emph{both} root values, one in each of the by-reference
+compute \emph{both} root values, one in each of the by-reference
 variables.
 
 \begin{minted}{php}

@@ -4,16 +4,17 @@
 \index{recursion!in Java}
 \index{Java!recursion}
 
-Java supports recursion with no special syntax.  However, as an object-oriented language, recursion is generally expensive and iterative or
+Java supports recursion with no special syntax necessary.  
+However, as an object-oriented language, recursion is generally 
+expensive and iterative or
 other non-recursive solutions are generally preferred.  We present
 a few examples to demonstrate how to write recursive methods in Java.
-
 The first example of a recursive method we gave was the toy count down
 example.  In Java it could be implemented as follows.
 
 \begin{minted}{java}
 public static void countDown(int n) {
-  if(n==0) {
+  if(n == 0) {
     System.out.println("Happy New Year!");
   } else {
     System.out.println(n);
@@ -23,7 +24,7 @@ public static void countDown(int n) {
 \end{minted}
 
 As another example that actually does something useful, consider the
-following recursive summation method that takes an array, 
+following recursive summation method that takes an array 
 and an index variable.  The recursion works as follows: if the index
 variable has reached the size of the array, it stops and returns zero
 (the base case).  Otherwise, it makes a recursive call to 
@@ -57,7 +58,7 @@ public static int recSumTail(int arr[], int i, int sum) {
 }
 \end{minted}
 
-As a final example, consider the following Java implementation of the 
+As another example, consider the following Java implementation of the 
 naive recursive Fibonacci sequence.  An additional condition has been
 included to check for ``invalid'' negative values of $n$ for which
 an exception is thrown.
@@ -100,7 +101,7 @@ public static int fibMemoization(int n, Map<Integer, Integer> m) {
 
 Java provides an arbitrary precision data type, \mintinline{java}{BigInteger}
 that can be used to compute arbitrarily large integer values.  Since
-Fibonacci numbers grow very quickly, using an \mintinline{java}{int} we could
+Fibonacci numbers grow exponentially, using an \mintinline{java}{int} we could
 only represent up to to $F_{45}$.  Using \mintinline{java}{BigInteger} we
 can support much larger values.  An example:
 
