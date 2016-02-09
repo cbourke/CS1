@@ -19,3 +19,16 @@ Exercises:
 Longer term:
  -A testing chapter
  -Intro to OOP
+
+
+
+Add appendix: project ideas
+ -music genre and influence visualization:
+  scrape wikipedia for genre and influenced by and influenced
+  sort genres by some measure (most strongly influenced by?), genres on y axis, influenced   
+  by on the x axis
+  detect cycles
+
+process an animated gif image and output each frame to a PDF page so when printed, it gives a “flip book”
+
+incorporate other project/extra credit ideas from past semesters
