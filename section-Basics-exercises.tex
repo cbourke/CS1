@@ -434,7 +434,128 @@ Starting with 10.00kg of an isotope with half-life
 \end{minted}
 \end{exer}
 
+\begin{exer}
+In sports, the \emph{magic number} is a number that indicates the
+combination of the number of games that a leader in a division must win and/or
+the 2nd place team must lose for the leader to clinch the division.  The
+magic number can be computed using the following formula:
+  $$G + 1 - W_A - L_B$$
+where $G$ is the number of games played in the season, $W_A$ is the number
+of wins the leader currently has and $L_B$ is the number of losses the 2nd
+place team currently has.
 
+Write a program that prompts the user to enter:
+\begin{itemize}
+  \item $G$, the total number of games in the season
+  \item $W_A$ the number of wins of the leading team
+  \item $L_A$ the number of losses of the leading team
+  \item $W_B$ the number of wins of the second place team
+  \item $L_B$ the number of losses of the second place
+\end{itemize}
+Your program will then output the current win percentages of both teams,
+the magic number of the leading team as well as the percentage of the
+remaining games that must go in team A's favor to satisfy the magic
+number (for this, we will assume A and B do not play each other).
+
+For example, if a user enters the values 162, 96, 58, 93, 62, the output
+should look something like the following.
+
+\begin{minted}{text}
+Team Wins Loss Perc   Magic Number
+A    96   58   62.34% 5 
+B    93   62   60.00%
+With 15 total games remaining, 33.33% must go in Team A's favor
+\end{minted}
+\end{exer}
+
+\begin{exer}
+The \emph{Doppler Effect} is a change in the observed 
+spectral frequency of light when objects in space are moving toward or away
+from us.  If the spectral frequency of the object is known, then the
+relative velocity can be estimated based on either the blue-shift (for
+objects traveling toward the observer) or the red-shift (for objects
+traveling away from the observer) of the observed frequency.  
+
+The blue-shift equation to determine velocity is given by 
+$$v_b = c\left(\frac{\lambda}{\lambda_b} - 1\right)$$
+The red-shift equation to determine velocity is given by
+$$v_a = c\left(1 - \frac{\lambda}{\lambda_r}\right)$$
+where
+\begin{itemize}
+  \item $c$ is the speed of light (299,792.458 km/s)
+  \item $\lambda$ is the actual spectral line of the object (ex: 
+  	hydrogen is 434nm)
+  \item $\lambda_r$ is the observed (red-shifted) spectral line and
+  	$\lambda_b$ is the observed (blue-shifted) spectral line
+\end{itemize}
+
+Write a program that prompts the user to enter which spectral shift they
+want to compute (1 for blue-shift, 2 for red-shift).  The program should then
+prompt for the spectral line of an object and the observed
+(shifted) frequency and output the velocity of the distant object.
+For example, if a user enters the values 1 (blue-shifted), 434 (nm) 
+and 487 (nm), the output
+should look something like the following.
+
+\begin{minted}{text}
+Spectral Line: 434nm
+Observed Line: 487nm
+Relative Velocity: 32626.28 km/s
+\end{minted}
+\end{exer}
+
+\begin{exer}
+Radiometric dating is a technique by which the age of rocks, minerals, 
+and other material can be estimated by measuring the proportion of radioactive
+isotopes it still has to its decay products.  It can be computed with the
+following formula:
+ $$D = D_0 + N (e^{\lambda t} - 1)$$
+where
+\begin{itemize}
+  \item $t$ is age of the sample,
+  \item $D$ is number of atoms of the daughter isotope in the sample,
+  \item $D_0$ is number of atoms of the daughter isotope in the original composition,
+  \item $N$ is number of atoms of the parent isotope in the sample 
+  \item $\lambda$ is the decay constant of the parent isotope, 
+  	$$\lambda = \frac{\ln{2}}{t_{1/2}}$$
+	where $t_{1/2}$ is the half-life of the parent isotope (in years).
+\end{itemize}
+Write a program that prompts the user to enter $D, D_0, N$, and $t_{1/2}$ and 
+computes the approximate age of the material, $t$.  
+
+For example, if the user were to enter 150, 50, 300, 28.8 (Strontium-90's half-life)
+then the program should output something like the following.
+
+\begin{minted}{text}
+The sample appears to be 11.953080 years old.
+\end{minted}
+\end{exer}
+
+\begin{exer}
+Suppose you have two circles each centered at $(0,0)$ and $(d,0)$
+with radii of $R, r$ respectively.  These circles may intersect at two points, 
+forming an asymmetric ``lens'' as in Figure \ref{fig:circleIntersection}.
+
+The area of this lens can be computed using the following formula:
+\begin{gather*}
+A = r^2 \cos^{-1}{\left(\frac{d^2+r^2-R^2}{2dr}\right)} + R^2\cos^{-1}{\left(\frac{d^2+R^2-r^2}{2dR}\right)} - \\
+\frac{1}{2}\sqrt{(-d+r+R)(d+r-R)(d-r+R)(d+r+R)}
+\end{gather*}
+
+Write a program that prompts the user for the two radii and the $x$-offset $d$
+and computes the area of this lens.  Your program should handle the special cases 
+where the two circles do not intersect and when they intersect at a single point 
+(the area is zero).
+
+%\url{http://mathworld.wolfram.com/Circle-CircleIntersection.html}
+
+\begin{figure}[h]
+\centering
+\includegraphics[scale=0.50]{images/circleIntersection}
+\caption{Intersection of two circles.}
+\label{fig:circleIntersection}
+\end{figure}
+\end{exer}
 
 
 

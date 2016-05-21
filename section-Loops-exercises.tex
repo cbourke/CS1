@@ -109,7 +109,9 @@ $y$ is the number of years
 elapsed, and $H$ is the half-life of the isotope in years.
 
 For example, using your program on Strontium-90 (symbol: Sr, atomic number: 38)
-with a half-life of 28.9 years and an initial amount of 10 grams would produce a table something like:
+with a half-life of 28.9 years and an initial amount of 10 grams would produce 
+a table something like the following.
+
 \begin{minted}{text}
  Strontium-90 (38-Sr)
 Elapsed Years    Amount
@@ -124,45 +126,47 @@ Elapsed Years    Amount
 \end{minted}
 \end{exer}
 
-\begin{exer}
-In this exercise, you will develop a program that assists people in saving for a retirement
-using a tax-deferred 401k program.  
-
-Your application will allow a user to enter the following inputs:
-\begin{itemize}
-  \item An initial starting balance
-  \item A monthly contribution amount (we'll assume its the same over the life of the savings plan)
-  \item An (average) annual rate of return
-  \item An (average) annual rate of inflation
-\end{itemize}
-
-In addition, your program will allow a user to choose between two different scenarios:
-\begin{itemize}
-  \item The first will allow the user to input a number of \emph{years} left until retirement.  
-  	It will then compute a monthly savings table which will be a projection out to that many years.
-  \item The second will take a \emph{target} dollar amount and compute a monthly savings
-  	table until the account balance has reached this target dollar amount.
-\end{itemize}
-
-The monthly interest rate should be inflation-adjusted.  The inflation-adjusted 
-rate of return can be computed with the following formula.
-  $$\frac{1 + \textrm{rate of return}}{1+\textrm{inflation rate}} - 1$$
-To get the monthly rate, simply divide by 12.  Each month, interest is applied to the balance at this 
-rate along with the monthly contribution amount.
-
-An example: if we start with \$10,000 and contribute \$500 monthly with a return rate of 9\% and
-an inflation rate of 1.2\%, the first few lines of our table would something like the following.
-
-\begin{minted}{text}
-Payment     Interest Earned  Contribution   Balance
-1           $   64.23        $ 500.00       $ 10564.23
-2           $   67.85        $ 500.00       $ 11132.08
-3           $   71.50        $ 500.00       $ 11703.58
-4           $   75.17        $ 500.00       $ 12278.75
-...
-\end{minted}
-
-\end{exer}
+%duplicate
+%\begin{exer}
+%HERE
+%In this exercise, you will develop a program that assists people in saving for a retirement
+%using a tax-deferred 401k program.  
+%
+%Your application will allow a user to enter the following inputs:
+%\begin{itemize}
+%  \item An initial starting balance
+%  \item A monthly contribution amount (we'll assume its the same over the life of the savings plan)
+%  \item An (average) annual rate of return
+%  \item An (average) annual rate of inflation
+%\end{itemize}
+%
+%In addition, your program will allow a user to choose between two different scenarios:
+%\begin{itemize}
+%  \item The first will allow the user to input a number of \emph{years} left until retirement.  
+%  	It will then compute a monthly savings table which will be a projection out to that many years.
+%  \item The second will take a \emph{target} dollar amount and compute a monthly savings
+%  	table until the account balance has reached this target dollar amount.
+%\end{itemize}
+%
+%The monthly interest rate should be inflation-adjusted.  The inflation-adjusted 
+%rate of return can be computed with the following formula.
+%  $$\frac{1 + \textrm{rate of return}}{1+\textrm{inflation rate}} - 1$$
+%To get the monthly rate, simply divide by 12.  Each month, interest is applied to the balance at this 
+%rate along with the monthly contribution amount.
+%
+%An example: if we start with \$10,000 and contribute \$500 monthly with a return rate of 9\% and
+%an inflation rate of 1.2\%, the first few lines of our table would something like the following.
+%
+%\begin{minted}{text}
+%Payment     Interest Earned  Contribution   Balance
+%1           $   64.23        $ 500.00       $ 10564.23
+%2           $   67.85        $ 500.00       $ 11132.08
+%3           $   71.50        $ 500.00       $ 11703.58
+%4           $   75.17        $ 500.00       $ 12278.75
+%...
+%\end{minted}
+%
+%\end{exer}
 
 %applied math type problems
 
@@ -601,6 +605,21 @@ result to get $\ln(x)$.  A similar trick can be used to ensure that the Taylor S
 convergent.
 \end{exer}
 
+\begin{exer}
+Write a program that takes a positive integer $n$ as a command line argument
+and outputs a list
+of all \emph{pairs} of integers $x, y$ such that $1 \leq x, y \leq n$ whose sum,
+$x + y$ is prime.  For example, if $n = 5$, the output should look something like
+the following.
+
+\begin{minted}{text}
+1 + 2 = 3 is prime
+1 + 4 = 5 is prime
+2 + 3 = 5 is prime
+2 + 5 = 7 is prime
+3 + 4 = 7 is prime
+\end{minted}
+\end{exer}
 
 \begin{exer}
 Consider the following variation on the classical ``FizzBuzz'' challenge.
@@ -609,6 +628,22 @@ as a command line argument.  However, if the number is a perfect square
 (that is, the square of some integer; for example $1 = 1^2, 4 = 2^2, 9 = 3^2$, etc.) 
 print ``Go Huskers'' instead.  If the number is a prime
 ($2, 3, 5, 7$, etc.) print ``Go Cubs'' instead.
+\end{exer}
+
+\begin{exer}
+Implement a program to solve the classic ``Rainfall Problem''
+(which has been used in CS education studies to assess programming knowledge
+and skills).  Write an interactive program that repeatedly prompts the user to enter
+an integer (which represents the amount of rainfall on a particular day) 
+until it reads the integer 99999.  After 99999 is entered, it should print 
+out the \emph{correct} average.  That is, it should not count the final 99999.
+Negative values should also be ignored.  For example, if the user entered
+the sequence \mintinline{text}{4 0 -1 10 99999} the output should look something
+like the following.
+
+\begin{minted}{text}
+Average rainfall: 4.66
+\end{minted}
 \end{exer}
 
 \begin{exer}
@@ -814,4 +849,103 @@ Decrypted Message: HELLO!
 \end{minted}
 \end{exer}
 
+\begin{exer}
+A \emph{centroid} (or barycenter) of a plane figure is the arithmetic mean of all 
+the points in the shape.  The centroid of a non-self-intersecting closed polygon defined by 
+$n$ vertices $(x_0, y_0), (x_1, y_1), \ldots, (x_{n_1}, y_{n-1})$ is the point $(C_x, C_y)$
+which can be computed using: 
+
+$$C_{\mathrm x} = \frac{1}{6A}\sum_{i=0}^{n-1}(x_i+x_{i+1})(x_i\ y_{i+1} - x_{i+1}\ y_i)$$
+
+$$C_{\mathrm y} = \frac{1}{6A}\sum_{i=0}^{n-1}(y_i+y_{i+1})(x_i\ y_{i+1} - x_{i+1}\ y_i)$$
+
+with $A$ being the polygon's signed area: 
+
+$$A = \frac{1}{2}\sum_{i=0}^{n-1} (x_i\ y_{i+1} - x_{i+1}\ y_i)$$
+
+In these formulas, the vertices are assumed to be numbered in order of their occurrence 
+along the polygon's perimeter. Furthermore, the vertex $(x_n, y_n) = (x_0, y_0)$.
+
+Write a program that takes $n$ pairs of $x$-$y$ coordinates as command line arguments
+that represent a polygon and computes its centroid.  For example, the an input such as
+
+\mintinline{text}{1 1.5 2 3.6 4.25 2.1 3.7 1.5 2.25 0.25}
+
+would correspond to the polygon in Figure \ref{fig:polygon} with a centroid of 
+$(2.46, 1.90)$. The output should look something like the following.
+
+\begin{minted}{text}
+Centroid: (2.468405, 1.902874)
+\end{minted}
+
+\begin{figure}
+\centering
+\input{figures/figPolygonCentroid}
+\caption{A polygon and its centroid.  Whoo!}
+\label{fig:polygon}
+\end{figure}
+\end{exer}
+
+\begin{exer}
+Suppose we are given a set of $n$ points $(x_0, y_0), (x_1, y_1), \ldots, (x_{n_1}, y_{n-1})$
+in the plane.  Write a program that outputs instructions for someone to ``walk''
+to each point in the order that they are given starting at the origin by only 
+going in the cardinal directions (not ``as the bird flies'').  For example, if the following input is given, 
+
+\mintinline{text}{3 5 2 7 9 5}
+
+Then the output should look like the following.
+
+\begin{minted}{text}
+Go north 5.00 units
+Go east 3.00 units
+Go north 2.00 units
+Go west 1.00 units
+Go south 2.00 units
+Go east 7.00 units
+\end{minted}
+\end{exer}
+
+\begin{exer}
+A \emph{histogram} is a graphical representation of the distribution of 
+numerical data. Typically, a histogram is represented as a (vertical) bar graph.  
+However, we'll limit our attention to graphing a horizontal ASCII histogram.  
+
+In particular, write a program that takes a sequence of numerical values representing
+grades (on a 0--100 scale; reject any invalid values).  The program will then display
+a horizontal graph of the distribution of these values over 6 fixed ranges that looks 
+something like the following.
+
+\begin{minted}{text}
+ 0 -  49  (2, 11.11%) ******
+50 -  59  (1,  5.56%) ***
+60 -  69  (1,  5.56%) ***
+70 -  79  (5, 27.78%) **************
+80 -  89  (4, 22.22%) ************
+90 - 100  (5, 27.78%) **************
+\end{minted}
+
+In the diagram, each star, \mintinline{text}{*} represents (at least) 2\% 
+\end{exer}
+
+\begin{exer}
+Shannon entropy is a measure of \emph{information} in a piece of data; 
+specifically it is the expected value (average) of the information the data contains.
+A higher entropy value corresponds to more random data while 0 indicates
+highly structured data.  Entropy is calculated using the following formula.
+
+$$\mathcal{H}(X) = - \sum_{i=1}^n p(x_i) \cdot \log_2{p(x_i)}$$
+
+where $x_1, x_2, \ldots, x_n$ are the distinct symbols in the data sequence $X$
+and $p(x_i)$ is the probability of the $x_i$-th symbol.  If the length of $X$ is
+$n$, then this is simply
+  $$p(x_i) = \frac{c(x_i)}{n}$$
+where $c(x_i)$ is a \emph{count} of the number of times $x_i$ appears in $X$.
+For example, the string ``Hello World'' has 8 distinct symbols with the probability
+of ``l'' being .2727, ``o'' being .1818 and the remaining being .0909.  Thus
+the entropy would be
+  $$\mathcal{H}(\texttt{'Hello World'}) = 2.845351$$
+Write a program that takes a string as command line input (which may contain spaces)
+and computes its entropy.  
+\end{exer}
 

@@ -26,29 +26,25 @@ on the less expensive one, and then computes a grand total.
 \end{exer}
 
 \begin{exer}
-Write a program that will calculate and print a bill for the city power
-company.  The rates vary depending on whether the use is residential,
-commercial, or industrial.  The program should prompt the user to 
-indicate which type the customer is as well as a total kilowatt hour (kWh)
-used and compute the total based on the rates in Table \ref{table:kwhRates}.
+Price Per Mile.  Write a program to determine which type of gas is
+the better deal with respect to price-per-mile driven.  For example, suppose
+unleaded costs \$2.50 per gallon and your vehicle is able to get an average of
+30 miles per gallon.  The true cost of unleaded is thus 8.33 cents per mile.
+Now suppose that the ethanol fuel costs only \$2.25 per gallon but only yields
+25 miles per gallon, thus 9 cents per mile, a worse deal.  
 
-\begin{table}[h]
-\centering
-\begin{tabular}{l|c|c}
-\hline
-Type & Base & Rate \\
-\hline\hline
-Residential & \$24.50 & \$0.1415 per kWh \\
-Commercial & \$75.00 & \$0.1750 per kWh \\
-Industrial & \$245.00 & \$0.2774 per kWh
-\end{tabular}
-\caption{Rates per kWh for each type of customer}
-\label{table:kwhRates}
-\end{table}
+Write a program that prompts the user to enter the price (per gallon) of 
+one type of gas as well as the miles-per-gallon.  Then prompt for the
+same two values for a second type of gas and compute the true cost of
+each type.  Print a message indicating which type of gas is the better
+deal.  For example, if the user enters the values above the output would
+look something like:
 
-Each customer is assessed a \emph{base} cost of service regardless of how
-much electricity they use.  In addition, if industrial customers use more than 
-2000 kWh, they are assessed an additional \$0.05 per kWh.
+\begin{minted}{text}
+Gas A: $0.0833 per mile
+Gas B: $0.0900 per mile
+Gas A is the better deal.
+\end{minted}
 \end{exer}
 
 %\begin{exer}
@@ -419,5 +415,4 @@ the length-side end of the room \emph{cannot} be used to tile the
 width-side of the room (and vice versa).  Your program will compute 
 and output the number of tiles required.
 \end{exer}
-
 
