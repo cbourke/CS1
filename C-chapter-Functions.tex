@@ -33,7 +33,7 @@ in garbage.
 \section{Defining \& Using Functions}
 
 For modern C, defining functions is a two step process.  First,
-you \emph{declare} a and its signature using a \emph{prototype}.  
+you \emph{declare} a function and its signature using a \emph{prototype}.  
 Then you \emph{define} the
 function by providing a function body that defines what the
 function does.
@@ -180,7 +180,7 @@ enumerated types and structures which we introduce later).
 Once a function has been defined, or at least a prototype has
 been brought into scope via an \mintinline{c}{#include} statement, 
 you can write code to call your function(s).  The syntax for
-doing so it to simply provide the function name followed by 
+doing so is to simply provide the function name followed by 
 parentheses containing values or variables to pass to the function.
 Some examples:
 
@@ -322,7 +322,7 @@ Consider the following example.
 //declare a normal integer variable
 int a = 10;
 //declare a pointer and initialize it to NULL
-int *ptrA = &a;
+int *ptrA = NULL;
 
 //point ptrA to a's memory location
 ptrA = &a;

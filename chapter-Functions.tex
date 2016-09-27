@@ -385,7 +385,7 @@ code, the value stored in \mintinline{c}{n} has been changed to
 10.  The program stack frames are depicted in Figure \ref{figure:PassByReference}.
 
 \begin{minted}{c}
-int sym(int *a, int b) {
+int sum(int *a, int b) {
   int x = *a + b;
   *a = 10;
   return x;

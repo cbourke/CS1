@@ -75,7 +75,7 @@ pseudocode is presented as Algorithm \ref{algo:linearSearch}.
 \begin{algorithm}[H]
   \Input{A collection of elements $A = \{a_1, \ldots, a_n\}$ and a key $e_k$}
   \Output{An element $a$ in $A$ such that $a = e_k$ according to some criteria; $\phi$ if no such element exists}
-  \ForEach{$a_i in A$}{
+  \ForEach{$a_i \textrm{in the collection} A$}{
     \If{$a_i = e_k$}{ \label{algo:linearSearch:elemOp}
       output $a_i$ \;
     }
@@ -431,7 +431,7 @@ a natural way to store and organize data.
 \end{problem}
 
 The requirement that the collection be made of ``orderable'' elements can be
-a bit technical,\footnote{We require that $A$ be a \emph{total order} a 
+a bit technical\footnote{We require that $A$ be a \emph{total order} a 
 partially ordered binary relation such that all pairs are comparable.}, but essentially 
 we need to be guaranteed that given two elements, $a, b$ in the collection, 
 we can determine whether $a < b$, $a = b$ or $a > b$.  If such a determination
