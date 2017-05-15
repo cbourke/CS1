@@ -462,13 +462,30 @@ the following.
 [  40  41  42  ]
 \end{minted}
 
+Which are all stored in one large chunk of memory.  To see this, 
+we can print out the memory address of each ``row'' during a
+particular run of the program:
+
+\begin{minted}{text}
+arr[0] = 0x7fe51b403270
+arr[1] = 0x7fe51b40327c
+arr[2] = 0x7fe51b403288
+arr[3] = 0x7fe51b403294
+arr[4] = 0x7fe51b4032a0
+\end{minted}
+
+Note that each hexadecimal value differs by \mintinline{text}{0x0c}
+(that is, 12 bytes): \mintinline{text}{0x...70 + 0x0c = 0x...7c} and
+\mintinline{text}{0x...7c + 0x0c = 0x...88} etc.  This is exactly how
+many bytes the 3 integers (4 bytes each) takes in memory in each ``row.''
+
 \section{Dynamic Data Structures}
 
 The C standard library does not provide a variety of advanced, dynamic
 data structures such as linked lists or sets.  As of C89 and POSIX.1 the
 C standard library does provide hash tables and binary search trees, but
 does not require implementations of other dynamic data structures.
-instead, you must either implement your own or utilize a third-party 
+Instead, you must either implement your own or utilize a third-party 
 library such as glibc, the \gls{gnuLabel} C library 
 (\url{http://www.gnu.org/software/libc/}).
 

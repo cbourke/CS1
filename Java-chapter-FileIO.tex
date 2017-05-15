@@ -108,29 +108,28 @@ kinds of data.
 \section{File Output}
 
 There are several ways to achieve file output, 
-but we'll look at the two most useful ways.  First,
-we consider how to do plaintext output 
-using a buffered stream for performance.  Unfortunately,
-to do this requires the nesting of several classes. 
-We create a new \mintinline{java}{FileWriter} specifying
-the path and file name, we then ``wrap'' that in a
-\mintinline{java}{BufferedWriter} for better performance.
-Finally, for convenience, we wrap that into a 
-\mintinline{java}{PrintWriter} which offers many convenient
-methods for writing primitive and \mintinline{java}{String} 
-types.  It also offers a \mintinline{java}{printf()} style
-method for formatting.
+but we'll look at the simplest and most useful way.
+Java provides a \mintinline{java}{PrintWriter} class 
+which offers many convenient methods for writing primitive 
+and \mintinline{java}{String} types in a formatted manner.
+It has the usual \mintinline{java}{print()} and \mintinline{java}{println()}
+methods that we are familiar with as well as a 
+\mintinline{java}{printf()} style method for formatting.
+
+\mintinline{java}{PrintWriter} is also buffered, depending
+on how you instantiate it, it might ``flush'' its buffer
+after every endline character or you may do it manually
+by invoking the \mintinline{java}{flush()} method.  
 
 \begin{minted}{java}
 int x = 10;
 double pi = 3.14;
-FileWriter fw = null;
+PrintWriter pw = null;
 try {
-  fw = new FileWriter("data.txt");
-} catch(IOException ioe) {
-  throw new RuntimeException(ioe);
+  pw = new PrintWriter(new File("data.txt"));
+} catch(FileNotFoundException fnfe) {
+  throw new RuntimeException(fnfe);
 }
-PrintWriter pw = new PrintWriter(new BufferedWriter(fw));
 
 pw.println("Hello World!");
 pw.println(x);
@@ -140,9 +139,9 @@ pw.close();
 \end{minted}
 
 The \mintinline{java}{close()} method will conveniently
-close all the underlying resources (in this case, the 
-\mintinline{java}{BufferedWriter} and \mintinline{java}{FileWriter}) 
-for us.  In addition, \mintinline{java}{PrintWriter}
+close all the underlying resources and flush the buffer
+for us, writing any buffered data to the file. In addition, 
+\mintinline{java}{PrintWriter}
 implements \mintinline{java}{AutoCloseable} and so it can
 be used in a try-catch-with resources statement.
 
@@ -150,7 +149,7 @@ Another ``convenience'' of \mintinline{java}{PrintWriter} is
 that is ``swallows'' exceptions (just as the \mintinline{java}{Scanner}
 class did).  That means we don't have to deal explicitly with
 the checked \mintinline{java}{IOException}s that the
-underlying classes throw as the \mintinline{java}{PrinteWriter}
+underlying class(es) throw as the \mintinline{java}{PrintWriter}
 silently catches them (though doesn't handle them).  However, 
 this can also be viewed as a disadvantage in that if we want
 to do error handling, we need to manually check if there was 
