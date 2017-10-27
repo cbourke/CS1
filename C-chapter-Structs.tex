@@ -31,15 +31,15 @@ and convenient way to collect related pieces of data.
 To define a structure, we use the keyword \mintinline{c}{struct}
 along with the previously introduced keyword \mintinline{c}{typedef}.
 To motivate an example, let's reconsider a student entity, which
-has a first and last name (strings), ID (integer), and a GPA 
+has an ID (integer), first and last name (strings), and a GPA 
 (a floating point number).  Each of these pieces of data can be
 encapsulated into a structure as follows.
 
 \begin{minted}{c}
 typedef struct {
+  int id;
   char *firstName;
   char *lastName;
-  int id;
   double gpa;
 } Student;
 \end{minted}
@@ -166,9 +166,9 @@ variable, so it makes sense that we could include it in another structure.
 \centering
 \begin{minted}{c}
 typedef struct {
+  int id;
   char *firstName;
   char *lastName;
-  int id;
   double gpa;
   Date dateOfBirth;
 } Student;
@@ -202,7 +202,8 @@ Student t;
 These static declarations will allocate enough space on the stack
 to hold all of the data associated with the structures (the two
 \mintinline{c}{char *} pointers, \mintinline{c}{int}, and 
-\mintinline{c}{double}).  However, the values stored in 
+\mintinline{c}{double} and the three \mintinline{c}{int} variables
+in the \mintinline{c}{Date} structure).  However, the values stored in 
 each of the structure's member variables are undefined.  With
 this style of declaration, C does not define default values.
 
@@ -212,9 +213,9 @@ is to use the following syntax.
 \begin{minted}{c}
 Student s = {};
 Student t = {
+  12345678,
   "Grace",
   "Hopper",
-  12345678,
   4.0,
   {
     1906,
@@ -401,7 +402,6 @@ Student **roster = (Student **) malloc(sizeof(Student *) * 10);
 for(i=0; i<10; i++) {
   roster[i] = (Student *) malloc(sizeof(Student) * 1);
 }
-...
 
 //access each as pointers and use the arrow operator
 roster[0]->id = 87654321;
@@ -416,6 +416,28 @@ roster[1] = temp;
 As in the example above, if each element in the array is a pointer
 to a structure, then we use the arrow operator to access each 
 member variable.
+
+The differences between these two approaches is illustrated in
+Figures \ref{figure:arrayOfStructures} and \ref{figure:arrayOfStructurePointers}.
+As presented, each \mintinline{c}{Student} structure takes 40 
+bytes.\footnote{This is just an estimate and may vary on different systems
+and compilers.  Usually, compilers use \emph{alignment} and may pad
+structures with extra bytes in order to make it more efficient to store
+in memory.}  With the first approach (as in Figure 
+\ref{figure:arrayOfStructures}, each structure instance is stored 
+contiguously in memory.  Swapping two records involves copying entire
+blocks of 40 bytes.  In contrast, using pointers to structures as in
+Figure \ref{figure:arrayOfStructurePointers} means that structures may
+be stored non-contiguously in different memory locations.  Swapping
+two structures is done indirectly by swapping pointers (only 8 bytes).
+The difference in this particular example is not that great (8 vs.\ 40 bytes), 
+but with larger structures it can become an issue.  Each approach has
+its own advantages and disadvantages and one may be more appropriate 
+than the other in different situations.
+
+\input{figures/figureArrayOfStructures}
+
+\input{figures/figureArrayOfStructurePointers}
 
 \section{Using Structures With Functions}
 
