@@ -439,6 +439,52 @@ than the other in different situations.
 
 \input{figures/figureArrayOfStructurePointers}
 
+\subsubsection{Hybrid Approach}
+
+It is also possible to take a ``hybrid'' approach to storing structures
+in arrays that stores them both contiguously, but also allows you to reference
+them indirectly through a pointer array.  To do so, we declare and allocate 
+a dynamic array as before.
+
+\begin{minted}{c}
+int n = 10;
+Student *rosterData = (Student *) malloc(n * sizeof(Student));
+\end{minted}
+
+Then, we can declare an array of \mintinline{c}{Student} pointers as well.
+
+\begin{minted}{c}
+Student **roster = (Student **) malloc(n * sizeof(Student *));
+\end{minted}
+
+But now we need to make each \mintinline{c}{roster[i]} pointer point
+to the $i$-th record in \mintinline{c}{rosterData}.  Each record, 
+\mintinline{c}{rosterData[i]} is a regular structure, but we need 
+a pointer to it.  In order to get a pointer, we use the referencing
+operator, \mintinline{c}{&rosterData[i]} and make each pointer point
+to it.
+
+\begin{minted}{c}
+for(i=0; i<n; i++) {
+  roster[i] = &rosterData[i];
+}
+\end{minted}
+
+This approach is illustrated in Figure \ref{figure:arrayOfStructuresHybrid}.
+Now we can indirectly reference each record in \mintinline{c}{rosterData}
+via a pointer in the \mintinline{c}{roster} array.  
+
+\begin{minted}{c}
+roster[0]->nuid = 12345678;
+\end{minted}
+
+If we wanted to ``swap''
+two records, we simply swap their pointers instead of their data.  Indeed,
+care must be taken not to swap the data in \mintinline{c}{rosterData} otherwise
+the pointers would become invalid and out-of-synch with the data array.
+
+\input{figures/figureArrayOfStructuresHybrid}
+
 \section{Using Structures With Functions}
 
 As with built-in types, we can use structures as parameters to functions
