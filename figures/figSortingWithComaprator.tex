@@ -1,0 +1,56 @@
+%\documentclass{article}
+%\usepackage{fullpage}
+%\usepackage{subfigure}
+%\usepackage{tikz}
+%\usetikzlibrary{arrows,arrows.meta,backgrounds,calc,trees,decorations,decorations.pathmorphing}
+%
+%\begin{document}
+
+\begin{figure}
+\centering
+
+\begin{tikzpicture}[scale=1.0,transform shape,
+fringeedge/.style={green!50!yellow!50!black,thick},
+edge/.style={->,thick},
+place/.style={rectangle,draw=black,fill=red!20,inner sep=6pt,minimum size=6mm},
+transition/.style={rectangle,draw=black!50,fill=black!20,thick,inner sep=0pt,minimum size=4mm}] 
+
+\draw[fill=blue!5,thick,dotted] (0,0) rectangle (3,3);
+\node[] at (1.5,1.5) {
+\begin{tabular}{c}
+Sorting \\
+Algorithm
+\end{tabular}
+};
+
+\node (INPUT) at (-2,1.5) [place] {array};
+\draw[-{Latex[length=2mm]}] (INPUT) -- node[pos=.5,below] {Input} (0, 1.5);
+
+\node (OUTPUT) at (6,1.5) [place] {sorted array};
+\draw[-{Latex[length=2mm]}] (3,1.5) -- node[pos=.5,below] {Output} (OUTPUT);
+
+\draw[fill=green!5,thick,dotted] (.25,-3.5) rectangle (2.75,-1.5);
+\node[] at (1.5,-2.5) {Comparator};
+
+
+\draw[-{Latex[length=2mm]}] (1,0) -- node[left,pos=.5] {$a, b$} (1,-1.5);
+
+\draw[{Latex[length=2mm]}-] (2,0) -- node[right,pos=.5] {
+$\textrm{order} = \left\{
+\begin{array}{rl}
+< 0 & \textrm{if } a < b \\
+0 & \textrm{if } a = b \\
+> 0 & \textrm{if } a > b
+\end{array}\right.$} (2,-1.5);
+
+\end{tikzpicture}
+
+\caption[Generalized Sorting with a Comparator]{Generalized Sorting with a Comparator.  A sorting algorithm doesn't need to know \emph{what} it is sorting or how they are \emph{ordered} as long as it has access to a \emph{comparator} that \emph{does} know how to order elements.  By using a comparator, the sorting function can be kept general and generic so that one implementation can be used for any type of data.}
+\label{fig:sortingAlgorithmWithComparator}
+\end{figure}
+
+
+
+
+
+%\end{document}

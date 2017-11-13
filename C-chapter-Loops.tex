@@ -94,7 +94,7 @@ For loops in C use the familiar syntax of placing the initialization, continuati
 condition, and iteration on the same line as the keyword \mintinline{c}{for}.
 An example can be found in Code Sample \ref{code:c:forLoop}.
 
-\begin{listing}[H]
+\begin{listing}[!h]
 \begin{minted}{c}
 int i;
 for(i=1; i<=10; i++) {
@@ -187,7 +187,7 @@ The code in Code Sample \ref{code:c:normalizeWhileLoop} specifically
 refers to the value $32145.234$ but would work equally well with any 
 non-negative value of \mintinline{c}{x}.
 
-\begin{listing}[H]
+\begin{listing}[!h]
 \begin{minted}{c}
 double x = 32145.234;
 int k = 0;
@@ -206,7 +206,7 @@ Let's revisit the example from Section \ref{subsection:summationExample} in whic
 we computed the sum of integers $1 + 2 + \cdots + 10$.  The code is presented in
 Code Sample \ref{code:c:summationForLoop}
 
-\begin{listing}[H]
+\begin{listing}[!h]
 \begin{minted}{c}
 int i;
 int sum = 0;
@@ -235,7 +235,7 @@ Recall that you can write loops within loops.  The inner loop will execute fully
 \emph{for each} iteration of the outer loop.  An example of two nested of
 loops in C can be found in Code Sample \ref{code:c:nestedForLoops}.
 
-\begin{listing}[H]
+\begin{listing}[!h]
 \begin{minted}{c}
 int i, j;
 int n = 10;

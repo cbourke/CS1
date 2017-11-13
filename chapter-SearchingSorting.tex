@@ -989,7 +989,7 @@ or strings.  Instead, they accept collections of \emph{any type}.  The
 basic algorithms for searching and sorting are generic themselves (after
 all we presented them as pseudocode).  The only real difference between
 an implementation for, say, numbers versus a sorting algorithm for 
-student objects is \emph{how} they are compared.  
+strings is \emph{how} pairs of elements are compared and ordered.
 
 This genericness extends to objects.  It would be extremely inefficient, 
 development-wise, to have to rewrite Quick Sort for a collection of 
@@ -998,11 +998,11 @@ then another for ID, and repeat them all again for a reversed ordering.
 Instead, a single, generic sorting algorithm is implemented that can
 be \emph{configured} by passing in a \emph{comparator}.
 
-A \index{comparator} comparator is a function or object that provides functionality to determine
-how to order two elements (usually of the same type).  In general, a
-comparator takes two arguments, $a, b$ which are the elements to be 
-compared and returns an integer value with the following ``contract.''
-It returns:
+A \index{comparator} comparator is a function or object that 
+provides functionality to determine how to order two elements.  
+In general, a comparator takes two arguments, $a, b$ which are 
+the elements to be compared and returns an integer value with 
+the following ``contract.''  It returns:
 \begin{itemize}
   \item something negative, $< 0$ if $a$ comes before $b$, $a < b$
   \item zero if $a$ and $b$ are equivalent, $a = b$
@@ -1013,6 +1013,10 @@ Chapter \ref{chapter:strings}.  Using comparators allows us to reuse
 the generic search and sorting algorithms.  Now for each sorting that
 we want, we only need to create a comparator to define the \emph{ordering}
 rather than reimplementing the whole algorithm every single time.
+This relationship is depicted in Figure 
+\ref{fig:sortingAlgorithmWithComparator}.
+
+\input{figures/figSortingWithComaprator}
 
 \subsection{Preventing Arithmetic Errors}
 

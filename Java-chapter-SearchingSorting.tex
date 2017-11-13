@@ -286,7 +286,7 @@ The only difference is that the method takes a \mintinline{java}{List} instead
 of an array.  Otherwise, the behavior is the same.  We present several examples
 in Code Sample \ref{code:java:searchExamples}.
 
-\begin{listing}[H]
+\begin{listing}[!h]
 \begin{minted}{java}
 ArrayList<Student> roster = ...
 		
@@ -344,7 +344,7 @@ Likewise, \mintinline{java}{Collections} provides the following method.
 Several examples of the usage of these methods are presented in Code
 Sample \ref{code:java:sortExamples}.
 
-\begin{listing}[H]
+\begin{listing}[!h]
 \begin{minted}{java}
 List<Student> roster = ...
 Student rosterArr[] = ...
@@ -435,7 +435,7 @@ design of our \mintinline{java}{Comparator}.  Code Sample
 for our \mintinline{java}{Student} class that orders \mintinline{java}{null}
 instances first.
 
-\begin{listing}[H]
+\begin{listing}[!h]
 \begin{minted}{java}
 Comparator<Student> byNameWithNulls = new Comparator<Student>() {
   @Override

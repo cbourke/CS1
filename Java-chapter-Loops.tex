@@ -91,7 +91,7 @@ For loops in Java use the familiar syntax of placing the initialization, continu
 condition, and iteration on the same line as the keyword \mintinline{java}{for}.
 An example can be found in Code Sample \ref{code:java:forLoop}.
 
-\begin{listing}[H]
+\begin{listing}[!h]
 \begin{minted}{java}
 for(int i=1; i<=10; i++) {
   //perform some action
@@ -159,7 +159,7 @@ a reference to the collection that we want to iterate over.  The first
 part is the \emph{type} and local reference variable that the loop
 will use.  
 
-\begin{listing}[H]
+\begin{listing}[!h]
 \begin{minted}{java}
 int arr[] = {10, 20, 8, 42};
 int sum = 0;
@@ -183,7 +183,7 @@ interface).  One example is a \mintinline{java}{List}, an ordered
 collection of elements.  Code Sample \ref{code:java:enhancedForLoopExample2} 
 contains an example.
 
-\begin{listing}[H]
+\begin{listing}[!h]
 \begin{minted}{java}
 List<Integer> list = Arrays.asList(10, 20, 8, 42);
 int sum = 0;
@@ -205,7 +205,7 @@ than 10.  The code in Code Sample \ref{code:java:normalizeWhileLoop} specificall
 refers to the value $32145.234$ but would work equally well with any value of 
 \mintinline{java}{x}.
 
-\begin{listing}[H]
+\begin{listing}[!h]
 \begin{minted}{java}
 double x = 32145.234;
 int k = 0;
@@ -224,7 +224,7 @@ Let's revisit the example from Section \ref{subsection:summationExample} in whic
 we computed the sum of integers $1 + 2 + \cdots + 10$.  The code is presented in
 Code Sample \ref{code:java:summationForLoop}
 
-\begin{listing}[H]
+\begin{listing}[!h]
 \begin{minted}{java}
 int sum = 0;
 for(int i=1; i<=10; i++) {
@@ -252,7 +252,7 @@ Recall that you can write loops within loops by nesting them.  The inner loop wi
 \emph{for each} iteration of the outer loop.  An example of two nested of
 loops in Java can be found in Code Sample \ref{code:java:nestedForLoops}.
 
-\begin{listing}[H]
+\begin{listing}[!h]
 \begin{minted}{java}
 int i, j;
 int n = 10;

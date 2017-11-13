@@ -92,7 +92,7 @@ For loops in PHP use the familiar syntax of placing the initialization, continua
 condition, and iteration on the same line as the \mintinline{php}{for} keyword.
 An example can be found in Code Sample \ref{code:php:forLoop}.
 
-\begin{listing}[H]
+\begin{listing}[!h]
 \begin{minted}{php}
 $i;
 for($i=1; $i<=10; $i++) {
@@ -169,7 +169,7 @@ than 10.  The code in Code Sample \ref{code:php:normalizeWhileLoop} specifically
 refers to the value $32145.234$ but would work equally well with any value of 
 \mintinline{php}{$x}.
 
-\begin{listing}[H]
+\begin{listing}[!h]
 \begin{minted}{php}
 $x = 32145.234;
 $k = 0;
@@ -188,7 +188,7 @@ Let's revisit the example from Section \ref{subsection:summationExample} in whic
 we computed the sum of integers $1 + 2 + \cdots + 10$.  The code is presented in
 Code Sample \ref{code:php:summationForLoop}
 
-\begin{listing}[H]
+\begin{listing}[!h]
 \begin{minted}{php}
 $sum = 0;
 for($i=1; $i<=10; $i++) {
@@ -216,7 +216,7 @@ Recall that you can write loops within loops.  The inner loop will execute fully
 \emph{for each} iteration of the outer loop.  An example of two nested of
 loops in PHP can be found in Code Sample \ref{code:php:nestedForLoops}.
 
-\begin{listing}[H]
+\begin{listing}[!h]
 \begin{minted}{php}
 $n = 10;
 $m = 20;
