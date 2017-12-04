@@ -466,7 +466,7 @@ void * getMax(const void *arr, int n, size_t size,
 }
 \end{minted}
 
-\begin{listing}[!h]
+\begin{listing}[H]
 \inputminted[fontsize=\scriptsize]{c}{code/functionPointers.c}
 \caption{C Function Pointer Syntax Examples}
 \label{code:c:moreFunctionPointerSyntax}
@@ -608,13 +608,13 @@ for duplicate code.
 We illustrate the usage of these functions in Code Samples 
 \ref{code:c:searchExamples} and \ref{code:c:sortExamples}.
 
-\begin{listing}[!h]
+\begin{listing}[H]
 \inputminted[fontsize=\scriptsize]{c}{code/searchDemo.c}.
 \caption{C Search Examples}
 \label{code:c:searchExamples}
 \end{listing}
 
-\begin{listing}[!h]
+\begin{listing}[H]
 \inputminted[]{c}{code/sortDemo.c}.
 \caption{C Sort Examples}
 \label{code:c:sortExamples}
@@ -644,9 +644,10 @@ two \mintinline{c}{const void *} types, while \mintinline{c}{strcmp()}
 takes two \mintinline{c}{const char *} types.  This difference is 
 subtle but important.\footnote{A full discussion can be found on the 
 c-faq, \url{http://c-faq.com/lib/qsort1.html}.}  The recommended way 
-of doing this is to define a different comparator function as follows.
+of doing this is to define a different comparator function as 
+in Code Sample \ref{listing:c:comparatorForStrings}.
 
-\begin{listing}[!h]
+\begin{listing}[H]
 \begin{minted}{c}
 /* compare strings via pointers */
 int pstrcmp(const void *p1, const void *p2)
@@ -655,6 +656,7 @@ int pstrcmp(const void *p1, const void *p2)
 }
 \end{minted}
 \caption{C Comparator Function for Strings}
+\label{listing:c:comparatorForStrings}
 \end{listing}
 
 Observe the behavior of this function: it uses the standard 
@@ -681,7 +683,7 @@ to pointers.\footnote{Again, a full discussion can be found on c-faq,
 \url{http://c-faq.com/lib/qsort2.html}.}  An example appears in Code 
 Sample \ref{code:SortingStructures}.
 
-\begin{listing}[!h]
+\begin{listing}[H]
 \begin{minted}{c}
 /**
  * Orders two Student pointers according to the last name/first name
@@ -728,7 +730,7 @@ all \mintinline{c}{NULL} pointers to be equal).  An example with respect
 to our \mintinline{c}{Student} structure is given in Code Snippet 
 \ref{code:SortingStructuresWithNulls}.
 
-\begin{listing}[!h]
+\begin{listing}[H]
 \begin{minted}{c}
 int studentPtrLastNameCmpWithNulls(const void *s1, const void *s2) {
   const Student *a = *(const Student **)s1;
