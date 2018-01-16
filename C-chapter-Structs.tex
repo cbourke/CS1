@@ -443,7 +443,11 @@ than the other in different situations.
 
 It is also possible to take a ``hybrid'' approach to storing structures
 in arrays that stores them both contiguously, but also allows you to reference
-them indirectly through a pointer array.  To do so, we declare and allocate 
+them indirectly through a pointer array.  This is essentially what we did
+in Section \ref{subsection:contiguous2DArrays} when we created a contiguous
+2-dimensional array of integers.  We made a single call to \mintinline{c}{malloc}
+and then had to setup the pointers to each ``row.''  To do this with 
+structures, we can do something similar.  First, we declare and allocate 
 a dynamic array as before.
 
 \begin{minted}{c}
