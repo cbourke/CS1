@@ -99,8 +99,7 @@ r = (x == 2.71);
 \end{minted}
 
 The three basic logical operators are also supported as described in 
-Table \ref{table:java:logicOperators} using the same code snippet variable
-values as examples.
+Table \ref{table:java:logicOperators}.
 
 \begin{table}
 \centering
@@ -117,9 +116,12 @@ Negation & \mintinline{java}{!} &
 \hline
 \Or & \mintinline{java}{||} & 
 	\mintinline{java}{x || false} & \True \\
-~ & ~ & \mintinline{java}{x || y} & \False \\
+~ & ~ & \mintinline{java}{x || y} & \True \\
+~ & ~ & \mintinline{java}{!x || y} & \False \\
 \end{tabular}
-\caption{Logical Operators in Java}
+\caption{Logical Operators in Java with \mintinline{java}{x = true}
+and \mintinline{java}{y = false} both being \mintinline{java}{Boolean}
+variables.}
 \label{table:java:logicOperators}
 \end{table}
 

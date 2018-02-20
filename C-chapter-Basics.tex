@@ -492,16 +492,19 @@ and reads the input from the standard input buffer, converts the value entered b
 an integer and places the result in the variable \mintinline{c}{a} where it can now be used
 by the remainder of the program.
 
-A few points of interest.  First, the same placeholder as \mintinline{c}{printf()} was used, \mintinline{c}{%d}
-for \mintinline{c}{int} values.  However, when we ``passed'' the variable \mintinline{c}{a} to \mintinline{c}{scanf()}
-we placed an ampersand, \mintinline{c}{&} in front of it.  This is passing the variable \emph{by reference}
-and we'll explore that concept further in Chapter \ref{chapter:c:functions}, but for now just know that
-when using variables with \mintinline{c}{scanf()}, an ampersand is required.  Failure to place an
+A few points of interest.  First, the same placeholder as 
+\mintinline{c}{printf()} was used, \mintinline{c}{%d}
+for \mintinline{c}{int} values.  However, when we ``passed'' 
+the variable \mintinline{c}{a} to \mintinline{c}{scanf()}
+we placed an ampersand, \mintinline{c}{&} in front of it.  
+This is passing the variable \emph{by reference} and we'll 
+explore that concept further in Chapter \ref{chapter:c:functions}, 
+but for now just know that when using variables with \mintinline{c}{scanf()}, an ampersand is required.  Failure to place an
 ampersand in front of a variable with \mintinline{c}{scanf()} will likely result in a \emph{segmentation fault} \index{segmentation fault}
 (an illegal memory access).
 
-You can use the same placeholder, \mintinline{c}{%c} with \mintinline{c}{scanf()} to read in single 
-characters as well.  However, for floating point numbers, in particular \mintinline{c}{double} types, 
+You can use the same placeholder, \mintinline{c}{%c} with \mintinline{c}{scanf()} to read in a single 
+character as well.  However, for floating point numbers, in particular \mintinline{c}{double} types, 
 the placeholder \mintinline{c}{%lf} must be used (which stands for long float, a double precision
 number).  Failure to use the correct placeholder may result in garbage results as the input will
 be interpreted incorrectly.  Another example:
@@ -689,7 +692,7 @@ exercises later!}  Carefully adapting the formula leads to
 
 \begin{minted}{c}
 root1 = (-b + sqrt(b*b - 4*a*c) ) / (2*a);
-root1 = (-b - sqrt(b*b - 4*a*c) ) / (2*a);
+root2 = (-b - sqrt(b*b - 4*a*c) ) / (2*a);
 \end{minted}
 
 Finally, we print the output using \mintinline{c}{printf()}.  The full program 
