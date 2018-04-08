@@ -1,0 +1,80 @@
+%\documentclass[12pt]{scrbook}
+%
+%\usepackage{tikz}
+%\usepackage{minted}
+%\usetikzlibrary{decorations.pathreplacing,arrows}
+%\usetikzlibrary{positioning}
+%
+%\usepackage{fullpage}
+%\usepackage{subfigure}
+%\begin{document}
+%
+%
+%Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
+%
+\begin{figure}
+\centering
+
+{
+\setmintedinline{bgcolor={}}
+
+
+\begin{tikzpicture}[scale=0.65,transform shape]
+
+% Define block styles
+\tikzstyle{box} = [rectangle,
+                   draw,
+                   fill=white,
+                   text width=1.5cm,
+                   text centered,
+                   inner sep=5pt,
+                   node distance=0cm]
+
+\tikzstyle{line} = [draw, -latex']; %
+
+\node [box] (init) at (-2,2) {\mintinline{c}{**m}};
+
+\node [box] (p0) at (2,0) {\mintinline{c}{m[0]}};
+\node [box, right=of p0] (p1) {\mintinline{c}{m[1]}};
+\node [box, right=of p1] (p2) {\mintinline{c}{m[2]}};
+\node [box, right=of p2] (p3) {\mintinline{c}{m[3]}};
+%\node [box, right=of p3] (p4) {\mintinline{c}{m[4]}};
+%\draw[->,bend right] (init.south) -- (p0.west);
+\draw [->] (init.south) to [out=270,in=180] (p0.west);
+
+\node [box] (m00) at (-6,-5) {\mintinline{c}{m[0][0]}};
+\node [box, right=of m00] (m01) {\mintinline{c}{m[0][1]}};
+\node [box, right=of m01] (m02) {\mintinline{c}{m[0][2]}};
+\node [box, right=of m02] (m10) {\mintinline{c}{m[1][0]}};
+\node [box, right=of m10] (m11) {\mintinline{c}{m[1][1]}};
+\node [box, right=of m11] (m12) {\mintinline{c}{m[1][2]}};
+\node [box, right=of m12] (m20) {\mintinline{c}{m[2][0]}};
+\node [box, right=of m20] (m21) {\mintinline{c}{m[2][1]}};
+\node [box, right=of m21] (m22) {\mintinline{c}{m[2][2]}};
+\node [box, right=of m22] (m30) {\mintinline{c}{m[3][0]}};
+\node [box, right=of m30] (m31) {\mintinline{c}{m[3][1]}};
+\node [box, right=of m31] (m32) {\mintinline{c}{m[3][2]}};
+%\node [box, right=of m32] (m40) {\mintinline{c}{m[4][0]}};
+%\node [box, right=of m40] (m41) {\mintinline{c}{m[4][1]}};
+%\node [box, right=of m41] (m42) {\mintinline{c}{m[4][2]}};
+
+
+\draw [->] (p0.south) to [out=270,in=90] (m00.north);
+\draw [->] (p1.south) to [out=270,in=90] (m10.north);
+\draw [->] (p2.south) to [out=270,in=90] (m20.north);
+\draw [->] (p3.south) to [out=270,in=90] (m30.north);
+%\draw [->] (p4.south) to [out=270,in=90] (m40.north);
+
+
+\end{tikzpicture}
+}
+\caption[Contiguous Two Dimensional Array]{Contiguous Two Dimensional Array.  
+The initial pointer-to-pointers \mintinline{c}{m} is initialized to an array
+of pointers, \mintinline{c}{m[0]..m[3]}.  A $4 \times 3$ contiguous
+array is created and each of the pointers is initialized to the proper
+location so it can be treated as a two-dimensional array.}
+\label{figure:contiguous2DArray}
+\end{figure}
+
+%\end{document}
+
