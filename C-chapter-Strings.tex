@@ -284,7 +284,7 @@ and \mintinline{c}{double} types.
 
 \begin{minted}{c}
 //create an array that can hold 5 strings
-char **names = (char **) malloc(5 * malloc(sizeof(char*)));
+char **names = (char **) malloc(5 * sizeof(char*));
 int i;
 for(i=0; i<5; i++) {
   //each string can hold at most 19 characters
