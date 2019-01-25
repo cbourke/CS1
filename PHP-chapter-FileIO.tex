@@ -74,22 +74,20 @@ handle that was returned by \mintinline{php}{fopen()}
 and returns a string containing the entire line 
 \emph{including} the endline character.  If necessary, 
 leading and trailing whitespace can be removed using 
-\mintinline{php}{trim()}.  To determine the end of a
-file you can use \mintinline{php}{feof()} which returns
-\mintinline{php}{true} when the handle has reached the end of the file.
+\mintinline{php}{trim()}.  
+
+When no remaining lines are available in the file, 
+\mintinline{php}{fgets()} returns \mintinline{php}{false} which 
+can thus be used in a while loop to process a file line by line.  
 Code Sample \ref{code:php:lineByLine} contains a full example of
-processing a file line-by-line.
+processing a file line-by-line.  
 
 \begin{listing}
 \begin{minted}{php}
 $h = fopen("input.data", "r"); 
-while(!feof($h)) {
-  //read the next line:
-  $line = fgets($h);
-  //trim it:
-  $line = trim($line);
-  //process it, we'll just print it
-  print $line; 
+
+while( $line = fgets($h) ) {
+  printf("%s", $line);
 }
 \end{minted}
 \caption{Processing a file line-by-line in PHP}
