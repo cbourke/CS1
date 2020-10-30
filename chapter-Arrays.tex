@@ -224,7 +224,7 @@ int * foo(int n) {
   int i;
   int b[5];
   for(i=0; i<5; i++) {
-    b[i] = n*i;
+    b[i] = n * (i+1);
     printf("b[%d] = %d\n", i, b[i]);
   }
   return b;
