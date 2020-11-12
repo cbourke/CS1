@@ -1,0 +1,158 @@
+{\setmintedinline{bgcolor={}}
+\begin{tikzpicture}[scale=0.75,transform shape]
+
+% Define block styles
+\tikzstyle{box} = [rectangle,
+                   draw,
+                   fill=white,
+                   text width=3.0cm,
+                   %text height=0.9cm,
+                   text centered,
+                   inner sep=5pt,
+                   node distance=1.25cm]
+
+\tikzstyle{struct} = [rectangle,
+                   draw,
+                   fill=white,
+                   text width=2.5cm,
+                   minimum height=2.0cm,
+                   text centered,
+                   inner sep=5pt,
+                   node distance=1.25cm]
+
+\tikzstyle{line} = [draw, -latex']; %
+
+%\draw[red] (-1, 0) rectangle (19, -1);
+    \node [box] (init) at (0,0) {\mintinline{c}{names} \\(\mintinline{c}{char **})};
+
+    \node [box, right of=init,node distance=5cm] (p0) {\mintinline{c}{names[0]} \\
+    (\mintinline{c}{char *})};
+    %\node[node distance = 3cm,right of=p0] (d0) {?};
+    %\draw[line] (p0) -- (d0);
+    \node [box, below of=p0] (p1) {\mintinline{c}{names[1]} \\
+    (\mintinline{c}{char *})};
+    %\node[node distance = 3cm,right of=p1] (d1) {?};
+    %\draw[line] (p1) -- (d1);
+    \node [box, below of=p1] (p2) {\mintinline{c}{names[2]} \\
+    (\mintinline{c}{char *})};
+    %\node[node distance = 3cm,right of=p2] (d2) {?};
+    %\draw[line] (p2) -- (d2);
+    \node [box, below of=p2] (p3) {\mintinline{c}{names[3]} \\
+    (\mintinline{c}{char *})};
+    \node [box, below of=p3] (p4) {\mintinline{c}{names[4]} \\
+    (\mintinline{c}{char *})};
+    %\node[node distance = 3cm,right of=pn] (dn) {?};
+    %\draw[line] (pn) -- (dn);
+    \path [line] (init) -- (p0);
+    
+
+    \node[box] (a) at (11, 0) {\mintinline{c}{"Chris"}};
+    %\draw[line] (p0.east) -- (a.west);
+    
+    \draw[line] (node cs:name=p0,angle=0)
+      .. controls +(east:1cm) and +(-2,0) .. (a.west);
+
+    \node[box,below of=a] (b) {\mintinline{c}{"Margaret"}};
+
+    \draw[line] (node cs:name=p1,angle=0)
+      .. controls +(east:3cm) and +(-1,0) .. (b.west);
+
+    \node[box,below of=b] (c) {\mintinline{c}{"Alan"}};
+    \draw[line] (node cs:name=p2,angle=0)
+      .. controls +(east:1cm) and +(-2,0) .. (c.west);
+
+
+    \node[box,below of=c] (d) {\mintinline{c}{"Grace"}};
+    \draw[line] (node cs:name=p3,angle=0)
+      .. controls +(east:4cm) and +(-2,0) .. (d.west);
+
+    \node[box,below of=d] (e) {\mintinline{c}{"Zeppo"}};
+    \draw[line] (node cs:name=p4,angle=0)
+      .. controls +(east:4cm) and +(-2,0) .. (e.west);
+
+
+    \node[box] (qsort) at (0, -7) {\mintinline{c}{qsort()}};
+    \draw[line] (init.south) -- (qsort.north);
+
+    \draw[line] (init.south) -- (qsort.north);
+
+    \draw[line,dashed] (qsort.20) %(node cs:name=qsort,angle=70)
+      .. controls +(north:4cm) and +(-2,0) .. (p1.west);
+
+    \draw[line,dashed] (qsort.20) %(node cs:name=qsort,angle=70)
+      .. controls +(north:2cm) and +(-2,0) .. (p3.west);
+
+
+    \node[box,text width=3.0cm] (step1a) at (5, -9) {\mintinline{c}{&names[1]}\\(\mintinline{c}{char **})};
+    \node[box,text width=3.0cm] (step1b) at (9, -9) {\mintinline{c}{&names[3]}\\(\mintinline{c}{char **})};
+
+    \draw[line] (qsort.east) -| (step1a.north);
+    \draw[line] (qsort.east) -| node[pos=.35,above] (pbr) {pass-by-reference} (step1b.north);
+    
+
+    \node[box,text width=3.0cm] (step2a) at (5, -11.5) {\mintinline{c}{const void *}};
+    \node[box,text width=3.0cm] (step2b) at (9, -11.5) {\mintinline{c}{const void *}};
+
+  \draw[line] (step1a) -- node[fill=black!10!white,shape=circle,draw,right=.5cm] {\scriptsize B} (step2a);
+  \draw[line] (step1b) -- (step2b);
+
+
+%    \draw[line] (qsort.east) 
+%      .. controls +(east:5cm) and +(0,0) .. (cmp.north);
+%
+%    \draw[line] (qsort.east) 
+%      .. controls +(east:5cm) and +(0,0) .. (cmp.7);
+
+    \node[box,text width=7.0cm] (cmp) at (7, -14) {\mintinline{c}{cmp(const void *a, const void *b)}};
+
+  \draw[line,shorten >=.25cm] (step2a) -- (step2a |- cmp); 
+  \draw[line,shorten >=.25cm] (step2b) -- (step2b |- cmp); 
+  
+      \draw[line,dashed] (step1a.west) %(node cs:name=qsort,angle=70)
+      .. controls +(west:2cm) and +(-1,0) .. (p1.west);
+
+      \draw[line,dashed] (step1b.west) %(node cs:name=qsort,angle=70)
+      .. controls +(west:5cm) and +(-2,0) .. (p3.west);
+
+    \node[fill=black!10!white,shape=circle,draw,right of=pbr,above,node distance=2cm] {\scriptsize A};
+
+    \node[box,text width=6cm,inner sep=10pt] (cast) at (6.75, -16) {\Large\mintinline{c}{(*(const char **)a)}};
+    
+  \draw[line,<-,shorten <=0cm] (cast) -- (cast |- cmp.south); 
+
+    \node[fill=black!10!white,shape=circle,draw,right of=cast,node distance=4cm] {\scriptsize C};
+
+    \draw [thick,decorate,decoration={mirror,brace,amplitude=3pt,aspect=.5},xshift=0pt,yshift=0pt]
+($(cast) + (2.0,-0.75)$) -- ($(cast) + (2.75,-0.75)$) coordinate[midway,xshift=0cm,yshift=-.75cm] (part1);
+
+    \draw [thick,decorate,decoration={mirror,brace,amplitude=5pt,aspect=.4},xshift=0pt,yshift=0pt]
+($(cast) + (-2.0,-1.25)$) -- ($(cast) + (2.75,-1.25)$) coordinate[pos=.4,xshift=0cm,yshift=-.75cm] (part2);
+    
+    \draw [thick,decorate,decoration={mirror,brace,amplitude=5pt,aspect=.16},xshift=0pt,yshift=0pt]
+($(cast) + (-2.75,-1.75)$) -- ($(cast) + (2.75,-1.75)$) coordinate[pos=.16,xshift=0cm,yshift=-.75cm] (part3);
+
+  \node[draw,below of=part1] (castA) {\mintinline{c}{const void *}};
+  \node[draw,below of=part2,node distance=2cm] (castB) {\mintinline{c}{const char **}};
+  \node[draw,below of=part3,node distance=3cm] (castC) {\mintinline{c}{char *}};
+  \draw[-,shorten >=-.5cm] (castA) -- (part1);
+  \draw[-,shorten >=-.5cm] (castB) -- (part2);
+  \draw[-,shorten >=-.5cm] (castC) -- (part3);
+
+\node[inner sep=3pt,fill=black!10!white,shape=circle,draw,right of=castA,node distance=2.25cm] {\scriptsize C.1};
+\node[inner sep=3pt,fill=black!10!white,shape=circle,draw,right of=castB,node distance=2.35cm] {\scriptsize C.2};
+\node[inner sep=3pt,fill=black!10!white,shape=circle,draw,right of=castC,node distance=1.75cm] {\scriptsize C.3};
+
+  \node[draw,below of=castC,node distance=2cm] (strcmp) {\mintinline{c}{strcmp()}};
+
+\draw[->] (castC) -- (strcmp);
+
+\draw[line,dashed] (castB.west) %(node cs:name=qsort,angle=70)
+      .. controls +(west:5cm) and +(-2,0) .. (p1.190);
+
+\draw[line,dashed] (castC.west) %(node cs:name=qsort,angle=70)
+      .. controls +(west:5cm) and +(-2,0) .. (b.190);
+
+
+
+\end{tikzpicture}
+}

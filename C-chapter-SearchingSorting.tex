@@ -713,6 +713,29 @@ qsort(roster, n, sizeof(Student *), studentPtrLastNameCmp);
 \label{code:SortingStructures}
 \end{listing}
 
+
+\begin{figure}
+\centering
+\input{figures/figCSortArrayOfStrings}
+\caption[Sorting an Array of Strings]{Sorting an Array of Strings.  An array of strings is passed to \mintinline{c}{qsort}.  When \mintinline{c}{qsort} needs
+to order two strings, it passes it off to the provided comparator, but does
+so by passing them by reference (A) meaning that pointers to the pointers are
+passed to the comparator function (\mintinline{c}{char **}).  However, the
+comparator receives (B) two generic void pointers because of its signature (the
+pointers are automatically and safely upcasted).  Inside the comparator function,
+the passed pointers are casted (C).  Starting off as generic void pointers (C.1)
+they are casted as character pointer-pointers (C.2) which refer to the 
+pointers in the array (\mintinline{c}{names[1]}).  However, \mintinline{c}{strcmp}
+requires pointers to character arrays, so we dereference (C.3) which now
+pointers to the actual string (\mintinline{c}{"Margaret"}).  Casting of 
+\mintinline{c}{b} is similar.}
+\label{figure:sortingArrayOfStrings}
+\end{figure}
+
+
+
+\subsection{Dealing With \mintinline{c}{NULL} Elements}
+
 Another issue when sorting arrays of pointers is that we may now 
 have to deal with \mintinline{c}{NULL} elements.  When sorting 
 arrays of elements this is not an issue as a properly initialized 
