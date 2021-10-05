@@ -1,0 +1,75 @@
+\documentclass[crop,tikz,tkz-euclide]{standalone}
+
+\usetikzlibrary{math} 
+%\usetikzlibrary{calc,positioning}
+\usetikzlibrary{decorations.pathreplacing}
+\usepackage{minted}
+
+\begin{document}
+
+
+\begin{tikzpicture}[scale=1.0,transform shape] 
+	
+\def\sz{10mm}
+% node style definition
+\tikzstyle{block} = [
+	draw, fill=black!10, rectangle,
+	minimum height=\sz, minimum width=\sz ];
+\tikzstyle{plain} = [draw=none,fill=none];
+% array element definition
+\def\arr{2, 3, 5, 7, 11, 13, $\cdots$ };
+%\def\x{0}; % x pos of arr
+%\def\y{0}; % y pos of arr
+\newcounter{ind};
+\setcounter{ind}{0};
+\node[plain] at (-1.75, 1) { index };
+\node[plain] at (-1.75, 0) { contents };
+\foreach \item in \arr
+{
+	\node[block] at (\theind*\sz,0) { \item };
+	\node[plain] at (\theind*\sz,1.0) { \theind };
+	\addtocounter{ind}{1};
+}
+
+\node[plain] (a0) at (-8.5,-1.5) {\mintinline{c}{arr[0]}};
+\node[plain] (a1) at (-5.0,-1.5) {\mintinline{c}{arr + 0 * sizeof(int)}};
+\node[plain] (a2) at (-1.5,-1.5) {\mintinline{c}{arr + 0 }};
+\draw[->] (a0) -- (a1);
+\draw[->] (a1) -- (a2);
+
+
+\node[plain] (b0) at (-8.5,-2.0) {\mintinline{c}{arr[1]}};
+\node[plain] (b1) at (-5.0,-2.0) {\mintinline{c}{arr + 1 * sizeof(int)}};
+\node[plain] (b2) at (-1.5,-2.0) {\mintinline{c}{arr + 4 }};
+\draw[->] (b0) -- (b1);
+\draw[->] (b1) -- (b2);
+
+
+\node[plain] (c0) at (-8.5,-2.5) {\mintinline{c}{arr[2]}};
+\node[plain] (c1) at (-5.0,-2.5) {\mintinline{c}{arr + 2 * sizeof(int)}};
+\node[plain] (c2) at (-1.5,-2.5) {\mintinline{c}{arr + 8 }};
+\draw[->] (c0) -- (c1);
+\draw[->] (c1) -- (c2);
+
+\node[plain] (d0) at (-8.5,-3.0) {\mintinline{c}{arr[3]}};
+\node[plain] (d1) at (-5.0,-3.0) {\mintinline{c}{arr + 3 * sizeof(int)}};
+\node[plain] (d2) at (-1.5,-3.0) {\mintinline{c}{arr + 12 }};
+\draw[->] (d0) -- (d1);
+\draw[->] (d1) -- (d2);
+
+\node[plain] (e0) at (-8.5,-3.5) {\mintinline{c}{arr[4]}};
+\node[plain] (e1) at (-5.0,-3.5) {\mintinline{c}{arr + 4 * sizeof(int)}};
+\node[plain] (e2) at (-1.5,-3.5) {\mintinline{c}{arr + 16 }};
+\draw[->] (e0) -- (e1);
+\draw[->] (e1) -- (e2);
+	
+\draw[->](a2.east) -| (-.5,-.5);
+\draw[->](b2.east) -| (.5,-.5);
+\draw[->](c2.east) -| (1.5,-.5);
+\draw[->](d2.east) -| (2.5,-.5);
+\draw[->](e2.east) -| (3.5,-.5);
+
+\end{tikzpicture}
+
+
+\end{document}

@@ -268,6 +268,45 @@ Once freed, accessing old memory pointed to by the \mintinline{c}{arr}
 pointer is undefined behavior and may lead to unexpected or fatal
 results.  
 
+\subsection{Pointer Arithmetic}
+
+Both static and dynamic arrays in C are memory addresses.  When referring
+to an array using a pointer, \mintinline{c}{int * arr} the name of
+the array, \mintinline{c}{arr} is its memory address.  This memory
+address references the \emph{beginning} of the array.  The elements
+in an array are stored \emph{contiguously}, one after another.  
+It is possible to find an element by computing an \emph{offset} from
+the beginning memory location.  
+
+In fact, this is how indexing actually works.  When we refer to the
+$i$-th element in an array, we use \mintinline{c}{arr[i]}.  This is
+just syntactic sugar for computing the \emph{actual} memory location
+of the $i$-th element.  
+
+For example, if the array is integers, we know that each integer
+takes \mintinline{c}{sizeof(int)} bytes of storage.  To find the
+memory address of the $i$-th element, we take the memory adress
+of the array \mintinline{c}{arr} and \emph{add} the number of
+bytes an integer takes, \mintinline{c}{sizeof(int)} times 
+\mintinline{c}{i}.  In total:
+
+\mintinline{c}{arr[i] = arr + i * sizeof(int)} 
+
+This is why indexing starts at 0 for the first element.  The
+first element is immediately available without having to 
+use any offset.  In other words: 
+
+\mintinline{c}{arr[0] = arr + 0 * sizeof(int) = arr}
+
+This idea is illustrated in Figure \ref{figure:indexingPointerArithmetic}.
+
+\begin{figure}
+\centering
+\includestandalone[width=.9\textwidth]{figures/figArrayOffsets}
+\caption{Indexing and pointer arithmetic}
+\label{figure:indexingPointerArithmetic}
+\end{figure}
+
 \section{Using Arrays with Functions}
 
 Since arrays are represented using pointers, we can pass and
