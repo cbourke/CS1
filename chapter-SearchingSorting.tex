@@ -843,16 +843,16 @@ Merge Sort is presented as Algorithm \ref{algo:mergeSort} with the
 \begin{algorithm}[H]
   \Input{Two sorted collections, $L$, $R$ of size $n, m$ respectively.}
   \Output{A sorted collection $A$ consisting of all elements of $L$ and $R$}
-  $A \leftarrow $ a new, empty collection \;
-  $i \leftarrow 1$ \;
-  $j \leftarrow 1$ \;
-  $k \leftarrow 1$ \Comment{index variable for $A$} \;
+  $A \leftarrow $ a new, empty collection of size $n+m$ \;
+  $i \leftarrow 1$ \Comment{index variable for $L$}
+  $j \leftarrow 1$ \Comment{index variable for $R$}
+  $k \leftarrow 1$ \Comment{index variable for $A$}
   \While{$i \leq n \And j \leq m$}{
-    \eIf{$L_i \leq R_i$}{
+    \eIf{$L_i \leq R_j$}{
       $A_k \leftarrow L_i$ \;
       $i \leftarrow (i+1)$ \;
     }{
-      $A_k \leftarrow L_j$ \;
+      $A_k \leftarrow R_j$ \;
       $j \leftarrow (j+1)$ \;
     }
     $k \leftarrow (k+1)$ \;
